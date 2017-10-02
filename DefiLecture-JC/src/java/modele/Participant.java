@@ -22,7 +22,7 @@ public class Participant {
     Equipe equipe;                  //équipe dont le participant fait partie
     String avatar;                  //Pour l'instant l'avatar sera représenté par le chemin vers l'image
     int role;                       //Utilisateur==0 | Participant==1 | Capitaine==2 | Animateur==3 | Administrateur==4
-    ArrayList<Lecture> lectures;    //liste des lectures faites
+    //ArrayList<Lecture> lectures;    //liste des lectures faites // ==> accessible avec clé secondaire 
     int pointage;                   //Sommes des points gagné par les lectures
     int minutes_restantes;
     
@@ -41,7 +41,7 @@ public class Participant {
         this.equipe = equipe;
         this.avatar = avatar;
         this.role = role;
-        this.lectures = lectures;
+        //this.lectures = lectures;
         this.pointage = pointage;
         this.minutes_restantes = minutes_restantes;
     }
@@ -121,7 +121,7 @@ public class Participant {
     public void setRole(int role) {
         this.role = role;
     }
-
+/*
     public ArrayList<Lecture> getLectures() {
         return lectures;
     }
@@ -129,7 +129,7 @@ public class Participant {
     public void setLectures(ArrayList<Lecture> lectures) {
         this.lectures = lectures;
     }
-
+*/
     public int getPointage() {
         return pointage;
     }
