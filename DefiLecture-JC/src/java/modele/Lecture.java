@@ -13,21 +13,38 @@ import java.util.Date;
  */
 public class Lecture {
     
-    
-    Date date_inscription; //clé primaire double
-    Participant participant; // clé primaire double
-    
+    int idLecutre; // clé primaire
+    int idParticipant;
+    Date date_inscription; 
     String titre;
     int duree_minutes;
-    boolean obligatoire; // variable qui indique si la lecture faite était obligtoire ou non
-    
-    //Constructeur
-    public Lecture(Date date_inscription, Participant participant, String titre, int duree_minutes, boolean obligatoire) {
+    boolean obligatoire; //indique si la lecture est obligtoire ou non
+    boolean defi; // indique si la lecture fait partie d'un défi
+
+    public Lecture(int idLecutre, int idParticipant, Date date_inscription, String titre, int duree_minutes, boolean obligatoire, boolean defi) {
+        this.idLecutre = idLecutre;
+        this.idParticipant = idParticipant;
         this.date_inscription = date_inscription;
-        this.participant = participant;
         this.titre = titre;
         this.duree_minutes = duree_minutes;
         this.obligatoire = obligatoire;
+        this.defi = defi;
+    }
+
+    public int getIdLecutre() {
+        return idLecutre;
+    }
+
+    public void setIdLecutre(int idLecutre) {
+        this.idLecutre = idLecutre;
+    }
+
+    public int getIdParticipant() {
+        return idParticipant;
+    }
+
+    public void setIdParticipant(int idParticipant) {
+        this.idParticipant = idParticipant;
     }
 
     public Date getDate_inscription() {
@@ -36,14 +53,6 @@ public class Lecture {
 
     public void setDate_inscription(Date date_inscription) {
         this.date_inscription = date_inscription;
-    }
-
-    public Participant getParticipant() {
-        return participant;
-    }
-
-    public void setParticipant(Participant participant) {
-        this.participant = participant;
     }
 
     public String getTitre() {
@@ -69,9 +78,14 @@ public class Lecture {
     public void setObligatoire(boolean obligatoire) {
         this.obligatoire = obligatoire;
     }
-    
-    
-    
+
+    public boolean estDefi() {
+        return defi;
+    }
+
+    public void setDefi(boolean defi) {
+        this.defi = defi;
+    }
     
     
     
