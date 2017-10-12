@@ -13,51 +13,20 @@ import java.util.ArrayList;
  */
 public class Equipe {
     
-    int idEquipe; //clé primaire
-    int idCapitaine;
-    int idMembre1;
-    int idMembre2;
-    String nom;
+    String nom; // Clé primaire
+    ArrayList<Participant> membres; //Liste des participants qui font partis de l'équipe
 
-    public Equipe(int idEquipe, int idCapitaine, int idMembre1, int idMembre2, String nom) {
-        this.idEquipe = idEquipe;
-        this.idCapitaine = idCapitaine;
-        this.idMembre1 = idMembre1;
-        this.idMembre2 = idMembre2;
+    //Constructeurs
+    public Equipe(String nom) {
         this.nom = nom;
     }
 
-    public int getIdEquipe() {
-        return idEquipe;
+    public Equipe(String nom, ArrayList<Participant> membres) {
+        this.nom = nom;
+        this.membres = membres;
     }
-
-    public void setIdEquipe(int idEquipe) {
-        this.idEquipe = idEquipe;
-    }
-
-    public int getIdCapitaine() {
-        return idCapitaine;
-    }
-
-    public void setIdCapitaine(int idCapitaine) {
-        this.idCapitaine = idCapitaine;
-    }
-
-    public int getIdMembre1() {
-        return idMembre1;
-    }
-
-    public void setIdMembre1(int idMembre1) {
-        this.idMembre1 = idMembre1;
-    }
-
-    public int getIdMembre2() {
-        return idMembre2;
-    }
-
-    public void setIdMembre2(int idMembre2) {
-        this.idMembre2 = idMembre2;
-    }
+    
+    //Getters and Setters
 
     public String getNom() {
         return nom;
@@ -66,9 +35,14 @@ public class Equipe {
     public void setNom(String nom) {
         this.nom = nom;
     }
-    
 
-    
+    public ArrayList<Participant> getMembres() {
+        return membres;
+    }
+
+    public void setMembres(ArrayList<Participant> membres) {
+        this.membres = membres;
+    }
     
      
     

@@ -13,26 +13,22 @@ import java.util.Date;
  */
 public class Lecture {
     
-    int idLecture; // clé primaire
-    int idParticipant;
-    Date date_inscription;
+    
+    Date date_inscription; //clé primaire double
+    Participant participant; // clé primaire double
+    
     String titre;
     int duree_minutes;
-    boolean obligatoire; // indique si la lecture est obligtoire ou non
-    boolean defi; // indique si la lecture fait partie d'un défi
+    boolean obligatoire; // variable qui indique si la lecture faite était obligtoire ou non
     
     //Constructeur
-    
-    public Lecture(int idLecture, int idParticipant, Date date_inscription, String titre, int duree_minutes, boolean obligatoire, boolean defi) {
-        this.idLecture = idLecture;
-        this.idParticipant = idParticipant;
+    public Lecture(Date date_inscription, Participant participant, String titre, int duree_minutes, boolean obligatoire) {
         this.date_inscription = date_inscription;
+        this.participant = participant;
         this.titre = titre;
         this.duree_minutes = duree_minutes;
         this.obligatoire = obligatoire;
-        this.defi = defi;
     }
-
 
     public Date getDate_inscription() {
         return date_inscription;
@@ -42,32 +38,13 @@ public class Lecture {
         this.date_inscription = date_inscription;
     }
 
-    public int getIdLecture() {
-        return idLecture;
+    public Participant getParticipant() {
+        return participant;
     }
 
-    public void setIdLecture(int idLecture) {
-        this.idLecture = idLecture;
+    public void setParticipant(Participant participant) {
+        this.participant = participant;
     }
-
-    public int getIdParticipant() {
-        return idParticipant;
-    }
-
-    public void setIdParticipant(int idParticipant) {
-        this.idParticipant = idParticipant;
-    }
-
-    public boolean estDefi() {
-        return defi;
-    }
-
-    public void setDefi(boolean defi) {
-        this.defi = defi;
-    }
-
-
-   
 
     public String getTitre() {
         return titre;
