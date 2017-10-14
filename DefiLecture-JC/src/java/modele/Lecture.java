@@ -5,45 +5,41 @@
  */
 package modele;
 
-import java.util.Date;
-
 /**
  *
  * @author Charles
  */
 public class Lecture {
     
-    
-    Date date_inscription; //clé primaire double
-    Participant participant; // clé primaire double
-    
+    String dateInscription; //clé primaire double
+    int idParticipant; // clé primaire double pas de stockage d'objet dans la base de données
     String titre;
-    int duree_minutes;
+    int dureeMinutes;
     boolean obligatoire; // variable qui indique si la lecture faite était obligtoire ou non
     
     //Constructeur
-    public Lecture(Date date_inscription, Participant participant, String titre, int duree_minutes, boolean obligatoire) {
-        this.date_inscription = date_inscription;
-        this.participant = participant;
+    public Lecture(String dateInscription, int idParticipant, String titre, int dureeMinutes, boolean obligatoire) {
+        this.dateInscription = dateInscription;
+
         this.titre = titre;
-        this.duree_minutes = duree_minutes;
+        this.dureeMinutes = dureeMinutes;
         this.obligatoire = obligatoire;
     }
 
-    public Date getDate_inscription() {
-        return date_inscription;
+    public String getDateInscription() {
+        return dateInscription;
     }
 
-    public void setDate_inscription(Date date_inscription) {
-        this.date_inscription = date_inscription;
+    public void setDateInscription(String dateInscription) {
+        this.dateInscription = dateInscription;
     }
 
-    public Participant getParticipant() {
-        return participant;
+    public int getIdParticipant() {
+        return idParticipant;
     }
 
-    public void setParticipant(Participant participant) {
-        this.participant = participant;
+    public void setIdParticipant(int idParticipant) {
+        this.idParticipant = idParticipant;
     }
 
     public String getTitre() {
@@ -54,12 +50,12 @@ public class Lecture {
         this.titre = titre;
     }
 
-    public int getDuree_minutes() {
-        return duree_minutes;
+    public int getDureeMinutes() {
+        return dureeMinutes;
     }
 
-    public void setDuree_minutes(int duree_minutes) {
-        this.duree_minutes = duree_minutes;
+    public void setDureeMinutes(int dureeMinutes) {
+        this.dureeMinutes = dureeMinutes;
     }
 
     public boolean estObligatoire() {
