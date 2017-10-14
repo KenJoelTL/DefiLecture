@@ -13,20 +13,26 @@ import java.util.ArrayList;
  */
 public class Equipe {
     
-    String nom; // Clé primaire
-    ArrayList<Participant> membres; //Liste des participants qui font partis de l'équipe
+    int idEquipe; //clé primaire
+    String nom;
+    
 
     //Constructeurs
-    public Equipe(String nom) {
+
+    public Equipe(int idEquipe, String nom) {
+        this.idEquipe = idEquipe;
         this.nom = nom;
     }
 
-    public Equipe(String nom, ArrayList<Participant> membres) {
-        this.nom = nom;
-        this.membres = membres;
+    public int getIdEquipe() {
+        return idEquipe;
     }
+
+    // Getters et Setters
     
-    //Getters and Setters
+    public void setIdEquipe(int idEquipe) {
+        this.idEquipe = idEquipe;
+    }
 
     public String getNom() {
         return nom;
@@ -34,14 +40,6 @@ public class Equipe {
 
     public void setNom(String nom) {
         this.nom = nom;
-    }
-
-    public ArrayList<Participant> getMembres() {
-        return membres;
-    }
-
-    public void setMembres(ArrayList<Participant> membres) {
-        this.membres = membres;
     }
     
      
