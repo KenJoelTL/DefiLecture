@@ -20,6 +20,9 @@ public class Lecture {
     boolean obligatoire; //indique si la lecture est obligtoire ou non
     boolean defi; // indique si la lecture fait partie d'un défi
 
+    
+    // Constructeur
+    
     public Lecture(int idLecture, int idParticipant, String dateInscription, String titre, int dureeMinutes, boolean obligatoire, boolean defi) {
         this.idLecture = idLecture;
         this.idParticipant = idParticipant;
@@ -30,6 +33,8 @@ public class Lecture {
         this.defi = defi;
     }
 
+    // Getters et Setters
+    
     public int getIdLecture() {
         return idLecture;
     }
