@@ -5,57 +5,67 @@
  */
 package modele;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author Joel
  */
 public class Participant {
-    String nom_utilisateur;         //clé primaire
     
+    int idParticipant;             //clé primaire
+    int idEquipe;                  //équipe dont le participant fait partie
+    
+    String nomUtilisateur;         //ancienne clé primaire
     String pseudonyme;              //l'utilisateur peut aussi s'inscrire avec un pseudo unique
     String nom;
     String prenom;
     String courriel;
     String programme;               //programme scolaire
-    Equipe equipe;                  //équipe dont le participant fait partie
     String avatar;                  //Pour l'instant l'avatar sera représenté par le chemin vers l'image
     int role;                       //Utilisateur==0 | Participant==1 | Capitaine==2 | Animateur==3 | Administrateur==4
-    //ArrayList<Lecture> lectures;    //liste des lectures faites // ==> accessible avec clé secondaire 
     int pointage;                   //Sommes des points gagné par les lectures
-    int minutes_restantes;
+    int minutesRestantes;
     
     public Participant(){
     
     }
 
-
-    public Participant(String nom_utilisateur, String pseudonyme, String nom, String prenom, String courriel, String programme, Equipe equipe, String avatar, int role, ArrayList<Lecture> lectures, int pointage, int minutes_restantes) {
-        this.nom_utilisateur = nom_utilisateur;
+    public Participant(int idParticipant, int idEquipe, String nomUtilisateur, String pseudonyme, String nom, String prenom,
+                            String courriel, String programme, String avatar, int role, int pointage, int minutesRestantes) {
+        this.idParticipant = idParticipant;
+        this.idEquipe = idEquipe;
+        this.nomUtilisateur = nomUtilisateur;
         this.pseudonyme = pseudonyme;
         this.nom = nom;
         this.prenom = prenom;
         this.courriel = courriel;
         this.programme = programme;
-        this.equipe = equipe;
         this.avatar = avatar;
         this.role = role;
-        //this.lectures = lectures;
         this.pointage = pointage;
-        this.minutes_restantes = minutes_restantes;
-    }
-    
-     
-    
-    
-
-    public String getNom_utilisateur() {
-        return nom_utilisateur;
+        this.minutesRestantes = minutesRestantes;
     }
 
-    public void setNom_utilisateur(String nom_utilisateur) {
-        this.nom_utilisateur = nom_utilisateur;
+    public Participant(int idEquipe, String nomUtilisateur, String pseudonyme, String nom, String prenom, String courriel,
+                            String programme, String avatar, int role, int pointage, int minutesRestantes) {
+        this.idEquipe = idEquipe;
+        this.nomUtilisateur = nomUtilisateur;
+        this.pseudonyme = pseudonyme;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.courriel = courriel;
+        this.programme = programme;
+        this.avatar = avatar;
+        this.role = role;
+        this.pointage = pointage;
+        this.minutesRestantes = minutesRestantes;
+    }
+
+    public String getNomUtilisateur() {
+        return nomUtilisateur;
+    }
+
+    public void setNomUtilisateur(String nomUtilisateur) {
+        this.nomUtilisateur = nomUtilisateur;
     }
 
     public String getPseudonyme() {
@@ -98,14 +108,6 @@ public class Participant {
         this.programme = programme;
     }
 
-    public Equipe getEquipe() {
-        return equipe;
-    }
-
-    public void setEquipe(Equipe equipe) {
-        this.equipe = equipe;
-    }
-
     public String getAvatar() {
         return avatar;
     }
@@ -121,15 +123,7 @@ public class Participant {
     public void setRole(int role) {
         this.role = role;
     }
-/*
-    public ArrayList<Lecture> getLectures() {
-        return lectures;
-    }
 
-    public void setLectures(ArrayList<Lecture> lectures) {
-        this.lectures = lectures;
-    }
-*/
     public int getPointage() {
         return pointage;
     }
@@ -139,11 +133,11 @@ public class Participant {
     }
 
     public int getMinutes_restantes() {
-        return minutes_restantes;
+        return minutesRestantes;
     }
 
-    public void setMinutes_restantes(int minutes_restantes) {
-        this.minutes_restantes = minutes_restantes;
+    public void setMinutes_restantes(int minutesRestantes) {
+        this.minutesRestantes = minutesRestantes;
     }
     
     
