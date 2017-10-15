@@ -8,14 +8,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Index</title>
+        <title>Profil d'équipe</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <style>
-            #toutPageProfil { background-image: url("ocean.jpg");
+            #toutPageEquipe { background-image: url("ocean.jpg");
                               background-repeat: no-repeat;
                               background-position: right top;
                               background-attachment: fixed;
@@ -46,13 +46,14 @@
           <!-- Options contenues par le boutons à son activation -->   
           <div class="collapse navbar-collapse" id="optionsNavigation">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#">Acceuil</a></li>
+              <li><a href="index.jsp">Acceuil</a></li>
               <li><a href="#">Tableau des scores</a></li>
               <li><a href="#">Page de profil</a></li>
+              <li class="active"><a href="profilEquipe.jsp">Page d'équipe</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
             <!--  <li><a href="#"><span class="glyphicon glyphicon-user"></span> S'incrire</a></li> -->
-              <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>
+              <li><a href='Frontal?action=AfficherPageConnexion'><span class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>
             </ul>   
           </div>
              
@@ -89,7 +90,7 @@
                     <div class="panel-body">Panel Content</div>
                 </div>
                 
-                <table class='table table-hover' style="background-color: rgb(255, 255, 255);">
+                <table class='table table-hover' style="background-color: rgb(255, 255, 255); border:1px lightgray solid">
                   <thead>
                     <tr>
                       <th>Prénom</th>

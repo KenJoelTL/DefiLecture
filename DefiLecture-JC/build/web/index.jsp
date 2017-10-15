@@ -22,23 +22,24 @@
           
           <div class="navbar-header">
             <a class="navbar-brand" href="#">Défi-Lecture</a>
-            <!-- Apparait lorque la fenêtre devient de la taille d'un téléphone mobile -->
+            <!-- Apparait lorsque la fenêtre devient de la taille d'un téléphone mobile -->
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#optionsNavigation">
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>                       
             </button>
           </div>          
              
-          <!-- Options contenues par le boutons à son activation -->   
+          <!-- Options contenues dans le bouton à son activation -->   
           <div class="collapse navbar-collapse" id="optionsNavigation">
             <ul class="nav navbar-nav">
               <li class="active"><a href="#">Acceuil</a></li>
               <li><a href="#">Tableau des scores</a></li>
               <li><a href="#">Page de profil</a></li>
+              <li><a href="Frontal?action=AfficherPageEquipe">Page d'équipe</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
             <!--  <li><a href="#"><span class="glyphicon glyphicon-user"></span> S'incrire</a></li> -->
-              <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>
+              <li><a href='Frontal?action=AfficherPageConnexion'><span class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>
             </ul>   
           </div>
              
@@ -48,7 +49,7 @@
         <div class='container' style='margin-top: 100px'>
             <div class='row'>
                 
-                <a href='profilEquipe.jsp'>Page de profil</a>
+                <a href='Frontal?action=AfficherPageEquipe'>Page d'équipe</a>
             </div>
         </div>
         
