@@ -32,12 +32,14 @@
           <!-- Options contenues dans le bouton à son activation -->   
           <div class="collapse navbar-collapse" id="optionsNavigation">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#">Acceuil</a></li>
-              <li><a href="#">Tableau des scores</a></li>
+                <li class="active"><a href="#">Acceuil</a></li>
+              <li><a href="#"><span class="glyphicon glyphicon-stats"></span> Tableau des scores</a></li>
              <%if(session.getAttribute("connecte") != null){%>
               <li><a href="#">Page de profil</a></li>
               <li><a href="*.Frontal?action=AfficherPageEquipe">Page d'équipe</a></li>
-             <%}%>
+            <%}else{%>
+              <li style="background-color: #349737;"><a href='*.Frontal?action=AfficherPageInscription' style="color: #fff;" ><span class="glyphicon glyphicon-education"></span> S'incrire</a></li>        
+            <%}%>
             </ul>
             <ul class="nav navbar-nav navbar-right">
             <!--  <li><a href="#"><span class="glyphicon glyphicon-user"></span> S'incrire</a></li> -->
