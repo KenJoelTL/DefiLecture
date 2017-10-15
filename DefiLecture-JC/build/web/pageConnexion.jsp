@@ -14,7 +14,14 @@
     <body>
         <h1>Connexion</h1>
         
-        <form action="Frontal" method="post">
+        <%if(session.getAttribute("connecte") != null){%>
+        <p>
+            Bonjour <%=session.getAttribute("connecte")%>
+        </p>
+        <%}
+        %>
+        
+        <form action="connexion.Frontal" method="post">
             Identifiant : <input type="email" name="courriel" />
             Mot de passe : <input type="password" name="motPasse" />
             <input type="hidden" name="action" value="EffectuerConnexion">

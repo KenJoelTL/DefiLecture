@@ -7,17 +7,17 @@ package controlleur;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Joel
  */
-public class Frontal extends HttpServlet {
+public class EffectuerDeconnexion extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,43 +30,13 @@ public class Frontal extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //Controlleur Frontal
-        /* Le type d'une action est déterminé par son préfixe. 
-            Afficher  : Renvoie une vue 
-            Effectuer : Effectue un traitement
-        */
-        response.setContentType("text/html;charset=UTF-8");
-        String action = request.getParameter("action");
-        RequestDispatcher rd;
-        if ("AfficherPageProfil".equals(action)) {
-            rd = this.getServletContext().getNamedDispatcher(action);
-            rd.forward(request, response);
-        } 
-        else if ("AfficherPageEquipe".equals(action)) {
-            rd = this.getServletContext().getNamedDispatcher(action);
-            rd.forward(request, response);
-        }
-        else if ("AfficherPageInscription".equals(action)) {
-            rd = this.getServletContext().getNamedDispatcher(action);
-            rd.forward(request, response);
-        }
-        else if ("AfficherPageConnexion".equals(action)) {
-            rd = this.getServletContext().getNamedDispatcher(action);
-            rd.forward(request, response);
-        }
-        else if ("EffectuerConnexion".equals(action)) {
-            rd = this.getServletContext().getNamedDispatcher(action);
-            rd.forward(request, response);
-        }
-        else if ("EffectuerDeconnexion".equals(action)) {
-            rd = this.getServletContext().getNamedDispatcher(action);
-            rd.forward(request, response);
-        }
-        else{
-            //rd = this.getServletContext().getNamedDispatcher(action);
-            response.sendRedirect("./index.jsp");
-        }
         
+        HttpSession session = request.getSession(false);
+        
+//        if(session.getAttribute("connecte") != null){
+            session.removeAttribute("connecte");
+            response.sendRedirect("./index.jsp");
+//        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -24,9 +24,13 @@
         <servlet-name>AfficherPageConnexion</servlet-name>
         <servlet-class>controlleur.AfficherPageConnexion</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EffectuerDeconnexion</servlet-name>
+        <servlet-class>controlleur.EffectuerDeconnexion</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Frontal</servlet-name>
-        <url-pattern>/Frontal</url-pattern>
+        <url-pattern>*.Frontal</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AfficherPageEquipe</servlet-name>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>AfficherPageConnexion</servlet-name>
         <url-pattern>/AfficherPageConnexion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EffectuerDeconnexion</servlet-name>
+        <url-pattern>/EffectuerDeconnexion</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -34,12 +34,19 @@
             <ul class="nav navbar-nav">
               <li class="active"><a href="#">Acceuil</a></li>
               <li><a href="#">Tableau des scores</a></li>
+             <%if(session.getAttribute("connecte") != null){%>
               <li><a href="#">Page de profil</a></li>
-              <li><a href="Frontal?action=AfficherPageEquipe">Page d'équipe</a></li>
+              <li><a href="*.Frontal?action=AfficherPageEquipe">Page d'équipe</a></li>
+             <%}%>
             </ul>
             <ul class="nav navbar-nav navbar-right">
             <!--  <li><a href="#"><span class="glyphicon glyphicon-user"></span> S'incrire</a></li> -->
-              <li><a href='Frontal?action=AfficherPageConnexion'><span class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>
+            <%if(session.getAttribute("connecte") == null){%>
+              <li><a href='*.Frontal?action=AfficherPageConnexion'><span class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>        
+            <%}else{%>
+              <li><a href='*.Frontal?action=EffectuerDeconnexion'><span class="glyphicon glyphicon-log-in"></span> Se d&eacute;connecter</a></li>
+            <%}%>
+            
             </ul>   
           </div>
              
@@ -49,7 +56,7 @@
         <div class='container' style='margin-top: 100px'>
             <div class='row'>
                 
-                <a href='Frontal?action=AfficherPageEquipe'>Page d'équipe</a>
+                <a href='*.Frontal?action=AfficherPageEquipe'>Page d'équipe</a>
             </div>
         </div>
         
