@@ -38,7 +38,7 @@ public class EffectuerConnexion extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String  courriel = request.getParameter("courriel"),
+        String  identifiant = request.getParameter("identifiant"),
                 motPasse = request.getParameter("motPasse"); 
         
         ServletContext contexte = this.getServletContext();
@@ -48,7 +48,7 @@ public class EffectuerConnexion extends HttpServlet {
         Connection cnx =null;
         ResultSet rs = null;
         PreparedStatement requetePreparee = null; 
-        String requete = "SELECT courriel FROM participant WHERE courriel = ? and motPasse = ?";
+        String requete = "SELECT courriel FROM participant WHERE (courriel = ? or nomUtilisateur = ? ) and motPasse = ?";
 
         try{
             //Étape 1 : chargement du pilote JDBC
@@ -58,8 +58,9 @@ public class EffectuerConnexion extends HttpServlet {
             //Étape 3 : execution de la requete
             requetePreparee = cnx.prepareStatement(requete);
             //Étape 3.1 : liaison des paramètres avec les valeurs
-            requetePreparee.setString(1, courriel);   //met la 1er ? à la valeur du courriel dans la requete
-            requetePreparee.setString(2, motPasse);   //met la 2e  ? à la valeur de motPasse dans la requete
+            requetePreparee.setString(1, identifiant);   //met la 1er ? à la valeur du courriel dans la requete
+            requetePreparee.setString(2, identifiant);   //met la 2e  ? à la valeur du nomUtilisateur dans la requete
+            requetePreparee.setString(3, motPasse);      //met la 1er ? à la valeur du motPasse dans la requete
 
             ResultSet resultat = requetePreparee.executeQuery();
             // On vérifie s'il y a un résultat    

@@ -22,7 +22,7 @@
         %>
         
         <form action="connexion.Frontal" method="post">
-            Identifiant : <input type="email" name="courriel" />
+            Identifiant : <input type="text" name="identifiant" />
             Mot de passe : <input type="password" name="motPasse" />
             <input type="hidden" name="action" value="EffectuerConnexion">
             <input type="submit" value=" Connexion" />

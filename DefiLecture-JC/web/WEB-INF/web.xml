@@ -28,6 +28,10 @@
         <servlet-name>EffectuerDeconnexion</servlet-name>
         <servlet-class>controlleur.EffectuerDeconnexion</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AfficherPageInscription</servlet-name>
+        <servlet-class>controlleur.AfficherPageInscription</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Frontal</servlet-name>
         <url-pattern>*.Frontal</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>EffectuerDeconnexion</servlet-name>
         <url-pattern>/EffectuerDeconnexion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AfficherPageInscription</servlet-name>
+        <url-pattern>/AfficherPageInscription</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

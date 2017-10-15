@@ -7,7 +7,6 @@ package controlleur;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Joel
  */
-public class Frontal extends HttpServlet {
+public class AfficherPageInscription extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,47 +29,19 @@ public class Frontal extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //Controlleur Frontal
-        /* Le type d'une action est déterminé par son préfixe. 
-            Afficher  : Renvoie une vue 
-            Effectuer : Effectue un traitement
-        */
         response.setContentType("text/html;charset=UTF-8");
-        String action = request.getParameter("action");
-        RequestDispatcher rd;
-        if ("AfficherPageProfil".equals(action)) {
-            rd = this.getServletContext().getNamedDispatcher(action);
-            rd.forward(request, response);
-        } 
-        else if ("AfficherPageEquipe".equals(action)) {
-            rd = this.getServletContext().getNamedDispatcher(action);
-            rd.forward(request, response);
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet AfficherPageInscription</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet AfficherPageInscription at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-        else if ("AfficherPageInscription".equals(action)) {
-            rd = this.getServletContext().getNamedDispatcher(action);
-            rd.forward(request, response);
-        }
-        else if ("AfficherPageConnexion".equals(action)) {
-            rd = this.getServletContext().getNamedDispatcher(action);
-            rd.forward(request, response);
-        }
-        else if ("EffectuerInscription".equals(action)) {
-            rd = this.getServletContext().getNamedDispatcher(action);
-            rd.forward(request, response);
-        }
-        else if ("EffectuerConnexion".equals(action)) {
-            rd = this.getServletContext().getNamedDispatcher(action);
-            rd.forward(request, response);
-        }
-        else if ("EffectuerDeconnexion".equals(action)) {
-            rd = this.getServletContext().getNamedDispatcher(action);
-            rd.forward(request, response);
-        }
-        else{
-            //rd = this.getServletContext().getNamedDispatcher(action);
-            response.sendRedirect("./index.jsp");
-        }
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
