@@ -14,7 +14,6 @@
     <body>
         <h1>Inscription</h1>
         <form action="connexion.Frontal" method="post">
-            Courriel : <input type="email" name="courriel" required/>*
             <div>
                 Prenom : <input type="text" name="prenom" required/>*
             
