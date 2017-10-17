@@ -15,9 +15,9 @@ import java.sql.SQLException;
  */
 public class Connexion {
 	private static Connection cnx;
-	private static String 	url = "jdbc:mysql://localhost/defilecture?user=root&amp;password=root";
-			
-        
+	private static String url;
+	private static String user;		
+        private static String password;
         private Connexion()
         {
         }
@@ -25,11 +25,11 @@ public class Connexion {
 	{
 		if (cnx == null)
 			try {
-				/*if (user.equals(""))*/
-				cnx = DriverManager.getConnection(url);
-				/*else
-					cnx = DriverManager.getConnection(url,user,password);
-                                */            
+				if (user.equals(""))
+                                    cnx = DriverManager.getConnection(url);
+				else
+                                    cnx = DriverManager.getConnection(url,user,password);
+                                          
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -59,7 +59,7 @@ public class Connexion {
 		Connexion.url = url;
 	}
         
-        /*
+        
 	public static String getUser() {
 		return user;
 	}
@@ -69,5 +69,5 @@ public class Connexion {
 	public static void setPassword(String password) {
 		Connexion.password = password;
 	}
-        */
+        
 }
