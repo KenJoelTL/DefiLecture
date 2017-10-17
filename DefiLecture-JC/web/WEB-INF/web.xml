@@ -32,6 +32,10 @@
         <servlet-name>AfficherPageInscription</servlet-name>
         <servlet-class>controlleur.AfficherPageInscription</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EffectuerInscription</servlet-name>
+        <servlet-class>controlleur.EffectuerInscription</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Frontal</servlet-name>
         <url-pattern>*.Frontal</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>AfficherPageInscription</servlet-name>
         <url-pattern>/AfficherPageInscription</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EffectuerInscription</servlet-name>
+        <url-pattern>/EffectuerInscription</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
