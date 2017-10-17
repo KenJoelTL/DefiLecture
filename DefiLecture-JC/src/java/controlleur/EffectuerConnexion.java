@@ -82,7 +82,7 @@ public class EffectuerConnexion extends HttpServlet {
         }
         catch(ClassNotFoundException e){
             System.out.println("Erreur dans le chargement du pilote :"+ e);
-            response.sendRedirect("./pageConnexion.jsp");
+            response.sendRedirect("./connexion.jsp");
         }
         finally{
             try {
