@@ -27,8 +27,8 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `equipe` (
-  `idEquipe` int(10) NOT NULL,
-  `nomEquipe` varchar(255) NOT NULL
+  `ID_EQUIPE` int(10) NOT NULL,
+  `NOM_EQUIPE` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -38,13 +38,13 @@ CREATE TABLE `equipe` (
 --
 
 CREATE TABLE `lecture` (
-  `idLecture` int(10) NOT NULL,
-  `idParticipant` int(10) NOT NULL,
-  `titre` varchar(255) NOT NULL,
-  `dateInscription` date NOT NULL,
-  `dureeMinutes` int(10) NOT NULL,
-  `obligatoire` int(2) DEFAULT '0',
-  `defi` int(2) DEFAULT '0'
+  `ID_LECTURE` int(10) NOT NULL,
+  `ID_PARTICIPANT` int(10) NOT NULL,
+  `TITRE` varchar(255) NOT NULL,
+  `DATE_INSCRIPTION` date NOT NULL,
+  `DUREE_MINUTES` int(10) NOT NULL,
+  `EST_OBLIGATOIRE` int(2) DEFAULT '0',
+  `EST_DEFI` int(2) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -54,18 +54,18 @@ CREATE TABLE `lecture` (
 --
 
 CREATE TABLE `participant` (
-  `idParticipant` int(10) NOT NULL,
-  `idEquipe` int(10) DEFAULT NULL,
-  `nomUtilisateur` varchar(255) NOT NULL,
-  `courriel` varchar(255) NOT NULL,
-  `nom` varchar(255) NOT NULL,
-  `prenom` varchar(255) NOT NULL,
-  `pointage` int(10) DEFAULT '0',
-  `minutesRestantes` int(10) DEFAULT '0',
-  `programmeEtude` varchar(255) DEFAULT NULL,
-  `avatar` varchar(255) DEFAULT NULL,
-  `pseudonyme` varchar(255) DEFAULT NULL,
-  `role` int(10) NOT NULL DEFAULT '0'
+  `ID_PARTICIPANT` int(10) NOT NULL,
+  `ID_EQUIPE` int(10) DEFAULT NULL,
+  `COURRIEL` varchar(255) NOT NULL,
+  `MOT_PASSE` varchar(12) NOT NULL,
+  `NOM` varchar(255) NOT NULL,
+  `PRENOM` varchar(255) NOT NULL,
+  `POINTAGE` int(10) DEFAULT '0',
+  `MINUTES_RESTANTES` int(10) DEFAULT '0',
+  `PROGRAMME_ETUDE` varchar(255) DEFAULT NULL,
+  `AVATAR` varchar(255) DEFAULT NULL,
+  `PSEUDONYME` varchar(255) DEFAULT NULL,
+  `ROLE` int(10) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -76,24 +76,24 @@ CREATE TABLE `participant` (
 -- Indexes for table `equipe`
 --
 ALTER TABLE `equipe`
-  ADD PRIMARY KEY (`idEquipe`),
-  ADD UNIQUE KEY `nomEquipe` (`nomEquipe`);
+  ADD PRIMARY KEY (`ID_EQUIPE`),
+  ADD UNIQUE KEY `NOM_EQUIPE` (`NOM_EQUIPE`);
 
 --
 -- Indexes for table `lecture`
 --
 ALTER TABLE `lecture`
-  ADD PRIMARY KEY (`idLecture`),
-  ADD KEY `idParticipant` (`idParticipant`);
+  ADD PRIMARY KEY (`ID_LECTURE`),
+  ADD KEY `ID_PARTICIPANT` (`ID_PARTICIPANT`);
 
 --
 -- Indexes for table `participant`
 --
 ALTER TABLE `participant`
-  ADD PRIMARY KEY (`idParticipant`),
-  ADD UNIQUE KEY `unique_courriel` (`courriel`),
-  ADD UNIQUE KEY `participant_unq` (`nomUtilisateur`),
-  ADD KEY `idEquipe` (`idEquipe`);
+  ADD PRIMARY KEY (`ID_PARTICIPANT`),
+  ADD UNIQUE KEY `COURRIEL_UNQ` (`COURRIEL`),
+  ADD UNIQUE KEY `PARTICIPANT_UNQ` (`PSEUDONYME`),
+  ADD KEY `ID_EQUIPE` (`ID_EQUIPE`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -103,17 +103,17 @@ ALTER TABLE `participant`
 -- AUTO_INCREMENT for table `equipe`
 --
 ALTER TABLE `equipe`
-  MODIFY `idEquipe` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_EQUIPE` int(10) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `lecture`
 --
 ALTER TABLE `lecture`
-  MODIFY `idLecture` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_LECTURE` int(10) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `participant`
 --
 ALTER TABLE `participant`
-  MODIFY `idParticipant` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_PARTICIPANT` int(10) NOT NULL AUTO_INCREMENT;
 --
 -- Constraints for dumped tables
 --
@@ -122,13 +122,13 @@ ALTER TABLE `participant`
 -- Constraints for table `lecture`
 --
 ALTER TABLE `lecture`
-  ADD CONSTRAINT `lecture_fk` FOREIGN KEY (`idParticipant`) REFERENCES `participant` (`idParticipant`) ON DELETE CASCADE;
+  ADD CONSTRAINT `LECTURE_FK` FOREIGN KEY (`ID_PARTICIPANT`) REFERENCES `participant` (`ID_PARTICIPANT`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `participant`
 --
 ALTER TABLE `participant`
-  ADD CONSTRAINT `participant_fk` FOREIGN KEY (`idEquipe`) REFERENCES `equipe` (`idEquipe`) ON DELETE SET NULL;
+  ADD CONSTRAINT `PARTICIPANT_FK` FOREIGN KEY (`ID_EQUIPE`) REFERENCES `equipe` (`ID_EQUIPE`) ON DELETE SET NULL;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
