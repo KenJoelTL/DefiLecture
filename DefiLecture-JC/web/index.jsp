@@ -21,7 +21,7 @@
          <div class="container-fluid">
           
           <div class="navbar-header">
-            <a class="navbar-brand" href="#">Défi-Lecture</a>
+            <a class="navbar-brand" href='*.do?tache=""'>Défi-Lecture</a>
             <!-- Apparait lorsque la fenêtre devient de la taille d'un téléphone mobile -->
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#optionsNavigation">
               <span class="icon-bar"></span>
@@ -36,7 +36,7 @@
               <li><a href="#"><span class="glyphicon glyphicon-stats"></span> Tableau des scores</a></li>
              <%if(session.getAttribute("connecte") != null){%>
               <li><a href="#">Page de profil</a></li>
-              <li><a href="*.Frontal?action=AfficherPageEquipe">Page d'équipe</a></li>
+              <li><a href="*.do?tache=afficherPageEquipe">Page d'équipe</a></li>
             <%}else{%>
               <li style="background-color: #349737;"><a href='*.do?tache=afficherPageInscription' style="color: #fff;" ><span class="glyphicon glyphicon-education"></span> S'incrire</a></li>        
             <%}%>
@@ -44,7 +44,7 @@
             <ul class="nav navbar-nav navbar-right">
             <!--  <li><a href="#"><span class="glyphicon glyphicon-user"></span> S'incrire</a></li> -->
             <%if(session.getAttribute("connecte") == null){%>
-              <li><a href='*.Frontal?action=AfficherPageConnexion'><span class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>        
+              <li><a href='*.do?tache=afficherPageConnexion'><span class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>        
             <%}else{%>
               <li><a href='*.Frontal?action=EffectuerDeconnexion'><span class="glyphicon glyphicon-log-in"></span> Se d&eacute;connecter</a></li>
             <%}%>

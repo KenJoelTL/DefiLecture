@@ -5,6 +5,7 @@
  */
 package controleur;
 
+
 /**
  *
  * @author Charles
@@ -13,12 +14,15 @@ public class ActionBuilder {
     public static Action getAction(String actionName) {
         if (actionName != null)
             switch (actionName) {
-                case "afficherPageConnexion":
-                    return new AfficherPageConnexion();
+                
                 case "afficherPageEquipe":
-                    return new AfficherPageEquipe();
+                    return new AfficherPageEquipeAction();
                 case "afficherPageInscription":
-                    return new AfficherPageInscription();        
+                    return new AfficherPageInscriptionAction(); 
+                case "afficherPageConnexion":
+                    return new AfficherPageConnexionAction();    
+                    /*
+                     
                 case "effectuerConnexion":
                     return new EffectuerConnexion();                
                 case "effectuerCreationLecture":
@@ -26,7 +30,8 @@ public class ActionBuilder {
                 case "effectuerDeconnexion":
                     return new EffectuerDeconnexion();
                 case "effectuerInscription":
-                    return new EffectuerInscription();                
+                    return new EffectuerInscription();  
+                */
             }
         return new DefaultAction();
     }
