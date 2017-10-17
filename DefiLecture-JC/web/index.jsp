@@ -32,13 +32,13 @@
           <!-- Options contenues dans le bouton à son activation -->   
           <div class="collapse navbar-collapse" id="optionsNavigation">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Acceuil</a></li>
+                <li class="active"><a href='*.do?tache=""'>Acceuil</a></li>
               <li><a href="#"><span class="glyphicon glyphicon-stats"></span> Tableau des scores</a></li>
              <%if(session.getAttribute("connecte") != null){%>
               <li><a href="#">Page de profil</a></li>
               <li><a href="*.Frontal?action=AfficherPageEquipe">Page d'équipe</a></li>
             <%}else{%>
-              <li style="background-color: #349737;"><a href='*.Frontal?action=AfficherPageInscription' style="color: #fff;" ><span class="glyphicon glyphicon-education"></span> S'incrire</a></li>        
+              <li style="background-color: #349737;"><a href='*.do?tache=afficherPageInscription' style="color: #fff;" ><span class="glyphicon glyphicon-education"></span> S'incrire</a></li>        
             <%}%>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -56,10 +56,29 @@
         </nav>
         
         <div class='container' style='margin-top: 100px'>
-            <div class='row'>
+            
                 
-                <a href='*.Frontal?action=AfficherPageEquipe'>Page d'équipe</a>
-            </div>
+                <a href='*.do?tache=afficherPageEquipe'>Page d'équipe</a>
+                
+               
+                
+                <%if (request.getAttribute("vue") == null) 
+                {
+                %>
+                
+                <%@include file="accueil.jsp" %>      
+                 
+                <%}
+                else{
+                    String vue = request.getAttribute("vue").toString();
+                %>
+                <jsp:include page="<%=vue%>" ></jsp:include>
+                <%}%>
+                    
+
+
+                
+            
         </div>
         
     </body>
