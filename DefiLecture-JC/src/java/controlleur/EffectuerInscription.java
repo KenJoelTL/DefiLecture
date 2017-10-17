@@ -80,7 +80,7 @@ public class EffectuerInscription extends HttpServlet {
             requetePreparee.execute();
             // On vérifie s'il y a un résultat    
          //   if(){
-                response.sendRedirect("./pageConnexion.jsp");
+                response.sendRedirect("./connexion.jsp");
          /*   }
             else{
 //                RequestDispatcher r = this.getServletContext().getRequestDispatcher("/pageInscription.jsp");
@@ -90,11 +90,11 @@ public class EffectuerInscription extends HttpServlet {
         }
         catch(SQLException e){
             System.out.println("problème dans la connexion vers la base de données : " + e);
-            response.sendRedirect("./pageConnexion.jsp");
+            response.sendRedirect("./connexion.jsp");
         }
         catch(ClassNotFoundException e){
             System.out.println("Erreur dans le chargement du pilote :"+ e);
-            response.sendRedirect("./pageConnexion.jsp");
+            response.sendRedirect("./connexion.jsp");
         }
         finally{
             try {

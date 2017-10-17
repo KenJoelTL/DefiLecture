@@ -67,18 +67,18 @@ public class EffectuerConnexion extends HttpServlet {
             if(resultat.next()){
                 HttpSession session = request.getSession(true);
                 session.setAttribute("connecte", resultat.getString(1));
-                response.sendRedirect("./profilEquipe.jsp");
+                response.sendRedirect("./pageEquipe.jsp");
             }
             else{/*
                 HttpSession session = request.getSession(true);
                 session.setAttribute("connecte", "0");*/
-                RequestDispatcher r = this.getServletContext().getRequestDispatcher("/pageConnexion.jsp");
+                RequestDispatcher r = this.getServletContext().getRequestDispatcher("/connexion.jsp");
                 r.forward(request, response);
             }
         }
         catch(SQLException e){
             System.out.println("problème dans la connexion vers la base de données : " + e);
-            response.sendRedirect("./pageConnexion.jsp");
+            response.sendRedirect("./connexion.jsp");
         }
         catch(ClassNotFoundException e){
             System.out.println("Erreur dans le chargement du pilote :"+ e);

@@ -29,7 +29,7 @@ public class AfficherPageEquipe extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("./profilEquipe.jsp");
+        response.sendRedirect("./pageEquipe.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
