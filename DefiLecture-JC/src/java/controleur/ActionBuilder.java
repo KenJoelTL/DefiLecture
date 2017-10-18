@@ -23,7 +23,9 @@ public class ActionBuilder {
                 case "afficherPageConnexion":
                     return new AfficherPageConnexionAction();    
                 case "effectuerConnexion":
-                    return new EffectuerConnexionAction();                
+                    return new EffectuerConnexionAction();
+                case "afficherPageAccueil":
+                    return new AfficherPageAccueilAction();
                     /*
                      
                 case "effectuerCreationLecture":
@@ -34,6 +36,6 @@ public class ActionBuilder {
                     return new EffectuerInscription();  
                 */
             }
-        return new DefaultAction();
+        return new AfficherPageAccueilAction();
     }
 }
