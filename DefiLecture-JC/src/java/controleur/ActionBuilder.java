@@ -26,10 +26,14 @@ public class ActionBuilder {
                     return new EffectuerConnexionAction();
                 case "afficherPageAccueil":
                     return new AfficherPageAccueilAction();
+                case "afficherCreationLecture":
+                    return new AfficherCreationLectureAction();
+                case "effectuerCreationLecture":
+                    return new EffectuerCreationLectureAction();
                     /*
                      
                 case "effectuerCreationLecture":
-                    return new EffectuerCreationLecture();                
+                    return new EffectuerCreationLectureAction();                
                 case "effectuerDeconnexion":
                     return new EffectuerDeconnexion();
                 case "effectuerInscription":
