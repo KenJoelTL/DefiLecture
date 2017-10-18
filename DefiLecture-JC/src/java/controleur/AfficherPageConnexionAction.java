@@ -20,6 +20,8 @@ public class AfficherPageConnexionAction implements Action, RequestAware{
     @Override
     public String execute() {
         
+        System.out.println("affichage de la page de connexion");
+        
         request.setAttribute("vue", "connexion.jsp");
         
         return "/index.jsp";

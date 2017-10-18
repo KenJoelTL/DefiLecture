@@ -12,6 +12,7 @@ package controleur;
  */
 public class ActionBuilder {
     public static Action getAction(String actionName) {
+        System.out.print("entrer dans l'action builder");
         if (actionName != null)
             switch (actionName) {
                 
@@ -21,10 +22,10 @@ public class ActionBuilder {
                     return new AfficherPageInscriptionAction(); 
                 case "afficherPageConnexion":
                     return new AfficherPageConnexionAction();    
+                case "effectuerConnexion":
+                    return new EffectuerConnexionAction();                
                     /*
                      
-                case "effectuerConnexion":
-                    return new EffectuerConnexion();                
                 case "effectuerCreationLecture":
                     return new EffectuerCreationLecture();                
                 case "effectuerDeconnexion":

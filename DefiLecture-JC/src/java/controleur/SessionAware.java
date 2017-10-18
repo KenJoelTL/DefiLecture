@@ -5,6 +5,7 @@
  */
 package controleur;
 
+import javax.servlet.http.HttpSession;
 /**
  *
  * @author Charles

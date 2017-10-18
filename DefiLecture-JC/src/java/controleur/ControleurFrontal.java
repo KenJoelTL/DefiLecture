@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 /**
  *
  * @author Charles
@@ -29,17 +30,32 @@ public class ControleurFrontal extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String op = request.getParameter("operation");
-        Action action = ActionBuilder.getAction(op);
-        if (action instanceof RequestAware) {
-           ((RequestAware)action).setRequest(request);
-           ((RequestAware)action).setResponse(response);
+        
+        
+        String t = request.getParameter("tache");
+        
+        if (t != null) {
+            
+            Action action = ActionBuilder.getAction(t);
+            if (action instanceof RequestAware) {
+               ((RequestAware)action).setRequest(request);
+               ((RequestAware)action).setResponse(response);
+            }
+            if (action instanceof SessionAware) {
+               ((SessionAware)action).setSession(request.getSession(true));
+            }        
+            String vue = action.execute();
+            this.getServletContext().getRequestDispatcher(vue).forward(request, response);
         }
-        if (action instanceof SessionAware) {
-           ((SessionAware)action).setSession(request.getSession(true));
-        }        
-        String vue = action.execute();
-        this.getServletContext().getRequestDispatcher(vue).forward(request, response);
+        
+        else
+        {
+            Action action = ActionBuilder.getAction("");
+            String vue = action.execute();
+            this.getServletContext().getRequestDispatcher(vue).forward(request, response);
+            
+        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

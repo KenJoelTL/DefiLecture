@@ -5,10 +5,14 @@
  */
 package controleur;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 /**
  *
  * @author Charles
  */
-public class RequestAware {
-    
+public interface RequestAware {
+    public void setRequest(HttpServletRequest r);
+    public void setResponse(HttpServletResponse r);
 }
