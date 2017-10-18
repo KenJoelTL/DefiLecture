@@ -36,12 +36,15 @@ public class EffectuerConnexionAction implements Action, RequestAware, SessionAw
         String  identifiant = request.getParameter("identifiant"),
                 motPasse = request.getParameter("motPasse"); 
         
+        System.out.println(identifiant);
+        System.out.println(motPasse);
+        
         String pilote = "com.mysql.jdbc.Driver";
         
         Connection cnx =null;
         ResultSet rs = null;
         PreparedStatement requetePreparee = null; 
-        String requete = "SELECT 'COURRIEL' FROM participant WHERE ('COURRIEL' = ? or 'PSEUDONYME' = ? ) and 'MOT_PASSE' = ?";
+        String requete = "SELECT COURRIEL FROM participant WHERE (COURRIEL = ? or PSEUDONYME = ? ) and MOT_PASSE = ?";
 
         try{
             //Étape 1 : chargement du pilote JDBC
@@ -61,6 +64,7 @@ public class EffectuerConnexionAction implements Action, RequestAware, SessionAw
             ResultSet resultat = requetePreparee.executeQuery();
             // On vérifie s'il y a un résultat    
             if(resultat.next()){
+                System.out.println("Trouver résultat dans base de donnée");
                 HttpSession session = request.getSession(true);
                 session.setAttribute("connecte", resultat.getString(1));
                 request.setAttribute("vue", "pageEquipe.jsp");
@@ -69,6 +73,7 @@ public class EffectuerConnexionAction implements Action, RequestAware, SessionAw
             else{/*
                 HttpSession session = request.getSession(true);
                 session.setAttribute("connecte", "0");*/
+                System.out.println("Pas trouvé de résultat dans base de donnée");
                 request.setAttribute("vue", "connexion.jsp");
                 return "/index.jsp";
             }
@@ -78,7 +83,7 @@ public class EffectuerConnexionAction implements Action, RequestAware, SessionAw
             request.setAttribute("vue", "connexion.jsp");
             return "/index.jsp";
         }
-        catch(ClassNotFoundException e){
+        catch(ClassNotFoundException e){ 
             System.out.println("Erreur dans le chargement du pilote :"+ e);
             request.setAttribute("vue", "connexion.jsp");
             return "/index.jsp";
@@ -89,11 +94,11 @@ public class EffectuerConnexionAction implements Action, RequestAware, SessionAw
                     rs.close();
                 if(requetePreparee !=null)
                     requetePreparee.close();
-                if(cnx != null)
-                    cnx.close();
             } catch (SQLException ex) {
                 System.out.println("problème dans la fermeture de la connexion");
-            } 
+            }
+            Connexion.close();
+            
         }
     }
 
