@@ -33,6 +33,7 @@
           <div class="collapse navbar-collapse" id="optionsNavigation">
             <ul class="nav navbar-nav">
                 <li class="active"><a href='*.do?tache=""'>Acceuil</a></li>
+                <li class="active"><a href="*.do?tache=afficherCreationLecture">Créer Lecture</a></li>
               <li><a href="#"><span class="glyphicon glyphicon-stats"></span> Tableau des scores</a></li>
              <%if(session.getAttribute("connecte") != null){%>
               <li><a href="#">Page de profil</a></li>

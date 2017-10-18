@@ -23,6 +23,10 @@ public class Lecture {
     
     // Constructeur
     
+    
+    public Lecture() {
+    }
+
     public Lecture(int idLecture, int idParticipant, String dateInscription, String titre, int dureeMinutes, int obligatoire, int defi) {
         this.idLecture = idLecture;
         this.idParticipant = idParticipant;
@@ -32,6 +36,17 @@ public class Lecture {
         this.obligatoire = obligatoire;
         this.defi = defi;
     }
+
+    public Lecture(int idParticipant, String dateInscription, String titre, int dureeMinutes) {
+        this.idParticipant = idParticipant;
+        this.dateInscription = dateInscription;
+        this.titre = titre;
+        this.dureeMinutes = dureeMinutes;
+        this.idLecture = 0;
+        this.obligatoire = 0;
+        this.defi = 0;
+    }
+    
 
     // Getters et Setters
     
