@@ -17,13 +17,17 @@ public class Lecture {
     String dateInscription; 
     String titre;
     int dureeMinutes;
-    boolean obligatoire; //indique si la lecture est obligtoire ou non
-    boolean defi; // indique si la lecture fait partie d'un défi
+    int obligatoire; //indique si la lecture est obligtoire ou non
+    int defi; // indique si la lecture fait partie d'un défi
 
     
     // Constructeur
     
-    public Lecture(int idLecture, int idParticipant, String dateInscription, String titre, int dureeMinutes, boolean obligatoire, boolean defi) {
+    
+    public Lecture() {
+    }
+
+    public Lecture(int idLecture, int idParticipant, String dateInscription, String titre, int dureeMinutes, int obligatoire, int defi) {
         this.idLecture = idLecture;
         this.idParticipant = idParticipant;
         this.dateInscription = dateInscription;
@@ -32,6 +36,17 @@ public class Lecture {
         this.obligatoire = obligatoire;
         this.defi = defi;
     }
+
+    public Lecture(int idParticipant, String dateInscription, String titre, int dureeMinutes) {
+        this.idParticipant = idParticipant;
+        this.dateInscription = dateInscription;
+        this.titre = titre;
+        this.dureeMinutes = dureeMinutes;
+        this.idLecture = 0;
+        this.obligatoire = 0;
+        this.defi = 0;
+    }
+    
 
     // Getters et Setters
     
@@ -75,19 +90,19 @@ public class Lecture {
         this.dureeMinutes = dureeMinutes;
     }
 
-    public boolean estObligatoire() {
+    public int estObligatoire() {
         return obligatoire;
     }
 
-    public void setObligatoire(boolean obligatoire) {
+    public void setObligatoire(int obligatoire) {
         this.obligatoire = obligatoire;
     }
 
-    public boolean estDefi() {
+    public int estDefi() {
         return defi;
     }
 
-    public void setDefi(boolean defi) {
+    public void setDefi(int defi) {
         this.defi = defi;
     }
     

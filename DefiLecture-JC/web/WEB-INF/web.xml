@@ -13,6 +13,10 @@
         <servlet-class>controlleur.Frontal</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>CF</servlet-name>
+        <servlet-class>controleur.ControleurFrontal</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>AfficherPageEquipe</servlet-name>
         <servlet-class>controlleur.AfficherPageEquipe</servlet-class>
     </servlet>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>EffectuerInscription</servlet-name>
         <url-pattern>/EffectuerInscription</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CF</servlet-name>
+        <url-pattern>*.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
