@@ -16,7 +16,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
-    <body>
+    <body style="background-color: whitesmoke;">
+        <div class='container-fluid'  style="margin-bottom: 50px" >
         <nav class="navbar navbar-inverse navbar-fixed-top">
          <div class="container-fluid">
           
@@ -55,13 +56,14 @@
              
          </div>
         </nav>
+        </div>
         
-        <div class='container' style='margin-top: 100px'>
             
                 
                 <a href='*.do?tache=afficherPageEquipe'>Page d'équipe</a>
                 
-               
+                <div class="container-fluid">
+                    
                 
                 <%if (request.getAttribute("vue") == null) 
                 {
@@ -77,10 +79,10 @@
                 <%}%>
                     
 
+                </div> 
 
                 
             
-        </div>
         
     </body>
 </html>
