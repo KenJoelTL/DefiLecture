@@ -16,6 +16,6 @@ public interface Config {
     public static final String DB_USER = "root";
     public static final String DB_PWD = "root";
     public static final String DB_NAME = "defilecture";
-    public static final String DRIVER = "com.mysql.jdbc.Driver";
+    public static final String DRIVER = "com.mysql.jdbc.Driver"; //Ajout de l'attribut contenant info du pilote - Joel
     
 }
