@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import jdbc.Connexion;
 
 /**
@@ -48,12 +50,18 @@ public class CompteDAO extends DAO<Compte>{
                         paramStm.close();
                         return true;
                 }
+            return false;
         }
         catch (SQLException exp) {
         }
         finally {
-                if (paramStm!=null)
-                    Connexion.close();
+                try {
+                    if (paramStm!=null)
+                        paramStm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(CompteDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Connexion.close();
         }
         return false;
     }

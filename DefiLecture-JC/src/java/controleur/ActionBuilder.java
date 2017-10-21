@@ -36,8 +36,6 @@ public class ActionBuilder {
                      
                 case "effectuerCreationLecture":
                     return new EffectuerCreationLectureAction();                
-                case "effectuerDeconnexion":
-                    return new EffectuerDeconnexion();
                 case "effectuerInscription":
                     return new EffectuerInscription();  
                 */
