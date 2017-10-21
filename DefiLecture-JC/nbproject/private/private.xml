@@ -3,18 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/src/java/controlleur/EffectuerConnexion.java</file>
-            <file>file:/E:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/src/java/controlleur/AfficherPageEquipe.java</file>
-            <file>file:/E:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/src/java/controlleur/EffectuerInscription.java</file>
+            <file>file:/E:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/web/inscription.jsp</file>
+            <file>file:/E:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/src/java/modele/Participant.java</file>
             <file>file:/E:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/src/java/controlleur/EffectuerDeconnexion.java</file>
             <file>file:/E:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/src/java/controlleur/AfficherPageConnexion.java</file>
-            <file>file:/E:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/src/java/controlleur/AfficherPageInscription.java</file>
             <file>file:/E:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/web/connexion.jsp</file>
-            <file>file:/E:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/web/index.jsp</file>
-            <file>file:/E:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/web/inscription.jsp</file>
+            <file>file:/E:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/src/java/controlleur/EffectuerConnexion.java</file>
+            <file>file:/E:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/src/java/controlleur/AfficherPageEquipe.java</file>
             <file>file:/E:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/web/pageEquipe.jsp</file>
-            <file>file:/E:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/web/lecture.jsp</file>
-            <file>file:/E:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/src/java/modele/DAO.java</file>
+            <file>file:/E:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/src/java/controlleur/AfficherPageInscription.java</file>
         </group>
     </open-files>
 </project-private>

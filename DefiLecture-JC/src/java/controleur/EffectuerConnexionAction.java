@@ -6,12 +6,9 @@
 package controleur;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -20,7 +17,7 @@ import jdbc.Connexion;
 
 /**
  *
- * @author Charles
+ * @author Joel
  */
 public class EffectuerConnexionAction implements Action, RequestAware, SessionAware {
     
@@ -39,8 +36,8 @@ public class EffectuerConnexionAction implements Action, RequestAware, SessionAw
         System.out.println(identifiant);
         System.out.println(motPasse);
         
-        String pilote = "com.mysql.jdbc.Driver";
-        
+       // String pilote = "com.mysql.jdbc.Driver";
+       
         Connection cnx =null;
         ResultSet rs = null;
         PreparedStatement requetePreparee = null; 
@@ -48,7 +45,7 @@ public class EffectuerConnexionAction implements Action, RequestAware, SessionAw
 
         try{
             //Étape 1 : chargement du pilote JDBC
-            Class.forName(pilote);
+            Class.forName(Config.DRIVER);
             //Étape 2 : ouverture de la connection vers la base de données
             Connexion.setUrl(Config.URL);
             Connexion.setUser(Config.DB_USER);
@@ -58,8 +55,8 @@ public class EffectuerConnexionAction implements Action, RequestAware, SessionAw
             requetePreparee = cnx.prepareStatement(requete);
             //Étape 3.1 : liaison des paramètres avec les valeurs
             requetePreparee.setString(1, identifiant);   //met la 1er ? à la valeur du courriel dans la requete
-            requetePreparee.setString(2, identifiant);   //met la 2e  ? à la valeur du nomUtilisateur dans la requete
-            requetePreparee.setString(3, motPasse);      //met la 1er ? à la valeur du motPasse dans la requete
+            requetePreparee.setString(2, identifiant);   //met la 2e  ? à la valeur du pseudonyme dans la requete
+            requetePreparee.setString(3, motPasse);      //met la 3e  ? à la valeur du motPasse dans la requete
 
             ResultSet resultat = requetePreparee.executeQuery();
             // On vérifie s'il y a un résultat    
