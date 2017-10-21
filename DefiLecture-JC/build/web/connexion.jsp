@@ -21,10 +21,10 @@
         <%}
         %>
         
-        <form action="connexion.Frontal" method="post">
+        <form action="*.do" method="post">
             Identifiant : <input type="text" name="identifiant" />
             Mot de passe : <input type="password" name="motPasse" />
-            <input type="hidden" name="action" value="EffectuerConnexion">
+            <input type="hidden" name="tache" value="effectuerConnexion">
             <input type="submit" value=" Connexion" />
         </form>
     </body>
