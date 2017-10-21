@@ -48,7 +48,7 @@
             <%if(session.getAttribute("connecte") == null){%>
               <li><a href='*.do?tache=afficherPageConnexion'><span class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>        
             <%}else{%>
-              <li><a href='*.Frontal?action=EffectuerDeconnexion'><span class="glyphicon glyphicon-log-in"></span> Se d&eacute;connecter</a></li>
+              <li><a href='*.do?tache=effectuerDeconnexion'><span class="glyphicon glyphicon-log-in"></span> Se d&eacute;connecter</a></li>
             <%}%>
             
             </ul>   
