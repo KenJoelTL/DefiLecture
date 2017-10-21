@@ -16,6 +16,8 @@ public class ActionBuilder {
         if (actionName != null)
             switch (actionName) {
                 
+                case "afficherPageAccueil":
+                    return new AfficherPageAccueilAction();
                 case "afficherPageEquipe":
                     return new AfficherPageEquipeAction();
                 case "afficherPageInscription":
@@ -24,8 +26,8 @@ public class ActionBuilder {
                     return new AfficherPageConnexionAction();    
                 case "effectuerConnexion":
                     return new EffectuerConnexionAction();
-                case "afficherPageAccueil":
-                    return new AfficherPageAccueilAction();
+                case "effectuerDeconnexion":
+                    return new EffectuerDeconnexionAction();
                 case "afficherCreationLecture":
                     return new AfficherCreationLectureAction();
                 case "effectuerCreationLecture":
