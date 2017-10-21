@@ -48,7 +48,7 @@ public class EffectuerCreationLectureAction implements Action, RequestAware, Ses
             Connection cnx = Connexion.getInstance();
             dao = new LectureDAO(cnx);
             lecture = new Lecture();
-            lecture.setIdParticipant(idParticipant);
+            lecture.setIdCompte(idParticipant);
             lecture.setDureeMinutes(dureeMinutes);
             lecture.setTitre(titre);
             lecture.setDateInscription(dateInscription);

@@ -16,15 +16,15 @@ import jdbc.Connexion;
  *
  * @author Joel
  */
-public class ParticipantDAO extends DAO<Participant>{
+public class CompteDAO extends DAO<Compte>{
 
-    public ParticipantDAO(Connection cnx) {
+    public CompteDAO(Connection cnx) {
         super(cnx);
     }
 
     @Override
-    public boolean create(Participant x) {
-        String req = "INSERT INTO participant (`ID_EQUIPE` , `COURRIEL` , `MOT_PASSE` , `NOM`, `PRENOM`, `PSEUDONYME`, `AVATAR`, `PROGRAMME_ETUDE`) VALUES "+
+    public boolean create(Compte x) {
+        String req = "INSERT INTO compte (`ID_EQUIPE` , `COURRIEL` , `MOT_PASSE` , `NOM`, `PRENOM`, `PSEUDONYME`, `AVATAR`, `PROGRAMME_ETUDE`) VALUES "+
 			     "(?,?,?,?,?,?,?,?)";
 
         PreparedStatement paramStm = null;
@@ -59,22 +59,22 @@ public class ParticipantDAO extends DAO<Participant>{
     }
 
     @Override
-    public Participant read(int id) {
+    public Compte read(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Participant read(String id) {
+    public Compte read(String id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     @Override
-    public boolean update(Participant x) {
+    public boolean update(Compte x) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean delete(Participant x) {
+    public boolean delete(Compte x) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
@@ -83,9 +83,9 @@ public class ParticipantDAO extends DAO<Participant>{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public Participant findByIdentifiantMotPasse(String identifiant, String motPasse){
+    public Compte findByIdentifiantMotPasse(String identifiant, String motPasse){
         
-        String req = "SELECT * FROM participant WHERE (`COURRIEL` = ? or `PSEUDONYME` = ?) and `MOT_PASSE` = ?";
+        String req = "SELECT * FROM compte WHERE (`COURRIEL` = ? or `PSEUDONYME` = ?) and `MOT_PASSE` = ?";
         
         PreparedStatement paramStm = null;
         try {
@@ -101,22 +101,22 @@ public class ParticipantDAO extends DAO<Participant>{
                 // On vérifie s'il y a un résultat    
                 if(resultat.next()){
                     
-                    Participant p = new Participant();
-                    p.setIdParticipant(resultat.getInt("ID_PARTICIPANT"));
-                    p.setIdEquipe(resultat.getInt("ID_EQUIPE"));
-                    p.setCourriel(resultat.getString("COURRIEL"));
-                    p.setPrenom(resultat.getString("PRENOM"));             
-                    p.setNom(resultat.getString("NOM"));
-                    p.setPseudonyme(resultat.getString("PSEUDONYME"));             
-                    p.setAvatar(resultat.getString("AVATAR"));             
-                    p.setProgrammeEtude(resultat.getString("PROGRAMME_ETUDE"));
-                    p.setMinutesRestantes(resultat.getInt("MINUTES_RESTANTES"));
-                    p.setPointage(resultat.getInt("POINTAGE"));
-                    p.setRole(resultat.getInt("ROLE"));
+                    Compte c = new Compte();
+                    c.setIdCompte(resultat.getInt("ID_COMPTE"));
+                    c.setIdEquipe(resultat.getInt("ID_EQUIPE"));
+                    c.setCourriel(resultat.getString("COURRIEL"));
+                    c.setPrenom(resultat.getString("PRENOM"));             
+                    c.setNom(resultat.getString("NOM"));
+                    c.setPseudonyme(resultat.getString("PSEUDONYME"));             
+                    c.setAvatar(resultat.getString("AVATAR"));             
+                    c.setProgrammeEtude(resultat.getString("PROGRAMME_ETUDE"));
+                    c.setMinutesRestantes(resultat.getInt("MINUTES_RESTANTES"));
+                    c.setPointage(resultat.getInt("POINTAGE"));
+                    c.setRole(resultat.getInt("ROLE"));
                     
                     resultat.close();
                     paramStm.close();
-                        return p;
+                        return c;
                 }
             resultat.close();
             paramStm.close();

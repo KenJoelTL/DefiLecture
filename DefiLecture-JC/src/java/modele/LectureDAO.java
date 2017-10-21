@@ -26,7 +26,7 @@ public class LectureDAO extends DAO<Lecture> {
     @Override
     public boolean create(Lecture x) {
                
-        String req = "INSERT INTO lecture (`ID_PARTICIPANT` , `TITRE` , `DATE_INSCRIPTION` , `DUREE_MINUTES`) VALUES "+
+        String req = "INSERT INTO lecture (`ID_COMPTE` , `TITRE` , `DATE_INSCRIPTION` , `DUREE_MINUTES`) VALUES "+
 			     "(?,?,?,?)";
 
         PreparedStatement paramStm = null;
@@ -36,7 +36,7 @@ public class LectureDAO extends DAO<Lecture> {
                 paramStm = cnx.prepareStatement(req);
 
                 
-                paramStm.setInt(1, x.getIdParticipant());
+                paramStm.setInt(1, x.getIdCompte());
                 paramStm.setString(2, x.getTitre());
                 paramStm.setString(3, x.getDateInscription());
                 paramStm.setInt(4, x.getDureeMinutes());
