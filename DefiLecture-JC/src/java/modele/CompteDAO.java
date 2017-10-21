@@ -26,8 +26,8 @@ public class CompteDAO extends DAO<Compte>{
 
     @Override
     public boolean create(Compte x) {
-        String req = "INSERT INTO compte (`ID_EQUIPE` , `COURRIEL` , `MOT_PASSE` , `NOM`, `PRENOM`, `PSEUDONYME`, `AVATAR`, `PROGRAMME_ETUDE`) VALUES "+
-			     "(?,?,?,?,?,?,?,?)";
+        String req = "INSERT INTO compte (`COURRIEL` , `MOT_PASSE` , `NOM`, `PRENOM`, `PSEUDONYME`, `AVATAR`, `PROGRAMME_ETUDE`) VALUES "+
+			     "(?,?,?,?,?,?,?)";
 
         PreparedStatement paramStm = null;
         try {
@@ -35,21 +35,32 @@ public class CompteDAO extends DAO<Compte>{
                 paramStm = cnx.prepareStatement(req);
 
                 
-                paramStm.setInt(1, x.getIdEquipe());
-                paramStm.setString(2, x.getCourriel());
-                paramStm.setString(3, x.getMotPasse());
-                paramStm.setString(4, x.getNom());
-                paramStm.setString(5, x.getPrenom());
-                paramStm.setString(6, x.getPseudonyme());
-                paramStm.setString(7, x.getAvatar());
-                paramStm.setString(8, x.getProgrammeEtude());
-
+                paramStm.setString(1, x.getCourriel());
+                paramStm.setString(2, x.getMotPasse());
+                paramStm.setString(3, x.getNom());
+                paramStm.setString(4, x.getPrenom());
+                if(!"".equals(x.getPseudonyme()))
+                    paramStm.setString(5, x.getPseudonyme());
+                else
+                    paramStm.setString(5, null);
+                if(!"".equals(x.getAvatar()))
+                    paramStm.setString(6, x.getAvatar());
+                else
+                    paramStm.setString(6, null);
+                if(!"".equals(x.getProgrammeEtude()))
+                    paramStm.setString(7, x.getProgrammeEtude());
+                else
+                    paramStm.setString(7, null);
+                
                 int nbLignesAffectees= paramStm.executeUpdate();
                 
                 if (nbLignesAffectees>0) {
                         paramStm.close();
                         return true;
                 }
+                
+                //paramStm.execute();
+                
             return false;
         }
         catch (SQLException exp) {

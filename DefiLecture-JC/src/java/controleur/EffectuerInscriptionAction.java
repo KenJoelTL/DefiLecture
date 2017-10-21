@@ -47,6 +47,8 @@ public class EffectuerInscriptionAction implements Action, RequestAware, Session
             compte.setPrenom(prenom);
             compte.setNom(nom);
             compte.setMotPasse(motPasse);
+            compte.setPseudonyme(pseudonyme);
+            compte.setProgrammeEtude(programmeEtude);
             
             //faire vérification avec des findBy
             

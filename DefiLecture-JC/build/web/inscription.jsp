@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>Inscription</h1>
-        <form action="connexion.do" method="post">
+        <form action="*.do" method="post">
             <div>
                 Prenom* : <input type="text" name="prenom" required/>
             
