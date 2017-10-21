@@ -21,7 +21,7 @@
             </div>
             <div>
                 Durée de la lecutre (en minute) : <input type="text" name="dureeMinutes" required />
-                ID Participant : <input type="int" name="idParticipant" required />    
+                ID Compte : <input type="int" name="idCompte" required />    
               
             </div>
            
@@ -30,4 +30,3 @@
         </form>
     </body>
 </html>
-

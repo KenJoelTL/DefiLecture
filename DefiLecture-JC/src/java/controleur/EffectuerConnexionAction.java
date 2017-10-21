@@ -38,7 +38,7 @@ public class EffectuerConnexionAction implements Action, RequestAware, SessionAw
         
        // String pilote = "com.mysql.jdbc.Driver";
 
-        Compte participant;
+        Compte compte;
 
         try{
             Class.forName(Config.DRIVER);
@@ -48,13 +48,13 @@ public class EffectuerConnexionAction implements Action, RequestAware, SessionAw
             Connection cnx = Connexion.getInstance();
             
             dao = new CompteDAO(cnx);
-            participant = dao.findByIdentifiantMotPasse(identifiant, motPasse);
+            compte = dao.findByIdentifiantMotPasse(identifiant, motPasse);
             
             // On vérifie s'il y a un résultat    
-            if(participant!=null){
+            if(compte!=null){
                 System.out.println("Trouver résultat dans base de donnée");
                 session = request.getSession(true);
-                session.setAttribute("connecte", participant.getIdCompte());
+                session.setAttribute("connecte", compte.getIdCompte());
                 request.setAttribute("vue", "pageEquipe.jsp");
             }
             else{
