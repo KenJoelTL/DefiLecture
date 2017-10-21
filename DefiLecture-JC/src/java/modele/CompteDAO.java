@@ -10,22 +10,24 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import jdbc.Connexion;
 
 /**
  *
  * @author Joel
  */
-public class ParticipantDAO extends DAO<Participant>{
+public class CompteDAO extends DAO<Compte>{
 
-    public ParticipantDAO(Connection cnx) {
+    public CompteDAO(Connection cnx) {
         super(cnx);
     }
 
     @Override
-    public boolean create(Participant x) {
-        String req = "INSERT INTO participant (`ID_EQUIPE` , `COURRIEL` , `MOT_PASSE` , `NOM`, `PRENOM`, `PSEUDONYME`, `AVATAR`, `PROGRAMME_ETUDE`) VALUES "+
-			     "(?,?,?,?,?,?,?,?)";
+    public boolean create(Compte x) {
+        String req = "INSERT INTO compte (`COURRIEL` , `MOT_PASSE` , `NOM`, `PRENOM`, `PSEUDONYME`, `AVATAR`, `PROGRAMME_ETUDE`) VALUES "+
+			     "(?,?,?,?,?,?,?)";
 
         PreparedStatement paramStm = null;
         try {
@@ -33,48 +35,65 @@ public class ParticipantDAO extends DAO<Participant>{
                 paramStm = cnx.prepareStatement(req);
 
                 
-                paramStm.setInt(1, x.getIdEquipe());
-                paramStm.setString(2, x.getCourriel());
-                paramStm.setString(3, x.getMotPasse());
-                paramStm.setString(4, x.getNom());
-                paramStm.setString(5, x.getPrenom());
-                paramStm.setString(6, x.getPseudonyme());
-                paramStm.setString(7, x.getAvatar());
-                paramStm.setString(8, x.getProgrammeEtude());
-
+                paramStm.setString(1, x.getCourriel());
+                paramStm.setString(2, x.getMotPasse());
+                paramStm.setString(3, x.getNom());
+                paramStm.setString(4, x.getPrenom());
+                if(!"".equals(x.getPseudonyme()))
+                    paramStm.setString(5, x.getPseudonyme());
+                else
+                    paramStm.setString(5, null);
+                if(!"".equals(x.getAvatar()))
+                    paramStm.setString(6, x.getAvatar());
+                else
+                    paramStm.setString(6, null);
+                if(!"".equals(x.getProgrammeEtude()))
+                    paramStm.setString(7, x.getProgrammeEtude());
+                else
+                    paramStm.setString(7, null);
+                
                 int nbLignesAffectees= paramStm.executeUpdate();
                 
                 if (nbLignesAffectees>0) {
                         paramStm.close();
                         return true;
                 }
+                
+                //paramStm.execute();
+                
+            return false;
         }
         catch (SQLException exp) {
         }
         finally {
-                if (paramStm!=null)
-                    Connexion.close();
+                try {
+                    if (paramStm!=null)
+                        paramStm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(CompteDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Connexion.close();
         }
         return false;
     }
 
     @Override
-    public Participant read(int id) {
+    public Compte read(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Participant read(String id) {
+    public Compte read(String id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     @Override
-    public boolean update(Participant x) {
+    public boolean update(Compte x) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean delete(Participant x) {
+    public boolean delete(Compte x) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
@@ -83,9 +102,9 @@ public class ParticipantDAO extends DAO<Participant>{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public Participant findByIdentifiantMotPasse(String identifiant, String motPasse){
+    public Compte findByIdentifiantMotPasse(String identifiant, String motPasse){
         
-        String req = "SELECT * FROM participant WHERE (`COURRIEL` = ? or `PSEUDONYME` = ?) and `MOT_PASSE` = ?";
+        String req = "SELECT * FROM compte WHERE (`COURRIEL` = ? or `PSEUDONYME` = ?) and `MOT_PASSE` = ?";
         
         PreparedStatement paramStm = null;
         try {
@@ -101,22 +120,22 @@ public class ParticipantDAO extends DAO<Participant>{
                 // On vérifie s'il y a un résultat    
                 if(resultat.next()){
                     
-                    Participant p = new Participant();
-                    p.setIdParticipant(resultat.getInt("ID_PARTICIPANT"));
-                    p.setIdEquipe(resultat.getInt("ID_EQUIPE"));
-                    p.setCourriel(resultat.getString("COURRIEL"));
-                    p.setPrenom(resultat.getString("PRENOM"));             
-                    p.setNom(resultat.getString("NOM"));
-                    p.setPseudonyme(resultat.getString("PSEUDONYME"));             
-                    p.setAvatar(resultat.getString("AVATAR"));             
-                    p.setProgrammeEtude(resultat.getString("PROGRAMME_ETUDE"));
-                    p.setMinutesRestantes(resultat.getInt("MINUTES_RESTANTES"));
-                    p.setPointage(resultat.getInt("POINTAGE"));
-                    p.setRole(resultat.getInt("ROLE"));
+                    Compte c = new Compte();
+                    c.setIdCompte(resultat.getInt("ID_COMPTE"));
+                    c.setIdEquipe(resultat.getInt("ID_EQUIPE"));
+                    c.setCourriel(resultat.getString("COURRIEL"));
+                    c.setPrenom(resultat.getString("PRENOM"));             
+                    c.setNom(resultat.getString("NOM"));
+                    c.setPseudonyme(resultat.getString("PSEUDONYME"));             
+                    c.setAvatar(resultat.getString("AVATAR"));             
+                    c.setProgrammeEtude(resultat.getString("PROGRAMME_ETUDE"));
+                    c.setMinutesRestantes(resultat.getInt("MINUTES_RESTANTES"));
+                    c.setPointage(resultat.getInt("POINTAGE"));
+                    c.setRole(resultat.getInt("ROLE"));
                     
                     resultat.close();
                     paramStm.close();
-                        return p;
+                        return c;
                 }
             resultat.close();
             paramStm.close();

@@ -13,26 +13,26 @@
     </head>
     <body>
         <h1>Inscription</h1>
-        <form action="connexion.Frontal" method="post">
+        <form action="*.do" method="post">
             <div>
-                Prenom : <input type="text" name="prenom" required/>*
+                Prenom* : <input type="text" name="prenom" required/>
             
-                Nom : <input type="text" name="nom" required/>*
+                Nom* : <input type="text" name="nom" required/>
             </div>
             <div>
                 Programme d'étude : <input type="text" name="programmeEtude" />
 
-                Courriel : <input type="email" name="courriel" required/>*
+                Courriel* : <input type="email" name="courriel" required/>
             </div>
             <div>    
                 Pseudonyme : <input type="text" name="pseudonyme" />
             </div>
             <div>
-                Mot de passe : <input type="password" name="motPasse" required/>*
+                Mot de passe* : <input type="password" name="motPasse" required/>
             
-                Confirmation du mot de passe : <input type="password" name="confirmationMotPasse" required/>*
+                Confirmation du mot de passe* : <input type="password" name="confirmationMotPasse" required/>
             </div>
-            <input type="hidden" name="action" value="EffectuerInscription">
+            <input type="hidden" name="tache" value="effectuerInscription">
             <input type="submit" value=" S'inscrire" />
         </form>
     </body>

@@ -6,7 +6,6 @@
 package controleur;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -33,7 +32,7 @@ public class EffectuerCreationLectureAction implements Action, RequestAware, Ses
         String  titre = request.getParameter("titre"),
                 dateInscription = request.getParameter("dateInscription");
         int     dureeMinutes = Integer.parseInt(request.getParameter("dureeMinutes")),
-                idParticipant = Integer.parseInt(request.getParameter("idParticipant"));
+                idCompte = Integer.parseInt(request.getParameter("idCompte"));
         
         String pilote = "com.mysql.jdbc.Driver";
         Lecture lecture;
@@ -48,7 +47,7 @@ public class EffectuerCreationLectureAction implements Action, RequestAware, Ses
             Connection cnx = Connexion.getInstance();
             dao = new LectureDAO(cnx);
             lecture = new Lecture();
-            lecture.setIdParticipant(idParticipant);
+            lecture.setIdCompte(idCompte);
             lecture.setDureeMinutes(dureeMinutes);
             lecture.setTitre(titre);
             lecture.setDateInscription(dateInscription);

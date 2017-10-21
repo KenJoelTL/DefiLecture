@@ -18,8 +18,7 @@ import modele.CompteDAO;
  *
  * @author Joel
  */
-public class EffectuerConnexionAction implements Action, RequestAware, SessionAware {
-    
+public class EffectuerInscriptionAction implements Action, RequestAware, SessionAware {
     private HttpSession session;
     private HttpServletRequest request;
     private HttpServletResponse response;
@@ -27,49 +26,46 @@ public class EffectuerConnexionAction implements Action, RequestAware, SessionAw
 
     @Override
     public String execute() {
-        
-        System.out.println("Entrer dans l'action de connexion");
-        
-        String identifiant = request.getParameter("identifiant"),
-               motPasse    = request.getParameter("motPasse"); 
-        
-        System.out.println(identifiant);
-        System.out.println(motPasse);
-        
-       // String pilote = "com.mysql.jdbc.Driver";
-
         Compte compte;
-
+        String  courriel = request.getParameter("courriel"),
+                prenom = request.getParameter("prenom"),
+                nom = request.getParameter("nom"),
+                motPasse = request.getParameter("motPasse"),
+                programmeEtude = request.getParameter("programmeEtude"),
+                pseudonyme = request.getParameter("pseudonyme"); 
+        
         try{
+
             Class.forName(Config.DRIVER);
             Connexion.setUrl(Config.URL);
             Connexion.setUser(Config.DB_USER);
             Connexion.setPassword(Config.DB_PWD);
             Connection cnx = Connexion.getInstance();
-            
             dao = new CompteDAO(cnx);
-            compte = dao.findByIdentifiantMotPasse(identifiant, motPasse);
+            compte = new Compte();
+            compte.setCourriel(courriel);
+            compte.setPrenom(prenom);
+            compte.setNom(nom);
+            compte.setMotPasse(motPasse);
+            compte.setPseudonyme(pseudonyme);
+            compte.setProgrammeEtude(programmeEtude);
             
-            // On vérifie s'il y a un résultat    
-            if(compte!=null){
-                System.out.println("Trouver résultat dans base de donnée");
-                session = request.getSession(true);
-                session.setAttribute("connecte", compte.getIdCompte());
-                request.setAttribute("vue", "pageEquipe.jsp");
-            }
-            else{
-                System.out.println("Pas trouvé de résultat dans base de donnée");
+            //faire vérification avec des findBy
+            
+            if(dao.create(compte)){
+                System.out.println("Une compte a été créée avec succès");
                 request.setAttribute("vue", "connexion.jsp");
             }
-            return "/index.jsp";           
-        }
-        catch(ClassNotFoundException e){ 
-            System.out.println("Erreur dans le chargement du pilote :"+ e);
-            request.setAttribute("vue", "connexion.jsp");
+            else{
+                System.out.println("Problème de création de la compte");
+                request.setAttribute("vue", "accueil.jsp");
+            }
             return "/index.jsp";
         }
-        finally{
-            Connexion.close();
+        catch(ClassNotFoundException e){
+            System.out.println("Erreur dans le chargement du pilote :"+ e);
+            request.setAttribute("vue", "compte.jsp");
+            return "/index.jsp";
         }
     }
 
@@ -87,5 +83,4 @@ public class EffectuerConnexionAction implements Action, RequestAware, SessionAw
     public void setSession(HttpSession session) {
         this.session = session;
     }
-    
 }

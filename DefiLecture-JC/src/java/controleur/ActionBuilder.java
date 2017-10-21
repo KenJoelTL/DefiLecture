@@ -22,6 +22,8 @@ public class ActionBuilder {
                     return new AfficherPageEquipeAction();
                 case "afficherPageInscription":
                     return new AfficherPageInscriptionAction(); 
+                case "effectuerInscription":
+                    return new EffectuerInscriptionAction();  
                 case "afficherPageConnexion":
                     return new AfficherPageConnexionAction();    
                 case "effectuerConnexion":
@@ -36,10 +38,6 @@ public class ActionBuilder {
                      
                 case "effectuerCreationLecture":
                     return new EffectuerCreationLectureAction();                
-                case "effectuerDeconnexion":
-                    return new EffectuerDeconnexion();
-                case "effectuerInscription":
-                    return new EffectuerInscription();  
                 */
             }
         return new AfficherPageAccueilAction();

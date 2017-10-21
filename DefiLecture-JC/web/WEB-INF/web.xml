@@ -17,36 +17,12 @@
         <servlet-class>controleur.ControleurFrontal</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AfficherPageEquipe</servlet-name>
-        <servlet-class>controlleur.AfficherPageEquipe</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AfficherPageConnexion</servlet-name>
-        <servlet-class>controlleur.AfficherPageConnexion</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AfficherPageInscription</servlet-name>
-        <servlet-class>controlleur.AfficherPageInscription</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>EffectuerInscription</servlet-name>
         <servlet-class>controlleur.EffectuerInscription</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Frontal</servlet-name>
         <url-pattern>*.Frontal</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AfficherPageEquipe</servlet-name>
-        <url-pattern>/AfficherPageEquipe</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AfficherPageConnexion</servlet-name>
-        <url-pattern>/AfficherPageConnexion</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AfficherPageInscription</servlet-name>
-        <url-pattern>/AfficherPageInscription</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>EffectuerInscription</servlet-name>

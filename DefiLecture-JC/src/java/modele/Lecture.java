@@ -13,7 +13,7 @@ public class Lecture {
     
 
     int idLecture; // clé primaire
-    int idParticipant;
+    int idCompte;
     String dateInscription; 
     String titre;
     int dureeMinutes;
@@ -27,9 +27,9 @@ public class Lecture {
     public Lecture() {
     }
 
-    public Lecture(int idLecture, int idParticipant, String dateInscription, String titre, int dureeMinutes, int obligatoire, int defi) {
+    public Lecture(int idLecture, int idCompte, String dateInscription, String titre, int dureeMinutes, int obligatoire, int defi) {
         this.idLecture = idLecture;
-        this.idParticipant = idParticipant;
+        this.idCompte = idCompte;
         this.dateInscription = dateInscription;
         this.titre = titre;
         this.dureeMinutes = dureeMinutes;
@@ -37,8 +37,8 @@ public class Lecture {
         this.defi = defi;
     }
 
-    public Lecture(int idParticipant, String dateInscription, String titre, int dureeMinutes) {
-        this.idParticipant = idParticipant;
+    public Lecture(int idCompte, String dateInscription, String titre, int dureeMinutes) {
+        this.idCompte = idCompte;
         this.dateInscription = dateInscription;
         this.titre = titre;
         this.dureeMinutes = dureeMinutes;
@@ -58,12 +58,12 @@ public class Lecture {
         this.idLecture = idLecture;
     }
 
-    public int getIdParticipant() {
-        return idParticipant;
+    public int getIdCompte() {
+        return idCompte;
     }
 
-    public void setIdParticipant(int idParticipant) {
-        this.idParticipant = idParticipant;
+    public void setIdCompte(int idCompte) {
+        this.idCompte = idCompte;
     }
 
     public String getDateInscription() {

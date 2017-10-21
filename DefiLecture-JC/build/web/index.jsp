@@ -16,7 +16,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
-    <body>
+    <body style="background-color: whitesmoke;">
+        <div class='container-fluid'  style="margin-bottom: 50px" >
         <nav class="navbar navbar-inverse navbar-fixed-top">
          <div class="container-fluid">
           
@@ -33,8 +34,10 @@
           <div class="collapse navbar-collapse" id="optionsNavigation">
             <ul class="nav navbar-nav">
                 <li class="active"><a href='*.do?tache=""'>Acceuil</a></li>
+            <%if(session.getAttribute("connecte") != null){%>
                 <li class="active"><a href="*.do?tache=afficherCreationLecture">Créer Lecture</a></li>
-              <li><a href="#"><span class="glyphicon glyphicon-stats"></span> Tableau des scores</a></li>
+            <%}%>
+                <li><a href="#"><span class="glyphicon glyphicon-stats"></span> Tableau des scores</a></li>
              <%if(session.getAttribute("connecte") != null){%>
               <li><a href="#">Page de profil</a></li>
               <li><a href="*.do?tache=afficherPageEquipe">Page d'équipe</a></li>
@@ -47,7 +50,7 @@
             <%if(session.getAttribute("connecte") == null){%>
               <li><a href='*.do?tache=afficherPageConnexion'><span class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>        
             <%}else{%>
-              <li><a href='*.Frontal?action=EffectuerDeconnexion'><span class="glyphicon glyphicon-log-in"></span> Se d&eacute;connecter</a></li>
+              <li><a href='*.do?tache=effectuerDeconnexion'><span class="glyphicon glyphicon-log-in"></span> Se d&eacute;connecter</a></li>
             <%}%>
             
             </ul>   
@@ -55,13 +58,12 @@
              
          </div>
         </nav>
+        </div>
         
-        <div class='container' style='margin-top: 100px'>
             
                 
-                <a href='*.do?tache=afficherPageEquipe'>Page d'équipe</a>
-                
-               
+                <div class="container-fluid">
+                    
                 
                 <%if (request.getAttribute("vue") == null) 
                 {
@@ -77,10 +79,10 @@
                 <%}%>
                     
 
+                </div> 
 
                 
             
-        </div>
         
     </body>
 </html>

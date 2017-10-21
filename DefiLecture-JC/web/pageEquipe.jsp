@@ -4,16 +4,6 @@
     Author     : Joel
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Profil d'équipe</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <style>
             #toutPageEquipe { background-image: url("ocean.jpg");
                               background-repeat: no-repeat;
@@ -22,50 +12,9 @@
                               z-index: -1;
             }
         </style>
-    
-    
-    
-    </head>
-    <body style="background-color: whitesmoke;">
+
         
         <div id='toutPageEquipe' style='background-color: rgba(51, 122, 183, 0.5);'>    
-            
-                
-        <nav class="navbar navbar-inverse">
-         <div class="container-fluid">
-          
-          <div class="navbar-header">
-            <a class="navbar-brand" href="#">Défi-Lecture</a>
-            <!-- Apparait lorque la fenêtre devient de la taille d'un téléphone mobile -->
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#optionsNavigation">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>                       
-            </button>
-          </div>          
-             
-          <!-- Options contenues par le boutons à son activation -->   
-          <div class="collapse navbar-collapse" id="optionsNavigation">
-            <ul class="nav navbar-nav">
-              <li><a href="index.jsp">Acceuil</a></li>
-              <li><a href="#">Tableau des scores</a></li>
-            <%if(session.getAttribute("connecte") != null){%>
-              <li><a href="#">Page de profil</a></li>
-              <li class="active"><a href="*.Frontal?action=AfficherPageEquipe">Page d'équipe</a></li>
-            <%}%>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-            <!--  <li><a href="#"><span class="glyphicon glyphicon-user"></span> S'incrire</a></li> -->
-            <%if(session.getAttribute("connecte") == null){%>
-              <li><a href='*.Frontal?action=AfficherPageConnexion'><span class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>        
-            <%}else{%>
-              <li><a href='*.Frontal?action=EffectuerDeconnexion'><span class="glyphicon glyphicon-log-in"></span> Se d&eacute;connecter</a></li>
-            <%}%>
-            </ul>   
-          </div>
-             
-         </div>
-      
-            </nav>
         
             <div class='container-fluid'>
             
@@ -74,7 +23,7 @@
                         
                     <div class='col-md-1' ></div>
                     <div class='col-md-6' >
-                        <p>Page de l'équipe<p>
+                        <p>Page de l'�quipe<p>
                     </div>
                     <div class='col-md-5' >
                         <div class='col-sm-6' ><p>Pointage Courant</p><p>58 pts</p></div>
@@ -99,7 +48,7 @@
                 <table class='table table-hover' style="background-color: rgb(255, 255, 255); border:1px lightgray solid">
                   <thead>
                     <tr>
-                      <th>Prénom</th>
+                      <th>Pr�nom</th>
                       <th>Nom</th>
                       <th>Contributions</th>
                     </tr>
@@ -145,5 +94,4 @@
         </div>
             
    
-    </body>
-</html>
+
