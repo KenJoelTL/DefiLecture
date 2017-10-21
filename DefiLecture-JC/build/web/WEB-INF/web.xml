@@ -16,17 +16,9 @@
         <servlet-name>CF</servlet-name>
         <servlet-class>controleur.ControleurFrontal</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>EffectuerInscription</servlet-name>
-        <servlet-class>controlleur.EffectuerInscription</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>Frontal</servlet-name>
         <url-pattern>*.Frontal</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>EffectuerInscription</servlet-name>
-        <url-pattern>/EffectuerInscription</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CF</servlet-name>

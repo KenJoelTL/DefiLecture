@@ -35,11 +35,12 @@ public class EffectuerInscriptionAction implements Action, RequestAware, Session
                 pseudonyme = request.getParameter("pseudonyme"); 
         
         try{
-
+            //Étape 1 : chargement du pilote JDBC
             Class.forName(Config.DRIVER);
             Connexion.setUrl(Config.URL);
             Connexion.setUser(Config.DB_USER);
             Connexion.setPassword(Config.DB_PWD);
+            //Étape 2 : ouverture de la connection vers la base de données
             Connection cnx = Connexion.getInstance();
             dao = new CompteDAO(cnx);
             compte = new Compte();
