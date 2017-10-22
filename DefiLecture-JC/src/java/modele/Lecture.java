@@ -18,7 +18,6 @@ public class Lecture {
     String titre;
     int dureeMinutes;
     int obligatoire; //indique si la lecture est obligtoire ou non
-    int defi; // indique si la lecture fait partie d'un défi
 
     
     // Constructeur
@@ -27,14 +26,13 @@ public class Lecture {
     public Lecture() {
     }
 
-    public Lecture(int idLecture, int idCompte, String dateInscription, String titre, int dureeMinutes, int obligatoire, int defi) {
+    public Lecture(int idLecture, int idCompte, String dateInscription, String titre, int dureeMinutes, int obligatoire) {
         this.idLecture = idLecture;
         this.idCompte = idCompte;
         this.dateInscription = dateInscription;
         this.titre = titre;
         this.dureeMinutes = dureeMinutes;
         this.obligatoire = obligatoire;
-        this.defi = defi;
     }
 
     public Lecture(int idCompte, String dateInscription, String titre, int dureeMinutes) {
@@ -44,7 +42,6 @@ public class Lecture {
         this.dureeMinutes = dureeMinutes;
         this.idLecture = 0;
         this.obligatoire = 0;
-        this.defi = 0;
     }
     
 
@@ -97,17 +94,7 @@ public class Lecture {
     public void setObligatoire(int obligatoire) {
         this.obligatoire = obligatoire;
     }
-
-    public int estDefi() {
-        return defi;
-    }
-
-    public void setDefi(int defi) {
-        this.defi = defi;
-    }
     
-    
-
     
     
 }

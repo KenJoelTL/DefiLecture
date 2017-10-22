@@ -86,7 +86,28 @@ public class LectureDAO extends DAO<Lecture> {
 
     @Override
     public List<Lecture> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    List<Lecture> liste = new LinkedList<>();
+		  try 
+		  {
+			  Statement stm = cnx.createStatement(); 
+			  ResultSet r = stm.executeQuery("SELECT * FROM lecture");
+			  while (r.next()){
+				  Lecture l = new Lecture();
+          l.setIdLecture(r.getInt("ID_LECTURE"));
+				  l.setIdCompte(r.getInt("ID_COMPTE"));
+				  l.setTitre(r.getString("TITRE"));
+          l.setDateInscription(r.getString("DATE_INSCRIPTION"));
+				  l.setDureeMinutes(r.getInt("DUREE_MINUTES"));
+				  l.setObligatoire(r.getInt("EST_OBLIGATOIRE"));
+				  liste.add(l);
+			   }
+			  r.close();
+			  stm.close();
+		  }
+		  catch (SQLException exp)
+		  {
+	  	}
+  		return liste;
     }
 	
     public List<Lecture> findByIdCompte(int idCompte){
