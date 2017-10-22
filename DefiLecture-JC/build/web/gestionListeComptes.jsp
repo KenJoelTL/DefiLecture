@@ -16,7 +16,7 @@
     Connexion.setUrl(Config.URL);
     Connexion.setUser(Config.DB_USER);
     Connexion.setPassword(Config.DB_PWD);
-    
+    Connexion.reinit();
     Connection cnx = Connexion.getInstance();
     CompteDAO dao = new CompteDAO(cnx);
     
@@ -37,7 +37,7 @@
       <tbody>
 <%  
     for(Compte c : listeComptes){
-    //(listeComptes.iterator().hasNext()){
+    //while (listeComptes.iterator().hasNext()){
       //  c = listeComptes.iterator().next();
         switch (c.getRole()) {
                 case 0: role = "Utilisteur"; //considéré comme un simple visiteur
