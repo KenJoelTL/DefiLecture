@@ -20,6 +20,8 @@ public class ActionBuilder {
                     return new AfficherPageAccueilAction();
                 case "afficherPageEquipe":
                     return new AfficherPageEquipeAction();
+                case "afficherPageProfil":
+                    return new AfficherPageProfilAction();
                 case "afficherPageInscription":
                     return new AfficherPageInscriptionAction(); 
                 case "effectuerInscription":
