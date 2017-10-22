@@ -12,6 +12,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import jdbc.Connexion;
 
 /**
@@ -126,7 +128,12 @@ public class DefiDAO extends DAO<Defi> {
 
     @Override
     public Defi read(String id) {
-        return(this.read(Integer.parseInt(id)));
+        try{
+            return this.read(Integer.parseInt(id));
+        }
+        catch(NumberFormatException e){
+            return null;
+        }  
     }
 
     @Override
@@ -136,7 +143,38 @@ public class DefiDAO extends DAO<Defi> {
 
     @Override
     public boolean delete(Defi x) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String req = "DELETE FROM defi WHERE `ID_DEFI` = ?";
+        
+        PreparedStatement paramStm = null;
+
+        try {
+                paramStm.setInt(1, x.getIdDefi());
+                paramStm = cnx.prepareStatement(req);
+
+                int nbLignesAffectees= paramStm.executeUpdate();
+                
+                if (nbLignesAffectees>0) {
+                    paramStm.close();
+                    return true;
+                }
+                
+            return false;
+        }
+        catch (SQLException exp) {
+        }
+        catch (Exception exp) {
+        }
+        finally {
+                try {
+                    if (paramStm!=null)
+                        paramStm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(LectureDAO.class.getName())
+                            .log(Level.SEVERE, null, ex);
+                }
+                Connexion.close();
+        }
+        return false;
     }
 
     @Override
