@@ -108,7 +108,7 @@ public class LectureDAO extends DAO<Lecture> {
 
                     Lecture l = new Lecture();
                     l.setIdLecture(resultat.getInt("ID_LECTURE"));
-                    l.setIdCompte(resultat.getInt("ID_COMTPE"));
+                    l.setIdCompte(resultat.getInt("ID_COMPTE"));
                     l.setDateInscription(resultat.getString("DATE_INSCRIPTION"));
                     l.setTitre(resultat.getString("TITRE"));
                     l.setDureeMinutes(resultat.getInt("DUREE_MINUTES"));
