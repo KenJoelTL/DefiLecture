@@ -24,6 +24,8 @@ public class EffectuerDeconnexionAction implements Action, RequestAware, Session
         
         if(session.getAttribute("connecte") != null){
             session.removeAttribute("connecte");
+            if(session.getAttribute("role") != null)
+                session.removeAttribute("role");
         }
         request.setAttribute("vue","accueil.jsp");
         return "/index.jsp";

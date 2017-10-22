@@ -55,6 +55,7 @@ public class EffectuerConnexionAction implements Action, RequestAware, SessionAw
                 System.out.println("Trouver résultat dans base de donnée");
                 session = request.getSession(true);
                 session.setAttribute("connecte", compte.getIdCompte());
+                session.setAttribute("role", compte.getRole());
                 request.setAttribute("vue", "pageEquipe.jsp");
             }
             else{
