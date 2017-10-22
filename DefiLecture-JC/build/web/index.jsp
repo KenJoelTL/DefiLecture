@@ -44,6 +44,11 @@
             <%}else{%>
               <li style="background-color: #349737;"><a href='*.do?tache=afficherPageInscription' style="color: #fff;" ><span class="glyphicon glyphicon-education"></span> S'incrire</a></li>        
             <%}%>
+            <%if(session.getAttribute("role") != null){
+                if((int)session.getAttribute("role") == 4){%>
+                <li class="active"><a href="*.do?tache=afficherPageGestionListeCompte">Gérer les comptes</a></li>
+            <%  }
+              }%>
             </ul>
             <ul class="nav navbar-nav navbar-right">
             <!--  <li><a href="#"><span class="glyphicon glyphicon-user"></span> S'incrire</a></li> -->

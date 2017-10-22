@@ -34,6 +34,9 @@ public class ActionBuilder {
                     return new AfficherCreationLectureAction();
                 case "effectuerCreationLecture":
                     return new EffectuerCreationLectureAction();
+                case "afficherPageGestionListeCompte":
+                    return new AfficherPageGestionListeComptesAction();
+
                     /*
                      
                 case "effectuerCreationLecture":
