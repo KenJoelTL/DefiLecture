@@ -42,7 +42,7 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
                 
             paramStm.setInt(1, x.getIdCompte());
             paramStm.setInt(2, x.getIdDefi());
-            paramStm.setInt(3, x.estReussi());
+            paramStm.setInt(3, x.getEstReussi());
                 
 
             int n= paramStm.executeUpdate();
@@ -93,7 +93,7 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
                     i.setIdCompte(resultat.getInt("ID_COMPTE"));
                     i.setIdDefi(resultat.getInt("ID_DEFI"));
                     i.setEstReussi(resultat.getInt("EST_REUSSI"));
-                    i.setDateInscriptionDefi(resultat.getInt("DATE_INSCRIPTION_DEFI"));
+                    i.setDateInscriptionDefi(resultat.getString("DATE_INSCRIPTION_DEFI"));
                     
                     resultat.close();
                     paramStm.close();
@@ -156,7 +156,7 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
                     i.setIdCompte(resultat.getInt("ID_COMPTE"));
                     i.setIdDefi(resultat.getInt("ID_DEFI"));
                     i.setEstReussi(resultat.getInt("EST_REUSSI"));
-                    i.setDateInscriptionDefi(resultat.getInt("DATE_INSCRIPTION_DEFI"));
+                    i.setDateInscriptionDefi(resultat.getString("DATE_INSCRIPTION_DEFI"));
 
                     listeInscriptionDefi.add(i);
                         
@@ -207,7 +207,7 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
                     i.setIdCompte(resultat.getInt("ID_COMPTE"));
                     i.setIdDefi(resultat.getInt("ID_DEFI"));
                     i.setEstReussi(resultat.getInt("EST_REUSSI"));
-                    i.setDateInscriptionDefi(resultat.getInt("DATE_INSCRIPTION_DEFI"));
+                    i.setDateInscriptionDefi(resultat.getString("DATE_INSCRIPTION_DEFI"));
 
                     listeInscriptionDefi.add(i);
 

@@ -40,12 +40,12 @@ public class DefiDAO extends DAO<Defi> {
 
                 
                 paramStm.setInt(1, x.getIdCompte());
-                paramStm.setString(2, x.getNomDefi());
+                paramStm.setString(2, x.getNom());
                 paramStm.setString(3, x.getDateDebut());
 				paramStm.setString(3, x.getDateFin());
 				paramStm.setString(3, x.getQuestion());
 				paramStm.setString(3, x.getReponse());
-                paramStm.setInt(4, x.getPointDefi());
+                paramStm.setInt(4, x.getPoint());
 
                 int n= paramStm.executeUpdate();
                 
@@ -94,7 +94,7 @@ public class DefiDAO extends DAO<Defi> {
                     d.setDateFin(resultat.getString("DATE_FIN"));
                     d.setQuestion(resultat.getString("QUESTION"));
                     d.setReponse(resultat.getString("REPONSE"));
-                    d.setPointDefi(resultat.getInt("POINT_DEFI"));
+                    d.setPoint(resultat.getInt("POINT_DEFI"));
 
                     resultat.close();
                     paramStm.close();
@@ -164,7 +164,7 @@ public class DefiDAO extends DAO<Defi> {
                     d.setDateFin(resultat.getString("DATE_FIN"));
                     d.setQuestion(resultat.getString("QUESTION"));
                     d.setReponse(resultat.getString("REPONSE"));
-                    d.setPointDefi(resultat.getInt("POINT_DEFI"));
+                    d.setPoint(resultat.getInt("POINT_DEFI"));
                     
                     listeDefi.add(d);
                         
