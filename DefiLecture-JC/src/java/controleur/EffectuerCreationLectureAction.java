@@ -29,8 +29,7 @@ public class EffectuerCreationLectureAction implements Action, RequestAware, Ses
         
         System.out.println("Entrer dans l'action créer lecture");
         
-        String  titre = request.getParameter("titre"),
-                dateInscription = request.getParameter("dateInscription");
+        String  titre = request.getParameter("titre");                
         int     dureeMinutes = Integer.parseInt(request.getParameter("dureeMinutes")),
                 idCompte = Integer.parseInt(request.getParameter("idCompte"));
         
@@ -50,7 +49,6 @@ public class EffectuerCreationLectureAction implements Action, RequestAware, Ses
             lecture.setIdCompte(idCompte);
             lecture.setDureeMinutes(dureeMinutes);
             lecture.setTitre(titre);
-            lecture.setDateInscription(dateInscription);
             if(dao.create(lecture))
                 System.out.println("Une lecture a été créée avec succès");
             else

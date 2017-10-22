@@ -5,6 +5,8 @@
  */
 package modele;
 
+import java.sql.Date;
+
 /**
  *
  * @author Charles
@@ -14,7 +16,7 @@ public class Lecture {
 
     int idLecture; // clé primaire
     int idCompte;
-    String dateInscription; 
+    Date dateInscription; 
     String titre;
     int dureeMinutes;
     int obligatoire; //indique si la lecture est obligtoire ou non
@@ -26,7 +28,7 @@ public class Lecture {
     public Lecture() {
     }
 
-    public Lecture(int idLecture, int idCompte, String dateInscription, String titre, int dureeMinutes, int obligatoire) {
+    public Lecture(int idLecture, int idCompte, Date dateInscription, String titre, int dureeMinutes, int obligatoire) {
         this.idLecture = idLecture;
         this.idCompte = idCompte;
         this.dateInscription = dateInscription;
@@ -35,14 +37,14 @@ public class Lecture {
         this.obligatoire = obligatoire;
     }
 
-    public Lecture(int idCompte, String dateInscription, String titre, int dureeMinutes) {
+   /* public Lecture(int idCompte, String dateInscription, String titre, int dureeMinutes) {
         this.idCompte = idCompte;
         this.dateInscription = dateInscription;
         this.titre = titre;
         this.dureeMinutes = dureeMinutes;
         this.idLecture = 0;
         this.obligatoire = 0;
-    }
+    }*/
     
 
     // Getters et Setters
@@ -63,11 +65,11 @@ public class Lecture {
         this.idCompte = idCompte;
     }
 
-    public String getDateInscription() {
+    public Date getDateInscription() {
         return dateInscription;
     }
 
-    public void setDateInscription(String dateInscription) {
+    public void setDateInscription(Date dateInscription) {
         this.dateInscription = dateInscription;
     }
 

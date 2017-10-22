@@ -29,8 +29,8 @@ public class LectureDAO extends DAO<Lecture> {
     @Override
     public boolean create(Lecture x) {
                
-        String req = "INSERT INTO lecture (`ID_COMPTE` , `TITRE` , `DATE_INSCRIPTION` , `DUREE_MINUTES`) VALUES "+
-			     "(?,?,?,?)";
+        String req = "INSERT INTO lecture (`ID_COMPTE` , `TITRE` , `DUREE_MINUTES`) VALUES "+
+			     "(?,?,?)";
 
         PreparedStatement paramStm = null;
         try 
@@ -41,8 +41,7 @@ public class LectureDAO extends DAO<Lecture> {
                 
                 paramStm.setInt(1, x.getIdCompte());
                 paramStm.setString(2, x.getTitre());
-                paramStm.setString(3, x.getDateInscription());
-                paramStm.setInt(4, x.getDureeMinutes());
+                paramStm.setInt(3, x.getDureeMinutes());
 
                 int n= paramStm.executeUpdate();
                 
@@ -88,27 +87,27 @@ public class LectureDAO extends DAO<Lecture> {
     @Override
     public List<Lecture> findAll() {
                     List<Lecture> liste = new LinkedList<>();
-		  try 
-		  {
-			  Statement stm = cnx.createStatement(); 
-			  ResultSet r = stm.executeQuery("SELECT * FROM lecture");
-			  while (r.next()){
-				  Lecture l = new Lecture();
-          l.setIdLecture(r.getInt("ID_LECTURE"));
-				  l.setIdCompte(r.getInt("ID_COMPTE"));
-				  l.setTitre(r.getString("TITRE"));
-          l.setDateInscription(r.getString("DATE_INSCRIPTION"));
-				  l.setDureeMinutes(r.getInt("DUREE_MINUTES"));
-				  l.setObligatoire(r.getInt("EST_OBLIGATOIRE"));
-				  liste.add(l);
-			   }
-			  r.close();
-			  stm.close();
-		  }
-		  catch (SQLException exp)
-		  {
-	  	}
-  		return liste;
+        try 
+            {
+                Statement stm = cnx.createStatement(); 
+                ResultSet r = stm.executeQuery("SELECT * FROM lecture");
+                while (r.next()){
+                    Lecture l = new Lecture();
+                    l.setIdLecture(r.getInt("ID_LECTURE"));
+                    l.setIdCompte(r.getInt("ID_COMPTE"));
+                    l.setTitre(r.getString("TITRE"));
+                    l.setDateInscription(r.getDate("DATE_INSCRIPTION"));
+                    l.setDureeMinutes(r.getInt("DUREE_MINUTES"));
+                    l.setObligatoire(r.getInt("EST_OBLIGATOIRE"));
+                    liste.add(l);
+                }
+                r.close();
+                stm.close();
+            }
+        catch (SQLException exp)
+            {
+            }
+        return liste;
     }
 	
     public List<Lecture> findByIdCompte(int idCompte){
@@ -131,7 +130,7 @@ public class LectureDAO extends DAO<Lecture> {
                     Lecture l = new Lecture();
                     l.setIdLecture(resultat.getInt("ID_LECTURE"));
                     l.setIdCompte(resultat.getInt("ID_COMPTE"));
-                    l.setDateInscription(resultat.getString("DATE_INSCRIPTION"));
+                    l.setDateInscription(resultat.getDate("DATE_INSCRIPTION"));
                     l.setTitre(resultat.getString("TITRE"));
                     l.setDureeMinutes(resultat.getInt("DUREE_MINUTES"));
                     l.setObligatoire(resultat.getInt("EST_OBLIGATOIRE"));

@@ -88,7 +88,7 @@ CREATE TABLE `lecture` (
   `ID_LECTURE` int(10) NOT NULL,
   `ID_COMPTE` int(10) NOT NULL,
   `TITRE` varchar(255) NOT NULL,
-  `DATE_INSCRIPTION` varchar(255) NOT NULL,
+  `DATE_INSCRIPTION` datetime DEFAULT CURRENT_TIMESTAMP,
   `DUREE_MINUTES` int(10) NOT NULL,
   `EST_OBLIGATOIRE` int(2) DEFAULT '0' /*0=lecture non obligatoire; 1=lecture obligatoire*/
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
