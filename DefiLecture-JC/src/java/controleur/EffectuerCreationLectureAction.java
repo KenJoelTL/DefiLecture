@@ -31,7 +31,7 @@ public class EffectuerCreationLectureAction implements Action, RequestAware, Ses
         
         String  titre = request.getParameter("titre");                
         int     dureeMinutes = Integer.parseInt(request.getParameter("dureeMinutes")),
-                idCompte = Integer.parseInt(request.getParameter("idCompte"));
+                idCompte = (int)session.getAttribute("connecte");
         
         String pilote = "com.mysql.jdbc.Driver";
         Lecture lecture;

@@ -39,7 +39,7 @@
             <%}%>
                 <li><a href="#"><span class="glyphicon glyphicon-stats"></span> Tableau des scores</a></li>
              <%if(session.getAttribute("connecte") != null){%>
-              <li><a href="#">Page de profil</a></li>
+              <li><a href="*.do?tache=afficherPageProfil">Page de profil</a></li>
               <li><a href="*.do?tache=afficherPageEquipe">Page d'équipe</a></li>
             <%}else{%>
               <li style="background-color: #349737;"><a href='*.do?tache=afficherPageInscription' style="color: #fff;" ><span class="glyphicon glyphicon-education"></span> S'incrire</a></li>        
