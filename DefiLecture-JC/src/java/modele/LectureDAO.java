@@ -10,7 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import jdbc.Connexion;
 
@@ -59,8 +59,6 @@ public class LectureDAO extends DAO<Lecture> {
         {
                 if (paramStm!=null)
                     Connexion.close();
-                  /*if(stm != null)
-                      Connexion.close();*/
                   
         }
         return false;
@@ -88,29 +86,78 @@ public class LectureDAO extends DAO<Lecture> {
 
     @Override
     public List<Lecture> findAll() {
-        List<Lecture> liste = new LinkedList<>();
-		try 
-		{
-			Statement stm = cnx.createStatement(); 
-			ResultSet r = stm.executeQuery("SELECT * FROM lecture");
-			while (r.next())
-			{
-				Lecture l = new Lecture();
-                                l.setIdLecture(r.getInt("ID_LECTURE"));
-				l.setIdCompte(r.getInt("ID_COMPTE"));
-				l.setTitre(r.getString("TITRE"));
-                                l.setDateInscription(r.getString("DATE_INSCRIPTION"));
-				l.setDureeMinutes(r.getInt("DUREE_MINUTES"));
-				l.setObligatoire(r.getInt("EST_OBLIGATOIRE"));
-				liste.add(l);
-			}
-			r.close();
-			stm.close();
-		}
-		catch (SQLException exp)
-		{
-		}
-		return liste;
+                    List<Lecture> liste = new LinkedList<>();
+		  try 
+		  {
+			  Statement stm = cnx.createStatement(); 
+			  ResultSet r = stm.executeQuery("SELECT * FROM lecture");
+			  while (r.next()){
+				  Lecture l = new Lecture();
+          l.setIdLecture(r.getInt("ID_LECTURE"));
+				  l.setIdCompte(r.getInt("ID_COMPTE"));
+				  l.setTitre(r.getString("TITRE"));
+          l.setDateInscription(r.getString("DATE_INSCRIPTION"));
+				  l.setDureeMinutes(r.getInt("DUREE_MINUTES"));
+				  l.setObligatoire(r.getInt("EST_OBLIGATOIRE"));
+				  liste.add(l);
+			   }
+			  r.close();
+			  stm.close();
+		  }
+		  catch (SQLException exp)
+		  {
+	  	}
+  		return liste;
+    }
+	
+    public List<Lecture> findByIdCompte(int idCompte){
+
+        String req = "SELECT * FROM lecture WHERE `ID_COMPTE` = ?";
+        List<Lecture> listeLecture = new ArrayList<Lecture>();
+
+        PreparedStatement paramStm = null;
+        try {
+
+                paramStm = cnx.prepareStatement(req);
+
+                paramStm.setInt(1, idCompte);
+
+                ResultSet resultat = paramStm.executeQuery();
+
+                // On vérifie s'il y a un résultat    
+                while(resultat.next()){
+
+                    Lecture l = new Lecture();
+                    l.setIdLecture(resultat.getInt("ID_LECTURE"));
+                    l.setIdCompte(resultat.getInt("ID_COMPTE"));
+                    l.setDateInscription(resultat.getString("DATE_INSCRIPTION"));
+                    l.setTitre(resultat.getString("TITRE"));
+                    l.setDureeMinutes(resultat.getInt("DUREE_MINUTES"));
+                    l.setObligatoire(resultat.getInt("EST_OBLIGATOIRE"));
+                    listeLecture.add(l);
+
+                }
+                resultat.close();
+                paramStm.close();
+                return listeLecture;
+
+        }
+        catch (SQLException exp) {
+        }
+        finally {
+            try{
+                if (paramStm!=null)
+                    paramStm.close();
+                if(cnx!=null)
+                    Connexion.close();
+            }
+            catch (SQLException exp) {
+            }
+             catch (Exception e) {
+            }
+        }        
+
+        return listeLecture;
     }
     
 }
