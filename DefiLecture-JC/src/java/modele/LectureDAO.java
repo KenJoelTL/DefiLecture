@@ -7,8 +7,10 @@ package modele;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import jdbc.Connexion;
 
@@ -57,8 +59,6 @@ public class LectureDAO extends DAO<Lecture> {
         {
                 if (paramStm!=null)
                     Connexion.close();
-                  /*if(stm != null)
-                      Connexion.close();*/
                   
         }
         return false;
@@ -87,6 +87,56 @@ public class LectureDAO extends DAO<Lecture> {
     @Override
     public List<Lecture> findAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+	
+    public List<Lecture> findByIdCompte(int idCompte){
+
+        String req = "SELECT * FROM lecture WHERE `ID_COMPTE` = ?";
+        List<Lecture> listeLecture = new ArrayList<Lecture>();
+
+        PreparedStatement paramStm = null;
+        try {
+
+                paramStm = cnx.prepareStatement(req);
+
+                paramStm.setInt(1, idCompte);
+
+                ResultSet resultat = paramStm.executeQuery();
+
+                // On vérifie s'il y a un résultat    
+                while(resultat.next()){
+
+                    Lecture l = new Lecture();
+                    l.setIdLecture(resultat.getInt("ID_LECTURE"));
+                    l.setIdCompte(resultat.getInt("ID_COMTPE"));
+                    l.setDateInscription(resultat.getString("DATE_INSCRIPTION"));
+                    l.setTitre(resultat.getString("TITRE"));
+                    l.setDureeMinutes(resultat.getInt("DUREE_MINUTES"));
+                    l.setObligatoire(resultat.getInt("EST_OBLIGATOIRE"));
+                    listeLecture.add(l);
+
+                }
+                resultat.close();
+                paramStm.close();
+                return listeLecture;
+
+        }
+        catch (SQLException exp) {
+        }
+        finally {
+            try{
+                if (paramStm!=null)
+                    paramStm.close();
+                if(cnx!=null)
+                    Connexion.close();
+            }
+            catch (SQLException exp) {
+            }
+             catch (Exception e) {
+            }
+        }        
+
+        return listeLecture;
     }
     
 }
