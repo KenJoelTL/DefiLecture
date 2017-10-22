@@ -75,7 +75,7 @@ CREATE TABLE `inscription_defi` (
   `ID_COMPTE` int(10) NOT NULL,
   `ID_DEFI` int(10) DEFAULT NULL,
   `EST_REUSSI` int(10) DEFAULT NULL, /*0=non réussi; 1=réussi*/
-  `DATE_INSCRIPTION_DEFI` varchar(255) NOT NULL
+  `DATE_INSCRIPTION_DEFI` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

@@ -15,13 +15,13 @@
         <h1>Inscription</h1>
         <form action="*.do" method="post">
             <div>
-                Titre : <input type="text" name="titre" required/>*
+                Titre* : <input type="text" name="titre" required/>
             
-                Date inscription : <input type="text" name="dateInscription" required/>*
+                Date inscription* : <input type="text" name="dateInscription" required/>
             </div>
             <div>
-                Durée de la lecutre (en minute) : <input type="text" name="dureeMinutes" required />
-                ID Compte : <input type="int" name="idCompte" required />    
+                Durée de la lecutre (en minute)* : <input type="text" name="dureeMinutes" required />
+                ID Compte* : <input type="int" name="idCompte" required />    
               
             </div>
            
