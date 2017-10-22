@@ -250,10 +250,11 @@ public class CompteDAO extends DAO<Compte>{
     
     @Override
     public List<Compte> findAll() {
+                        System.out.println("\n=========================================================HEEEEEY===================================");
         List<Compte> liste = new LinkedList<>();
         try {
             Statement stm = cnx.createStatement(); 
-            ResultSet r = stm.executeQuery("SELECT * FROM compte");
+            ResultSet r = stm.executeQuery("SELECT * FROM compte WHERE 1");
             while (r.next()) {
                 Compte c = new Compte();
                 c.setIdCompte(r.getInt("ID_COMPTE"));
@@ -262,12 +263,13 @@ public class CompteDAO extends DAO<Compte>{
                 c.setMotPasse(r.getString("MOT_PASSE"));
                 c.setNom(r.getString("NOM"));
                 c.setPrenom(r.getString("PRENOM"));
-                c.setPointage(r.getInt("DUREE_MINUTES"));
+                c.setPointage(r.getInt("POINTAGE"));
                 c.setMinutesRestantes(r.getInt("MINUTES_RESTANTES"));
                 c.setProgrammeEtude(r.getString("PROGRAMME_ETUDE"));
                 c.setAvatar(r.getString("AVATAR"));
-                c.setPseudonyme(r.getString("PSEUDONYME"));
+                c.setPseudonyme(r.getString("PSEUDONYME")); 
                 c.setRole(r.getInt("ROLE"));
+                System.out.println("\nUtilisateur : "+c);
                 liste.add(c);
             }
             r.close();

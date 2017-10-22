@@ -30,17 +30,19 @@
         <tr>
           <th>Prenom</th>
           <th>Nom</th>
+          <th>Pseudonyme</th>
           <th>Courriel</th>
           <th>Rôle</th>
         </tr>
       </thead>
       <tbody>
+          
 <%  
     for(Compte c : listeComptes){
     //while (listeComptes.iterator().hasNext()){
       //  c = listeComptes.iterator().next();
         switch (c.getRole()) {
-                case 0: role = "Utilisteur"; //considéré comme un simple visiteur
+                case 0: role = "Utilisateur"; //considéré comme un simple visiteur
                     break;
                 case 1: role = "Participant";       
                     break;
@@ -57,8 +59,10 @@
         <tr>
           <td><%=c.getPrenom()%></td>
           <td><%=c.getNom() %></td>
+          <td><%=c.getPseudonyme() %></td>
           <td><%=c.getCourriel()%></td>
           <td><%=role%></td>
+          <td><a href="*.do?tache=afficherPageGestionConfigurationCompte&id=<%=c.getIdCompte()%>">Modifier</a>
         </tr>
 <% } %>
       </tbody>

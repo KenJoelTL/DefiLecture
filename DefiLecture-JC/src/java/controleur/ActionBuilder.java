@@ -38,6 +38,8 @@ public class ActionBuilder {
                     return new EffectuerCreationLectureAction();
                 case "afficherPageGestionListeCompte":
                     return new AfficherPageGestionListeComptesAction();
+                case "afficherPageGestionConfigurationCompte":
+                    return new AfficherPageGestionConfigurationCompteAction();
 
                     /*
                      
