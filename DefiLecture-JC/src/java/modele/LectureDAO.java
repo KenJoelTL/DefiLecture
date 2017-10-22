@@ -29,8 +29,8 @@ public class LectureDAO extends DAO<Lecture> {
     @Override
     public boolean create(Lecture x) {
                
-        String req = "INSERT INTO lecture (`ID_COMPTE` , `TITRE` , `DUREE_MINUTES`) VALUES "+
-			     "(?,?,?)";
+        String req = "INSERT INTO lecture (`ID_COMPTE` , `TITRE` , `DUREE_MINUTES`, `EST_OBLIGATOIRE`) VALUES "+
+			     "(?,?,?,?)";
 
         PreparedStatement paramStm = null;
         try 
@@ -42,7 +42,7 @@ public class LectureDAO extends DAO<Lecture> {
                 paramStm.setInt(1, x.getIdCompte());
                 paramStm.setString(2, x.getTitre());
                 paramStm.setInt(3, x.getDureeMinutes());
-
+                paramStm.setInt(4, x.estObligatoire());    
                 int n= paramStm.executeUpdate();
                 
                 if (n>0)

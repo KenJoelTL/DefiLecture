@@ -31,6 +31,7 @@ public class EffectuerCreationLectureAction implements Action, RequestAware, Ses
         
         String  titre = request.getParameter("titre");                
         int     dureeMinutes = Integer.parseInt(request.getParameter("dureeMinutes")),
+                obligatoire = Integer.parseInt(request.getParameter("obligatoire")),
                 idCompte = (int)session.getAttribute("connecte");
         
         String pilote = "com.mysql.jdbc.Driver";
@@ -49,6 +50,7 @@ public class EffectuerCreationLectureAction implements Action, RequestAware, Ses
             lecture.setIdCompte(idCompte);
             lecture.setDureeMinutes(dureeMinutes);
             lecture.setTitre(titre);
+            lecture.setObligatoire(obligatoire);
             if(dao.create(lecture))
                 System.out.println("Une lecture a été créée avec succès");
             else
