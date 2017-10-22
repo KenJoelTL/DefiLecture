@@ -42,10 +42,10 @@ public class DefiDAO extends DAO<Defi> {
                 paramStm.setInt(1, x.getIdCompte());
                 paramStm.setString(2, x.getNom());
                 paramStm.setString(3, x.getDateDebut());
-				paramStm.setString(3, x.getDateFin());
-				paramStm.setString(3, x.getQuestion());
-				paramStm.setString(3, x.getReponse());
-                paramStm.setInt(4, x.getPoint());
+		paramStm.setString(4, x.getDateFin());
+		paramStm.setString(5, x.getQuestion());
+		paramStm.setString(6, x.getReponse());
+                paramStm.setInt(7, x.getPoint());
 
                 int n= paramStm.executeUpdate();
                 
