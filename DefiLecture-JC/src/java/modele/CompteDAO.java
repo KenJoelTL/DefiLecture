@@ -83,11 +83,6 @@ public class CompteDAO extends DAO<Compte>{
 
     @Override
     public Compte read(int id) {
-        return this.read(id+"");
-    }
-
-    @Override
-    public Compte read(String id) {
         String req = "SELECT * FROM compte WHERE `ID_COMPTE` = ?";
         
         PreparedStatement paramStm = null;
@@ -95,7 +90,7 @@ public class CompteDAO extends DAO<Compte>{
 
             paramStm = cnx.prepareStatement(req);
 
-            paramStm.setString(1, id);
+            paramStm.setInt(1, id);
 
             ResultSet resultat = paramStm.executeQuery();
 
@@ -141,6 +136,17 @@ public class CompteDAO extends DAO<Compte>{
         }        
         
         return null;
+
+    }
+
+    @Override
+    public Compte read(String id) {
+        try{
+            return this.read(Integer.parseInt(id));
+        }
+        catch(NumberFormatException e){
+            return null;
+        }        
     }
     
     @Override
@@ -368,6 +374,63 @@ public class CompteDAO extends DAO<Compte>{
         }        
         
         return null;
+    }
+
+    public Compte findByPseudonyme(String pseudo) {
+        String req = "SELECT * FROM compte WHERE `PSEUDONYME` = ?";
+        
+        PreparedStatement paramStm = null;
+        try {
+
+            paramStm = cnx.prepareStatement(req);
+
+            paramStm.setString(1, pseudo);
+
+            ResultSet resultat = paramStm.executeQuery();
+
+            // On vérifie s'il y a un résultat    
+            if(resultat.next()){
+
+                Compte c = new Compte();
+                c.setIdCompte(resultat.getInt("ID_COMPTE"));
+                c.setIdEquipe(resultat.getInt("ID_EQUIPE"));
+                c.setCourriel(resultat.getString("COURRIEL"));
+                c.setPrenom(resultat.getString("PRENOM"));             
+                c.setNom(resultat.getString("NOM"));
+                c.setPseudonyme(resultat.getString("PSEUDONYME"));             
+                c.setAvatar(resultat.getString("AVATAR"));             
+                c.setProgrammeEtude(resultat.getString("PROGRAMME_ETUDE"));
+                c.setMinutesRestantes(resultat.getInt("MINUTES_RESTANTES"));
+                c.setPointage(resultat.getInt("POINTAGE"));
+                c.setRole(resultat.getInt("ROLE"));
+
+                resultat.close();
+                paramStm.close();
+                    return c;
+            }
+            
+            resultat.close();
+            paramStm.close();
+            return null;
+                
+        }
+        catch (SQLException exp) {
+        }
+        finally {
+            try{
+                if (paramStm!=null)
+                    paramStm.close();
+                if(cnx!=null)
+                    Connexion.close();
+            }
+            catch (SQLException exp) {
+            }
+             catch (Exception e) {
+            }
+        }        
+        
+        return null;
+
     }
     
 }

@@ -66,11 +66,6 @@ public class EquipeDAO extends DAO<Equipe>{
 
     @Override
     public Equipe read(int id) {
-        return this.read(id+"");
-    }
-
-    @Override
-    public Equipe read(String id) {
         String req = "SELECT * FROM equipe WHERE `ID_EQUIPE` = ?";
         
         PreparedStatement paramStm = null;
@@ -78,7 +73,7 @@ public class EquipeDAO extends DAO<Equipe>{
 
             paramStm = cnx.prepareStatement(req);
 
-            paramStm.setString(1, id);
+            paramStm.setInt(1, id);
 
             ResultSet resultat = paramStm.executeQuery();
 
@@ -117,6 +112,18 @@ public class EquipeDAO extends DAO<Equipe>{
         }        
         
         return null;
+    }
+
+    @Override
+    public Equipe read(String id) {
+        
+        try{
+            return this.read(Integer.parseInt(id));
+        }
+        catch(NumberFormatException e){
+            return null;
+        }
+
     }
 
     @Override
