@@ -18,7 +18,7 @@ import modele.LectureDAO;
  *
  * @author Charles
  */
-public class EffectuerCreationLectureAction implements Action, RequestAware, SessionAware {
+public class EffectuerCreationLectureAction implements Action, RequestAware, SessionAware, RequirePRGAction {
     private HttpSession session;
     private HttpServletRequest request;
     private HttpServletResponse response;
@@ -56,13 +56,13 @@ public class EffectuerCreationLectureAction implements Action, RequestAware, Ses
             else
                 System.out.println("Problème de création de la lecture");
                 
-            request.setAttribute("vue", "accueil.jsp");
-            return "/index.jsp";
+            //request.setAttribute("vue", "accueil.jsp");
+            return "*.do?tache=afficherPageProfil";
         }
         catch(ClassNotFoundException e){
             System.out.println("Erreur dans le chargement du pilote :"+ e);
-            request.setAttribute("vue", "lecture.jsp");
-            return "/index.jsp";
+            //request.setAttribute("vue", "lecture.jsp");
+            return "*.do?tache=afficherPageProfil";
         }
         
         

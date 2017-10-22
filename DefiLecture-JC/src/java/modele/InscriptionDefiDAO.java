@@ -12,6 +12,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import jdbc.Connexion;
 
 /**
@@ -131,7 +133,38 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
 
     @Override
     public boolean delete(InscriptionDefi x) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String req = "DELETE FROM inscription_defi WHERE `ID_INSCRIPTION_DEFI` = ?";
+        
+        PreparedStatement paramStm = null;
+
+        try {
+                paramStm.setInt(1, x.getIdInscriptionDefi());
+                paramStm = cnx.prepareStatement(req);
+
+                int nbLignesAffectees= paramStm.executeUpdate();
+                
+                if (nbLignesAffectees>0) {
+                    paramStm.close();
+                    return true;
+                }
+                
+            return false;
+        }
+        catch (SQLException exp) {
+        }
+        catch (Exception exp) {
+        }
+        finally {
+                try {
+                    if (paramStm!=null)
+                        paramStm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(LectureDAO.class.getName())
+                            .log(Level.SEVERE, null, ex);
+                }
+                Connexion.close();
+        }
+        return false;
     }
 
     @Override

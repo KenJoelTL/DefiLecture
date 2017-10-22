@@ -19,6 +19,9 @@ public class Defi {
                    dateFin,
                    question,
                    reponse;
+    public Defi(){
+    
+    }
 
     public int getIdDefi() {
         return idDefi;
