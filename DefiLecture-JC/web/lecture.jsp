@@ -19,7 +19,6 @@
             </div>
             <div>
                 Durée de la lecutre (en minute)* : <input type="text" name="dureeMinutes" required />
-                ID Compte* : <input type="int" name="idCompte" required />    
               
             </div>
            
