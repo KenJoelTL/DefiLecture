@@ -23,27 +23,36 @@
     <body>
         <h1>Page de configuration</h1>
         
-        <form action="modif.do" class="form">
-                        <div>
-                Prenom* : <input type="text" name="prenom" required/>
-            
-                Nom* : <input type="text" name="nom" required/>
-            </div>
+        <form action="*.do" method="post" >
             <div>
-                Programme d'étude : <input type="text" name="programmeEtude" />
-
-                Courriel* : <input type="email" name="courriel" required/>
+                Prenom* : <input type="text" name="prenom" value="<%=c.getPrenom()%>" required/>
+            
+                Nom* : <input type="text" name="nom" value="<%=c.getNom()%>" required/>
+            </div>
+                <%--  <div>
+                Programme d'&eacute;tude : <input type="text" name="programmeEtude" value="<%=c.getProgrammeEtude()==null? "": c.getIdCompte()%>" />
+--%>
+                Courriel* : <input type="email" name="courriel" value="<%=c.getCourriel()%>" required/>
             </div>
             <div>    
-                Pseudonyme : <input type="text" name="pseudonyme" />
+                Pseudonyme : <input type="text" name="pseudonyme" value="<%=c.getPseudonyme()%>" />
+            </div>
+            <div>Role du compte : 
+                <select name="role">
+                    <option value="1">Participant</option>
+                    <option value="2">Capitaine</option>
+                    <%if((int)session.getAttribute("role")==4) {%>
+                    <option value="3">Modérateur</option>
+                    <option value="4">Administrateur</option>
+                    <%}%>
+                </select>
             </div>
             <div>
-                Mot de passe* : <input type="password" name="motPasse" required/>
-            
-                Confirmation du mot de passe* : <input type="password" name="confirmationMotPasse" required/>
+            <input type="hidden" name="idCompte" value="<%=c.getIdCompte()%>">
+            <input type="hidden" name="tache" value="effectuerModificationCompte">
+                <input type="submit" name="modifie" value=" Enregistrer" />
+                <input type="submit" name="annule" value=" Annuler" />
             </div>
-            <input type="hidden" name="tache" value="effectuerInscription">
-            <input type="submit" value=" Enregistrer" />
         </form>
         
         
