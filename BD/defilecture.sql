@@ -71,7 +71,7 @@ CREATE TABLE `demande_equipe` (
 CREATE TABLE `equipe` (
   `ID_EQUIPE` int(10) NOT NULL,
   `NOM_EQUIPE` varchar(255) NOT NULL,
-  `ID_CAPITAINE` int(11) DEFAULT NULL,
+ -- `ID_CAPITAINE` int(11) DEFAULT NULL,
   `POINT_EQUIPE` int(11) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -152,7 +152,7 @@ ALTER TABLE `demande_equipe`
 ALTER TABLE `equipe`
   ADD PRIMARY KEY (`ID_EQUIPE`),
   ADD UNIQUE KEY `NOM_EQUIPE` (`NOM_EQUIPE`),
-  ADD KEY `ID_CAPITAINE` (`ID_CAPITAINE`);
+--  ADD KEY `ID_CAPITAINE` (`ID_CAPITAINE`);
 
 --
 -- Index pour la table `inscription_defi`
@@ -232,8 +232,8 @@ ALTER TABLE `demande_equipe`
 --
 -- Contraintes pour la table `equipe`
 --
-ALTER TABLE `equipe`
-  ADD CONSTRAINT `EQUIPE_FK1` FOREIGN KEY (`ID_CAPITAINE`) REFERENCES `compte` (`ID_COMPTE`) ON DELETE SET NULL;
+--ALTER TABLE `equipe`
+--  ADD CONSTRAINT `EQUIPE_FK1` FOREIGN KEY (`ID_CAPITAINE`) REFERENCES `compte` (`ID_COMPTE`) ON DELETE SET NULL;
 
 --
 -- Contraintes pour la table `inscription_defi`
