@@ -151,15 +151,17 @@ public class CompteDAO extends DAO<Compte>{
     
     @Override
     public boolean update(Compte x) {
-                String req = "UPDATE compte SET (`COURRIEL` , `MOT_PASSE` , `NOM`, "
-                + "`PRENOM`, `PSEUDONYME`, `AVATAR`, `PROGRAMME_ETUDE`, `ID_EQUIPE`"
-                + ", `ID_EQUIPE`, `MINUTES_RESTANTES`, `POINTAGE`, `ROLE`) VALUES "
-                +    "(?,?,?,?,?,?,?,?,?,?,?,?) WHERE `ID_COMPTE = ?`";
+                String req = "UPDATE compte SET `COURRIEL` = ? , `MOT_PASSE` = ?, "
+                           + "`NOM` = ?, `PRENOM` = ?, `PSEUDONYME` = ?, "
+                        + "`AVATAR` = ?, `PROGRAMME_ETUDE` = ?, `ID_EQUIPE` = ?, "
+                        + "`MINUTES_RESTANTES` = ?, `POINTAGE` = ?, `ROLE`= ? "
+                        + "WHERE `ID_COMPTE` = ?";
 
         PreparedStatement paramStm = null;
         try {
 
-                paramStm = cnx.prepareStatement(req);
+                paramStm = cnx.prepareStatement(req); //Exception ici : Il ne peut pas créer le preparedStatement.
+                                                      //la requête est peut-être mal formulée
 
                 
                 paramStm.setString(1, x.getCourriel());
@@ -250,7 +252,7 @@ public class CompteDAO extends DAO<Compte>{
     
     @Override
     public List<Compte> findAll() {
-                        System.out.println("\n=========================================================HEEEEEY===================================");
+                        
         List<Compte> liste = new LinkedList<>();
         try {
             Statement stm = cnx.createStatement(); 
@@ -269,7 +271,7 @@ public class CompteDAO extends DAO<Compte>{
                 c.setAvatar(r.getString("AVATAR"));
                 c.setPseudonyme(r.getString("PSEUDONYME")); 
                 c.setRole(r.getInt("ROLE"));
-                System.out.println("\nUtilisateur : "+c);
+                
                 liste.add(c);
             }
             r.close();
