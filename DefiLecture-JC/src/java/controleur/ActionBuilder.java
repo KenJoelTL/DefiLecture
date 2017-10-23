@@ -40,6 +40,15 @@ public class ActionBuilder {
                     return new AfficherPageGestionListeComptesAction();
                 case "afficherPageGestionConfigurationCompte":
                     return new AfficherPageGestionConfigurationCompteAction();
+                case "effectuerModificationCompte":
+                    return new EffectuerModificationCompteAction();
+
+                    /*
+                     
+                case "effectuerCreationLecture":
+                    return new EffectuerCreationLectureAction();                
+                */
+            
 
                     /*
                      

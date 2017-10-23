@@ -20,9 +20,9 @@ import modele.CompteDAO;
  * @author Joel
  */
 public class AfficherPageGestionConfigurationCompteAction implements Action, RequestAware,SessionAware {
-    HttpSession session;
-    HttpServletRequest request;
-    HttpServletResponse response;
+    private HttpSession session;
+    private HttpServletRequest request;
+    private HttpServletResponse response;
     
     @Override
     public String execute() {
