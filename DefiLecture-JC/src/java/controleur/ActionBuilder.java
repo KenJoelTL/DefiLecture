@@ -35,8 +35,10 @@ public class ActionBuilder {
                 case "effectuerDeconnexion":
                     return new EffectuerDeconnexionAction();
        //Lecture             
-                case "afficherCreationLecture":
-                    return new AfficherCreationLectureAction();
+                case "afficherPageCreationLecture":
+                    return new AfficherPageCreationLectureAction();
+                case "afficherPageGestionLecture":
+                    return new AfficherPageGestionLectureAction();
                 case "effectuerCreationLecture":
                     return new EffectuerCreationLectureAction();
                 case "afficherPageModificationLecture":
@@ -44,8 +46,8 @@ public class ActionBuilder {
                 case "effectuerModificationLecture":
                     return new EffectuerModificationLectureAction();
        //Defi
-                case "afficherCreationDefi":
-                    return new AfficherCreationDefiAction();
+                case "afficherPageCreationDefi":
+                    return new AfficherPageCreationDefiAction();
                 case "effectuerCreationDefi":
                     return new EffectuerCreationDefiAction();
        //Compte        

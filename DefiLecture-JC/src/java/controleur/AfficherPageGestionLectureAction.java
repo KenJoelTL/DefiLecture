@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Charles
  */
-public class AfficherCreationDefiAction implements Action, RequestAware {
+public class AfficherPageGestionLectureAction implements Action, RequestAware {
 
     private HttpServletRequest request;
     private HttpServletResponse response;
@@ -20,7 +20,7 @@ public class AfficherCreationDefiAction implements Action, RequestAware {
     @Override
     public String execute() {
         
-        request.setAttribute("vue", "defi.jsp");
+        request.setAttribute("vue", "pageGestionLecture.jsp");
         
         return "/index.jsp";
     }

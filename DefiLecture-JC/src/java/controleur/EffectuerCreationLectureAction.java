@@ -53,12 +53,12 @@ public class EffectuerCreationLectureAction implements Action, RequestAware, Ses
                 System.out.println("Problème de création de la lecture");
                 
             //request.setAttribute("vue", "accueil.jsp");
-            return "*.do?tache=afficherPageProfil";
+            return "*.do?tache=afficherPageGestionLecture";
         }
         catch(ClassNotFoundException e){
             System.out.println("Erreur dans le chargement du pilote :"+ e);
             //request.setAttribute("vue", "lecture.jsp");
-            return "*.do?tache=afficherPageProfil";
+            return "*.do?tache=afficherPageGestionLecture";
         }
         
         

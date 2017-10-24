@@ -40,7 +40,7 @@ public class EffectuerModificationLectureAction implements Action, RequestAware,
                 Lecture lecture = dao.read(idLecture);
                 if(lecture == null)
                     //request.setAttribute("vue", "pageProfil.jsp");
-                    return "*.do?tache=afficherPageProfil";
+                    return "*.do?tache=afficherPageGestionLecture";
                 else{
                     cnx = Connexion.startConnection(Config.DB_USER,Config.DB_PWD,Config.URL,Config.DRIVER);
                     dao.setCnx(cnx);
@@ -73,17 +73,17 @@ public class EffectuerModificationLectureAction implements Action, RequestAware,
                     else{
                     //il faut avertir que les changements ont étés faits
                     //    request.setAttribute("vue", "pageProfil.jsp"); //faire PRG
-                    return "*.do?tache=afficherPageProfil";
+                    return "*.do?tache=afficherPageGestionLecture";
         
                     }
                 }            
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(EffectuerModificationCompteAction.class.getName()).log(Level.SEVERE, null, ex);
-                return "*.do?tache=afficherPageProfil";
+                return "*.do?tache=afficherPageGestionLecture";
             }
         }
         else
-            return "*.do?tache=afficherPageProfil";
+            return "*.do?tache=afficherPageGestionLecture";
         
     }
 
