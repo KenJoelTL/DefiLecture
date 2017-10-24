@@ -15,12 +15,9 @@
 <%@ page pageEncoding="UTF-8" %>
 <h2>Liste de mes lectures</h2>
 
-<%  Class.forName(Config.DRIVER);
-    Connexion.setUrl(Config.URL);
-    Connexion.setUser(Config.DB_USER);
-    Connexion.setPassword(Config.DB_PWD);
+<% 
     Connexion.reinit();
-    Connection cnx = Connexion.getInstance();
+    Connection cnx = Connexion.startConnection(Config.DB_USER,Config.DB_PWD,Config.URL,Config.DRIVER);
     LectureDAO dao = new LectureDAO(cnx);
     
     List<Lecture> listeLectures = dao.findByIdCompte((int)(session.getAttribute("connecte")));

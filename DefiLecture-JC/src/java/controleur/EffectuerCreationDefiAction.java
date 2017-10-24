@@ -50,11 +50,8 @@ public class EffectuerCreationDefiAction implements Action, RequestAware, Sessio
         
         try{
 
-            Class.forName(Config.DRIVER);
-            Connexion.setUrl(Config.URL);
-            Connexion.setUser(Config.DB_USER);
-            Connexion.setPassword(Config.DB_PWD);
-            Connection cnx = Connexion.getInstance();
+            Connexion.reinit();
+            Connection cnx = Connexion.startConnection(Config.DB_USER,Config.DB_PWD,Config.URL,Config.DRIVER);
             dao = new DefiDAO(cnx);
             defi = new Defi();
             defi.setIdCompte(idCompte);
