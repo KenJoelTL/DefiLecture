@@ -70,4 +70,26 @@ public class Connexion {
 		Connexion.password = password;
 	}
         
+        public static void setConfig(String user, String password, String url){
+                Connexion.user = user;
+                Connexion.password = password;
+                Connexion.url = url;
+        }
+        
+        public static Connection startConnection(String user, String password, String url, String driver) throws ClassNotFoundException{
+                Class.forName(driver);
+                Connexion.user = user;
+                Connexion.password = password;
+                Connexion.url = url;             
+            return getInstance();
+        }
+        
+        public static Connection startConnection(String driver) throws ClassNotFoundException{
+                Class.forName(driver);/*
+                Connexion.user = user;
+                Connexion.password = password;
+                Connexion.url = url; */            
+            return getInstance();
+        }
+        
 }

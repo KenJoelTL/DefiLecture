@@ -29,13 +29,12 @@
             
                 Nom* : <input type="text" name="nom" value="<%=c.getNom()%>" required/>
             </div>
-                <%--  <div>
-                Programme d'&eacute;tude : <input type="text" name="programmeEtude" value="<%=c.getProgrammeEtude()==null? "": c.getIdCompte()%>" />
---%>
+            <div>
+                Programme d'&eacute;tude : <input type="text" name="programmeEtude" value="<%=c.getProgrammeEtude()==null? "": c.getProgrammeEtude()%>" />
                 Courriel* : <input type="email" name="courriel" value="<%=c.getCourriel()%>" required/>
             </div>
             <div>    
-                Pseudonyme : <input type="text" name="pseudonyme" value="<%=c.getPseudonyme()%>" />
+                Pseudonyme : <input type="text" name="pseudonyme" value="<%=c.getPseudonyme()==null? "":c.getPseudonyme()%>" />
             </div>
             <div>Role du compte : 
                 <select name="role">
