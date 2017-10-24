@@ -45,15 +45,16 @@ public class ControleurFrontal extends HttpServlet {
                ((SessionAware)action).setSession(request.getSession(true));
             }
             
-            String vue = action.execute();
+            if(!(action instanceof SendAjaxResponse)){
+                String vue = action.execute();
             
-            if (action instanceof RequirePRGAction) {
-                response.sendRedirect(vue);
+                if (action instanceof RequirePRGAction) {
+                    response.sendRedirect(vue);
+                }
+                else {
+                     this.getServletContext().getRequestDispatcher(vue).forward(request, response);
+                }
             }
-            else {
-                 this.getServletContext().getRequestDispatcher(vue).forward(request, response);
-            }
-            
             
            
         }

@@ -13,6 +13,6 @@ import javax.servlet.http.HttpServletResponse;
  * @author Charles
  */
 public interface RequestAware {
-    public void setRequest(HttpServletRequest r);
-    public void setResponse(HttpServletResponse r);
+    public void setRequest(HttpServletRequest resquest);
+    public void setResponse(HttpServletResponse response);
 }
