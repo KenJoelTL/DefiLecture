@@ -44,7 +44,7 @@ public class LectureDAO extends DAO<Lecture> {
                 paramStm.setInt(1, x.getIdCompte());
                 paramStm.setString(2, x.getTitre());
                 paramStm.setInt(3, x.getDureeMinutes());
-                paramStm.setInt(4, x.estObligatoire());    
+                paramStm.setInt(4, x.getEstObligatoire());    
                 int n= paramStm.executeUpdate();
                 
                 if (n>0)
@@ -88,7 +88,7 @@ public class LectureDAO extends DAO<Lecture> {
                     l.setDateInscription(resultat.getDate("DATE_INSCRIPTION"));
                     l.setTitre(resultat.getString("TITRE"));
                     l.setDureeMinutes(resultat.getInt("DUREE_MINUTES"));
-                    l.setObligatoire(resultat.getInt("EST_OBLIGATOIRE"));
+                    l.setEstObligatoire(resultat.getInt("EST_OBLIGATOIRE"));
                     
                     resultat.close();
                     paramStm.close();
@@ -130,7 +130,41 @@ public class LectureDAO extends DAO<Lecture> {
 
     @Override
     public boolean update(Lecture x) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                 String req = "UPDATE lecture SET TITRE = ?, DUREE_MINUTES = ?,"
+                           + "EST_OBLIGATOIRE = ? WHERE ID_LECTURE = ?";
+
+        PreparedStatement paramStm = null;
+        try {
+                paramStm = cnx.prepareStatement(req);
+
+                paramStm.setString(1, x.getTitre());
+                paramStm.setInt(2, x.getDureeMinutes());
+                paramStm.setInt(3, x.getEstObligatoire());
+                paramStm.setInt(4, x.getIdLecture());
+
+                int nbLignesAffectees= paramStm.executeUpdate();
+                
+                if (nbLignesAffectees>0) {
+                        paramStm.close();
+                        return true;
+                }
+                                
+            return false;
+        }
+        catch (SQLException exp) {
+            System.out.println(exp.getMessage());
+        }
+        finally {
+                try {
+                    if (paramStm!=null)
+                        paramStm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(CompteDAO.class.getName())
+                            .log(Level.SEVERE, null, ex);
+                }
+                Connexion.close();
+        }
+        return false;
     }
 
     @Override
@@ -183,7 +217,7 @@ public class LectureDAO extends DAO<Lecture> {
                     l.setTitre(r.getString("TITRE"));
                     l.setDateInscription(r.getDate("DATE_INSCRIPTION"));
                     l.setDureeMinutes(r.getInt("DUREE_MINUTES"));
-                    l.setObligatoire(r.getInt("EST_OBLIGATOIRE"));
+                    l.setEstObligatoire(r.getInt("EST_OBLIGATOIRE"));
                     liste.add(l);
                 }
                 r.close();
@@ -218,7 +252,7 @@ public class LectureDAO extends DAO<Lecture> {
                     l.setDateInscription(resultat.getDate("DATE_INSCRIPTION"));
                     l.setTitre(resultat.getString("TITRE"));
                     l.setDureeMinutes(resultat.getInt("DUREE_MINUTES"));
-                    l.setObligatoire(resultat.getInt("EST_OBLIGATOIRE"));
+                    l.setEstObligatoire(resultat.getInt("EST_OBLIGATOIRE"));
                     listeLecture.add(l);
 
                 }

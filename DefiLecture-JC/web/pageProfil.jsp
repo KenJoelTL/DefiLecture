@@ -42,7 +42,8 @@
     for(Lecture l : listeLectures){
     //while (listeComptes.iterator().hasNext()){
       //  c = listeComptes.iterator().next();
-        switch (l.estObligatoire()) {
+      pageContext.setAttribute("l", l);
+        switch (l.getEstObligatoire()) {
                 case 0: obligatoire = "NON";
                     break;
                 case 1: obligatoire = "OUI";       
@@ -52,12 +53,14 @@
             }
 %>
         <tr>
-          <td><%=l.getTitre()%></td>
-          <td><%=l.getDureeMinutes() %> minutes</td>
-          <td><%= l.getDateInscription() %> </td>
+          <td>${l.titre}</td>
+          <td>${l.dureeMinutes} minutes</td>
+          <td>${l.dateInscription} </td>
           <td><%=obligatoire%></td>
+          <td><a href="*.do?tache=afficherPageModificationLecture&id=${l.idLecture}">Modifier</a></td>
+          <td><a href="#">Supprimer</a></td>
         </tr>
-<% } %>
+    <% } %>
       </tbody>
         
     </table>
