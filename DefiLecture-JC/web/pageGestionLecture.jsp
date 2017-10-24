@@ -4,6 +4,7 @@
     Author     : Charles
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="jdbc.Config"%>
 <%@page import="modele.Compte"%>
@@ -19,10 +20,8 @@
     Connexion.reinit();
     Connection cnx = Connexion.startConnection(Config.DB_USER,Config.DB_PWD,Config.URL,Config.DRIVER);
     LectureDAO dao = new LectureDAO(cnx);
-    
     List<Lecture> listeLectures = dao.findByIdCompte((int)(session.getAttribute("connecte")));
-    //Compte c;
-    String obligatoire;
+    pageContext.setAttribute("listeLectures", listeLectures);
   %>
     <table class="table">
         
@@ -35,29 +34,17 @@
         </tr>
       </thead>
       <tbody>
-<%  
-    for(Lecture l : listeLectures){
-    //while (listeComptes.iterator().hasNext()){
-      //  c = listeComptes.iterator().next();
-      pageContext.setAttribute("l", l);
-        switch (l.getEstObligatoire()) {
-                case 0: obligatoire = "NON";
-                    break;
-                case 1: obligatoire = "OUI";       
-                    break;
-                default:
-                    obligatoire = "NON";
-            }
-%>
-        <tr>
-          <td>${l.titre}</td>
-          <td>${l.dureeMinutes} minutes</td>
-          <td>${l.dateInscription} </td>
-          <td><%=obligatoire%></td>
-          <td><a href="*.do?tache=afficherPageModificationLecture&id=${l.idLecture}">Modifier</a></td>
-          <td><a href="#">Supprimer</a></td>
-        </tr>
-    <% } %>
+        <c:forEach items="${listeLectures}" var="l">
+            <tr>
+              <td>${l.titre}</td>
+              <td>${l.dureeMinutes} minutes</td>
+              <td>${l.dateInscription} </td>
+              <td>${l.estObligatoire eq 0 ? "NON" : "OUI"}</td>
+              <td><a href="*.do?tache=afficherPageModificationLecture&id=${l.idLecture}">Modifier</a></td>
+              <td><a href="#">Supprimer</a></td>
+            </tr>
+        </c:forEach>
+
       </tbody>
         
     </table>

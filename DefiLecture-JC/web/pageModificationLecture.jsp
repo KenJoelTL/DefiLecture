@@ -10,22 +10,15 @@
 <%@page import="java.sql.Connection"%>
 <%@page import="jdbc.Config"%>
 <%@page import="jdbc.Connexion"%>
-<% /* Class.forName(Config.DRIVER);
-    Connexion.setUrl(Config.URL);
-    Connexion.setUser(Config.DB_USER);
-    Connexion.setPassword(Config.DB_PWD);*/
+<% 
     Connexion.reinit();
     Connection cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
     LectureDAO dao = new LectureDAO(cnx);
-    
     Lecture l = dao.read(request.getParameter("id"));
     pageContext.setAttribute("l", l);
   %>
 
 
-  
-  
-  
     <body>
         <h1>Modification de la lecture</h1>
         <form action="*.do" method="post">
