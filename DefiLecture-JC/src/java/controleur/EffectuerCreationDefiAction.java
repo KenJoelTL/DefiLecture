@@ -31,6 +31,7 @@ public class EffectuerCreationDefiAction implements Action, RequestAware, Sessio
     public String execute() {
         
         String  nom = request.getParameter("nom"),
+                description = request.getParameter("description"),
                 dateDebut = request.getParameter("dateDebut"),
                 dateFin = request.getParameter("dateFin"),
                 question = request.getParameter("question"),
@@ -38,9 +39,9 @@ public class EffectuerCreationDefiAction implements Action, RequestAware, Sessio
                 choix2 = request.getParameter("choix2"),
                 choix3 = request.getParameter("choix3"),
                 choix4 = request.getParameter("choix4"),
-                questionDB = question+";"+choix1+";"+choix2+";"+choix3+";"+choix4,
-                
+                choixReponse = choix1+";"+choix2+";"+choix3+";"+choix4,
                 reponse = request.getParameter("reponse");
+        
         int     idCompte = (int)session.getAttribute("connecte"),
                 point = Integer.parseInt(request.getParameter("point"));
 
@@ -56,9 +57,11 @@ public class EffectuerCreationDefiAction implements Action, RequestAware, Sessio
             defi = new Defi();
             defi.setIdCompte(idCompte);
             defi.setNom(nom);
+            defi.setDescription(description);
             defi.setDateDebut(dateDebut);
             defi.setDateFin(dateFin);
-            defi.setQuestion(questionDB);
+            defi.setQuestion(question);
+            defi.setChoixReponse(choixReponse);
             defi.setReponse(reponse);
             defi.setPoint(point);
             if(dao.create(defi))
