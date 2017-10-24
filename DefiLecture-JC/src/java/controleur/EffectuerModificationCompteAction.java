@@ -19,7 +19,7 @@ import modele.CompteDAO;
  *
  * @author Joel
  */
-public class EffectuerModificationCompteAction implements Action, RequestAware{
+public class EffectuerModificationCompteAction implements Action, RequestAware/*, RequirePRGAction*/{
     private HttpServletResponse response;
     private HttpServletRequest request;
 
@@ -93,14 +93,15 @@ public class EffectuerModificationCompteAction implements Action, RequestAware{
                         compte.setNom(nom);
                     if(motPasse != null && !"".equals(motPasse.trim()) && !motPasse.equals(compte.getMotPasse()))
                         compte.setMotPasse(motPasse);
-                    if(pseudonyme != null && !"".equals(pseudonyme.trim()) && !pseudonyme.equals(compte.getPseudonyme()))
+                    if(pseudonyme != null && !pseudonyme.equals(compte.getPseudonyme()))
                         compte.setPseudonyme(pseudonyme);
-                    if(programmeEtude != null && !"".equals(programmeEtude.trim()) && !programmeEtude.equals(compte.getProgrammeEtude()))
+                    if(programmeEtude != null && !programmeEtude.equals(compte.getProgrammeEtude()))
                         compte.setProgrammeEtude(programmeEtude);
                     
                     if(!dao.update(compte)){
         //                request.setAttribute("vue", "gestionConfigurationCompte.jsp"); //mettre un message d'erreur
                         request.setAttribute("vue", "accueil.jsp");
+               //         return "*.do?tache=afficherCreationDefi";
                     }
                     else{
                     //il faut avertir que les changements ont étés faits
@@ -128,6 +129,5 @@ public class EffectuerModificationCompteAction implements Action, RequestAware{
     public void setResponse(HttpServletResponse response) {
         this.response = response;
     }
-
     
 }

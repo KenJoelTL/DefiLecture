@@ -10,12 +10,11 @@
 <%@page import="modele.CompteDAO"%>
 <%@page import="jdbc.Connexion"%>
 <%@ page pageEncoding="UTF-8" %>
-<h2>Gestionnaire de comptes</h2>
 
-<%  Connection cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
-    CompteDAO dao = new CompteDAO(cnx);
-    pageContext.setAttribute("dao", dao);   %>
-  
+<%  CompteDAO dao = new CompteDAO(Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
+    pageContext.setAttribute("listeComptes", dao.findAll());   %>
+    
+<h2>Gestionnaire de comptes</h2>  
 
     <table class="table">
         
@@ -30,7 +29,7 @@
       </thead>
       <tbody>
               
-      <c:forEach items="${dao.findAll()}" var="compte">
+      <c:forEach items="${listeComptes}" var="compte">
 
         <c:choose>
             <c:when test="${compte.role eq 1}">
