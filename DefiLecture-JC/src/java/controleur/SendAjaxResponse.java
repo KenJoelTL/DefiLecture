@@ -9,6 +9,6 @@ package controleur;
  *
  * @author Joel
  */
-public class SendAjaxResponse {
+interface SendAjaxResponse { //interface de marquage
     //public void setResponse(HttpServletResponse response);
 }

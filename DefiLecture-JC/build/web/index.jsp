@@ -49,6 +49,11 @@
                 <li class="active"><a href="*.do?tache=afficherPageGestionListeCompte">Gérer les comptes</a></li>
             <%  }
               }%>
+                <%if(session.getAttribute("role") != null){
+                if((int)session.getAttribute("role") >= 3){%>
+                <li class="active"><a href="*.do?tache=afficherCreationDefi">Créer un défi</a></li>
+            <%  }
+              }%>
             </ul>
             <ul class="nav navbar-nav navbar-right">
             <!--  <li><a href="#"><span class="glyphicon glyphicon-user"></span> S'incrire</a></li> -->
