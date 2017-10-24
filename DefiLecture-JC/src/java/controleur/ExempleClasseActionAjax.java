@@ -30,7 +30,7 @@ public class ExempleClasseActionAjax implements Action, RequestAware, SendAjaxRe
             
             
             
-            //finalement envoyer un reponse 
+            //finalement envoyer un reponse en spéficiant le format
             response.setContentType("application/json"); //ou n'importe quoi comme string
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write(json);
