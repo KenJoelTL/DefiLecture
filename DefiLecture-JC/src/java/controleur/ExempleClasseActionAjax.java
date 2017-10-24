@@ -6,8 +6,6 @@
 package controleur;
 
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -25,21 +23,23 @@ public class ExempleClasseActionAjax implements Action, RequestAware, SendAjaxRe
             //Logique ici
             
             
-            //contruire une chaine json
+            //contruire une chaine json ou biee faire comme on veux
             String json = "[]";
+            String commeOnVeux = "['"+request.getParameter("prenom")+"']";
             
             
             
             //finalement envoyer un reponse en spéficiant le format
-            response.setContentType("application/json"); //ou n'importe quoi comme string
-            response.setCharacterEncoding("UTF-8");
+            response.setContentType("application/json;UTF-8"); //ou n'importe quoi comme string text/plain ou  bien html/text
+            //response.setCharacterEncoding("UTF-8");
             response.getWriter().write(json);
+            response.getWriter().write(commeOnVeux);
         } catch (IOException ex) {
             //Logger.getLogger(ExempleClasseActionAjax.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("\n"+ex.getMessage());
         }
         
-        return "N'importe quoi, car la chaine ne sera pas prise en compte par le contrôleur frontal";
+        return "N'importe quoi, car la chaine ne sera pas prise en compte par le contrôleur frontal"; //return null
         
     }
 

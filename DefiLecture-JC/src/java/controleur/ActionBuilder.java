@@ -46,6 +46,8 @@ public class ActionBuilder {
                     return new AfficherPageGestionConfigurationCompteAction();
                 case "effectuerModificationCompte":
                     return new EffectuerModificationCompteAction();
+                case "testAjax":
+                    return new ExempleClasseActionAjax();
 
                     /*
                      

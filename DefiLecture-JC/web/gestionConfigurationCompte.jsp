@@ -8,6 +8,18 @@
 <%@page import="java.sql.Connection"%>
 <%@page import="jdbc.Config"%>
 <%@page import="jdbc.Connexion"%>
+<script>  
+	$(document).ready(
+		function () {
+			//alert('Le DOM est pret!');
+			$("#prenom").keyup(function(event) {
+				$('#testAjax5').load('*.do?tache=testAjax&prenom='+event.target.value);
+                            }
+                        );
+                }
+        );  
+
+</script>
 <%  Class.forName(Config.DRIVER);
     Connexion.setUrl(Config.URL);
     Connexion.setUser(Config.DB_USER);
@@ -25,7 +37,7 @@
         
         <form action="*.do" method="post" >
             <div>
-                Prenom* : <input type="text" name="prenom" value="<%=c.getPrenom()%>" required/>
+                Prenom* : <input type="text" id=prenom name="prenom" value="<%=c.getPrenom()%>" required/>
             
                 Nom* : <input type="text" name="nom" value="<%=c.getNom()%>" required/>
             </div>
@@ -53,6 +65,16 @@
                 <input type="submit" name="annule" value=" Annuler" />
             </div>
         </form>
-        
+
+        <div class="form">                
+            <form>
+                <input type="hidden" name="idCompte" value="<%=c.getIdCompte()%>">
+                <input type="submit" name="supprime" value=" Supprimer" />
+            </form>        
+        </div>
+        <div id="testAjax5">
+        </div>
+                
+                
         
     </body>
