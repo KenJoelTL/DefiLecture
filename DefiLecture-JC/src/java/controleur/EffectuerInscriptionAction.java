@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package controleur;
 
 import java.sql.Connection;
@@ -34,7 +30,7 @@ public class EffectuerInscriptionAction implements Action, RequestAware, Session
                 programmeEtude = request.getParameter("programmeEtude"),
                 pseudonyme = request.getParameter("pseudonyme"); 
         
-        try{
+        try{/*
             //Étape 1 : chargement du pilote JDBC
             Class.forName(Config.DRIVER);
             //Étape 2 : configurer les paramèetre de la connection vers la base de données
@@ -42,7 +38,8 @@ public class EffectuerInscriptionAction implements Action, RequestAware, Session
             Connexion.setUser(Config.DB_USER);
             Connexion.setPassword(Config.DB_PWD);
             //Étape 3 : ouverture de la connection vers la base de données
-            Connection cnx = Connexion.getInstance();
+            Connection cnx = Connexion.getInstance();*/
+            Connection cnx = Connexion.startConnection(Config.DB_USER,Config.DB_PWD,Config.URL,Config.DRIVER);
             dao = new CompteDAO(cnx);
             compte = new Compte();
             compte.setCourriel(courriel);
@@ -55,7 +52,7 @@ public class EffectuerInscriptionAction implements Action, RequestAware, Session
             //faire vérification avec des findBy
             
             if(dao.create(compte)){
-                System.out.println("Une compte a été créée avec succès");
+                System.out.println("Un compte a été créé avec succès");
                 request.setAttribute("vue", "connexion.jsp");
             }
             else{

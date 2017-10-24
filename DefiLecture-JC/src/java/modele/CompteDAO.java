@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jdbc.Connexion;
+import jdk.nashorn.internal.codegen.types.Type;
 
 /**
  *
@@ -99,10 +100,14 @@ public class CompteDAO extends DAO<Compte>{
 
                 Compte c = new Compte();
                 c.setIdCompte(resultat.getInt("ID_COMPTE"));
-                c.setIdEquipe(resultat.getInt("ID_EQUIPE"));
+                if(resultat.getInt("ID_EQUIPE") == 0)
+                    c.setIdEquipe(-1);
+                else
+                    c.setIdEquipe(resultat.getInt("ID_EQUIPE"));
                 c.setCourriel(resultat.getString("COURRIEL"));
                 c.setPrenom(resultat.getString("PRENOM"));             
                 c.setNom(resultat.getString("NOM"));
+                c.setMotPasse(resultat.getString("MOT_PASSE"));
                 c.setPseudonyme(resultat.getString("PSEUDONYME"));             
                 c.setAvatar(resultat.getString("AVATAR"));             
                 c.setProgrammeEtude(resultat.getString("PROGRAMME_ETUDE"));
@@ -151,40 +156,47 @@ public class CompteDAO extends DAO<Compte>{
     
     @Override
     public boolean update(Compte x) {
-                String req = "UPDATE compte SET (`COURRIEL` , `MOT_PASSE` , `NOM`, "
-                + "`PRENOM`, `PSEUDONYME`, `AVATAR`, `PROGRAMME_ETUDE`, `ID_EQUIPE`"
-                + ", `ID_EQUIPE`, `MINUTES_RESTANTES`, `POINTAGE`, `ROLE`) VALUES "
-                +    "(?,?,?,?,?,?,?,?,?,?,?,?) WHERE `ID_COMPTE = ?`";
+                String req = "UPDATE compte SET COURRIEL = ?, MOT_PASSE = ?,"
+                           + "NOM = ?, PRENOM = ?, PSEUDONYME = ?, AVATAR = ?,"
+                           + "PROGRAMME_ETUDE = ?, ID_EQUIPE = ?, MINUTES_RESTANTES = ?,"
+                           + "POINTAGE = ?, ROLE = ? WHERE ID_COMPTE = ?";
 
         PreparedStatement paramStm = null;
         try {
-
                 paramStm = cnx.prepareStatement(req);
 
-                
                 paramStm.setString(1, x.getCourriel());
                 paramStm.setString(2, x.getMotPasse());
                 paramStm.setString(3, x.getNom());
                 paramStm.setString(4, x.getPrenom());
                 
-                if(!"".equals(x.getPseudonyme()))
-                    paramStm.setString(5, x.getPseudonyme());
-                else
+                if(x.getPseudonyme() == null || "".equals(x.getPseudonyme().trim()))
                     paramStm.setString(5, null);
-                if(!"".equals(x.getAvatar()))
-                    paramStm.setString(6, x.getAvatar());
                 else
-                    paramStm.setString(6, null);
-                if(!"".equals(x.getProgrammeEtude()))
-                    paramStm.setString(7, x.getProgrammeEtude());
-                else
-                    paramStm.setString(7, null);
+                    paramStm.setString(5, x.getPseudonyme());
                 
-                paramStm.setInt(8, x.getIdEquipe());
+                if(x.getAvatar() == null || "".equals(x.getAvatar().trim()))
+                    paramStm.setString(6, null);
+                else
+                    paramStm.setString(6, x.getAvatar());
+                
+                if(x.getProgrammeEtude() == null || "".equals(x.getProgrammeEtude().trim()))
+                    paramStm.setString(7, null);
+                else
+                    paramStm.setString(7, x.getProgrammeEtude());
+                
+                if(x.getIdEquipe() == -1){
+                    paramStm.setNull(8, java.sql.Types.INTEGER);
+                    System.out.println("\n==============================================================================================");
+                }
+                else
+                    paramStm.setInt(8, x.getIdEquipe());
                 paramStm.setInt(9, x.getMinutesRestantes());
                 paramStm.setInt(10, x.getPointage());
                 paramStm.setInt(11, x.getRole());
+
                 paramStm.setInt(12, x.getIdCompte());
+
                 
                 int nbLignesAffectees= paramStm.executeUpdate();
                 
@@ -192,12 +204,11 @@ public class CompteDAO extends DAO<Compte>{
                         paramStm.close();
                         return true;
                 }
-                
-                //paramStm.execute();
-                
+                                
             return false;
         }
         catch (SQLException exp) {
+            System.out.println(exp.getMessage());
         }
         finally {
                 try {
@@ -250,6 +261,7 @@ public class CompteDAO extends DAO<Compte>{
     
     @Override
     public List<Compte> findAll() {
+                        
         List<Compte> liste = new LinkedList<>();
         try {
             Statement stm = cnx.createStatement(); 
@@ -262,12 +274,13 @@ public class CompteDAO extends DAO<Compte>{
                 c.setMotPasse(r.getString("MOT_PASSE"));
                 c.setNom(r.getString("NOM"));
                 c.setPrenom(r.getString("PRENOM"));
-                c.setPointage(r.getInt("DUREE_MINUTES"));
+                c.setPointage(r.getInt("POINTAGE"));
                 c.setMinutesRestantes(r.getInt("MINUTES_RESTANTES"));
                 c.setProgrammeEtude(r.getString("PROGRAMME_ETUDE"));
                 c.setAvatar(r.getString("AVATAR"));
-                c.setPseudonyme(r.getString("PSEUDONYME"));
+                c.setPseudonyme(r.getString("PSEUDONYME")); 
                 c.setRole(r.getInt("ROLE"));
+                
                 liste.add(c);
             }
             r.close();

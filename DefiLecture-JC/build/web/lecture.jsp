@@ -12,17 +12,23 @@
         <title>Création d'une lecture</title>
     </head>
     <body>
-        <h1>Inscription</h1>
+        <h1>Inscription d'une lecture</h1>
         <form action="*.do" method="post">
             <div>
-                Titre* : <input type="text" name="titre" required/>
-            
-                Date inscription* : <input type="text" name="dateInscription" required/>
+                Titre* : <input type="text" name="titre" required />
             </div>
             <div>
-                Durée de la lecutre (en minute)* : <input type="text" name="dureeMinutes" required />
-                ID Compte* : <input type="int" name="idCompte" required />    
-              
+                Durée de la lecture (en minutes)* : <input type="text" name="dureeMinutes" required />
+            </div>
+            <div>
+                <br>
+                La lecture était-elle obligatoire?
+                <div class="radio">
+                    <label><input type="radio" name="obligatoire" value="1" required >oui</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="obligatoire" value="2" required >non</label>
+                </div>
             </div>
            
             <input type="hidden" name="tache" value="effectuerCreationLecture">

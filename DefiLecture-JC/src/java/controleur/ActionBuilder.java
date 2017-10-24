@@ -8,7 +8,7 @@ package controleur;
 
 /**
  *
- * @author Charles
+ * @authors Charles & Joel
  */
 public class ActionBuilder {
     public static Action getAction(String actionName) {
@@ -42,6 +42,10 @@ public class ActionBuilder {
                     return new EffectuerCreationDefiAction();
                 case "afficherPageGestionListeCompte":
                     return new AfficherPageGestionListeComptesAction();
+                case "afficherPageGestionConfigurationCompte":
+                    return new AfficherPageGestionConfigurationCompteAction();
+                case "effectuerModificationCompte":
+                    return new EffectuerModificationCompteAction();
 
                     /*
                      

@@ -12,7 +12,7 @@ package modele;
 public class Compte {
     
     int idCompte;             //clé primaire
-    int idEquipe;                  //équipe dont le participant fait partie
+    int idEquipe =-1;                  //équipe dont le participant fait partie
     
 //    String nomUtilisateur;         //ancienne clé primaire
     String pseudonyme;              //l'utilisateur peut aussi s'inscrire avec un pseudo unique
@@ -23,7 +23,7 @@ public class Compte {
     String programmeEtude;               //programme scolaire
     String avatar;                  //Pour l'instant l'avatar sera représenté par le chemin vers l'image
     int role;                       //Utilisateur==0 | Participant==1 | Capitaine==2 | Animateur==3 | Administrateur==4
-    int pointage;                   //Sommes des points gagné par les lectures
+    int pointage;                   //Sommes des points gagnées par les lectures (minutes de lecture = (pointage*15)+minutesRestantes)
     int minutesRestantes;
     
     public Compte(){
