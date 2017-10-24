@@ -13,6 +13,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import jdbc.Connexion;
 
 /**
@@ -66,12 +68,64 @@ public class LectureDAO extends DAO<Lecture> {
 
     @Override
     public Lecture read(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String req = "SELECT * FROM lecture WHERE `ID_LECTURE` = ?";
+
+        PreparedStatement paramStm = null;
+        try {
+
+                paramStm = cnx.prepareStatement(req);
+
+                paramStm.setInt(1, id);
+
+                ResultSet resultat = paramStm.executeQuery();
+
+                // On vérifie s'il y a un résultat    
+                if(resultat.next()){
+
+                    Lecture l = new Lecture();
+                    l.setIdLecture(resultat.getInt("ID_LECTURE"));
+                    l.setIdCompte(resultat.getInt("ID_COMPTE"));
+                    l.setDateInscription(resultat.getDate("DATE_INSCRIPTION"));
+                    l.setTitre(resultat.getString("TITRE"));
+                    l.setDureeMinutes(resultat.getInt("DUREE_MINUTES"));
+                    l.setObligatoire(resultat.getInt("EST_OBLIGATOIRE"));
+                    
+                    resultat.close();
+                    paramStm.close();
+                    return l;
+
+                }
+                resultat.close();
+                paramStm.close();
+                return null;
+
+        }
+        catch (SQLException exp) {
+        }
+        finally {
+            try{
+                if (paramStm!=null)
+                    paramStm.close();
+                if(cnx!=null)
+                    Connexion.close();
+            }
+            catch (SQLException exp) {
+            }
+             catch (Exception e) {
+            }
+        }        
+
+        return null;
     }
 
     @Override
     public Lecture read(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            return this.read(Integer.parseInt(id));
+        }
+        catch(NumberFormatException e){
+            return null;
+        }  
     }
 
     @Override
@@ -81,7 +135,38 @@ public class LectureDAO extends DAO<Lecture> {
 
     @Override
     public boolean delete(Lecture x) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String req = "DELETE FROM lecture WHERE `ID_LECTURE` = ?";
+        
+        PreparedStatement paramStm = null;
+
+        try {
+                paramStm.setInt(1, x.getIdLecture());
+                paramStm = cnx.prepareStatement(req);
+
+                int nbLignesAffectees= paramStm.executeUpdate();
+                
+                if (nbLignesAffectees>0) {
+                    paramStm.close();
+                    return true;
+                }
+                
+            return false;
+        }
+        catch (SQLException exp) {
+        }
+        catch (Exception exp) {
+        }
+        finally {
+                try {
+                    if (paramStm!=null)
+                        paramStm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(LectureDAO.class.getName())
+                            .log(Level.SEVERE, null, ex);
+                }
+                Connexion.close();
+        }
+        return false;
     }
 
     @Override
