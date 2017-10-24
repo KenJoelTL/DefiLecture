@@ -30,8 +30,8 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
     @Override
     public boolean create(InscriptionDefi x) {
                
-        String req = "INSERT INTO inscription_defi (`ID_COMPTE` ,`ID_DEFI` , `EST_REUSSI`) VALUES "+
-			     "(?,?,?)";
+        String req = "INSERT INTO inscription_defi (`ID_COMPTE` ,`ID_DEFI` ,`POINT` , `EST_REUSSI`) VALUES "+
+			     "(?,?,?,?)";
 				 		 
 
         PreparedStatement paramStm = null;
@@ -44,7 +44,8 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
                 
             paramStm.setInt(1, x.getIdCompte());
             paramStm.setInt(2, x.getIdDefi());
-            paramStm.setInt(3, x.getEstReussi());
+            paramStm.setInt(3, x.getPoint());
+            paramStm.setInt(4, x.getEstReussi());
                 
 
             int n= paramStm.executeUpdate();
@@ -94,6 +95,7 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
                     i.setIdInscriptionDefi(resultat.getInt("ID_INSCRIPTION_DEFI"));
                     i.setIdCompte(resultat.getInt("ID_COMPTE"));
                     i.setIdDefi(resultat.getInt("ID_DEFI"));
+                    i.setPoint(resultat.getInt("POINT"));
                     i.setEstReussi(resultat.getInt("EST_REUSSI"));
                     i.setDateInscriptionDefi(resultat.getString("DATE_INSCRIPTION_DEFI"));
                     
@@ -188,6 +190,7 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
                     i.setIdInscriptionDefi(resultat.getInt("ID_INSCRIPTION_DEFI"));
                     i.setIdCompte(resultat.getInt("ID_COMPTE"));
                     i.setIdDefi(resultat.getInt("ID_DEFI"));
+                    i.setPoint(resultat.getInt("POINT"));
                     i.setEstReussi(resultat.getInt("EST_REUSSI"));
                     i.setDateInscriptionDefi(resultat.getString("DATE_INSCRIPTION_DEFI"));
 
@@ -239,6 +242,7 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
                     i.setIdInscriptionDefi(resultat.getInt("ID_INSCRIPTION_DEFI"));
                     i.setIdCompte(resultat.getInt("ID_COMPTE"));
                     i.setIdDefi(resultat.getInt("ID_DEFI"));
+                    i.setPoint(resultat.getInt("POINT"));
                     i.setEstReussi(resultat.getInt("EST_REUSSI"));
                     i.setDateInscriptionDefi(resultat.getString("DATE_INSCRIPTION_DEFI"));
 

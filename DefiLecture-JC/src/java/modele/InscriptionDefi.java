@@ -13,6 +13,7 @@ public class InscriptionDefi {
     int idInscriptionDefi,
             idCompte,
             idDefi,
+            point,
             estReussi;
     String dateInscriptionDefi;
 
@@ -39,6 +40,16 @@ public class InscriptionDefi {
     public void setIdDefi(int idDefi) {
         this.idDefi = idDefi;
     }
+
+    public int getPoint() {
+        return point;
+    }
+
+    public void setPoint(int point) {
+        this.point = point;
+    }
+    
+    
 
     public int getEstReussi() {
         return estReussi;

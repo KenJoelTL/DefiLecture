@@ -42,9 +42,11 @@ CREATE TABLE `defi` (
   `ID_DEFI` int(10) NOT NULL,
   `ID_COMPTE` int(10) DEFAULT NULL,
   `NOM_DEFI` varchar(255) NOT NULL,
+  `DESCRIPTION` varchar(255) DEFAULT NULL,
   `DATE_DEBUT` varchar(255) NOT NULL,
   `DATE_FIN` varchar(255) NOT NULL,
   `QUESTION` varchar(255) DEFAULT NULL,
+  `CHOIX_REPONSE` varchar(255) DEFAULT NULL,
   `REPONSE` varchar(255) DEFAULT NULL,
   `POINT_DEFI` int(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -86,6 +88,7 @@ CREATE TABLE `inscription_defi` (
   `ID_COMPTE` int(10) NOT NULL,
   `ID_DEFI` int(10) DEFAULT NULL,
   `EST_REUSSI` int(10) DEFAULT NULL, /*0=non réussi; 1=réussi*/
+  `POINT` int(11) DEFAULT '0',
   `DATE_INSCRIPTION_DEFI` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -151,8 +154,7 @@ ALTER TABLE `demande_equipe`
 --
 ALTER TABLE `equipe`
   ADD PRIMARY KEY (`ID_EQUIPE`),
-  ADD UNIQUE KEY `NOM_EQUIPE` (`NOM_EQUIPE`),
---  ADD KEY `ID_CAPITAINE` (`ID_CAPITAINE`);
+  ADD UNIQUE KEY `NOM_EQUIPE` (`NOM_EQUIPE`);
 
 --
 -- Index pour la table `inscription_defi`
@@ -229,11 +231,6 @@ ALTER TABLE `demande_equipe`
   ADD CONSTRAINT `DEMANDE_EQUIPE_FK1` FOREIGN KEY (`ID_COMPTE`) REFERENCES `compte` (`ID_COMPTE`) ON DELETE CASCADE,
   ADD CONSTRAINT `DEMANDE_EQUIPE_FK2` FOREIGN KEY (`ID_EQUIPE`) REFERENCES `equipe` (`ID_EQUIPE`) ON DELETE CASCADE;
 
---
--- Contraintes pour la table `equipe`
---
---ALTER TABLE `equipe`
---  ADD CONSTRAINT `EQUIPE_FK1` FOREIGN KEY (`ID_CAPITAINE`) REFERENCES `compte` (`ID_COMPTE`) ON DELETE SET NULL;
 
 --
 -- Contraintes pour la table `inscription_defi`

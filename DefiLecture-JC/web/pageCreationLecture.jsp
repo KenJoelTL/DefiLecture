@@ -1,6 +1,6 @@
 <%-- 
-    Document   : lecture
-    Created on : 2017-10-17, 21:52:12
+    Document   : pageCreationLecture
+    Created on : 2017-10-24, 13:07:39
     Author     : Charles
 --%>
 
@@ -27,7 +27,7 @@
                     <label><input type="radio" name="obligatoire" value="1" required >oui</label>
                 </div>
                 <div class="radio">
-                    <label><input type="radio" name="obligatoire" value="2" required >non</label>
+                    <label><input type="radio" name="obligatoire" value="0" required >non</label>
                 </div>
             </div>
            

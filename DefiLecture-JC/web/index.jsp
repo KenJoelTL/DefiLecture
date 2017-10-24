@@ -1,7 +1,7 @@
 <%-- 
     Document   : index
     Created on : 2017-10-14, 12:23:05
-    Author     : Joel
+    Author     : Joel & Charles
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -38,7 +38,17 @@
                 <li class="active"><a href='*.do?tache=""'>Acceuil</a></li>
            
              <c:if test="${ !empty sessionScope.connecte }">
-                <li class="active"><a href="*.do?tache=afficherCreationLecture">Créer Lecture</a></li>
+                
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Lectures
+                    <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="*.do?tache=afficherPageCreationLecture">Créer une lecture</a></li>
+                      <li><a href="*.do?tache=afficherPageGestionLecture">Voir mes lectures</a></li>
+                    </ul>
+                </li>
+                
+                
             </c:if>
            
                 <li><a href="#"><span class="glyphicon glyphicon-stats"></span> Tableau des scores</a></li>
@@ -59,7 +69,17 @@
                      <li class="active"><a href="*.do?tache=afficherPageGestionListeCompte">Gérer les comptes</a></li>
                  </c:if>
                  <c:if test="${ sessionScope.role ge 3 }">
-                    <li class="active"><a href="*.do?tache=afficherCreationDefi">Créer un défi</a></li>
+                    
+                    
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Défis
+                        <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="*.do?tache=afficherPageCreationDefi">Créer un défi</a></li>
+                          <li><a href="#">Voir les défis</a></li>
+                        </ul>
+                    </li>
+                    
                  </c:if>
             </c:if>
             
