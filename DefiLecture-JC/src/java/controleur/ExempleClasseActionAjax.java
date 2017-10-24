@@ -44,7 +44,7 @@ public class ExempleClasseActionAjax implements Action, RequestAware, SendAjaxRe
     }
 
     @Override
-    public void setRequest(HttpServletRequest resquest) {
+    public void setRequest(HttpServletRequest request) {
         this.request = request;
     }
 
