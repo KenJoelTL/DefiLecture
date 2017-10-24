@@ -37,7 +37,7 @@
                         <label><input type="radio" checked name="obligatoire" value="1" required >oui</label>
                     </div>
                     <div class="radio">
-                        <label><input type="radio" name="obligatoire" value="2" required >non</label>
+                        <label><input type="radio" name="obligatoire" value="0" required >non</label>
                     </div>
                     </c:when>
                     <c:otherwise>
@@ -45,7 +45,7 @@
                             <label><input type="radio" name="obligatoire" value="1" required >oui</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" checked name="obligatoire" value="2" required >non</label>
+                            <label><input type="radio" checked name="obligatoire" value="0" required >non</label>
                         </div>
                         
                     </c:otherwise>
