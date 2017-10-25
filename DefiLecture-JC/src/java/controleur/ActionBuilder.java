@@ -63,12 +63,10 @@ public class ActionBuilder {
                     return new AfficherPageGestionConfigurationCompteAction();
                 case "effectuerModificationCompte":
                     return new EffectuerModificationCompteAction();
-
-                    /*
-                     
-                case "effectuerCreationLecture":
-                    return new EffectuerCreationLectureAction();                
-                */
+      //Test Ajax
+                case "testAjax":
+                    return new ExempleClasseActionAjax();
+                
             }
         return new AfficherPageAccueilAction();
     }

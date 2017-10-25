@@ -82,8 +82,11 @@ public class EquipeDAO extends DAO<Equipe>{
 
                 Equipe e = new Equipe();
                 e.setIdEquipe(resultat.getInt("ID_EQUIPE"));
-                e.setNom(resultat.getString("NOM"));
-                e.setIdCapitaine(resultat.getInt("ID_CAPITAINE"));
+                e.setNom(resultat.getString("NOM_EQUIPE"));
+                if(resultat.getInt("ID_CAPITAINE")==0)
+                    e.setIdCapitaine(-1);
+                else
+                    e.setIdCapitaine(resultat.getInt("ID_CAPITAINE"));
                 e.setPoint(resultat.getInt("POINT_EQUIPE"));
 
                 resultat.close();
@@ -128,17 +131,22 @@ public class EquipeDAO extends DAO<Equipe>{
 
     @Override
     public boolean update(Equipe x) {
-        String req = "UPDATE equipe SET (`NOM_EQUIPE` , `ID_CAPITAINE` , "
-                   + "`POINT_EQUIPE`) VALUES (?,?,?) WHERE `ID_EQUIPE = ?`";
+        String req = "UPDATE equipe SET `NOM_EQUIPE` = ? , `ID_CAPITAINE` = ?, "
+                   + "`POINT_EQUIPE` = ? WHERE `ID_EQUIPE = ?`";
 
         PreparedStatement paramStm = null;
         try {
 
                 paramStm = cnx.prepareStatement(req);
 
-                
-                paramStm.setString(1, x.getNom());
-                paramStm.setInt(2, x.getIdCapitaine());
+                if(x.getNom() == null || "".equals(x.getNom().trim()))
+                    paramStm.setString(1, null);
+                else
+                    paramStm.setString(1, x.getNom());
+                if(x.getIdCapitaine() == -1)
+                    paramStm.setNull(2, java.sql.Types.INTEGER);
+                else
+                    paramStm.setInt(2, x.getIdCapitaine());
                 paramStm.setInt(3, x.getPoint());
                 paramStm.setInt(4, x.getIdEquipe());
                 
@@ -180,7 +188,7 @@ public class EquipeDAO extends DAO<Equipe>{
                 
                 if (nbLignesAffectees>0) {
                         paramStm.close();
-                        return true;
+                    return true;
                 }
                 
             return false;
@@ -205,7 +213,7 @@ public class EquipeDAO extends DAO<Equipe>{
         List<Equipe> liste = new LinkedList<>();
         try {
             Statement stm = cnx.createStatement(); 
-            ResultSet r = stm.executeQuery("SELECT * FROM equipe");
+            ResultSet r = stm.executeQuery("SELECT * FROM equipe ORDER BY POINT_EQUIPE DESC");
             while (r.next()) {
                 Equipe e = new Equipe();
                 e.setIdEquipe(r.getInt("ID_EQUIPE"));
@@ -320,8 +328,53 @@ public class EquipeDAO extends DAO<Equipe>{
         
         return null;
     }
+    /*
+    public int countNbMembre(int idEquipe){
     
-    
+        String req = "SELECT COUNT(ID_COMPTE) FROM `compte` WHERE ID_EQUIPE = ?";
+       
+        PreparedStatement paramStm = null;
+        try {
 
-    
+            paramStm = cnx.prepareStatement(req);
+
+            paramStm.setInt(1, idEquipe);
+
+            ResultSet resultat = paramStm.executeQuery();
+
+            // On vérifie s'il y a un résultat    
+            if(resultat.next()){
+
+        
+                resultat.getInt("ID_EQUIPE");
+                
+                resultat.close();
+                paramStm.close();
+                    return e;
+            }
+            
+            resultat.close();
+            paramStm.close();
+            return null;
+                
+        }
+        catch (SQLException exp) {
+        }
+        finally {
+            try{
+                if (paramStm!=null)
+                    paramStm.close();
+                if(cnx!=null)
+                    Connexion.close();
+            }
+            catch (SQLException exp) {
+            }
+             catch (Exception e) {
+            }
+        }         
+        
+        return 0;
+    }
+
+    */
 }

@@ -4,7 +4,16 @@
     Author     : Joel
 --%>
 
+<%@page import="modele.CompteDAO"%>
+<%@page import="jdbc.Connexion"%>
+<%@page import="jdbc.Config"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:if test="${ !empty sessionScope.connecte}">
+<% CompteDAO dao = new CompteDAO(Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
+    pageContext.setAttribute("compteConnecte", dao.read(session.getAttribute("connecte").toString())); %>
+</c:if> 
+    
 <!DOCTYPE html>
 <!-- Layout -->
 <html>
@@ -17,6 +26,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body style="background-color: whitesmoke;">
+
         <div class='container-fluid'  style="margin-bottom: 50px" >
         <nav class="navbar navbar-inverse navbar-fixed-top">
          <div class="container-fluid">
@@ -34,34 +44,47 @@
           <div class="collapse navbar-collapse" id="optionsNavigation">
             <ul class="nav navbar-nav">
                 <li class="active"><a href='*.do?tache=""'>Acceuil</a></li>
-            <%if(session.getAttribute("connecte") != null){%>
+           
+             <c:if test="${ !empty sessionScope.connecte }">
                 <li class="active"><a href="*.do?tache=afficherCreationLecture">Créer Lecture</a></li>
-            <%}%>
+            </c:if>
+           
                 <li><a href="#"><span class="glyphicon glyphicon-stats"></span> Tableau des scores</a></li>
-             <%if(session.getAttribute("connecte") != null){%>
-              <li><a href="*.do?tache=afficherPageProfil">Page de profil</a></li>
-              <li><a href="*.do?tache=afficherPageEquipe">Page d'équipe</a></li>
-            <%}else{%>
-              <li style="background-color: #349737;"><a href='*.do?tache=afficherPageInscription' style="color: #fff;" ><span class="glyphicon glyphicon-education"></span> S'incrire</a></li>        
-            <%}%>
-            <%if(session.getAttribute("role") != null){
-                if((int)session.getAttribute("role") == 4){%>
-                <li class="active"><a href="*.do?tache=afficherPageGestionListeCompte">Gérer les comptes</a></li>
-            <%  }
-              }%>
-                <%if(session.getAttribute("role") != null){
-                if((int)session.getAttribute("role") >= 3){%>
-                <li class="active"><a href="*.do?tache=afficherCreationDefi">Créer un défi</a></li>
-            <%  }
-              }%>
+             
+           
+            <c:choose>
+                <c:when test="${ !empty sessionScope.connecte }">
+                    <li><a href="*.do?tache=afficherPageProfil">Page de profil</a></li>
+                    <c:if test="${compteConnecte.idEquipe gt -1}">
+                    <li><a href="*.do?tache=afficherPageEquipe&idEquipe=${compteConnecte.idEquipe}">Page d'équipe</a></li>
+                   </c:if>
+                </c:when>
+                <c:otherwise>
+                    <li style="background-color: #349737;"><a href='*.do?tache=afficherPageInscription' style="color: #fff;" ><span class="glyphicon glyphicon-education"></span> S'incrire</a></li>
+                </c:otherwise>
+            </c:choose>
+                    
+            <c:if test="${ !empty sessionScope.role }">
+                 <c:if test="${ sessionScope.role eq 4 }">
+                     <li class="active"><a href="*.do?tache=afficherPageGestionListeCompte">Gérer les comptes</a></li>
+                 </c:if>
+                 <c:if test="${ sessionScope.role ge 3 }">
+                    <li class="active"><a href="*.do?tache=afficherCreationDefi">Créer un défi</a></li>
+                 </c:if>
+            </c:if>
+            
+                
             </ul>
             <ul class="nav navbar-nav navbar-right">
-            <!--  <li><a href="#"><span class="glyphicon glyphicon-user"></span> S'incrire</a></li> -->
-            <%if(session.getAttribute("connecte") == null){%>
-              <li><a href='*.do?tache=afficherPageConnexion'><span class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>        
-            <%}else{%>
-              <li><a href='*.do?tache=effectuerDeconnexion'><span class="glyphicon glyphicon-log-in"></span> Se d&eacute;connecter</a></li>
-            <%}%>
+            <c:choose>
+                <c:when test="${ empty sessionScope.connecte }">
+                    <li><a href='*.do?tache=afficherPageConnexion'><span class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>        
+                </c:when>
+                <c:otherwise>
+                    <li><a href='*.do?tache=effectuerDeconnexion'><span class="glyphicon glyphicon-log-in"></span> Se d&eacute;connecter</a></li>
+                </c:otherwise>
+            </c:choose>
+   
             
             </ul>   
           </div>
@@ -74,20 +97,17 @@
                 
                 <div class="container-fluid">
                     
-                
-                <%if (request.getAttribute("vue") == null) 
-                {
-                %>
-                
-                <%@include file="accueil.jsp" %>      
-                 
-                <%}
-                else{
-                    String vue = request.getAttribute("vue").toString();
-                %>
-                <jsp:include page="<%=vue%>" ></jsp:include>
-                <%}%>
+                    <c:choose>
+                        <c:when test="${ !empty requestScope.vue }">
+                            <c:set var="vue" value="${requestScope.vue}"/>
+                            <jsp:include page="${vue}" ></jsp:include>
+                        </c:when>
+                        <c:otherwise>
+                            <jsp:include page="accueil.jsp" ></jsp:include>
+                        </c:otherwise>
+                    </c:choose>
                     
+               
 
                 </div> 
 

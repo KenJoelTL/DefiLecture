@@ -13,7 +13,8 @@ public class Equipe {
     
     int idEquipe, //clé primaire
         idCapitaine,
-        point;
+        point,
+        nbMembre;
     
     String nom;
     
@@ -69,6 +70,14 @@ public class Equipe {
 
     public void setPoint(int point) {
         this.point = point;
+    }
+
+    public int getNbMembre() {
+        return nbMembre;
+    }
+
+    public void setNbMembre(int nbMembre) {
+        this.nbMembre = nbMembre;
     }
     
      
