@@ -69,7 +69,7 @@ public class EffectuerCreationDefiAction implements Action, RequestAware, Sessio
             else
                 System.out.println("Problème de création du défi");
 
-            return "*.do?tache=afficherPageCreationDefi";
+            return "*.do?tache=afficherPageParticipationDefi";
         }
         catch(ClassNotFoundException e){
             System.out.println("Erreur dans le chargement du pilote :"+ e);

@@ -47,7 +47,7 @@ public class EffectuerInscriptionDefiAction implements Action, RequestAware, Req
                 
                 
                 if(defi == null)
-                    return "*.do?tache=afficherPageGestionDefi";
+                    return "*.do?tache=afficherPageParticipationDefi";
                 else{
                     
                     //Si le participant a déjà fait le défi, on ne crée pas une nouvelle inscription_defi
@@ -56,7 +56,7 @@ public class EffectuerInscriptionDefiAction implements Action, RequestAware, Req
                     List<InscriptionDefi> listeInscriptionDefi = daoInscriptionDefi.findAllByIdCompte(idCompte);
                     for(InscriptionDefi i : listeInscriptionDefi){
                         if(i.getIdDefi() == idDefi)
-                            return "*.do?tache=afficherPageGestionDefi";
+                            return "*.do?tache=afficherPageParticipationDefi";
                     }
                 
                 
@@ -84,7 +84,7 @@ public class EffectuerInscriptionDefiAction implements Action, RequestAware, Req
                     
                     //Création de l'inscription_defi dans la base de données
                     daoInscriptionDefi.create(inscriptionDefi);
-                    return "*.do?tache=afficherPageGestionDefi";
+                    return "*.do?tache=afficherPageParticipationDefi";
                     
                 }
                     
@@ -93,12 +93,12 @@ public class EffectuerInscriptionDefiAction implements Action, RequestAware, Req
             
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(EffectuerModificationCompteAction.class.getName()).log(Level.SEVERE, null, ex);
-                return "*.do?tache=afficherPageGestionLecture";
+                return "*.do?tache=afficherPageParticipationDefi";
               }
             
         }
         else
-            return "*.do?tache=afficherPageGestionDefi";
+            return "*.do?tache=afficherPageParticipationDefi";
         
         
         
