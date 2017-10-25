@@ -23,17 +23,17 @@ public class ExempleClasseActionAjax implements Action, RequestAware, SendAjaxRe
             //Logique ici
             
             
-            //contruire une chaine json ou biee faire comme on veux
+            //construire une chaîne json ou bien faire comme on veut
             String json = "[]";
-            String commeOnVeux = "['"+request.getParameter("prenom")+"']";
+            String commeOnVeut = "['"+request.getParameter("prenom")+"']";
             
             
             
-            //finalement envoyer un reponse en spéficiant le format
-            response.setContentType("application/json;UTF-8"); //ou n'importe quoi comme string text/plain ou  bien html/text
+            //finalement envoyer une reponse en spécifiant le format
+            response.setContentType("application/json;UTF-8"); //ou n'importe quoi comme string text/plain(conseillé pour du Json) ou bien html/text
             //response.setCharacterEncoding("UTF-8");
             response.getWriter().write(json);
-            response.getWriter().write(commeOnVeux);
+            response.getWriter().write(commeOnVeut);
         } catch (IOException ex) {
             //Logger.getLogger(ExempleClasseActionAjax.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("\n"+ex.getMessage());

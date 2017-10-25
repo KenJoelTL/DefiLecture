@@ -213,7 +213,7 @@ public class EquipeDAO extends DAO<Equipe>{
         List<Equipe> liste = new LinkedList<>();
         try {
             Statement stm = cnx.createStatement(); 
-            ResultSet r = stm.executeQuery("SELECT * FROM equipe");
+            ResultSet r = stm.executeQuery("SELECT * FROM equipe ORDER BY POINT_EQUIPE DSC");
             while (r.next()) {
                 Equipe e = new Equipe();
                 e.setIdEquipe(r.getInt("ID_EQUIPE"));
