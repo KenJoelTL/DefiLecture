@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jdbc.Connexion;
-import jdk.nashorn.internal.codegen.types.Type;
 
 /**
  *
@@ -187,7 +186,6 @@ public class CompteDAO extends DAO<Compte>{
                 
                 if(x.getIdEquipe() == -1){
                     paramStm.setNull(8, java.sql.Types.INTEGER);
-                    System.out.println("\n==============================================================================================");
                 }
                 else
                     paramStm.setInt(8, x.getIdEquipe());
@@ -269,7 +267,10 @@ public class CompteDAO extends DAO<Compte>{
             while (r.next()) {
                 Compte c = new Compte();
                 c.setIdCompte(r.getInt("ID_COMPTE"));
-                c.setIdEquipe(r.getInt("ID_EQUIPE"));
+                if(r.getInt("ID_EQUIPE")==0)
+                    c.setIdEquipe(-1);
+                else    
+                    c.setIdEquipe(r.getInt("ID_EQUIPE"));
                 c.setCourriel(r.getString("COURRIEL"));
                 c.setMotPasse(r.getString("MOT_PASSE"));
                 c.setNom(r.getString("NOM"));
@@ -292,35 +293,38 @@ public class CompteDAO extends DAO<Compte>{
 
     }
     
-    public List<Compte> findByIdEquipe(String idEquipe){
+    public List<Compte> findByIdEquipe(int idEquipe){
         List<Compte> liste = new LinkedList<>();
-        String req = "SELECT * FROM compte WHERE `ID_COMPTE` = ?";
+        String req = "SELECT * FROM compte WHERE `ID_EQUIPE` = ?";
         
         PreparedStatement paramStm = null;
         try {
 
             paramStm = cnx.prepareStatement(req);
 
-            paramStm.setString(1, idEquipe);
+            paramStm.setInt(1, idEquipe);
 
-            ResultSet r = paramStm.executeQuery();
-            while (r.next()) {
+            ResultSet resultat = paramStm.executeQuery();
+            while (resultat.next()) {
                 Compte c = new Compte();
-                c.setIdCompte(r.getInt("ID_COMPTE"));
-                c.setIdEquipe(r.getInt("ID_EQUIPE"));
-                c.setCourriel(r.getString("COURRIEL"));
-                c.setMotPasse(r.getString("MOT_PASSE"));
-                c.setNom(r.getString("NOM"));
-                c.setPrenom(r.getString("PRENOM"));
-                c.setPointage(r.getInt("DUREE_MINUTES"));
-                c.setMinutesRestantes(r.getInt("MINUTES_RESTANTES"));
-                c.setProgrammeEtude(r.getString("PROGRAMME_ETUDE"));
-                c.setAvatar(r.getString("AVATAR"));
-                c.setPseudonyme(r.getString("PSEUDONYME"));
-                c.setRole(r.getInt("ROLE"));
+                c.setIdCompte(resultat.getInt("ID_COMPTE"));
+                if(resultat.getInt("ID_EQUIPE") == 0)
+                    c.setIdEquipe(-1);
+                else
+                    c.setIdEquipe(resultat.getInt("ID_EQUIPE"));
+                c.setCourriel(resultat.getString("COURRIEL"));
+                c.setPrenom(resultat.getString("PRENOM"));             
+                c.setNom(resultat.getString("NOM"));
+                c.setMotPasse(resultat.getString("MOT_PASSE"));
+                c.setPseudonyme(resultat.getString("PSEUDONYME"));             
+                c.setAvatar(resultat.getString("AVATAR"));             
+                c.setProgrammeEtude(resultat.getString("PROGRAMME_ETUDE"));
+                c.setMinutesRestantes(resultat.getInt("MINUTES_RESTANTES"));
+                c.setPointage(resultat.getInt("POINTAGE"));
+                c.setRole(resultat.getInt("ROLE"));
                 liste.add(c);
             }
-            r.close();
+            resultat.close();
             paramStm.close();
         }
         catch (SQLException exp){
@@ -351,10 +355,14 @@ public class CompteDAO extends DAO<Compte>{
                     
                     Compte c = new Compte();
                     c.setIdCompte(resultat.getInt("ID_COMPTE"));
-                    c.setIdEquipe(resultat.getInt("ID_EQUIPE"));
+                    if(resultat.getInt("ID_EQUIPE") == 0)
+                        c.setIdEquipe(-1);
+                    else
+                        c.setIdEquipe(resultat.getInt("ID_EQUIPE"));
                     c.setCourriel(resultat.getString("COURRIEL"));
                     c.setPrenom(resultat.getString("PRENOM"));             
                     c.setNom(resultat.getString("NOM"));
+                    c.setMotPasse(resultat.getString("MOT_PASSE"));
                     c.setPseudonyme(resultat.getString("PSEUDONYME"));             
                     c.setAvatar(resultat.getString("AVATAR"));             
                     c.setProgrammeEtude(resultat.getString("PROGRAMME_ETUDE"));

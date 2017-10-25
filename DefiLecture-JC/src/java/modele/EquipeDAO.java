@@ -82,8 +82,11 @@ public class EquipeDAO extends DAO<Equipe>{
 
                 Equipe e = new Equipe();
                 e.setIdEquipe(resultat.getInt("ID_EQUIPE"));
-                e.setNom(resultat.getString("NOM"));
-                e.setIdCapitaine(resultat.getInt("ID_CAPITAINE"));
+                e.setNom(resultat.getString("NOM_EQUIPE"));
+                if(resultat.getInt("ID_CAPITAINE")==0)
+                    e.setIdCapitaine(-1);
+                else
+                    e.setIdCapitaine(resultat.getInt("ID_CAPITAINE"));
                 e.setPoint(resultat.getInt("POINT_EQUIPE"));
 
                 resultat.close();
@@ -128,17 +131,22 @@ public class EquipeDAO extends DAO<Equipe>{
 
     @Override
     public boolean update(Equipe x) {
-        String req = "UPDATE equipe SET (`NOM_EQUIPE` , `ID_CAPITAINE` , "
-                   + "`POINT_EQUIPE`) VALUES (?,?,?) WHERE `ID_EQUIPE = ?`";
+        String req = "UPDATE equipe SET `NOM_EQUIPE` = ? , `ID_CAPITAINE` = ?, "
+                   + "`POINT_EQUIPE` = ? WHERE `ID_EQUIPE = ?`";
 
         PreparedStatement paramStm = null;
         try {
 
                 paramStm = cnx.prepareStatement(req);
 
-                
-                paramStm.setString(1, x.getNom());
-                paramStm.setInt(2, x.getIdCapitaine());
+                if(x.getNom() == null || "".equals(x.getNom().trim()))
+                    paramStm.setString(1, null);
+                else
+                    paramStm.setString(1, x.getNom());
+                if(x.getIdCapitaine() == -1)
+                    paramStm.setNull(2, java.sql.Types.INTEGER);
+                else
+                    paramStm.setInt(2, x.getIdCapitaine());
                 paramStm.setInt(3, x.getPoint());
                 paramStm.setInt(4, x.getIdEquipe());
                 
@@ -180,7 +188,7 @@ public class EquipeDAO extends DAO<Equipe>{
                 
                 if (nbLignesAffectees>0) {
                         paramStm.close();
-                        return true;
+                    return true;
                 }
                 
             return false;

@@ -4,8 +4,16 @@
     Author     : Joel
 --%>
 
+<%@page import="modele.CompteDAO"%>
+<%@page import="jdbc.Connexion"%>
+<%@page import="jdbc.Config"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:if test="${ !empty sessionScope.connecte}">
+<% CompteDAO dao = new CompteDAO(Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
+    pageContext.setAttribute("compteConnecte", dao.read(session.getAttribute("connecte").toString())); %>
+</c:if> 
+    
 <!DOCTYPE html>
 <!-- Layout -->
 <html>
@@ -47,7 +55,9 @@
             <c:choose>
                 <c:when test="${ !empty sessionScope.connecte }">
                     <li><a href="*.do?tache=afficherPageProfil">Page de profil</a></li>
-                    <li><a href="*.do?tache=afficherPageEquipe">Page d'équipe</a></li>
+                    <c:if test="${compteConnecte.idEquipe gt -1}">
+                    <li><a href="*.do?tache=afficherPageEquipe&idEquipe=${compteConnecte.idEquipe}">Page d'équipe</a></li>
+                   </c:if>
                 </c:when>
                 <c:otherwise>
                     <li style="background-color: #349737;"><a href='*.do?tache=afficherPageInscription' style="color: #fff;" ><span class="glyphicon glyphicon-education"></span> S'incrire</a></li>

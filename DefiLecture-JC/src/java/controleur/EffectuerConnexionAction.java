@@ -35,8 +35,6 @@ public class EffectuerConnexionAction implements Action, RequestAware, SessionAw
         
         System.out.println(identifiant);
         System.out.println(motPasse);
-        
-       // String pilote = "com.mysql.jdbc.Driver";
 
         Compte compte;
 
@@ -56,7 +54,7 @@ public class EffectuerConnexionAction implements Action, RequestAware, SessionAw
                 session = request.getSession(true);
                 session.setAttribute("connecte", compte.getIdCompte());
                 session.setAttribute("role", compte.getRole());
-                request.setAttribute("vue", "pageEquipe.jsp");
+                request.setAttribute("vue", "pageProfil.jsp");
             }
             else{
                 System.out.println("Pas trouvé de résultat dans base de donnée");
