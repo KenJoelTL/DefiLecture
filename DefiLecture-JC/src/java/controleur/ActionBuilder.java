@@ -50,8 +50,8 @@ public class ActionBuilder {
                     return new AfficherPageCreationDefiAction();
                 case "effectuerCreationDefi":
                     return new EffectuerCreationDefiAction();
-                case "afficherPageGestionDefi":
-                    return new AfficherPageGestionDefiAction();
+                case "afficherPageParticipationDefi":
+                    return new AfficherPageParticipationDefiAction();
                 case "afficherPageInscriptionDefi":
                     return new AfficherPageInscriptionDefiAction();
                 case "effectuerInscriptionDefi":
