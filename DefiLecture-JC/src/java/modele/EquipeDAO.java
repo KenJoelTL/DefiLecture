@@ -213,7 +213,7 @@ public class EquipeDAO extends DAO<Equipe>{
         List<Equipe> liste = new LinkedList<>();
         try {
             Statement stm = cnx.createStatement(); 
-            ResultSet r = stm.executeQuery("SELECT * FROM equipe ORDER BY POINT_EQUIPE DSC");
+            ResultSet r = stm.executeQuery("SELECT * FROM equipe ORDER BY POINT_EQUIPE DESC");
             while (r.next()) {
                 Equipe e = new Equipe();
                 e.setIdEquipe(r.getInt("ID_EQUIPE"));
@@ -328,8 +328,53 @@ public class EquipeDAO extends DAO<Equipe>{
         
         return null;
     }
+    /*
+    public int countNbMembre(int idEquipe){
     
-    
+        String req = "SELECT COUNT(ID_COMPTE) FROM `compte` WHERE ID_EQUIPE = ?";
+       
+        PreparedStatement paramStm = null;
+        try {
 
-    
+            paramStm = cnx.prepareStatement(req);
+
+            paramStm.setInt(1, idEquipe);
+
+            ResultSet resultat = paramStm.executeQuery();
+
+            // On vérifie s'il y a un résultat    
+            if(resultat.next()){
+
+        
+                resultat.getInt("ID_EQUIPE");
+                
+                resultat.close();
+                paramStm.close();
+                    return e;
+            }
+            
+            resultat.close();
+            paramStm.close();
+            return null;
+                
+        }
+        catch (SQLException exp) {
+        }
+        finally {
+            try{
+                if (paramStm!=null)
+                    paramStm.close();
+                if(cnx!=null)
+                    Connexion.close();
+            }
+            catch (SQLException exp) {
+            }
+             catch (Exception e) {
+            }
+        }         
+        
+        return 0;
+    }
+
+    */
 }

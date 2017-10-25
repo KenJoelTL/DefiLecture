@@ -56,7 +56,7 @@
           <td>${ empty compte.pseudonyme ? "---" : compte.pseudonyme}</td>
           <td>${compte.courriel}</td>
           <td>${role}</td>
-          <td><c:if test="${sessionScope.role gt compte.role}">
+          <td><c:if test="${ (sessionScope.connecte eq compte.idCompte ) or (sessionScope.role gt compte.role)}">
                 <a href="*.do?tache=afficherPageGestionConfigurationCompte&id=${compte.idCompte}">Modifier</a>
               </c:if>
           </td>
