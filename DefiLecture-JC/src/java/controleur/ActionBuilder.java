@@ -22,38 +22,51 @@ public class ActionBuilder {
                     return new AfficherPageEquipeAction();
                 case "afficherPageProfil":
                     return new AfficherPageProfilAction();
+       //Inscription
                 case "afficherPageInscription":
                     return new AfficherPageInscriptionAction(); 
                 case "effectuerInscription":
                     return new EffectuerInscriptionAction();  
+       //Connexion
                 case "afficherPageConnexion":
                     return new AfficherPageConnexionAction();    
                 case "effectuerConnexion":
                     return new EffectuerConnexionAction();
                 case "effectuerDeconnexion":
                     return new EffectuerDeconnexionAction();
-                case "afficherCreationLecture":
-                    return new AfficherCreationLectureAction();
+       //Lecture             
+                case "afficherPageCreationLecture":
+                    return new AfficherPageCreationLectureAction();
+                case "afficherPageGestionLecture":
+                    return new AfficherPageGestionLectureAction();
                 case "effectuerCreationLecture":
                     return new EffectuerCreationLectureAction();
-                case "afficherCreationDefi":
-                    return new AfficherCreationDefiAction();
+                case "afficherPageModificationLecture":
+                    return new AfficherPageModificationLectureAction();
+                case "effectuerModificationLecture":
+                    return new EffectuerModificationLectureAction();
+       //Defi
+                case "afficherPageCreationDefi":
+                    return new AfficherPageCreationDefiAction();
                 case "effectuerCreationDefi":
                     return new EffectuerCreationDefiAction();
+                case "afficherPageParticipationDefi":
+                    return new AfficherPageParticipationDefiAction();
+                case "afficherPageInscriptionDefi":
+                    return new AfficherPageInscriptionDefiAction();
+                case "effectuerInscriptionDefi":
+                    return new EffectuerInscriptionDefiAction();
+       //Compte        
                 case "afficherPageGestionListeCompte":
                     return new AfficherPageGestionListeComptesAction();
                 case "afficherPageGestionConfigurationCompte":
                     return new AfficherPageGestionConfigurationCompteAction();
                 case "effectuerModificationCompte":
                     return new EffectuerModificationCompteAction();
+      //Test Ajax
                 case "testAjax":
                     return new ExempleClasseActionAjax();
-
-                    /*
-                     
-                case "effectuerCreationLecture":
-                    return new EffectuerCreationLectureAction();                
-                */
+                
             }
         return new AfficherPageAccueilAction();
     }

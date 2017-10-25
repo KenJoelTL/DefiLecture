@@ -31,6 +31,7 @@ public class EffectuerCreationDefiAction implements Action, RequestAware, Sessio
     public String execute() {
         
         String  nom = request.getParameter("nom"),
+                description = request.getParameter("description"),
                 dateDebut = request.getParameter("dateDebut"),
                 dateFin = request.getParameter("dateFin"),
                 question = request.getParameter("question"),
@@ -38,9 +39,9 @@ public class EffectuerCreationDefiAction implements Action, RequestAware, Sessio
                 choix2 = request.getParameter("choix2"),
                 choix3 = request.getParameter("choix3"),
                 choix4 = request.getParameter("choix4"),
-                questionDB = question+";"+choix1+";"+choix2+";"+choix3+";"+choix4,
-                
+                choixReponse = choix1+";"+choix2+";"+choix3+";"+choix4,
                 reponse = request.getParameter("reponse");
+        
         int     idCompte = (int)session.getAttribute("connecte"),
                 point = Integer.parseInt(request.getParameter("point"));
 
@@ -50,18 +51,17 @@ public class EffectuerCreationDefiAction implements Action, RequestAware, Sessio
         
         try{
 
-            Class.forName(Config.DRIVER);
-            Connexion.setUrl(Config.URL);
-            Connexion.setUser(Config.DB_USER);
-            Connexion.setPassword(Config.DB_PWD);
-            Connection cnx = Connexion.getInstance();
+            Connexion.reinit();
+            Connection cnx = Connexion.startConnection(Config.DB_USER,Config.DB_PWD,Config.URL,Config.DRIVER);
             dao = new DefiDAO(cnx);
             defi = new Defi();
             defi.setIdCompte(idCompte);
             defi.setNom(nom);
+            defi.setDescription(description);
             defi.setDateDebut(dateDebut);
             defi.setDateFin(dateFin);
-            defi.setQuestion(questionDB);
+            defi.setQuestion(question);
+            defi.setChoixReponse(choixReponse);
             defi.setReponse(reponse);
             defi.setPoint(point);
             if(dao.create(defi))
@@ -69,12 +69,12 @@ public class EffectuerCreationDefiAction implements Action, RequestAware, Sessio
             else
                 System.out.println("Problème de création du défi");
 
-            return "*.do?tache=afficherCreationDefi";
+            return "*.do?tache=afficherPageParticipationDefi";
         }
         catch(ClassNotFoundException e){
             System.out.println("Erreur dans le chargement du pilote :"+ e);
 
-            return "*.do?tache=afficherCreationDefi";
+            return "*.do?tache=afficherPageCreationDefi";
         }
                 
         

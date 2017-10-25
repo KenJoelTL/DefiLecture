@@ -34,35 +34,31 @@ public class EffectuerCreationLectureAction implements Action, RequestAware, Ses
                 obligatoire = Integer.parseInt(request.getParameter("obligatoire")),
                 idCompte = (int)session.getAttribute("connecte");
         
-        String pilote = "com.mysql.jdbc.Driver";
         Lecture lecture;
         
         
         try{
 
-            Class.forName(pilote);
-            Connexion.setUrl(Config.URL);
-            Connexion.setUser(Config.DB_USER);
-            Connexion.setPassword(Config.DB_PWD);
-            Connection cnx = Connexion.getInstance();
+            Connexion.reinit();
+            Connection cnx = Connexion.startConnection(Config.DB_USER,Config.DB_PWD,Config.URL,Config.DRIVER);
             dao = new LectureDAO(cnx);
             lecture = new Lecture();
             lecture.setIdCompte(idCompte);
             lecture.setDureeMinutes(dureeMinutes);
             lecture.setTitre(titre);
-            lecture.setObligatoire(obligatoire);
+            lecture.setEstObligatoire(obligatoire);
             if(dao.create(lecture))
                 System.out.println("Une lecture a été créée avec succès");
             else
                 System.out.println("Problème de création de la lecture");
                 
             //request.setAttribute("vue", "accueil.jsp");
-            return "*.do?tache=afficherPageProfil";
+            return "*.do?tache=afficherPageGestionLecture";
         }
         catch(ClassNotFoundException e){
             System.out.println("Erreur dans le chargement du pilote :"+ e);
             //request.setAttribute("vue", "lecture.jsp");
-            return "*.do?tache=afficherPageProfil";
+            return "*.do?tache=afficherPageGestionLecture";
         }
         
         

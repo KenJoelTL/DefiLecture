@@ -30,8 +30,8 @@ public class DefiDAO extends DAO<Defi> {
     @Override
     public boolean create(Defi x) {
                
-        String req = "INSERT INTO defi (`ID_COMPTE` , `NOM_DEFI` , `DATE_DEBUT` , `DATE_FIN`, `QUESTION`, `REPONSE`, `POINT_DEFI`) VALUES "+
-			     "(?,?,?,?,?,?,?)";
+        String req = "INSERT INTO defi (`ID_COMPTE` , `NOM_DEFI` , `DESCRIPTION`, `DATE_DEBUT` , `DATE_FIN`, `QUESTION`, `CHOIX_REPONSE`, `REPONSE`, `POINT_DEFI`) VALUES "+
+			     "(?,?,?,?,?,?,?,?,?)";
 				 		 
 
         PreparedStatement paramStm = null;
@@ -43,11 +43,13 @@ public class DefiDAO extends DAO<Defi> {
                 
                 paramStm.setInt(1, x.getIdCompte());
                 paramStm.setString(2, x.getNom());
-                paramStm.setString(3, x.getDateDebut());
-		paramStm.setString(4, x.getDateFin());
-		paramStm.setString(5, x.getQuestion());
-		paramStm.setString(6, x.getReponse());
-                paramStm.setInt(7, x.getPoint());
+                paramStm.setString(3, x.getDescription());
+                paramStm.setString(4, x.getDateDebut());
+		paramStm.setString(5, x.getDateFin());
+		paramStm.setString(6, x.getQuestion());
+                paramStm.setString(7, x.getChoixReponse());
+		paramStm.setString(8, x.getReponse());
+                paramStm.setInt(9, x.getPoint());
 
                 int n= paramStm.executeUpdate();
                 
@@ -91,10 +93,12 @@ public class DefiDAO extends DAO<Defi> {
 
                     d.setIdDefi(resultat.getInt("ID_DEFI"));
                     d.setIdCompte(resultat.getInt("ID_COMPTE"));
-                    d.setNom(resultat.getString("NOM"));
+                    d.setNom(resultat.getString("NOM_DEFI"));
+                    d.setDescription(resultat.getString("DESCRIPTION"));
                     d.setDateDebut(resultat.getString("DATE_DEBUT"));
                     d.setDateFin(resultat.getString("DATE_FIN"));
                     d.setQuestion(resultat.getString("QUESTION"));
+                    d.setChoixReponse(resultat.getString("CHOIX_REPONSE"));
                     d.setReponse(resultat.getString("REPONSE"));
                     d.setPoint(resultat.getInt("POINT_DEFI"));
 
@@ -181,7 +185,7 @@ public class DefiDAO extends DAO<Defi> {
     public List<Defi> findAll() {
         
         String req = "SELECT * FROM defi";
-		List<Defi> listeDefi = new ArrayList<Defi>();
+        List<Defi> listeDefi = new ArrayList<Defi>();
         
         Statement stm = null;
         try {
@@ -197,10 +201,12 @@ public class DefiDAO extends DAO<Defi> {
 
                     d.setIdDefi(resultat.getInt("ID_DEFI"));
                     d.setIdCompte(resultat.getInt("ID_COMPTE"));
-                    d.setNom(resultat.getString("NOM"));
+                    d.setNom(resultat.getString("NOM_DEFI"));
+                    d.setDescription(resultat.getString("DESCRIPTION"));
                     d.setDateDebut(resultat.getString("DATE_DEBUT"));
                     d.setDateFin(resultat.getString("DATE_FIN"));
                     d.setQuestion(resultat.getString("QUESTION"));
+                    d.setChoixReponse(resultat.getString("CHOIX_REPONSE"));
                     d.setReponse(resultat.getString("REPONSE"));
                     d.setPoint(resultat.getInt("POINT_DEFI"));
                     

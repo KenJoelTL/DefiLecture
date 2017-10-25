@@ -15,9 +15,11 @@ public class Defi {
                 idCompte,
                 point;
     private String nom,
+                   description,
                    dateDebut,
                    dateFin,
                    question,
+                   choixReponse,
                    reponse;
     public Defi(){
     
@@ -55,6 +57,16 @@ public class Defi {
         this.nom = nom;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
+    
+
     public String getDateDebut() {
         return dateDebut;
     }
@@ -78,6 +90,16 @@ public class Defi {
     public void setQuestion(String question) {
         this.question = question;
     }
+
+    public String getChoixReponse() {
+        return choixReponse;
+    }
+
+    public void setChoixReponse(String choixReponse) {
+        this.choixReponse = choixReponse;
+    }
+    
+    
 
     public String getReponse() {
         return reponse;
