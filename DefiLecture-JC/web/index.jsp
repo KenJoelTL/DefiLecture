@@ -76,7 +76,7 @@
                         <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                           <li><a href="*.do?tache=afficherPageCreationDefi">Créer un défi</a></li>
-                          <li><a href="#">Voir les défis</a></li>
+                          <li><a href="*.do?tache=afficherPageGestionDefi">Voir les défis</a></li>
                         </ul>
                     </li>
                     

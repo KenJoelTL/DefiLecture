@@ -93,7 +93,7 @@ public class DefiDAO extends DAO<Defi> {
 
                     d.setIdDefi(resultat.getInt("ID_DEFI"));
                     d.setIdCompte(resultat.getInt("ID_COMPTE"));
-                    d.setNom(resultat.getString("NOM"));
+                    d.setNom(resultat.getString("NOM_DEFI"));
                     d.setDescription(resultat.getString("DESCRIPTION"));
                     d.setDateDebut(resultat.getString("DATE_DEBUT"));
                     d.setDateFin(resultat.getString("DATE_FIN"));
@@ -185,7 +185,7 @@ public class DefiDAO extends DAO<Defi> {
     public List<Defi> findAll() {
         
         String req = "SELECT * FROM defi";
-		List<Defi> listeDefi = new ArrayList<Defi>();
+        List<Defi> listeDefi = new ArrayList<Defi>();
         
         Statement stm = null;
         try {
@@ -201,7 +201,7 @@ public class DefiDAO extends DAO<Defi> {
 
                     d.setIdDefi(resultat.getInt("ID_DEFI"));
                     d.setIdCompte(resultat.getInt("ID_COMPTE"));
-                    d.setNom(resultat.getString("NOM"));
+                    d.setNom(resultat.getString("NOM_DEFI"));
                     d.setDescription(resultat.getString("DESCRIPTION"));
                     d.setDateDebut(resultat.getString("DATE_DEBUT"));
                     d.setDateFin(resultat.getString("DATE_FIN"));

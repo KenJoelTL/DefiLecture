@@ -50,6 +50,12 @@ public class ActionBuilder {
                     return new AfficherPageCreationDefiAction();
                 case "effectuerCreationDefi":
                     return new EffectuerCreationDefiAction();
+                case "afficherPageGestionDefi":
+                    return new AfficherPageGestionDefiAction();
+                case "afficherPageInscriptionDefi":
+                    return new AfficherPageInscriptionDefiAction();
+                case "effectuerInscriptionDefi":
+                    return new EffectuerInscriptionDefiAction();
        //Compte        
                 case "afficherPageGestionListeCompte":
                     return new AfficherPageGestionListeComptesAction();
