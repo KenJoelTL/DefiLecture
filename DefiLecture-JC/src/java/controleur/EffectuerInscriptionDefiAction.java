@@ -6,6 +6,7 @@
 package controleur;
 
 import java.sql.Connection;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
@@ -49,8 +50,19 @@ public class EffectuerInscriptionDefiAction implements Action, RequestAware, Req
                     return "*.do?tache=afficherPageGestionDefi";
                 else{
                     
+                    //Si le participant a déjà fait le défi, on ne crée pas une nouvelle inscription_defi
                     cnx = Connexion.startConnection(Config.DB_USER,Config.DB_PWD,Config.URL,Config.DRIVER);
                     InscriptionDefiDAO daoInscriptionDefi = new InscriptionDefiDAO(cnx);
+                    List<InscriptionDefi> listeInscriptionDefi = daoInscriptionDefi.findAllByIdCompte(idCompte);
+                    for(InscriptionDefi i : listeInscriptionDefi){
+                        if(i.getIdDefi() == idDefi)
+                            return "*.do?tache=afficherPageGestionDefi";
+                    }
+                
+                
+                    
+                    cnx = Connexion.startConnection(Config.DB_USER,Config.DB_PWD,Config.URL,Config.DRIVER);
+                    daoInscriptionDefi = new InscriptionDefiDAO(cnx);
                     
                     inscriptionDefi.setIdCompte(idCompte);
                     inscriptionDefi.setIdDefi(idDefi);

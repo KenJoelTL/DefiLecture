@@ -57,19 +57,21 @@
               <td>+ ${d.point} minutes</td>
               <td>${d.dateDebut} </td>
               <td>${d.dateFin}</td>
-              <td>
+              
                       <c:choose>
                           <c:when test="${listeReussi.contains(d.idDefi.toString())}">
-                              REUSSI
+                          <td class="bg-success">REUSSI</td>
+                              
                           </c:when>
                           <c:when test="${listeEchoue.contains(d.idDefi.toString())}">
-                             ECHOUE
+                             <td class="bg-danger">ECHOUE</td>
                           </c:when>
                              <c:otherwise>
-                                 <a href="*.do?tache=afficherPageInscriptionDefi&id=${d.idDefi}">Relever le défi</a>
+                                 <td> <a class="btn btn-info" role="button" href="*.do?tache=afficherPageInscriptionDefi&id=${d.idDefi}">Relever le défi</a></td>
+
                              </c:otherwise>
                       </c:choose>
-              </td>
+              </td
             </tr>
         </c:forEach>
 

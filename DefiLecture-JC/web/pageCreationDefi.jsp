@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
         <h1>Creation d'un defi</h1>
-        <div class="col-sm-4">
+        <div class="col-lg-4 col-sm-10">
         <form action="*.do" method="post">
             <div class="form-group">
                 <label for="nom">Nom du défi* : </label>
