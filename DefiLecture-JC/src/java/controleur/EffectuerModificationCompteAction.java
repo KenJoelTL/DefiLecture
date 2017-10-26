@@ -19,7 +19,7 @@ import modele.CompteDAO;
  *
  * @author Joel
  */
-public class EffectuerModificationCompteAction implements Action, RequestAware/*, RequirePRGAction*/{
+public class EffectuerModificationCompteAction implements Action, RequestAware, RequirePRGAction{
     private HttpServletResponse response;
     private HttpServletRequest request;
 
@@ -44,7 +44,7 @@ public class EffectuerModificationCompteAction implements Action, RequestAware/*
                 CompteDAO dao = new CompteDAO(cnx);
                 Compte compte = dao.read(idCompte);
                 if(compte == null)
-                    request.setAttribute("vue", "gestionListeComptes.jsp");
+                    return"*.do?tache=afficherPageGestionListeCompte";
                 else{
                     cnx = Connexion.startConnection(Config.DB_USER,Config.DB_PWD,Config.URL,Config.DRIVER);
                     dao.setCnx(cnx);
@@ -99,25 +99,26 @@ public class EffectuerModificationCompteAction implements Action, RequestAware/*
                         compte.setProgrammeEtude(programmeEtude);
                     
                     if(!dao.update(compte)){
-        //                request.setAttribute("vue", "gestionConfigurationCompte.jsp"); //mettre un message d'erreur
-                        request.setAttribute("vue", "accueil.jsp");
-               //         return "*.do?tache=afficherCreationDefi";
+                        request.setAttribute("message", "Problèmes dans l'enregistrement des informations"); //mettre un message d'erreur
+                        return"*.do?tache=afficherPageGestionConfigurationCompte&id="+compte.getIdCompte();
                     }
                     else{
                     //il faut avertir que les changements ont étés faits
-                        request.setAttribute("vue", "gestionListeComptes.jsp"); //faire PRG
+                        return"*.do?tache=afficherPageGestionListeCompte";
         //                request.setAttribute("vue", "gestionConfigurationCompte.jsp");
                     }
                 }            
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(EffectuerModificationCompteAction.class.getName()).log(Level.SEVERE, null, ex);
-                request.setAttribute("vue", "gestionConfigurationCompte.jsp");
+                //request.setAttribute("vue", "gestionConfigurationCompte.jsp");
+                request.setAttribute("message", "Problèmes dans l'enregistrement des informations"); //mettre un message d'erreur
+                return"*.do?tache=afficherPageGestionConfigurationCompte&id="+request.getParameter("idCompte");
             }
         }
         else
-            request.setAttribute("vue", "gestionListeComptes.jsp");
+            return"*.do?tache=afficherPageGestionListeCompte";
         
-        return("/index.jsp");
+//        return("/index.jsp");
     }
 
     @Override

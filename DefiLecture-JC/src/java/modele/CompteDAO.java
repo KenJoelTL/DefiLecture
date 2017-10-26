@@ -162,28 +162,33 @@ public class CompteDAO extends DAO<Compte>{
 
         PreparedStatement paramStm = null;
         try {
-                paramStm = cnx.prepareStatement(req);
+            paramStm = cnx.prepareStatement(req);
 
+            if(x.getCourriel()     != null && !"".equals(x.getCourriel().trim()) 
+                && x.getMotPasse() != null && !"".equals(x.getMotPasse().trim())
+                && x.getNom()      != null && !"".equals(x.getNom().trim())     
+                && x.getPrenom()   != null && !"".equals(x.getPrenom().trim()))
+            {
                 paramStm.setString(1, x.getCourriel());
                 paramStm.setString(2, x.getMotPasse());
                 paramStm.setString(3, x.getNom());
                 paramStm.setString(4, x.getPrenom());
-                
+
                 if(x.getPseudonyme() == null || "".equals(x.getPseudonyme().trim()))
                     paramStm.setString(5, null);
                 else
                     paramStm.setString(5, x.getPseudonyme());
-                
+
                 if(x.getAvatar() == null || "".equals(x.getAvatar().trim()))
                     paramStm.setString(6, null);
                 else
                     paramStm.setString(6, x.getAvatar());
-                
+
                 if(x.getProgrammeEtude() == null || "".equals(x.getProgrammeEtude().trim()))
                     paramStm.setString(7, null);
                 else
                     paramStm.setString(7, x.getProgrammeEtude());
-                
+
                 if(x.getIdEquipe() == -1){
                     paramStm.setNull(8, java.sql.Types.INTEGER);
                 }
@@ -195,15 +200,15 @@ public class CompteDAO extends DAO<Compte>{
 
                 paramStm.setInt(12, x.getIdCompte());
 
-                
+
                 int nbLignesAffectees= paramStm.executeUpdate();
-                
+
                 if (nbLignesAffectees>0) {
-                        paramStm.close();
-                        return true;
+                    paramStm.close();
+                    return true;
                 }
-                                
-            return false;
+            }                
+        return false;
         }
         catch (SQLException exp) {
             System.out.println(exp.getMessage());

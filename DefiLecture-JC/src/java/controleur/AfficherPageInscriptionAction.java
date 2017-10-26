@@ -19,7 +19,7 @@ public class AfficherPageInscriptionAction implements Action, RequestAware {
 
     @Override
     public String execute() {
-        request.setAttribute("vue", "inscription.jsp");
+        request.setAttribute("vue", "pageInscription.jsp");
         
         return "/index.jsp";
     }

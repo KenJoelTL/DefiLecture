@@ -37,7 +37,7 @@ public class AfficherPageGestionListeComptesAction implements Action, RequestAwa
             
             if(session.getAttribute("connecte")!=null &&
                     dao.read((int)session.getAttribute("connecte")).getRole()==4)   //si le compte connecté est Admin
-                request.setAttribute("vue", "gestionListeComptes.jsp");
+                request.setAttribute("vue", "pageGestionListeCompte.jsp");
             else
                 request.setAttribute("vue", "accueil.jsp");
             

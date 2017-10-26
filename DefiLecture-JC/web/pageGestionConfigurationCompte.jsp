@@ -27,7 +27,7 @@ $(document).ready(
     
     <body>
         <h1>Page de configuration</h1>
-        
+        <span>${requestScope.message}</span>
         <form action="modification.do" method="post" >
             <div>
                 Prenom* : <input type="text" id=prenom name="prenom" value="${compte.prenom}" required/>
@@ -35,11 +35,11 @@ $(document).ready(
                 Nom* : <input type="text" name="nom" value="${compte.nom}" required/>
             </div>
             <div>
-                Programme d'&eacute;tude : <input type="text" name="programmeEtude" value="${ empty compte.programmeEtude ? "": c.programmeEtude }" />
+                Programme d'&eacute;tude : <input type="text" name="programmeEtude" value="${compte.programmeEtude}" />
                 Courriel* : <input type="email" name="courriel" value="${compte.courriel}" required/>
             </div>
             <div>    
-                Pseudonyme : <input type="text" name="pseudonyme" value="${ empty compte.pseudonyme ? "" : c.pseudonyme }" />
+                Pseudonyme : <input type="text" name="pseudonyme" value="${compte.pseudonyme}" />
             </div>
             <div>R&ocirc;le du compte :
                 <c:set var="selected" value=" selected=\"selected\"" />
