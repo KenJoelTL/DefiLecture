@@ -28,8 +28,7 @@ public class EquipeDAO extends DAO<Equipe>{
 
     @Override
     public boolean create(Equipe x) {
-        String req = "INSERT INTO equipe (`NOM_EQUIPE` , `ID_CAPITAINE`) "
-                    + "VALUES (?,?)";
+        String req = "INSERT INTO equipe (`NOM_EQUIPE`) VALUES (?)";
 
         PreparedStatement paramStm = null;
         try {
@@ -38,7 +37,7 @@ public class EquipeDAO extends DAO<Equipe>{
 
                 
                 paramStm.setString(1, x.getNom());
-                paramStm.setInt(2, x.getIdCapitaine());
+//                paramStm.setInt(2, x.getIdCapitaine());
                 
                 int nbLignesAffectees= paramStm.executeUpdate();
                 
