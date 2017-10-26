@@ -65,9 +65,22 @@
             <c:choose>
                 <c:when test="${ !empty sessionScope.connecte }">
                     <li><a href="*.do?tache=afficherPageProfil">Page de profil</a></li>
-                    <c:if test="${compteConnecte.idEquipe gt -1}">
-                    <li><a href="*.do?tache=afficherPageEquipe&idEquipe=${compteConnecte.idEquipe}">Page d'&eacutequipe</a></li>
-                   </c:if>
+                    <c:choose>
+                        <c:when test="${ (sessionScope.role eq 2) or (sessionScope.role eq 4) }">
+                            <c:choose>
+                                <c:when test="${compteConnecte.idEquipe gt -1}">
+                                    <li><a href="affichagePageEquipe.do?tache=afficherPageEquipe&idEquipe=${compteConnecte.idEquipe}">Page d'&eacutequipe</a></li>                        
+                                </c:when>
+                                <c:otherwise>
+                                    <li><a href="creationEquipe.do?tache=afficherPageCreationEquipe">C&eacute;er une equipe</a></li>                                              
+                                </c:otherwise>
+                            </c:choose>
+                        </c:when>
+                        <c:when test="${compteConnecte.idEquipe gt -1}">
+                            <li><a href="*.do?tache=afficherPageEquipe&idEquipe=${compteConnecte.idEquipe}">Page d'&eacutequipe</a></li>
+                        </c:when>
+                    
+                    </c:choose>
                 </c:when>
                 <c:otherwise>
                     <li style="background-color: #349737;"><a href='*.do?tache=afficherPageInscription' style="color: #fff;" ><span class="glyphicon glyphicon-education"></span> S'incrire</a></li>
