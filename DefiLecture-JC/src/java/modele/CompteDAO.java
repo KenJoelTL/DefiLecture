@@ -225,6 +225,11 @@ public class CompteDAO extends DAO<Compte>{
         }
         return false;
     }
+    /*
+    public boolean updateEquipe(){
+    
+    }*/
+    
 
     @Override
     public boolean delete(Compte x) {

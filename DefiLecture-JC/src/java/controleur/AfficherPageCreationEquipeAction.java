@@ -19,7 +19,7 @@ import modele.CompteDAO;
  *
  * @author Joel
  */
-public class AfficherPageCreationEquipeAction implements Action,RequestAware, SessionAware, RequirePRGAction{
+public class AfficherPageCreationEquipeAction implements Action,RequestAware, SessionAware{
     private HttpServletResponse response;
     private HttpServletRequest request;
     private HttpSession session;        
@@ -28,7 +28,7 @@ public class AfficherPageCreationEquipeAction implements Action,RequestAware, Se
     public String execute() {
         if((int)session.getAttribute("role")==2 || (int)session.getAttribute("role")==4){
 
-            int idCompte = (int)session.getAttribute("id");
+            int idCompte = (int)session.getAttribute("connecte");
             try {
                 CompteDAO dao = new CompteDAO(Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
                 Compte compte = dao.read(idCompte);

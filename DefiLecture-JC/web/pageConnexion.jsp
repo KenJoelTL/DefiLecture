@@ -3,7 +3,7 @@
     Created on : 2017-10-15
     Author     : Joel
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,14 +14,14 @@
     <body>
         <h1>Connexion</h1>
         
-        <%if(session.getAttribute("connecte") != null){%>
+        
+        <c:if test="${ !empty sessionScope.connecte }">
         <p>
             Bonjour <%=session.getAttribute("connecte")%>
         </p>
-        <%}
-        %>
+        </c:if>
         
-        <form action="*.do" method="post">
+        <form action="connexion.do" method="post">
             Identifiant : <input type="text" name="identifiant" />
             Mot de passe : <input type="password" name="motPasse" />
             <input type="hidden" name="tache" value="effectuerConnexion">

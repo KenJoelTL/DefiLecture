@@ -22,7 +22,7 @@ public class AfficherPageConnexionAction implements Action, RequestAware{
         
         System.out.println("affichage de la page de connexion");
         
-        request.setAttribute("vue", "connexion.jsp");
+        request.setAttribute("vue", "pageConnexion.jsp");
         
         return "/index.jsp";
     }

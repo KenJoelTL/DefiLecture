@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import jdbc.Config;
 import jdbc.Connexion;
+import modele.Compte;
+import modele.CompteDAO;
 import modele.Equipe;
 import modele.EquipeDAO;
 
@@ -27,7 +29,8 @@ public class EffectuerCreationEquipeAction implements Action, RequestAware, Sess
     
     @Override
     public String execute() {
-        if((int)session.getAttribute("role")==2 || (int)session.getAttribute("role")==4){
+        if(session.getAttribute("connecte") != null){
+         if((int)session.getAttribute("role")==2 || (int)session.getAttribute("role")==4){
             String nom = request.getParameter("nom");
             if(nom != null){
                 Equipe equipe = new Equipe();
@@ -40,18 +43,27 @@ public class EffectuerCreationEquipeAction implements Action, RequestAware, Sess
                         /*Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
                         equipe = dao.find()*/
                         //return"profilEquipe.do?tache=afficherPageEquipe&idEquipe="+equipe.getIdEquipe(); //envoyer sur la page de l'équipe.
-                        return"creationEquipeCompletee.do"; //soit afficher le page avec utilisateur pour pouvoir enoyer une demande
-
+                        dao.setCnx(Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
+                        equipe = dao.findByNom(equipe.getNom());
+                        
+                        CompteDAO daoCompte = new CompteDAO(Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
+                        Compte compte = daoCompte.read((int)session.getAttribute("connecte"));
+                        compte.setIdEquipe(equipe.getIdEquipe());
+                        daoCompte = new CompteDAO(Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
+                        if(daoCompte.update(compte))
+                            return"creationEquipeCompletee.do?tache=afficherPageEquipe&idEquipe="+equipe.getIdEquipe(); //soit afficher le page avec utilisateur pour pouvoir enoyer une demande
                     }
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(AfficherPageCreationEquipeAction.class.getName()).log(Level.SEVERE, null, ex);
-                    //return"creation.do?tache=afficherPageCreationEquipe";
                     return"creation.do?tache=afficherPageCreationEquipe";
 
                 }
             }
+         }
+            return"creation.do?tache=afficherPageCreationEquipe";
         }
-        return"creation.do?tache=afficherPageCreationEquipe";
+        return"connexion.do?tache=afficherPageConnexion";
+
     }
 
     @Override
