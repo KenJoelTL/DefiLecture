@@ -76,7 +76,9 @@ public class EffectuerCreationDefiAction implements Action, RequestAware, Sessio
 
             return "*.do?tache=afficherPageCreationDefi";
         }
-                
+        finally{
+           Connexion.close();
+        }               
         
     }
 

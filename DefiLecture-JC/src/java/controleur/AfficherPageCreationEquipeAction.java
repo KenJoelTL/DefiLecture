@@ -39,6 +39,9 @@ public class AfficherPageCreationEquipeAction implements Action,RequestAware, Se
                 Logger.getLogger(AfficherPageCreationEquipeAction.class.getName()).log(Level.SEVERE, null, ex);
                  request.setAttribute("vue","accueil.jsp");
             }
+            finally{
+                Connexion.close();
+            }
         }
         return"/index.jsp";
     }

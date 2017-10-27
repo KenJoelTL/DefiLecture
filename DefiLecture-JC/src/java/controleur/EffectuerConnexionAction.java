@@ -58,13 +58,13 @@ public class EffectuerConnexionAction implements Action, RequestAware, SessionAw
             }
             else{
                 System.out.println("Pas trouvé de résultat dans base de donnée");
-                request.setAttribute("vue", "connexion.jsp");
+                request.setAttribute("vue", "pageConnexion.jsp");
             }
             return "/index.jsp";           
         }
         catch(ClassNotFoundException e){ 
             System.out.println("Erreur dans le chargement du pilote :"+ e);
-            request.setAttribute("vue", "connexion.jsp");
+            request.setAttribute("vue", "pageConnexion.jsp");
             return "/index.jsp";
         }
         finally{

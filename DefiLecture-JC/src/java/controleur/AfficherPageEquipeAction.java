@@ -35,7 +35,6 @@ public class AfficherPageEquipeAction implements Action, RequestAware {
                 Connection cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
                 EquipeDAO dao = new EquipeDAO(cnx);
                 if(dao.read(idEquipe) == null){
-                    System.out.println("\nCOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOCOUCOCCOCOCO");
                     request.setAttribute("vue", "accueil.jsp");
                 }
                 else{
