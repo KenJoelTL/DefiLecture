@@ -11,6 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import jdbc.Config;
 import jdbc.Connexion;
+import modele.Compte;
+import modele.CompteDAO;
+import modele.DemandeEquipe;
+import modele.DemandeEquipeDAO;
 import modele.Lecture;
 import modele.LectureDAO;
 
@@ -22,7 +26,6 @@ public class EffectuerCreationLectureAction implements Action, RequestAware, Ses
     private HttpSession session;
     private HttpServletRequest request;
     private HttpServletResponse response;
-    private LectureDAO dao;
     
     @Override
     public String execute() {
@@ -41,14 +44,40 @@ public class EffectuerCreationLectureAction implements Action, RequestAware, Ses
 
             Connexion.reinit();
             Connection cnx = Connexion.startConnection(Config.DB_USER,Config.DB_PWD,Config.URL,Config.DRIVER);
+            LectureDAO dao;
             dao = new LectureDAO(cnx);
             lecture = new Lecture();
             lecture.setIdCompte(idCompte);
             lecture.setDureeMinutes(dureeMinutes);
             lecture.setTitre(titre);
             lecture.setEstObligatoire(obligatoire);
-            if(dao.create(lecture))
+            if(dao.create(lecture)){
+                
+                //Mise à jour des points du participant
+                //Conversion du nombre de minutes de la lecture en points pour le Participant : 15mins = 1 point
+                CompteDAO daoCompte = new CompteDAO(cnx);
+                Compte compte = new Compte();
+                compte = daoCompte.read(idCompte);
+                int pointLecture = (dureeMinutes + compte.getMinutesRestantes()) / 15;
+                int pointCompte = compte.getPoint() + pointLecture;
+                //Les minutes restantes sont gardées en mémoire ici
+                int minutesRestantes = (dureeMinutes + compte.getMinutesRestantes()) % 15;
+                compte.setPoint(pointCompte);
+                compte.setMinutesRestantes(minutesRestantes);
+                daoCompte.update(compte);
+                //Mise à jour des points dans demande_equipe (pour calculer le total des points de l'équipe)
+                if(compte.getIdEquipe() > 0){
+                    DemandeEquipeDAO demandeDAO = new DemandeEquipeDAO(cnx);
+                    DemandeEquipe demande = new DemandeEquipe();
+                    demande = demandeDAO.findByIdCompteEquipe(idCompte, compte.getIdEquipe()).get(0);
+                    int pointDemandeEquipe = demande.getPoint() + pointLecture;
+                    demande.setPoint(pointDemandeEquipe);
+                    demandeDAO.update(demande);
+                }
+
                 System.out.println("Une lecture a été créée avec succès");
+            }
+                
             else
                 System.out.println("Problème de création de la lecture");
                 
