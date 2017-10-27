@@ -76,9 +76,16 @@
                                 </c:otherwise>
                             </c:choose>
                         </c:when>
-                        <c:when test="${compteConnecte.idEquipe gt -1}">
-                            <li><a href="*.do?tache=afficherPageEquipe&idEquipe=${compteConnecte.idEquipe}">Page d'&eacutequipe</a></li>
-                        </c:when>
+                        <c:otherwise>
+                            <c:choose>
+                                <c:when test="${compteConnecte.idEquipe gt -1}">
+                                    <li><a href="affichagePageEquipe.do?tache=afficherPageEquipe&idEquipe=${compteConnecte.idEquipe}">Page d'&eacutequipe</a></li>                        
+                                </c:when>
+                                <c:otherwise>
+                                    <li><a href="joindreEquipe.do?tache=afficherPageAccueuil">Joindre une &eacute;quipe</a></li>                                              
+                                </c:otherwise>
+                            </c:choose>
+                        </c:otherwise>
                     
                     </c:choose>
                 </c:when>
