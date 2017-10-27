@@ -12,9 +12,8 @@ package modele;
 public class Equipe {
     
     int idEquipe, //clé primaire
-        idCapitaine,
         point,
-        nbMembre;
+        nbMembres;
     
     String nom;
     
@@ -27,22 +26,14 @@ public class Equipe {
     public Equipe(int idEquipe, String nom) {
         this.idEquipe = idEquipe;
         this.nom = nom;
-    }
-
-    public Equipe(int idEquipe, int idCapitaine, String nom) {
-        this.idEquipe = idEquipe;
-        this.idCapitaine = idCapitaine;
-        this.nom = nom;
+        this.nbMembres = 0;
         this.point = 0;
     }
     
-    
-
+    // Getters et Setters
     public int getIdEquipe() {
         return idEquipe;
     }
-
-    // Getters et Setters
     
     public void setIdEquipe(int idEquipe) {
         this.idEquipe = idEquipe;
@@ -56,14 +47,6 @@ public class Equipe {
         this.nom = nom;
     }
 
-    public int getIdCapitaine() {
-        return idCapitaine;
-    }
-
-    public void setIdCapitaine(int idCapitaine) {
-        this.idCapitaine = idCapitaine;
-    }
-
     public int getPoint() {
         return point;
     }
@@ -72,12 +55,12 @@ public class Equipe {
         this.point = point;
     }
 
-    public int getNbMembre() {
-        return nbMembre;
+    public int getNbMembres() {
+        return nbMembres;
     }
 
-    public void setNbMembre(int nbMembre) {
-        this.nbMembre = nbMembre;
+    public void setNbMembres(int nbMembres) {
+        this.nbMembres = nbMembres;
     }
     
      

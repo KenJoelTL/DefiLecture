@@ -18,8 +18,6 @@ public class ActionBuilder {
                 
                 case "afficherPageAccueil":
                     return new AfficherPageAccueilAction();
-                case "afficherPageEquipe":
-                    return new AfficherPageEquipeAction();
                 case "afficherPageProfil":
                     return new AfficherPageProfilAction();
        //Inscription
@@ -63,6 +61,13 @@ public class ActionBuilder {
                     return new AfficherPageGestionConfigurationCompteAction();
                 case "effectuerModificationCompte":
                     return new EffectuerModificationCompteAction();
+       //Equipe
+                case "afficherPageEquipe":
+                    return new AfficherPageEquipeAction();
+                case "afficherPageCreationEquipe":
+                    return new AfficherPageCreationEquipeAction();
+                case "effectuerCreationEquipe":
+                    return new EffectuerCreationEquipeAction();
       //Test Ajax
                 case "testAjax":
                     return new ExempleClasseActionAjax();

@@ -53,7 +53,7 @@ public class EffectuerInscriptionAction implements Action, RequestAware, Session
             
             if(dao.create(compte)){
                 System.out.println("Un compte a été créé avec succès");
-                request.setAttribute("vue", "connexion.jsp");
+                request.setAttribute("vue", "pageConnexion.jsp");
             }
             else{
                 System.out.println("Problème de création de la compte");

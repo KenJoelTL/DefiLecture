@@ -40,14 +40,14 @@ public class AfficherPageGestionConfigurationCompteAction implements Action, Req
                 CompteDAO dao = new CompteDAO(cnx);
 
                 if(dao.read(idCompte)==null)
-                    request.setAttribute("vue", "gestionListeComptes.jsp");
+                    request.setAttribute("vue", "pageGestionListeCompte.jsp");
                 else{    
-                    request.setAttribute("vue", "gestionConfigurationCompte.jsp");
+                    request.setAttribute("vue", "pageGestionConfigurationCompte.jsp");
                 }
             } 
             catch (ClassNotFoundException ex) {
                 Logger.getLogger(AfficherPageGestionConfigurationCompteAction.class.getName()).log(Level.SEVERE, null, ex);
-                request.setAttribute("vue", "gestionListeComptes.jsp");
+                request.setAttribute("vue", "pageGestionListeCompte.jsp");
                 return "/index.jsp";
             }
             
