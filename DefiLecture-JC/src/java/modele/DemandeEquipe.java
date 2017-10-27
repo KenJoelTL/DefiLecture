@@ -13,7 +13,8 @@ public class DemandeEquipe {
     int idDemandeEquipe,
         idCompte,
         idEquipe,
-        statut;
+        statut,
+        point;
 
     public int getIdDemandeEquipe() {
         return idDemandeEquipe;
@@ -45,6 +46,14 @@ public class DemandeEquipe {
 
     public void setStatut(int statut) {
         this.statut = statut;
+    }
+
+    public int getPoint() {
+        return point;
+    }
+
+    public void setPoint(int point) {
+        this.point = point;
     }
     
     

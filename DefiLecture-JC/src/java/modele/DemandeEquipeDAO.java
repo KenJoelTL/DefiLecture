@@ -29,7 +29,7 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
     @Override
     public boolean create(DemandeEquipe x) {
         String req = "INSERT INTO demande_equipe (`ID_DEMANDE_EQUIPE`, `ID_COMPTE,` "
-                   + "`ID_EQUIPE`, `STATUS`) + VALUES (?,?,?,?)";
+                   + "`ID_EQUIPE`, `STATUS`, `POINT`) + VALUES (?,?,?,?,?)";
 
         PreparedStatement paramStm = null;
         try {
@@ -40,6 +40,7 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
                 paramStm.setInt(2, x.getIdCompte());
                 paramStm.setInt(3, x.getIdEquipe());
                 paramStm.setInt(4, x.getStatut());
+                paramStm.setInt(5, x.getPoint());
                 
                 int nbLignesAffectees= paramStm.executeUpdate();
                 
@@ -86,6 +87,7 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
                 de.setIdCompte(resultat.getInt("ID_COMPTE"));
                 de.setIdEquipe(resultat.getInt("ID_EQUIPE"));
                 de.setStatut(resultat.getInt("STATUT"));
+                de.setPoint(resultat.getInt("POINT"));
 
                 resultat.close();
                 paramStm.close();
@@ -127,8 +129,8 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
 
     @Override
     public boolean update(DemandeEquipe x) {
-        String req = "UPDATE demande_equipe SET (`ID_EQUIPE` , `ID_COMPTE` , "
-                   + "`POINT_EQUIPE`) VALUES (?,?,?) WHERE `ID_DEMANDE_EQUIPE = ?`";
+        String req = "UPDATE demande_equipe SET `ID_EQUIPE` = ? , `ID_COMPTE` = ? , "
+                   + "`POINT` = ? , `STATUS`= ? WHERE `ID_DEMANDE_EQUIPE = ?`";
 
         PreparedStatement paramStm = null;
         try {
@@ -137,8 +139,9 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
 
             paramStm.setInt(1, x.getIdEquipe());
             paramStm.setInt(2, x.getIdCompte());
-            paramStm.setInt(3, x.getStatut());
-            paramStm.setInt(4, x.getIdDemandeEquipe());
+            paramStm.setInt(3, x.getPoint());
+            paramStm.setInt(4, x.getStatut());
+            paramStm.setInt(5, x.getIdDemandeEquipe());
 
             int nbLignesAffectees= paramStm.executeUpdate();
 
@@ -212,6 +215,7 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
                 de.setIdCompte(resultat.getInt("ID_COMPTE"));
                 de.setIdEquipe(resultat.getInt("ID_EQUIPE"));
                 de.setStatut(resultat.getInt("STATUT"));
+                de.setPoint(resultat.getInt("POINT"));
                 liste.add(de);
             }
             
@@ -244,6 +248,7 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
                 de.setIdCompte(resultat.getInt("ID_COMPTE"));
                 de.setIdEquipe(resultat.getInt("ID_EQUIPE"));
                 de.setStatut(resultat.getInt("STATUT"));
+                de.setPoint(resultat.getInt("POINT"));
                 liste.add(de);
             }
             
@@ -276,6 +281,7 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
                 de.setIdCompte(resultat.getInt("ID_COMPTE"));
                 de.setIdEquipe(resultat.getInt("ID_EQUIPE"));
                 de.setStatut(resultat.getInt("STATUT"));
+                de.setPoint(resultat.getInt("POINT"));
                 liste.add(de);
             }
             
@@ -309,6 +315,7 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
                 de.setIdCompte(resultat.getInt("ID_COMPTE"));
                 de.setIdEquipe(resultat.getInt("ID_EQUIPE"));
                 de.setStatut(resultat.getInt("STATUT"));
+                de.setPoint(resultat.getInt("POINT"));
                 liste.add(de);
             }
             
@@ -320,6 +327,75 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
         }
         return liste;
     }
+    
+    /*
+    public List<DemandeEquipe> findByIdEquipeStatut(int idEquipe,) {
+        List<DemandeEquipe> liste = new LinkedList<>();
+        
+        try {
+            String req = "SELECT * FROM demande_equipe WHERE `ID_EQUIPE` = ?";
+
+            PreparedStatement paramStm = cnx.prepareStatement(req);
+
+            paramStm.setInt(1, idEquipe);
+
+            ResultSet resultat = paramStm.executeQuery();
+
+            // On vérifie s'il y a un résultat    
+            while(resultat.next()){
+
+                DemandeEquipe de = new DemandeEquipe();
+                de.setIdDemandeEquipe(resultat.getInt("ID_DEMANDE_EQUIPE"));
+                de.setIdCompte(resultat.getInt("ID_COMPTE"));
+                de.setIdEquipe(resultat.getInt("ID_EQUIPE"));
+                de.setStatut(resultat.getInt("STATUT"));
+                de.setPoint(resultat.getInt("POINT"));
+                liste.add(de);
+            }
+            
+            resultat.close();
+            paramStm.close();
+                
+        }
+        catch (SQLException exp) {
+        }
+        return liste;
+    }*/
+    /*
+    
+    public int findByIdEquipe(int idEquipe) {
+        List<DemandeEquipe> liste = new LinkedList<>();
+        
+        try {
+            String req = "SELECT * FROM demande_equipe WHERE `ID_EQUIPE` = ?";
+
+            PreparedStatement paramStm = cnx.prepareStatement(req);
+
+            paramStm.setInt(1, idEquipe);
+
+            ResultSet resultat = paramStm.executeQuery();
+
+            // On vérifie s'il y a un résultat    
+            while(resultat.next()){
+
+                DemandeEquipe de = new DemandeEquipe();
+                de.setIdDemandeEquipe(resultat.getInt("ID_DEMANDE_EQUIPE"));
+                de.setIdCompte(resultat.getInt("ID_COMPTE"));
+                de.setIdEquipe(resultat.getInt("ID_EQUIPE"));
+                de.setStatut(resultat.getInt("STATUT"));
+                de.setPoint(resultat.getInt("POINT"));
+                liste.add(de);
+            }
+            
+            resultat.close();
+            paramStm.close();
+                
+        }
+        catch (SQLException exp) {
+        }
+        return liste;
+    }
+    */
     
     
 }
