@@ -33,34 +33,33 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
 
         PreparedStatement paramStm = null;
         try {
+            paramStm = cnx.prepareStatement(req);
 
-                paramStm = cnx.prepareStatement(req);
+            paramStm.setInt(1, x.getIdDemandeEquipe());
+            paramStm.setInt(2, x.getIdCompte());
+            paramStm.setInt(3, x.getIdEquipe());
+            paramStm.setInt(4, x.getStatut());
+            paramStm.setInt(5, x.getPoint());
 
-                paramStm.setInt(1, x.getIdDemandeEquipe());
-                paramStm.setInt(2, x.getIdCompte());
-                paramStm.setInt(3, x.getIdEquipe());
-                paramStm.setInt(4, x.getStatut());
-                paramStm.setInt(5, x.getPoint());
-                
-                int nbLignesAffectees= paramStm.executeUpdate();
-                
-                if (nbLignesAffectees>0) {
-                        paramStm.close();
-                        return true;
-                }
+            int nbLignesAffectees= paramStm.executeUpdate();
+
+            if (nbLignesAffectees>0) {
+                paramStm.close();
+                return true;
+            }
                 
             return false;
         }
         catch (SQLException exp) {
         }
         finally {
-                try {
-                    if (paramStm!=null)
-                        paramStm.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(DemandeEquipeDAO.class.getName())
-                            .log(Level.SEVERE, null, ex);
-                }
+            try {
+                if (paramStm!=null)
+                    paramStm.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DemandeEquipeDAO.class.getName())
+                        .log(Level.SEVERE, null, ex);
+            }
                 
         }
         return false;
@@ -151,13 +150,13 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
         catch (SQLException exp) {
         }
         finally {
-                try {
-                    if (paramStm!=null)
-                        paramStm.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(DemandeEquipeDAO.class.getName())
-                            .log(Level.SEVERE, null, ex);
-                }
+            try {
+                if (paramStm!=null)
+                    paramStm.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DemandeEquipeDAO.class.getName())
+                        .log(Level.SEVERE, null, ex);
+            }
                 
         }
         return false;
@@ -183,13 +182,13 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
         catch (SQLException exp) {
         }
         finally {
-                try {
-                    if (paramStm!=null)
-                        paramStm.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(DemandeEquipeDAO.class.getName())
-                            .log(Level.SEVERE, null, ex);
-                }
+            try {
+                if (paramStm!=null)
+                    paramStm.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DemandeEquipeDAO.class.getName())
+                        .log(Level.SEVERE, null, ex);
+            }
                 
         }
         return false;

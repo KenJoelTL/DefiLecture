@@ -41,15 +41,15 @@ SET FOREIGN_KEY_CHECKS=1;
 CREATE TABLE `defi` (
   `ID_DEFI` int(10) NOT NULL,
   `ID_COMPTE` int(10) DEFAULT NULL,
-  `NOM_DEFI` varchar(255) NOT NULL,
+  `NOM` varchar(255) NOT NULL,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
   `DATE_DEBUT` varchar(255) NOT NULL,
   `DATE_FIN` varchar(255) NOT NULL,
   `QUESTION` varchar(255) DEFAULT NULL,
   `CHOIX_REPONSE` varchar(255) DEFAULT NULL,
   `REPONSE` varchar(255) DEFAULT NULL,
-  `POINT_DEFI` int(10) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `VALEUR_MINUTE` int(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -61,8 +61,9 @@ CREATE TABLE `demande_equipe` (
   `ID_DEMANDE_EQUIPE` int(10) NOT NULL,
   `ID_COMPTE` int(10) NOT NULL,
   `ID_EQUIPE` int(10) NOT NULL,
+  `POINT` int(10) NOT NULL,
   `STATUT_DEMANDE` int(10) NOT NULL DEFAULT '0' /*0=en attente; 1=acceptée; 2=refusée*/
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -72,10 +73,8 @@ CREATE TABLE `demande_equipe` (
 
 CREATE TABLE `equipe` (
   `ID_EQUIPE` int(10) NOT NULL,
-  `NOM_EQUIPE` varchar(255) NOT NULL,
- -- `ID_CAPITAINE` int(11) DEFAULT NULL,
-  `POINT_EQUIPE` int(11) DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `NOM` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -87,10 +86,10 @@ CREATE TABLE `inscription_defi` (
   `ID_INSCRIPTION_DEFI` int(10) NOT NULL,
   `ID_COMPTE` int(10) NOT NULL,
   `ID_DEFI` int(10) DEFAULT NULL,
-  `EST_REUSSI` int(10) DEFAULT NULL, /*0=non réussi; 1=réussi*/
-  `POINT` int(11) DEFAULT '0',
-  `DATE_INSCRIPTION_DEFI` datetime DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `EST_REUSSI` int(10) DEFAULT '0', /*0=non réussi; 1=réussi*/
+  `VALEUR_MINUTE` int(11) DEFAULT '0',
+  `DATE_INSCRIPTION` datetime DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -105,7 +104,7 @@ CREATE TABLE `lecture` (
   `DATE_INSCRIPTION` datetime DEFAULT CURRENT_TIMESTAMP,
   `DUREE_MINUTES` int(10) NOT NULL,
   `EST_OBLIGATOIRE` int(2) DEFAULT '0' /*0=lecture non obligatoire; 1=lecture obligatoire*/
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 -- --------------------------------------------------------
@@ -121,13 +120,13 @@ CREATE TABLE `compte` (
   `MOT_PASSE` varchar(12) NOT NULL,
   `NOM` varchar(255) NOT NULL,
   `PRENOM` varchar(255) NOT NULL,
-  `POINTAGE` int(10) DEFAULT '0',
+  `POINT` int(10) DEFAULT '0',
   `MINUTES_RESTANTES` int(10) DEFAULT '0',
   `PROGRAMME_ETUDE` varchar(255) DEFAULT NULL,
   `AVATAR` varchar(255) DEFAULT NULL,
   `PSEUDONYME` varchar(255) DEFAULT NULL,
   `ROLE` int(10) NOT NULL DEFAULT '0' /*0=participant; 1=capitaine; 2=modérateur; 3=administrateur*/
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 --
@@ -154,7 +153,7 @@ ALTER TABLE `demande_equipe`
 --
 ALTER TABLE `equipe`
   ADD PRIMARY KEY (`ID_EQUIPE`),
-  ADD UNIQUE KEY `NOM_EQUIPE` (`NOM_EQUIPE`);
+  ADD UNIQUE KEY `NOM` (`NOM`);
 
 --
 -- Index pour la table `inscription_defi`

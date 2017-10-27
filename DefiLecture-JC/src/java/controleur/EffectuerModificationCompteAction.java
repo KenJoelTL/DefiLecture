@@ -70,8 +70,8 @@ public class EffectuerModificationCompteAction implements Action, RequestAware, 
                     if(request.getParameter("pointage") != null){
                         try{
                             pointage = Integer.parseInt(request.getParameter("pointage"));
-                            if(pointage != compte.getPointage())
-                                compte.setPointage(pointage);
+                            if(pointage != compte.getPoint())
+                                compte.setsetPointintage);
                         }
                         catch(NumberFormatException e){
                         }
