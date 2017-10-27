@@ -61,7 +61,7 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
                     Logger.getLogger(DemandeEquipeDAO.class.getName())
                             .log(Level.SEVERE, null, ex);
                 }
-                Connexion.close();
+                
         }
         return false;
     }
@@ -105,8 +105,6 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
             try{
                 if (paramStm!=null)
                     paramStm.close();
-                if(cnx!=null)
-                    Connexion.close();
             }
             catch (SQLException exp) {
             }
@@ -160,7 +158,7 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
                     Logger.getLogger(DemandeEquipeDAO.class.getName())
                             .log(Level.SEVERE, null, ex);
                 }
-                Connexion.close();
+                
         }
         return false;
     }
@@ -192,7 +190,7 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
                     Logger.getLogger(DemandeEquipeDAO.class.getName())
                             .log(Level.SEVERE, null, ex);
                 }
-                Connexion.close();
+                
         }
         return false;
     }

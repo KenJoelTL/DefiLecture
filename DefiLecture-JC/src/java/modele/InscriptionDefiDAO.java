@@ -61,8 +61,12 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
         }
         finally
         {
-                if (paramStm!=null)
-                    Connexion.close();
+                try {
+                    if (paramStm!=null)
+                        paramStm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
          
         }
         return false;
@@ -116,8 +120,6 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
             try{
                 if (paramStm!=null)
                     paramStm.close();
-                if(cnx!=null)
-                    Connexion.close();
             }
             catch (SQLException exp) {
             }
@@ -164,7 +166,6 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
                     Logger.getLogger(LectureDAO.class.getName())
                             .log(Level.SEVERE, null, ex);
                 }
-                Connexion.close();
         }
         return false;
     }
@@ -208,8 +209,6 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
             try{
                 if (stm!=null)
                     stm.close();
-                if(cnx!=null)
-                    Connexion.close();
             }
             catch (SQLException exp) {
             }
@@ -260,8 +259,6 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
             try{
                 if (paramStm!=null)
                     paramStm.close();
-                if(cnx!=null)
-                    Connexion.close();
             }
             catch (SQLException exp) {
             }

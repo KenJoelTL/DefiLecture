@@ -58,7 +58,7 @@ public class EquipeDAO extends DAO<Equipe>{
                     Logger.getLogger(EquipeDAO.class.getName())
                             .log(Level.SEVERE, null, ex);
                 }
-                Connexion.close();
+                
         }
         return false;
     }
@@ -100,8 +100,6 @@ public class EquipeDAO extends DAO<Equipe>{
             try{
                 if (paramStm!=null)
                     paramStm.close();
-                if(cnx!=null)
-                    Connexion.close();
             }
             catch (SQLException exp) {
             }
@@ -158,7 +156,7 @@ public class EquipeDAO extends DAO<Equipe>{
                     Logger.getLogger(EquipeDAO.class.getName())
                             .log(Level.SEVERE, null, ex);
                 }
-                Connexion.close();
+                
         }
         return false;
     }
@@ -192,7 +190,7 @@ public class EquipeDAO extends DAO<Equipe>{
                     Logger.getLogger(EquipeDAO.class.getName())
                             .log(Level.SEVERE, null, ex);
                 }
-                Connexion.close();
+                
         }
         return false;
     }
@@ -257,8 +255,6 @@ public class EquipeDAO extends DAO<Equipe>{
             try{
                 if (paramStm!=null)
                     paramStm.close();
-                if(cnx!=null)
-                    Connexion.close();
             }
             catch (SQLException exp) {
             }
@@ -305,8 +301,6 @@ public class EquipeDAO extends DAO<Equipe>{
             try{
                 if (paramStm!=null)
                     paramStm.close();
-                if(cnx!=null)
-                    Connexion.close();
             }
             catch (SQLException exp) {
             }
@@ -347,8 +341,6 @@ public class EquipeDAO extends DAO<Equipe>{
             try{
                 if (paramStm!=null)
                     paramStm.close();
-                if(cnx!=null)
-                    Connexion.close();
             }
             catch (SQLException exp) {
             }

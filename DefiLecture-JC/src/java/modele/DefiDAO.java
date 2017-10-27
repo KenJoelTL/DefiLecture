@@ -65,8 +65,12 @@ public class DefiDAO extends DAO<Defi> {
         }
         finally
         {
+                try {
                 if (paramStm!=null)
-                    Connexion.close();
+                        paramStm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(DefiDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
          
         }
         return false;
@@ -118,8 +122,6 @@ public class DefiDAO extends DAO<Defi> {
             try{
                 if (paramStm!=null)
                     paramStm.close();
-                if(cnx!=null)
-                    Connexion.close();
             }
             catch (SQLException exp) {
             }
@@ -176,7 +178,7 @@ public class DefiDAO extends DAO<Defi> {
                     Logger.getLogger(LectureDAO.class.getName())
                             .log(Level.SEVERE, null, ex);
                 }
-                Connexion.close();
+                
         }
         return false;
     }
@@ -224,8 +226,6 @@ public class DefiDAO extends DAO<Defi> {
             try{
                 if (stm!=null)
                     stm.close();
-                if(cnx!=null)
-                    Connexion.close();
             }
             catch (SQLException exp) {
             }

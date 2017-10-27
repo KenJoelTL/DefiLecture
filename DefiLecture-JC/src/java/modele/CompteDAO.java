@@ -14,7 +14,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jdbc.Connexion;
 
 /**
  *
@@ -76,7 +75,6 @@ public class CompteDAO extends DAO<Compte>{
                     Logger.getLogger(CompteDAO.class.getName())
                             .log(Level.SEVERE, null, ex);
                 }
-                Connexion.close();
         }
         return false;
     }
@@ -130,8 +128,6 @@ public class CompteDAO extends DAO<Compte>{
             try{
                 if (paramStm!=null)
                     paramStm.close();
-                if(cnx!=null)
-                    Connexion.close();
             }
             catch (SQLException exp) {
             }
@@ -221,7 +217,7 @@ public class CompteDAO extends DAO<Compte>{
                     Logger.getLogger(CompteDAO.class.getName())
                             .log(Level.SEVERE, null, ex);
                 }
-                Connexion.close();
+                
         }
         return false;
     }
@@ -262,7 +258,6 @@ public class CompteDAO extends DAO<Compte>{
                     Logger.getLogger(CompteDAO.class.getName())
                             .log(Level.SEVERE, null, ex);
                 }
-                Connexion.close();
         }
         return false;
     }
@@ -395,8 +390,6 @@ public class CompteDAO extends DAO<Compte>{
             try{
                 if (paramStm!=null)
                     paramStm.close();
-                if(cnx!=null)
-                    Connexion.close();
             }
             catch (SQLException exp) {
             }
@@ -451,8 +444,6 @@ public class CompteDAO extends DAO<Compte>{
             try{
                 if (paramStm!=null)
                     paramStm.close();
-                if(cnx!=null)
-                    Connexion.close();
             }
             catch (SQLException exp) {
             }
