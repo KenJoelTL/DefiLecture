@@ -19,7 +19,7 @@ public class Lecture {
     Date dateInscription; 
     String titre;
     int dureeMinutes;
-    int obligatoire; //indique si la lecture est obligtoire ou non
+    int estObligatoire; //indique si la lecture est obligtoire ou non
 
     
     // Constructeur
@@ -28,13 +28,13 @@ public class Lecture {
     public Lecture() {
     }
 
-    public Lecture(int idLecture, int idCompte, Date dateInscription, String titre, int dureeMinutes, int obligatoire) {
+    public Lecture(int idLecture, int idCompte, Date dateInscription, String titre, int dureeMinutes, int estObligatoire) {
         this.idLecture = idLecture;
         this.idCompte = idCompte;
         this.dateInscription = dateInscription;
         this.titre = titre;
         this.dureeMinutes = dureeMinutes;
-        this.obligatoire = obligatoire;
+        this.estObligatoire = estObligatoire;
     }
 
    /* public Lecture(int idCompte, String dateInscription, String titre, int dureeMinutes) {
@@ -89,12 +89,12 @@ public class Lecture {
         this.dureeMinutes = dureeMinutes;
     }
 
-    public int estObligatoire() {
-        return obligatoire;
+    public int getEstObligatoire() {
+        return estObligatoire;
     }
 
-    public void setObligatoire(int obligatoire) {
-        this.obligatoire = obligatoire;
+    public void setEstObligatoire(int obligatoire) {
+        this.estObligatoire = obligatoire;
     }
     
     

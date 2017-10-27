@@ -3,12 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/F:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/src/java/jdbc/Connexion.java</file>
-            <file>file:/F:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/src/java/controleur/EffectuerModificationCompteAction.java</file>
-            <file>file:/F:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/web/gestionListeComptes.jsp</file>
-            <file>file:/F:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/web/gestionConfigurationCompte.jsp</file>
-            <file>file:/F:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/src/java/controleur/EffectuerInscriptionAction.java</file>
-            <file>file:/F:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/src/java/modele/CompteDAO.java</file>
+            <file>file:/G:/Dossier%20ecole/1Automne2017/Hypermedia%20II/TP/TP1/Github/DefiLectureTp1/DefiLecture-JC/web/index.jsp</file>
+            <file>file:/G:/Dossier%20ecole/1Automne2017/Hypermedia%20II/TP/TP1/Github/DefiLectureTp1/DefiLecture-JC/src/java/modele/Lecture.java</file>
+            <file>file:/G:/Dossier%20ecole/1Automne2017/Hypermedia%20II/TP/TP1/Github/DefiLectureTp1/DefiLecture-JC/web/pageGestionLecture.jsp</file>
+            <file>file:/G:/Dossier%20ecole/1Automne2017/Hypermedia%20II/TP/TP1/Github/DefiLectureTp1/DefiLecture-JC/web/pageModificationLecture.jsp</file>
+            <file>file:/G:/Dossier%20ecole/1Automne2017/Hypermedia%20II/TP/TP1/Github/DefiLectureTp1/DefiLecture-JC/web/pageCreationDefi.jsp</file>
+            <file>file:/G:/Dossier%20ecole/1Automne2017/Hypermedia%20II/TP/TP1/Github/DefiLectureTp1/DefiLecture-JC/src/java/controleur/EffectuerModificationLectureAction.java</file>
+            <file>file:/G:/Dossier%20ecole/1Automne2017/Hypermedia%20II/TP/TP1/Github/DefiLectureTp1/DefiLecture-JC/web/pageCreationLecture.jsp</file>
         </group>
     </open-files>
 </project-private>
