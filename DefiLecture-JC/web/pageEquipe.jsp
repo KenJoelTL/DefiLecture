@@ -72,8 +72,8 @@
                       <td>${membre.nom}</td>
                       <td>
                         <div class="progress">
-                          <div class="progress-bar" role="progressbar" aria-valuenow="${membre.pointage}"
-                            aria-valuemin="0" aria-valuemax="100" style="width:${(membre.pointage/equipe.point)*100}%">
+                          <div class="progress-bar" role="progressbar" aria-valuenow="${membre.point}"
+                            aria-valuemin="0" aria-valuemax="100" style="width:${(membre.point/equipe.point)*100}%">
                           </div>
                         </div>
                       </td>
@@ -86,17 +86,6 @@
                           <div class="progress">
                             <div class="progress-bar" role="progressbar" aria-valuenow="10"
                             aria-valuemin="0" aria-valuemax="100" style="width:10%">
-                            </div>
-                          </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>July</td>
-                      <td>Dooley</td>
-                      <td>
-                          <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="40"
-                            aria-valuemin="0" aria-valuemax="100" style="width:40%">
                             </div>
                           </div>
                       </td>

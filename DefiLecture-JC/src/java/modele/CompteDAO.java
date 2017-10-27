@@ -14,7 +14,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jdbc.Connexion;
 
 /**
  *
@@ -76,7 +75,6 @@ public class CompteDAO extends DAO<Compte>{
                     Logger.getLogger(CompteDAO.class.getName())
                             .log(Level.SEVERE, null, ex);
                 }
-                Connexion.close();
         }
         return false;
     }
@@ -111,7 +109,7 @@ public class CompteDAO extends DAO<Compte>{
                 c.setAvatar(resultat.getString("AVATAR"));             
                 c.setProgrammeEtude(resultat.getString("PROGRAMME_ETUDE"));
                 c.setMinutesRestantes(resultat.getInt("MINUTES_RESTANTES"));
-                c.setPointage(resultat.getInt("POINTAGE"));
+                c.setPoint(resultat.getInt("POINT"));
                 c.setRole(resultat.getInt("ROLE"));
 
                 resultat.close();
@@ -130,8 +128,6 @@ public class CompteDAO extends DAO<Compte>{
             try{
                 if (paramStm!=null)
                     paramStm.close();
-                if(cnx!=null)
-                    Connexion.close();
             }
             catch (SQLException exp) {
             }
@@ -158,7 +154,7 @@ public class CompteDAO extends DAO<Compte>{
                 String req = "UPDATE compte SET COURRIEL = ?, MOT_PASSE = ?,"
                            + "NOM = ?, PRENOM = ?, PSEUDONYME = ?, AVATAR = ?,"
                            + "PROGRAMME_ETUDE = ?, ID_EQUIPE = ?, MINUTES_RESTANTES = ?,"
-                           + "POINTAGE = ?, ROLE = ? WHERE ID_COMPTE = ?";
+                           + "POINT = ?, ROLE = ? WHERE ID_COMPTE = ?";
 
         PreparedStatement paramStm = null;
         try {
@@ -195,7 +191,7 @@ public class CompteDAO extends DAO<Compte>{
                 else
                     paramStm.setInt(8, x.getIdEquipe());
                 paramStm.setInt(9, x.getMinutesRestantes());
-                paramStm.setInt(10, x.getPointage());
+                paramStm.setInt(10, x.getPoint());
                 paramStm.setInt(11, x.getRole());
 
                 paramStm.setInt(12, x.getIdCompte());
@@ -221,7 +217,7 @@ public class CompteDAO extends DAO<Compte>{
                     Logger.getLogger(CompteDAO.class.getName())
                             .log(Level.SEVERE, null, ex);
                 }
-                Connexion.close();
+                
         }
         return false;
     }
@@ -262,7 +258,6 @@ public class CompteDAO extends DAO<Compte>{
                     Logger.getLogger(CompteDAO.class.getName())
                             .log(Level.SEVERE, null, ex);
                 }
-                Connexion.close();
         }
         return false;
     }
@@ -285,7 +280,7 @@ public class CompteDAO extends DAO<Compte>{
                 c.setMotPasse(r.getString("MOT_PASSE"));
                 c.setNom(r.getString("NOM"));
                 c.setPrenom(r.getString("PRENOM"));
-                c.setPointage(r.getInt("POINTAGE"));
+                c.setPoint(r.getInt("POINT"));
                 c.setMinutesRestantes(r.getInt("MINUTES_RESTANTES"));
                 c.setProgrammeEtude(r.getString("PROGRAMME_ETUDE"));
                 c.setAvatar(r.getString("AVATAR"));
@@ -330,7 +325,7 @@ public class CompteDAO extends DAO<Compte>{
                 c.setAvatar(resultat.getString("AVATAR"));             
                 c.setProgrammeEtude(resultat.getString("PROGRAMME_ETUDE"));
                 c.setMinutesRestantes(resultat.getInt("MINUTES_RESTANTES"));
-                c.setPointage(resultat.getInt("POINTAGE"));
+                c.setPoint(resultat.getInt("POINT"));
                 c.setRole(resultat.getInt("ROLE"));
                 liste.add(c);
             }
@@ -377,7 +372,7 @@ public class CompteDAO extends DAO<Compte>{
                     c.setAvatar(resultat.getString("AVATAR"));             
                     c.setProgrammeEtude(resultat.getString("PROGRAMME_ETUDE"));
                     c.setMinutesRestantes(resultat.getInt("MINUTES_RESTANTES"));
-                    c.setPointage(resultat.getInt("POINTAGE"));
+                    c.setPoint(resultat.getInt("POINT"));
                     c.setRole(resultat.getInt("ROLE"));
                     
                     resultat.close();
@@ -395,8 +390,6 @@ public class CompteDAO extends DAO<Compte>{
             try{
                 if (paramStm!=null)
                     paramStm.close();
-                if(cnx!=null)
-                    Connexion.close();
             }
             catch (SQLException exp) {
             }
@@ -432,7 +425,7 @@ public class CompteDAO extends DAO<Compte>{
                 c.setAvatar(resultat.getString("AVATAR"));             
                 c.setProgrammeEtude(resultat.getString("PROGRAMME_ETUDE"));
                 c.setMinutesRestantes(resultat.getInt("MINUTES_RESTANTES"));
-                c.setPointage(resultat.getInt("POINTAGE"));
+                c.setPoint(resultat.getInt("POINT"));
                 c.setRole(resultat.getInt("ROLE"));
 
                 resultat.close();
@@ -451,8 +444,6 @@ public class CompteDAO extends DAO<Compte>{
             try{
                 if (paramStm!=null)
                     paramStm.close();
-                if(cnx!=null)
-                    Connexion.close();
             }
             catch (SQLException exp) {
             }

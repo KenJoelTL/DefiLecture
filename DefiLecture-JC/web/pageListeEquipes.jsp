@@ -24,13 +24,14 @@
         </tr>
       </thead>
       
+      <c:set var="i" value="0"/>          
       <tbody>
       <c:forEach items="${listeEquipes}" var="equipe">          
         <tr>
-          <td>${compte.prenom}</td>
+          <td>#${i}</td>
           <td><a href="pageEquipe.do?afficherPageEquipe&idEquipe=${equipe.idEquipe}">${equipe.nom}</a></td>
           <td>${equipe.point}</td>
-        </tr>
+        </tr>${i+=1}
       </c:forEach>  
       </tbody>
       

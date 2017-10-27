@@ -30,7 +30,7 @@ public class DefiDAO extends DAO<Defi> {
     @Override
     public boolean create(Defi x) {
                
-        String req = "INSERT INTO defi (`ID_COMPTE` , `NOM_DEFI` , `DESCRIPTION`, `DATE_DEBUT` , `DATE_FIN`, `QUESTION`, `CHOIX_REPONSE`, `REPONSE`, `POINT_DEFI`) VALUES "+
+        String req = "INSERT INTO defi (`ID_COMPTE` , `NOM_DEFI` , `DESCRIPTION`, `DATE_DEBUT` , `DATE_FIN`, `QUESTION`, `CHOIX_REPONSE`, `REPONSE`, `VALEUR_MINUTE`) VALUES "+
 			     "(?,?,?,?,?,?,?,?,?)";
 				 		 
 
@@ -49,7 +49,7 @@ public class DefiDAO extends DAO<Defi> {
 		paramStm.setString(6, x.getQuestion());
                 paramStm.setString(7, x.getChoixReponse());
 		paramStm.setString(8, x.getReponse());
-                paramStm.setInt(9, x.getPoint());
+                paramStm.setInt(9, x.getValeurMinute());
 
                 int n= paramStm.executeUpdate();
                 
@@ -65,8 +65,12 @@ public class DefiDAO extends DAO<Defi> {
         }
         finally
         {
+                try {
                 if (paramStm!=null)
-                    Connexion.close();
+                        paramStm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(DefiDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
          
         }
         return false;
@@ -100,7 +104,7 @@ public class DefiDAO extends DAO<Defi> {
                     d.setQuestion(resultat.getString("QUESTION"));
                     d.setChoixReponse(resultat.getString("CHOIX_REPONSE"));
                     d.setReponse(resultat.getString("REPONSE"));
-                    d.setPoint(resultat.getInt("POINT_DEFI"));
+                    d.setValeurMinute(resultat.getInt("VALEUR_MINUTE"));
 
                     resultat.close();
                     paramStm.close();
@@ -118,8 +122,6 @@ public class DefiDAO extends DAO<Defi> {
             try{
                 if (paramStm!=null)
                     paramStm.close();
-                if(cnx!=null)
-                    Connexion.close();
             }
             catch (SQLException exp) {
             }
@@ -176,7 +178,7 @@ public class DefiDAO extends DAO<Defi> {
                     Logger.getLogger(LectureDAO.class.getName())
                             .log(Level.SEVERE, null, ex);
                 }
-                Connexion.close();
+                
         }
         return false;
     }
@@ -208,7 +210,7 @@ public class DefiDAO extends DAO<Defi> {
                     d.setQuestion(resultat.getString("QUESTION"));
                     d.setChoixReponse(resultat.getString("CHOIX_REPONSE"));
                     d.setReponse(resultat.getString("REPONSE"));
-                    d.setPoint(resultat.getInt("POINT_DEFI"));
+                    d.setValeurMinute(resultat.getInt("VALEUR_MINUTE"));
                     
                     listeDefi.add(d);
                         
@@ -224,8 +226,6 @@ public class DefiDAO extends DAO<Defi> {
             try{
                 if (stm!=null)
                     stm.close();
-                if(cnx!=null)
-                    Connexion.close();
             }
             catch (SQLException exp) {
             }

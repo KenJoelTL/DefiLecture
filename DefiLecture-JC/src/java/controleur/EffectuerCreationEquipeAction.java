@@ -5,6 +5,7 @@
  */
 package controleur;
 
+import java.sql.Connection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
@@ -37,26 +38,30 @@ public class EffectuerCreationEquipeAction implements Action, RequestAware, Sess
                 equipe.setNom(nom);
  //           equipe.setIdCapitaine((int)session.getAttribute("id"));
                 try {
-                    EquipeDAO dao = new EquipeDAO(Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
+                    Connection cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
+                    EquipeDAO daoEquipe = new EquipeDAO(cnx);
 
-                    if(dao.create(equipe)){
+                    if(daoEquipe.create(equipe)){
                         /*Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
                         equipe = dao.find()*/
                         //return"profilEquipe.do?tache=afficherPageEquipe&idEquipe="+equipe.getIdEquipe(); //envoyer sur la page de l'équipe.
-                        dao.setCnx(Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
-                        equipe = dao.findByNom(equipe.getNom());
+                        //daoEquipe.setCnx(Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
+                        equipe = daoEquipe.findByNom(equipe.getNom());
                         
-                        CompteDAO daoCompte = new CompteDAO(Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
+                        CompteDAO daoCompte = new CompteDAO(cnx);
                         Compte compte = daoCompte.read((int)session.getAttribute("connecte"));
+                        
                         compte.setIdEquipe(equipe.getIdEquipe());
-                        daoCompte = new CompteDAO(Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
+                        //daoCompte = new CompteDAO(Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
                         if(daoCompte.update(compte))
                             return"creationEquipeCompletee.do?tache=afficherPageEquipe&idEquipe="+equipe.getIdEquipe(); //soit afficher le page avec utilisateur pour pouvoir enoyer une demande
                     }
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(AfficherPageCreationEquipeAction.class.getName()).log(Level.SEVERE, null, ex);
                     return"creation.do?tache=afficherPageCreationEquipe";
-
+                }            
+                finally{
+                    Connexion.close();
                 }
             }
          }

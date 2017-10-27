@@ -28,7 +28,7 @@ public class EquipeDAO extends DAO<Equipe>{
 
     @Override
     public boolean create(Equipe x) {
-        String req = "INSERT INTO equipe (`NOM_EQUIPE`) VALUES (?)";
+        String req = "INSERT INTO equipe (`NOM`) VALUES (?)";
 
         PreparedStatement paramStm = null;
         try {
@@ -58,7 +58,7 @@ public class EquipeDAO extends DAO<Equipe>{
                     Logger.getLogger(EquipeDAO.class.getName())
                             .log(Level.SEVERE, null, ex);
                 }
-                Connexion.close();
+                
         }
         return false;
     }
@@ -81,8 +81,7 @@ public class EquipeDAO extends DAO<Equipe>{
 
                 Equipe e = new Equipe();
                 e.setIdEquipe(resultat.getInt("ID_EQUIPE"));
-                e.setNom(resultat.getString("NOM_EQUIPE"));
-                e.setPoint(resultat.getInt("POINT_EQUIPE"));
+                e.setNom(resultat.getString("NOM"));
 
                 resultat.close();
                 paramStm.close();
@@ -100,8 +99,6 @@ public class EquipeDAO extends DAO<Equipe>{
             try{
                 if (paramStm!=null)
                     paramStm.close();
-                if(cnx!=null)
-                    Connexion.close();
             }
             catch (SQLException exp) {
             }
@@ -126,7 +123,7 @@ public class EquipeDAO extends DAO<Equipe>{
 
     @Override
     public boolean update(Equipe x) {
-        String req = "UPDATE equipe SET `NOM_EQUIPE` = ? WHERE `ID_EQUIPE = ?`";
+        String req = "UPDATE equipe SET `NOM` = ? WHERE `ID_EQUIPE = ?`";
 
         PreparedStatement paramStm = null;
         try {
@@ -158,7 +155,7 @@ public class EquipeDAO extends DAO<Equipe>{
                     Logger.getLogger(EquipeDAO.class.getName())
                             .log(Level.SEVERE, null, ex);
                 }
-                Connexion.close();
+                
         }
         return false;
     }
@@ -192,7 +189,7 @@ public class EquipeDAO extends DAO<Equipe>{
                     Logger.getLogger(EquipeDAO.class.getName())
                             .log(Level.SEVERE, null, ex);
                 }
-                Connexion.close();
+                
         }
         return false;
     }
@@ -206,7 +203,7 @@ public class EquipeDAO extends DAO<Equipe>{
             while (r.next()) {
                 Equipe e = new Equipe();
                 e.setIdEquipe(r.getInt("ID_EQUIPE"));
-                e.setNom(r.getString("NOM_EQUIPE"));
+                e.setNom(r.getString("NOM"));
                 
                 //appeler les DAO DEMANDE
                 e.setPoint(r.getInt("POINT_EQUIPE"));
@@ -222,7 +219,7 @@ public class EquipeDAO extends DAO<Equipe>{
     }
 
     public Equipe findByNom(String nom) {
-        String req = "SELECT * FROM equipe WHERE `NOM_EQUIPE` = ?";
+        String req = "SELECT * FROM equipe WHERE `NOM` = ?";
         
         PreparedStatement paramStm = null;
         try {
@@ -238,8 +235,7 @@ public class EquipeDAO extends DAO<Equipe>{
 
                 Equipe e = new Equipe();
                 e.setIdEquipe(resultat.getInt("ID_EQUIPE"));
-                e.setNom(resultat.getString("NOM_EQUIPE"));
-                e.setPoint(resultat.getInt("POINT_EQUIPE"));
+                e.setNom(resultat.getString("NOM"));
 
                 resultat.close();
                 paramStm.close();
@@ -257,8 +253,6 @@ public class EquipeDAO extends DAO<Equipe>{
             try{
                 if (paramStm!=null)
                     paramStm.close();
-                if(cnx!=null)
-                    Connexion.close();
             }
             catch (SQLException exp) {
             }
@@ -286,8 +280,7 @@ public class EquipeDAO extends DAO<Equipe>{
 
                 Equipe e = new Equipe();
                 e.setIdEquipe(resultat.getInt("ID_EQUIPE"));
-                e.setNom(resultat.getString("NOM_EQUIPE"));
-                e.setPoint(resultat.getInt("POINT_EQUIPE"));
+                e.setNom(resultat.getString("NOM"));
 
                 resultat.close();
                 paramStm.close();
@@ -305,8 +298,6 @@ public class EquipeDAO extends DAO<Equipe>{
             try{
                 if (paramStm!=null)
                     paramStm.close();
-                if(cnx!=null)
-                    Connexion.close();
             }
             catch (SQLException exp) {
             }
@@ -320,7 +311,7 @@ public class EquipeDAO extends DAO<Equipe>{
     public int countNbMembre(int idEquipe){
     
 //        String req = "SELECT COUNT(ID_COMPTE) FROM `compte` WHERE ID_EQUIPE = ?";
-        String req = "SELECT COUNT(ID_DEMANDE_EQUIPE) FROM `demande_equipe` WHERE ID_EQUIPE = ? and STATUT_DEMANDE = ACCEPTEE";
+        String req = "SELECT COUNT(ID_DEMANDE_EQUIPE) FROM `demande_equipe` WHERE ID_EQUIPE = ? and STATUT_DEMANDE > 0";
        int nbMembre = 0;
         PreparedStatement paramStm = null;
         try {
@@ -347,8 +338,6 @@ public class EquipeDAO extends DAO<Equipe>{
             try{
                 if (paramStm!=null)
                     paramStm.close();
-                if(cnx!=null)
-                    Connexion.close();
             }
             catch (SQLException exp) {
             }

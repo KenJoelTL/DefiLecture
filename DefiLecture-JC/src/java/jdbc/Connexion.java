@@ -18,6 +18,7 @@ public class Connexion {
 	private static String url;
 	private static String user;		
         private static String password;
+        //private static String encoding;
         private Connexion()
         {
         }

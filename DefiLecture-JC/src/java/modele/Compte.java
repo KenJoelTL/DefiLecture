@@ -23,7 +23,7 @@ public class Compte {
     String programmeEtude;               //programme scolaire
     String avatar;                  //Pour l'instant l'avatar sera représenté par le chemin vers l'image
     int role;                       //Utilisateur==0 | Participant==1 | Capitaine==2 | Animateur==3 | Administrateur==4
-    int pointage;                   //Sommes des points gagnées par les lectures (minutes de lecture = (pointage*15)+minutesRestantes)
+    int point;                   //Sommes des points gagnées par les lectures (minutes de lecture = (point*15)+minutesRestantes)
     int minutesRestantes;
     
     public Compte(){
@@ -41,7 +41,7 @@ public class Compte {
         this.programmeEtude = programme;
         this.avatar = avatar;
         this.role = role;
-        this.pointage = pointage;
+        this.point = pointage;
         this.minutesRestantes = minutesRestantes;
     }
 
@@ -55,7 +55,7 @@ public class Compte {
         this.programmeEtude = programme;
         this.avatar = avatar;
         this.role = role;
-        this.pointage = pointage;
+        this.point = pointage;
         this.minutesRestantes = minutesRestantes;
     }
 
@@ -139,12 +139,12 @@ public class Compte {
         this.role = role;
     }
 
-    public int getPointage() {
-        return pointage;
+    public int getPoint() {
+        return point;
     }
 
-    public void setPointage(int pointage) {
-        this.pointage = pointage;
+    public void setPoint(int point) {
+        this.point = point;
     }
 
     public String getMotPasse() {

@@ -59,8 +59,12 @@ public class LectureDAO extends DAO<Lecture> {
         }
         finally
         {
-                if (paramStm!=null)
-                    Connexion.close();
+                try {
+                    if (paramStm!=null)
+                    paramStm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(LectureDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
                   
         }
         return false;
@@ -106,8 +110,6 @@ public class LectureDAO extends DAO<Lecture> {
             try{
                 if (paramStm!=null)
                     paramStm.close();
-                if(cnx!=null)
-                    Connexion.close();
             }
             catch (SQLException exp) {
             }
@@ -162,7 +164,7 @@ public class LectureDAO extends DAO<Lecture> {
                     Logger.getLogger(CompteDAO.class.getName())
                             .log(Level.SEVERE, null, ex);
                 }
-                Connexion.close();
+                
         }
         return false;
     }
@@ -198,7 +200,7 @@ public class LectureDAO extends DAO<Lecture> {
                     Logger.getLogger(LectureDAO.class.getName())
                             .log(Level.SEVERE, null, ex);
                 }
-                Connexion.close();
+                
         }
         return false;
     }
@@ -267,8 +269,6 @@ public class LectureDAO extends DAO<Lecture> {
             try{
                 if (paramStm!=null)
                     paramStm.close();
-                if(cnx!=null)
-                    Connexion.close();
             }
             catch (SQLException exp) {
             }

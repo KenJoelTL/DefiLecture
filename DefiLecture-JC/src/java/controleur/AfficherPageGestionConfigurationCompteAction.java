@@ -31,11 +31,7 @@ public class AfficherPageGestionConfigurationCompteAction implements Action, Req
         else{
             String idCompte = request.getParameter("id");
             try {
-                Class.forName(Config.DRIVER);
-                Connexion.setUrl(Config.URL);
-                Connexion.setUser(Config.DB_USER);
-                Connexion.setPassword(Config.DB_PWD);
-                Connection cnx = Connexion.getInstance();
+                Connection cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
 
                 CompteDAO dao = new CompteDAO(cnx);
 
@@ -50,7 +46,9 @@ public class AfficherPageGestionConfigurationCompteAction implements Action, Req
                 request.setAttribute("vue", "pageGestionListeCompte.jsp");
                 return "/index.jsp";
             }
-            
+            finally{
+                Connexion.close();
+            }
         }
         return "/index.jsp";
     }

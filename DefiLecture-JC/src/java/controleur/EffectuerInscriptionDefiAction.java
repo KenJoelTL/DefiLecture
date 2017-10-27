@@ -70,7 +70,7 @@ public class EffectuerInscriptionDefiAction implements Action, RequestAware, Req
                     //Si non, une inscription_defi est crée, avec le résultat 0 (échoué)
                     if(!defi.getReponse().equals(reponseParticipant)) {
                         
-                        inscriptionDefi.setPoint(0);
+                        inscriptionDefi.setValeurMinute(0);
                         inscriptionDefi.setEstReussi(0);
                         
                         
@@ -78,7 +78,7 @@ public class EffectuerInscriptionDefiAction implements Action, RequestAware, Req
                     //Si oui, une inscription_defi est crée, avec le résultat 1 (réussie)
                     else{
                         
-                        inscriptionDefi.setPoint(defi.getPoint());
+                        inscriptionDefi.setValeurMinute(defi.getValeurMinute());
                         inscriptionDefi.setEstReussi(1);
                     }
                     
