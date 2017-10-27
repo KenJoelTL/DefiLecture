@@ -71,7 +71,7 @@ public class EffectuerModificationCompteAction implements Action, RequestAware, 
                         try{
                             pointage = Integer.parseInt(request.getParameter("pointage"));
                             if(pointage != compte.getPoint())
-                                compte.setsetPointintage);
+                                compte.setPoint(pointage);
                         }
                         catch(NumberFormatException e){
                         }

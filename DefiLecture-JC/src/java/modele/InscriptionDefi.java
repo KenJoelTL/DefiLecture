@@ -13,9 +13,9 @@ public class InscriptionDefi {
     int idInscriptionDefi,
             idCompte,
             idDefi,
-            point,
+            valeurMinute,
             estReussi;
-    String dateInscriptionDefi;
+    String dateInscription;
 
     public int getIdInscriptionDefi() {
         return idInscriptionDefi;
@@ -41,15 +41,13 @@ public class InscriptionDefi {
         this.idDefi = idDefi;
     }
 
-    public int getPoint() {
-        return point;
+    public int getValeurMinute() {
+        return valeurMinute;
     }
 
-    public void setPoint(int point) {
-        this.point = point;
-    }
-    
-    
+    public void setValeurMinute(int valeurMinute) {
+        this.valeurMinute = valeurMinute;
+    } 
 
     public int getEstReussi() {
         return estReussi;
@@ -59,12 +57,12 @@ public class InscriptionDefi {
         this.estReussi = estReussi;
     }
 
-    public String getDateInscriptionDefi() {
-        return dateInscriptionDefi;
+    public String getDateInscription() {
+        return dateInscription;
     }
 
-    public void setDateInscriptionDefi(String dateInscriptionDefi) {
-        this.dateInscriptionDefi = dateInscriptionDefi;
+    public void setDateInscription(String dateInscription) {
+        this.dateInscription = dateInscription;
     }
     
     

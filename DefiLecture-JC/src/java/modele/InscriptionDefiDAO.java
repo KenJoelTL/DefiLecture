@@ -30,7 +30,7 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
     @Override
     public boolean create(InscriptionDefi x) {
                
-        String req = "INSERT INTO inscription_defi (`ID_COMPTE` ,`ID_DEFI` ,`POINT` , `EST_REUSSI`) VALUES "+
+        String req = "INSERT INTO inscription_defi (`ID_COMPTE` ,`ID_DEFI` ,`VALEUR_MINUTE` , `EST_REUSSI`) VALUES "+
 			     "(?,?,?,?)";
 				 		 
 
@@ -44,7 +44,7 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
                 
             paramStm.setInt(1, x.getIdCompte());
             paramStm.setInt(2, x.getIdDefi());
-            paramStm.setInt(3, x.getPoint());
+            paramStm.setInt(3, x.getValeurMinute());
             paramStm.setInt(4, x.getEstReussi());
                 
 
@@ -99,9 +99,9 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
                     i.setIdInscriptionDefi(resultat.getInt("ID_INSCRIPTION_DEFI"));
                     i.setIdCompte(resultat.getInt("ID_COMPTE"));
                     i.setIdDefi(resultat.getInt("ID_DEFI"));
-                    i.setPoint(resultat.getInt("POINT"));
+                    i.setValeurMinute(resultat.getInt("VALEUR_MINUTE"));
                     i.setEstReussi(resultat.getInt("EST_REUSSI"));
-                    i.setDateInscriptionDefi(resultat.getString("DATE_INSCRIPTION_DEFI"));
+                    i.setDateInscription(resultat.getString("DATE_INSCRIPTION_DEFI"));
                     
                     resultat.close();
                     paramStm.close();
@@ -191,9 +191,9 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
                     i.setIdInscriptionDefi(resultat.getInt("ID_INSCRIPTION_DEFI"));
                     i.setIdCompte(resultat.getInt("ID_COMPTE"));
                     i.setIdDefi(resultat.getInt("ID_DEFI"));
-                    i.setPoint(resultat.getInt("POINT"));
+                    i.setValeurMinute(resultat.getInt("VALEUR_MINUTE"));
                     i.setEstReussi(resultat.getInt("EST_REUSSI"));
-                    i.setDateInscriptionDefi(resultat.getString("DATE_INSCRIPTION_DEFI"));
+                    i.setDateInscription(resultat.getString("DATE_INSCRIPTION_DEFI"));
 
                     listeInscriptionDefi.add(i);
                         
@@ -241,9 +241,9 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
                     i.setIdInscriptionDefi(resultat.getInt("ID_INSCRIPTION_DEFI"));
                     i.setIdCompte(resultat.getInt("ID_COMPTE"));
                     i.setIdDefi(resultat.getInt("ID_DEFI"));
-                    i.setPoint(resultat.getInt("POINT"));
+                    i.setValeurMinute(resultat.getInt("VALEUR_MINUTE"));
                     i.setEstReussi(resultat.getInt("EST_REUSSI"));
-                    i.setDateInscriptionDefi(resultat.getString("DATE_INSCRIPTION_DEFI"));
+                    i.setDateInscription(resultat.getString("DATE_INSCRIPTION_DEFI"));
 
                     listeInscriptionDefi.add(i);
 

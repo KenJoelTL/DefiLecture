@@ -63,7 +63,7 @@ public class EffectuerCreationDefiAction implements Action, RequestAware, Sessio
             defi.setQuestion(question);
             defi.setChoixReponse(choixReponse);
             defi.setReponse(reponse);
-            defi.setPoint(point);
+            defi.setValeurMinute(point);
             if(dao.create(defi))
                 System.out.println("Un defi a été créé avec succès");
             else
