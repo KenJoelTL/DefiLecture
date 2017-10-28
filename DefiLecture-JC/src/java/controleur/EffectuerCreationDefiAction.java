@@ -11,8 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import jdbc.Config;
 import jdbc.Connexion;
+import modele.Compte;
+import modele.CompteDAO;
 import modele.Defi;
 import modele.DefiDAO;
+import modele.DemandeEquipe;
+import modele.DemandeEquipeDAO;
 import modele.Lecture;
 import modele.LectureDAO;
 
@@ -43,7 +47,7 @@ public class EffectuerCreationDefiAction implements Action, RequestAware, Sessio
                 reponse = request.getParameter("reponse");
         
         int     idCompte = (int)session.getAttribute("connecte"),
-                point = Integer.parseInt(request.getParameter("point"));
+                valeurMinute = Integer.parseInt(request.getParameter("valeurMinute"));
 
         
         
@@ -63,9 +67,11 @@ public class EffectuerCreationDefiAction implements Action, RequestAware, Sessio
             defi.setQuestion(question);
             defi.setChoixReponse(choixReponse);
             defi.setReponse(reponse);
-            defi.setValeurMinute(point);
-            if(dao.create(defi))
+            defi.setValeurMinute(valeurMinute);
+            if(dao.create(defi)){
+
                 System.out.println("Un defi a été créé avec succès");
+            }
             else
                 System.out.println("Problème de création du défi");
 
