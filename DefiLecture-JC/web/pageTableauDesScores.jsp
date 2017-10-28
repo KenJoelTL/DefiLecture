@@ -1,19 +1,26 @@
 <%-- 
-    Document   : pageListeEquipes
-    Created on : 2017-10-24, 20:46:22
+    Document   : pageTableauDesScores
+    Created on : 2017-10-27, 21:22:09
     Author     : Joel
 --%>
 
-<%@ page pageEncoding="UTF-8" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="modele.EquipeDAO"%>
 <%@page import="jdbc.Config"%>
 <%@page import="jdbc.Connexion"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
 
 <%  EquipeDAO dao = new EquipeDAO(Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
     pageContext.setAttribute("listeEquipes", dao.findAll());   %>
     
-<h2>Liste des équipes</h2>  
+<h2>Tableau des scores</h2>  
 
     <table class="table">
       <thead>
@@ -24,15 +31,17 @@
         </tr>
       </thead>
       
-      <c:set var="i" value="0"/>          
       <tbody>
       <c:forEach items="${listeEquipes}" var="equipe">          
+      <c:set var="i" value="${i+1}"/>          
         <tr>
           <td>#${i}</td>
-          <td><a href="pageEquipe.do?afficherPageEquipe&idEquipe=${equipe.idEquipe}">${equipe.nom}</a></td>
+          <td><a href="pageEquipe.do?tache=afficherPageEquipe&idEquipe=${equipe.idEquipe}">${equipe.nom}</a></td>
           <td>${equipe.point}</td>
-        </tr>${i+=1}
+        </tr>
       </c:forEach>  
       </tbody>
       
     </table>
+    </body>
+</html>

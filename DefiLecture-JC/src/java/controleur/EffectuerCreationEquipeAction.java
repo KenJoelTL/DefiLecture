@@ -42,7 +42,7 @@ public class EffectuerCreationEquipeAction implements Action, RequestAware, Sess
                 try {
                     Connection cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
                     EquipeDAO daoEquipe = new EquipeDAO(cnx);
-
+                    //idéalement créer le tout seulement si et seulement si toutes les conditions sont vraies
                     if(daoEquipe.create(equipe)){
                         equipe = daoEquipe.findByNom(equipe.getNom());
                         if(equipe != null){

@@ -333,6 +333,34 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
         return null;
     }
     
+    public int sumPointByidEquipe(int idEquipe){
+        int somme = 0;
+        String req = "SELECT SUM(POINT) FROM demande_equipe WHERE `ID_EQUIPE` = ?";
+        PreparedStatement paramStm = null;
+        try {
+
+            paramStm = cnx.prepareStatement(req);
+            paramStm.setInt(1, idEquipe);
+            ResultSet resultat = paramStm.executeQuery();
+
+            // On vérifie s'il y a un résultat    
+            if(resultat.next())
+                somme = resultat.getInt("SUM(POINT)");
+            
+            resultat.close();
+            paramStm.close();
+        }
+        catch (SQLException exp) {}
+        finally {
+            try{
+                if (paramStm!=null)
+                    paramStm.close();
+            }catch (SQLException exp) {}
+        }        
+
+        return somme;
+    }
+    
     /*
     public List<DemandeEquipe> findByIdEquipeStatut(int idEquipe,) {
         List<DemandeEquipe> liste = new LinkedList<>();

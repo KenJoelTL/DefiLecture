@@ -59,7 +59,7 @@
                 
             </c:if>
            
-                <li><a href="#"><span class="glyphicon glyphicon-stats"></span> Tableau des scores</a></li>
+                <li><a href="scoreboard.do?tache=afficherPageTableauDesScores"><span class="glyphicon glyphicon-stats"></span> Tableau des scores</a></li>
              
            
             <c:choose>
