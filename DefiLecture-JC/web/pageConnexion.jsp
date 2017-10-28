@@ -4,7 +4,12 @@
     Author     : Joel
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+        <c:if test="${ !empty sessionScope.connecte }">
+        <p>
+            Bonjour <%=session.getAttribute("connecte")%>
+        </p>
+        </c:if>
+-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,14 +18,7 @@
     </head>
     <body>
         <h1>Connexion</h1>
-        
-        
-        <c:if test="${ !empty sessionScope.connecte }">
-        <p>
-            Bonjour <%=session.getAttribute("connecte")%>
-        </p>
-        </c:if>
-        
+            
         <form action="connexion.do" method="post">
             Identifiant : <input type="text" name="identifiant" />
             Mot de passe : <input type="password" name="motPasse" />

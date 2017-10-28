@@ -5,6 +5,7 @@
  */
 package modele;
 
+import com.util.Util;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,7 +15,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jdbc.Connexion;
 
 /**
  *
@@ -34,9 +34,10 @@ public class EquipeDAO extends DAO<Equipe>{
         try {
 
                 paramStm = cnx.prepareStatement(req);
-
-                
-                paramStm.setString(1, x.getNom());
+/*
+                    byte[] ptext = x.getNom().getBytes(ISO_8859_1); 
+String value = new String(ptext, UTF_8);*/ 
+                paramStm.setString(1, Util.toUTF8(x.getNom()));
 //                paramStm.setInt(2, x.getIdCapitaine());
                 
                 int nbLignesAffectees= paramStm.executeUpdate();
@@ -224,9 +225,10 @@ public class EquipeDAO extends DAO<Equipe>{
         PreparedStatement paramStm = null;
         try {
 
-            paramStm = cnx.prepareStatement(req);
-
-            paramStm.setString(1, nom);
+            paramStm = cnx.prepareStatement(req);/*
+            byte[] ptext = nom.getBytes(ISO_8859_1); 
+            String value = new String(ptext, UTF_8); */      
+            paramStm.setString(1, Util.toUTF8(nom));
 
             ResultSet resultat = paramStm.executeQuery();
 

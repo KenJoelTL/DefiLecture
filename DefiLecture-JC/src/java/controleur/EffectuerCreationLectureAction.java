@@ -69,7 +69,7 @@ public class EffectuerCreationLectureAction implements Action, RequestAware, Ses
                 if(compte.getIdEquipe() > 0){
                     DemandeEquipeDAO demandeDAO = new DemandeEquipeDAO(cnx);
                     DemandeEquipe demande = new DemandeEquipe();
-                    demande = demandeDAO.findByIdCompteEquipe(idCompte, compte.getIdEquipe()).get(0);
+                    demande = demandeDAO.findByIdCompteEquipe(idCompte, compte.getIdEquipe());
                     int pointDemandeEquipe = demande.getPoint() + pointLecture;
                     demande.setPoint(pointDemandeEquipe);
                     demandeDAO.update(demande);
