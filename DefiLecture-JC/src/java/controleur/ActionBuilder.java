@@ -72,13 +72,24 @@ public class ActionBuilder {
                     return new AfficherPageTableauScoresAction();
                 case"afficherPageListeEquipes":
                     return new AfficherPageListeEquipesAction();
+      //DemandeEquipe          
                 case "effectuerDemandeAdhesionEquipe":
                     return new EffectuerDemandeAdhesionEquipeAction();
+                case "afficherPageListeDemandesEquipe":
+                    return new AfficherPageListeDemandesEquipeAction();
+                case "accepterDemandeAdhesion":
+                    return new AccepterDemandeAdhesionAction();
+                case "refuserDemandeAdhesion":
+                    return new RefuserDemandeAdhesionAction();
       //Test Ajax
                 case "testAjax":
                     return new ExempleClasseActionAjax();
+                    
+                default:
+                    return new DefaultAction();
                 
             }
+        
         return new AfficherPageAccueilAction();
     }
 }
