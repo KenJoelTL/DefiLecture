@@ -5,6 +5,7 @@
  */
 package modele;
 
+import com.util.Util;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -37,20 +38,20 @@ public class CompteDAO extends DAO<Compte>{
                 paramStm = cnx.prepareStatement(req);
 
                 
-                paramStm.setString(1, x.getCourriel());
-                paramStm.setString(2, x.getMotPasse());
-                paramStm.setString(3, x.getNom());
-                paramStm.setString(4, x.getPrenom());
+                paramStm.setString(1, Util.toUTF8(x.getCourriel()));
+                paramStm.setString(2, Util.toUTF8(x.getMotPasse()));
+                paramStm.setString(3, Util.toUTF8(x.getNom()));
+                paramStm.setString(4, Util.toUTF8(x.getPrenom()));
                 if(!"".equals(x.getPseudonyme()))
-                    paramStm.setString(5, x.getPseudonyme());
+                    paramStm.setString(5, Util.toUTF8(x.getPseudonyme()));
                 else
                     paramStm.setString(5, null);
                 if(!"".equals(x.getAvatar()))
-                    paramStm.setString(6, x.getAvatar());
+                    paramStm.setString(6, Util.toUTF8(x.getAvatar()));
                 else
                     paramStm.setString(6, null);
                 if(!"".equals(x.getProgrammeEtude()))
-                    paramStm.setString(7, x.getProgrammeEtude());
+                    paramStm.setString(7, Util.toUTF8(x.getProgrammeEtude()));
                 else
                     paramStm.setString(7, null);
                 
@@ -60,8 +61,6 @@ public class CompteDAO extends DAO<Compte>{
                         paramStm.close();
                         return true;
                 }
-                
-                //paramStm.execute();
                 
             return false;
         }
@@ -173,17 +172,17 @@ public class CompteDAO extends DAO<Compte>{
                 if(x.getPseudonyme() == null || "".equals(x.getPseudonyme().trim()))
                     paramStm.setString(5, null);
                 else
-                    paramStm.setString(5, x.getPseudonyme());
+                    paramStm.setString(5, Util.toUTF8(x.getPseudonyme()));
 
                 if(x.getAvatar() == null || "".equals(x.getAvatar().trim()))
                     paramStm.setString(6, null);
                 else
-                    paramStm.setString(6, x.getAvatar());
+                    paramStm.setString(6, Util.toUTF8(x.getAvatar()));
 
                 if(x.getProgrammeEtude() == null || "".equals(x.getProgrammeEtude().trim()))
                     paramStm.setString(7, null);
                 else
-                    paramStm.setString(7, x.getProgrammeEtude());
+                    paramStm.setString(7, Util.toUTF8(x.getProgrammeEtude()));
 
                 if(x.getIdEquipe() == -1){
                     paramStm.setNull(8, java.sql.Types.INTEGER);
@@ -221,11 +220,6 @@ public class CompteDAO extends DAO<Compte>{
         }
         return false;
     }
-    /*
-    public boolean updateEquipe(){
-    
-    }*/
-    
 
     @Override
     public boolean delete(Compte x) {
@@ -349,9 +343,9 @@ public class CompteDAO extends DAO<Compte>{
 
                 paramStm = cnx.prepareStatement(req);
 
-                paramStm.setString(1, identifiant);
-                paramStm.setString(2, identifiant);
-                paramStm.setString(3, motPasse);
+                paramStm.setString(1, Util.toUTF8(identifiant));
+                paramStm.setString(2, Util.toUTF8(identifiant));
+                paramStm.setString(3, Util.toUTF8(motPasse));
 
                 resultat = paramStm.executeQuery();
                 
@@ -408,7 +402,7 @@ public class CompteDAO extends DAO<Compte>{
 
             paramStm = cnx.prepareStatement(req);
 
-            paramStm.setString(1, pseudo);
+            paramStm.setString(1, Util.toUTF8(pseudo));
 
             ResultSet resultat = paramStm.executeQuery();
 
@@ -436,23 +430,52 @@ public class CompteDAO extends DAO<Compte>{
             resultat.close();
             paramStm.close();
             return null;
-                
         }
-        catch (SQLException exp) {
-        }
+        catch (SQLException exp) {}
         finally {
             try{
                 if (paramStm!=null)
                     paramStm.close();
             }
-            catch (SQLException exp) {
-            }
-             catch (Exception e) {
-            }
+            catch (SQLException exp) {}
         }        
         
         return null;
 
     }
+    
+    public int countCompteByIdEquipe(int idEquipe){
+    
+//        String req = "SELECT COUNT(ID_COMPTE), idEquipe FROM `compte` WHERE ID_EQUIPE = ? GROUP BY COUNT(ID_COMPTE)";
+        String req = "SELECT COUNT(ID_DEMANDE_EQUIPE) FROM `demande_equipe` WHERE ID_EQUIPE = ? and STATUT_DEMANDE = 1";
+       int nbMembre = 0;
+        PreparedStatement paramStm = null;
+        try {
+
+            paramStm = cnx.prepareStatement(req);
+            paramStm.setInt(1, idEquipe);
+            ResultSet resultat = paramStm.executeQuery();
+
+            // On vérifie s'il y a un résultat    
+            if(resultat.next()){
+                //nbMembre = resultat.getInt("COUNT(ID_COMPTE)");
+                nbMembre = resultat.getInt("COUNT(ID_DEMANDE_EQUIPE)");
+            }
+            
+            resultat.close();
+            paramStm.close();
+            return nbMembre;
+        }
+        catch (SQLException exp) {}
+        finally {
+            try{
+                if (paramStm!=null)
+                    paramStm.close();
+            }
+            catch (SQLException exp) {}
+        }         
+        return nbMembre;
+    }
+    
     
 }

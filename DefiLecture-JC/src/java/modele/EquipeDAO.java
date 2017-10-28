@@ -5,6 +5,7 @@
  */
 package modele;
 
+import com.util.Util;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,7 +15,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jdbc.Connexion;
 
 /**
  *
@@ -33,18 +33,15 @@ public class EquipeDAO extends DAO<Equipe>{
         PreparedStatement paramStm = null;
         try {
 
-                paramStm = cnx.prepareStatement(req);
+            paramStm = cnx.prepareStatement(req);
+            paramStm.setString(1, Util.toUTF8(x.getNom()));
 
-                
-                paramStm.setString(1, x.getNom());
-//                paramStm.setInt(2, x.getIdCapitaine());
-                
-                int nbLignesAffectees= paramStm.executeUpdate();
-                
-                if (nbLignesAffectees>0) {
-                        paramStm.close();
-                        return true;
-                }
+            int nbLignesAffectees= paramStm.executeUpdate();
+
+            if (nbLignesAffectees>0) {
+                    paramStm.close();
+                    return true;
+            }
                 
             return false;
         }
@@ -82,7 +79,9 @@ public class EquipeDAO extends DAO<Equipe>{
                 Equipe e = new Equipe();
                 e.setIdEquipe(resultat.getInt("ID_EQUIPE"));
                 e.setNom(resultat.getString("NOM"));
-
+                e.setPoint((new DemandeEquipeDAO(cnx).sumPointByidEquipe(id)));
+                e.setNbMembres((new CompteDAO(cnx)).countCompteByIdEquipe(id));
+                
                 resultat.close();
                 paramStm.close();
                     return e;
@@ -199,15 +198,15 @@ public class EquipeDAO extends DAO<Equipe>{
         List<Equipe> liste = new LinkedList<>();
         try {
             Statement stm = cnx.createStatement(); 
-            ResultSet r = stm.executeQuery("SELECT * FROM equipe ORDER BY POINT_EQUIPE DESC");
+            ResultSet r = stm.executeQuery("SELECT * FROM equipe");
             while (r.next()) {
                 Equipe e = new Equipe();
                 e.setIdEquipe(r.getInt("ID_EQUIPE"));
                 e.setNom(r.getString("NOM"));
                 
-                //appeler les DAO DEMANDE
-                e.setPoint(r.getInt("POINT_EQUIPE"));
-
+                //appelle les DAO DEMANDE Compte et DemandeEquipe
+                e.setPoint(new DemandeEquipeDAO(cnx).sumPointByidEquipe(r.getInt("ID_EQUIPE")));
+                e.setNbMembres(new CompteDAO(cnx).countCompteByIdEquipe(r.getInt("ID_EQUIPE")));
                 liste.add(e);
             }
             r.close();
@@ -224,9 +223,8 @@ public class EquipeDAO extends DAO<Equipe>{
         PreparedStatement paramStm = null;
         try {
 
-            paramStm = cnx.prepareStatement(req);
-
-            paramStm.setString(1, nom);
+            paramStm = cnx.prepareStatement(req);      
+            paramStm.setString(1, Util.toUTF8(nom));
 
             ResultSet resultat = paramStm.executeQuery();
 
@@ -292,61 +290,16 @@ public class EquipeDAO extends DAO<Equipe>{
             return null;
                 
         }
-        catch (SQLException exp) {
-        }
+        catch (SQLException exp) {}
         finally {
             try{
                 if (paramStm!=null)
                     paramStm.close();
             }
-            catch (SQLException exp) {
-            }
-             catch (Exception e) {
-            }
+            catch (SQLException exp) {}
         }        
         
         return null;
     }
-    
-    public int countNbMembre(int idEquipe){
-    
-//        String req = "SELECT COUNT(ID_COMPTE) FROM `compte` WHERE ID_EQUIPE = ?";
-        String req = "SELECT COUNT(ID_DEMANDE_EQUIPE) FROM `demande_equipe` WHERE ID_EQUIPE = ? and STATUT_DEMANDE > 0";
-       int nbMembre = 0;
-        PreparedStatement paramStm = null;
-        try {
-
-            paramStm = cnx.prepareStatement(req);
-
-            paramStm.setInt(1, idEquipe);
-
-            ResultSet resultat = paramStm.executeQuery();
-
-            // On vérifie s'il y a un résultat    
-            if(resultat.next()){
-                nbMembre = resultat.getInt("COUNT(ID_COMPTE)");
-            }
-            
-            resultat.close();
-            paramStm.close();
-            return nbMembre;
-                
-        }
-        catch (SQLException exp) {
-        }
-        finally {
-            try{
-                if (paramStm!=null)
-                    paramStm.close();
-            }
-            catch (SQLException exp) {
-            }
-             catch (Exception e) {
-            }           
-        }         
-        
-        return nbMembre;
-    }
-
     
 }

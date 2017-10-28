@@ -68,6 +68,12 @@ public class ActionBuilder {
                     return new AfficherPageCreationEquipeAction();
                 case "effectuerCreationEquipe":
                     return new EffectuerCreationEquipeAction();
+                case "afficherPageTableauScores":
+                    return new AfficherPageTableauScoresAction();
+                case"afficherPageListeEquipes":
+                    return new AfficherPageListeEquipesAction();
+                case "effectuerDemandeAdhesionEquipe":
+                    return new EffectuerDemandeAdhesionEquipeAction();
       //Test Ajax
                 case "testAjax":
                     return new ExempleClasseActionAjax();

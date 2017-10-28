@@ -15,6 +15,8 @@ import jdbc.Config;
 import jdbc.Connexion;
 import modele.Compte;
 import modele.CompteDAO;
+import modele.DemandeEquipe;
+import modele.DemandeEquipeDAO;
 import modele.Equipe;
 import modele.EquipeDAO;
 
@@ -36,25 +38,30 @@ public class EffectuerCreationEquipeAction implements Action, RequestAware, Sess
             if(nom != null){
                 Equipe equipe = new Equipe();
                 equipe.setNom(nom);
- //           equipe.setIdCapitaine((int)session.getAttribute("id"));
+             // equipe.setIdCapitaine((int)session.getAttribute("id"));
                 try {
                     Connection cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
                     EquipeDAO daoEquipe = new EquipeDAO(cnx);
-
+                    //idéalement créer le tout seulement si et seulement si toutes les conditions sont vraies
                     if(daoEquipe.create(equipe)){
-                        /*Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
-                        equipe = dao.find()*/
-                        //return"profilEquipe.do?tache=afficherPageEquipe&idEquipe="+equipe.getIdEquipe(); //envoyer sur la page de l'équipe.
-                        //daoEquipe.setCnx(Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
                         equipe = daoEquipe.findByNom(equipe.getNom());
-                        
-                        CompteDAO daoCompte = new CompteDAO(cnx);
-                        Compte compte = daoCompte.read((int)session.getAttribute("connecte"));
-                        
-                        compte.setIdEquipe(equipe.getIdEquipe());
-                        //daoCompte = new CompteDAO(Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
-                        if(daoCompte.update(compte))
-                            return"creationEquipeCompletee.do?tache=afficherPageEquipe&idEquipe="+equipe.getIdEquipe(); //soit afficher le page avec utilisateur pour pouvoir enoyer une demande
+                        if(equipe != null){
+                            CompteDAO daoCompte = new CompteDAO(cnx);
+                            Compte compte = daoCompte.read((int)session.getAttribute("connecte"));
+
+                            compte.setIdEquipe(equipe.getIdEquipe());
+
+                            if(daoCompte.update(compte)){
+                                DemandeEquipeDAO daoDemandeEquipe = new DemandeEquipeDAO(cnx);
+                                DemandeEquipe demande = new DemandeEquipe();
+                                demande.setIdCompte(compte.getIdCompte());
+                                demande.setIdEquipe(compte.getIdEquipe());
+                                
+                                demande.setStatutDemande(1);
+                                if(daoDemandeEquipe.create(demande))
+                                    return"creationEquipeCompletee.do?tache=afficherPageEquipe&idEquipe="+equipe.getIdEquipe(); //soit afficher le page avec utilisateur pour pouvoir enoyer une demande
+                            }
+                        }
                     }
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(AfficherPageCreationEquipeAction.class.getName()).log(Level.SEVERE, null, ex);
@@ -64,8 +71,9 @@ public class EffectuerCreationEquipeAction implements Action, RequestAware, Sess
                     Connexion.close();
                 }
             }
-         }
             return"creation.do?tache=afficherPageCreationEquipe";
+         }
+         return"creation.do?tache=afficherPageAccueil";
         }
         return"connexion.do?tache=afficherPageConnexion";
 

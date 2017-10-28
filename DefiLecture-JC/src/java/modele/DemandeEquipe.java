@@ -13,7 +13,7 @@ public class DemandeEquipe {
     int idDemandeEquipe,
         idCompte,
         idEquipe,
-        statutDemande,
+        statutDemande = -1,
         point;
 
     public int getIdDemandeEquipe() {
