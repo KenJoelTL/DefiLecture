@@ -48,7 +48,7 @@ public class AccepterDemandeAdhesionAction implements Action, RequestAware, Sess
                 else{
                     CompteDAO compteDao = new CompteDAO(cnx);
                     Compte cpt = compteDao.read(demandeEq.getIdCompte());
-                    if(cpt == null)
+                    if(cpt == null || cpt.getIdEquipe() !=-1)
                         action = "*.do?tache=afficherPageAccueil";
                     else{
                         int idEquipe = demandeEq.getIdEquipe();
