@@ -4,6 +4,7 @@
     Author     : Joel
 --%>
 
+<%@page import="java.sql.Connection"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:if test="${empty requestScope}">${requestScope.idEquipe=1}</c:if>
 <%@page import="modele.EquipeDAO"%>
@@ -20,9 +21,10 @@
     }
 </style>
 
-<%  EquipeDAO daoEquipe = new EquipeDAO(Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
+<%  Connection cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
+    EquipeDAO daoEquipe = new EquipeDAO(cnx);
     Equipe equipe = daoEquipe.read(request.getParameter("idEquipe"));
-    CompteDAO daoCompte = new CompteDAO(Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
+    CompteDAO daoCompte = new CompteDAO(cnx);
     pageContext.setAttribute("equipe", equipe);        
     pageContext.setAttribute("listeMembres", daoCompte.findByIdEquipe(equipe.getIdEquipe())); %>
     
@@ -80,17 +82,6 @@
                       </td>
                     </tr>
                     </c:forEach>
-                    <tr>
-                      <td>Mary</td>
-                      <td>Moe</td>
-                      <td>
-                          <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="10"
-                            aria-valuemin="0" aria-valuemax="100" style="width:10%">
-                            </div>
-                          </div>
-                      </td>
-                    </tr>
                   </tbody>
                 </table>
                 

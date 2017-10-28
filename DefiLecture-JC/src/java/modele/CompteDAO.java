@@ -37,20 +37,24 @@ public class CompteDAO extends DAO<Compte>{
 
                 paramStm = cnx.prepareStatement(req);
 
-                
+              if(x.getCourriel() != null && !"".equals(x.getCourriel().trim())
+              && x.getMotPasse() != null && !"".equals(x.getMotPasse().trim())     
+              && x.getNom()      != null && !"".equals(x.getNom().trim())
+              && x.getPrenom()   != null && !"".equals(x.getPrenom().trim())){
+
                 paramStm.setString(1, Util.toUTF8(x.getCourriel()));
                 paramStm.setString(2, Util.toUTF8(x.getMotPasse()));
                 paramStm.setString(3, Util.toUTF8(x.getNom()));
                 paramStm.setString(4, Util.toUTF8(x.getPrenom()));
-                if(!"".equals(x.getPseudonyme()))
+                if(x.getPseudonyme() != null && !"".equals(x.getPseudonyme().trim()))
                     paramStm.setString(5, Util.toUTF8(x.getPseudonyme()));
                 else
                     paramStm.setString(5, null);
-                if(!"".equals(x.getAvatar()))
+                if(x.getAvatar() != null && !"".equals(x.getAvatar().trim()))
                     paramStm.setString(6, Util.toUTF8(x.getAvatar()));
                 else
                     paramStm.setString(6, null);
-                if(!"".equals(x.getProgrammeEtude()))
+                if(x.getProgrammeEtude() != null && !"".equals(x.getProgrammeEtude().trim()))
                     paramStm.setString(7, Util.toUTF8(x.getProgrammeEtude()));
                 else
                     paramStm.setString(7, null);
@@ -61,7 +65,7 @@ public class CompteDAO extends DAO<Compte>{
                         paramStm.close();
                         return true;
                 }
-                
+              }
             return false;
         }
         catch (SQLException exp) {
