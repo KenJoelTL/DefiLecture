@@ -14,9 +14,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import jdbc.Config;
 import jdbc.Connexion;
+import modele.Compte;
+import modele.CompteDAO;
 import modele.DefiDAO;
 import modele.InscriptionDefiDAO;
 import modele.Defi;
+import modele.DemandeEquipe;
+import modele.DemandeEquipeDAO;
 import modele.InscriptionDefi;
 
 /**
@@ -80,6 +84,29 @@ public class EffectuerInscriptionDefiAction implements Action, RequestAware, Req
                         
                         inscriptionDefi.setValeurMinute(defi.getValeurMinute());
                         inscriptionDefi.setEstReussi(1);
+                        
+                        //Mise à jour des points du participant
+                        //Conversion du nombre de minutes de la lecture en points pour le Participant : 15mins = 1 point
+                        CompteDAO daoCompte = new CompteDAO(cnx);
+                        Compte compte = new Compte();
+                        compte = daoCompte.read(idCompte);
+                        int pointDefi = (defi.getValeurMinute() + compte.getMinutesRestantes()) / 15;
+                        int pointCompte = compte.getPoint() + pointDefi;
+                        //Les minutes restantes sont gardées en mémoire ici
+                        int minutesRestantes = (defi.getValeurMinute() + compte.getMinutesRestantes()) % 15;
+                        compte.setPoint(pointCompte);
+                        compte.setMinutesRestantes(minutesRestantes);
+                        daoCompte.update(compte);
+                        //Mise à jour des points dans demande_equipe (pour calculer le total des points de l'équipe)
+                        if(compte.getIdEquipe() > 0){
+                            DemandeEquipeDAO demandeDAO = new DemandeEquipeDAO(cnx);
+                            DemandeEquipe demande = new DemandeEquipe();
+                            demande = demandeDAO.findByIdCompteEquipe(idCompte, compte.getIdEquipe()).get(0);
+                            int pointDemandeEquipe = demande.getPoint() + pointDefi;
+                            demande.setPoint(pointDemandeEquipe);
+                            demandeDAO.update(demande);
+                        }
+                
                     }
                     
                     //Création de l'inscription_defi dans la base de données

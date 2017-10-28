@@ -30,17 +30,18 @@ public class DefiDAO extends DAO<Defi> {
     @Override
     public boolean create(Defi x) {
                
-        String req = "INSERT INTO defi (`ID_COMPTE` , `NOM_DEFI` , `DESCRIPTION`, `DATE_DEBUT` , `DATE_FIN`, `QUESTION`, `CHOIX_REPONSE`, `REPONSE`, `VALEUR_MINUTE`) VALUES "+
+        System.out.println("entrer dans le DAO");
+        String req = "INSERT INTO defi (`ID_COMPTE` , `NOM` , `DESCRIPTION`, `DATE_DEBUT` , `DATE_FIN`, `QUESTION`, `CHOIX_REPONSE`, `REPONSE`, `VALEUR_MINUTE`) VALUES "+
 			     "(?,?,?,?,?,?,?,?,?)";
 				 		 
 
         PreparedStatement paramStm = null;
         try 
         {
-
+            System.out.println("entrer dans le try");
                 paramStm = cnx.prepareStatement(req);
-
                 
+                System.out.println("avant les param");
                 paramStm.setInt(1, x.getIdCompte());
                 paramStm.setString(2, x.getNom());
                 paramStm.setString(3, x.getDescription());
@@ -50,7 +51,7 @@ public class DefiDAO extends DAO<Defi> {
                 paramStm.setString(7, x.getChoixReponse());
 		paramStm.setString(8, x.getReponse());
                 paramStm.setInt(9, x.getValeurMinute());
-
+            System.out.println("apres les param");
                 int n= paramStm.executeUpdate();
                 
                 if (n>0)
@@ -97,7 +98,7 @@ public class DefiDAO extends DAO<Defi> {
 
                     d.setIdDefi(resultat.getInt("ID_DEFI"));
                     d.setIdCompte(resultat.getInt("ID_COMPTE"));
-                    d.setNom(resultat.getString("NOM_DEFI"));
+                    d.setNom(resultat.getString("NOM"));
                     d.setDescription(resultat.getString("DESCRIPTION"));
                     d.setDateDebut(resultat.getString("DATE_DEBUT"));
                     d.setDateFin(resultat.getString("DATE_FIN"));
@@ -203,7 +204,7 @@ public class DefiDAO extends DAO<Defi> {
 
                     d.setIdDefi(resultat.getInt("ID_DEFI"));
                     d.setIdCompte(resultat.getInt("ID_COMPTE"));
-                    d.setNom(resultat.getString("NOM_DEFI"));
+                    d.setNom(resultat.getString("NOM"));
                     d.setDescription(resultat.getString("DESCRIPTION"));
                     d.setDateDebut(resultat.getString("DATE_DEBUT"));
                     d.setDateFin(resultat.getString("DATE_FIN"));
