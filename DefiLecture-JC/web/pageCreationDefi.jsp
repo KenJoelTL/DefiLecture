@@ -62,7 +62,7 @@
             </div>
             <div class="form-group">
                 <label for="point">Nombre de point pour ce défi* : </label>
-                <input class="form-control" type="text" name="point" required />
+                <input class="form-control" type="text" name="valeurMinute" required />
             </div>
             
            

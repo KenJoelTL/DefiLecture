@@ -101,7 +101,7 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
                     i.setIdDefi(resultat.getInt("ID_DEFI"));
                     i.setValeurMinute(resultat.getInt("VALEUR_MINUTE"));
                     i.setEstReussi(resultat.getInt("EST_REUSSI"));
-                    i.setDateInscription(resultat.getString("DATE_INSCRIPTION_DEFI"));
+                    i.setDateInscription(resultat.getString("DATE_INSCRIPTION"));
                     
                     resultat.close();
                     paramStm.close();
@@ -193,7 +193,7 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
                     i.setIdDefi(resultat.getInt("ID_DEFI"));
                     i.setValeurMinute(resultat.getInt("VALEUR_MINUTE"));
                     i.setEstReussi(resultat.getInt("EST_REUSSI"));
-                    i.setDateInscription(resultat.getString("DATE_INSCRIPTION_DEFI"));
+                    i.setDateInscription(resultat.getString("DATE_INSCRIPTION"));
 
                     listeInscriptionDefi.add(i);
                         
@@ -243,7 +243,7 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
                     i.setIdDefi(resultat.getInt("ID_DEFI"));
                     i.setValeurMinute(resultat.getInt("VALEUR_MINUTE"));
                     i.setEstReussi(resultat.getInt("EST_REUSSI"));
-                    i.setDateInscription(resultat.getString("DATE_INSCRIPTION_DEFI"));
+                    i.setDateInscription(resultat.getString("DATE_INSCRIPTION"));
 
                     listeInscriptionDefi.add(i);
 

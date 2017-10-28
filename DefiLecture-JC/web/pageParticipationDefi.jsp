@@ -45,7 +45,7 @@
         <thead>
         <tr>
           <th>Titre</th>
-          <th>Points</th>
+          <th>Valeur</th>
           <th>Date debut</th>
           <th>Date fin</th>
         </tr>
@@ -54,7 +54,7 @@
         <c:forEach items="${listeDefi}" var="d">
             <tr>
               <td>${d.nom}</td>
-              <td>+ ${d.point} minutes</td>
+              <td>+ ${d.valeurMinute} minutes</td>
               <td>${d.dateDebut} </td>
               <td>${d.dateFin}</td>
               
