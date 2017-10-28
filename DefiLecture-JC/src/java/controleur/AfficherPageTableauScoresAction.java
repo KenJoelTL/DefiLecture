@@ -12,13 +12,13 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Joel
  */
-public class AfficherPageTableauDesScoresAction implements Action, RequestAware {
+public class AfficherPageTableauScoresAction implements Action, RequestAware {
     private HttpServletResponse response;
     private HttpServletRequest request;
 
     @Override
     public String execute() {
-        request.setAttribute("vue", "pageTableauDesScores.jsp");
+        request.setAttribute("vue", "pageTableauScores.jsp");
         return "/index.jsp";
     }
     
