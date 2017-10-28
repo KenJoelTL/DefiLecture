@@ -7,29 +7,35 @@ package controleur;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Charles
+ * @author Joel
  */
-public class DefaultAction implements Action, RequestAware {
+public class RefuserDemandeAdhesionAction implements Action, SessionAware, RequestAware{
+    HttpServletRequest request;
+    HttpServletResponse response;
+    HttpSession session;
 
-    private HttpServletRequest request;
-    private HttpServletResponse response;
-    
     @Override
-    public String execute() {      
-        request.setAttribute("vue", "accueil.jsp");
-        return "/index.jsp";
+    public String execute() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
+    @Override
+    public void setSession(HttpSession session) {
+        this.response = response;
+    }
+
     @Override
     public void setRequest(HttpServletRequest request) {
         this.request = request;
     }
-    
+
     @Override
     public void setResponse(HttpServletResponse response) {
         this.response = response;
     }
+    
 }

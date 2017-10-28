@@ -3,11 +3,12 @@
     Created on : 2017-10-14
     Author     : Joel
 --%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:if test="${empty requestScope}">${requestScope.idEquipe=1}</c:if>
-<%@page import="modele.Equipe"%>
-<%@page import="modele.CompteDAO"%>
 <%@page import="modele.EquipeDAO"%>
+<%@page import="modele.CompteDAO"%>
+<%@page import="modele.Equipe"%>
 <%@page import="jdbc.Config"%>
 <%@page import="jdbc.Connexion"%>
 <style>

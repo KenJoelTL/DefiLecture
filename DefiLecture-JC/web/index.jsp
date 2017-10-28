@@ -75,9 +75,12 @@
                                     <li><a href="affichagePageEquipe.do?tache=afficherPageEquipe&idEquipe=${compteConnecte.idEquipe}">
                                             Page d'&eacute;quipe</a>
                                     </li>                        
+                                    <li><a href="joindreEquipe.do?tache=afficherPageListeDemandesEquipe&ordre=recu">
+                                            Acc&eacute;der aux demandes</a>
+                                    </li>                                              
                                 </c:when>
                                 <c:otherwise>
-                                    <li><a href="creationEquipe.do?tache=afficherPageCreationEquipe">C&eacute;er une equipe</a></li>                                              
+                                    <li><a href="creationEquipe.do?tache=afficherPageCreationEquipe">C&eacute;er une equipe</a></li>                                            
                                 </c:otherwise>
                             </c:choose>
                         </c:when>
@@ -90,6 +93,7 @@
                                 </c:when>
                                 <c:otherwise>
                                     <li><a href="joindreEquipe.do?tache=afficherPageListeEquipes">Joindre une &eacute;quipe</a></li>                                              
+                                    <li><a href="joindreEquipe.do?tache=afficherPageListeDemandesEquipe&ordre=envoyee">Acc&eacute;der aux demandes</a></li>                                              
                                 </c:otherwise>
                             </c:choose>
                         </c:otherwise>

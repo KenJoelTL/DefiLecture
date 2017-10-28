@@ -9,17 +9,9 @@
         <param-value>jdbc:mysql://localhost/defilecture?user=root&amp;password=root</param-value>
     </context-param>
     <servlet>
-        <servlet-name>Frontal</servlet-name>
-        <servlet-class>controlleur.Frontal</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>CF</servlet-name>
         <servlet-class>controleur.ControleurFrontal</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>Frontal</servlet-name>
-        <url-pattern>*.Frontal</url-pattern>
-    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CF</servlet-name>
         <url-pattern>*.do</url-pattern>
