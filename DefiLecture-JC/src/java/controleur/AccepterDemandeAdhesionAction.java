@@ -54,7 +54,7 @@ public class AccepterDemandeAdhesionAction implements Action, RequestAware, Sess
                     else{
                         int idEquipe = demandeEq.getIdEquipe();
                         int nbMembre = compteDao.countCompteByIdEquipe(idEquipe);
-                        if (nbMembre < 3) {//remplacer par une constante
+                        if (nbMembre < MAX_PARTICIPANT_PAR_EQUIPE) {
                             cpt.setIdEquipe(idEquipe);
                             demandeEq.setStatutDemande(1);
                             if(deDao.update(demandeEq) && compteDao.update(cpt)){

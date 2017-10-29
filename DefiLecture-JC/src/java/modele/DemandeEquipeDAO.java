@@ -14,7 +14,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jdbc.Connexion;
 
 /**
  *
@@ -125,9 +124,7 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
 
     @Override
     public boolean update(DemandeEquipe x) {
-        
-        
-        
+       
         String req = "UPDATE demande_equipe SET `ID_EQUIPE` = ? , `ID_COMPTE` = ? , "
                    + "`POINT` = ? , `STATUT_DEMANDE`= ? WHERE `ID_DEMANDE_EQUIPE` = ?";
 
@@ -183,8 +180,8 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
                 int nbLignesAffectees= paramStm.executeUpdate();
                 
                 if (nbLignesAffectees>0) {
-                        paramStm.close();
-                        return true;
+                    paramStm.close();
+                    return true;
                 }
         }
         catch (SQLException exp) {

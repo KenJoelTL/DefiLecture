@@ -13,8 +13,10 @@ public class DemandeEquipe {
     int idDemandeEquipe,
         idCompte,
         idEquipe,
-        statutDemande = -1,
-        point;
+        point,
+        statutDemande = -1; /* -1 : Le demande est visible, elle vient d'être (re)créée 
+                                0 : Le participant a contribué, mais a quitté l'equipe
+                                1 : Le participant fait présentement partie de l'équipe */
 
     public int getIdDemandeEquipe() {
         return idDemandeEquipe;

@@ -55,15 +55,26 @@ public class EffectuerDemandeAdhesionEquipeAction implements Action, SessionAwar
                 }
                 else{
                     DemandeEquipe demandeEq = new DemandeEquipe();
-                    demandeEq.setIdCompte(compte.getIdCompte());
-                    demandeEq.setIdEquipe(equipe.getIdEquipe());
                     DemandeEquipeDAO demandeDao = new DemandeEquipeDAO(cnx);
+                    demandeEq = demandeDao.findByIdCompteEquipe(compte.getIdCompte(), equipe.getIdEquipe());
                     
-                    //Insertion dans la base de données
-                    if(!demandeDao.create(demandeEq))
-                        action = "demandeEchouee.do?tache=afficherPageListeEquipes";
-                    else
-                        action = "demandeEnvoyee.do?tache=afficherPageListeEquipes";
+                    // Vérifie si la demande existe déjà comme dans le cas que l'utilisateur 
+                    // a quitté l'équipe avec plus de 0 points en contribution
+                    if(demandeEq == null){ // si la demande n'existe pas
+                        demandeEq.setIdCompte(compte.getIdCompte());
+                        demandeEq.setIdEquipe(equipe.getIdEquipe());
+
+                        //Insertion dans la base de données
+                        if(!demandeDao.create(demandeEq))
+                            action = "demandeEchouee.do?tache=afficherPageListeEquipes";
+                        else
+                            action = "demandeEnvoyee.do?tache=afficherPageListeEquipes";
+                    }
+                    else{//si la demande existe déjà alors on la rend visible
+                        demandeEq.setStatutDemande(-1);
+                    }
+                    
+                    
                 }
         
                 
