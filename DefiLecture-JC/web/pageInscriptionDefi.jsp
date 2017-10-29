@@ -5,6 +5,7 @@
 --%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="modele.Defi"%>
 <%@page import="modele.DefiDAO"%>
@@ -22,6 +23,7 @@
     pageContext.setAttribute("choixReponse", choixReponse);
   %>
 
+  
 
     <body>
         <h1>Inscription à un défi</h1>

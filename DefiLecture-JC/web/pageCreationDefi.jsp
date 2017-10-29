@@ -5,8 +5,93 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<script language="javascript" src="./script/jquery-1.4.2.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+        var i=1; // compteur pour les choix de reponse
+        
+        //Quand on appuie sur le bouton +, un nouveau choix de reponse est affiché
+        $("#btnPLUS").on("click", function(){
+            //Création textbox pour les choix de réponse
+            var s = "<div><label for=\"choix"+ i +"\">Choix#"+ i +" : </label>" +
+                "<input  id=\"choix"+ i +"\" class=\"choix form-control\" type=\"text\" name=\"choix"+ i +"\" required /></div>"; 
+            //Création des boutons radio pour choisir la bonne réponse
+            var b = "<div class=\"radio\">"+
+                        "<label><input type=\"radio\" name=\"reponse\" value=\""+ (i-1) +"\" required >Choix #"+ i +"</label>"+
+                    "<\/div>";
+            i++;
+            $("#choixReponse").append(s);
+            $("#bonneReponse").append(b);
+
+        });
+        
+        //Quand on appuie sur le bouton -, le dernier choix de réponse ajouté est supprimé
+        $("#btnMOINS").on("click", function(){
+            //On supprime le text box du dernier choix de reponse
+            var select = document.getElementById('choixReponse');
+            select.removeChild(select.lastChild);
+            //On supprime le bouton radio du dernier choix de réponse
+            var select = document.getElementById('bonneReponse');
+            select.removeChild(select.lastChild);
+            i--;
+            //On recrée la chaine string qui sera passé en parametre pour les choix de réponse
+            var r=""; // chaine construite pour les choix de reponse
+            for(var j = 1; j< i; j++){
+                r+= $("#choix"+j).val() +";";
+            }
+            
+            
+             //===>À RETRAVAILLER : Chaine JSON
+            /*var r= "[\"";
+            for(var j = 1; j< i; j++){
+                if(j=i-1)
+                    r+= $("#choix"+j).val();
+                else
+                    r+=  "\""+ $("#choix"+j).val() +"\",";
+            }
+            r+= "\"]"; 
+            */
+            
+            $("#choixReponseJSON").attr("value", r);
+            
+             
+  
+           // $("#choixReponse").html(tabChoix);
+        });
+        
+        
+        $("#choixReponse").on('keyup', '.choix', function(){
+            //Pour créer une chaine JSON
+            //var r = "[\""+$("#choix1").val() +"\",\""+ $("#choix2").val() +"\",\""+ $("#choix3").val() +"\",\""+ $("#choix4").val() +"\"]"; 
+            var r=""; // chaine construite pour les choix de reponse
+            for(var j = 1; j< i; j++){
+                r+= $("#choix"+j).val() +";";
+            }
+            
+             //===>À RETRAVAILLER : Chaine JSON
+            /*var r= "[\"";
+            for(var j = 1; j< i; j++){
+                if(j=i-1)
+                    r+= $("#choix"+j).val();
+                else
+                    r+=  "\""+ $("#choix"+j).val() +"\",";
+            }
+            r+= "\"]"; 
+            */
+            
+            $("#test2").html(r);
+            
+            //var s = $("#choix1").val() +";"+ $("#choix2").val() +";"+ $("#choix3").val() +";"+ $("#choix4").val(); 
+            $("#choixReponseJSON").attr("value", r);
+        });
+    });
+</script>
+    
+
 
         <h1>Creation d'un defi</h1>
+        <h2 id="test2" > ALLO </h2>
         <div class="col-lg-4 col-sm-10">
         <form action="*.do" method="post">
             <div class="form-group">
@@ -32,40 +117,29 @@
             
             <div class="form-group">
                 <h4>Choix de réponse :</h4>
-                <label for="choix1">Choix#1 : </label>
-                <input class="form-control" type="text" name="choix1" required />
-                <label for="choix1">Choix#2 : </label>
-                <input class="form-control" type="text" name="choix2" required />
-                <label for="choix3">Choix#3 : </label>
-                <input class="form-control" type="text" name="choix3" required />
-                <label for="choix4">Choix#4 : </label>
-                <input class="form-control" type="text" name="choix4" required />
+                Ajouter un choix : <button id="btnPLUS" type="button">+</button> <button id="btnMOINS" type="button">-</button>
                 
+                <div id="choixReponse"></div>
                 
-                
-                    La bonne réponse est :
-                    <div class="radio">
-                        <label><input type="radio" name="reponse" value="0" required >Choix #1</label>
-                    </div>
-                     <div class="radio">
-                        <label><input type="radio" name="reponse" value="1" required >Choix #2</label>
-                    </div>
-                     <div class="radio">
-                        <label><input type="radio" name="reponse" value="2" required >Choix #3</label>
-                    </div>
-                     <div class="radio">
-                        <label><input type="radio" name="reponse" value="3" required >Choix #4</label>
-                    </div>
-                
-               
+ 
             
             </div>
+            
+            <div class="form-group">
+                
+                <h4>La bonne réponse est :</h4>
+                <div id="bonneReponse"></div>
+
+            </div>
+            
+            
+            
             <div class="form-group">
                 <label for="point">Nombre de point pour ce défi* : </label>
                 <input class="form-control" type="text" name="valeurMinute" required />
             </div>
             
-           
+            <input id="choixReponseJSON" type="hidden" name="choixReponseJSON" value="">
             <input type="hidden" name="tache" value="effectuerCreationDefi">
             <input type="submit" value="Créer un défi!" />
         </form>
