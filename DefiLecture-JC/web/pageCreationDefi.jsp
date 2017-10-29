@@ -36,52 +36,47 @@
             select.removeChild(select.lastChild);
             i--;
             //On recrée la chaine string qui sera passé en parametre pour les choix de réponse
+            //
+            //===>Pour créer une chaine séparée par des ;
+            /*    
             var r=""; // chaine construite pour les choix de reponse
             for(var j = 1; j< i; j++){
                 r+= $("#choix"+j).val() +";";
             }
-            
-            
-             //===>À RETRAVAILLER : Chaine JSON
-            /*var r= "[\"";
+            */
+            //===>Pour créer une chaine JSON
+            var r= "[";
             for(var j = 1; j< i; j++){
-                if(j=i-1)
-                    r+= $("#choix"+j).val();
+                if(j==(i-1))
+                    r+= "\""+ $("#choix"+j).val() +"\"";
                 else
                     r+=  "\""+ $("#choix"+j).val() +"\",";
             }
-            r+= "\"]"; 
-            */
-            
+            r+= "]"; 
             $("#choixReponseJSON").attr("value", r);
-            
-             
-  
-           // $("#choixReponse").html(tabChoix);
+
         });
         
         
         $("#choixReponse").on('keyup', '.choix', function(){
-            //Pour créer une chaine JSON
-            //var r = "[\""+$("#choix1").val() +"\",\""+ $("#choix2").val() +"\",\""+ $("#choix3").val() +"\",\""+ $("#choix4").val() +"\"]"; 
-            var r=""; // chaine construite pour les choix de reponse
+
+            //===>Pour créer une chaine séparée par des ;
+            /*var r=""; // chaine construite pour les choix de reponse
             for(var j = 1; j< i; j++){
                 r+= $("#choix"+j).val() +";";
             }
-            
-             //===>À RETRAVAILLER : Chaine JSON
-            /*var r= "[\"";
+            */
+           
+            //===>Pour créer une chaine JSON
+            var r= "[";
             for(var j = 1; j< i; j++){
-                if(j=i-1)
-                    r+= $("#choix"+j).val();
+                if(j==(i-1))
+                    r+= "\""+ $("#choix"+j).val() +"\"";
                 else
                     r+=  "\""+ $("#choix"+j).val() +"\",";
             }
-            r+= "\"]"; 
-            */
-            
-            $("#test2").html(r);
-            
+            r+= "]"; 
+
             //var s = $("#choix1").val() +";"+ $("#choix2").val() +";"+ $("#choix3").val() +";"+ $("#choix4").val(); 
             $("#choixReponseJSON").attr("value", r);
         });
@@ -91,7 +86,6 @@
 
 
         <h1>Creation d'un defi</h1>
-        <h2 id="test2" > ALLO </h2>
         <div class="col-lg-4 col-sm-10">
         <form action="*.do" method="post">
             <div class="form-group">
