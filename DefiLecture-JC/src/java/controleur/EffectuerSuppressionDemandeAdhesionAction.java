@@ -13,8 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import jdbc.Config;
 import jdbc.Connexion;
-import modele.Compte;
-import modele.CompteDAO;
 import modele.DemandeEquipe;
 import modele.DemandeEquipeDAO;
 
@@ -22,15 +20,14 @@ import modele.DemandeEquipeDAO;
  *
  * @author Joel
  */
-public class AccepterDemandeAdhesionAction implements Action, RequestAware, SessionAware, RequirePRGAction{
-    HttpServletResponse response;
+public class EffectuerSuppressionDemandeAdhesionAction implements Action, SessionAware, RequestAware, RequirePRGAction{
     HttpServletRequest request;
+    HttpServletResponse response;
     HttpSession session;
 
     @Override
     public String execute() {
-        String action = ".do?tache=afficherPageAccueil";
-        int MAX_PARTICIPANT_PAR_EQUIPE = 3;
+String action = ".do?tache=afficherPageAccueil";
         if(session.getAttribute("connecte") == null
             || session.getAttribute("role") == null
             || ((int)session.getAttribute("role") != 2)
@@ -47,32 +44,25 @@ public class AccepterDemandeAdhesionAction implements Action, RequestAware, Sess
                 if(demandeEq == null)
                     action = "*.do?tache=afficherPageAccueil";
                 else{
-                    CompteDAO compteDao = new CompteDAO(cnx);
-                    Compte cpt = compteDao.read(demandeEq.getIdCompte());
-                    if(cpt == null || cpt.getIdEquipe() !=-1)
+                    if(!deDao.delete(demandeEq))
                         action = "*.do?tache=afficherPageAccueil";
-                    else{
-                        int idEquipe = demandeEq.getIdEquipe();
-                        int nbMembre = compteDao.countCompteByIdEquipe(idEquipe);
-                        if (nbMembre < MAX_PARTICIPANT_PAR_EQUIPE) {
-                            cpt.setIdEquipe(idEquipe);
-                            demandeEq.setStatutDemande(1);
-                            if(deDao.update(demandeEq) && compteDao.update(cpt)){
-                                action = "ajoutReussi.do?tache=afficherPageListeDemandesEquipe&ordre=recu";
-                            }
-                        }
-                   
-                    }   
+                    else
+                        action = "refus.do?tache=afficherPageListeDemandesEquipe&ordre=recu";
                 }
                     
                 
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(AccepterDemandeAdhesionAction.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(EffectuerAcceptationDemandeAdhesionAction.class.getName()).log(Level.SEVERE, null, ex);
                 action = "echec.do?tache=afficherPageAcceuil";
             }
             finally{Connexion.close();}
         }
         return action;
+    }
+
+    @Override
+    public void setSession(HttpSession session) {
+        this.session = session;
     }
 
     @Override
@@ -84,9 +74,5 @@ public class AccepterDemandeAdhesionAction implements Action, RequestAware, Sess
     public void setResponse(HttpServletResponse response) {
         this.response = response;
     }
-
-    @Override
-    public void setSession(HttpSession session) {
-        this.session = session;
-    }
+    
 }

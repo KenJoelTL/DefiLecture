@@ -3,6 +3,7 @@
     Created on : 2017-10-28, 08:15:58
     Author     : Joel
 --%>
+<%@page import="modele.DemandeEquipe"%>
 <%@page import="modele.EquipeDAO"%>
 <%@page import="modele.Compte"%>
 <%@page import="modele.CompteDAO"%>
@@ -26,7 +27,7 @@
         if(request.getParameter("idEquipe")==null)
             compte = cptDao.read((int)session.getAttribute("connecte"));
         pageContext.setAttribute("cptDao", cptDao);
-        pageContext.setAttribute("listeDemandes", demandeEqDao.findByIdEquipeStatutDemande(compte.getIdEquipe(),-1));
+        pageContext.setAttribute("listeDemandes", demandeEqDao.findByIdEquipeStatutDemande(compte.getIdEquipe(),DemandeEquipe.EN_ATTENTE));
     }
     else{
         EquipeDAO eqpDao = new EquipeDAO(cnx);
@@ -65,13 +66,22 @@
         </c:if>
        </c:forEach>
       </c:when>
-         
+
       <c:otherwise>
        <c:forEach items="${listeDemandes}" var="demande">
         <c:set var="equipe" value="${eqpDao.read(demande.idEquipe)}"></c:set>
         <tr>
-            <td>Demande envoy&eacute;e l'équipe <a href="equipe.do?tache=afficherPageEquipe&idEquipe=${equipe.idEquipe}">${equipe.nom}</a></td>
-            <td>État</td>
+        <c:choose>
+            <td>
+            <c:when test="${!demande.statutDemande eq DemandeEquipe.ACCEPTEE}">
+                <span>Demande Acceptée !</span>
+            </c:when>
+                <span>Demande envoy&eacute;e &agrave; l'&eacute;quipe 
+                    <a href="equipe.do?tache=afficherPageEquipe&idEquipe=${equipe.idEquipe}">${equipe.nom}</a>
+                </span>
+                <a href="refuser.do?tache=refuserDemandeAdhesion&idDemandeEquipe=${demande.idDemandeEquipe}">Annuler</a>
+            </td>
+        </c:choose>
         </tr>
        </c:forEach>
       </c:otherwise>

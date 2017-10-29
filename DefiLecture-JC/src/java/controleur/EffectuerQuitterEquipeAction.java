@@ -49,24 +49,27 @@ public class EffectuerQuitterEquipeAction implements Action, RequestAware, Requi
                     || equipe.getIdEquipe() != compte.getIdEquipe()){}
                 else{
                     DemandeEquipeDAO demandeEqpDao = new DemandeEquipeDAO(cnx);
-                    DemandeEquipe demandeEquipe = demandeEqpDao.findByIdCompteEquipe(compte.getIdCompte(), equipe.getIdEquipe());
+                    DemandeEquipe demandeEquipe = 
+                            demandeEqpDao.findByIdCompteEquipe(compte.getIdCompte(), equipe.getIdEquipe());
                     if(demandeEquipe == null){}
                     else{
                         demandeEquipe.setStatutDemande(0);
                         compte.setIdEquipe(-1);
+                        //si l'un des enregistrements échouent alors on revient à l'état initial 
                         if(!demandeEqpDao.update(demandeEquipe) || !compteDao.update(compte)){
                             demandeEquipe.setStatutDemande(1);
                             compte.setIdEquipe(equipe.getIdEquipe());
                             demandeEqpDao.update(demandeEquipe);
                             compteDao.update(compte);
-                            action = "echec.do?tache=afficherPageEquipe&idEquipe="+idEquipe;
+                            action = "echec.do?tache=afficherPageEquipe&idEquipe="+idEquipe; 
                         }
                         else{}
                     }
                 }
                 
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(EffectuerQuitterEquipeAction.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(EffectuerQuitterEquipeAction.class.getName())
+                        .log(Level.SEVERE, null, ex);
             }
             finally{
                 Connexion.close();
