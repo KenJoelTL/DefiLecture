@@ -26,8 +26,8 @@ public class EffectuerConnexionAction implements Action, RequestAware, SessionAw
 
     @Override
     public String execute() {
-        String action = "*do?tache=afficherPageConnexion";      
-        if(session.getAttribute("connecte")    != null
+        String action = "*.do?tache=afficherPageConnexion";      
+        if(session.getAttribute("connecte")    == null
         || request.getParameter("identifiant") == null
         || request.getParameter("motPasse")    == null){}
         else{
@@ -45,12 +45,12 @@ public class EffectuerConnexionAction implements Action, RequestAware, SessionAw
                     session = request.getSession(true);
                     session.setAttribute("connecte", compte.getIdCompte());
                     session.setAttribute("role", compte.getRole());
-                    action = "*do?tache=afficherPageAcceuil";
+                    action = "*.do?tache=afficherPageAcceuil";
                 }
             }
             catch(ClassNotFoundException e){ 
                 System.out.println("Erreur dans le chargement du pilote :"+ e);
-                action = "*do?tache=afficherPageConnexion";      
+                action = "*.do?tache=afficherPageConnexion";      
             }
             finally{
                 Connexion.close();
