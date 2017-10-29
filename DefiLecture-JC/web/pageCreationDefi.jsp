@@ -36,55 +36,28 @@
             select.removeChild(select.lastChild);
             i--;
             //On recrée la chaine string qui sera passé en parametre pour les choix de réponse
-            //
-            //===>Pour créer une chaine séparée par des ;
-            /*    
-            var r=""; // chaine construite pour les choix de reponse
-            for(var j = 1; j< i; j++){
-                r+= $("#choix"+j).val() +";";
-            }
-            */
             //===>Pour créer une chaine JSON
-            var r= "[";
+            var tab = [];
             for(var j = 1; j< i; j++){
-                if(j==(i-1))
-                    r+= "\""+ $("#choix"+j).val() +"\"";
-                else
-                    r+=  "\""+ $("#choix"+j).val() +"\",";
+                tab.push($("#choix"+j).val());
             }
-            r+= "]"; 
-            $("#choixReponseJSON").attr("value", r);
-
+            var chaineJSON = JSON.stringify(tab);
+            $("#choixReponseJSON").attr("value", chaineJSON);
         });
         
         
         $("#choixReponse").on('keyup', '.choix', function(){
-
-            //===>Pour créer une chaine séparée par des ;
-            /*var r=""; // chaine construite pour les choix de reponse
-            for(var j = 1; j< i; j++){
-                r+= $("#choix"+j).val() +";";
-            }
-            */
-           
             //===>Pour créer une chaine JSON
-            var r= "[";
+            var tab = [];
             for(var j = 1; j< i; j++){
-                if(j==(i-1))
-                    r+= "\""+ $("#choix"+j).val() +"\"";
-                else
-                    r+=  "\""+ $("#choix"+j).val() +"\",";
+                tab.push($("#choix"+j).val());
             }
-            r+= "]"; 
-
-            //var s = $("#choix1").val() +";"+ $("#choix2").val() +";"+ $("#choix3").val() +";"+ $("#choix4").val(); 
-            $("#choixReponseJSON").attr("value", r);
+            var chaineJSON = JSON.stringify(tab);
+            $("#choixReponseJSON").attr("value", chaineJSON);
         });
     });
 </script>
     
-
-
         <h1>Creation d'un defi</h1>
         <div class="col-lg-4 col-sm-10">
         <form action="*.do" method="post">

@@ -18,7 +18,6 @@
     DefiDAO dao = new DefiDAO(cnx);
     Defi d = dao.read(request.getParameter("id"));
     String choixReponse = d.getChoixReponse();
-    System.out.println(choixReponse);
     pageContext.setAttribute("d", d);
   %>
 
@@ -33,6 +32,7 @@
                     "</div>";
             }
             $("#listeChoixReponse").append(s);
+
        });
   </script>
 
