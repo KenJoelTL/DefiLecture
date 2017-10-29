@@ -18,7 +18,7 @@
                 "<input  id=\"choix"+ i +"\" class=\"choix form-control\" type=\"text\" name=\"choix"+ i +"\" required /></div>"; 
             //Création des boutons radio pour choisir la bonne réponse
             var b = "<div class=\"radio\">"+
-                        "<label><input type=\"radio\" name=\"reponse\" value=\""+ (i-1) +"\" required >Choix #"+ i +"</label>"+
+                        "<label><input type=\"radio\" name=\"reponse\" value=\""+ (i-1) +"\" required >Choix #"+ i +": <span id=\"radiochoix"+i+"\"></span></label>"+
                     "<\/div>";
             i++;
             $("#choixReponse").append(s);
@@ -54,6 +54,8 @@
             }
             var chaineJSON = JSON.stringify(tab);
             $("#choixReponseJSON").attr("value", chaineJSON);
+            value = $("#"+$(this).attr("id")).val();
+            $("#radio"+$(this).attr("id")).html(value);
         });
     });
 </script>
@@ -94,7 +96,7 @@
             
             <div class="form-group">
                 
-                <h4>La bonne réponse est :</h4>
+                <h4 id="titreBonneReponse">La bonne réponse est :</h4>
                 <div id="bonneReponse"></div>
 
             </div>
