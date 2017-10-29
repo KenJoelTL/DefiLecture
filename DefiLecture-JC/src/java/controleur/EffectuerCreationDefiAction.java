@@ -39,11 +39,12 @@ public class EffectuerCreationDefiAction implements Action, RequestAware, Sessio
                 dateDebut = request.getParameter("dateDebut"),
                 dateFin = request.getParameter("dateFin"),
                 question = request.getParameter("question"),
-                choix1 = request.getParameter("choix1"),
+                /*choix1 = request.getParameter("choix1"),
                 choix2 = request.getParameter("choix2"),
                 choix3 = request.getParameter("choix3"),
-                choix4 = request.getParameter("choix4"),
-                choixReponse = choix1+";"+choix2+";"+choix3+";"+choix4,
+                choix4 = request.getParameter("choix4"),*/
+                //choixReponse = choix1+";"+choix2+";"+choix3+";"+choix4,
+                choixReponse = request.getParameter("choixReponseJSON"),
                 reponse = request.getParameter("reponse");
         
         int     idCompte = (int)session.getAttribute("connecte"),
