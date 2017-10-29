@@ -10,11 +10,16 @@ package modele;
  * @author Joel
  */
 public class DemandeEquipe {
+    
+    public static int EN_ATTENTE = -1, //-1 : Le demande est visible, elle vient d'être (re)créée 
+               SUSPENDUE = 0  , // 0 : Le participant a contribué, mais a quitté l'equipe
+               ACCEPTEE = 1   ; // 1 : Le participant fait présentement partie de l'équipe */
+               
     int idDemandeEquipe,
         idCompte,
         idEquipe,
-        statutDemande = -1,
-        point;
+        point,
+        statutDemande = EN_ATTENTE; 
 
     public int getIdDemandeEquipe() {
         return idDemandeEquipe;

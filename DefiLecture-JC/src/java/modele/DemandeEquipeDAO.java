@@ -14,7 +14,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jdbc.Connexion;
 
 /**
  *
@@ -125,9 +124,7 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
 
     @Override
     public boolean update(DemandeEquipe x) {
-        
-        
-        
+       
         String req = "UPDATE demande_equipe SET `ID_EQUIPE` = ? , `ID_COMPTE` = ? , "
                    + "`POINT` = ? , `STATUT_DEMANDE`= ? WHERE `ID_DEMANDE_EQUIPE` = ?";
 
@@ -183,8 +180,8 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
                 int nbLignesAffectees= paramStm.executeUpdate();
                 
                 if (nbLignesAffectees>0) {
-                        paramStm.close();
-                        return true;
+                    paramStm.close();
+                    return true;
                 }
         }
         catch (SQLException exp) {
@@ -361,16 +358,17 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
         return somme;
     }
     
-    /*
-    public List<DemandeEquipe> findByIdEquipeStatut(int idEquipe,) {
+    
+    public List<DemandeEquipe> findByIdEquipeStatutDemande(int idEquipe, int statutDemande) {
         List<DemandeEquipe> liste = new LinkedList<>();
         
         try {
-            String req = "SELECT * FROM demande_equipe WHERE `ID_EQUIPE` = ?";
+            String req = "SELECT * FROM demande_equipe WHERE `ID_EQUIPE` = ? and STATUT_DEMANDE = ?";
 
             PreparedStatement paramStm = cnx.prepareStatement(req);
 
             paramStm.setInt(1, idEquipe);
+            paramStm.setInt(2, statutDemande);
 
             ResultSet resultat = paramStm.executeQuery();
 
@@ -388,14 +386,15 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
             
             resultat.close();
             paramStm.close();
-                
+
         }
         catch (SQLException exp) {
         }
         return liste;
-    }*/
-    /*
+    }
     
+    
+    /*
     public int findByIdEquipe(int idEquipe) {
         List<DemandeEquipe> liste = new LinkedList<>();
         

@@ -18,58 +18,45 @@ import modele.CompteDAO;
  *
  * @author Joel
  */
-public class EffectuerConnexionAction implements Action, RequestAware, SessionAware {
+public class EffectuerConnexionAction implements Action, RequestAware, SessionAware, RequirePRGAction{
     
     private HttpSession session;
     private HttpServletRequest request;
     private HttpServletResponse response;
-    private CompteDAO dao;
 
     @Override
     public String execute() {
-        
-        System.out.println("Entrer dans l'action de connexion");
-        
-        String identifiant = request.getParameter("identifiant"),
-               motPasse    = request.getParameter("motPasse"); 
-        
-        System.out.println(identifiant);
-        System.out.println(motPasse);
+        String action = "*do?tache=afficherPageConnexion";      
+        if(session.getAttribute("connecte")    != null
+        || request.getParameter("identifiant") == null
+        || request.getParameter("motPasse")    == null){}
+        else{
+            String identifiant = request.getParameter("identifiant"),
+                   motPasse    = request.getParameter("motPasse"); 
+            try{
+                CompteDAO dao =
+                        new CompteDAO(Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
+                Compte compte = 
+                        dao.findByIdentifiantMotPasse(identifiant, motPasse);
 
-        Compte compte;
-
-        try{
-            Class.forName(Config.DRIVER);
-            Connexion.setUrl(Config.URL);
-            Connexion.setUser(Config.DB_USER);
-            Connexion.setPassword(Config.DB_PWD);
-            Connection cnx = Connexion.getInstance();
-            
-            dao = new CompteDAO(cnx);
-            compte = dao.findByIdentifiantMotPasse(identifiant, motPasse);
-            
-            // On vérifie s'il y a un résultat    
-            if(compte!=null){
-                System.out.println("Trouver résultat dans base de donnée");
-                session = request.getSession(true);
-                session.setAttribute("connecte", compte.getIdCompte());
-                session.setAttribute("role", compte.getRole());
-                request.setAttribute("vue", "pageProfil.jsp");
+                // On vérifie s'il y a un résultat    
+                if(compte==null){}
+                else{
+                    session = request.getSession(true);
+                    session.setAttribute("connecte", compte.getIdCompte());
+                    session.setAttribute("role", compte.getRole());
+                    action = "*do?tache=afficherPageAcceuil";
+                }
             }
-            else{
-                System.out.println("Pas trouvé de résultat dans base de donnée");
-                request.setAttribute("vue", "pageConnexion.jsp");
+            catch(ClassNotFoundException e){ 
+                System.out.println("Erreur dans le chargement du pilote :"+ e);
+                action = "*do?tache=afficherPageConnexion";      
             }
-            return "/index.jsp";           
+            finally{
+                Connexion.close();
+            }
         }
-        catch(ClassNotFoundException e){ 
-            System.out.println("Erreur dans le chargement du pilote :"+ e);
-            request.setAttribute("vue", "pageConnexion.jsp");
-            return "/index.jsp";
-        }
-        finally{
-            Connexion.close();
-        }
+        return action;
     }
 
     @Override

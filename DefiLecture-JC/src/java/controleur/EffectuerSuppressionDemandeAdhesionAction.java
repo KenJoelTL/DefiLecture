@@ -13,8 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import jdbc.Config;
 import jdbc.Connexion;
-import modele.Compte;
-import modele.CompteDAO;
 import modele.DemandeEquipe;
 import modele.DemandeEquipeDAO;
 
@@ -22,7 +20,7 @@ import modele.DemandeEquipeDAO;
  *
  * @author Joel
  */
-public class RefuserDemandeAdhesionAction implements Action, SessionAware, RequestAware, RequirePRGAction{
+public class EffectuerSuppressionDemandeAdhesionAction implements Action, SessionAware, RequestAware, RequirePRGAction{
     HttpServletRequest request;
     HttpServletResponse response;
     HttpSession session;
@@ -50,12 +48,11 @@ String action = ".do?tache=afficherPageAccueil";
                         action = "*.do?tache=afficherPageAccueil";
                     else
                         action = "refus.do?tache=afficherPageListeDemandesEquipe&ordre=recu";
-                    
                 }
                     
                 
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(AccepterDemandeAdhesionAction.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(EffectuerAcceptationDemandeAdhesionAction.class.getName()).log(Level.SEVERE, null, ex);
                 action = "echec.do?tache=afficherPageAcceuil";
             }
             finally{Connexion.close();}
@@ -65,7 +62,7 @@ String action = ".do?tache=afficherPageAccueil";
 
     @Override
     public void setSession(HttpSession session) {
-        this.response = response;
+        this.session = session;
     }
 
     @Override

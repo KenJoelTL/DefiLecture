@@ -22,7 +22,7 @@ import modele.DemandeEquipeDAO;
  *
  * @author Joel
  */
-public class AccepterDemandeAdhesionAction implements Action, RequestAware, SessionAware, RequirePRGAction{
+public class EffectuerAcceptationDemandeAdhesionAction implements Action, RequestAware, SessionAware, RequirePRGAction{
     HttpServletResponse response;
     HttpServletRequest request;
     HttpSession session;
@@ -30,6 +30,7 @@ public class AccepterDemandeAdhesionAction implements Action, RequestAware, Sess
     @Override
     public String execute() {
         String action = ".do?tache=afficherPageAccueil";
+        int MAX_PARTICIPANT_PAR_EQUIPE = 3;
         if(session.getAttribute("connecte") == null
             || session.getAttribute("role") == null
             || ((int)session.getAttribute("role") != 2)
@@ -48,12 +49,12 @@ public class AccepterDemandeAdhesionAction implements Action, RequestAware, Sess
                 else{
                     CompteDAO compteDao = new CompteDAO(cnx);
                     Compte cpt = compteDao.read(demandeEq.getIdCompte());
-                    if(cpt == null)
+                    if(cpt == null || cpt.getIdEquipe() !=-1)
                         action = "*.do?tache=afficherPageAccueil";
                     else{
                         int idEquipe = demandeEq.getIdEquipe();
                         int nbMembre = compteDao.countCompteByIdEquipe(idEquipe);
-                        if (nbMembre < 3) {//remplacer par une constante
+                        if (nbMembre < MAX_PARTICIPANT_PAR_EQUIPE) {
                             cpt.setIdEquipe(idEquipe);
                             demandeEq.setStatutDemande(1);
                             if(deDao.update(demandeEq) && compteDao.update(cpt)){
@@ -66,7 +67,7 @@ public class AccepterDemandeAdhesionAction implements Action, RequestAware, Sess
                     
                 
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(AccepterDemandeAdhesionAction.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(EffectuerAcceptationDemandeAdhesionAction.class.getName()).log(Level.SEVERE, null, ex);
                 action = "echec.do?tache=afficherPageAcceuil";
             }
             finally{Connexion.close();}

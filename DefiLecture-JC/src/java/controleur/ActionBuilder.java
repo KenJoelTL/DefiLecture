@@ -78,9 +78,9 @@ public class ActionBuilder {
                 case "afficherPageListeDemandesEquipe":
                     return new AfficherPageListeDemandesEquipeAction();
                 case "accepterDemandeAdhesion":
-                    return new AccepterDemandeAdhesionAction();
+                    return new EffectuerAcceptationDemandeAdhesionAction();
                 case "refuserDemandeAdhesion":
-                    return new RefuserDemandeAdhesionAction();
+                    return new EffectuerSuppressionDemandeAdhesionAction();
       //Test Ajax
                 case "testAjax":
                     return new ExempleClasseActionAjax();
