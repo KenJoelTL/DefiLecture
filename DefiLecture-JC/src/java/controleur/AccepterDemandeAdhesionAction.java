@@ -30,6 +30,7 @@ public class AccepterDemandeAdhesionAction implements Action, RequestAware, Sess
     @Override
     public String execute() {
         String action = ".do?tache=afficherPageAccueil";
+        int MAX_PARTICIPANT_PAR_EQUIPE = 3;
         if(session.getAttribute("connecte") == null
             || session.getAttribute("role") == null
             || ((int)session.getAttribute("role") != 2)
