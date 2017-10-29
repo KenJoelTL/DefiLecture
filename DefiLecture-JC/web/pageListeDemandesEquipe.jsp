@@ -18,20 +18,20 @@
 
 
 <%  Connection cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
-    DemandeEquipeDAO eqDao = new DemandeEquipeDAO(cnx);
+    DemandeEquipeDAO demandeEqDao = new DemandeEquipeDAO(cnx);
 
-    if(request.getParameter("ordre") == "recu"){
+    if("recu".equals(request.getParameter("ordre"))){
         CompteDAO cptDao = new CompteDAO(cnx);
         Compte compte = new Compte();
         if(request.getParameter("idEquipe")==null)
             compte = cptDao.read((int)session.getAttribute("connecte"));
         pageContext.setAttribute("cptDao", cptDao);
-        pageContext.setAttribute("listeDemandes", eqDao.findByIdEquipe(compte.getIdEquipe()));
+        pageContext.setAttribute("listeDemandes", demandeEqDao.findByIdEquipeStatutDemande(compte.getIdEquipe(),-1));
     }
     else{
         EquipeDAO eqpDao = new EquipeDAO(cnx);
-        pageContext.setAttribute("eqpDao", eqpDao);
-        pageContext.setAttribute("listeDemandes", eqDao.findByIdCompte((int)session.getAttribute("connecte")));
+        pageContext.setAttribute("demandeEqDao", eqpDao);
+        pageContext.setAttribute("listeDemandes", demandeEqDao.findByIdCompte((int)session.getAttribute("connecte")));
     }
 %>
 
@@ -53,7 +53,7 @@
           
       <c:when test="${requestScope.ordre eq 'recu'}">
        <c:forEach items="${listeDemandes}" var="demande">
-        <c:if test="${sessionScope.role eq 2 and demande.statutDemande eq -1}">
+        <c:if test="${sessionScope.role eq 2}">
          <c:set var="auteur" value="${cptDao.read(demande.idCompte)}"></c:set>
          <tr>
             <td>Demande envoy&eacute;e par ${auteur.prenom} ${auteur.nom}</td>

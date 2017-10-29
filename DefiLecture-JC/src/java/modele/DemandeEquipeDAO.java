@@ -358,16 +358,17 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
         return somme;
     }
     
-    /*
-    public List<DemandeEquipe> findByIdEquipeStatut(int idEquipe,) {
+    
+    public List<DemandeEquipe> findByIdEquipeStatutDemande(int idEquipe, int statutDemande) {
         List<DemandeEquipe> liste = new LinkedList<>();
         
         try {
-            String req = "SELECT * FROM demande_equipe WHERE `ID_EQUIPE` = ?";
+            String req = "SELECT * FROM demande_equipe WHERE `ID_EQUIPE` = ? and STATUT_DEMANDE = ?";
 
             PreparedStatement paramStm = cnx.prepareStatement(req);
 
             paramStm.setInt(1, idEquipe);
+            paramStm.setInt(2, statutDemande);
 
             ResultSet resultat = paramStm.executeQuery();
 
@@ -385,14 +386,15 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
             
             resultat.close();
             paramStm.close();
-                
+
         }
         catch (SQLException exp) {
         }
         return liste;
-    }*/
-    /*
+    }
     
+    
+    /*
     public int findByIdEquipe(int idEquipe) {
         List<DemandeEquipe> liste = new LinkedList<>();
         

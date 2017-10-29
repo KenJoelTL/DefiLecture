@@ -61,6 +61,7 @@ public class EffectuerDemandeAdhesionEquipeAction implements Action, SessionAwar
                     // Vérifie si la demande existe déjà comme dans le cas que l'utilisateur 
                     // a quitté l'équipe avec plus de 0 points en contribution
                     if(demandeEq == null){ // si la demande n'existe pas
+                        demandeEq = new DemandeEquipe();
                         demandeEq.setIdCompte(compte.getIdCompte());
                         demandeEq.setIdEquipe(equipe.getIdEquipe());
 
