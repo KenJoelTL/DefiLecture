@@ -5,6 +5,7 @@
  */
 package modele;
 
+import com.util.Util;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -38,20 +39,20 @@ public class DefiDAO extends DAO<Defi> {
         PreparedStatement paramStm = null;
         try 
         {
-            System.out.println("entrer dans le try");
+
                 paramStm = cnx.prepareStatement(req);
                 
-                System.out.println("avant les param");
+
                 paramStm.setInt(1, x.getIdCompte());
-                paramStm.setString(2, x.getNom());
-                paramStm.setString(3, x.getDescription());
+                paramStm.setString(2, Util.toUTF8(x.getNom()));
+                paramStm.setString(3, Util.toUTF8(x.getDescription()));
                 paramStm.setString(4, x.getDateDebut());
 		paramStm.setString(5, x.getDateFin());
-		paramStm.setString(6, x.getQuestion());
-                paramStm.setString(7, x.getChoixReponse());
-		paramStm.setString(8, x.getReponse());
+		paramStm.setString(6, Util.toUTF8(x.getQuestion()));
+                paramStm.setString(7, Util.toUTF8(x.getChoixReponse()));
+		paramStm.setString(8, Util.toUTF8(x.getReponse()));
                 paramStm.setInt(9, x.getValeurMinute());
-            System.out.println("apres les param");
+
                 int n= paramStm.executeUpdate();
                 
                 if (n>0)
