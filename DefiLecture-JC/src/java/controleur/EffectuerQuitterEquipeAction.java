@@ -56,14 +56,14 @@ public class EffectuerQuitterEquipeAction implements Action, RequestAware, Requi
                         demandeEquipe.setStatutDemande(0);
                         compte.setIdEquipe(-1);
                         //si l'un des enregistrements échouent alors on revient à l'état initial 
-                        if(!demandeEqpDao.update(demandeEquipe) || !compteDao.update(compte)){
+                     /*   if(!demandeEqpDao.update(demandeEquipe) || !compteDao.update(compte)){
                             demandeEquipe.setStatutDemande(1);
                             compte.setIdEquipe(equipe.getIdEquipe());
                             demandeEqpDao.update(demandeEquipe);
                             compteDao.update(compte);
                             action = "echec.do?tache=afficherPageEquipe&idEquipe="+idEquipe; 
                         }
-                        else{}
+                        else{}*/
                     }
                 }
                 
