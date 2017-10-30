@@ -37,6 +37,7 @@
 %>
 
 
+
 <h2>Liste des demandes</h2>
 
     <table class="table">
@@ -67,20 +68,25 @@
        </c:forEach>
       </c:when>
 
+         
       <c:otherwise>
        <c:forEach items="${listeDemandes}" var="demande">
         <c:set var="equipe" value="${eqpDao.read(demande.idEquipe)}"></c:set>
         <tr>
         <c:choose>
-            <td>
             <c:when test="${!demande.statutDemande eq DemandeEquipe.ACCEPTEE}">
+            <td>
                 <span>Demande Acceptée !</span>
+            </td>
             </c:when>
+            <c:otherwise>
+            <td>
                 <span>Demande envoy&eacute;e &agrave; l'&eacute;quipe 
                     <a href="equipe.do?tache=afficherPageEquipe&idEquipe=${equipe.idEquipe}">${equipe.nom}</a>
                 </span>
                 <a href="refuser.do?tache=refuserDemandeAdhesion&idDemandeEquipe=${demande.idDemandeEquipe}">Annuler</a>
             </td>
+            </c:otherwise>
         </c:choose>
         </tr>
        </c:forEach>
