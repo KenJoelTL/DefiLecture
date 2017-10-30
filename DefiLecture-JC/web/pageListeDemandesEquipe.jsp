@@ -24,8 +24,9 @@
     if("recu".equals(request.getParameter("ordre"))){
         CompteDAO cptDao = new CompteDAO(cnx);
         Compte compte = new Compte();
-        if(request.getParameter("idEquipe")==null)
+        if(request.getParameter("idEquipe")==null){
             compte = cptDao.read((int)session.getAttribute("connecte"));
+        }
         pageContext.setAttribute("cptDao", cptDao);
         pageContext.setAttribute("listeDemandes", demandeEqDao.findByIdEquipeStatutDemande(compte.getIdEquipe(),DemandeEquipe.EN_ATTENTE));
     }
@@ -53,9 +54,9 @@
       <tbody>
       <c:choose>
           
-      <c:when test="${requestScope.ordre eq 'recu'}">
+      <c:when test="${(param.ordre eq 'recu') and (sessionScope.role eq 2) }">
        <c:forEach items="${listeDemandes}" var="demande">
-        <c:if test="${sessionScope.role eq 2}">
+
          <c:set var="auteur" value="${cptDao.read(demande.idCompte)}"></c:set>
          <tr>
             <td>Demande envoy&eacute;e par ${auteur.prenom} ${auteur.nom}</td>
@@ -64,7 +65,6 @@
                 <a href="refuser.do?tache=refuserDemandeAdhesion&idDemandeEquipe=${demande.idDemandeEquipe}">Refuser</a>
             </td>
          </tr>
-        </c:if>
        </c:forEach>
       </c:when>
 
@@ -74,7 +74,7 @@
         <c:set var="equipe" value="${eqpDao.read(demande.idEquipe)}"></c:set>
         <tr>
         <c:choose>
-            <c:when test="${!demande.statutDemande eq DemandeEquipe.ACCEPTEE}">
+            <c:when test="${demande.statutDemande eq DemandeEquipe.ACCEPTEE}">
             <td>
                 <span>Demande Acceptée !</span>
             </td>
