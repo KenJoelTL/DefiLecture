@@ -49,40 +49,45 @@ public class EffectuerCreationLectureAction implements Action, RequestAware, Ses
                
             try{
 
-                Connexion.reinit();
-                Connection cnx = Connexion.startConnection(Config.DB_USER,Config.DB_PWD,Config.URL,Config.DRIVER);
-                LectureDAO dao;
-                dao = new LectureDAO(cnx);
-                lecture = new Lecture();
-                lecture.setIdCompte(idCompte);
-                lecture.setDureeMinutes(dureeMinutes);
-                lecture.setTitre(titre);
-                lecture.setEstObligatoire(obligatoire);
-                if(dao.create(lecture)){
+                
 
-                    //Mise à jour des points du participant
-                    //Conversion du nombre de minutes de la lecture en points pour le Participant : 15mins = 1 point
-                    CompteDAO daoCompte = new CompteDAO(cnx);
-                    Compte compte = new Compte();
-                    compte = daoCompte.read(idCompte);
-                    int pointLecture = (dureeMinutes + compte.getMinutesRestantes()) / 15;
-                    int pointCompte = compte.getPoint() + pointLecture;
-                    //Les minutes restantes sont gardées en mémoire ici
-                    int minutesRestantes = (dureeMinutes + compte.getMinutesRestantes()) % 15;
-                    compte.setPoint(pointCompte);
-                    compte.setMinutesRestantes(minutesRestantes);
-                    daoCompte.update(compte);
-                    //Mise à jour des points dans demande_equipe (pour calculer le total des points de l'équipe)
-                    if(compte.getIdEquipe() > 0){
-                        DemandeEquipeDAO demandeDAO = new DemandeEquipeDAO(cnx);
-                        DemandeEquipe demande = new DemandeEquipe();
-                        demande = demandeDAO.findByIdCompteEquipe(idCompte, compte.getIdEquipe());
-                        int pointDemandeEquipe = demande.getPoint() + pointLecture;
-                        demande.setPoint(pointDemandeEquipe);
-                        demandeDAO.update(demande);
-                    }
+
+            Connexion.reinit();
+            Connection cnx = Connexion.startConnection(Config.DB_USER,Config.DB_PWD,Config.URL,Config.DRIVER);
+            LectureDAO dao;
+            dao = new LectureDAO(cnx);
+            lecture = new Lecture();
+            lecture.setIdCompte(idCompte);
+            lecture.setDureeMinutes(dureeMinutes);
+            lecture.setTitre(titre);
+            lecture.setEstObligatoire(obligatoire);
+            if(dao.create(lecture)){
+                
+                //Mise à jour des points du participant
+                //Conversion du nombre de minutes de la lecture en points pour le Participant : 15mins = 1 point
+                CompteDAO daoCompte = new CompteDAO(cnx);
+                Compte compte = new Compte();
+                compte = daoCompte.read(idCompte);
+                if(lecture.getEstObligatoire() == 1)
+                    dureeMinutes*=2;
+                int pointLecture = (dureeMinutes + compte.getMinutesRestantes()) / 15;
+                int pointCompte = compte.getPoint() + pointLecture;
+                //Les minutes restantes sont gardées en mémoire ici
+                int minutesRestantes = (dureeMinutes + compte.getMinutesRestantes()) % 15;
+                compte.setPoint(pointCompte);
+                compte.setMinutesRestantes(minutesRestantes);
+                daoCompte.update(compte);
+                //Mise à jour des points dans demande_equipe (pour calculer le total des points de l'équipe)
+                if(compte.getIdEquipe() > 0){
+                    DemandeEquipeDAO demandeDAO = new DemandeEquipeDAO(cnx);
+                    DemandeEquipe demande = new DemandeEquipe();
+                    demande = demandeDAO.findByIdCompteEquipe(idCompte, compte.getIdEquipe());
+                    int pointDemandeEquipe = demande.getPoint() + pointLecture;
+                    demande.setPoint(pointDemandeEquipe);
+                    demandeDAO.update(demande);
 
                     System.out.println("Une lecture a été créée avec succès");
+
                 }
 
                 else
