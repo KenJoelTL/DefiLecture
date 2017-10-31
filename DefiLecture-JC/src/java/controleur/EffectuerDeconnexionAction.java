@@ -20,14 +20,12 @@ public class EffectuerDeconnexionAction implements Action, RequestAware, Session
     
     @Override
     public String execute() {
-        String action = "deconnexion.do?tache=afficherPageAccueil";
+        String action = "accueil.do?tache=afficherPageAccueil";
         session = request.getSession(true);
         
-        if(session.getAttribute("connecte") != null){
-            session.removeAttribute("connecte");
-            if(session.getAttribute("role") != null)
-                session.removeAttribute("role");
-        }
+        if(session != null)
+            session.invalidate();
+        
         return action;
     }
 

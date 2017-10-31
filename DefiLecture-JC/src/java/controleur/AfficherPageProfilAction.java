@@ -19,6 +19,8 @@ public class AfficherPageProfilAction implements Action, RequestAware {
     
     @Override
     public String execute() {
+        
+        if(request.getParameter("idCompte") != null)
         request.setAttribute("vue", "pageProfil.jsp");
         
         return "/index.jsp";

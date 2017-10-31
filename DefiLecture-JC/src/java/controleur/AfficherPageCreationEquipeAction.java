@@ -26,23 +26,31 @@ public class AfficherPageCreationEquipeAction implements Action,RequestAware, Se
             
     @Override
     public String execute() {
-        if((int)session.getAttribute("role")==2 || (int)session.getAttribute("role")==4){
+        
+        if( session.getAttribute ("connecte") != null && session.getAttribute("role") != null 
+        &&( (int)session.getAttribute("role") == Compte.CAPITAINE 
+        ||  (int)session.getAttribute("role") == Compte.ADMINISTRATEUR) ){
 
             int idCompte = (int)session.getAttribute("connecte");
+            
             try {
-                CompteDAO dao = new CompteDAO(Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
+                CompteDAO dao = new CompteDAO(Connexion.startConnection
+                    (Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
                 Compte compte = dao.read(idCompte);
-                if(compte.getIdEquipe()==-1){
+                
+                if(compte.getIdEquipe()==-1)
                     request.setAttribute("vue", "pageCreationEquipe.jsp");
-                }
+                
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(AfficherPageCreationEquipeAction.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(AfficherPageCreationEquipeAction
+                                   .class.getName()).log(Level.SEVERE, null, ex);
                  request.setAttribute("vue","accueil.jsp");
             }
             finally{
                 Connexion.close();
             }
         }
+        
         return"/index.jsp";
     }
     

@@ -7,19 +7,22 @@ package controleur;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Charles
  */
-public class AfficherPageInscriptionAction implements Action, RequestAware {
+public class AfficherPageInscriptionAction implements Action, RequestAware, SessionAware {
     
     private HttpServletRequest request;
     private HttpServletResponse response;
-
+    private HttpSession session;
+    
     @Override
     public String execute() {
-        request.setAttribute("vue", "pageInscription.jsp");
+       if( session.getAttribute("connecte")== null)
+            request.setAttribute("vue", "pageInscription.jsp");
         
         return "/index.jsp";
     }
@@ -34,4 +37,11 @@ public class AfficherPageInscriptionAction implements Action, RequestAware {
         this.response = response;
     }
     
+    @Override
+    public void setSession(HttpSession session) {
+        this.session = session;
+    }
+    
+    
 }
+

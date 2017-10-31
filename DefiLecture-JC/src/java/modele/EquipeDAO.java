@@ -132,7 +132,7 @@ public class EquipeDAO extends DAO<Equipe>{
                 if(x.getNom() == null || "".equals(x.getNom().trim()))
                     paramStm.setString(1, null);
                 else
-                    paramStm.setString(1, x.getNom());
+                    paramStm.setString(1, Util.toUTF8(x.getNom()));
                 paramStm.setInt(2, x.getIdEquipe());
                 
                 int nbLignesAffectees= paramStm.executeUpdate();
@@ -207,6 +207,7 @@ public class EquipeDAO extends DAO<Equipe>{
                 //appelle les DAO DEMANDE Compte et DemandeEquipe
                 e.setPoint(new DemandeEquipeDAO(cnx).sumPointByidEquipe(r.getInt("ID_EQUIPE")));
                 e.setNbMembres(new CompteDAO(cnx).countCompteByIdEquipe(r.getInt("ID_EQUIPE")));
+				
                 liste.add(e);
             }
             r.close();
@@ -234,6 +235,9 @@ public class EquipeDAO extends DAO<Equipe>{
                 Equipe e = new Equipe();
                 e.setIdEquipe(resultat.getInt("ID_EQUIPE"));
                 e.setNom(resultat.getString("NOM"));
+                e.setPoint((new DemandeEquipeDAO(cnx).sumPointByidEquipe(resultat.getInt("ID_EQUIPE"))));
+                e.setNbMembres((new CompteDAO(cnx)).countCompteByIdEquipe(resultat.getInt("ID_EQUIPE")));
+				
 
                 resultat.close();
                 paramStm.close();
@@ -279,6 +283,9 @@ public class EquipeDAO extends DAO<Equipe>{
                 Equipe e = new Equipe();
                 e.setIdEquipe(resultat.getInt("ID_EQUIPE"));
                 e.setNom(resultat.getString("NOM"));
+                
+                e.setPoint((new DemandeEquipeDAO(cnx).sumPointByidEquipe(resultat.getInt("ID_EQUIPE"))));
+                e.setNbMembres((new CompteDAO(cnx)).countCompteByIdEquipe(resultat.getInt("ID_EQUIPE")));
 
                 resultat.close();
                 paramStm.close();

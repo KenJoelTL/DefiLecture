@@ -10,7 +10,11 @@ package modele;
  * @author Joel
  */
 public class Compte {
-    
+    public static int PARTICIPANT = 1;
+    public static int CAPITAINE = 2;
+    public static int MODERATEUR = 3;
+    public static int ADMINISTRATEUR = 4;
+       
     int idCompte;             //clé primaire
     int idEquipe =-1;                  //équipe dont le participant fait partie
     

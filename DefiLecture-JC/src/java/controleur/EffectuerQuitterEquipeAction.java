@@ -36,6 +36,10 @@ public class EffectuerQuitterEquipeAction implements Action, RequestAware, Requi
             || session.getAttribute("role") == null
             || request.getParameter("idEquipe") == null
             || request.getParameter("idCompte") == null){}
+        else if(!request.getParameter("idCompte")
+            .equals((String)session.getAttribute("connecte"))
+            && ((int)session.getAttribute("role") != Compte.CAPITAINE)
+            && ((int)session.getAttribute("role") != Compte.ADMINISTRATEUR)){}
         else{
             try {
                 String idCompte = request.getParameter("idCompte");
@@ -53,17 +57,19 @@ public class EffectuerQuitterEquipeAction implements Action, RequestAware, Requi
                             demandeEqpDao.findByIdCompteEquipe(compte.getIdCompte(), equipe.getIdEquipe());
                     if(demandeEquipe == null){}
                     else{
-                        demandeEquipe.setStatutDemande(0);
-                        compte.setIdEquipe(-1);
+                        if(demandeEqpDao.delete(demandeEquipe))
+                            compte.setIdEquipe(-1); 
+                        
+                       // demandeEquipe.setStatutDemande(0); //met à 0 si l'utilisateur est suspendu
                         //si l'un des enregistrements échouent alors on revient à l'état initial 
-                        if(!demandeEqpDao.update(demandeEquipe) || !compteDao.update(compte)){
+                     /*   if(!demandeEqpDao.update(demandeEquipe) || !compteDao.update(compte)){
                             demandeEquipe.setStatutDemande(1);
                             compte.setIdEquipe(equipe.getIdEquipe());
                             demandeEqpDao.update(demandeEquipe);
                             compteDao.update(compte);
                             action = "echec.do?tache=afficherPageEquipe&idEquipe="+idEquipe; 
                         }
-                        else{}
+                        else{}*/
                     }
                 }
                 

@@ -32,15 +32,25 @@ public class EffectuerCreationLectureAction implements Action, RequestAware, Ses
         
         System.out.println("Entrer dans l'action créer lecture");
         
-        String  titre = request.getParameter("titre");                
-        int     dureeMinutes = Integer.parseInt(request.getParameter("dureeMinutes")),
-                obligatoire = Integer.parseInt(request.getParameter("obligatoire")),
-                idCompte = (int)session.getAttribute("connecte");
-        
-        Lecture lecture;
-        
-        
-        try{
+        if(session.getAttribute("connecte") != null
+        && session.getAttribute("role") != null
+        && ( ((int)session.getAttribute("role") == Compte.PARTICIPANT)
+            || ((int)session.getAttribute("role") == Compte.CAPITAINE) )
+        && request.getParameter("titre")!=null
+        && request.getParameter("dureeMinutes")!=null
+        && request.getParameter("obligatoire")!=null){
+     
+            String  titre = request.getParameter("titre");                
+            int     dureeMinutes = Integer.parseInt(request.getParameter("dureeMinutes")),
+                    obligatoire = Integer.parseInt(request.getParameter("obligatoire")),
+                    idCompte = (int)session.getAttribute("connecte");
+
+            Lecture lecture;
+               
+            try{
+
+                
+
 
             Connexion.reinit();
             Connection cnx = Connexion.startConnection(Config.DB_USER,Config.DB_PWD,Config.URL,Config.DRIVER);
@@ -75,25 +85,22 @@ public class EffectuerCreationLectureAction implements Action, RequestAware, Ses
                     int pointDemandeEquipe = demande.getPoint() + pointLecture;
                     demande.setPoint(pointDemandeEquipe);
                     demandeDAO.update(demande);
+
+                    System.out.println("Une lecture a été créée avec succès");
+
                 }
 
-                System.out.println("Une lecture a été créée avec succès");
+                else
+                    System.out.println("Problème de création de la lecture");
             }
-                
-            else
-                System.out.println("Problème de création de la lecture");
-                
-            //request.setAttribute("vue", "accueil.jsp");
-            return "*.do?tache=afficherPageGestionLecture";
+            catch(ClassNotFoundException e){
+                System.out.println("Erreur dans le chargement du pilote :"+ e);
+                //request.setAttribute("vue", "lecture.jsp");
+                return "*.do?tache=afficherPageGestionLecture";
+            }
+
         }
-        catch(ClassNotFoundException e){
-            System.out.println("Erreur dans le chargement du pilote :"+ e);
-            //request.setAttribute("vue", "lecture.jsp");
-            return "*.do?tache=afficherPageGestionLecture";
-        }
-        
-        
-        
+        return "*.do?tache=afficherPageGestionLecture";
     }
 
     @Override

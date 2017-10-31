@@ -28,20 +28,17 @@ public class AfficherPageEquipeAction implements Action, RequestAware {
         
         String idEquipe = request.getParameter("idEquipe");
         
-        if(idEquipe==null)
-            request.setAttribute("vue", "accueil.jsp");
-        else{
+        if(idEquipe!=null){
             try {
-                Connection cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
+                Connection cnx = Connexion.startConnection
+                        (Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
                 EquipeDAO dao = new EquipeDAO(cnx);
-                if(dao.read(idEquipe) == null){
-                    request.setAttribute("vue", "accueil.jsp");
-                }
-                else{
+                if(dao.read(idEquipe) != null)
                     request.setAttribute("vue", "pageEquipe.jsp");
-                }
+                    
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(AfficherPageEquipeAction.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(AfficherPageEquipeAction
+                                   .class.getName()).log(Level.SEVERE, null, ex);
                 request.setAttribute("vue", "accueil.jsp");
             }
             finally{

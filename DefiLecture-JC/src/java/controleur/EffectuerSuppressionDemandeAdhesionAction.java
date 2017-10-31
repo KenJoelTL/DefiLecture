@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import jdbc.Config;
 import jdbc.Connexion;
+import modele.Compte;
 import modele.DemandeEquipe;
 import modele.DemandeEquipeDAO;
 
@@ -30,7 +31,7 @@ public class EffectuerSuppressionDemandeAdhesionAction implements Action, Sessio
 String action = ".do?tache=afficherPageAccueil";
         if(session.getAttribute("connecte") == null
             || session.getAttribute("role") == null
-            || ((int)session.getAttribute("role") != 2)
+            || ((int)session.getAttribute("role") != Compte.CAPITAINE)
             || request.getParameter("idDemandeEquipe") == null){
             action = ".do?tache=afficherPageAccueil";}
         else{
