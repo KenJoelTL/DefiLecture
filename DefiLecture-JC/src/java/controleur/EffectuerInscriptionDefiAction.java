@@ -27,18 +27,21 @@ import modele.InscriptionDefi;
  *
  * @author Charles
  */
-public class EffectuerInscriptionDefiAction implements Action, RequestAware, RequirePRGAction {
+public class EffectuerInscriptionDefiAction implements Action, RequestAware, RequirePRGAction, SessionAware {
 
     private HttpServletRequest request;
     private HttpServletResponse response;
-
+    private HttpSession session;
     
     
     
     @Override
     public String execute() {
-        
-        if(request.getParameter("valider")!=null){
+        if(session.getAttribute("connecte") != null
+        && session.getAttribute("role") != null
+        && ( ((int)session.getAttribute("role") == Compte.PARTICIPANT)
+            || ((int)session.getAttribute("role") == Compte.CAPITAINE) )
+        && request.getParameter("valider")!=null){
             String reponseParticipant = request.getParameter("reponseParticipant");
             int     idCompte = Integer.parseInt(request.getParameter("idCompte")),
                     idDefi = Integer.parseInt(request.getParameter("idDefi"));
@@ -139,6 +142,11 @@ public class EffectuerInscriptionDefiAction implements Action, RequestAware, Req
     @Override
     public void setResponse(HttpServletResponse response) {
         this.response = response;
+    }
+
+    @Override
+    public void setSession(HttpSession session) {
+        this.session = session;
     }
 
 
