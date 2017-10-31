@@ -37,13 +37,14 @@ public class EffectuerInscriptionDefiAction implements Action, RequestAware, Req
     
     @Override
     public String execute() {
+        System.out.println("ENTRER DANS L'ACTION INSCRIPTION DEFI");
         if(session.getAttribute("connecte") != null
         && session.getAttribute("role") != null
         && ( ((int)session.getAttribute("role") == Compte.PARTICIPANT)
             || ((int)session.getAttribute("role") == Compte.CAPITAINE) )
         && request.getParameter("valider")!=null){
             String reponseParticipant = request.getParameter("reponseParticipant");
-            int     idCompte = Integer.parseInt(request.getParameter("idCompte")),
+            int     idCompte = (int)(session.getAttribute("connecte")),
                     idDefi = Integer.parseInt(request.getParameter("idDefi"));
             InscriptionDefi inscriptionDefi = new InscriptionDefi();       
               
@@ -52,22 +53,24 @@ public class EffectuerInscriptionDefiAction implements Action, RequestAware, Req
                 DefiDAO daoDefi = new DefiDAO(cnx);
                 Defi defi = daoDefi.read(idDefi);
                 
-                
+                System.out.println("test1");
                 if(defi == null)
                     return "*.do?tache=afficherPageParticipationDefi";
                 else{
-                    
+                    System.out.println("test2");
                     //Si le participant a déjà fait le défi, on ne crée pas une nouvelle inscription_defi
                     cnx = Connexion.startConnection(Config.DB_USER,Config.DB_PWD,Config.URL,Config.DRIVER);
                     InscriptionDefiDAO daoInscriptionDefi = new InscriptionDefiDAO(cnx);
                     List<InscriptionDefi> listeInscriptionDefi = daoInscriptionDefi.findAllByIdCompte(idCompte);
+                    System.out.println("test 2.2");
+                    System.out.println(idCompte);
                     for(InscriptionDefi i : listeInscriptionDefi){
                         if(i.getIdDefi() == idDefi)
                             return "*.do?tache=afficherPageParticipationDefi";
                     }
                 
                 
-                    
+                    System.out.println("test3");
                     cnx = Connexion.startConnection(Config.DB_USER,Config.DB_PWD,Config.URL,Config.DRIVER);
                     daoInscriptionDefi = new InscriptionDefiDAO(cnx);
                     
@@ -79,12 +82,12 @@ public class EffectuerInscriptionDefiAction implements Action, RequestAware, Req
                         
                         inscriptionDefi.setValeurMinute(0);
                         inscriptionDefi.setEstReussi(0);
-                        
+                        System.out.println("test4");
                         
                     }
                     //Si oui, une inscription_defi est crée, avec le résultat 1 (réussie)
                     else{
-                        
+                        System.out.println("test5");
                         inscriptionDefi.setValeurMinute(defi.getValeurMinute());
                         inscriptionDefi.setEstReussi(1);
                         
@@ -100,6 +103,7 @@ public class EffectuerInscriptionDefiAction implements Action, RequestAware, Req
                         compte.setPoint(pointCompte);
                         compte.setMinutesRestantes(minutesRestantes);
                         daoCompte.update(compte);
+                        System.out.println("test6");
                         //Mise à jour des points dans demande_equipe (pour calculer le total des points de l'équipe)
                         if(compte.getIdEquipe() > 0){
                             DemandeEquipeDAO demandeDAO = new DemandeEquipeDAO(cnx);
@@ -108,6 +112,7 @@ public class EffectuerInscriptionDefiAction implements Action, RequestAware, Req
                             int pointDemandeEquipe = demande.getPoint() + pointDefi;
                             demande.setPoint(pointDemandeEquipe);
                             demandeDAO.update(demande);
+                            System.out.println("test7");
                         }
                 
                     }

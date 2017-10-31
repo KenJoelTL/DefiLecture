@@ -56,7 +56,7 @@
                     <div>
                         <input type="hidden" name="tache" value="effectuerInscriptionDefi">
                         <input type="hidden" name="idDefi" value="${d.idDefi}">
-                        <input type="hidden" name="idCompte" value="${d.idCompte}">
+
                         <input type="submit" name="valider" value=" Valider ma réponse" />
                         <input type="submit" name="annule" value=" Annuler" />
                     </div>

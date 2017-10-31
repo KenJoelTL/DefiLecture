@@ -4,6 +4,8 @@
     Author     : Charles
 --%>
 
+<%@page import="modele.Compte"%>
+<%@page import="modele.CompteDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="modele.InscriptionDefi"%>
 <%@page import="modele.InscriptionDefiDAO"%>
@@ -21,8 +23,23 @@
     Connexion.reinit();
     Connection cnx = Connexion.startConnection(Config.DB_USER,Config.DB_PWD,Config.URL,Config.DRIVER);
     DefiDAO daoDefi = new DefiDAO(cnx);
-    List<Defi> listeDefi = daoDefi.findAll();
+    
+    CompteDAO daoCompte = new CompteDAO(cnx);
+    Compte compte = new Compte();
+    compte = daoCompte.read((int)session.getAttribute("connecte"));
+    int role = compte.getRole();
+    pageContext.setAttribute("role", role);
+    List<Defi> listeDefi;
+    if(compte.getRole()<3){
+        listeDefi = daoDefi.findAllDefiEnCours();
+        
+    }
+    else{
+        listeDefi = daoDefi.findAllByIdCompte((int)session.getAttribute("connecte"));
+    }
+    
     pageContext.setAttribute("listeDefi", listeDefi);
+    
     
     cnx = Connexion.startConnection(Config.DB_USER,Config.DB_PWD,Config.URL,Config.DRIVER);
     InscriptionDefiDAO daoInscriptionDefi = new InscriptionDefiDAO(cnx);
@@ -58,6 +75,14 @@
               <td>${d.dateDebut} </td>
               <td>${d.dateFin}</td>
               
+              <%-- Si le compte est un compte admin ou moderateur, il ne peut pas relever de défi, mais il peut les modifier--%>
+              <c:if test="${pageScope.role ge 3}">
+                  <td><a href="##">modifier</a></td>
+              </c:if>
+              
+               
+              <c:if test="${pageScope.role lt 3}">
+              
                       <c:choose>
                           <c:when test="${listeReussi.contains(d.idDefi.toString())}">
                           <td class="bg-success">REUSSI</td>
@@ -71,6 +96,7 @@
 
                              </c:otherwise>
                       </c:choose>
+              </c:if>
               </td
             </tr>
         </c:forEach>

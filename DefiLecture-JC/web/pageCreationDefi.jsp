@@ -75,12 +75,12 @@
             
             <div class="form-group">
                 <label for="dateDebut">Date de début* : </label>
-                <input class="form-control" type="text" name="dateDebut" required />
+                <input class="form-control" type="datetime-local" name="dateDebut" required />
                 <label for="dateDebut">Date de fin* : </label>
-                <input class="form-control" type="text" name="dateFin" required />
+                <input class="form-control" type="datetime-local" name="dateFin" required />
             </div>
             <div class="form-group">
-                <label for="question">Question* : </label>
+                <label for="question">Question à répondre pour réussir ce défi* : </label>
                 <input class="form-control" type="text" name="question" required />
             </div>
             
