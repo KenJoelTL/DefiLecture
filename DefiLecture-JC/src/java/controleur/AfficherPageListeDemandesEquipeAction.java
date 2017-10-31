@@ -8,6 +8,7 @@ package controleur;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import modele.Compte;
 
 /**
  *
@@ -20,12 +21,12 @@ public class AfficherPageListeDemandesEquipeAction implements Action, RequestAwa
     
     @Override
     public String execute() { 
+        
         if(session.getAttribute("connecte") == null)
-           request.setAttribute("vue", "pageConnexion");
+           request.setAttribute("vue", "pageConnexion");        
         else
             request.setAttribute("vue", "pageListeDemandesEquipe.jsp");
-        //request.getParameter("ordre");
-        //request.setAttribute("ordre");
+
         return"/index.jsp";
     }
 

@@ -168,10 +168,10 @@ public class CompteDAO extends DAO<Compte>{
                 && x.getNom()      != null && !"".equals(x.getNom().trim())     
                 && x.getPrenom()   != null && !"".equals(x.getPrenom().trim()))
             {
-                paramStm.setString(1, x.getCourriel());
-                paramStm.setString(2, x.getMotPasse());
-                paramStm.setString(3, x.getNom());
-                paramStm.setString(4, x.getPrenom());
+                paramStm.setString(1, Util.toUTF8(x.getCourriel()));
+                paramStm.setString(2, Util.toUTF8(x.getMotPasse()));
+                paramStm.setString(3, Util.toUTF8(x.getNom()));
+                paramStm.setString(4, Util.toUTF8(x.getPrenom()));
 
                 if(x.getPseudonyme() == null || "".equals(x.getPseudonyme().trim()))
                     paramStm.setString(5, null);

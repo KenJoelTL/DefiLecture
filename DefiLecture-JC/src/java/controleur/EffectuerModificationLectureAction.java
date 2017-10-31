@@ -10,8 +10,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import jdbc.Config;
 import jdbc.Connexion;
+import modele.Compte;
 import modele.Lecture;
 import modele.LectureDAO;
 
@@ -19,14 +21,19 @@ import modele.LectureDAO;
  *
  * @author Charles
  */
-public class EffectuerModificationLectureAction implements Action, RequestAware, RequirePRGAction {
-    
+public class EffectuerModificationLectureAction implements Action, RequestAware, RequirePRGAction, SessionAware {
+    private HttpSession session;
     private HttpServletResponse response;
     private HttpServletRequest request;
 
     @Override
     public String execute() {
-        if(request.getParameter("modifie")!=null){
+        
+        if(session.getAttribute("connecte") != null
+        && session.getAttribute("role") != null
+        && ( ((int)session.getAttribute("role") == Compte.PARTICIPANT)
+            || ((int)session.getAttribute("role") == Compte.CAPITAINE) )
+        && request.getParameter("modifie")!=null){
             String idLecture = request.getParameter("idLecture"),
                    titre = request.getParameter("titre");
                    
@@ -95,6 +102,11 @@ public class EffectuerModificationLectureAction implements Action, RequestAware,
     @Override
     public void setResponse(HttpServletResponse response) {
         this.response = response;
+    }
+
+    @Override
+    public void setSession(HttpSession session) {
+        this.session = session;
     }
     
 }
