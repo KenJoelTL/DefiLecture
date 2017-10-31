@@ -10,7 +10,7 @@ package modele;
  * @author Joel
  */
 public class Equipe {
-    
+    public static int NB_MAX_MEMBRES = 3;
     int idEquipe, //clé primaire
         point,
         nbMembres;

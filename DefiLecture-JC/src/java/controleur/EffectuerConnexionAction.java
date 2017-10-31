@@ -27,10 +27,10 @@ public class EffectuerConnexionAction implements Action, RequestAware, SessionAw
     @Override
     public String execute() {
         String action = "*.do?tache=afficherPageConnexion";      
-        if(session.getAttribute("connecte")    != null
-        || request.getParameter("identifiant") == null
-        || request.getParameter("motPasse")    == null){ }
-        else{
+        if(session.getAttribute("connecte")    == null
+        && request.getParameter("identifiant") != null
+        && request.getParameter("motPasse")    != null)
+        {
             String identifiant = request.getParameter("identifiant"),
                    motPasse    = request.getParameter("motPasse"); 
             try{
@@ -40,8 +40,7 @@ public class EffectuerConnexionAction implements Action, RequestAware, SessionAw
                         dao.findByIdentifiantMotPasse(identifiant, motPasse);
 
                 // On vérifie s'il y a un résultat    
-                if(compte==null){}
-                else{
+                if(compte!=null){
                     session = request.getSession(true);
                     session.setAttribute("connecte", compte.getIdCompte());
                     session.setAttribute("role", compte.getRole());

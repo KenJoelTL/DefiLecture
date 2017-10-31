@@ -17,6 +17,7 @@ import modele.Compte;
 import modele.CompteDAO;
 import modele.DemandeEquipe;
 import modele.DemandeEquipeDAO;
+import modele.Equipe;
 
 /**
  *
@@ -30,16 +31,17 @@ public class EffectuerAcceptationDemandeAdhesionAction implements Action, Reques
     @Override
     public String execute() {
         String action = ".do?tache=afficherPageAccueil";
-        int MAX_PARTICIPANT_PAR_EQUIPE = 3;
         if(session.getAttribute("connecte") == null
             || session.getAttribute("role") == null
-            || ((int)session.getAttribute("role") != 2)
+            || ( ((int)session.getAttribute("role") != Compte.CAPITAINE)
+                && ((int)session.getAttribute("role") != Compte.ADMINISTRATEUR))
             || request.getParameter("idDemandeEquipe") == null){
             action = ".do?tache=afficherPageAccueil";}
         else{
             try {
                 String idDemandeEq = request.getParameter("idDemandeEquipe");
-                Connection cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
+                Connection cnx = Connexion.startConnection(Config.DB_USER, 
+                                 Config.DB_PWD, Config.URL, Config.DRIVER);
                 
                 DemandeEquipeDAO deDao = new DemandeEquipeDAO(cnx);
                 DemandeEquipe demandeEq = deDao.read(idDemandeEq);
@@ -54,9 +56,9 @@ public class EffectuerAcceptationDemandeAdhesionAction implements Action, Reques
                     else{
                         int idEquipe = demandeEq.getIdEquipe();
                         int nbMembre = compteDao.countCompteByIdEquipe(idEquipe);
-                        if (nbMembre < MAX_PARTICIPANT_PAR_EQUIPE) {
+                        if (nbMembre < Equipe.NB_MAX_MEMBRES) {
                             cpt.setIdEquipe(idEquipe);
-                            demandeEq.setStatutDemande(1);
+                            demandeEq.setStatutDemande(DemandeEquipe.ACCEPTEE);
                             if(deDao.update(demandeEq) && compteDao.update(cpt)){
                                 action = "ajoutReussi.do?tache=afficherPageListeDemandesEquipe&ordre=recu";
                             }
@@ -67,7 +69,8 @@ public class EffectuerAcceptationDemandeAdhesionAction implements Action, Reques
                     
                 
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(EffectuerAcceptationDemandeAdhesionAction.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(EffectuerAcceptationDemandeAdhesionAction
+                        .class.getName()).log(Level.SEVERE, null, ex);
                 action = "echec.do?tache=afficherPageAcceuil";
             }
             finally{Connexion.close();}

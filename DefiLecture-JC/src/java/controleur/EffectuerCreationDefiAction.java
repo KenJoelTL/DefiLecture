@@ -42,7 +42,8 @@ public class EffectuerCreationDefiAction implements Action, RequestAware, Sessio
         && request.getParameter("dateFin")!=null
         && request.getParameter("question")!=null
         && request.getParameter("choixReponseJSON")!=null
-        && request.getParameter("reponseJSON")!=null
+        && request.getParameter("reponse")!=null
+        && request.getParameter("valeurMinute")!=null
         && request.getParameter("dateDebut")!=null){
             String  nom = request.getParameter("nom"),
                     description = request.getParameter("description"),
