@@ -58,6 +58,8 @@ public class EffectuerCreationLectureAction implements Action, RequestAware, Ses
                 CompteDAO daoCompte = new CompteDAO(cnx);
                 Compte compte = new Compte();
                 compte = daoCompte.read(idCompte);
+                if(lecture.getEstObligatoire() == Lecture.OBLIGATOIRE)
+                    dureeMinutes*=2;
                 int pointLecture = (dureeMinutes + compte.getMinutesRestantes()) / 15;
                 int pointCompte = compte.getPoint() + pointLecture;
                 //Les minutes restantes sont gardées en mémoire ici

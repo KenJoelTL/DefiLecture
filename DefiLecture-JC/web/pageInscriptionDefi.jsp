@@ -37,21 +37,21 @@
   </script>
 
     <body>
-        <h1>Inscription à un défi</h1>
-        <div>
-                Nom du défi: ${d.nom}
-        </div>
-        <div>      
-                Description : ${d.description}
+        <h2>${d.nom}</h2>
+  
+        <div >      
+                <label for="description">Défi à relever : </label>
+                <textarea id="description" disabled class="form-control" name="description" rows="15" style="max-width:80%; resize:none">${d.description}</textarea>
         </div>
         
         <div>
-                Question à répondre : ${d.question}
+                <label for="question">Question à répondre : </label>
+                <p id="question"> ${d.question} </p>
         </div>
           
        <div>
             <form action="*.do" method="post">
-                <h1>Choix de réponse</h1>
+                <label for="listeChoixReponse">Choix de réponse : </label>
                 <div id="listeChoixReponse"></div>
                     <div>
                         <input type="hidden" name="tache" value="effectuerInscriptionDefi">
