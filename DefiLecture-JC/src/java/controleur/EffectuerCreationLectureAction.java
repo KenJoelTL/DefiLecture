@@ -47,10 +47,7 @@ public class EffectuerCreationLectureAction implements Action, RequestAware, Ses
 
             Lecture lecture;
                
-            try{
-
-                
-
+        try{
 
             Connexion.reinit();
             Connection cnx = Connexion.startConnection(Config.DB_USER,Config.DB_PWD,Config.URL,Config.DRIVER);
@@ -61,7 +58,7 @@ public class EffectuerCreationLectureAction implements Action, RequestAware, Ses
             lecture.setDureeMinutes(dureeMinutes);
             lecture.setTitre(titre);
             lecture.setEstObligatoire(obligatoire);
-            if(dao.create(lecture)){
+             if(dao.create(lecture)){
                 
                 //Mise à jour des points du participant
                 //Conversion du nombre de minutes de la lecture en points pour le Participant : 15mins = 1 point
@@ -92,6 +89,7 @@ public class EffectuerCreationLectureAction implements Action, RequestAware, Ses
 
                 else
                     System.out.println("Problème de création de la lecture");
+              }
             }
             catch(ClassNotFoundException e){
                 System.out.println("Erreur dans le chargement du pilote :"+ e);
