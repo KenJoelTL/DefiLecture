@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
@@ -210,6 +211,8 @@ public class EquipeDAO extends DAO<Equipe>{
 				
                 liste.add(e);
             }
+            Collections.sort(liste);
+            Collections.reverse(liste);
             r.close();
             stm.close();
         }

@@ -24,8 +24,10 @@
 <%  Connection cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
     EquipeDAO daoEquipe = new EquipeDAO(cnx);
     Equipe equipe = daoEquipe.read(request.getParameter("idEquipe"));
+    int rang = daoEquipe.findAll().indexOf(equipe)+1;
     CompteDAO daoCompte = new CompteDAO(cnx);
-    pageContext.setAttribute("equipe", equipe);        
+    pageContext.setAttribute("rang", rang);  
+    pageContext.setAttribute("equipe", equipe);  
     pageContext.setAttribute("listeMembres", daoCompte.findByIdEquipe(equipe.getIdEquipe())); %>
     
         <div id='toutPageEquipe' style='background-color: rgba(51, 122, 183, 0.5);'>    
@@ -43,7 +45,7 @@
                     <div class='col-md-5' >
                         <div class='col-sm-6' ><p>Pointage Courant</p><p>${equipe.point} pts</p></div>
 
-                        <div class='col-sm-6' ><p>Rang</p><p>#8</p></div>
+                        <div class='col-sm-6' ><p>Rang</p><p>#${rang}</p></div>
                     </div>
                     </div>
                 </div>
