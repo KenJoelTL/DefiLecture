@@ -27,9 +27,9 @@ public class EffectuerConnexionAction implements Action, RequestAware, SessionAw
     @Override
     public String execute() {
         String action = "*.do?tache=afficherPageConnexion";      
-        if(session.getAttribute("connecte")    == null
+        if(session.getAttribute("connecte")    != null
         || request.getParameter("identifiant") == null
-        || request.getParameter("motPasse")    == null){}
+        || request.getParameter("motPasse")    == null){ }
         else{
             String identifiant = request.getParameter("identifiant"),
                    motPasse    = request.getParameter("motPasse"); 
