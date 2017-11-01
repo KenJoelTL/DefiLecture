@@ -355,6 +355,11 @@ public class CompteDAO extends DAO<Compte>{
                 
                 // On vérifie s'il y a un résultat    
                 if(resultat.next()){
+                    if(!motPasse.equals(resultat.getString("MOT_PASSE")))
+                        return null;
+                    if(!identifiant.equals(resultat.getString("PSEUDONYME")) &&
+                       !identifiant.equals(resultat.getString("COURRIEL")) )
+                        return null;
                     
                     Compte c = new Compte();
                     c.setIdCompte(resultat.getInt("ID_COMPTE"));

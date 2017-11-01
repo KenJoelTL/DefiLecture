@@ -84,6 +84,8 @@
                 <span>Demande envoy&eacute;e &agrave; l'&eacute;quipe 
                     <a href="equipe.do?tache=afficherPageEquipe&idEquipe=${equipe.idEquipe}">${equipe.nom}</a>
                 </span>
+            </td>
+            <td>
                 <a href="refuser.do?tache=refuserDemandeAdhesion&idDemandeEquipe=${demande.idDemandeEquipe}">Annuler</a>
             </td>
             </c:otherwise>

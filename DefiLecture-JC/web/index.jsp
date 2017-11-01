@@ -80,7 +80,7 @@
                                     </li>                                              
                                 </c:when>
                                 <c:otherwise>
-                                    <li><a href="creationEquipe.do?tache=afficherPageCreationEquipe">C&eacute;er une equipe</a></li>                                            
+                                    <li><a href="creationEquipe.do?tache=afficherPageCreationEquipe">Cr&eacute;er une equipe</a></li>                                            
                                 </c:otherwise>
                             </c:choose>
                         </c:when>

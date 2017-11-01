@@ -18,13 +18,13 @@ public class AfficherPageCreationLectureAction implements Action, RequestAware, 
     private HttpServletRequest request;
     private HttpServletResponse response;
     private HttpSession session;
-    
+
     @Override
     public String execute() {
     
         if(session.getAttribute("connecte") != null && session.getAttribute("role") != null 
-        && ((int)session.getAttribute("role")== Compte.CAPITAINE 
-        ||  (int)session.getAttribute("role")== Compte.PARTICIPANT))
+        && ( ((int)session.getAttribute("role")== Compte.CAPITAINE) 
+        ||   ((int)session.getAttribute("role")== Compte.PARTICIPANT)) )
             request.setAttribute("vue", "pageCreationLecture.jsp");
         
         return "/index.jsp";
@@ -34,7 +34,7 @@ public class AfficherPageCreationLectureAction implements Action, RequestAware, 
     public void setRequest(HttpServletRequest request) {
         this.request = request;
     }
-    
+
     @Override
     public void setResponse(HttpServletResponse response) {
         this.response = response;

@@ -72,6 +72,8 @@ public class ActionBuilder {
                     return new AfficherPageTableauScoresAction();
                 case"afficherPageListeEquipes":
                     return new AfficherPageListeEquipesAction();
+                case"effectuerDepartEquipe":
+                    return new EffectuerQuitterEquipeAction();
       //DemandeEquipe          
                 case "effectuerDemandeAdhesionEquipe":
                     return new EffectuerDemandeAdhesionEquipeAction();
