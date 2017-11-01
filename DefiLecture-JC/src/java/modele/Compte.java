@@ -19,14 +19,14 @@ public class Compte {
     int idEquipe =-1;                  //équipe dont le participant fait partie
     
 //    String nomUtilisateur;         //ancienne clé primaire
-    String pseudonyme;              //l'utilisateur peut aussi s'inscrire avec un pseudo unique
+    String pseudonyme;                  //l'utilisateur peut aussi s'inscrire avec un pseudo unique
     String nom;
     String prenom;
     String courriel;
     String motPasse;
-    String programmeEtude;               //programme scolaire
-    String avatar;                  //Pour l'instant l'avatar sera représenté par le chemin vers l'image
-    int role;                       //Utilisateur==0 | Participant==1 | Capitaine==2 | Animateur==3 | Administrateur==4
+    String programmeEtude;              //programme scolaire
+    String avatar;                      //Pour l'instant l'avatar sera représenté par le chemin vers l'image
+    int role = Compte.PARTICIPANT;      //Utilisateur==0 | Participant==1 | Capitaine==2 | Animateur==3 | Administrateur==4
     int point;                   //Sommes des points gagnées par les lectures (minutes de lecture = (point*15)+minutesRestantes)
     int minutesRestantes;
     

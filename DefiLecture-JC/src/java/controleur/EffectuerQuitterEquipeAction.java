@@ -31,13 +31,14 @@ public class EffectuerQuitterEquipeAction implements Action, RequestAware, Requi
     
     @Override
     public String execute() {
-        String action = "echec.*do?tache=afficherPageAccueil";
+
+        String action = "echec.do?tache=afficherPageAccueil";
         if(session.getAttribute("connecte") == null
             || session.getAttribute("role") == null
             || request.getParameter("idEquipe") == null
-            || request.getParameter("idCompte") == null){}
+            || request.getParameter("idCompte") == null){ }
         else if(!request.getParameter("idCompte")
-            .equals((String)session.getAttribute("connecte"))
+            .equals(session.getAttribute("connecte")+"")
             && ((int)session.getAttribute("role") != Compte.CAPITAINE)
             && ((int)session.getAttribute("role") != Compte.ADMINISTRATEUR)){}
         else{
@@ -49,17 +50,21 @@ public class EffectuerQuitterEquipeAction implements Action, RequestAware, Requi
                 CompteDAO compteDao = new CompteDAO(cnx);
                 Compte compte = compteDao.read(idCompte);
                 Equipe equipe = equipeDao.read(idEquipe); 
-                if(compte == null || equipe == null 
-                    || equipe.getIdEquipe() != compte.getIdEquipe()){}
-                else{
+                if(compte != null && equipe != null 
+                    && equipe.getIdEquipe() == compte.getIdEquipe()){
+                    
                     DemandeEquipeDAO demandeEqpDao = new DemandeEquipeDAO(cnx);
                     DemandeEquipe demandeEquipe = 
                             demandeEqpDao.findByIdCompteEquipe(compte.getIdCompte(), equipe.getIdEquipe());
-                    if(demandeEquipe == null){}
-                    else{
-                        if(demandeEqpDao.delete(demandeEquipe))
-                            compte.setIdEquipe(-1); 
-                        
+                    
+                    if(demandeEquipe != null){
+                        if(demandeEqpDao.delete(demandeEquipe)){
+                            compte.setIdEquipe(-1);
+                            compteDao.update(compte);
+                            action="auRevoir.do?tache=afficherPageEquipe&idEquipe="+idEquipe;
+                        }
+                        else
+                            action="tuRestes.do?tache=afficherPageEquipe&idEquipe="+idEquipe;
                        // demandeEquipe.setStatutDemande(0); //met à 0 si l'utilisateur est suspendu
                         //si l'un des enregistrements échouent alors on revient à l'état initial 
                      /*   if(!demandeEqpDao.update(demandeEquipe) || !compteDao.update(compte)){

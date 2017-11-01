@@ -169,7 +169,7 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
 
     @Override
     public boolean delete(DemandeEquipe x) {
-        String req = "DELETE FROM equipe WHERE `ID_DEMANDE_EQUIPE = ?`";
+        String req = "DELETE FROM demande_equipe WHERE `ID_DEMANDE_EQUIPE` = ?";
 
         PreparedStatement paramStm = null;
         try {
