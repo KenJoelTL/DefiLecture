@@ -4,12 +4,19 @@
     Author     : Charles
 --%>
 
+<%@page import="java.util.logging.Level"%>
+<%@page import="java.text.ParseException"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.text.DateFormat"%>
+<%@page import="java.util.Locale"%>
 <%@page import="modele.Compte"%>
 <%@page import="modele.CompteDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="modele.InscriptionDefi"%>
 <%@page import="modele.InscriptionDefiDAO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="jdbc.Config"%>
 <%@page import="modele.Defi"%>
@@ -39,8 +46,7 @@
     }
     
     pageContext.setAttribute("listeDefi", listeDefi);
-    
-    
+ 
     cnx = Connexion.startConnection(Config.DB_USER,Config.DB_PWD,Config.URL,Config.DRIVER);
     InscriptionDefiDAO daoInscriptionDefi = new InscriptionDefiDAO(cnx);
     List<InscriptionDefi> listeInscriptionDefi = daoInscriptionDefi.findAllByIdCompte((int)session.getAttribute("connecte"));
@@ -68,18 +74,47 @@
         </tr>
       </thead>
       <tbody>
+            
+          
         <c:forEach items="${listeDefi}" var="d">
             <tr>
               <td>${d.nom}</td>
               <td>+ ${d.valeurMinute} minutes</td>
-              <td>${d.dateDebut} </td>
-              <td>${d.dateFin}</td>
+              <c:catch>
+                <fmt:parseDate pattern="yyyy-MM-dd' 'hh:mm:ss.SS" value="${d.dateDebut}" var="dateDebutPARSE" />
+              </c:catch>
+              <fmt:formatDate var="dateDebut" value="${dateDebutPARSE}" pattern="d MMMM yyyy 'à' HH'h'mm" />
+              <td>${dateDebut} </td>
+              <c:catch>
+                <fmt:parseDate pattern="yyyy-MM-dd' 'hh:mm:ss.SS" value="${d.dateFin}" var="dateFinPARSE" />
+              </c:catch>
+              <fmt:formatDate var="dateFin" value="${dateFinPARSE}" pattern="d MMMM yyyy 'à' HH'h'mm" />
+              <td>${dateFin} </td>
+              
+              
+              
+              <%-- variable qui indique la date d'aujourd'hui, pour faire des comparaisons--%>
+              <jsp:useBean id="now" class="java.util.Date" />
+              <fmt:formatDate var="dateMaintenant" value="${now}" pattern="yyyy-MM-dd' 'hh:mm:ss.S" />
               
               <%-- Si le compte est un compte admin ou moderateur, il ne peut pas relever de défi, mais il peut les modifier--%>
               <c:if test="${pageScope.role ge 3}">
                   <td><a href="##">modifier</a></td>
-              </c:if>
               
+                  <%-- Sert à identifier si les défi sont en cours, en attente, ou terminé--%>
+                 <c:choose>
+                     <c:when test="${(d.dateDebut lt dateMaintenant) and (d.dateFin gt dateMaintenant)}">
+                         <td class="bg-success"> EN COURS </td>
+                     </c:when>
+                     <c:when test="${d.dateFin lt dateMaintenant}">
+                         <td class="bg-danger"> TERMINÉ </td>
+                     </c:when>
+                     <c:otherwise>
+                         <td> EN ATTENTE </td>
+                     </c:otherwise>
+                 </c:choose>
+              
+              </c:if>
                
               <c:if test="${pageScope.role lt 3}">
               
