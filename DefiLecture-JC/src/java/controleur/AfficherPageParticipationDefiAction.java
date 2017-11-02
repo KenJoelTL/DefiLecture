@@ -7,24 +7,20 @@ package controleur;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Charles
  */
-public class AfficherPageParticipationDefiAction implements Action, RequestAware, SessionAware {
+public class AfficherPageParticipationDefiAction implements Action, RequestAware {
 
     private HttpServletRequest request;
     private HttpServletResponse response;
-    private HttpSession session;
     
     @Override
     public String execute() {
         
-        if(session.getAttribute("connecte") != null)
-            request.setAttribute("vue", "pageParticipationDefi.jsp");
-        request.setAttribute("vue", "pageConnexion.jsp");
+        request.setAttribute("vue", "pageParticipationDefi.jsp");
         
         return "/index.jsp";
     }
@@ -37,11 +33,6 @@ public class AfficherPageParticipationDefiAction implements Action, RequestAware
     @Override
     public void setResponse(HttpServletResponse response) {
         this.response = response;
-    }
-
-    @Override
-    public void setSession(HttpSession session) {
-        this.session = session;
     }
     
 }
