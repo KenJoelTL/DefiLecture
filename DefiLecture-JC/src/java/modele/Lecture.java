@@ -13,6 +13,8 @@ import java.sql.Date;
  */
 public class Lecture {
     
+    public static int NON_OBLIGATOIRE = 0;
+    public static int OBLIGATOIRE = 1;
 
     int idLecture; // clé primaire
     int idCompte;
