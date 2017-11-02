@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -54,6 +55,10 @@ public class ActionBuilder {
                     return new AfficherPageInscriptionDefiAction();
                 case "effectuerInscriptionDefi":
                     return new EffectuerInscriptionDefiAction();
+                case "afficherPageModificationDefi":
+                    return new AfficherPageModificationDefiAction();
+                case "effectuerModificationDefi":
+                    return new EffectuerModificationDefiAction();
        //Compte        
                 case "afficherPageGestionListeCompte":
                     return new AfficherPageGestionListeComptesAction();

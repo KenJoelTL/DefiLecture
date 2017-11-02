@@ -9,7 +9,7 @@
 
 <script>
     $(document).ready(function(){
-        var i=1; // compteur pour les choix de reponse
+        var i=2; // compteur pour les choix de reponse
         
         //Quand on appuie sur le bouton +, un nouveau choix de reponse est affiché
         $("#btnPLUS").on("click", function(){
@@ -28,6 +28,8 @@
         
         //Quand on appuie sur le bouton -, le dernier choix de réponse ajouté est supprimé
         $("#btnMOINS").on("click", function(){
+            if(i>2)
+            {
             //On supprime le text box du dernier choix de reponse
             var select = document.getElementById('choixReponse');
             select.removeChild(select.lastChild);
@@ -43,6 +45,7 @@
             }
             var chaineJSON = JSON.stringify(tab);
             $("#choixReponseJSON").attr("value", chaineJSON);
+            }
         });
         
         
@@ -88,7 +91,10 @@
                 <h4>Choix de réponse :</h4>
                 Ajouter un choix : <button id="btnPLUS" type="button">+</button> <button id="btnMOINS" type="button">-</button>
                 
-                <div id="choixReponse"></div>
+                <div id="choixReponse">
+                    <div><label for="choix1">Choix#1 :</label> 
+                    <input  id="choix1"class="choix form-control" type="text" name="choix1" required /></div>
+                </div>
                 
  
             
@@ -97,7 +103,13 @@
             <div class="form-group">
                 
                 <h4 id="titreBonneReponse">La bonne réponse est :</h4>
-                <div id="bonneReponse"></div>
+                <div id="bonneReponse">
+                    <div class="radio">
+                        <label><input type="radio" name="reponse" value="0" required >Choix #1: <span id="radiochoix1"></span></label>
+                    </div>
+                    
+                    
+                </div>
 
             </div>
             

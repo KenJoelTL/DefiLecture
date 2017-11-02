@@ -65,7 +65,7 @@ public class EffectuerCreationLectureAction implements Action, RequestAware, Ses
                 CompteDAO daoCompte = new CompteDAO(cnx);
                 Compte compte = new Compte();
                 compte = daoCompte.read(idCompte);
-                if(lecture.getEstObligatoire() == 1)
+                if(lecture.getEstObligatoire() == Lecture.NON_OBLIGATOIRE)
                     dureeMinutes*=2;
                 int pointLecture = (dureeMinutes + compte.getMinutesRestantes()) / 15;
                 int pointCompte = compte.getPoint() + pointLecture;
@@ -90,6 +90,7 @@ public class EffectuerCreationLectureAction implements Action, RequestAware, Ses
                 else
                     System.out.println("Problème de création de la lecture");
               }
+
             
             }
             catch(ClassNotFoundException e){
