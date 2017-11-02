@@ -279,4 +279,54 @@ public class LectureDAO extends DAO<Lecture> {
         return listeLecture;
     }
     
+    public List<Lecture> findByIdCompteOrderByDate(int idCompte){
+
+        String req = "SELECT * FROM lecture WHERE `ID_COMPTE` = ? ORDER BY lecture.DATE_INSCRIPTION desc";
+        List<Lecture> listeLecture = new ArrayList<Lecture>();
+
+        PreparedStatement paramStm = null;
+        try {
+
+                paramStm = cnx.prepareStatement(req);
+
+                paramStm.setInt(1, idCompte);
+
+                ResultSet resultat = paramStm.executeQuery();
+
+                // On vérifie s'il y a un résultat    
+                while(resultat.next()){
+
+                    Lecture l = new Lecture();
+                    l.setIdLecture(resultat.getInt("ID_LECTURE"));
+                    l.setIdCompte(resultat.getInt("ID_COMPTE"));
+                    l.setDateInscription(resultat.getDate("DATE_INSCRIPTION"));
+                    l.setTitre(resultat.getString("TITRE"));
+                    l.setDureeMinutes(resultat.getInt("DUREE_MINUTES"));
+                    l.setEstObligatoire(resultat.getInt("EST_OBLIGATOIRE"));
+                    listeLecture.add(l);
+
+                }
+                resultat.close();
+                paramStm.close();
+                return listeLecture;
+
+        }
+        catch (SQLException exp) {
+        }
+        finally {
+            try{
+                if (paramStm!=null)
+                    paramStm.close();
+            }
+            catch (SQLException exp) {
+            }
+             catch (Exception e) {
+            }
+        }        
+
+        return listeLecture;
+    }
+    
+    
+    
 }
