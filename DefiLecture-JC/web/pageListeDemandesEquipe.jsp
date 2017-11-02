@@ -32,7 +32,7 @@
     }
     else{
         EquipeDAO eqpDao = new EquipeDAO(cnx);
-        pageContext.setAttribute("demandeEqDao", eqpDao);
+        pageContext.setAttribute("equipeDao", eqpDao);
         pageContext.setAttribute("listeDemandes", demandeEqDao.findByIdCompte((int)session.getAttribute("connecte")));
     }
 %>
@@ -54,15 +54,15 @@
       <tbody>
       <c:choose>
           
-      <c:when test="${(param.ordre eq 'recu') and (sessionScope.role eq 2) }">
+      <c:when test="${(param.ordre eq 'recu') and (sessionScope.role eq Compte.CAPITAINE) }">
        <c:forEach items="${listeDemandes}" var="demande">
 
          <c:set var="auteur" value="${cptDao.read(demande.idCompte)}"></c:set>
          <tr>
             <td>Demande envoy&eacute;e par ${auteur.prenom} ${auteur.nom}</td>
             <td>
-                <a href="accepter.do?tache=accepterDemandeAdhesion&idDemandeEquipe=${demande.idDemandeEquipe}">Accepter</a>
-                <a href="refuser.do?tache=refuserDemandeAdhesion&idDemandeEquipe=${demande.idDemandeEquipe}">Refuser</a>
+                <a href="accepter.do?tache=effectuerAcceptationDemandeAdhesion&idDemandeEquipe=${demande.idDemandeEquipe}">Accepter</a>
+                <a href="refuser.do?tache=effectuerSuppressionDemandeAdhesion&idDemandeEquipe=${demande.idDemandeEquipe}">Refuser</a>
             </td>
          </tr>
        </c:forEach>
@@ -71,7 +71,7 @@
          
       <c:otherwise>
        <c:forEach items="${listeDemandes}" var="demande">
-        <c:set var="equipe" value="${eqpDao.read(demande.idEquipe)}"></c:set>
+        <c:set var="equipe" value="${equipeDao.read(demande.idEquipe)}"></c:set>
         <tr>
         <c:choose>
             <c:when test="${demande.statutDemande eq DemandeEquipe.ACCEPTEE}">
@@ -86,7 +86,7 @@
                 </span>
             </td>
             <td>
-                <a href="refuser.do?tache=refuserDemandeAdhesion&idDemandeEquipe=${demande.idDemandeEquipe}">Annuler</a>
+                <a href="refuser.do?tache=effectuerSuppressionDemandeAdhesion&idDemandeEquipe=${demande.idDemandeEquipe}">Annuler</a>
             </td>
             </c:otherwise>
         </c:choose>

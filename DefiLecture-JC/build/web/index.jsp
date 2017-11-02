@@ -112,14 +112,16 @@
                  <c:if test="${ sessionScope.role eq 4 }">
                      <li class="active"><a href="*.do?tache=afficherPageGestionListeCompte">G&eacute;rer les comptes</a></li>
                  </c:if>
-                 <c:if test="${ sessionScope.role ge 3 }">
+                 <c:if test="${ sessionScope.role ge 1 }">
                     
                     
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">D&eacute;fis
                         <span class="caret"></span></a>
                         <ul class="dropdown-menu">
+                            <c:if test="${ sessionScope.role ge 3 }">
                           <li><a href="*.do?tache=afficherPageCreationDefi">Cr&eacute;er un d&eacute;fi</a></li>
+                          </c:if>
                           <li><a href="*.do?tache=afficherPageParticipationDefi">Voir les d&eacute;fis</a></li>
                         </ul>
                     </li>

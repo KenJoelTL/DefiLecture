@@ -70,18 +70,27 @@ public class ActionBuilder {
                     return new EffectuerCreationEquipeAction();
                 case "afficherPageTableauScores":
                     return new AfficherPageTableauScoresAction();
-                case"afficherPageListeEquipes":
+                case "afficherPageListeEquipes":
                     return new AfficherPageListeEquipesAction();
-                case"effectuerDepartEquipe":
+                case "afficherPageModificationEquipe":
+                    return new AfficherPageModificationEquipeAction();
+                case "effectuerModificationEquipe":
+                    return new EffectuerModificationEquipeAction();
+               
+                case "effectuerDepartEquipe":
                     return new EffectuerQuitterEquipeAction();
+                case "effectuerSuspensionMembreEquipe":
+                    return new EffectuerSuspensionMembreEquipeAction();
+                case "effectuerReaffectationMembreEquipe":
+                    return new EffectuerReaffectationMembreEquipeAction();
       //DemandeEquipe          
                 case "effectuerDemandeAdhesionEquipe":
                     return new EffectuerDemandeAdhesionEquipeAction();
                 case "afficherPageListeDemandesEquipe":
                     return new AfficherPageListeDemandesEquipeAction();
-                case "accepterDemandeAdhesion":
+                case "effectuerAcceptationDemandeAdhesion":
                     return new EffectuerAcceptationDemandeAdhesionAction();
-                case "refuserDemandeAdhesion":
+                case "effectuerSuppressionDemandeAdhesion":
                     return new EffectuerSuppressionDemandeAdhesionAction();
       //Test Ajax
                 case "testAjax":
