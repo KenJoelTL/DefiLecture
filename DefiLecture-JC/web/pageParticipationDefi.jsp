@@ -99,7 +99,7 @@
               
               <%-- Si le compte est un compte admin ou moderateur, il ne peut pas relever de défi, mais il peut les modifier--%>
               <c:if test="${pageScope.role ge 3}">
-                  <td><a href="##">modifier</a></td>
+                  <td><a href="*.do?tache=afficherPageModificationDefi&id=${d.idDefi}">modifier</a></td>
               
                   <%-- Sert à identifier si les défi sont en cours, en attente, ou terminé--%>
                  <c:choose>

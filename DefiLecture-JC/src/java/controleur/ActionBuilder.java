@@ -54,6 +54,10 @@ public class ActionBuilder {
                     return new AfficherPageInscriptionDefiAction();
                 case "effectuerInscriptionDefi":
                     return new EffectuerInscriptionDefiAction();
+                case "afficherPageModificationDefi":
+                    return new AfficherPageModificationDefiAction();
+                case "effectuerModificationDefi":
+                    return new EffectuerModificationDefiAction();
        //Compte        
                 case "afficherPageGestionListeCompte":
                     return new AfficherPageGestionListeComptesAction();

@@ -146,7 +146,46 @@ public class DefiDAO extends DAO<Defi> {
 
     @Override
     public boolean update(Defi x) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                 String req = "UPDATE defi SET NOM = ? , DESCRIPTION = ?,"
+                           + "DATE_DEBUT = ?, DATE_FIN = ?, CHOIX_REPONSE = ?,"
+                         + "REPONSE = ?, VALEUR_MINUTE = ? WHERE ID_DEFI = ?";
+
+        PreparedStatement paramStm = null;
+        try {
+                paramStm = cnx.prepareStatement(req);
+
+                paramStm.setString(1, Util.toUTF8(x.getNom()));
+                paramStm.setString(2, Util.toUTF8(x.getDescription()));
+                paramStm.setString(3, x.getDateDebut());
+                paramStm.setString(4, x.getDateFin());
+                paramStm.setString(5, Util.toUTF8(x.getChoixReponse()));
+                paramStm.setString(6, Util.toUTF8(x.getReponse()));
+                paramStm.setInt(7, x.getValeurMinute());
+                paramStm.setInt(8, x.getIdDefi());
+
+                int nbLignesAffectees= paramStm.executeUpdate();
+                
+                if (nbLignesAffectees>0) {
+                        paramStm.close();
+                        return true;
+                }
+                                
+            return false;
+        }
+        catch (SQLException exp) {
+            System.out.println(exp.getMessage());
+        }
+        finally {
+                try {
+                    if (paramStm!=null)
+                        paramStm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(CompteDAO.class.getName())
+                            .log(Level.SEVERE, null, ex);
+                }
+                
+        }
+        return false;
     }
 
     @Override
