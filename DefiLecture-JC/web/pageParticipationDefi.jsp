@@ -81,12 +81,12 @@
               <td>${d.nom}</td>
               <td>+ ${d.valeurMinute} minutes</td>
               <c:catch>
-                <fmt:parseDate pattern="yyyy-MM-dd' 'hh:mm:ss.SS" value="${d.dateDebut}" var="dateDebutPARSE" />
+                <fmt:parseDate pattern="yyyy-MM-dd' 'HH:mm:ss.SS" value="${d.dateDebut}" var="dateDebutPARSE" />
               </c:catch>
               <fmt:formatDate var="dateDebut" value="${dateDebutPARSE}" pattern="d MMMM yyyy 'à' HH'h'mm" />
               <td>${dateDebut} </td>
               <c:catch>
-                <fmt:parseDate pattern="yyyy-MM-dd' 'hh:mm:ss.SS" value="${d.dateFin}" var="dateFinPARSE" />
+                <fmt:parseDate pattern="yyyy-MM-dd' 'HH:mm:ss.SS" value="${d.dateFin}" var="dateFinPARSE" />
               </c:catch>
               <fmt:formatDate var="dateFin" value="${dateFinPARSE}" pattern="d MMMM yyyy 'à' HH'h'mm" />
               <td>${dateFin} </td>
@@ -95,7 +95,7 @@
               
               <%-- variable qui indique la date d'aujourd'hui, pour faire des comparaisons--%>
               <jsp:useBean id="now" class="java.util.Date" />
-              <fmt:formatDate var="dateMaintenant" value="${now}" pattern="yyyy-MM-dd' 'hh:mm:ss.S" />
+              <fmt:formatDate var="dateMaintenant" value="${now}" pattern="yyyy-MM-dd' 'HH:mm:ss.S" />
               
               <%-- Si le compte est un compte admin ou moderateur, il ne peut pas relever de défi, mais il peut les modifier--%>
               <c:if test="${pageScope.role ge 3}">
