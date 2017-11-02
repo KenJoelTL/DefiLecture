@@ -123,7 +123,7 @@ public class EquipeDAO extends DAO<Equipe>{
 
     @Override
     public boolean update(Equipe x) {
-        String req = "UPDATE equipe SET `NOM` = ? WHERE `ID_EQUIPE = ?`";
+        String req = "UPDATE equipe SET `NOM` = ? WHERE `ID_EQUIPE` = ?";
 
         PreparedStatement paramStm = null;
         try {
@@ -162,7 +162,7 @@ public class EquipeDAO extends DAO<Equipe>{
 
     @Override
     public boolean delete(Equipe x) {
-        String req = "DELETE FROM equipe WHERE `ID_EQUIPE = ?`";
+        String req = "DELETE FROM equipe WHERE `ID_EQUIPE` = ?";
 
         PreparedStatement paramStm = null;
         try {

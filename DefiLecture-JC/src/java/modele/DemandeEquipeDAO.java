@@ -307,7 +307,6 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
             paramStm.setInt(2, idEquipe);
 
             ResultSet resultat = paramStm.executeQuery();
-            System.out.println("\n=======================avant le resultat.");
             // On vérifie s'il y a un résultat    
             if(resultat.next()){
 
@@ -317,7 +316,7 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
                 de.setIdEquipe(resultat.getInt("ID_EQUIPE"));
                 de.setStatutDemande(resultat.getInt("STATUT_DEMANDE"));
                 de.setPoint(resultat.getInt("POINT"));
-                System.out.println("\n=======================apres l'ajout dans la liste");
+                
                 return de;
             }
             

@@ -28,12 +28,11 @@ public class EffectuerSuppressionDemandeAdhesionAction implements Action, Sessio
 
     @Override
     public String execute() {
-String action = ".do?tache=afficherPageAccueil";
+        String action = "*.do?tache=afficherPageAccueil";
         if(session.getAttribute("connecte") == null
             || session.getAttribute("role") == null
-            || ((int)session.getAttribute("role") != Compte.CAPITAINE)
             || request.getParameter("idDemandeEquipe") == null){
-            action = ".do?tache=afficherPageAccueil";}
+            action = ".do?tache=afficherPageAccueil";}      
         else{
             try {
                 String idDemandeEq = request.getParameter("idDemandeEquipe");
@@ -42,13 +41,17 @@ String action = ".do?tache=afficherPageAccueil";
                 DemandeEquipeDAO deDao = new DemandeEquipeDAO(cnx);
                 DemandeEquipe demandeEq = deDao.read(idDemandeEq);
                 
-                if(demandeEq == null)
-                    action = "*.do?tache=afficherPageAccueil";
-                else{
-                    if(!deDao.delete(demandeEq))
-                        action = "*.do?tache=afficherPageAccueil";
-                    else
-                        action = "refus.do?tache=afficherPageListeDemandesEquipe&ordre=recu";
+                if(demandeEq != null){
+                    if((demandeEq.getIdCompte() == (int)session.getAttribute("connecte"))
+                    || ((int)session.getAttribute("role") == Compte.CAPITAINE)
+                    || ((int)session.getAttribute("role") == Compte.ADMINISTRATEUR)){
+                        if(!deDao.delete(demandeEq))
+                            action = "*.do?tache=afficherPageAccueil";
+                        else
+                            action = "refus.do?tache=afficherPageListeDemandesEquipe&ordre=recu";
+                    
+                    }  
+                       
                 }
                     
                 

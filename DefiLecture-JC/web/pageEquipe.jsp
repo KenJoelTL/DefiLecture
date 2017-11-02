@@ -7,7 +7,7 @@
 <%@page import="modele.DemandeEquipeDAO"%>
 <%@page import="java.sql.Connection"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:if test="${empty requestScope}">${requestScope.idEquipe=1}</c:if>
+<c:if test="${empty param.idEquipe}">${param.idEquipe=1}</c:if>
 <%@page import="modele.EquipeDAO"%>
 <%@page import="modele.CompteDAO"%>
 <%@page import="modele.Equipe"%>
@@ -65,7 +65,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading" style="background-color: #253849; color: #e9e9e9;">Performances
                         <c:if test="${(!empty sessionScope.connecte) and (compteConnecte.idEquipe eq equipe.idEquipe)}">
-                            <a href="depart.do?tache=effectuerDepartEquipe&idCompte=${sessionScope.connecte}&idEquipe=${equipe.idEquipe}">
+                            <a href="depart.do?tache=afficherPageModificationEquipe&idEquipe=${equipe.idEquipe}">
                                 Paramètres <span class="glyphicon glyphicon-cog"></span>
                             </a>
                         </c:if>

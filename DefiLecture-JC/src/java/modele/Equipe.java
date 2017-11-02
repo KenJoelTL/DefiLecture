@@ -11,11 +11,11 @@ package modele;
  */
 public class Equipe implements Comparable<Equipe>{
     public static int NB_MAX_MEMBRES = 3;
-    int idEquipe, //clé primaire
-        point,
-        nbMembres;
+    private int idEquipe, //clé primaire
+                point,
+                nbMembres;
     
-    String nom;
+    private String nom;
     
 
     //Constructeurs

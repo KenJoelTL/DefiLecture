@@ -2,13 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/F:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/src/java/jdbc/Connexion.java</file>
-            <file>file:/F:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/src/java/controleur/EffectuerModificationCompteAction.java</file>
-            <file>file:/F:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/web/gestionListeComptes.jsp</file>
-            <file>file:/F:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/web/gestionConfigurationCompte.jsp</file>
-            <file>file:/F:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/src/java/controleur/EffectuerInscriptionAction.java</file>
-            <file>file:/F:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/src/java/modele/CompteDAO.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

@@ -10,12 +10,12 @@ package modele;
  * @author Joel
  */
 public class InscriptionDefi {
-    int idInscriptionDefi,
-            idCompte,
-            idDefi,
-            valeurMinute,
-            estReussi;
-    String dateInscription;
+    private int idInscriptionDefi,
+                idCompte,
+                idDefi,
+                valeurMinute,
+                estReussi;
+    private String dateInscription;
 
     public int getIdInscriptionDefi() {
         return idInscriptionDefi;

@@ -14,7 +14,7 @@
         <h1>Cr&eacuteation d'une &eacute;quipe</h1>
         <form action="creationEquipe.do" method="post">
         <div class="form-group">
-        <label for="Nom de l'&eacutequipe*">Nom de l'&eacutequipe* :</label>
+        <label for="nom">Nom de l'&eacute;quipe* :</label>
         <input type="text" class="form-control" id="nom" placeholder="Entrez le nom de votre nouvelle &eacute;quipe" name="nom" required/>
         </div>
             <input type="hidden" name="tache" value="effectuerCreationEquipe">
