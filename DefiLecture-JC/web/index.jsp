@@ -45,7 +45,7 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href='*.do?tache=""'>Acceuil</a></li>
            
-             <c:if test="${ !empty sessionScope.connecte }">
+             <c:if test="${ !empty sessionScope.connecte && sessionScope.role le 2 }">
                 
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Lectures
