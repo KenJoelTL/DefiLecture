@@ -10,26 +10,27 @@ package modele;
  * @author Joel
  */
 public class Compte {
-    public static int PARTICIPANT = 1;
-    public static int CAPITAINE = 2;
-    public static int MODERATEUR = 3;
+    public static int PARTICIPANT    = 1;
+    public static int CAPITAINE      = 2;
+    public static int MODERATEUR     = 3;
     public static int ADMINISTRATEUR = 4;
+    public static String AVATAR_DEFAUT ="/image/avatars/avatarCompte_1";
        
-    private int idCompte,                   //clé primaire
-                idEquipe =-1;               //équipe dont le participant fait partie -1:le compte en question ne fait pas partie d'une équipe
+    private int idCompte,                       //clé primaire
+                idEquipe =-1;                   //équipe dont le participant fait partie -1:le compte en question ne fait pas partie d'une équipe
     
-    private int role = Compte.PARTICIPANT,  //Utilisateur==0 | Participant==1 | Capitaine==2 | Animateur==3 | Administrateur==4
-                point,                      //Sommes des points gagnées par les lectures (minutes de lecture = (point*15)+minutesRestantes)
+    private int role = Compte.PARTICIPANT,      //Utilisateur==0 | Participant==1 | Capitaine==2 | Animateur==3 | Administrateur==4
+                point,                          //Sommes des points gagnées par les lectures. 
                 minutesRestantes;
 
-//    String nomUtilisateur;                //ancienne clé primaire
-    private String pseudonyme,              //l'utilisateur peut aussi s'inscrire avec un pseudo unique
-                nom,
-                prenom,
-                courriel,
-                motPasse,
-                programmeEtude,             //programme scolaire
-                avatar;                     //Pour l'instant l'avatar sera représenté par le chemin vers l'image
+//    String nomUtilisateur;                    //ancienne clé primaire
+    private String pseudonyme,                  //l'utilisateur peut aussi s'inscrire avec un pseudo unique
+                   nom,
+                   prenom,
+                   courriel,
+                   motPasse,
+                   programmeEtude,              //programme scolaire
+                   avatar = AVATAR_DEFAUT;      //Pour l'instant l'avatar sera représenté par le chemin vers l'image
     
     public Compte(){
     

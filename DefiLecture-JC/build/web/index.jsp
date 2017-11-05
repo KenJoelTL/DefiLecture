@@ -155,11 +155,11 @@
                     
                     <c:choose>
                         <c:when test="${ !empty requestScope.vue }">
-                            <c:set var="vue" value="${requestScope.vue}"/>
+                            <c:set var="vue" value="/WEB-INF/vue/${requestScope.vue}"/>
                             <jsp:include page="${vue}" ></jsp:include>
                         </c:when>
                         <c:otherwise>
-                            <jsp:include page="accueil.jsp" ></jsp:include>
+                            <jsp:include page="/WEB-INF/vue/accueil.jsp" ></jsp:include>
                         </c:otherwise>
                     </c:choose>
                     

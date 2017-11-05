@@ -4,11 +4,6 @@
     Author     : Joel
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-        <c:if test="${ !empty sessionScope.connecte }">
-        <p>
-            Bonjour <%=session.getAttribute("connecte")%>
-        </p>
-        </c:if>
 -<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,6 +12,12 @@
         <title>Page de connexion</title>
     </head>
     <body>
+        <c:choose>
+            
+        <c:when test="${ !empty sessionScope.connecte }">
+        <p>
+            Bonjour <%=session.getAttribute("connecte")%>
+        </p>
         <h1>Connexion</h1>
             
         <form action="connexion.do" method="post">
@@ -25,5 +26,13 @@
             <input type="hidden" name="tache" value="effectuerConnexion">
             <input type="submit" value=" Connexion" />
         </form>
+        </c:when>
+        <c:otherwise>
+            <a href="accueil.do?tache=afficherPageAccueil">
+                Retourner &agrave; la page d'accueil.
+            </a>
+        </c:otherwise>
+        
+        </c:choose>
     </body>
 </html>

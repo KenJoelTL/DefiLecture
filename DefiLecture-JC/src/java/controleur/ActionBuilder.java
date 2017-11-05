@@ -100,6 +100,8 @@ public class ActionBuilder {
       //Test Ajax
                 case "testAjax":
                     return new ExempleClasseActionAjax();
+                case "ajouterImage":
+                    return new AjouterImageAction();
                     
                 default:
                     return new DefaultAction();
