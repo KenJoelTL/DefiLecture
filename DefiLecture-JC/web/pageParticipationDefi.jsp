@@ -37,15 +37,18 @@
     int role = compte.getRole();
     pageContext.setAttribute("role", role);
     List<Defi> listeDefi;
+    //List<Defi> listeHistoriqueParticipant = new ArrayList<>();
     if(compte.getRole()<3){
-        listeDefi = daoDefi.findAllDefiEnCours();
-        
+        //listeDefi = daoDefi.findAllDefiEnCours();
+        listeDefi = daoDefi.findHistorique();
+        //listeHistorique = daoDefi.findHistoriqueByIdCompte((int)session.getAttribute("connecte"));
     }
     else{
         listeDefi = daoDefi.findAllByIdCompte((int)session.getAttribute("connecte"));
     }
     
     pageContext.setAttribute("listeDefi", listeDefi);
+    //pageContext.setAttribute("listeHistorique", listeHistorique);
  
     cnx = Connexion.startConnection(Config.DB_USER,Config.DB_PWD,Config.URL,Config.DRIVER);
     InscriptionDefiDAO daoInscriptionDefi = new InscriptionDefiDAO(cnx);
@@ -62,6 +65,12 @@
     }
     pageContext.setAttribute("listeReussi", listeReussi);
     pageContext.setAttribute("listeEchoue", listeEchoue);
+    
+    //Création de la liste d'historique des défis
+    cnx = Connexion.startConnection(Config.DB_USER,Config.DB_PWD,Config.URL,Config.DRIVER);
+    
+    
+
   %>
   
   <table class="table">
@@ -127,8 +136,14 @@
                              <td class="bg-danger">ECHOUE</td>
                           </c:when>
                              <c:otherwise>
-                                 <td> <a class="btn btn-info" role="button" href="*.do?tache=afficherPageInscriptionDefi&id=${d.idDefi}">Relever le défi</a></td>
-
+                                 <c:choose>
+                                     <c:when test="${d.dateFin lt dateMaintenant}">
+                                        <td> TERMINÉ </td>
+                                    </c:when>
+                                        <c:otherwise>
+                                            <td> <a class="btn btn-info" role="button" href="*.do?tache=afficherPageInscriptionDefi&id=${d.idDefi}">Relever le défi</a></td>
+                                        </c:otherwise>
+                                 </c:choose>
                              </c:otherwise>
                       </c:choose>
               </c:if>
