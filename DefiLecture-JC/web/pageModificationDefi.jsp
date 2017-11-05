@@ -169,7 +169,7 @@
             
             
             <div class="form-group">
-                <label for="point">Nombre de point pour ce défi* : </label>
+                <label for="point">Nombre de minutes pour ce défi* : </label>
                 <input class="form-control" type="text" name="valeurMinute" value="${defi.valeurMinute}" required />
             </div>
             

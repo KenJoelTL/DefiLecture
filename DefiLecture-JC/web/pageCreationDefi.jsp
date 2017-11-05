@@ -40,7 +40,7 @@
                 
                 <div id="choixReponse">
                     <div><label for="choix1">Choix#1 :</label> 
-                    <input  id="choix1"class="choix form-control" type="text" name="choix1" required /></div>
+                    <input  id="choix1"class="choix form-control" type="text" name="choix1" required ></input</div>
                 </div>
                 
  
@@ -63,7 +63,7 @@
             
             
             <div class="form-group">
-                <label for="point">Nombre de point pour ce défi* : </label>
+                <label for="point">Nombre de minutes pour ce défi* : </label>
                 <input class="form-control" type="text" name="valeurMinute" required />
             </div>
             
