@@ -9,14 +9,9 @@
             <input type="hidden" name="idCompte" value="${sessionScope.connecte}" />
             <input type="submit" value="Upload" name="upload" id="upload" />
         </form>
-            <span>${requestScope.test}</span>
             <span><%=this.getServletContext().getRealPath("/image/avatars/AvatarCompte_1")%></span>
-            <!--
-            <div style="background-image: url('C:/Users/Joel/Desktop/data.jpg')">                
-            </div>
-            <div style="background-image: url('./build/web/image/avatars/ImageDe1')">                
-            </div>-->
+
             <div style="background-image: url('<%=this.getServletContext().getRealPath("/image/avatars/AvatarCompte_1")%>')">                
             </div>
-            <div style="background-image: url('<c:url value='/image/avatars/AvatarCompte_1'/>')">                
+            <div style="background-image: url('<c:url value='/images/avatars/AvatarCompte_1'/>')">                
             </div>

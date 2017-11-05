@@ -4,8 +4,8 @@
     Author     : Joel
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="modele.Compte"%>
-<%@page import="modele.CompteDAO"%>
+<%@page import="com.defiLecture.modele.Compte"%>
+<%@page import="com.defiLecture.modele.CompteDAO"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="jdbc.Config"%>
 <%@page import="jdbc.Connexion"%>

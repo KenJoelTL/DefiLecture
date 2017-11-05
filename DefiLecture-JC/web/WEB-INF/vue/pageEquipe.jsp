@@ -4,17 +4,16 @@
     Author     : Joel
 --%>
 
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="com.defiLecture.modele.DemandeEquipeDAO"%>
 <%@page import="java.sql.Connection"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:if test="${empty param.idEquipe}">${param.idEquipe=1}</c:if>
 <%@page import="com.defiLecture.modele.EquipeDAO"%>
 <%@page import="com.defiLecture.modele.CompteDAO"%>
 <%@page import="com.defiLecture.modele.Equipe"%>
 <%@page import="jdbc.Config"%>
 <%@page import="jdbc.Connexion"%>
 <style>
-    #toutPageEquipe { background-image: url("ocean.jpg");
+    #toutPageEquipe { background-image: url("<c:url value='/images/arriere-plans/ocean.jpg'/>");
                       background-repeat: no-repeat;
                       background-position: right top;
                       background-attachment: fixed;
@@ -22,6 +21,7 @@
     }
 </style>
 
+<c:if test="${empty param.idEquipe}">${param.idEquipe=1}</c:if>
 <%  Connection cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
     EquipeDAO daoEquipe = new EquipeDAO(cnx);
     Equipe equipe = daoEquipe.read(request.getParameter("idEquipe"));

@@ -7,10 +7,10 @@
 <%@page import="com.defiLecture.modele.DemandeEquipeDAO"%>
 <%@page import="com.defiLecture.modele.CompteDAO"%>
 <%@page import="java.sql.Connection"%>
-<%@ page pageEncoding="UTF-8" %>
 <%@page import="com.defiLecture.modele.EquipeDAO"%>
 <%@page import="jdbc.Config"%>
 <%@page import="jdbc.Connexion"%>
+<%@ page pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%  Connection cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);

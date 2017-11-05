@@ -4,7 +4,7 @@
     Author     : Joel & Charles
 --%>
 
-<%@page import="modele.CompteDAO"%>
+<%@page import="com.defiLecture.modele.CompteDAO"%>
 <%@page import="jdbc.Connexion"%>
 <%@page import="jdbc.Config"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
