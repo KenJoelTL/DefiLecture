@@ -29,7 +29,6 @@ public class EffectuerModificationDefiAction implements Action, RequestAware, Se
 
     @Override
     public String execute() {
-        System.out.println("test1");
   
         
         if(session.getAttribute("connecte") != null
@@ -37,7 +36,7 @@ public class EffectuerModificationDefiAction implements Action, RequestAware, Se
         && ( ((int)session.getAttribute("role") == Compte.MODERATEUR)
             || ((int)session.getAttribute("role") == Compte.ADMINISTRATEUR) )
         && request.getParameter("modifie")!=null){
-            System.out.println("test2");
+            
             String nom = request.getParameter("nom"),
                    description = request.getParameter("titre"),
                     dateDebut = request.getParameter("dateDebut"),
@@ -52,18 +51,18 @@ public class EffectuerModificationDefiAction implements Action, RequestAware, Se
               
             try {
                 Connection cnx = Connexion.startConnection(Config.DB_USER,Config.DB_PWD,Config.URL,Config.DRIVER);
-                System.out.println("test3");
+                
                 Defi defi = new DefiDAO(cnx).read(idDefi);
                 if(defi == null){
-                    System.out.println("test4");
+                    
                     return "*.do?tache=afficherPageParticipationDefi";
                 }
                 else{
-                    System.out.println("test5");
+                    
                    
                     if(nom != null && !"".equals(nom.trim()) && !nom.equals(defi.getNom()))
                         defi.setNom(nom);
-                    System.out.println("test6");
+                    
                     if(request.getParameter("valeurMinute") != null){
                         try{
                             valeurMinute = Integer.parseInt(request.getParameter("valeurMinute"));
@@ -73,35 +72,35 @@ public class EffectuerModificationDefiAction implements Action, RequestAware, Se
                         catch(NumberFormatException e){
                         }
                     }
-                    System.out.println("test7");
+                    
                     if(dateDebut != defi.getDateDebut())
                         defi.setDateDebut(dateDebut);
                     if(dateFin != defi.getDateFin())
                         defi.setDateFin(dateFin);
                     
-                    System.out.println("test8");
+                 
                  
                     if(description != null && !"".equals(description.trim()) && !description.equals(defi.getDescription()))
                         defi.setDescription(description);
-                    System.out.println("test9");
+                 
                     if(question != null && !"".equals(question.trim()) && !question.equals(defi.getQuestion()))
                         defi.setQuestion(question);
-                    System.out.println("test10");
+                 
                     if(choixReponse != defi.getChoixReponse())
                         defi.setChoixReponse(choixReponse);
                     if(reponse != defi.getReponse())
                         defi.setReponse(reponse);
-                    System.out.println("test11");
+                 
                     cnx = Connexion.startConnection(Config.DB_USER,Config.DB_PWD,Config.URL,Config.DRIVER);
                     
                     DefiDAO dao = new DefiDAO(cnx);
                     if(!dao.update(defi)){
-                        System.out.println("test12");
+                 
                         //request.setAttribute("vue", "accueil.jsp");
                         return "*.do?tache=afficherPageParticipationDefi";
                     }
                     else{
-                        System.out.println("test13");
+                 
                     //il faut avertir que les changements ont étés faits
                     //    request.setAttribute("vue", "pageProfil.jsp"); //faire PRG
                     return "*.do?tache=afficherPageParticipationDefi";
@@ -114,7 +113,7 @@ public class EffectuerModificationDefiAction implements Action, RequestAware, Se
             }
         }
         else
-            return "*.do?tache=afficherPageGestionLecture";
+            return "*.do?tache=afficherPageParticipationDefi";
         
     }
 

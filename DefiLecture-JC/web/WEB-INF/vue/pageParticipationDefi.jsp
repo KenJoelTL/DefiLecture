@@ -37,15 +37,18 @@
     int role = compte.getRole();
     pageContext.setAttribute("role", role);
     List<Defi> listeDefi;
+    //List<Defi> listeHistoriqueParticipant = new ArrayList<>();
     if(compte.getRole()<3){
-        listeDefi = daoDefi.findAllDefiEnCours();
-        
+        //listeDefi = daoDefi.findAllDefiEnCours();
+        listeDefi = daoDefi.findHistorique();
+        //listeHistorique = daoDefi.findHistoriqueByIdCompte((int)session.getAttribute("connecte"));
     }
     else{
         listeDefi = daoDefi.findAllByIdCompte((int)session.getAttribute("connecte"));
     }
     
     pageContext.setAttribute("listeDefi", listeDefi);
+    //pageContext.setAttribute("listeHistorique", listeHistorique);
  
     cnx = Connexion.startConnection(Config.DB_USER,Config.DB_PWD,Config.URL,Config.DRIVER);
     InscriptionDefiDAO daoInscriptionDefi = new InscriptionDefiDAO(cnx);
@@ -62,6 +65,12 @@
     }
     pageContext.setAttribute("listeReussi", listeReussi);
     pageContext.setAttribute("listeEchoue", listeEchoue);
+    
+    //Création de la liste d'historique des défis
+    cnx = Connexion.startConnection(Config.DB_USER,Config.DB_PWD,Config.URL,Config.DRIVER);
+    
+    
+
   %>
   
   <table class="table">
@@ -74,10 +83,16 @@
         </tr>
       </thead>
       <tbody>
-            
+       
+          <%-- variable qui indique la date d'aujourd'hui, pour faire des comparaisons--%>
+              <jsp:useBean id="now" class="java.util.Date" />
+              <fmt:formatDate var="dateMaintenant" value="${now}" pattern="yyyy-MM-dd' 'HH:mm:ss.S" />
           
         <c:forEach items="${listeDefi}" var="d">
-            <tr>
+            
+            <%-- Condition qui permet au participant de voir tous les défis qu'il a réussi ou échoué, et de voir les nouveaux défis à relever--%>
+            <c:if test="${(pageScope.role lt 3) and (listeReussi.contains(d.idDefi.toString()) or listeEchoue.contains(d.idDefi.toString()) or d.dateFin gt dateMaintenant) }">
+              <tr>
               <td>${d.nom}</td>
               <td>+ ${d.valeurMinute} minutes</td>
               <c:catch>
@@ -90,16 +105,49 @@
               </c:catch>
               <fmt:formatDate var="dateFin" value="${dateFinPARSE}" pattern="d MMMM yyyy 'à' HH'h'mm" />
               <td>${dateFin} </td>
-              
-              
-              
-              <%-- variable qui indique la date d'aujourd'hui, pour faire des comparaisons--%>
-              <jsp:useBean id="now" class="java.util.Date" />
-              <fmt:formatDate var="dateMaintenant" value="${now}" pattern="yyyy-MM-dd' 'HH:mm:ss.S" />
-              
-              <%-- Si le compte est un compte admin ou moderateur, il ne peut pas relever de défi, mais il peut les modifier--%>
+
+              <c:choose>
+                          <c:when test="${listeReussi.contains(d.idDefi.toString())}">
+                          <td class="bg-success">REUSSI</td>
+                              
+                          </c:when>
+                          <c:when test="${listeEchoue.contains(d.idDefi.toString())}">
+                             <td class="bg-danger">ECHOUE</td>
+                          </c:when>
+                             <c:otherwise>
+                                 <c:choose>
+                                     <c:when test="${d.dateFin lt dateMaintenant}">
+                                        <td> TERMINÉ </td>
+                                    </c:when>
+                                        <c:otherwise>
+                                            <td> <a class="btn btn-info" role="button" href="*.do?tache=afficherPageInscriptionDefi&id=${d.idDefi}">Relever le défi</a></td>
+                                        </c:otherwise>
+                                 </c:choose>
+                             </c:otherwise>
+              </c:choose>
+     
+              </c:if>
+                
+                                            
+              <%-- Condition qui permet au modérateur ou à l'administrateur de voir tous les défis qu'il a créé--%>                              
               <c:if test="${pageScope.role ge 3}">
-                  <td><a href="*.do?tache=afficherPageModificationDefi&id=${d.idDefi}">modifier</a></td>
+                  
+             <tr>
+              <td>${d.nom}</td>
+              <td>+ ${d.valeurMinute} minutes</td>
+              <c:catch>
+                <fmt:parseDate pattern="yyyy-MM-dd' 'HH:mm:ss.SS" value="${d.dateDebut}" var="dateDebutPARSE" />
+              </c:catch>
+              <fmt:formatDate var="dateDebut" value="${dateDebutPARSE}" pattern="d MMMM yyyy 'à' HH'h'mm" />
+              <td>${dateDebut} </td>
+              <c:catch>
+                <fmt:parseDate pattern="yyyy-MM-dd' 'HH:mm:ss.SS" value="${d.dateFin}" var="dateFinPARSE" />
+              </c:catch>
+              <fmt:formatDate var="dateFin" value="${dateFinPARSE}" pattern="d MMMM yyyy 'à' HH'h'mm" />
+              <td>${dateFin} </td>
+
+              <%-- Si le compte est un compte admin ou moderateur, il ne peut pas relever de défi, mais il peut les modifier--%>
+              <td><a href="*.do?tache=afficherPageModificationDefi&id=${d.idDefi}">modifier</a></td>
               
                   <%-- Sert à identifier si les défi sont en cours, en attente, ou terminé--%>
                  <c:choose>
@@ -114,28 +162,15 @@
                      </c:otherwise>
                  </c:choose>
               
-              </c:if>
-               
-              <c:if test="${pageScope.role lt 3}">
-              
-                      <c:choose>
-                          <c:when test="${listeReussi.contains(d.idDefi.toString())}">
-                          <td class="bg-success">REUSSI</td>
-                              
-                          </c:when>
-                          <c:when test="${listeEchoue.contains(d.idDefi.toString())}">
-                             <td class="bg-danger">ECHOUE</td>
-                          </c:when>
-                             <c:otherwise>
-                                 <td> <a class="btn btn-info" role="button" href="*.do?tache=afficherPageInscriptionDefi&id=${d.idDefi}">Relever le défi</a></td>
 
-                             </c:otherwise>
-                      </c:choose>
-              </c:if>
+               
+              
               </td
             </tr>
+            </c:if>
         </c:forEach>
 
       </tbody>
         
+>>>>>>> masterAction:DefiLecture-JC/web/pageParticipationDefi.jsp
     </table>
