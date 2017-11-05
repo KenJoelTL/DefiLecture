@@ -83,10 +83,16 @@
         </tr>
       </thead>
       <tbody>
-            
+       
+          <%-- variable qui indique la date d'aujourd'hui, pour faire des comparaisons--%>
+              <jsp:useBean id="now" class="java.util.Date" />
+              <fmt:formatDate var="dateMaintenant" value="${now}" pattern="yyyy-MM-dd' 'HH:mm:ss.S" />
           
         <c:forEach items="${listeDefi}" var="d">
-            <tr>
+            
+            <%-- Condition qui permet au participant de voir tous les défis qu'il a réussi ou échoué, et de voir les nouveaux défis à relever--%>
+            <c:if test="${(pageScope.role lt 3) and (listeReussi.contains(d.idDefi.toString()) or listeEchoue.contains(d.idDefi.toString()) or d.dateFin gt dateMaintenant) }">
+              <tr>
               <td>${d.nom}</td>
               <td>+ ${d.valeurMinute} minutes</td>
               <c:catch>
@@ -99,35 +105,8 @@
               </c:catch>
               <fmt:formatDate var="dateFin" value="${dateFinPARSE}" pattern="d MMMM yyyy 'à' HH'h'mm" />
               <td>${dateFin} </td>
-              
-              
-              
-              <%-- variable qui indique la date d'aujourd'hui, pour faire des comparaisons--%>
-              <jsp:useBean id="now" class="java.util.Date" />
-              <fmt:formatDate var="dateMaintenant" value="${now}" pattern="yyyy-MM-dd' 'HH:mm:ss.S" />
-              
-              <%-- Si le compte est un compte admin ou moderateur, il ne peut pas relever de défi, mais il peut les modifier--%>
-              <c:if test="${pageScope.role ge 3}">
-                  <td><a href="*.do?tache=afficherPageModificationDefi&id=${d.idDefi}">modifier</a></td>
-              
-                  <%-- Sert à identifier si les défi sont en cours, en attente, ou terminé--%>
-                 <c:choose>
-                     <c:when test="${(d.dateDebut lt dateMaintenant) and (d.dateFin gt dateMaintenant)}">
-                         <td class="bg-success"> EN COURS </td>
-                     </c:when>
-                     <c:when test="${d.dateFin lt dateMaintenant}">
-                         <td class="bg-danger"> TERMINÉ </td>
-                     </c:when>
-                     <c:otherwise>
-                         <td> EN ATTENTE </td>
-                     </c:otherwise>
-                 </c:choose>
-              
-              </c:if>
-               
-              <c:if test="${pageScope.role lt 3}">
-              
-                      <c:choose>
+
+              <c:choose>
                           <c:when test="${listeReussi.contains(d.idDefi.toString())}">
                           <td class="bg-success">REUSSI</td>
                               
@@ -145,10 +124,50 @@
                                         </c:otherwise>
                                  </c:choose>
                              </c:otherwise>
-                      </c:choose>
+              </c:choose>
+     
               </c:if>
+                
+                                            
+              <%-- Condition qui permet au modérateur ou à l'administrateur de voir tous les défis qu'il a créé--%>                              
+              <c:if test="${pageScope.role ge 3}">
+                  
+             <tr>
+              <td>${d.nom}</td>
+              <td>+ ${d.valeurMinute} minutes</td>
+              <c:catch>
+                <fmt:parseDate pattern="yyyy-MM-dd' 'HH:mm:ss.SS" value="${d.dateDebut}" var="dateDebutPARSE" />
+              </c:catch>
+              <fmt:formatDate var="dateDebut" value="${dateDebutPARSE}" pattern="d MMMM yyyy 'à' HH'h'mm" />
+              <td>${dateDebut} </td>
+              <c:catch>
+                <fmt:parseDate pattern="yyyy-MM-dd' 'HH:mm:ss.SS" value="${d.dateFin}" var="dateFinPARSE" />
+              </c:catch>
+              <fmt:formatDate var="dateFin" value="${dateFinPARSE}" pattern="d MMMM yyyy 'à' HH'h'mm" />
+              <td>${dateFin} </td>
+
+              <%-- Si le compte est un compte admin ou moderateur, il ne peut pas relever de défi, mais il peut les modifier--%>
+              <td><a href="*.do?tache=afficherPageModificationDefi&id=${d.idDefi}">modifier</a></td>
+              
+                  <%-- Sert à identifier si les défi sont en cours, en attente, ou terminé--%>
+                 <c:choose>
+                     <c:when test="${(d.dateDebut lt dateMaintenant) and (d.dateFin gt dateMaintenant)}">
+                         <td class="bg-success"> EN COURS </td>
+                     </c:when>
+                     <c:when test="${d.dateFin lt dateMaintenant}">
+                         <td class="bg-danger"> TERMINÉ </td>
+                     </c:when>
+                     <c:otherwise>
+                         <td> EN ATTENTE </td>
+                     </c:otherwise>
+                 </c:choose>
+              
+
+               
+              
               </td
             </tr>
+            </c:if>
         </c:forEach>
 
       </tbody>
