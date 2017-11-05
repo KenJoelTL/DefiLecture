@@ -4,11 +4,11 @@
     Author     : Joel
 --%>
 
-<%@page import="modele.DemandeEquipeDAO"%>
-<%@page import="modele.CompteDAO"%>
+<%@page import="com.defiLecture.modele.DemandeEquipeDAO"%>
+<%@page import="com.defiLecture.modele.CompteDAO"%>
 <%@page import="java.sql.Connection"%>
 <%@ page pageEncoding="UTF-8" %>
-<%@page import="modele.EquipeDAO"%>
+<%@page import="com.defiLecture.modele.EquipeDAO"%>
 <%@page import="jdbc.Config"%>
 <%@page import="jdbc.Connexion"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

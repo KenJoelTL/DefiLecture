@@ -7,12 +7,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="jdbc.Config"%>
-<%@page import="modele.Compte"%>
-<%@page import="modele.Lecture"%>
+<%@page import="com.defiLecture.modele.Compte"%>
+<%@page import="com.defiLecture.modele.Lecture"%>
 <%@page import="java.util.List"%>
 <%@page import="java.sql.Connection"%>
-<%@page import="modele.CompteDAO"%>
-<%@page import="modele.LectureDAO"%>
+<%@page import="com.defiLecture.modele.CompteDAO"%>
+<%@page import="com.defiLecture.modele.LectureDAO"%>
 <%@page import="jdbc.Connexion"%>
 <h2>Liste de mes lectures</h2>
 

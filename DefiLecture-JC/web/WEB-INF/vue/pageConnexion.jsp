@@ -14,10 +14,8 @@
     <body>
         <c:choose>
             
-        <c:when test="${ !empty sessionScope.connecte }">
-        <p>
-            Bonjour <%=session.getAttribute("connecte")%>
-        </p>
+        <c:when test="${ empty sessionScope.connecte }">
+            
         <h1>Connexion</h1>
             
         <form action="connexion.do" method="post">

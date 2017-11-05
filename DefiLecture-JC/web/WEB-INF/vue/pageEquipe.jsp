@@ -4,13 +4,13 @@
     Author     : Joel
 --%>
 
-<%@page import="modele.DemandeEquipeDAO"%>
+<%@page import="com.defiLecture.modele.DemandeEquipeDAO"%>
 <%@page import="java.sql.Connection"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:if test="${empty param.idEquipe}">${param.idEquipe=1}</c:if>
-<%@page import="modele.EquipeDAO"%>
-<%@page import="modele.CompteDAO"%>
-<%@page import="modele.Equipe"%>
+<%@page import="com.defiLecture.modele.EquipeDAO"%>
+<%@page import="com.defiLecture.modele.CompteDAO"%>
+<%@page import="com.defiLecture.modele.Equipe"%>
 <%@page import="jdbc.Config"%>
 <%@page import="jdbc.Connexion"%>
 <style>

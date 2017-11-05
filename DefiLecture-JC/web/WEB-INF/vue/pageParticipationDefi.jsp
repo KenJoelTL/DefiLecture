@@ -10,19 +10,19 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.DateFormat"%>
 <%@page import="java.util.Locale"%>
-<%@page import="modele.Compte"%>
-<%@page import="modele.CompteDAO"%>
+<%@page import="com.defiLecture.modele.Compte"%>
+<%@page import="com.defiLecture.modele.CompteDAO"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="modele.InscriptionDefi"%>
-<%@page import="modele.InscriptionDefiDAO"%>
+<%@page import="com.defiLecture.modele.InscriptionDefi"%>
+<%@page import="com.defiLecture.modele.InscriptionDefiDAO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="jdbc.Config"%>
-<%@page import="modele.Defi"%>
+<%@page import="com.defiLecture.modele.Defi"%>
 <%@page import="java.util.List"%>
 <%@page import="java.sql.Connection"%>
-<%@page import="modele.DefiDAO"%>
+<%@page import="com.defiLecture.modele.DefiDAO"%>
 <%@page import="jdbc.Connexion"%>
 <h2>Liste des défis</h2>
 

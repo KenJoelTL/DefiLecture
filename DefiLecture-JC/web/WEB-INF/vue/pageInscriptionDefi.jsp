@@ -7,8 +7,8 @@
 <%@page import="java.util.List"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="modele.Defi"%>
-<%@page import="modele.DefiDAO"%>
+<%@page import="com.defiLecture.modele.Defi"%>
+<%@page import="com.defiLecture.modele.DefiDAO"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="jdbc.Config"%>
 <%@page import="jdbc.Connexion"%>

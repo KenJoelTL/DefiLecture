@@ -3,11 +3,11 @@
     Created on : 2017-11-01, 20:52:35
     Author     : Joel
 --%>
-<%@page import="modele.DemandeEquipeDAO"%>
-<%@page import="modele.Compte"%>
-<%@page import="modele.CompteDAO"%>
-<%@page import="modele.Equipe"%>
-<%@page import="modele.EquipeDAO"%>
+<%@page import="com.defiLecture.modele.DemandeEquipeDAO"%>
+<%@page import="com.defiLecture.modele.Compte"%>
+<%@page import="com.defiLecture.modele.CompteDAO"%>
+<%@page import="com.defiLecture.modele.Equipe"%>
+<%@page import="com.defiLecture.modele.EquipeDAO"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="jdbc.Connexion"%>
 <%@page import="jdbc.Config"%>
