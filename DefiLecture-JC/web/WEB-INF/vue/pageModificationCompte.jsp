@@ -24,23 +24,36 @@ $(document).ready(
 
 <%  CompteDAO dao = new CompteDAO(Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
     pageContext.setAttribute("compte", dao.read(request.getParameter("id"))); %>
-    
+
     <body>
         <h1>Page de configuration</h1>
         <span>${requestScope.message}</span>
+
+
+        <div style="background-image: url('<c:url value='${compte.avatar}'/>')"></div>
+
+        <img class="img-responsive avatar" src="<c:url value='${compte.avatar}'/>" alt="Avatar">
+        <form method="POST" action=".do" enctype="multipart/form-data">
+            Avatar :
+            <input type="file" name="nomFichier" id="file"  accept="image/*"/> <br/>
+            <input type="hidden" name="tache" value="effectuerAjoutAvatarCompte" />
+            <input type="submit" value="T&eacute;l&eacute;verser" name="upload" id="upload" />
+        </form>
+
         <form action="modification.do" method="post" >
             <div>
-                Prenom* : <input type="text" id=prenom name="prenom" value="${compte.prenom}" required/>
-            
-                Nom* : <input type="text" name="nom" value="${compte.nom}" required/>
+                Prenom* : <input type="text" id=prenom name="prenom" value="${compte.prenom}" required ${ compte.idCompte eq session.connecte ? '':'readonly' }/>
+
+                Nom* : <input type="text" name="nom" value="${compte.nom}" required ${ compte.idCompte eq session.connecte ? '':'readonly' }/>
             </div>
             <div>
-                Programme d'&eacute;tude : <input type="text" name="programmeEtude" value="${compte.programmeEtude}" />
-                Courriel* : <input type="email" name="courriel" value="${compte.courriel}" required/>
+                Programme d'&eacute;tude : <input type="text" name="programmeEtude" value="${compte.programmeEtude}" ${ compte.idCompte eq session.connecte ? '':'readonly' }/>
+                Courriel* : <input type="email" name="courriel" value="${compte.courriel}" required ${ compte.idCompte eq session.connecte ? '':'readonly' }/>
             </div>
-            <div>    
-                Pseudonyme : <input type="text" name="pseudonyme" value="${compte.pseudonyme}" />
+            <div>
+                Pseudonyme : <input type="text" name="pseudonyme" value="${compte.pseudonyme}" ${ compte.idCompte eq session.connecte ? '':'readonly' }/>
             </div>
+
             <div>R&ocirc;le du compte :
                 <c:set var="selected" value=" selected=\"selected\"" />
                 <select name="role">
@@ -60,15 +73,13 @@ $(document).ready(
             </div>
         </form>
 
-        <div class="form" action="suppression.do">                
+        <div class="form" action="suppression.do">
             <form>
                 <input type="hidden" name="idCompte" value="${compte.idCompte}">
                 <input type="submit" name="supprime" value=" Supprimer" />
-            </form>        
+            </form>
         </div>
-        <div id="testAjax5">
-        </div>
-                
-                
-        
+
+        <div id="testAjax5"></div>
+
     </body>

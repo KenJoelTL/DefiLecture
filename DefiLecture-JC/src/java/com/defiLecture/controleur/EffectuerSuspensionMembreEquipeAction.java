@@ -80,7 +80,7 @@ public class EffectuerSuspensionMembreEquipeAction implements Action, RequestAwa
                 }
                 
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(EffectuerQuitterEquipeAction.class.getName())
+                Logger.getLogger(EffectuerDepartEquipeAction.class.getName())
                         .log(Level.SEVERE, null, ex);
             }
             finally{

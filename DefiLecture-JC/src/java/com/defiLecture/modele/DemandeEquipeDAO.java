@@ -392,41 +392,4 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
         return liste;
     }
     
-    
-    /*
-    public int findByIdEquipe(int idEquipe) {
-        List<DemandeEquipe> liste = new LinkedList<>();
-        
-        try {
-            String req = "SELECT * FROM demande_equipe WHERE `ID_EQUIPE` = ?";
-
-            PreparedStatement paramStm = cnx.prepareStatement(req);
-
-            paramStm.setInt(1, idEquipe);
-
-            ResultSet resultat = paramStm.executeQuery();
-
-            // On vérifie s'il y a un résultat    
-            while(resultat.next()){
-
-                DemandeEquipe de = new DemandeEquipe();
-                de.setIdDemandeEquipe(resultat.getInt("ID_DEMANDE_EQUIPE"));
-                de.setIdCompte(resultat.getInt("ID_COMPTE"));
-                de.setIdEquipe(resultat.getInt("ID_EQUIPE"));
-                de.setStatutDemande(resultat.getInt("STATUT_DEMANDE"));
-                de.setPoint(resultat.getInt("POINT"));
-                liste.add(de);
-            }
-            
-            resultat.close();
-            paramStm.close();
-                
-        }
-        catch (SQLException exp) {
-        }
-        return liste;
-    }
-    */
-    
-    
 }

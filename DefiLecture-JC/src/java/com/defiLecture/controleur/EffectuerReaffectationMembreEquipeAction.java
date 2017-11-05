@@ -72,7 +72,7 @@ public class EffectuerReaffectationMembreEquipeAction implements Action, Request
                 }
                 
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(EffectuerQuitterEquipeAction.class.getName())
+                Logger.getLogger(EffectuerDepartEquipeAction.class.getName())
                         .log(Level.SEVERE, null, ex);
             }
             finally{

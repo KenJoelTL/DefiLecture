@@ -14,21 +14,22 @@ import com.defiLecture.modele.CompteDAO;
  *
  * @author Joel
  */
-public class EffectuerInscriptionAction implements Action, RequestAware, SessionAware, RequirePRGAction {
-    private HttpSession session;
+public class EffectuerInscriptionAction implements Action, RequestAware, RequirePRGAction {
+    //private HttpSession session;
     private HttpServletRequest request;
     private HttpServletResponse response;
-    private CompteDAO dao;
 
     @Override
     public String execute() {
-        String action = "echec.do?tache=afficherPageAccueil";
+        String action = "echec.do?tache=afficherPageInscription";
 
-        if( request.getParameter("courriel")  == null 
-            || request.getParameter("prenom") == null
-            || request.getParameter("nom")    == null)
-            action = "connexion.do?tache=afficherPageConnexion";
-        else{
+        if( request.getParameter("courriel")    != null 
+            && request.getParameter("prenom")   != null
+            && request.getParameter("nom")      != null
+            && request.getParameter("motPasse") != null
+            && request.getParameter("confirmationMotPasse")  != null
+            && request.getParameter("motPasse").equals(request.getParameter("confirmationMotPasse")) )
+        {
             try{
                 String  courriel = request.getParameter("courriel"),
                         prenom = request.getParameter("prenom"),
@@ -39,14 +40,14 @@ public class EffectuerInscriptionAction implements Action, RequestAware, Session
                 /*
                 //Étape 1 : chargement du pilote JDBC
                 Class.forName(Config.DRIVER);
-                //Étape 2 : configurer les paramèetre de la connection vers la base de données
+                //Étape 2 : configurer les paramètres de la connexion vers la base de données
                 Connexion.setUrl(Config.URL);
                 Connexion.setUser(Config.DB_USER);
                 Connexion.setPassword(Config.DB_PWD);
-                //Étape 3 : ouverture de la connection vers la base de données
+                //Étape 3 : ouverture de la connexion vers la base de données
                 Connection cnx = Connexion.getInstance();*/
                 Connection cnx = Connexion.startConnection(Config.DB_USER,Config.DB_PWD,Config.URL,Config.DRIVER);
-                dao = new CompteDAO(cnx);
+                CompteDAO dao = new CompteDAO(cnx);
                 Compte compte = new Compte();
                 compte.setCourriel(courriel);
                 compte.setPrenom(prenom);
@@ -58,6 +59,7 @@ public class EffectuerInscriptionAction implements Action, RequestAware, Session
                 //faire vérification avec des findBy
                 if(dao.create(compte)){
                     System.out.println("Un compte a été créé avec succès");
+                    
                     action="succes.do?tache=afficherPageConnexion";
                 }
                 else{
@@ -68,6 +70,7 @@ public class EffectuerInscriptionAction implements Action, RequestAware, Session
                 System.out.println("Erreur dans le chargement du pilote :"+ e);
             }
         }
+        else{}
         return action;
     }
 
@@ -80,9 +83,9 @@ public class EffectuerInscriptionAction implements Action, RequestAware, Session
     public void setResponse(HttpServletResponse response) {
         this.response = response;
     }
-
+/*
     @Override
     public void setSession(HttpSession session) {
         this.session = session;
-    }
+    }*/
 }

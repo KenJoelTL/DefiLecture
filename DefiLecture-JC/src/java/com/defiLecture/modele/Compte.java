@@ -14,7 +14,7 @@ public class Compte {
     public static int CAPITAINE      = 2;
     public static int MODERATEUR     = 3;
     public static int ADMINISTRATEUR = 4;
-    public static String AVATAR_DEFAUT ="/image/avatars/avatarCompte_1";
+    public static String AVATAR_DEFAUT ="/images/avatars/avatarCompte_defaut.png";
        
     private int idCompte,                       //clé primaire
                 idEquipe =-1;                   //équipe dont le participant fait partie -1:le compte en question ne fait pas partie d'une équipe

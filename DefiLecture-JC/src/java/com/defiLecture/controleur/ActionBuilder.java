@@ -13,7 +13,7 @@ package com.defiLecture.controleur;
  */
 public class ActionBuilder {
     public static Action getAction(String actionName) {
-        System.out.print("entrer dans l'action builder");
+        //System.out.print("entrer dans l'action builder");
         if (actionName != null)
             switch (actionName) {
                 
@@ -21,19 +21,19 @@ public class ActionBuilder {
                     return new AfficherPageAccueilAction();
                 case "afficherPageProfil":
                     return new AfficherPageProfilAction();
-       //Inscription
+      //Inscription
                 case "afficherPageInscription":
                     return new AfficherPageInscriptionAction(); 
                 case "effectuerInscription":
                     return new EffectuerInscriptionAction();  
-       //Connexion
+      //Connexion
                 case "afficherPageConnexion":
                     return new AfficherPageConnexionAction();    
                 case "effectuerConnexion":
                     return new EffectuerConnexionAction();
                 case "effectuerDeconnexion":
                     return new EffectuerDeconnexionAction();
-       //Lecture             
+      //Lecture             
                 case "afficherPageCreationLecture":
                     return new AfficherPageCreationLectureAction();
                 case "afficherPageGestionLecture":
@@ -44,7 +44,7 @@ public class ActionBuilder {
                     return new AfficherPageModificationLectureAction();
                 case "effectuerModificationLecture":
                     return new EffectuerModificationLectureAction();
-       //Defi
+      //Defi
                 case "afficherPageCreationDefi":
                     return new AfficherPageCreationDefiAction();
                 case "effectuerCreationDefi":
@@ -59,14 +59,16 @@ public class ActionBuilder {
                     return new AfficherPageModificationDefiAction();
                 case "effectuerModificationDefi":
                     return new EffectuerModificationDefiAction();
-       //Compte        
+      //Compte        
                 case "afficherPageGestionListeCompte":
                     return new AfficherPageGestionListeComptesAction();
-                case "afficherPageGestionConfigurationCompte":
-                    return new AfficherPageGestionConfigurationCompteAction();
+                case "afficherPageModificationCompte":
+                    return new AfficherPageModificationCompteAction();
                 case "effectuerModificationCompte":
                     return new EffectuerModificationCompteAction();
-       //Equipe
+                case "effectuerAjoutAvatarCompte":
+                    return new EffectuerAjoutAvatarCompteAction();
+      //Equipe
                 case "afficherPageEquipe":
                     return new AfficherPageEquipeAction();
                 case "afficherPageCreationEquipe":
@@ -82,12 +84,6 @@ public class ActionBuilder {
                 case "effectuerModificationEquipe":
                     return new EffectuerModificationEquipeAction();
                
-                case "effectuerDepartEquipe":
-                    return new EffectuerQuitterEquipeAction();
-                case "effectuerSuspensionMembreEquipe":
-                    return new EffectuerSuspensionMembreEquipeAction();
-                case "effectuerReaffectationMembreEquipe":
-                    return new EffectuerReaffectationMembreEquipeAction();
       //DemandeEquipe          
                 case "effectuerDemandeAdhesionEquipe":
                     return new EffectuerDemandeAdhesionEquipeAction();
@@ -97,11 +93,15 @@ public class ActionBuilder {
                     return new EffectuerAcceptationDemandeAdhesionAction();
                 case "effectuerSuppressionDemandeAdhesion":
                     return new EffectuerSuppressionDemandeAdhesionAction();
+                case "effectuerDepartEquipe":
+                    return new EffectuerDepartEquipeAction();
+                case "effectuerSuspensionMembreEquipe":
+                    return new EffectuerSuspensionMembreEquipeAction();
+                case "effectuerReaffectationMembreEquipe":
+                    return new EffectuerReaffectationMembreEquipeAction();
       //Test Ajax
                 case "testAjax":
                     return new ExempleClasseActionAjax();
-                case "ajouterImage":
-                    return new AjouterImageAction();
                     
                 default:
                     return new DefaultAction();

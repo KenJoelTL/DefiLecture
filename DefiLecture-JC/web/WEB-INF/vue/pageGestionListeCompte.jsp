@@ -57,7 +57,7 @@
           <td>${compte.courriel}</td>
           <td>${role}</td>
           <td><c:if test="${ (sessionScope.connecte eq compte.idCompte ) or (sessionScope.role gt compte.role)}">
-                <a href="*.do?tache=afficherPageGestionConfigurationCompte&id=${compte.idCompte}">Modifier</a>
+                <a href="details.do?tache=afficherPageModificationCompte&id=${compte.idCompte}">Modifier</a>
               </c:if>
           </td>
         </tr>

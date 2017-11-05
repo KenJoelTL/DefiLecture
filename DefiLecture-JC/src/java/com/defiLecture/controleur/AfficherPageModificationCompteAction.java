@@ -20,7 +20,7 @@ import com.defiLecture.modele.CompteDAO;
  *
  * @author Joel
  */
-public class AfficherPageGestionConfigurationCompteAction implements Action, RequestAware,SessionAware {
+public class AfficherPageModificationCompteAction implements Action, RequestAware,SessionAware {
     private HttpSession session;
     private HttpServletRequest request;
     private HttpServletResponse response;
@@ -28,13 +28,14 @@ public class AfficherPageGestionConfigurationCompteAction implements Action, Req
     @Override
     public String execute() {
 
-        request.setAttribute("vue", "gestionListeComptes.jsp");        
+        request.setAttribute("vue", "pageGestionListeCompte.jsp");        
         
-        //On vérifie si l'utilisateur qui est selectionné est bien celui qui est connecté. Autrement seuls les 
-        // administrateurs peuvent accéder à la page de configuration d'autrui
+        
+        // On vérifie si l'utilisateur qui est selectionné est bien celui qui est connecté. 
+        // Autrement, seuls les administrateurs et les modérateurs peuvent accéder à la page de configuration d'autrui
         if( session.getAttribute("connecte") != null && session.getAttribute("role") != null && request.getParameter("id")!=null) 
             if( ( !request.getParameter("id").equals(session.getAttribute("connecte")+"")
-             && (int)session.getAttribute("role") == Compte.ADMINISTRATEUR) 
+             && ( ((int)session.getAttribute("role") == Compte.ADMINISTRATEUR) || ((int)session.getAttribute("role") == Compte.MODERATEUR) ) ) 
              || (request.getParameter("id").equals(session.getAttribute("connecte")+"")) ){
 
             String idCompte = request.getParameter("id");
@@ -45,11 +46,11 @@ public class AfficherPageGestionConfigurationCompteAction implements Action, Req
                 CompteDAO dao = new CompteDAO(cnx);
 
                 if(dao.read(idCompte)!=null)
-                    request.setAttribute("vue", "pageGestionConfigurationCompte.jsp");
+                    request.setAttribute("vue", "pageModificationCompte.jsp");
                 
             } 
             catch (ClassNotFoundException ex) {
-                Logger.getLogger(AfficherPageGestionConfigurationCompteAction
+                Logger.getLogger(AfficherPageModificationCompteAction
                                    .class.getName()).log(Level.SEVERE, null, ex);
                 request.setAttribute("vue", "pageGestionListeCompte.jsp");
                 return "/index.jsp";

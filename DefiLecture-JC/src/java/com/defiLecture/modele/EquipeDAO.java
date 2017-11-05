@@ -268,48 +268,4 @@ public class EquipeDAO extends DAO<Equipe>{
         return null;
     }
     
-    public Equipe findByIdCapitaine(int idCapitaine) {
-        String req = "SELECT * FROM equipe WHERE `ID_CAPITAINE` = ?";
-        
-        PreparedStatement paramStm = null;
-        try {
-
-            paramStm = cnx.prepareStatement(req);
-
-            paramStm.setInt(1, idCapitaine);
-
-            ResultSet resultat = paramStm.executeQuery();
-
-            // On vérifie s'il y a un résultat    
-            if(resultat.next()){
-
-                Equipe e = new Equipe();
-                e.setIdEquipe(resultat.getInt("ID_EQUIPE"));
-                e.setNom(resultat.getString("NOM"));
-                
-                e.setPoint((new DemandeEquipeDAO(cnx).sumPointByidEquipe(resultat.getInt("ID_EQUIPE"))));
-                e.setNbMembres((new CompteDAO(cnx)).countCompteByIdEquipe(resultat.getInt("ID_EQUIPE")));
-
-                resultat.close();
-                paramStm.close();
-                    return e;
-            }
-            
-            resultat.close();
-            paramStm.close();
-            return null;
-                
-        }
-        catch (SQLException exp) {}
-        finally {
-            try{
-                if (paramStm!=null)
-                    paramStm.close();
-            }
-            catch (SQLException exp) {}
-        }        
-        
-        return null;
-    }
-    
 }

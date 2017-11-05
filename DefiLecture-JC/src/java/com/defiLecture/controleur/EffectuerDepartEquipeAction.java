@@ -24,7 +24,7 @@ import com.defiLecture.modele.Equipe;
  *
  * @author Joel
  */
-public class EffectuerQuitterEquipeAction implements Action, RequestAware, RequirePRGAction, SessionAware{
+public class EffectuerDepartEquipeAction implements Action, RequestAware, RequirePRGAction, SessionAware{
     private HttpServletRequest request;
     private HttpServletResponse response;
     private HttpSession session;
@@ -78,7 +78,7 @@ public class EffectuerQuitterEquipeAction implements Action, RequestAware, Requi
                 }
                 
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(EffectuerQuitterEquipeAction.class.getName())
+                Logger.getLogger(EffectuerDepartEquipeAction.class.getName())
                         .log(Level.SEVERE, null, ex);
             }
             finally{

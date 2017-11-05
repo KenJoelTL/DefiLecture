@@ -10,5 +10,5 @@ package com.defiLecture.controleur;
  * @author Joel
  */
 interface SendAjaxResponse { //interface de marquage
-    //public void setResponse(HttpServletResponse response);
+    
 }

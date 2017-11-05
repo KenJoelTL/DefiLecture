@@ -12,13 +12,8 @@ import javax.servlet.http.HttpSession;
 import jdbc.Config;
 import jdbc.Connexion;
 import com.defiLecture.modele.Compte;
-import com.defiLecture.modele.CompteDAO;
 import com.defiLecture.modele.Defi;
 import com.defiLecture.modele.DefiDAO;
-import com.defiLecture.modele.DemandeEquipe;
-import com.defiLecture.modele.DemandeEquipeDAO;
-import com.defiLecture.modele.Lecture;
-import com.defiLecture.modele.LectureDAO;
 
 /**
  *

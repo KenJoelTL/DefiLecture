@@ -1,5 +1,5 @@
 <%-- 
-    Document   : pageTableauDesScores
+    Document   : pageTableauScores
     Created on : 2017-10-27, 21:22:09
     Author     : Joel
 --%>

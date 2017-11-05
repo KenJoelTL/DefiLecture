@@ -76,7 +76,7 @@ public class EffectuerModificationCompteAction implements Action, RequestAware, 
                         catch(NumberFormatException e){
                         }
                     }
-                    if(request.getParameter("idEquipe") != null){ // lorsque quelqu'un quitte son equipe idEquipe == -1
+                    if(request.getParameter("idEquipe") != null){ // lorsque quelqu'un quitte son equipe idEquipe = -1
                         try{
                             idEquipe = Integer.parseInt(request.getParameter("idEquipe"));
                             if(idEquipe != compte.getIdEquipe())
@@ -100,7 +100,7 @@ public class EffectuerModificationCompteAction implements Action, RequestAware, 
                     
                     if(!dao.update(compte)){
                         request.setAttribute("message", "Problèmes dans l'enregistrement des informations"); //mettre un message d'erreur
-                        return"*.do?tache=afficherPageGestionConfigurationCompte&id="+compte.getIdCompte();
+                        return"*.do?tache=afficherPageModificationCompte&id="+compte.getIdCompte();
                     }
                     else{
                     //il faut avertir que les changements ont étés faits
@@ -110,7 +110,6 @@ public class EffectuerModificationCompteAction implements Action, RequestAware, 
                 }            
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(EffectuerModificationCompteAction.class.getName()).log(Level.SEVERE, null, ex);
-                //request.setAttribute("vue", "gestionConfigurationCompte.jsp");
                 request.setAttribute("message", "Problèmes dans l'enregistrement des informations"); //mettre un message d'erreur
                 return"*.do?tache=afficherPageGestionConfigurationCompte&id="+request.getParameter("idCompte");
             }
@@ -118,7 +117,7 @@ public class EffectuerModificationCompteAction implements Action, RequestAware, 
         else
             return"*.do?tache=afficherPageGestionListeCompte";
         
-//        return("/index.jsp");
+
     }
 
     @Override
