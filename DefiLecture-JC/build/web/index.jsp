@@ -4,7 +4,7 @@
     Author     : Joel & Charles
 --%>
 
-<%@page import="modele.CompteDAO"%>
+<%@page import="com.defiLecture.modele.CompteDAO"%>
 <%@page import="jdbc.Connexion"%>
 <%@page import="jdbc.Config"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -22,6 +22,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="./css/styles.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
@@ -45,7 +46,7 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href='*.do?tache=""'>Acceuil</a></li>
            
-             <c:if test="${ !empty sessionScope.connecte }">
+             <c:if test="${ !empty sessionScope.connecte && sessionScope.role le 2 }">
                 
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Lectures
@@ -151,15 +152,15 @@
         
             
                 
-                <div class="container-fluid">
+                <div class="container">
                     
                     <c:choose>
                         <c:when test="${ !empty requestScope.vue }">
-                            <c:set var="vue" value="${requestScope.vue}"/>
+                            <c:set var="vue" value="/WEB-INF/vue/${requestScope.vue}"/>
                             <jsp:include page="${vue}" ></jsp:include>
                         </c:when>
                         <c:otherwise>
-                            <jsp:include page="accueil.jsp" ></jsp:include>
+                            <jsp:include page="/WEB-INF/vue/accueil.jsp" ></jsp:include>
                         </c:otherwise>
                     </c:choose>
                     

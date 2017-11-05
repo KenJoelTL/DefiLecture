@@ -1,0 +1,14 @@
+/* 
+    Created on : 2017-11-05, 17:05:15
+    Author     : Joel
+*/
+
+.avatar{
+    height: 70px;
+    width: 75px;
+    border: 1px solid;
+    padding: 5px;
+    color: black;
+    box-shadow: 0 0 8px 3px black;
+    background-color: rgb(255, 255, 255);
+}
