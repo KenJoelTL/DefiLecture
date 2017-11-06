@@ -382,6 +382,59 @@ public class DefiDAO extends DAO<Defi> {
         
         return listeDefi;
     }
+     
+     
+     public List<Defi> findHistorique() {
+        
+        String req = "SELECT * FROM defi WHERE defi.DATE_DEBUT <= SYSDATE() ORDER BY defi.DATE_DEBUT desc";
+        List<Defi> listeDefi = new ArrayList<Defi>();
+        
+        Statement stm = null;
+        try {
+
+                stm = cnx.createStatement();
+
+                ResultSet resultat = stm.executeQuery(req);
+                
+                // On vérifie s'il y a un résultat    
+                while(resultat.next()){
+                    
+                    Defi d = new Defi();
+
+                    d.setIdDefi(resultat.getInt("ID_DEFI"));
+                    d.setIdCompte(resultat.getInt("ID_COMPTE"));
+                    d.setNom(resultat.getString("NOM"));
+                    d.setDescription(resultat.getString("DESCRIPTION"));
+                    d.setDateDebut(resultat.getString("DATE_DEBUT"));
+                    d.setDateFin(resultat.getString("DATE_FIN"));
+                    d.setQuestion(resultat.getString("QUESTION"));
+                    d.setChoixReponse(resultat.getString("CHOIX_REPONSE"));
+                    d.setReponse(resultat.getString("REPONSE"));
+                    d.setValeurMinute(resultat.getInt("VALEUR_MINUTE"));
+                    
+                    listeDefi.add(d);
+                        
+                }
+                resultat.close();       
+                stm.close();
+                return listeDefi;
+                
+        }
+        catch (SQLException exp) {
+        }
+        finally {
+            try{
+                if (stm!=null)
+                    stm.close();
+            }
+            catch (SQLException exp) {
+            }
+             catch (Exception e) {
+            }
+        }        
+        
+        return listeDefi;
+    }
     
     
 }
