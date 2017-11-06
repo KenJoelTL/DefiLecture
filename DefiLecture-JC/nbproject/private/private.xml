@@ -1,25 +1,18 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/G:/Dossier%20ecole/1Automne2017/Hypermedia%20II/TP/TP1/Github/DefiLectureTp1/DefiLecture-JC/web/index.jsp</file>
-            <file>file:/G:/Dossier%20ecole/1Automne2017/Hypermedia%20II/TP/TP1/Github/DefiLectureTp1/DefiLecture-JC/src/java/modele/Lecture.java</file>
-            <file>file:/G:/Dossier%20ecole/1Automne2017/Hypermedia%20II/TP/TP1/Github/DefiLectureTp1/DefiLecture-JC/web/pageGestionLecture.jsp</file>
-            <file>file:/G:/Dossier%20ecole/1Automne2017/Hypermedia%20II/TP/TP1/Github/DefiLectureTp1/DefiLecture-JC/web/pageModificationLecture.jsp</file>
-            <file>file:/G:/Dossier%20ecole/1Automne2017/Hypermedia%20II/TP/TP1/Github/DefiLectureTp1/DefiLecture-JC/web/pageCreationDefi.jsp</file>
-            <file>file:/G:/Dossier%20ecole/1Automne2017/Hypermedia%20II/TP/TP1/Github/DefiLectureTp1/DefiLecture-JC/src/java/controleur/EffectuerModificationLectureAction.java</file>
-            <file>file:/G:/Dossier%20ecole/1Automne2017/Hypermedia%20II/TP/TP1/Github/DefiLectureTp1/DefiLecture-JC/web/pageCreationLecture.jsp</file>
+            <file>file:/E:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/src/java/com/util/Util.java</file>
+            <file>file:/E:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/src/java/controleur/AfficherPageAccueilAction.java</file>
+            <file>file:/E:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/src/java/controleur/AfficherPageCreationDefiAction.java</file>
+            <file>file:/E:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/src/java/controleur/RequirePRGAction.java</file>
+            <file>file:/E:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/src/java/controleur/SendAjaxResponse.java</file>
+            <file>file:/E:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/src/java/modele/DefiDAO.java</file>
+            <file>file:/E:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/web/index.jsp</file>
+            <file>file:/E:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/src/java/modele/Lecture.java</file>
+            <file>file:/E:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/src/java/controleur/SessionAware.java</file>
+            <file>file:/E:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/src/java/controleur/ExempleClasseActionAjax.java</file>
         </group>
     </open-files>
 </project-private>
-=======
-<?xml version="1.0" encoding="UTF-8"?>
-<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
-    </open-files>
-</project-private>
->>>>>>> 3b5a36bf94f30510f497de86a53c4197eaa11ac0
