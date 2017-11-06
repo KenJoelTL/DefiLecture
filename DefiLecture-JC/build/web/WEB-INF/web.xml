@@ -10,7 +10,7 @@
     </context-param>
     <servlet>
         <servlet-name>CF</servlet-name>
-        <servlet-class>controleur.ControleurFrontal</servlet-class>
+        <servlet-class>com.defiLecture.controleur.ControleurFrontal</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>CF</servlet-name>
