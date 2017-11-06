@@ -13,22 +13,20 @@ import javax.servlet.http.HttpSession;
  *
  * @author Joel
  */
-public class EffectuerDeconnexionAction implements Action, RequestAware, SessionAware{
+public class EffectuerDeconnexionAction implements Action, RequestAware, SessionAware, RequirePRGAction{
     private HttpSession session;
     private HttpServletRequest request;
     private HttpServletResponse response;
     
     @Override
     public String execute() {
+        String action = "accueil.do?tache=afficherPageAccueil";
         session = request.getSession(true);
         
-        if(session.getAttribute("connecte") != null){
-            session.removeAttribute("connecte");
-            if(session.getAttribute("role") != null)
-                session.removeAttribute("role");
-        }
-        request.setAttribute("vue","accueil.jsp");
-        return "/index.jsp";
+        if(session != null)
+            session.invalidate();
+        
+        return action;
     }
 
     @Override

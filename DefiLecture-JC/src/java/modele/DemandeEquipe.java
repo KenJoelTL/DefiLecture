@@ -10,10 +10,16 @@ package modele;
  * @author Joel
  */
 public class DemandeEquipe {
-    int idDemandeEquipe,
+    
+    public static int EN_ATTENTE = -1, //-1 : Le demande est visible, elle vient d'être créée 
+               SUSPENDUE = 0  , // 0 : Le participant est suspendu de l'équipe.
+               ACCEPTEE = 1   ; // 1 : Le participant fait présentement partie de l'équipe */
+               
+    private int idDemandeEquipe,
         idCompte,
         idEquipe,
-        statut;
+        point,
+        statutDemande = EN_ATTENTE; 
 
     public int getIdDemandeEquipe() {
         return idDemandeEquipe;
@@ -39,12 +45,20 @@ public class DemandeEquipe {
         this.idEquipe = idEquipe;
     }
 
-    public int getStatut() {
-        return statut;
+    public int getStatutDemande() {
+        return statutDemande;
     }
 
-    public void setStatut(int statut) {
-        this.statut = statut;
+    public void setStatutDemande(int statutDemande) {
+        this.statutDemande = statutDemande;
+    }
+
+    public int getPoint() {
+        return point;
+    }
+
+    public void setPoint(int point) {
+        this.point = point;
     }
     
     

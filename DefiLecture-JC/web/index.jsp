@@ -4,13 +4,21 @@
     Author     : Joel & Charles
 --%>
 
+<%@page import="modele.CompteDAO"%>
+<%@page import="jdbc.Connexion"%>
+<%@page import="jdbc.Config"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:if test="${ !empty sessionScope.connecte}">
+<% CompteDAO dao = new CompteDAO(Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
+    pageContext.setAttribute("compteConnecte", dao.read(session.getAttribute("connecte").toString())); %>
+</c:if> 
+    
 <!DOCTYPE html>
 <!-- Layout -->
 <html>
     <head>
-        <title>Index</title>
+        <title>D&eacute;fi Lecture</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -24,7 +32,7 @@
          <div class="container-fluid">
           
           <div class="navbar-header">
-            <a class="navbar-brand" href='*.do?tache=""'>Défi-Lecture</a>
+            <a class="navbar-brand" href='*.do?tache=""'>D&eacute;fi-Lecture</a>
             <!-- Apparait lorsque la fenêtre devient de la taille d'un téléphone mobile -->
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#optionsNavigation">
               <span class="icon-bar"></span>
@@ -37,13 +45,13 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href='*.do?tache=""'>Acceuil</a></li>
            
-             <c:if test="${ !empty sessionScope.connecte }">
+             <c:if test="${ !empty sessionScope.connecte && sessionScope.role le 2 }">
                 
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Lectures
                     <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                      <li><a href="*.do?tache=afficherPageCreationLecture">Créer une lecture</a></li>
+                      <li><a href="*.do?tache=afficherPageCreationLecture">Cr&eacute;er une lecture</a></li>
                       <li><a href="*.do?tache=afficherPageGestionLecture">Voir mes lectures</a></li>
                     </ul>
                 </li>
@@ -51,32 +59,70 @@
                 
             </c:if>
            
-                <li><a href="#"><span class="glyphicon glyphicon-stats"></span> Tableau des scores</a></li>
+                <li><a href="scoreboard.do?tache=afficherPageTableauScores">
+                    <span class="glyphicon glyphicon-stats"></span> 
+                    Tableau des scores
+                    </a>
+                </li>
              
-           
             <c:choose>
                 <c:when test="${ !empty sessionScope.connecte }">
                     <li><a href="*.do?tache=afficherPageProfil">Page de profil</a></li>
-                    <li><a href="*.do?tache=afficherPageEquipe">Page d'équipe</a></li>
+                    <c:choose>
+                        <c:when test="${ (sessionScope.role eq 2) or (sessionScope.role eq 4) }">
+                            <c:choose>
+                                <c:when test="${compteConnecte.idEquipe gt -1}">
+                                    <li><a href="affichagePageEquipe.do?tache=afficherPageEquipe&idEquipe=${compteConnecte.idEquipe}">
+                                            Page d'&eacute;quipe</a>
+                                    </li>                        
+                                    <li><a href="joindreEquipe.do?tache=afficherPageListeDemandesEquipe&ordre=recu">
+                                            Acc&eacute;der aux demandes</a>
+                                    </li>                                              
+                                </c:when>
+                                <c:otherwise>
+                                    <li><a href="creationEquipe.do?tache=afficherPageCreationEquipe">Cr&eacute;er une equipe</a></li>                                            
+                                </c:otherwise>
+                            </c:choose>
+                        </c:when>
+                        <c:otherwise>
+                            <c:choose>
+                                <c:when test="${compteConnecte.idEquipe gt -1}">
+                                    <li><a href="affichagePageEquipe.do?tache=afficherPageEquipe&idEquipe=${compteConnecte.idEquipe}">
+                                            Page d'&eacutequipe</a>
+                                    </li>                        
+                                </c:when>
+                                <c:otherwise>
+                                    <li><a href="joindreEquipe.do?tache=afficherPageListeEquipes">Joindre une &eacute;quipe</a></li>                                              
+                                    <li><a href="joindreEquipe.do?tache=afficherPageListeDemandesEquipe&ordre=envoyee">Acc&eacute;der aux demandes</a></li>                                              
+                                </c:otherwise>
+                            </c:choose>
+                        </c:otherwise>
+                    
+                    </c:choose>
                 </c:when>
                 <c:otherwise>
-                    <li style="background-color: #349737;"><a href='*.do?tache=afficherPageInscription' style="color: #fff;" ><span class="glyphicon glyphicon-education"></span> S'incrire</a></li>
+                    <li style="background-color: #349737;">
+                        <a href='*.do?tache=afficherPageInscription' style="color: #fff;" >
+                            <span class="glyphicon glyphicon-education"></span> S'incrire</a>
+                    </li>
                 </c:otherwise>
             </c:choose>
                     
             <c:if test="${ !empty sessionScope.role }">
                  <c:if test="${ sessionScope.role eq 4 }">
-                     <li class="active"><a href="*.do?tache=afficherPageGestionListeCompte">Gérer les comptes</a></li>
+                     <li class="active"><a href="*.do?tache=afficherPageGestionListeCompte">G&eacute;rer les comptes</a></li>
                  </c:if>
-                 <c:if test="${ sessionScope.role ge 3 }">
+                 <c:if test="${ sessionScope.role ge 1 }">
                     
                     
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Défis
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">D&eacute;fis
                         <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                          <li><a href="*.do?tache=afficherPageCreationDefi">Créer un défi</a></li>
-                          <li><a href="*.do?tache=afficherPageParticipationDefi">Voir les défis</a></li>
+                            <c:if test="${ sessionScope.role ge 3 }">
+                          <li><a href="*.do?tache=afficherPageCreationDefi">Cr&eacute;er un d&eacute;fi</a></li>
+                          </c:if>
+                          <li><a href="*.do?tache=afficherPageParticipationDefi">Voir les d&eacute;fis</a></li>
                         </ul>
                     </li>
                     

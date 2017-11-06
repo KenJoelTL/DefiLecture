@@ -13,6 +13,11 @@ import java.sql.Date;
  */
 public class Lecture {
     
+<<<<<<< HEAD
+=======
+    public static int NON_OBLIGATOIRE = 0;
+    public static int OBLIGATOIRE = 1;
+>>>>>>> 3b5a36bf94f30510f497de86a53c4197eaa11ac0
 
     int idLecture; // clé primaire
     int idCompte;
@@ -43,7 +48,11 @@ public class Lecture {
         this.titre = titre;
         this.dureeMinutes = dureeMinutes;
         this.idLecture = 0;
+<<<<<<< HEAD
         this.obligatoire = 0;
+=======
+        this.estObligatoire = 0;
+>>>>>>> 3b5a36bf94f30510f497de86a53c4197eaa11ac0
     }*/
     
 
@@ -93,8 +102,13 @@ public class Lecture {
         return estObligatoire;
     }
 
+<<<<<<< HEAD
     public void setEstObligatoire(int obligatoire) {
         this.estObligatoire = obligatoire;
+=======
+    public void setEstObligatoire(int estObligatoire) {
+        this.estObligatoire = estObligatoire;
+>>>>>>> 3b5a36bf94f30510f497de86a53c4197eaa11ac0
     }
     
     

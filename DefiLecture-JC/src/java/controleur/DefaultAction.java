@@ -18,8 +18,7 @@ public class DefaultAction implements Action, RequestAware {
     private HttpServletResponse response;
     
     @Override
-    public String execute() {
-        
+    public String execute() {      
         request.setAttribute("vue", "accueil.jsp");
         return "/index.jsp";
     }

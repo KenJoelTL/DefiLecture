@@ -5,6 +5,7 @@
  */
 package modele;
 
+import com.util.Util;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,7 +16,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jdbc.Connexion;
 
 /**
  *
@@ -42,7 +42,7 @@ public class LectureDAO extends DAO<Lecture> {
 
                 
                 paramStm.setInt(1, x.getIdCompte());
-                paramStm.setString(2, x.getTitre());
+                paramStm.setString(2, Util.toUTF8(x.getTitre()));
                 paramStm.setInt(3, x.getDureeMinutes());
                 paramStm.setInt(4, x.getEstObligatoire());    
                 int n= paramStm.executeUpdate();
@@ -59,8 +59,12 @@ public class LectureDAO extends DAO<Lecture> {
         }
         finally
         {
-                if (paramStm!=null)
-                    Connexion.close();
+                try {
+                    if (paramStm!=null)
+                    paramStm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(LectureDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
                   
         }
         return false;
@@ -106,8 +110,6 @@ public class LectureDAO extends DAO<Lecture> {
             try{
                 if (paramStm!=null)
                     paramStm.close();
-                if(cnx!=null)
-                    Connexion.close();
             }
             catch (SQLException exp) {
             }
@@ -137,7 +139,7 @@ public class LectureDAO extends DAO<Lecture> {
         try {
                 paramStm = cnx.prepareStatement(req);
 
-                paramStm.setString(1, x.getTitre());
+                paramStm.setString(1, Util.toUTF8(x.getTitre()));
                 paramStm.setInt(2, x.getDureeMinutes());
                 paramStm.setInt(3, x.getEstObligatoire());
                 paramStm.setInt(4, x.getIdLecture());
@@ -162,7 +164,7 @@ public class LectureDAO extends DAO<Lecture> {
                     Logger.getLogger(CompteDAO.class.getName())
                             .log(Level.SEVERE, null, ex);
                 }
-                Connexion.close();
+                
         }
         return false;
     }
@@ -198,7 +200,7 @@ public class LectureDAO extends DAO<Lecture> {
                     Logger.getLogger(LectureDAO.class.getName())
                             .log(Level.SEVERE, null, ex);
                 }
-                Connexion.close();
+                
         }
         return false;
     }
@@ -267,8 +269,6 @@ public class LectureDAO extends DAO<Lecture> {
             try{
                 if (paramStm!=null)
                     paramStm.close();
-                if(cnx!=null)
-                    Connexion.close();
             }
             catch (SQLException exp) {
             }
@@ -278,5 +278,55 @@ public class LectureDAO extends DAO<Lecture> {
 
         return listeLecture;
     }
+    
+    public List<Lecture> findByIdCompteOrderByDate(int idCompte){
+
+        String req = "SELECT * FROM lecture WHERE `ID_COMPTE` = ? ORDER BY lecture.DATE_INSCRIPTION desc";
+        List<Lecture> listeLecture = new ArrayList<Lecture>();
+
+        PreparedStatement paramStm = null;
+        try {
+
+                paramStm = cnx.prepareStatement(req);
+
+                paramStm.setInt(1, idCompte);
+
+                ResultSet resultat = paramStm.executeQuery();
+
+                // On vérifie s'il y a un résultat    
+                while(resultat.next()){
+
+                    Lecture l = new Lecture();
+                    l.setIdLecture(resultat.getInt("ID_LECTURE"));
+                    l.setIdCompte(resultat.getInt("ID_COMPTE"));
+                    l.setDateInscription(resultat.getDate("DATE_INSCRIPTION"));
+                    l.setTitre(resultat.getString("TITRE"));
+                    l.setDureeMinutes(resultat.getInt("DUREE_MINUTES"));
+                    l.setEstObligatoire(resultat.getInt("EST_OBLIGATOIRE"));
+                    listeLecture.add(l);
+
+                }
+                resultat.close();
+                paramStm.close();
+                return listeLecture;
+
+        }
+        catch (SQLException exp) {
+        }
+        finally {
+            try{
+                if (paramStm!=null)
+                    paramStm.close();
+            }
+            catch (SQLException exp) {
+            }
+             catch (Exception e) {
+            }
+        }        
+
+        return listeLecture;
+    }
+    
+    
     
 }

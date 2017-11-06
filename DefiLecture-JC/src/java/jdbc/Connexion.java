@@ -18,6 +18,7 @@ public class Connexion {
 	private static String url;
 	private static String user;		
         private static String password;
+        //private static String encoding;
         private Connexion()
         {
         }
@@ -75,7 +76,12 @@ public class Connexion {
                 Connexion.password = password;
                 Connexion.url = url;
         }
-        
+        /**
+         * 
+     * @param user
+     * @param password
+     * @param url
+         */
         public static Connection startConnection(String user, String password, String url, String driver) throws ClassNotFoundException{
                 Class.forName(driver);
                 Connexion.user = user;
@@ -83,13 +89,13 @@ public class Connexion {
                 Connexion.url = url;             
             return getInstance();
         }
-        
+        /*
         public static Connection startConnection(String driver) throws ClassNotFoundException{
-                Class.forName(driver);/*
-                Connexion.user = user;
-                Connexion.password = password;
-                Connexion.url = url; */            
+               // Class.forName(driver);
+               // Connexion.user = user;
+               // Connexion.password = password;
+               // Connexion.url = url;             
             return getInstance();
-        }
+        }*/
         
 }

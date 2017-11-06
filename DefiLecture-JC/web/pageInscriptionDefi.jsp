@@ -5,6 +5,7 @@
 --%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="modele.Defi"%>
 <%@page import="modele.DefiDAO"%>
@@ -16,47 +17,46 @@
     Connection cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
     DefiDAO dao = new DefiDAO(cnx);
     Defi d = dao.read(request.getParameter("id"));
-    String[] choixReponse;
-    choixReponse = d.getChoixReponse().split(";");
+    String choixReponse = d.getChoixReponse();
     pageContext.setAttribute("d", d);
-    pageContext.setAttribute("choixReponse", choixReponse);
   %>
 
+  <script>
+       $(document).ready(function(){
+          var value = <%=choixReponse%>;
+          var s="";
+          //Boucle pour afficher les choix de réponses en bouton radio
+          for(i=0; i<value.length; i++ ){
+             s += "<div class=\"radio\">" +
+                        "<label><input type=\"radio\" name=\"reponseParticipant\" value=\""+i+"\" required >"+value[i]+"</label>"+
+                    "</div>";
+            }
+            $("#listeChoixReponse").append(s);
+
+       });
+  </script>
 
     <body>
-        <h1>Inscription à un défi</h1>
-        <div>
-                Nom du défi: ${d.nom}
-        </div>
-        <div>      
-                Description : ${d.description}
+        <h2>${d.nom}</h2>
+  
+        <div >      
+                <label for="description">Défi à relever : </label>
+                <textarea id="description" disabled class="form-control" name="description" rows="15" style="max-width:80%; resize:none">${d.description}</textarea>
         </div>
         
         <div>
-                Question à répondre : ${d.question}
+                <label for="question">Question à répondre : </label>
+                <p id="question"> ${d.question} </p>
         </div>
           
        <div>
             <form action="*.do" method="post">
-                Choix de réponse :
-
-                     <div class="radio">
-                        <label><input type="radio" name="reponseParticipant" value="0" required >${choixReponse[0]}</label>
-                    </div>
-                    <div class="radio">
-                        <label><input type="radio" name="reponseParticipant" value="1" required >${choixReponse[1]}</label>
-                    </div>
-                    <div class="radio">
-                        <label><input type="radio" name="reponseParticipant" value="2" required >${choixReponse[2]}</label>
-                    </div>
-                    <div class="radio">
-                        <label><input type="radio" name="reponseParticipant" value="3" required >${choixReponse[3]}</label>
-                    </div>
+                <label for="listeChoixReponse">Choix de réponse : </label>
+                <div id="listeChoixReponse"></div>
                     <div>
-     
                         <input type="hidden" name="tache" value="effectuerInscriptionDefi">
                         <input type="hidden" name="idDefi" value="${d.idDefi}">
-                        <input type="hidden" name="idCompte" value="${d.idCompte}">
+
                         <input type="submit" name="valider" value=" Valider ma réponse" />
                         <input type="submit" name="annule" value=" Annuler" />
                     </div>

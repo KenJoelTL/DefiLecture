@@ -20,7 +20,7 @@
     Connexion.reinit();
     Connection cnx = Connexion.startConnection(Config.DB_USER,Config.DB_PWD,Config.URL,Config.DRIVER);
     LectureDAO dao = new LectureDAO(cnx);
-    List<Lecture> listeLectures = dao.findByIdCompte((int)(session.getAttribute("connecte")));
+    List<Lecture> listeLectures = dao.findByIdCompteOrderByDate((int)(session.getAttribute("connecte")));
     pageContext.setAttribute("listeLectures", listeLectures);
   %>
     <table class="table">

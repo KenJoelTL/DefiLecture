@@ -3,8 +3,13 @@
     Created on : 2017-10-15
     Author     : Joel
 --%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+        <c:if test="${ !empty sessionScope.connecte }">
+        <p>
+            Bonjour <%=session.getAttribute("connecte")%>
+        </p>
+        </c:if>
+-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,15 +18,8 @@
     </head>
     <body>
         <h1>Connexion</h1>
-        
-        <%if(session.getAttribute("connecte") != null){%>
-        <p>
-            Bonjour <%=session.getAttribute("connecte")%>
-        </p>
-        <%}
-        %>
-        
-        <form action="*.do" method="post">
+            
+        <form action="connexion.do" method="post">
             Identifiant : <input type="text" name="identifiant" />
             Mot de passe : <input type="password" name="motPasse" />
             <input type="hidden" name="tache" value="effectuerConnexion">

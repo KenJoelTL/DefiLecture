@@ -11,7 +11,7 @@ package jdbc;
  */
 public interface Config {
     
-    public static final String URL = "jdbc:mysql://localhost/defilecture";
+    public static final String URL = "jdbc:mysql://localhost/defilecture?useUnicode=true&characterEncoding=UTF-8";
     public static final String DB_HOST = "localhost";
     public static final String DB_USER = "root";
     public static final String DB_PWD = "root";

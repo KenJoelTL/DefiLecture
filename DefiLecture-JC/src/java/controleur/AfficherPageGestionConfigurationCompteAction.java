@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import jdbc.Config;
 import jdbc.Connexion;
+import modele.Compte;
 import modele.CompteDAO;
 
 /**
@@ -26,31 +27,36 @@ public class AfficherPageGestionConfigurationCompteAction implements Action, Req
     
     @Override
     public String execute() {
-        if(request.getParameter("id")==null)
-            request.setAttribute("vue", "gestionListeComptes.jsp");
-        else{
+
+        request.setAttribute("vue", "gestionListeComptes.jsp");        
+        
+        //On vérifie si l'utilisateur qui est selectionné est bien celui qui est connecté. Autrement seuls les 
+        // administrateurs peuvent accéder à la page de configuration d'autrui
+        if( session.getAttribute("connecte") != null && session.getAttribute("role") != null && request.getParameter("id")!=null) 
+            if( ( !request.getParameter("id").equals(session.getAttribute("connecte")+"")
+             && (int)session.getAttribute("role") == Compte.ADMINISTRATEUR) 
+             || (request.getParameter("id").equals(session.getAttribute("connecte")+"")) ){
+
             String idCompte = request.getParameter("id");
             try {
-                Class.forName(Config.DRIVER);
-                Connexion.setUrl(Config.URL);
-                Connexion.setUser(Config.DB_USER);
-                Connexion.setPassword(Config.DB_PWD);
-                Connection cnx = Connexion.getInstance();
+                Connection cnx = Connexion.startConnection
+                       (Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
 
                 CompteDAO dao = new CompteDAO(cnx);
 
-                if(dao.read(idCompte)==null)
-                    request.setAttribute("vue", "gestionListeComptes.jsp");
-                else{    
-                    request.setAttribute("vue", "gestionConfigurationCompte.jsp");
-                }
+                if(dao.read(idCompte)!=null)
+                    request.setAttribute("vue", "pageGestionConfigurationCompte.jsp");
+                
             } 
             catch (ClassNotFoundException ex) {
-                Logger.getLogger(AfficherPageGestionConfigurationCompteAction.class.getName()).log(Level.SEVERE, null, ex);
-                request.setAttribute("vue", "gestionListeComptes.jsp");
+                Logger.getLogger(AfficherPageGestionConfigurationCompteAction
+                                   .class.getName()).log(Level.SEVERE, null, ex);
+                request.setAttribute("vue", "pageGestionListeCompte.jsp");
                 return "/index.jsp";
             }
-            
+            finally{
+                Connexion.close();
+            }
         }
         return "/index.jsp";
     }

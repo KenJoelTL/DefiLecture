@@ -7,22 +7,23 @@ package controleur;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Charles
  */
-public class AfficherPageConnexionAction implements Action, RequestAware{
+public class AfficherPageConnexionAction implements Action, RequestAware, SessionAware{
     
     private HttpServletRequest request;
     private HttpServletResponse response;
+    private HttpSession session;
     
     @Override
     public String execute() {
         
-        System.out.println("affichage de la page de connexion");
-        
-        request.setAttribute("vue", "connexion.jsp");
+        if(session.getAttribute("connecte") == null)
+            request.setAttribute("vue", "pageConnexion.jsp");
         
         return "/index.jsp";
     }
@@ -35,5 +36,10 @@ public class AfficherPageConnexionAction implements Action, RequestAware{
     @Override
     public void setResponse(HttpServletResponse response) {
         this.response = response;
+    }
+
+    @Override
+    public void setSession(HttpSession session) {
+        this.session = session;
     }
 }

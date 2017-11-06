@@ -9,13 +9,13 @@ package modele;
  *
  * @author Joel
  */
-public class Equipe {
+public class Equipe implements Comparable<Equipe>{
+    public static int NB_MAX_MEMBRES = 3;
+    private int idEquipe, //clé primaire
+                point,
+                nbMembres;
     
-    int idEquipe, //clé primaire
-        idCapitaine,
-        point;
-    
-    String nom;
+    private String nom;
     
 
     //Constructeurs
@@ -26,22 +26,14 @@ public class Equipe {
     public Equipe(int idEquipe, String nom) {
         this.idEquipe = idEquipe;
         this.nom = nom;
-    }
-
-    public Equipe(int idEquipe, int idCapitaine, String nom) {
-        this.idEquipe = idEquipe;
-        this.idCapitaine = idCapitaine;
-        this.nom = nom;
+        this.nbMembres = 0;
         this.point = 0;
     }
     
-    
-
+    // Getters et Setters
     public int getIdEquipe() {
         return idEquipe;
     }
-
-    // Getters et Setters
     
     public void setIdEquipe(int idEquipe) {
         this.idEquipe = idEquipe;
@@ -55,20 +47,41 @@ public class Equipe {
         this.nom = nom;
     }
 
-    public int getIdCapitaine() {
-        return idCapitaine;
-    }
-
-    public void setIdCapitaine(int idCapitaine) {
-        this.idCapitaine = idCapitaine;
-    }
-
     public int getPoint() {
         return point;
     }
 
     public void setPoint(int point) {
         this.point = point;
+    }
+
+    public int getNbMembres() {
+        return nbMembres;
+    }
+
+    public void setNbMembres(int nbMembres) {
+        this.nbMembres = nbMembres;
+    }
+
+    @Override
+    public int compareTo(Equipe equipe) {
+        int valeur = 0;    
+        if(this.point > equipe.point)
+            valeur = 1;
+        else if(this.point < equipe.point)
+            valeur = -1;
+        return valeur;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this != null && obj != null)
+            if(obj instanceof Equipe)
+                return (this.idEquipe == ((Equipe)obj).idEquipe) 
+                        /*&& (this.nom.equals(equipe.nom))*/;
+        
+        return false;
+        
     }
     
      

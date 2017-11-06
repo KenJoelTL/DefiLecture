@@ -5,6 +5,7 @@
  */
 package modele;
 
+import com.util.Util;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,8 +15,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jdbc.Connexion;
-import jdk.nashorn.internal.codegen.types.Type;
 
 /**
  *
@@ -38,21 +37,25 @@ public class CompteDAO extends DAO<Compte>{
 
                 paramStm = cnx.prepareStatement(req);
 
-                
-                paramStm.setString(1, x.getCourriel());
-                paramStm.setString(2, x.getMotPasse());
-                paramStm.setString(3, x.getNom());
-                paramStm.setString(4, x.getPrenom());
-                if(!"".equals(x.getPseudonyme()))
-                    paramStm.setString(5, x.getPseudonyme());
+              if(x.getCourriel() != null && !"".equals(x.getCourriel().trim())
+              && x.getMotPasse() != null && !"".equals(x.getMotPasse().trim())     
+              && x.getNom()      != null && !"".equals(x.getNom().trim())
+              && x.getPrenom()   != null && !"".equals(x.getPrenom().trim())){
+
+                paramStm.setString(1, Util.toUTF8(x.getCourriel()));
+                paramStm.setString(2, Util.toUTF8(x.getMotPasse()));
+                paramStm.setString(3, Util.toUTF8(x.getNom()));
+                paramStm.setString(4, Util.toUTF8(x.getPrenom()));
+                if(x.getPseudonyme() != null && !"".equals(x.getPseudonyme().trim()))
+                    paramStm.setString(5, Util.toUTF8(x.getPseudonyme()));
                 else
                     paramStm.setString(5, null);
-                if(!"".equals(x.getAvatar()))
-                    paramStm.setString(6, x.getAvatar());
+                if(x.getAvatar() != null && !"".equals(x.getAvatar().trim()))
+                    paramStm.setString(6, Util.toUTF8(x.getAvatar()));
                 else
                     paramStm.setString(6, null);
-                if(!"".equals(x.getProgrammeEtude()))
-                    paramStm.setString(7, x.getProgrammeEtude());
+                if(x.getProgrammeEtude() != null && !"".equals(x.getProgrammeEtude().trim()))
+                    paramStm.setString(7, Util.toUTF8(x.getProgrammeEtude()));
                 else
                     paramStm.setString(7, null);
                 
@@ -62,9 +65,7 @@ public class CompteDAO extends DAO<Compte>{
                         paramStm.close();
                         return true;
                 }
-                
-                //paramStm.execute();
-                
+              }
             return false;
         }
         catch (SQLException exp) {
@@ -77,7 +78,6 @@ public class CompteDAO extends DAO<Compte>{
                     Logger.getLogger(CompteDAO.class.getName())
                             .log(Level.SEVERE, null, ex);
                 }
-                Connexion.close();
         }
         return false;
     }
@@ -112,7 +112,7 @@ public class CompteDAO extends DAO<Compte>{
                 c.setAvatar(resultat.getString("AVATAR"));             
                 c.setProgrammeEtude(resultat.getString("PROGRAMME_ETUDE"));
                 c.setMinutesRestantes(resultat.getInt("MINUTES_RESTANTES"));
-                c.setPointage(resultat.getInt("POINTAGE"));
+                c.setPoint(resultat.getInt("POINT"));
                 c.setRole(resultat.getInt("ROLE"));
 
                 resultat.close();
@@ -131,8 +131,6 @@ public class CompteDAO extends DAO<Compte>{
             try{
                 if (paramStm!=null)
                     paramStm.close();
-                if(cnx!=null)
-                    Connexion.close();
             }
             catch (SQLException exp) {
             }
@@ -159,53 +157,57 @@ public class CompteDAO extends DAO<Compte>{
                 String req = "UPDATE compte SET COURRIEL = ?, MOT_PASSE = ?,"
                            + "NOM = ?, PRENOM = ?, PSEUDONYME = ?, AVATAR = ?,"
                            + "PROGRAMME_ETUDE = ?, ID_EQUIPE = ?, MINUTES_RESTANTES = ?,"
-                           + "POINTAGE = ?, ROLE = ? WHERE ID_COMPTE = ?";
+                           + "POINT = ?, ROLE = ? WHERE ID_COMPTE = ?";
 
         PreparedStatement paramStm = null;
         try {
-                paramStm = cnx.prepareStatement(req);
+            paramStm = cnx.prepareStatement(req);
 
-                paramStm.setString(1, x.getCourriel());
-                paramStm.setString(2, x.getMotPasse());
-                paramStm.setString(3, x.getNom());
-                paramStm.setString(4, x.getPrenom());
-                
+            if(x.getCourriel()     != null && !"".equals(x.getCourriel().trim()) 
+                && x.getMotPasse() != null && !"".equals(x.getMotPasse().trim())
+                && x.getNom()      != null && !"".equals(x.getNom().trim())     
+                && x.getPrenom()   != null && !"".equals(x.getPrenom().trim()))
+            {
+                paramStm.setString(1, Util.toUTF8(x.getCourriel()));
+                paramStm.setString(2, Util.toUTF8(x.getMotPasse()));
+                paramStm.setString(3, Util.toUTF8(x.getNom()));
+                paramStm.setString(4, Util.toUTF8(x.getPrenom()));
+
                 if(x.getPseudonyme() == null || "".equals(x.getPseudonyme().trim()))
                     paramStm.setString(5, null);
                 else
-                    paramStm.setString(5, x.getPseudonyme());
-                
+                    paramStm.setString(5, Util.toUTF8(x.getPseudonyme()));
+
                 if(x.getAvatar() == null || "".equals(x.getAvatar().trim()))
                     paramStm.setString(6, null);
                 else
-                    paramStm.setString(6, x.getAvatar());
-                
+                    paramStm.setString(6, Util.toUTF8(x.getAvatar()));
+
                 if(x.getProgrammeEtude() == null || "".equals(x.getProgrammeEtude().trim()))
                     paramStm.setString(7, null);
                 else
-                    paramStm.setString(7, x.getProgrammeEtude());
-                
+                    paramStm.setString(7, Util.toUTF8(x.getProgrammeEtude()));
+
                 if(x.getIdEquipe() == -1){
                     paramStm.setNull(8, java.sql.Types.INTEGER);
-                    System.out.println("\n==============================================================================================");
                 }
                 else
                     paramStm.setInt(8, x.getIdEquipe());
                 paramStm.setInt(9, x.getMinutesRestantes());
-                paramStm.setInt(10, x.getPointage());
+                paramStm.setInt(10, x.getPoint());
                 paramStm.setInt(11, x.getRole());
 
                 paramStm.setInt(12, x.getIdCompte());
 
-                
+
                 int nbLignesAffectees= paramStm.executeUpdate();
-                
+
                 if (nbLignesAffectees>0) {
-                        paramStm.close();
-                        return true;
+                    paramStm.close();
+                    return true;
                 }
-                                
-            return false;
+            }                
+        return false;
         }
         catch (SQLException exp) {
             System.out.println(exp.getMessage());
@@ -218,7 +220,7 @@ public class CompteDAO extends DAO<Compte>{
                     Logger.getLogger(CompteDAO.class.getName())
                             .log(Level.SEVERE, null, ex);
                 }
-                Connexion.close();
+                
         }
         return false;
     }
@@ -254,7 +256,6 @@ public class CompteDAO extends DAO<Compte>{
                     Logger.getLogger(CompteDAO.class.getName())
                             .log(Level.SEVERE, null, ex);
                 }
-                Connexion.close();
         }
         return false;
     }
@@ -269,12 +270,15 @@ public class CompteDAO extends DAO<Compte>{
             while (r.next()) {
                 Compte c = new Compte();
                 c.setIdCompte(r.getInt("ID_COMPTE"));
-                c.setIdEquipe(r.getInt("ID_EQUIPE"));
+                if(r.getInt("ID_EQUIPE")==0)
+                    c.setIdEquipe(-1);
+                else    
+                    c.setIdEquipe(r.getInt("ID_EQUIPE"));
                 c.setCourriel(r.getString("COURRIEL"));
                 c.setMotPasse(r.getString("MOT_PASSE"));
                 c.setNom(r.getString("NOM"));
                 c.setPrenom(r.getString("PRENOM"));
-                c.setPointage(r.getInt("POINTAGE"));
+                c.setPoint(r.getInt("POINT"));
                 c.setMinutesRestantes(r.getInt("MINUTES_RESTANTES"));
                 c.setProgrammeEtude(r.getString("PROGRAMME_ETUDE"));
                 c.setAvatar(r.getString("AVATAR"));
@@ -292,35 +296,38 @@ public class CompteDAO extends DAO<Compte>{
 
     }
     
-    public List<Compte> findByIdEquipe(String idEquipe){
+    public List<Compte> findByIdEquipe(int idEquipe){
         List<Compte> liste = new LinkedList<>();
-        String req = "SELECT * FROM compte WHERE `ID_COMPTE` = ?";
+        String req = "SELECT * FROM compte WHERE `ID_EQUIPE` = ?";
         
         PreparedStatement paramStm = null;
         try {
 
             paramStm = cnx.prepareStatement(req);
 
-            paramStm.setString(1, idEquipe);
+            paramStm.setInt(1, idEquipe);
 
-            ResultSet r = paramStm.executeQuery();
-            while (r.next()) {
+            ResultSet resultat = paramStm.executeQuery();
+            while (resultat.next()) {
                 Compte c = new Compte();
-                c.setIdCompte(r.getInt("ID_COMPTE"));
-                c.setIdEquipe(r.getInt("ID_EQUIPE"));
-                c.setCourriel(r.getString("COURRIEL"));
-                c.setMotPasse(r.getString("MOT_PASSE"));
-                c.setNom(r.getString("NOM"));
-                c.setPrenom(r.getString("PRENOM"));
-                c.setPointage(r.getInt("DUREE_MINUTES"));
-                c.setMinutesRestantes(r.getInt("MINUTES_RESTANTES"));
-                c.setProgrammeEtude(r.getString("PROGRAMME_ETUDE"));
-                c.setAvatar(r.getString("AVATAR"));
-                c.setPseudonyme(r.getString("PSEUDONYME"));
-                c.setRole(r.getInt("ROLE"));
+                c.setIdCompte(resultat.getInt("ID_COMPTE"));
+                if(resultat.getInt("ID_EQUIPE") == 0)
+                    c.setIdEquipe(-1);
+                else
+                    c.setIdEquipe(resultat.getInt("ID_EQUIPE"));
+                c.setCourriel(resultat.getString("COURRIEL"));
+                c.setPrenom(resultat.getString("PRENOM"));             
+                c.setNom(resultat.getString("NOM"));
+                c.setMotPasse(resultat.getString("MOT_PASSE"));
+                c.setPseudonyme(resultat.getString("PSEUDONYME"));             
+                c.setAvatar(resultat.getString("AVATAR"));             
+                c.setProgrammeEtude(resultat.getString("PROGRAMME_ETUDE"));
+                c.setMinutesRestantes(resultat.getInt("MINUTES_RESTANTES"));
+                c.setPoint(resultat.getInt("POINT"));
+                c.setRole(resultat.getInt("ROLE"));
                 liste.add(c);
             }
-            r.close();
+            resultat.close();
             paramStm.close();
         }
         catch (SQLException exp){
@@ -340,26 +347,35 @@ public class CompteDAO extends DAO<Compte>{
 
                 paramStm = cnx.prepareStatement(req);
 
-                paramStm.setString(1, identifiant);
-                paramStm.setString(2, identifiant);
-                paramStm.setString(3, motPasse);
+                paramStm.setString(1, Util.toUTF8(identifiant));
+                paramStm.setString(2, Util.toUTF8(identifiant));
+                paramStm.setString(3, Util.toUTF8(motPasse));
 
                 resultat = paramStm.executeQuery();
                 
                 // On vérifie s'il y a un résultat    
                 if(resultat.next()){
+                    if(!motPasse.equals(resultat.getString("MOT_PASSE")))
+                        return null;
+                    if(!identifiant.equals(resultat.getString("PSEUDONYME")) &&
+                       !identifiant.equals(resultat.getString("COURRIEL")) )
+                        return null;
                     
                     Compte c = new Compte();
                     c.setIdCompte(resultat.getInt("ID_COMPTE"));
-                    c.setIdEquipe(resultat.getInt("ID_EQUIPE"));
+                    if(resultat.getInt("ID_EQUIPE") == 0)
+                        c.setIdEquipe(-1);
+                    else
+                        c.setIdEquipe(resultat.getInt("ID_EQUIPE"));
                     c.setCourriel(resultat.getString("COURRIEL"));
                     c.setPrenom(resultat.getString("PRENOM"));             
                     c.setNom(resultat.getString("NOM"));
+                    c.setMotPasse(resultat.getString("MOT_PASSE"));
                     c.setPseudonyme(resultat.getString("PSEUDONYME"));             
                     c.setAvatar(resultat.getString("AVATAR"));             
                     c.setProgrammeEtude(resultat.getString("PROGRAMME_ETUDE"));
                     c.setMinutesRestantes(resultat.getInt("MINUTES_RESTANTES"));
-                    c.setPointage(resultat.getInt("POINTAGE"));
+                    c.setPoint(resultat.getInt("POINT"));
                     c.setRole(resultat.getInt("ROLE"));
                     
                     resultat.close();
@@ -377,8 +393,6 @@ public class CompteDAO extends DAO<Compte>{
             try{
                 if (paramStm!=null)
                     paramStm.close();
-                if(cnx!=null)
-                    Connexion.close();
             }
             catch (SQLException exp) {
             }
@@ -397,7 +411,7 @@ public class CompteDAO extends DAO<Compte>{
 
             paramStm = cnx.prepareStatement(req);
 
-            paramStm.setString(1, pseudo);
+            paramStm.setString(1, Util.toUTF8(pseudo));
 
             ResultSet resultat = paramStm.executeQuery();
 
@@ -414,7 +428,7 @@ public class CompteDAO extends DAO<Compte>{
                 c.setAvatar(resultat.getString("AVATAR"));             
                 c.setProgrammeEtude(resultat.getString("PROGRAMME_ETUDE"));
                 c.setMinutesRestantes(resultat.getInt("MINUTES_RESTANTES"));
-                c.setPointage(resultat.getInt("POINTAGE"));
+                c.setPoint(resultat.getInt("POINT"));
                 c.setRole(resultat.getInt("ROLE"));
 
                 resultat.close();
@@ -425,25 +439,52 @@ public class CompteDAO extends DAO<Compte>{
             resultat.close();
             paramStm.close();
             return null;
-                
         }
-        catch (SQLException exp) {
-        }
+        catch (SQLException exp) {}
         finally {
             try{
                 if (paramStm!=null)
                     paramStm.close();
-                if(cnx!=null)
-                    Connexion.close();
             }
-            catch (SQLException exp) {
-            }
-             catch (Exception e) {
-            }
+            catch (SQLException exp) {}
         }        
         
         return null;
 
     }
+    
+    public int countCompteByIdEquipe(int idEquipe){
+    
+//        String req = "SELECT COUNT(ID_COMPTE), idEquipe FROM `compte` WHERE ID_EQUIPE = ? GROUP BY COUNT(ID_COMPTE)";
+        String req = "SELECT COUNT(ID_DEMANDE_EQUIPE) FROM `demande_equipe` WHERE ID_EQUIPE = ? and STATUT_DEMANDE = 1";
+       int nbMembre = 0;
+        PreparedStatement paramStm = null;
+        try {
+
+            paramStm = cnx.prepareStatement(req);
+            paramStm.setInt(1, idEquipe);
+            ResultSet resultat = paramStm.executeQuery();
+
+            // On vérifie s'il y a un résultat    
+            if(resultat.next()){
+                //nbMembre = resultat.getInt("COUNT(ID_COMPTE)");
+                nbMembre = resultat.getInt("COUNT(ID_DEMANDE_EQUIPE)");
+            }
+            
+            resultat.close();
+            paramStm.close();
+            return nbMembre;
+        }
+        catch (SQLException exp) {}
+        finally {
+            try{
+                if (paramStm!=null)
+                    paramStm.close();
+            }
+            catch (SQLException exp) {}
+        }         
+        return nbMembre;
+    }
+    
     
 }

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import jdbc.Config;
 import jdbc.Connexion;
+import modele.Compte;
 import modele.CompteDAO;
 
 /**
@@ -26,8 +27,12 @@ public class AfficherPageGestionListeComptesAction implements Action, RequestAwa
     
     @Override
     public String execute() {
+            //Exclusivement pour l'Admin et le Modérateur.
+        if( session.getAttribute("connecte") != null && session.getAttribute("role") != null) 
         try {
-            //Exclusivement pour l'Admin. on vérifie si le role a été changé durant la session.
+            if( ( (int)session.getAttribute("role") == Compte.MODERATEUR) 
+             || ( (int)session.getAttribute("role") == Compte.ADMINISTRATEUR))   
+
             Class.forName(Config.DRIVER);
             Connexion.setUrl(Config.URL);
             Connexion.setUser(Config.DB_USER);
@@ -35,11 +40,8 @@ public class AfficherPageGestionListeComptesAction implements Action, RequestAwa
             Connection cnx = Connexion.getInstance();
             CompteDAO dao = new CompteDAO(cnx);
             
-            if(session.getAttribute("connecte")!=null &&
-                    dao.read((int)session.getAttribute("connecte")).getRole()==4)   //si le compte connecté est Admin
-                request.setAttribute("vue", "gestionListeComptes.jsp");
-            else
-                request.setAttribute("vue", "accueil.jsp");
+            if(dao.read((int)session.getAttribute("connecte"))!=null)
+                request.setAttribute("vue", "pageGestionListeCompte.jsp");
             
             return "/index.jsp";
 
@@ -49,9 +51,15 @@ public class AfficherPageGestionListeComptesAction implements Action, RequestAwa
             request.setAttribute("vue", "accueil.jsp");
             return "/index.jsp";
         }
+        catch(NullPointerException ex){
+            System.out.println("L'utilisateur n'existe pas");
+            return "/index.jsp";
+        }
+        
         finally{
             Connexion.close();
         }
+        return "/index.jsp";
     
     }
 

@@ -14,7 +14,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jdbc.Connexion;
 
 /**
  *
@@ -28,39 +27,38 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
 
     @Override
     public boolean create(DemandeEquipe x) {
-        String req = "INSERT INTO demande_equipe (`ID_DEMANDE_EQUIPE`, `ID_COMPTE,` "
-                   + "`ID_EQUIPE`, `STATUS`) + VALUES (?,?,?,?)";
+        String req = "INSERT INTO demande_equipe (`ID_COMPTE`, `ID_EQUIPE`,"
+                   + " `STATUT_DEMANDE`, `POINT`) VALUES (?,?,?,?)";
 
         PreparedStatement paramStm = null;
         try {
+            paramStm = cnx.prepareStatement(req);
 
-                paramStm = cnx.prepareStatement(req);
+            paramStm.setInt(1, x.getIdCompte());
+            paramStm.setInt(2, x.getIdEquipe());
+            paramStm.setInt(3, x.getStatutDemande());
+            paramStm.setInt(4, x.getPoint());
 
-                paramStm.setInt(1, x.getIdDemandeEquipe());
-                paramStm.setInt(2, x.getIdCompte());
-                paramStm.setInt(3, x.getIdEquipe());
-                paramStm.setInt(4, x.getStatut());
-                
-                int nbLignesAffectees= paramStm.executeUpdate();
-                
-                if (nbLignesAffectees>0) {
-                        paramStm.close();
-                        return true;
-                }
+            int nbLignesAffectees= paramStm.executeUpdate();
+
+            if (nbLignesAffectees>0) {
+                paramStm.close();
+                return true;
+            }
                 
             return false;
         }
         catch (SQLException exp) {
         }
         finally {
-                try {
-                    if (paramStm!=null)
-                        paramStm.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(DemandeEquipeDAO.class.getName())
-                            .log(Level.SEVERE, null, ex);
-                }
-                Connexion.close();
+            try {
+                if (paramStm!=null)
+                    paramStm.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DemandeEquipeDAO.class.getName())
+                        .log(Level.SEVERE, null, ex);
+            }
+                
         }
         return false;
     }
@@ -85,7 +83,8 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
                 de.setIdDemandeEquipe(resultat.getInt("ID_DEMANDE_EQUIPE"));
                 de.setIdCompte(resultat.getInt("ID_COMPTE"));
                 de.setIdEquipe(resultat.getInt("ID_EQUIPE"));
-                de.setStatut(resultat.getInt("STATUT"));
+                de.setStatutDemande(resultat.getInt("STATUT_DEMANDE"));
+                de.setPoint(resultat.getInt("POINT"));
 
                 resultat.close();
                 paramStm.close();
@@ -103,8 +102,6 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
             try{
                 if (paramStm!=null)
                     paramStm.close();
-                if(cnx!=null)
-                    Connexion.close();
             }
             catch (SQLException exp) {
             }
@@ -127,21 +124,29 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
 
     @Override
     public boolean update(DemandeEquipe x) {
-        String req = "UPDATE demande_equipe SET (`ID_EQUIPE` , `ID_COMPTE` , "
-                   + "`POINT_EQUIPE`) VALUES (?,?,?) WHERE `ID_DEMANDE_EQUIPE = ?`";
+       
+        String req = "UPDATE demande_equipe SET `ID_EQUIPE` = ? , `ID_COMPTE` = ? , "
+                   + "`POINT` = ? , `STATUT_DEMANDE`= ? WHERE `ID_DEMANDE_EQUIPE` = ?";
 
         PreparedStatement paramStm = null;
         try {
-
+            
             paramStm = cnx.prepareStatement(req);
-
+            
             paramStm.setInt(1, x.getIdEquipe());
+            
             paramStm.setInt(2, x.getIdCompte());
-            paramStm.setInt(3, x.getStatut());
-            paramStm.setInt(4, x.getIdDemandeEquipe());
-
+            
+            paramStm.setInt(3, x.getPoint());
+            
+            paramStm.setInt(4, x.getStatutDemande());
+            
+            
+            paramStm.setInt(5, x.getIdDemandeEquipe());
+            
+            
             int nbLignesAffectees= paramStm.executeUpdate();
-
+            
             if (nbLignesAffectees>0) {
                     paramStm.close();
                     return true;
@@ -150,21 +155,21 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
         catch (SQLException exp) {
         }
         finally {
-                try {
-                    if (paramStm!=null)
-                        paramStm.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(DemandeEquipeDAO.class.getName())
-                            .log(Level.SEVERE, null, ex);
-                }
-                Connexion.close();
+            try {
+                if (paramStm!=null)
+                    paramStm.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DemandeEquipeDAO.class.getName())
+                        .log(Level.SEVERE, null, ex);
+            }
+                
         }
         return false;
     }
 
     @Override
     public boolean delete(DemandeEquipe x) {
-        String req = "DELETE FROM equipe WHERE `ID_DEMANDE_EQUIPE = ?`";
+        String req = "DELETE FROM demande_equipe WHERE `ID_DEMANDE_EQUIPE` = ?";
 
         PreparedStatement paramStm = null;
         try {
@@ -175,21 +180,21 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
                 int nbLignesAffectees= paramStm.executeUpdate();
                 
                 if (nbLignesAffectees>0) {
-                        paramStm.close();
-                        return true;
+                    paramStm.close();
+                    return true;
                 }
         }
         catch (SQLException exp) {
         }
         finally {
-                try {
-                    if (paramStm!=null)
-                        paramStm.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(DemandeEquipeDAO.class.getName())
-                            .log(Level.SEVERE, null, ex);
-                }
-                Connexion.close();
+            try {
+                if (paramStm!=null)
+                    paramStm.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DemandeEquipeDAO.class.getName())
+                        .log(Level.SEVERE, null, ex);
+            }
+                
         }
         return false;
     }
@@ -211,7 +216,8 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
                 de.setIdDemandeEquipe(resultat.getInt("ID_DEMANDE_EQUIPE"));
                 de.setIdCompte(resultat.getInt("ID_COMPTE"));
                 de.setIdEquipe(resultat.getInt("ID_EQUIPE"));
-                de.setStatut(resultat.getInt("STATUT"));
+                de.setStatutDemande(resultat.getInt("STATUT_DEMANDE"));
+                de.setPoint(resultat.getInt("POINT"));
                 liste.add(de);
             }
             
@@ -243,7 +249,8 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
                 de.setIdDemandeEquipe(resultat.getInt("ID_DEMANDE_EQUIPE"));
                 de.setIdCompte(resultat.getInt("ID_COMPTE"));
                 de.setIdEquipe(resultat.getInt("ID_EQUIPE"));
-                de.setStatut(resultat.getInt("STATUT"));
+                de.setStatutDemande(resultat.getInt("STATUT_DEMANDE"));
+                de.setPoint(resultat.getInt("POINT"));
                 liste.add(de);
             }
             
@@ -275,7 +282,8 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
                 de.setIdDemandeEquipe(resultat.getInt("ID_DEMANDE_EQUIPE"));
                 de.setIdCompte(resultat.getInt("ID_COMPTE"));
                 de.setIdEquipe(resultat.getInt("ID_EQUIPE"));
-                de.setStatut(resultat.getInt("STATUT"));
+                de.setStatutDemande(resultat.getInt("STATUT_DEMANDE"));
+                de.setPoint(resultat.getInt("POINT"));
                 liste.add(de);
             }
             
@@ -288,8 +296,7 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
         return liste;
     }
 
-    public List<DemandeEquipe> findByIdCompteEquipe(int idCompte, int idEquipe) {
-        List<DemandeEquipe> liste = new LinkedList<>();
+    public DemandeEquipe findByIdCompteEquipe(int idCompte, int idEquipe) {
         
         try {
             String req = "SELECT * FROM demande_equipe WHERE `ID_COMPTE` = ? and `ID_EQUIPE` = ?";
@@ -300,6 +307,69 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
             paramStm.setInt(2, idEquipe);
 
             ResultSet resultat = paramStm.executeQuery();
+            // On vérifie s'il y a un résultat    
+            if(resultat.next()){
+
+                DemandeEquipe de = new DemandeEquipe();
+                de.setIdDemandeEquipe(resultat.getInt("ID_DEMANDE_EQUIPE"));
+                de.setIdCompte(resultat.getInt("ID_COMPTE"));
+                de.setIdEquipe(resultat.getInt("ID_EQUIPE"));
+                de.setStatutDemande(resultat.getInt("STATUT_DEMANDE"));
+                de.setPoint(resultat.getInt("POINT"));
+                
+                return de;
+            }
+            
+            resultat.close();
+            paramStm.close();
+                
+        }
+        catch (SQLException exp) {
+        }
+        return null;
+    }
+    
+    public int sumPointByidEquipe(int idEquipe){
+        int somme = 0;
+        String req = "SELECT SUM(POINT) FROM demande_equipe WHERE `ID_EQUIPE` = ?";
+        PreparedStatement paramStm = null;
+        try {
+
+            paramStm = cnx.prepareStatement(req);
+            paramStm.setInt(1, idEquipe);
+            ResultSet resultat = paramStm.executeQuery();
+
+            // On vérifie s'il y a un résultat    
+            if(resultat.next())
+                somme = resultat.getInt("SUM(POINT)");
+            
+            resultat.close();
+            paramStm.close();
+        }
+        catch (SQLException exp) {}
+        finally {
+            try{
+                if (paramStm!=null)
+                    paramStm.close();
+            }catch (SQLException exp) {}
+        }        
+
+        return somme;
+    }
+    
+    
+    public List<DemandeEquipe> findByIdEquipeStatutDemande(int idEquipe, int statutDemande) {
+        List<DemandeEquipe> liste = new LinkedList<>();
+        
+        try {
+            String req = "SELECT * FROM demande_equipe WHERE `ID_EQUIPE` = ? and STATUT_DEMANDE = ?";
+
+            PreparedStatement paramStm = cnx.prepareStatement(req);
+
+            paramStm.setInt(1, idEquipe);
+            paramStm.setInt(2, statutDemande);
+
+            ResultSet resultat = paramStm.executeQuery();
 
             // On vérifie s'il y a un résultat    
             while(resultat.next()){
@@ -308,7 +378,43 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
                 de.setIdDemandeEquipe(resultat.getInt("ID_DEMANDE_EQUIPE"));
                 de.setIdCompte(resultat.getInt("ID_COMPTE"));
                 de.setIdEquipe(resultat.getInt("ID_EQUIPE"));
-                de.setStatut(resultat.getInt("STATUT"));
+                de.setStatutDemande(resultat.getInt("STATUT_DEMANDE"));
+                de.setPoint(resultat.getInt("POINT"));
+                liste.add(de);
+            }
+            
+            resultat.close();
+            paramStm.close();
+
+        }
+        catch (SQLException exp) {
+        }
+        return liste;
+    }
+    
+    
+    /*
+    public int findByIdEquipe(int idEquipe) {
+        List<DemandeEquipe> liste = new LinkedList<>();
+        
+        try {
+            String req = "SELECT * FROM demande_equipe WHERE `ID_EQUIPE` = ?";
+
+            PreparedStatement paramStm = cnx.prepareStatement(req);
+
+            paramStm.setInt(1, idEquipe);
+
+            ResultSet resultat = paramStm.executeQuery();
+
+            // On vérifie s'il y a un résultat    
+            while(resultat.next()){
+
+                DemandeEquipe de = new DemandeEquipe();
+                de.setIdDemandeEquipe(resultat.getInt("ID_DEMANDE_EQUIPE"));
+                de.setIdCompte(resultat.getInt("ID_COMPTE"));
+                de.setIdEquipe(resultat.getInt("ID_EQUIPE"));
+                de.setStatutDemande(resultat.getInt("STATUT_DEMANDE"));
+                de.setPoint(resultat.getInt("POINT"));
                 liste.add(de);
             }
             
@@ -320,6 +426,7 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
         }
         return liste;
     }
+    */
     
     
 }

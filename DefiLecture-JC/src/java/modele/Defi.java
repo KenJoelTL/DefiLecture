@@ -13,7 +13,7 @@ public class Defi {
     
     private int idDefi,
                 idCompte,
-                point;
+                valeurMinute;
     private String nom,
                    description,
                    dateDebut,
@@ -41,12 +41,12 @@ public class Defi {
         this.idCompte = idCompte;
     }
 
-    public int getPoint() {
-        return point;
+    public int getValeurMinute() {
+        return valeurMinute;
     }
 
-    public void setPoint(int point) {
-        this.point = point;
+    public void setValeurMinute(int valeurMinute) {
+        this.valeurMinute = valeurMinute;
     }
 
     public String getNom() {

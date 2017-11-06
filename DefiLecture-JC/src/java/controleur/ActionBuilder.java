@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -18,8 +19,6 @@ public class ActionBuilder {
                 
                 case "afficherPageAccueil":
                     return new AfficherPageAccueilAction();
-                case "afficherPageEquipe":
-                    return new AfficherPageEquipeAction();
                 case "afficherPageProfil":
                     return new AfficherPageProfilAction();
        //Inscription
@@ -56,6 +55,10 @@ public class ActionBuilder {
                     return new AfficherPageInscriptionDefiAction();
                 case "effectuerInscriptionDefi":
                     return new EffectuerInscriptionDefiAction();
+                case "afficherPageModificationDefi":
+                    return new AfficherPageModificationDefiAction();
+                case "effectuerModificationDefi":
+                    return new EffectuerModificationDefiAction();
        //Compte        
                 case "afficherPageGestionListeCompte":
                     return new AfficherPageGestionListeComptesAction();
@@ -63,13 +66,46 @@ public class ActionBuilder {
                     return new AfficherPageGestionConfigurationCompteAction();
                 case "effectuerModificationCompte":
                     return new EffectuerModificationCompteAction();
-
-                    /*
-                     
-                case "effectuerCreationLecture":
-                    return new EffectuerCreationLectureAction();                
-                */
+       //Equipe
+                case "afficherPageEquipe":
+                    return new AfficherPageEquipeAction();
+                case "afficherPageCreationEquipe":
+                    return new AfficherPageCreationEquipeAction();
+                case "effectuerCreationEquipe":
+                    return new EffectuerCreationEquipeAction();
+                case "afficherPageTableauScores":
+                    return new AfficherPageTableauScoresAction();
+                case "afficherPageListeEquipes":
+                    return new AfficherPageListeEquipesAction();
+                case "afficherPageModificationEquipe":
+                    return new AfficherPageModificationEquipeAction();
+                case "effectuerModificationEquipe":
+                    return new EffectuerModificationEquipeAction();
+               
+                case "effectuerDepartEquipe":
+                    return new EffectuerQuitterEquipeAction();
+                case "effectuerSuspensionMembreEquipe":
+                    return new EffectuerSuspensionMembreEquipeAction();
+                case "effectuerReaffectationMembreEquipe":
+                    return new EffectuerReaffectationMembreEquipeAction();
+      //DemandeEquipe          
+                case "effectuerDemandeAdhesionEquipe":
+                    return new EffectuerDemandeAdhesionEquipeAction();
+                case "afficherPageListeDemandesEquipe":
+                    return new AfficherPageListeDemandesEquipeAction();
+                case "effectuerAcceptationDemandeAdhesion":
+                    return new EffectuerAcceptationDemandeAdhesionAction();
+                case "effectuerSuppressionDemandeAdhesion":
+                    return new EffectuerSuppressionDemandeAdhesionAction();
+      //Test Ajax
+                case "testAjax":
+                    return new ExempleClasseActionAjax();
+                    
+                default:
+                    return new DefaultAction();
+                
             }
+        
         return new AfficherPageAccueilAction();
     }
 }
