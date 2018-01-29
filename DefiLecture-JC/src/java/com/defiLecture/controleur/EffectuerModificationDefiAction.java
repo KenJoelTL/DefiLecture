@@ -95,18 +95,10 @@ public class EffectuerModificationDefiAction implements Action, RequestAware, Se
                     cnx = Connexion.startConnection(Config.DB_USER,Config.DB_PWD,Config.URL,Config.DRIVER);
                     
                     DefiDAO dao = new DefiDAO(cnx);
-                    if(!dao.update(defi)){
-                 
-                        //request.setAttribute("vue", "accueil.jsp");
+                    if(!dao.update(defi))
                         return "*.do?tache=afficherPageParticipationDefi";
-                    }
-                    else{
-                 
-                    //il faut avertir que les changements ont étés faits
-                    //    request.setAttribute("vue", "pageProfil.jsp"); //faire PRG
-                    return "*.do?tache=afficherPageParticipationDefi";
-        
-                    }
+                    else
+                        return "*.do?tache=afficherPageParticipationDefi";
                 }            
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(EffectuerModificationLectureAction.class.getName()).log(Level.SEVERE, null, ex);

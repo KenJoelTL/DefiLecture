@@ -6,8 +6,34 @@
     </context-param>
     <context-param>
         <param-name>urlBd</param-name>
-        <param-value>jdbc:mysql://localhost/defilecture?user=root&amp;password=root</param-value>
+        <param-value>jdbc:mysql://localhost/defilecture?useUnicode=true&amp;characterEncoding=UTF-8</param-value>
     </context-param>
+    <context-param>
+        <param-name>adminName</param-name>
+        <param-value>admin</param-value>
+    </context-param>
+    <context-param>
+        <param-name>adminPassword</param-name>
+        <param-value>admin</param-value>
+    </context-param>
+    <context-param>
+        <param-name>userBD</param-name>
+        <param-value>root</param-value>
+    </context-param>
+    <context-param>
+        <param-name>passwordBD</param-name>
+        <param-value>root</param-value>
+    </context-param>
+    <context-param>
+        <description>Nombre de maximum de participant par équipe</description>
+        <param-name>nbParticipantMax</param-name>
+        <param-value>3</param-value>
+    </context-param>
+    
+    <listener>
+        <listener-class>com.defiLecture.EcouteurApplication</listener-class>
+    </listener>
+    
     <servlet>
         <servlet-name>CF</servlet-name>
         <servlet-class>com.defiLecture.controleur.ControleurFrontal</servlet-class>
