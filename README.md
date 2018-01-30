@@ -1,2 +1,4 @@
-# DefiLectureTp1
-Hypermédia 2 - Tp 1
+# DefiLecture
+Application web faite en java
+
+Se référer au cahier des charges pour plus d'info
