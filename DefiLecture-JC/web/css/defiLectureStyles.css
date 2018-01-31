@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css?family=Goudy+Bookletter+1911');
+
+
+/*Header*/
+
+.logo-navigation {
+	width: 168px;
+    height: 73px;
+    background-image: url("../images/Logo_DL_INV_700x300.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 10px 10px;
+}
+
+.navbar {
+	background-color: black!important;
+}
+
+
+
+/*Page connexion*/
+
+.connexion-form {
+	display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    height: 800px;
+    padding-top: 35px;
+}
+
+.connexion-form .form-group, .connexion-form .input-group {
+	width : 100%;
+}
+
+.connexion-col {
+	background-image: url("../images/1_CONNEXION.png");
+}
+
+.connexion-form label {
+  font-family: 'Goudy Bookletter 1911', serif;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  padding: 9px 35px;
+  font-size: 18px;
+  width: 203px!important;
+}
+
+.connexion-form button {
+	font-family: 'Goudy Bookletter 1911', serif;
+	font-size: 20px;
+}
+
+.connexion-form input {
+	border-radius: 10px!important;
+	height: 45px;
+}
+
+.connexion-form a{
+	font-family: 'Goudy Bookletter 1911', serif;
+    font-size: 16px;
+    color: black;
+    border-bottom: 1px solid black;
+    margin-bottom: 20px;
+
+}

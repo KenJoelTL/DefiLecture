@@ -23,17 +23,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" href="./css/styles.css">
+        <link rel="stylesheet" href="./css/defiLectureStyles.css" type="text/css"> </head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body style="background-color: whitesmoke;">
 
-        <div class='container-fluid'  style="margin-bottom: 50px" >
+        <div class='container-fluid'  style="margin-bottom: 90px" >
         <nav class="navbar navbar-inverse navbar-fixed-top">
          <div class="container-fluid">
           
           <div class="navbar-header">
-            <a class="navbar-brand" href='*.do?tache=""'>D&eacute;fi-Lecture</a>
+            <a class="navbar-brand logo-navigation" href='*.do?tache=""'></a>
             <!-- Apparait lorsque la fenêtre devient de la taille d'un téléphone mobile -->
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#optionsNavigation">
               <span class="icon-bar"></span>
