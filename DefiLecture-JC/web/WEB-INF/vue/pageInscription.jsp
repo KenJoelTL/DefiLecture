@@ -12,28 +12,60 @@
         <title>Page D'inscription</title>
     </head>
     <body>
-        <h1>Inscription</h1>
-        <form action="inscription.do" method="post">
-            <div>
-                Prenom* : <input type="text" name="prenom" required/>
-            
-                Nom* : <input type="text" name="nom" required/>
-            </div>
-            <div>
-                Programme d'étude : <input type="text" name="programmeEtude" />
+        <div class='row'> 
+                <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 inscription-col"> 
+                    <h1>Inscription</h1>
+                    <form class="inscription-form" action="inscription.do" method="post">
+                        <div class="form-group">
+                            <label for="prenom">Prénom* :</label>
+                            <div class="input-group">
+                                <input id="prenom" type="text" class="form-control" name="prenom" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="nom">Nom* :</label>
+                            <div class="input-group">
+                                <input id="nom" type="text" class="form-control" name="nom" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="programmeEtude">Programme d'étude :</label>
+                            <div class="input-group">
+                                <input id="programmeEtude" type="text" class="form-control" name="programmeEtude">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="courriel">Programme d'étude :</label>
+                            <div class="input-group">
+                                <input id="courriel" type="email" class="form-control" name="courriel" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="pseudonyme">Pseudonyme :</label>
+                            <div class="input-group">
+                                <input id="pseudonyme" type="text" class="form-control" name="pseudonyme">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="motPasse">Mot de passe* :</label>
+                            <div class="input-group">
+                                <input id="motPasse" type="password" class="form-control" name="motPasse" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmationMotPasse">Confirmation du mot de passe* :</label>
+                            <div class="input-group">
+                                <input id="confirmationMotPasse" type="password" class="form-control" name="confirmationMotPasse" required>
+                            </div>
+                        </div> 
 
-                Courriel* : <input type="email" name="courriel" required/>
-            </div>
-            <div>    
-                Pseudonyme : <input type="text" name="pseudonyme" />
-            </div>
-            <div>
-                Mot de passe* : <input type="password" name="motPasse" required/>
-            
-                Confirmation du mot de passe* : <input type="password" name="confirmationMotPasse" required/>
-            </div>
-            <input type="hidden" name="tache" value="effectuerInscription">
-            <input type="submit" value=" S'inscrire" />
-        </form>
+                        <input type="hidden" name="tache" value="effectuerInscription">
+               
+                       <button type="submit" class="btn btn-danger btn-inscription">S'INSCRIRE</button>
+                    </form>
+    
+                </div>
+       </div>
     </body>
 </html>

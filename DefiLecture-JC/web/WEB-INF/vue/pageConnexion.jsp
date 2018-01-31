@@ -17,6 +17,7 @@
             
         <c:when test="${ empty sessionScope.connecte }">
        <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 connexion-col"> 
+           <h1>Connection</h1>
         <form class="connexion-form" action="connexion.do" method="post">
             <div class="form-group">
                 <label for="identifiant">Nom d'utilisateur :</label>
@@ -38,6 +39,7 @@
             </a>
             <input type="hidden" name="tache" value="effectuerConnexion">
             <button type="submit" class="btn btn-danger">ENVOYER</button>
+            
         </form>
       </div>
         </c:when>

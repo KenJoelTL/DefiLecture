@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Goudy+Bookletter+1911');
 
 
+h1, h2, h3, h4, h5, p, a, button, input, label {
+  font-family: 'Goudy Bookletter 1911', serif;
+}
+
 /*Header*/
 
 .logo-navigation {
@@ -21,7 +25,7 @@
 /*Page connexion*/
 
 .connexion-form {
-	display: flex;
+	 display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
@@ -42,16 +46,18 @@
 }
 
 .connexion-form label {
-  font-family: 'Goudy Bookletter 1911', serif;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 10px;
   padding: 9px 35px;
   font-size: 18px;
   width: 203px!important;
 }
+.connexion-col h1 {
+    font-size: 45px!important;
+    text-align: center;
+  }
 
 .connexion-form button {
-	font-family: 'Goudy Bookletter 1911', serif;
 	font-size: 20px;
 }
 
@@ -61,7 +67,6 @@
 }
 
 .connexion-form a{
-	font-family: 'Goudy Bookletter 1911', serif;
     font-size: 16px;
     color: black;
     border-bottom: 1px solid black;
@@ -69,9 +74,55 @@
 
 }
 
-.connexion-body {
+
+
+
+/*Inscription*/
+
+.inscription-form {
+  display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    min-height: 800px;
+    padding-top: 35px;
+    padding-bottom: 35px;
+}
+
+.inscription-form .form-group, .inscription-form .input-group {
+  width : 100%;
+}
+
+.inscription-form label {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  padding: 9px 35px;
+  font-size: 18px;
+  width: 217px!important;
+}
+.inscription-col h1 {
+    font-size: 45px!important;
+    text-align: center;
+  }
+
+.btn-inscription {
+  font-size: 20px;
+}
+
+.inscription-form input {
+  border-radius: 10px!important;
+  height: 45px;
+}
+
+.inscription-col {
   background-image: url("../images/1_CONNEXION.png");
   background-repeat: repeat;
-
+  background-size: contain;
 
 }
+
+.inscription-col h1 {
+    font-size: 45px!important;
+    text-align: center;
+  }
