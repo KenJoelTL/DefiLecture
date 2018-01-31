@@ -36,6 +36,9 @@
 
 .connexion-col {
 	background-image: url("../images/1_CONNEXION.png");
+  background-repeat: repeat;
+  background-size: contain;
+
 }
 
 .connexion-form label {
@@ -63,5 +66,12 @@
     color: black;
     border-bottom: 1px solid black;
     margin-bottom: 20px;
+
+}
+
+.connexion-body {
+  background-image: url("../images/1_CONNEXION.png");
+  background-repeat: repeat;
+
 
 }
