@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css?family=Goudy+Bookletter+1911');
+
+
+h1, h2, h3, h4, h5, p, a, button, input, label {
+  font-family: 'Goudy Bookletter 1911', serif;
+}
+
+/*Header*/
+
+.logo-navigation {
+	width: 168px;
+    height: 73px;
+    background-image: url("../images/Logo_DL_INV_700x300.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 10px 10px;
+}
+
+.navbar {
+	background-color: black!important;
+}
+
+.navbar li {
+  height: 93px;
+}
+
+.navbar li a {
+      height: 100%;
+    display: flex;
+    align-items: center;
+    color: white!important;
+    font-size: 20px;
+}
+
+.navbar li:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+@media screen and (max-width: 768px)  {
+    .navbar li {
+        height: 50px;
+    }
+}
+
+
+
+
+/*Page connexion*/
+
+.connexion-form {
+	 display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    height: 800px;
+    padding-top: 35px;
+}
+
+.connexion-form .form-group, .connexion-form .input-group {
+	width : 100%;
+}
+
+.connexion-col {
+	background-image: url("../images/1_CONNEXION.png");
+  background-repeat: repeat;
+  background-size: contain;
+
+}
+
+.connexion-form label {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  padding: 9px 35px;
+  font-size: 18px;
+  width: 203px!important;
+}
+.connexion-col h1 {
+    font-size: 45px!important;
+    text-align: center;
+  }
+
+.connexion-form button {
+	font-size: 20px;
+}
+
+.connexion-form input {
+	border-radius: 10px!important;
+	height: 45px;
+}
+
+.connexion-form a{
+    font-size: 16px;
+    color: black;
+    border-bottom: 1px solid black;
+    margin-bottom: 20px;
+
+}
+
+
+
+
+/*Inscription*/
+
+.inscription-form {
+  display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    min-height: 800px;
+    padding-top: 35px;
+    padding-bottom: 35px;
+}
+
+.inscription-form .form-group, .inscription-form .input-group {
+  width : 100%;
+}
+
+.inscription-form label {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  padding: 9px 35px;
+  font-size: 18px;
+  width: 217px!important;
+}
+.inscription-col h1 {
+    font-size: 45px!important;
+    text-align: center;
+  }
+
+.btn-inscription {
+  font-size: 20px;
+}
+
+.inscription-form input {
+  border-radius: 10px!important;
+  height: 45px;
+}
+
+.inscription-col {
+  background-image: url("../images/1_CONNEXION.png");
+  background-repeat: repeat;
+  background-size: contain;
+
+}
+
+.inscription-col h1 {
+    font-size: 45px!important;
+    text-align: center;
+  }
+
+
+/*Tableau des scores*/
+
+.scores-row {
+  background-image: url("../images/3_MODELE.png");
+  min-height: 800px;
+  padding: 20px 40px;
+
+}
+
+.scores-col {
+    background-color: rgba(255,255,255,0.5);
+    border-radius: 20px;
+    min-height: 700px;
+    padding: 5px 30px;
+  }
+
+.scores-col h2 {
+  text-align: center;
+}
