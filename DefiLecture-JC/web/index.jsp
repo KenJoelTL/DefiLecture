@@ -45,7 +45,7 @@
           <!-- Options contenues dans le bouton à son activation -->   
           <div class="collapse navbar-collapse" id="optionsNavigation">
             <ul class="nav navbar-nav">
-                <li class="active"><a href='*.do?tache=""'>Acceuil</a></li>
+                <li ><a href='*.do?tache=""'>Acceuil</a></li>
            
              <c:if test="${ !empty sessionScope.connecte && sessionScope.role le 2 }">
                 
@@ -103,8 +103,8 @@
                     </c:choose>
                 </c:when>
                 <c:otherwise>
-                    <li style="background-color: #349737;">
-                        <a href='*.do?tache=afficherPageInscription' style="color: #fff;" >
+                    <li >
+                        <a href='*.do?tache=afficherPageInscription' " >
                             <span class="glyphicon glyphicon-education"></span> S'incrire</a>
                     </li>
                 </c:otherwise>
