@@ -170,3 +170,27 @@ h1, h2, h3, h4, h5, p, a, button, input, label {
 .scores-col h2 {
   text-align: center;
 }
+
+
+/*Accueil*/
+
+.accueil-row {
+  background-image: url("../images/2_ACCUEIL.png");
+  min-height: 800px;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.accueil-col {
+  background-image: url("../images/Logo_DL_NB_700x300.png");
+  min-height:170px;
+  width: 394px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: rgba(255,255,255,0.5);
+  border-radius: 20px;
+}
+
+
