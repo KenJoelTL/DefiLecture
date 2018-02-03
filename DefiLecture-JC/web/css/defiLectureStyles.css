@@ -262,9 +262,9 @@ ul.dropdown-menu {
 }
 
 .creation-defi-col label {
-  background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 10px;
-  padding: 9px 25px 9px 15px;
+/*  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;*/
+  padding: 9px 25px 9px 4px;
   font-size: 18px;
   width: auto;
 }
@@ -281,10 +281,10 @@ ul.dropdown-menu {
   background:none!important;
   width: 35px;
 }
-
+/*
 .creation-defi-col label#ajouterChoix {
       padding: 6px 25px 6px 15px;
-}
+}*/
 
 .creation-defi-col .ajouterChoix, .creation-defi-col .bonneReponse {
       border: 2px solid white;
@@ -306,6 +306,13 @@ ul.dropdown-menu {
 
 }
 
+.creation-defi-form {
+  background-color: rgba(255, 255, 255, 0.5);
+      padding: 1% 2%;
+    margin-top: 5%;
+  border-radius: 20px;
+}
+
 /*Accéder aux demandes*/
 
 .demandes-row {
@@ -324,4 +331,31 @@ ul.dropdown-menu {
 
 .demandes-col h2 {
   text-align: center;
+}
+
+/*Participation défi*/
+
+.participationDefi-row {
+  background-image: url("../images/3_MODELE.png");
+  min-height: 800px;
+  padding: 5%;
+
+}
+
+.participationDefi-col {
+    background-color: rgba(255,255,255,0.5);
+    border-radius: 20px;
+    min-height: 700px;
+    padding: 5%;
+  }
+
+.participationDefi-col h2 {
+  text-align: center;
+}
+
+
+@media (max-width: 530px) {
+.cacherSurMobile tr td:nth-child(3), .cacherSurMobile tr td:nth-child(4), .cacherSurMobile tr th:nth-child(3), .cacherSurMobile tr th:nth-child(4) {
+  display: none;
+}
 }
