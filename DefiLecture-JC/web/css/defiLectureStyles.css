@@ -325,3 +325,30 @@ ul.dropdown-menu {
 .demandes-col h2 {
   text-align: center;
 }
+
+/*Participation défi*/
+
+.participationDefi-row {
+  background-image: url("../images/3_MODELE.png");
+  min-height: 800px;
+  padding: 5%;
+
+}
+
+.participationDefi-col {
+    background-color: rgba(255,255,255,0.5);
+    border-radius: 20px;
+    min-height: 700px;
+    padding: 5%;
+  }
+
+.participationDefi-col h2 {
+  text-align: center;
+}
+
+
+@media (max-width: 530px) {
+.cacherSurMobile tr td:nth-child(3), .cacherSurMobile tr td:nth-child(4), .cacherSurMobile tr th:nth-child(3), .cacherSurMobile tr th:nth-child(4) {
+  display: none;
+}
+}
