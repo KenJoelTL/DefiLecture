@@ -112,7 +112,7 @@
                     
             <c:if test="${ !empty sessionScope.role }">
                  <c:if test="${ sessionScope.role eq 4 }">
-                     <li class="active"><a href="*.do?tache=afficherPageGestionListeCompte">G&eacute;rer les comptes</a></li>
+                     <li ><a href="*.do?tache=afficherPageGestionListeCompte">G&eacute;rer les comptes</a></li>
                  </c:if>
                  <c:if test="${ sessionScope.role ge 1 }">
                     
