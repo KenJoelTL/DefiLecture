@@ -12,6 +12,7 @@
    <div class='row'> 
         
         <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 creation-defi-col">
+            <div class="creation-defi-form">
         <h1>Creation d'un defi</h1>
         <form action="*.do" method="post">
             <div class="form-group">
@@ -75,6 +76,6 @@
             <button type="submit" class="btn btn-success">Créer un défi! </button>
      
         </form>
-           
+           </div>
     </div>
 </div>
