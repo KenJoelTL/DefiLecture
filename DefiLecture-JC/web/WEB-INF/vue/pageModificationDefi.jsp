@@ -48,12 +48,12 @@
             //Si l'index est égal à la bonne réponse, le radio bouton sera checked 
             if((i-1)== reponse){
                  sBonneReponse += "<div class=\"radio\">"+
-                        "<label><input type=\"radio\" name=\"reponse\" value=\""+ (i-1) +"\" required checked >Choix #"+ i +": <span id=\"radiochoix"+i+"\">"+value[i-1]+"</span></label>"+
+                        "<label><input type=\"radio\" name=\"reponse\" value=\""+ (i-1) +"\" required checked >choix#"+ i +": <span id=\"radiochoix"+i+"\">"+value[i-1]+"</span></label>"+
                     "<\/div>";
               }
              else{
              sBonneReponse += "<div class=\"radio\">"+
-                        "<label><input type=\"radio\" name=\"reponse\" value=\""+ (i-1) +"\" required >Choix #"+ i +": <span id=\"radiochoix"+i+"\">"+value[i-1]+"</span></label>"+
+                        "<label><input type=\"radio\" name=\"reponse\" value=\""+ (i-1) +"\" required >choix#"+ i +": <span id=\"radiochoix"+i+"\">"+value[i-1]+"</span></label>"+
                     "<\/div>";
                 }
             }
@@ -62,7 +62,7 @@
 
           //Boucle pour recréer les choix de réponses en input text
           for(var i=1; i<=value.length; i++){
-              sChoixReponse += "<div><label for=\"choix"+ i +"\">Choix#"+ i +" : </label>" +
+              sChoixReponse += "<div><label for=\"choix"+ i +"\">choix#"+ i +" : </label>" +
                 "<input  id=\"choix"+ i +"\" class=\"choix form-control\" type=\"text\" name=\"choix"+ i +"\" required value=\""+value[i-1]+"\" /></div>"; 
           
             }
@@ -80,11 +80,11 @@
         //Quand on appuie sur le bouton +, un nouveau choix de reponse est affiché
         $("#btnPLUS").on("click", function(){
             //Création textbox pour les choix de réponse
-            sChoixReponse = "<div><label for=\"choix"+ i +"\">Choix#"+ i +" : </label>" +
+            sChoixReponse = "<div><label for=\"choix"+ i +"\">choix#"+ i +" : </label>" +
                 "<input  id=\"choix"+ i +"\" class=\"choix form-control\" type=\"text\" name=\"choix"+ i +"\" required /></div>"; 
             //Création des boutons radio pour choisir la bonne réponse
             sBonneReponse = "<div class=\"radio\">"+
-                        "<label><input type=\"radio\" name=\"reponse\" value=\""+ (i-1) +"\" required >Choix #"+ i +": <span id=\"radiochoix"+i+"\"></span></label>"+
+                        "<label><input type=\"radio\" name=\"reponse\" value=\""+ (i-1) +"\" required >choix#"+ i +": <span id=\"radiochoix"+i+"\"></span></label>"+
                     "<\/div>";
             i++;
             $("#choixReponse").append(sChoixReponse);
