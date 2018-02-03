@@ -36,7 +36,7 @@
           <div class="navbar-header">
             <a class="navbar-brand logo-navigation" href='*.do?tache=""'></a>
             <!-- Apparait lorsque la fenêtre devient de la taille d'un téléphone mobile -->
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#optionsNavigation">
+            <button id="btn-burger" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#optionsNavigation">
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>                       
             </button>
