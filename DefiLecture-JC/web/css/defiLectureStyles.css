@@ -156,7 +156,7 @@ h1, h2, h3, h4, h5, p, a, button, input, label {
 .scores-row {
   background-image: url("../images/3_MODELE.png");
   min-height: 800px;
-  padding: 20px 40px;
+  padding: 5%;
 
 }
 
@@ -164,7 +164,7 @@ h1, h2, h3, h4, h5, p, a, button, input, label {
     background-color: rgba(255,255,255,0.5);
     border-radius: 20px;
     min-height: 700px;
-    padding: 5px 30px;
+    padding: 5%;
   }
 
 .scores-col h2 {
@@ -246,4 +246,24 @@ h1, h2, h3, h4, h5, p, a, button, input, label {
 .creation-defi-col{
   padding-bottom: 20px;
 
+}
+
+/*Accéder aux demandes*/
+
+.demandes-row {
+  background-image: url("../images/3_MODELE.png");
+  min-height: 800px;
+  padding: 5%;
+
+}
+
+.demandes-col {
+    background-color: rgba(255,255,255,0.5);
+    border-radius: 20px;
+    min-height: 700px;
+    padding: 5%;
+  }
+
+.demandes-col h2 {
+  text-align: center;
 }
