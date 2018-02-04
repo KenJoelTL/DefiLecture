@@ -508,3 +508,46 @@ ul.dropdown-menu {
     margin-top: 5%;
   border-radius: 20px;
 }
+
+/*Creation lecture*/
+
+.creation-lecture-col {
+  background-image: url("../images/1_CONNEXION.png");
+  padding-bottom: 20px;
+}
+
+.creation-lecture-col h1 {
+  text-align: center;
+}
+
+.creation-lecture-col label {
+  padding: 9px 25px 9px 4px;
+  font-size: 18px;
+  width: auto;
+}
+
+
+.creation-lecture-col button {
+  font-size: 20px!important;
+  margin: auto;
+    display: flex;
+
+}
+
+
+.creation-lecture-form {
+  background-color: rgba(255, 255, 255, 0.5);
+      padding: 1% 2%;
+    margin-top: 5%;
+  border-radius: 20px;
+}
+
+.creation-lecture-col .lectureObligatoire {
+      border: 2px solid white;
+    border-radius: 20px;
+    padding: 1%;
+}
+
+.creation-lecture-col div.lectureObligatoire .radio label {
+    padding-left: 30px!important;
+}

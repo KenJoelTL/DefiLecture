@@ -7,13 +7,8 @@
 <%@page import="java.util.List"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<<<<<<< HEAD:DefiLecture-JC/web/pageInscriptionDefi.jsp
-<%@page import="modele.Defi"%>
-<%@page import="modele.DefiDAO"%>
-=======
 <%@page import="com.defiLecture.modele.Defi"%>
 <%@page import="com.defiLecture.modele.DefiDAO"%>
->>>>>>> masterAction:DefiLecture-JC/web/WEB-INF/vue/pageInscriptionDefi.jsp
 <%@page import="java.sql.Connection"%>
 <%@page import="jdbc.Config"%>
 <%@page import="jdbc.Connexion"%>
