@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Goudy+Bookletter+1911');
 
 
-h1, h2, h3, h4, h5, p, a, button, input, label {
+h1, h2, h3, h4, h5, p, a, button, input, textarea, label {
   font-family: 'Goudy Bookletter 1911', serif;
 }
 
@@ -355,7 +355,141 @@ ul.dropdown-menu {
 
 
 @media (max-width: 530px) {
-.cacherSurMobile tr td:nth-child(3), .cacherSurMobile tr td:nth-child(4), .cacherSurMobile tr th:nth-child(3), .cacherSurMobile tr th:nth-child(4) {
+.participationDefi-row .cacherSurMobile tr td:nth-child(3), .participationDefi-row .cacherSurMobile tr td:nth-child(4), .participationDefi-row .cacherSurMobile tr th:nth-child(3), .participationDefi-row .cacherSurMobile tr th:nth-child(4) {
   display: none;
 }
+}
+
+/*Gestion liste comptes*/
+
+.listeCompte-row {
+  background-image: url("../images/3_MODELE.png");
+  min-height: 800px;
+  padding: 5%;
+
+}
+
+.listeCompte-col {
+    background-color: rgba(255,255,255,0.5);
+    border-radius: 20px;
+    min-height: 700px;
+    padding: 5%!important;
+  }
+
+.listeCompte-col h2 {
+  text-align: center;
+}
+
+
+@media (max-width: 668px) {
+  .listeCompte-col .cacherSurMobile tr td:nth-child(1), .listeCompte-col .cacherSurMobile tr td:nth-child(2), .listeCompte-col .cacherSurMobile tr td:nth-child(3), .listeCompte-col .cacherSurMobile tr th:nth-child(1), .listeCompte-col .cacherSurMobile tr th:nth-child(2), .listeCompte-col .cacherSurMobile tr th:nth-child(3) {
+    display: none;
+  }
+
+  .listeCompte-col {
+    padding: 0!important;
+  }
+
+}
+
+/*Modification comptes*/
+
+.modification-compte-col {
+  background-image: url("../images/1_CONNEXION.png");
+  padding-bottom: 20px;
+}
+
+.modification-compte-col h1 {
+  text-align: center;
+}
+
+.modification-compte label {
+  padding: 9px 25px 9px 4px;
+  font-size: 18px;
+  width: auto;
+}
+
+
+
+.modification-compte-col button {
+  font-size: 18px!important;
+}
+
+
+.modification-compte-form {
+  background-color: rgba(255, 255, 255, 0.5);
+      padding: 1% 4%;
+    margin-top: 5%;
+  border-radius: 20px;
+}
+
+.modification-compte-col .btn-danger {
+      position: relative;
+    bottom: 39px;
+    left: 196px;
+}
+
+.modification-compte-col .avatar {
+  margin-left: auto;
+    margin-right: auto;
+}
+
+/*Modification défi*/
+
+
+.modification-defi-col {
+  background-image: url("../images/1_CONNEXION.png");
+}
+
+.modification-defi-col h1 {
+  text-align: center;
+}
+
+.modification-defi-col label {
+/*  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;*/
+  padding: 9px 25px 9px 4px;
+  font-size: 18px;
+  width: auto;
+}
+
+.modification-defi-col div#bonneReponse .radio label {
+    padding-left: 30px!important;
+}
+
+.modification-defi-col #btnMOINS {
+  font-family: arial!important;
+}
+
+.modification-defi-col #btnMOINS, .modification-defi-col #btnPLUS {
+  background:none!important;
+  width: 35px;
+}
+
+
+.modification-defi-col .ajouterChoix, .modification-defi-col .bonneReponse {
+      border: 2px solid white;
+    border-radius: 20px;
+    padding: 1%;
+}
+
+.modification-defi-col .bonneReponse {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.modification-defi-col button {
+  font-size: 20px!important;
+}
+
+.modification-defi-col{
+  padding-bottom: 20px;
+
+}
+
+.modification-defi-form {
+  background-color: rgba(255, 255, 255, 0.5);
+      padding: 1% 2%;
+    margin-top: 5%;
+  border-radius: 20px;
 }

@@ -1,7 +1,4 @@
-<<<<<<< HEAD:DefiLecture-JC/web/pageModificationDefi.jsp
-=======
-<<<<<<< HEAD:DefiLecture-JC/web/WEB-INF/vue/pageModificationDefi.jsp
->>>>>>> masterAction:DefiLecture-JC/web/WEB-INF/vue/pageModificationDefi.jsp
+
 <%-- 
     Document   : pageModificationDefi
     Created on : 2017-10-31, 18:48:11
@@ -9,19 +6,12 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<<<<<<< HEAD:DefiLecture-JC/web/pageModificationDefi.jsp
-<%@page import="modele.Defi"%>
-<%@page import="jdbc.Config"%>
-<%@page import="java.sql.Connection"%>
-<%@page import="jdbc.Connexion"%>
-<%@page import="modele.DefiDAO"%>
-=======
+
 <%@page import="com.defiLecture.modele.Defi"%>
 <%@page import="jdbc.Config"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="jdbc.Connexion"%>
 <%@page import="com.defiLecture.modele.DefiDAO"%>
->>>>>>> masterAction:DefiLecture-JC/web/WEB-INF/vue/pageModificationDefi.jsp
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <script language="javascript" src="./script/jquery-1.4.2.min.js"></script>
 
@@ -128,73 +118,74 @@
         });
     });
 </script>
-    
-        <h1>Creation d'un defi</h1>
-        <div class="col-lg-4 col-sm-10">
-        <form action="*.do" method="post">
-            <div class="form-group">
-                <label for="nom">Nom du défi* : </label>
-                <input class="form-control" type="text" name="nom" value="${defi.nom}" required />
-            </div>
-            
-            <div class="form-group">
-                <label for="description">Description du défi* : </label>
-                <textarea class="form-control" name="description" rows="5" required>${defi.description}</textarea>
-            </div>
-            
-            <div class="form-group">
-                <c:catch>
-                    <fmt:parseDate pattern="yyyy-MM-dd' 'HH:mm:ss.SS" value="${defi.dateDebut}" var="dateDebutPARSE" />
-                </c:catch>
-                <fmt:formatDate var="dateDebut" value="${dateDebutPARSE}" pattern="yyyy-MM-dd'T'HH:mm" />
-                <label for="dateDebut">Date de début* : </label>
-                <input class="form-control" type="datetime-local" name="dateDebut" value="${dateDebut}" required />
-                <c:catch>
-                    <fmt:parseDate pattern="yyyy-MM-dd' 'HH:mm:ss.SS" value="${defi.dateFin}" var="dateFinPARSE" />
-                </c:catch>
-                <fmt:formatDate var="dateFin" value="${dateFinPARSE}" pattern="yyyy-MM-dd'T'HH:mm" />
-                <label for="dateDebut">Date de fin* : </label>
-                <input class="form-control" type="datetime-local" name="dateFin" value="${dateFin}" required />
-            </div>
-            <div class="form-group">
-                <label for="question">Question à répondre pour réussir ce défi* : </label>
-                <input class="form-control" type="text" name="question" value="${defi.question}" required />
-            </div>
-            
-            <div class="form-group">
-                <h4>Choix de réponse :</h4>
-                Ajouter un choix : <button id="btnPLUS" type="button">+</button> <button id="btnMOINS" type="button">-</button>
-                
-                <div id="choixReponse"></div>
-                
- 
-            
-            </div>
-            
-            <div class="form-group">
-                
-                <h4 id="titreBonneReponse">La bonne réponse est :</h4>
-                <div id="bonneReponse"></div>
+<div class='row'> 
+        
+    <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 modification-defi-col">
+        <div class="modification-defi-form">
+            <h1>Modification d'un defi</h1>
+            <form action="*.do" method="post">
+                <div class="form-group">
+                    <label for="nom">Nom du défi* : </label>
+                    <input class="form-control" type="text" name="nom" value="${defi.nom}" required />
+                </div>
 
-            </div>
-            
-            
-            
-            <div class="form-group">
-                <label for="point">Nombre de minutes pour ce défi* : </label>
-                <input class="form-control" type="text" name="valeurMinute" value="${defi.valeurMinute}" required />
-            </div>
-            
-            <input id="choixReponseJSON" type="hidden" name="choixReponseJSON" value="">
-            <input type="hidden" name="idDefi" value="${defi.idDefi}">
-            <input type="hidden" name="tache" value="effectuerModificationDefi">
-            <input type="submit" name="modifie" value=" Enregistrer" />
-                <input type="submit" name="annule" value=" Annuler" />
-        </form>
-            <br>
+                <div class="form-group">
+                    <label for="description">Description du défi* : </label>
+                    <textarea class="form-control" name="description" rows="5" required>${defi.description}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <c:catch>
+                        <fmt:parseDate pattern="yyyy-MM-dd' 'HH:mm:ss.SS" value="${defi.dateDebut}" var="dateDebutPARSE" />
+                    </c:catch>
+                    <fmt:formatDate var="dateDebut" value="${dateDebutPARSE}" pattern="yyyy-MM-dd'T'HH:mm" />
+                    <label for="dateDebut">Date de début* : </label>
+                    <input class="form-control" type="datetime-local" name="dateDebut" value="${dateDebut}" required />
+                    <c:catch>
+                        <fmt:parseDate pattern="yyyy-MM-dd' 'HH:mm:ss.SS" value="${defi.dateFin}" var="dateFinPARSE" />
+                    </c:catch>
+                    <fmt:formatDate var="dateFin" value="${dateFinPARSE}" pattern="yyyy-MM-dd'T'HH:mm" />
+                    <label for="dateDebut">Date de fin* : </label>
+                    <input class="form-control" type="datetime-local" name="dateFin" value="${dateFin}" required />
+                </div>
+                <div class="form-group">
+                    <label for="question">Question à répondre pour réussir ce défi* : </label>
+                    <input class="form-control" type="text" name="question" value="${defi.question}" required />
+                </div>
+                <div class="ajouterChoix">
+                <div class="form-group">
+                    <label>Choix de réponse :</label>
+                    <label id="ajouterChoix">Ajouter un choix :</label> <button id="btnPLUS" type="button">+</button> <button id="btnMOINS" type="button">-</button>
+
+                    <div id="choixReponse"></div>
+
+
+
+                </div>
+                </div>
+                <div class="bonneReponse">
+                    <div class="form-group">
+
+                         <label id="titreBonneReponse">La bonne réponse est :</label>
+                        <div id="bonneReponse"></div>
+
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <label for="point">Nombre de minutes pour ce défi* : </label>
+                    <input class="form-control" type="text" name="valeurMinute" value="${defi.valeurMinute}" required />
+                </div>
+
+                <input id="choixReponseJSON" type="hidden" name="choixReponseJSON" value="">
+                <input type="hidden" name="idDefi" value="${defi.idDefi}">
+                <input type="hidden" name="tache" value="effectuerModificationDefi">
+                <button type="submit" class="btn btn-success" name="modifie" >Enregistrer </button>
+                <button type="submit" class="btn btn-info" name="annule" >Annuler</button>
+            </form>
+                <br>
+        </div>
+    </div>
 </div>
-
-<<<<<<< HEAD:DefiLecture-JC/web/pageModificationDefi.jsp
-=======
->>>>>>> masterAction:DefiLecture-JC/web/pageModificationDefi.jsp
->>>>>>> masterAction:DefiLecture-JC/web/WEB-INF/vue/pageModificationDefi.jsp
