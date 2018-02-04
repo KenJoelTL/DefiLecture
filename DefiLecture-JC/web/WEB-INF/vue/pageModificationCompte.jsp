@@ -6,25 +6,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="com.defiLecture.modele.Compte"%>
 <%@page import="com.defiLecture.modele.CompteDAO"%>
-<%@page import="java.sql.Connection"%>
-<%@page import="jdbc.Config"%>
 <%@page import="jdbc.Connexion"%>
 
-<script>  
-$(document).ready(
-        function () {
-                //alert('Le DOM est pret!');
-                $("#prenom").keyup(function(event) {
-                        $('#testAjax5').load('*.do?tache=testAjax&prenom='+event.target.value);
-                    }
-                );
-        }
-);  
-</script>
-
-<%  CompteDAO dao = new CompteDAO(Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
-    pageContext.setAttribute("compte", dao.read(request.getParameter("id"))); %>
-
+    <jsp:useBean id="connexion" class="jdbc.Connexion"></jsp:useBean>
+    <jsp:useBean id="dao" class="com.defiLecture.modele.CompteDAO">
+        <jsp:setProperty name="dao" property="cnx" value="${connexion.connection}"></jsp:setProperty>
+    </jsp:useBean>
+    <c:set var="compte" scope="page" value="${dao.read(param.id)}"/>
+    
     <body>
         <h1>Page de configuration</h1>
         <span>${requestScope.message}</span>
@@ -79,7 +68,5 @@ $(document).ready(
                 <input type="submit" name="supprime" value=" Supprimer" />
             </form>
         </div>
-
-        <div id="testAjax5"></div>
 
     </body>

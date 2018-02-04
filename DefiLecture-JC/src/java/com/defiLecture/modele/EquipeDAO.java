@@ -23,6 +23,9 @@ import java.util.logging.Logger;
  */
 public class EquipeDAO extends DAO<Equipe>{
 
+    public EquipeDAO() {
+    }
+    
     public EquipeDAO(Connection cnx) {
         super(cnx);
     }

@@ -3,12 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/src/java/com/defiLecture/controleur/AfficherPageEquipeAction.java</file>
-            <file>file:/E:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/web/WEB-INF/vue/pageListeDemandesEquipe.jsp</file>
-            <file>file:/E:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/web/WEB-INF/vue/pageGestionLecture.jsp</file>
-            <file>file:/E:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/src/java/com/defiLecture/modele/DAO.java</file>
-            <file>file:/E:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/web/WEB-INF/vue/pageListeEquipes.jsp</file>
-            <file>file:/E:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/web/WEB-INF/vue/pageGestionListeCompte.jsp</file>
+            <file>file:/E:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/src/java/com/defiLecture/EcouteurApplication.java</file>
+            <file>file:/E:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/src/java/jdbc/Config.java</file>
+            <file>file:/E:/Dossier%20d'école/Mes%20Documents/Session%206%20%5BAutomne%202017%5D/Hypermedia%20II/TP1/DefiLectureTp1/DefiLecture-JC/src/java/jdbc/Connexion.java</file>
         </group>
     </open-files>
 </project-private>

@@ -1,7 +1,3 @@
-<<<<<<< HEAD:DefiLecture-JC/web/pageModificationDefi.jsp
-=======
-<<<<<<< HEAD:DefiLecture-JC/web/WEB-INF/vue/pageModificationDefi.jsp
->>>>>>> masterAction:DefiLecture-JC/web/WEB-INF/vue/pageModificationDefi.jsp
 <%-- 
     Document   : pageModificationDefi
     Created on : 2017-10-31, 18:48:11
@@ -9,19 +5,11 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<<<<<<< HEAD:DefiLecture-JC/web/pageModificationDefi.jsp
-<%@page import="modele.Defi"%>
-<%@page import="jdbc.Config"%>
-<%@page import="java.sql.Connection"%>
-<%@page import="jdbc.Connexion"%>
-<%@page import="modele.DefiDAO"%>
-=======
 <%@page import="com.defiLecture.modele.Defi"%>
 <%@page import="jdbc.Config"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="jdbc.Connexion"%>
 <%@page import="com.defiLecture.modele.DefiDAO"%>
->>>>>>> masterAction:DefiLecture-JC/web/WEB-INF/vue/pageModificationDefi.jsp
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <script language="javascript" src="./script/jquery-1.4.2.min.js"></script>
 
@@ -35,6 +23,12 @@
 
 %>
 
+
+    <jsp:useBean id="connexion" class="jdbc.Connexion"></jsp:useBean>
+    <jsp:useBean id="dao" class="com.defiLecture.modele.DefiDAO">
+        <jsp:setProperty name="dao" property="cnx" value="${connexion.connection}"></jsp:setProperty>
+    </jsp:useBean>
+    <c:set var="compte" scope="page" value="${dao.read(param.id)}"/>
 
 <script>
     $(document).ready(function(){
@@ -193,8 +187,3 @@
         </form>
             <br>
 </div>
-
-<<<<<<< HEAD:DefiLecture-JC/web/pageModificationDefi.jsp
-=======
->>>>>>> masterAction:DefiLecture-JC/web/pageModificationDefi.jsp
->>>>>>> masterAction:DefiLecture-JC/web/WEB-INF/vue/pageModificationDefi.jsp

@@ -21,9 +21,6 @@ public class Defi {
                    question,
                    choixReponse,
                    reponse;
-    public Defi(){
-    
-    }
 
     public int getIdDefi() {
         return idDefi;
@@ -63,9 +60,7 @@ public class Defi {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-    
-    
+    } 
 
     public String getDateDebut() {
         return dateDebut;
@@ -99,8 +94,6 @@ public class Defi {
         this.choixReponse = choixReponse;
     }
     
-    
-
     public String getReponse() {
         return reponse;
     }

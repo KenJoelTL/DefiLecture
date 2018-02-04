@@ -21,6 +21,9 @@ import java.util.logging.Logger;
  * @author Charles
  */
 public class DefiDAO extends DAO<Defi> {
+
+    public DefiDAO() {
+    }
     
     public DefiDAO(Connection c)
     {

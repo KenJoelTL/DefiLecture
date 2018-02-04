@@ -6,20 +6,25 @@
 
 <%@page import="com.defiLecture.modele.DemandeEquipeDAO"%>
 <%@page import="com.defiLecture.modele.CompteDAO"%>
-<%@page import="java.sql.Connection"%>
 <%@page import="com.defiLecture.modele.EquipeDAO"%>
-<%@page import="jdbc.Config"%>
 <%@page import="jdbc.Connexion"%>
 <%@ page pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%  Connection cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
-    EquipeDAO dao = new EquipeDAO(cnx);
-    CompteDAO daoCompte = new CompteDAO(cnx);
-    DemandeEquipeDAO daoDemEq = new DemandeEquipeDAO(cnx);
-    pageContext.setAttribute("compteConnecte", daoCompte.read((int)session.getAttribute("connecte")));
-    pageContext.setAttribute("daoDemEq", daoDemEq);
-    pageContext.setAttribute("listeEquipes", dao.findAll());   %>
+<jsp:useBean id="connexion" scope="page" class="jdbc.Connexion"></jsp:useBean>  
+    
+<jsp:useBean id="daoEquipe" scope="page" class="com.defiLecture.modele.EquipeDAO">
+    <jsp:setProperty name="daoEquipe" property="cnx" value="${connexion.connection}"></jsp:setProperty>
+</jsp:useBean>
+<jsp:useBean id="daoCompte" scope="page" class="com.defiLecture.modele.CompteDAO">
+    <jsp:setProperty name="daoCompte" property="cnx" value="${connexion.connection}"></jsp:setProperty>
+</jsp:useBean>
+<jsp:useBean id="daoDemEq" scope="page" class="com.defiLecture.modele.DemandeEquipeDAO">
+    <jsp:setProperty name="daoDemEq" property="cnx" value="${connexion.connection}"></jsp:setProperty>
+</jsp:useBean>
+
+<c:set var="compteConnecte" value="${daoCompte.read(sessionScope.connecte)}"/>
+<c:set var="listeEquipes" value="${daoEquipe.findAll()}"/>
     
 <h2>Liste des équipes</h2>  
 

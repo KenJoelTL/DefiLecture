@@ -23,6 +23,9 @@ import java.util.logging.Logger;
  */
 public class LectureDAO extends DAO<Lecture> {
     
+    public LectureDAO(){ 
+    }
+    
     public LectureDAO(Connection c)
     {
         super(c);

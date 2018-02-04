@@ -15,6 +15,8 @@ import java.util.List;
 public abstract class DAO<T> {
 	protected Connection cnx;
 
+        public DAO(){}
+        
 	public DAO(Connection cnx) {
 		this.cnx = cnx;
 	}

@@ -19,7 +19,6 @@ public class Equipe implements Comparable<Equipe>{
     
 
     //Constructeurs
-
     public Equipe() {
     }
 
