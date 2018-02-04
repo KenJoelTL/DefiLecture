@@ -105,7 +105,7 @@
                 <c:otherwise>
                     <li >
                         <a href='*.do?tache=afficherPageInscription' " >
-                            <span class="glyphicon glyphicon-education"></span> S'incrire</a>
+                            <span class="glyphicon glyphicon-education"></span> S'inscrire</a>
                     </li>
                 </c:otherwise>
             </c:choose>
