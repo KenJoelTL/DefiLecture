@@ -55,30 +55,30 @@ $(document).ready(
                 <form action="modification.do" method="post" >
                     <div class="form-group">
                         <label for="prenom">Pr&eacute;nom* : </label>
-                        <input type="text" id=prenom name="prenom" value="${compte.prenom}" required ${ compte.idCompte eq session.connecte ? '':'readonly' }/>
+                        <input type="text" class="form-control" id=prenom name="prenom" value="${compte.prenom}" required ${ compte.idCompte eq session.connecte ? '':'readonly' }/>
                     </div>
                     <div class="form-group">
                         <label for="nom">Nom* : </label>
-                        <input type="text" name="nom" value="${compte.nom}" required ${ compte.idCompte eq session.connecte ? '':'readonly' }/>
+                        <input type="text" class="form-control" name="nom" value="${compte.nom}" required ${ compte.idCompte eq session.connecte ? '':'readonly' }/>
                     </div>
                     <div class="form-group">
                         <label for="programmeEtude">Programme d'&eacute;tude : </label>
-                         <input type="text" name="programmeEtude" value="${compte.programmeEtude}" ${ compte.idCompte eq session.connecte ? '':'readonly' }/>
+                         <input type="text" class="form-control" name="programmeEtude" value="${compte.programmeEtude}" ${ compte.idCompte eq session.connecte ? '':'readonly' }/>
                     </div>
                     <div class="form-group">
                          <label for="courriel">Courriel* : </label>
-                        <input type="email" name="courriel" value="${compte.courriel}" required ${ compte.idCompte eq session.connecte ? '':'readonly' }/>
+                        <input type="email" class="form-control" name="courriel" value="${compte.courriel}" required ${ compte.idCompte eq session.connecte ? '':'readonly' }/>
                     </div>
                    <div class="form-group">
                         <label for="pseudonyme">Pseudonyme : </label>
-                        <input type="text" name="pseudonyme" value="${compte.pseudonyme}" ${ compte.idCompte eq session.connecte ? '':'readonly' }/>
+                        <input type="text" class="form-control"  name="pseudonyme" value="${compte.pseudonyme}" ${ compte.idCompte eq session.connecte ? '':'readonly' }/>
                     </div>
 
                     <div class="form-group">
                         <label for="role">R&ocirc;le du compte : </label>
 
                         <c:set var="selected" value=" selected=\"selected\"" />
-                        <select name="role">
+                        <select name="role" class="form-control">
                             <option value="1" ${ compte.role eq 1 ? selected:'' }>Participant</option>
                             <option value="2" ${ compte.role eq 2 ? selected:'' }>Capitaine</option>
                             <c:if test="${sessionScope.role eq 4}">
