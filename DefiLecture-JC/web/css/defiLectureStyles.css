@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Goudy+Bookletter+1911');
 
 
-h1, h2, h3, h4, h5, p, a, button, input, label {
+h1, h2, h3, h4, h5, p, a, button, input, textarea, label {
   font-family: 'Goudy Bookletter 1911', serif;
 }
 
@@ -432,4 +432,64 @@ ul.dropdown-menu {
 .modification-compte-col .avatar {
   margin-left: auto;
     margin-right: auto;
+}
+
+/*Modification défi*/
+
+
+.modification-defi-col {
+  background-image: url("../images/1_CONNEXION.png");
+}
+
+.modification-defi-col h1 {
+  text-align: center;
+}
+
+.modification-defi-col label {
+/*  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;*/
+  padding: 9px 25px 9px 4px;
+  font-size: 18px;
+  width: auto;
+}
+
+.modification-defi-col div#bonneReponse .radio label {
+    padding-left: 30px!important;
+}
+
+.modification-defi-col #btnMOINS {
+  font-family: arial!important;
+}
+
+.modification-defi-col #btnMOINS, .modification-defi-col #btnPLUS {
+  background:none!important;
+  width: 35px;
+}
+
+
+.modification-defi-col .ajouterChoix, .modification-defi-col .bonneReponse {
+      border: 2px solid white;
+    border-radius: 20px;
+    padding: 1%;
+}
+
+.modification-defi-col .bonneReponse {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.modification-defi-col button {
+  font-size: 20px!important;
+}
+
+.modification-defi-col{
+  padding-bottom: 20px;
+
+}
+
+.modification-defi-form {
+  background-color: rgba(255, 255, 255, 0.5);
+      padding: 1% 2%;
+    margin-top: 5%;
+  border-radius: 20px;
 }
