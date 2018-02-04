@@ -5,23 +5,28 @@
  */
 package com.defiLecture.controleur;
 
+import com.defiLecture.modele.Compte;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Charles
  */
-public class AfficherPageProfilAction implements Action, RequestAware {
+public class AfficherPageProfilAction implements Action, RequestAware, SessionAware {
 
     private HttpServletRequest request;
     private HttpServletResponse response;
+     private HttpSession session;
     
     @Override
-    public String execute() {
-        
-        if(request.getParameter("idCompte") != null)
-        request.setAttribute("vue", "pageProfil.jsp");
+     public String execute() {
+    
+        if(session.getAttribute("connecte") != null && session.getAttribute("role") != null 
+        && ( ((int)session.getAttribute("role")== Compte.CAPITAINE) 
+        ||   ((int)session.getAttribute("role")== Compte.PARTICIPANT)) )
+            request.setAttribute("vue", "pageProfil.jsp");
         
         return "/index.jsp";
     }
@@ -35,5 +40,8 @@ public class AfficherPageProfilAction implements Action, RequestAware {
     public void setResponse(HttpServletResponse response) {
         this.response = response;
     }
-    
+    @Override
+    public void setSession(HttpSession session) {
+        this.session = session;
+    }
 }

@@ -14,7 +14,10 @@
 <%@page import="com.defiLecture.modele.CompteDAO"%>
 <%@page import="com.defiLecture.modele.LectureDAO"%>
 <%@page import="jdbc.Connexion"%>
-<h2>Liste de mes lectures</h2>
+
+<div class="row gestion-lecture-row"> 
+    <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 gestion-lecture-col">
+        <h2>Liste de mes lectures</h2>
 
 <% 
     Connexion.reinit();
@@ -23,28 +26,31 @@
     List<Lecture> listeLectures = dao.findByIdCompteOrderByDate((int)(session.getAttribute("connecte")));
     pageContext.setAttribute("listeLectures", listeLectures);
   %>
-    <table class="table">
-        
-        <thead>
-        <tr>
-          <th>Titre</th>
-          <th>Durée</th>
-          <th>Date d'inscription</th>
-          <th>Obligatoire</th>
-        </tr>
-      </thead>
-      <tbody>
-        <c:forEach items="${listeLectures}" var="l">
-            <tr>
-              <td>${l.titre}</td>
-              <td>${l.dureeMinutes} minutes</td>
-              <td>${l.dateInscription} </td>
-              <td>${l.estObligatoire eq 0 ? "NON" : "OUI"}</td>
-              <td><a href="*.do?tache=afficherPageModificationLecture&id=${l.idLecture}">Modifier</a></td>
-              <td><a href="#">Supprimer</a></td>
-            </tr>
-        </c:forEach>
+            <table class="table">
 
-      </tbody>
-        
-    </table>
+                <thead>
+                <tr>
+                  <th>Titre</th>
+                  <th>Durée</th>
+                  <th>Date d'inscription</th>
+                  <th>Obligatoire</th>
+                </tr>
+              </thead>
+              <tbody>
+                <c:forEach items="${listeLectures}" var="l">
+                    <tr>
+                      <td>${l.titre}</td>
+                      <td>${l.dureeMinutes} minutes</td>
+                      <td>${l.dateInscription} </td>
+                      <td>${l.estObligatoire eq 0 ? "NON" : "OUI"}</td>
+                      <td><a href="*.do?tache=afficherPageModificationLecture&id=${l.idLecture}">Modifier</a></td>
+                      <td><a href="#">Supprimer</a></td>
+                    </tr>
+                </c:forEach>
+
+              </tbody>
+
+            </table>
+    
+    </div>
+</div>
