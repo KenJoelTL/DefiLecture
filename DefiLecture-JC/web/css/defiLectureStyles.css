@@ -529,7 +529,7 @@ ul.dropdown-menu {
 
 .creation-lecture-col button {
   font-size: 20px!important;
-  margin: auto;
+      margin: 2% auto;
     display: flex;
 
 }
@@ -550,4 +550,70 @@ ul.dropdown-menu {
 
 .creation-lecture-col div.lectureObligatoire .radio label {
     padding-left: 30px!important;
+}
+
+/*Inscription défi*/
+
+.inscription-defi-col {
+  background-image: url("../images/1_CONNEXION.png");
+  padding-bottom: 20px;
+}
+
+.inscription-defi-col h1 {
+  text-align: center;
+}
+
+.inscription-defi-col label {
+  padding: 9px 25px 9px 4px;
+  font-size: 18px;
+  width: auto;
+}
+
+
+.inscription-defi-col button {
+  font-size: 20px!important;
+      margin: 2% auto;
+    display: flex;
+
+}
+
+
+.inscription-defi-form {
+  background-color: rgba(255, 255, 255, 0.5);
+      padding: 1% 2%;
+    margin-top: 5%;
+  border-radius: 20px;
+}
+
+.inscription-defi-col .choixReponse {
+      border: 2px solid white;
+    border-radius: 20px;
+    padding: 1%;
+}
+
+.inscription-defi-col div.choixReponse .radio label {
+    padding-left: 30px!important;
+}
+
+.inscription-defi-col textarea {
+  max-width: 100%!important;
+}
+ /*Page gestion lecture*/
+
+ .gestion-lecture-row {
+  background-image: url("../images/3_MODELE.png");
+  min-height: 800px;
+  padding: 5%;
+
+}
+
+.gestion-lecture-col {
+    background-color: rgba(255,255,255,0.5);
+    border-radius: 20px;
+    min-height: 700px;
+    padding: 5%;
+  }
+
+.gestion-lecture-col h2 {
+  text-align: center;
 }
