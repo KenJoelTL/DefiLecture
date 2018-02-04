@@ -1,7 +1,4 @@
-<<<<<<< HEAD:DefiLecture-JC/web/pageModificationDefi.jsp
-=======
-<<<<<<< HEAD:DefiLecture-JC/web/WEB-INF/vue/pageModificationDefi.jsp
->>>>>>> masterAction:DefiLecture-JC/web/WEB-INF/vue/pageModificationDefi.jsp
+
 <%-- 
     Document   : pageModificationDefi
     Created on : 2017-10-31, 18:48:11
@@ -9,19 +6,12 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<<<<<<< HEAD:DefiLecture-JC/web/pageModificationDefi.jsp
-<%@page import="modele.Defi"%>
-<%@page import="jdbc.Config"%>
-<%@page import="java.sql.Connection"%>
-<%@page import="jdbc.Connexion"%>
-<%@page import="modele.DefiDAO"%>
-=======
+
 <%@page import="com.defiLecture.modele.Defi"%>
 <%@page import="jdbc.Config"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="jdbc.Connexion"%>
 <%@page import="com.defiLecture.modele.DefiDAO"%>
->>>>>>> masterAction:DefiLecture-JC/web/WEB-INF/vue/pageModificationDefi.jsp
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <script language="javascript" src="./script/jquery-1.4.2.min.js"></script>
 
@@ -129,7 +119,7 @@
     });
 </script>
     
-        <h1>Creation d'un defi</h1>
+        <h1>Modification d'un defi</h1>
         <div class="col-lg-4 col-sm-10">
         <form action="*.do" method="post">
             <div class="form-group">
@@ -193,8 +183,3 @@
         </form>
             <br>
 </div>
-
-<<<<<<< HEAD:DefiLecture-JC/web/pageModificationDefi.jsp
-=======
->>>>>>> masterAction:DefiLecture-JC/web/pageModificationDefi.jsp
->>>>>>> masterAction:DefiLecture-JC/web/WEB-INF/vue/pageModificationDefi.jsp
