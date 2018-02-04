@@ -355,7 +355,34 @@ ul.dropdown-menu {
 
 
 @media (max-width: 530px) {
-.cacherSurMobile tr td:nth-child(3), .cacherSurMobile tr td:nth-child(4), .cacherSurMobile tr th:nth-child(3), .cacherSurMobile tr th:nth-child(4) {
+.participationDefi-row .cacherSurMobile tr td:nth-child(3), .participationDefi-row .cacherSurMobile tr td:nth-child(4), .participationDefi-row .cacherSurMobile tr th:nth-child(3), .participationDefi-row .cacherSurMobile tr th:nth-child(4) {
+  display: none;
+}
+}
+
+/*Gestion liste comptes*/
+
+.listeCompte-row {
+  background-image: url("../images/3_MODELE.png");
+  min-height: 800px;
+  padding: 5%;
+
+}
+
+.listeCompte-col {
+    background-color: rgba(255,255,255,0.5);
+    border-radius: 20px;
+    min-height: 700px;
+    padding: 0!important;
+  }
+
+.listeCompte-col h2 {
+  text-align: center;
+}
+
+
+@media (max-width: 530px) {
+.listeCompte-col .cacherSurMobile tr td:nth-child(1), .listeCompte-col .cacherSurMobile tr td:nth-child(2), .listeCompte-col .cacherSurMobile tr td:nth-child(3), .listeCompte-col .cacherSurMobile tr th:nth-child(1), .listeCompte-col .cacherSurMobile tr th:nth-child(2), .listeCompte-col .cacherSurMobile tr th:nth-child(3) {
   display: none;
 }
 }
