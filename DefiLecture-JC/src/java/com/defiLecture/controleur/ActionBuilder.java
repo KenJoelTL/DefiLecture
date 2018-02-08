@@ -8,7 +8,7 @@ package com.defiLecture.controleur;
 
 /**
  *
- * @authors Charles & Joel
+ * @author Charles et Joel
  */
 public class ActionBuilder {
     public static Action getAction(String actionName) {
