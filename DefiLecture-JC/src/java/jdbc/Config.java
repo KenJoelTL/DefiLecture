@@ -11,11 +11,11 @@ package jdbc;
  */
 public class Config {
     
-    public static String URL = "jdbc:mysql://localhost/defilecture?useUnicode=true&characterEncoding=UTF-8";
-    public static String DB_HOST = "localhost";
-    public static String DB_USER = "root"; //utiliser les para de config
-    public static String DB_PWD = "root";
-    public static String DB_NAME = "defilecture";
-    public static String DRIVER = "com.mysql.jdbc.Driver"; //Ajout de l'attribut contenant info du pilote - Joel
+    public static String URL = "";
+    public static String DB_HOST = "";
+    public static String DB_USER = ""; //utiliser les para de config
+    public static String DB_PWD = "";
+    public static String DB_NAME = "";
+    public static String DRIVER = ""; //Ajout de l'attribut contenant info du pilote - Joel
  
 }
