@@ -23,19 +23,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" href="./css/styles.css">
+        <link rel="stylesheet" href="./css/defiLectureStyles.css" type="text/css"> </head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body style="background-color: whitesmoke;">
 
-        <div class='container-fluid'  style="margin-bottom: 50px" >
+        <div class='container-fluid'  style="margin-bottom: 90px" >
         <nav class="navbar navbar-inverse navbar-fixed-top">
          <div class="container-fluid">
           
           <div class="navbar-header">
-            <a class="navbar-brand" href='*.do?tache=""'>D&eacute;fi-Lecture</a>
+            <a class="navbar-brand logo-navigation" href='*.do?tache=""'></a>
             <!-- Apparait lorsque la fenêtre devient de la taille d'un téléphone mobile -->
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#optionsNavigation">
+            <button id="btn-burger" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#optionsNavigation">
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>                       
             </button>
@@ -44,7 +45,7 @@
           <!-- Options contenues dans le bouton à son activation -->   
           <div class="collapse navbar-collapse" id="optionsNavigation">
             <ul class="nav navbar-nav">
-                <li class="active"><a href='*.do?tache=""'>Acceuil</a></li>
+                <li ><a href='*.do?tache=""'>Acceuil</a></li>
            
              <c:if test="${ !empty sessionScope.connecte && sessionScope.role le 2 }">
                 
@@ -102,16 +103,16 @@
                     </c:choose>
                 </c:when>
                 <c:otherwise>
-                    <li style="background-color: #349737;">
-                        <a href='*.do?tache=afficherPageInscription' style="color: #fff;" >
-                            <span class="glyphicon glyphicon-education"></span> S'incrire</a>
+                    <li >
+                        <a href='*.do?tache=afficherPageInscription' " >
+                            <span class="glyphicon glyphicon-education"></span> S'inscrire</a>
                     </li>
                 </c:otherwise>
             </c:choose>
                     
             <c:if test="${ !empty sessionScope.role }">
                  <c:if test="${ sessionScope.role eq 4 }">
-                     <li class="active"><a href="*.do?tache=afficherPageGestionListeCompte">G&eacute;rer les comptes</a></li>
+                     <li ><a href="*.do?tache=afficherPageGestionListeCompte">G&eacute;rer les comptes</a></li>
                  </c:if>
                  <c:if test="${ sessionScope.role ge 1 }">
                     

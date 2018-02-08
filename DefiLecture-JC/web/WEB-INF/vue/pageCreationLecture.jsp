@@ -12,27 +12,45 @@
         <title>Création d'une lecture</title>
     </head>
     <body>
-        <h1>Inscription d'une lecture</h1>
-        <form action="*.do" method="post">
-            <div>
-                Titre* : <input type="text" name="titre" required />
+        
+        <div class='row'> 
+        
+            <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 creation-lecture-col">
+                <div class="creation-lecture-form">
+                    <h1>Inscription d'une lecture</h1>
+                    <form action="*.do" method="post">
+                        <div class="form-group">
+                <label for="nom">Nom du défi* : </label>
+                <input class="form-control" type="text" name="nom" required />
             </div>
-            <div>
-                Durée de la lecture (en minutes)* : <input type="text" name="dureeMinutes" required />
-            </div>
-            <div>
-                <br>
-                La lecture était-elle obligatoire?
-                <div class="radio">
-                    <label><input type="radio" name="obligatoire" value="1" required >oui</label>
+                        
+                        <div class="form-group">
+                            <label for="titre">Titre* : </label>
+                            <input class="form-control" type="text" name="titre" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="dureeMinutes">Durée de la lecture (en minutes)* : </label>
+                            <input class="form-control" type="text" name="dureeMinutes" required />
+                        </div>
+                        <div class="lectureObligatoire">
+                            <div class="form-group">
+                                <label for="obligatoire">La lecture était-elle obligatoire? : </label>
+
+                                <div class="radio">
+                                    <label><input type="radio" name="obligatoire" value="1" required >oui</label>
+                                </div>
+                                <div class="radio">
+                                    <label><input type="radio" name="obligatoire" value="0" required >non</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <input type="hidden" name="tache" value="effectuerCreationLecture">
+                        <button type="submit" class="btn btn-success" value="Ajouter" >Ajouter</button>
+                        
+                    </form>
                 </div>
-                <div class="radio">
-                    <label><input type="radio" name="obligatoire" value="0" required >non</label>
-                </div>
             </div>
-           
-            <input type="hidden" name="tache" value="effectuerCreationLecture">
-            <input type="submit" value="Ajouter" />
-        </form>
+        </div>
     </body>
 </html>

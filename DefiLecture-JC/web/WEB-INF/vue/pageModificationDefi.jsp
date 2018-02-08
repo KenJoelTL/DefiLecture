@@ -5,6 +5,7 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <%@page import="com.defiLecture.modele.Defi"%>
 <%@page import="jdbc.Config"%>
 <%@page import="java.sql.Connection"%>
@@ -24,12 +25,6 @@
 %>
 
 
-    <jsp:useBean id="connexion" class="jdbc.Connexion"></jsp:useBean>
-    <jsp:useBean id="dao" class="com.defiLecture.modele.DefiDAO">
-        <jsp:setProperty name="dao" property="cnx" value="${connexion.connection}"></jsp:setProperty>
-    </jsp:useBean>
-    <c:set var="compte" scope="page" value="${dao.read(param.id)}"/>
-
 <script>
     $(document).ready(function(){
           var value = <%=choixReponse%>; //chaine string venant de la BD qui contient les choix de réponse
@@ -42,12 +37,12 @@
             //Si l'index est égal à la bonne réponse, le radio bouton sera checked 
             if((i-1)== reponse){
                  sBonneReponse += "<div class=\"radio\">"+
-                        "<label><input type=\"radio\" name=\"reponse\" value=\""+ (i-1) +"\" required checked >Choix #"+ i +": <span id=\"radiochoix"+i+"\">"+value[i-1]+"</span></label>"+
+                        "<label><input type=\"radio\" name=\"reponse\" value=\""+ (i-1) +"\" required checked >choix#"+ i +": <span id=\"radiochoix"+i+"\">"+value[i-1]+"</span></label>"+
                     "<\/div>";
               }
              else{
              sBonneReponse += "<div class=\"radio\">"+
-                        "<label><input type=\"radio\" name=\"reponse\" value=\""+ (i-1) +"\" required >Choix #"+ i +": <span id=\"radiochoix"+i+"\">"+value[i-1]+"</span></label>"+
+                        "<label><input type=\"radio\" name=\"reponse\" value=\""+ (i-1) +"\" required >choix#"+ i +": <span id=\"radiochoix"+i+"\">"+value[i-1]+"</span></label>"+
                     "<\/div>";
                 }
             }
@@ -56,7 +51,7 @@
 
           //Boucle pour recréer les choix de réponses en input text
           for(var i=1; i<=value.length; i++){
-              sChoixReponse += "<div><label for=\"choix"+ i +"\">Choix#"+ i +" : </label>" +
+              sChoixReponse += "<div><label for=\"choix"+ i +"\">choix#"+ i +" : </label>" +
                 "<input  id=\"choix"+ i +"\" class=\"choix form-control\" type=\"text\" name=\"choix"+ i +"\" required value=\""+value[i-1]+"\" /></div>"; 
           
             }
@@ -74,11 +69,11 @@
         //Quand on appuie sur le bouton +, un nouveau choix de reponse est affiché
         $("#btnPLUS").on("click", function(){
             //Création textbox pour les choix de réponse
-            sChoixReponse = "<div><label for=\"choix"+ i +"\">Choix#"+ i +" : </label>" +
+            sChoixReponse = "<div><label for=\"choix"+ i +"\">choix#"+ i +" : </label>" +
                 "<input  id=\"choix"+ i +"\" class=\"choix form-control\" type=\"text\" name=\"choix"+ i +"\" required /></div>"; 
             //Création des boutons radio pour choisir la bonne réponse
             sBonneReponse = "<div class=\"radio\">"+
-                        "<label><input type=\"radio\" name=\"reponse\" value=\""+ (i-1) +"\" required >Choix #"+ i +": <span id=\"radiochoix"+i+"\"></span></label>"+
+                        "<label><input type=\"radio\" name=\"reponse\" value=\""+ (i-1) +"\" required >choix#"+ i +": <span id=\"radiochoix"+i+"\"></span></label>"+
                     "<\/div>";
             i++;
             $("#choixReponse").append(sChoixReponse);
@@ -122,68 +117,74 @@
         });
     });
 </script>
-    
-        <h1>Creation d'un defi</h1>
-        <div class="col-lg-4 col-sm-10">
-        <form action="*.do" method="post">
-            <div class="form-group">
-                <label for="nom">Nom du défi* : </label>
-                <input class="form-control" type="text" name="nom" value="${defi.nom}" required />
-            </div>
-            
-            <div class="form-group">
-                <label for="description">Description du défi* : </label>
-                <textarea class="form-control" name="description" rows="5" required>${defi.description}</textarea>
-            </div>
-            
-            <div class="form-group">
-                <c:catch>
-                    <fmt:parseDate pattern="yyyy-MM-dd' 'HH:mm:ss.SS" value="${defi.dateDebut}" var="dateDebutPARSE" />
-                </c:catch>
-                <fmt:formatDate var="dateDebut" value="${dateDebutPARSE}" pattern="yyyy-MM-dd'T'HH:mm" />
-                <label for="dateDebut">Date de début* : </label>
-                <input class="form-control" type="datetime-local" name="dateDebut" value="${dateDebut}" required />
-                <c:catch>
-                    <fmt:parseDate pattern="yyyy-MM-dd' 'HH:mm:ss.SS" value="${defi.dateFin}" var="dateFinPARSE" />
-                </c:catch>
-                <fmt:formatDate var="dateFin" value="${dateFinPARSE}" pattern="yyyy-MM-dd'T'HH:mm" />
-                <label for="dateDebut">Date de fin* : </label>
-                <input class="form-control" type="datetime-local" name="dateFin" value="${dateFin}" required />
-            </div>
-            <div class="form-group">
-                <label for="question">Question à répondre pour réussir ce défi* : </label>
-                <input class="form-control" type="text" name="question" value="${defi.question}" required />
-            </div>
-            
-            <div class="form-group">
-                <h4>Choix de réponse :</h4>
-                Ajouter un choix : <button id="btnPLUS" type="button">+</button> <button id="btnMOINS" type="button">-</button>
-                
-                <div id="choixReponse"></div>
-                
- 
-            
-            </div>
-            
-            <div class="form-group">
-                
-                <h4 id="titreBonneReponse">La bonne réponse est :</h4>
-                <div id="bonneReponse"></div>
+<div class='row'> 
+        
+    <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 modification-defi-col">
+        <div class="modification-defi-form">
+            <h1>Modification d'un defi</h1>
+            <form action="*.do" method="post">
+                <div class="form-group">
+                    <label for="nom">Nom du défi* : </label>
+                    <input class="form-control" type="text" name="nom" value="${defi.nom}" required />
+                </div>
 
-            </div>
-            
-            
-            
-            <div class="form-group">
-                <label for="point">Nombre de minutes pour ce défi* : </label>
-                <input class="form-control" type="text" name="valeurMinute" value="${defi.valeurMinute}" required />
-            </div>
-            
-            <input id="choixReponseJSON" type="hidden" name="choixReponseJSON" value="">
-            <input type="hidden" name="idDefi" value="${defi.idDefi}">
-            <input type="hidden" name="tache" value="effectuerModificationDefi">
-            <input type="submit" name="modifie" value=" Enregistrer" />
-                <input type="submit" name="annule" value=" Annuler" />
-        </form>
-            <br>
+                <div class="form-group">
+                    <label for="description">Description du défi* : </label>
+                    <textarea class="form-control" name="description" rows="5" required>${defi.description}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <c:catch>
+                        <fmt:parseDate pattern="yyyy-MM-dd' 'HH:mm:ss.SS" value="${defi.dateDebut}" var="dateDebutPARSE" />
+                    </c:catch>
+                    <fmt:formatDate var="dateDebut" value="${dateDebutPARSE}" pattern="yyyy-MM-dd'T'HH:mm" />
+                    <label for="dateDebut">Date de début* : </label>
+                    <input class="form-control" type="datetime-local" name="dateDebut" value="${dateDebut}" required />
+                    <c:catch>
+                        <fmt:parseDate pattern="yyyy-MM-dd' 'HH:mm:ss.SS" value="${defi.dateFin}" var="dateFinPARSE" />
+                    </c:catch>
+                    <fmt:formatDate var="dateFin" value="${dateFinPARSE}" pattern="yyyy-MM-dd'T'HH:mm" />
+                    <label for="dateDebut">Date de fin* : </label>
+                    <input class="form-control" type="datetime-local" name="dateFin" value="${dateFin}" required />
+                </div>
+                <div class="form-group">
+                    <label for="question">Question à répondre pour réussir ce défi* : </label>
+                    <input class="form-control" type="text" name="question" value="${defi.question}" required />
+                </div>
+                <div class="ajouterChoix">
+                <div class="form-group">
+                    <label>Choix de réponse :</label>
+                    <label id="ajouterChoix">Ajouter un choix :</label> <button id="btnPLUS" type="button">+</button> <button id="btnMOINS" type="button">-</button>
+
+                    <div id="choixReponse"></div>
+
+
+
+                </div>
+                </div>
+                <div class="bonneReponse">
+                    <div class="form-group">
+
+                         <label id="titreBonneReponse">La bonne réponse est :</label>
+                        <div id="bonneReponse"></div>
+
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <label for="point">Nombre de minutes pour ce défi* : </label>
+                    <input class="form-control" type="text" name="valeurMinute" value="${defi.valeurMinute}" required />
+                </div>
+
+                <input id="choixReponseJSON" type="hidden" name="choixReponseJSON" value="">
+                <input type="hidden" name="idDefi" value="${defi.idDefi}">
+                <input type="hidden" name="tache" value="effectuerModificationDefi">
+                <button type="submit" class="btn btn-success" name="modifie" >Enregistrer </button>
+                <button type="submit" class="btn btn-info" name="annule" >Annuler</button>
+            </form>
+                <br>
+        </div>
+    </div>
 </div>

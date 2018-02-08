@@ -11,11 +11,11 @@
         //Quand on appuie sur le bouton +, un nouveau choix de reponse est affiché
         $("#btnPLUS").on("click", function(){
             //Création textbox pour les choix de réponse
-            var s = "<div><label for=\"choix"+ i +"\">Choix#"+ i +" : </label>" +
+            var s = "<div><label for=\"choix"+ i +"\">choix#"+ i +" : </label>" +
                 "<input  id=\"choix"+ i +"\" class=\"choix form-control\" type=\"text\" name=\"choix"+ i +"\" required /></div>"; 
             //Création des boutons radio pour choisir la bonne réponse
             var b = "<div class=\"radio\">"+
-                        "<label><input type=\"radio\" name=\"reponse\" value=\""+ (i-1) +"\" required >Choix #"+ i +": <span id=\"radiochoix"+i+"\"></span></label>"+
+                        "<label><input type=\"radio\" name=\"reponse\" value=\""+ (i-1) +"\" required >choix#"+ i +": <span id=\"radiochoix"+i+"\"></span></label>"+
                     "<\/div>";
             i++;
             $("#choixReponse").append(s);

@@ -11,33 +11,37 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Page de connexion</title>
     </head>
-    <body>
+    <body class="connexion-body">
         <div class='row'> 
         <c:choose>
             
         <c:when test="${ empty sessionScope.connecte }">
-            <div class="col-md-6 col-md-offset-3"> </div>
-        <h1>Connexion</h1>
-        <form action="connexion.do" method="post">
+       <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 connexion-col"> 
+           <h1>Connection</h1>
+        <form class="connexion-form" action="connexion.do" method="post">
             <div class="form-group">
-                <label for="identifiant">Identifiant :</label>
+                <label for="identifiant">Nom d'utilisateur :</label>
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <input id="identifiant" type="text" class="form-control" name="identifiant" placeholder="Courriel ou Pseudonyme">
+          
+                    <input id="identifiant" type="text" class="form-control" name="identifiant">
                 </div>
             </div>
             
             <div class="form-group">
                 <label for="motPasse">Mot de passe :</label>                
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                    <input id="motPasse" type="password" class="form-control" name="motPasse" placeholder="Mot de passe" >
+                    
+                    <input id="motPasse" type="password" class="form-control" name="motPasse"  >
                 </div>
             </div>
-
+            <a href="#">
+                Mot de passe oublié?.
+            </a>
             <input type="hidden" name="tache" value="effectuerConnexion">
-            <button type="submit" class="btn btn-success">Connexion</button>
+            <button type="submit" class="btn btn-danger">ENVOYER</button>
+            
         </form>
+      </div>
         </c:when>
         <c:otherwise>
             <a href="accueil.do?tache=afficherPageAccueil">

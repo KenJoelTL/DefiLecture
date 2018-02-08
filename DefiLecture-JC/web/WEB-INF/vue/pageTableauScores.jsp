@@ -19,29 +19,32 @@
 
 <%  EquipeDAO dao = new EquipeDAO(Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
     pageContext.setAttribute("listeEquipes", dao.findAll());   %>
-    
-<h2>Tableau des scores</h2>  
+        <div class="row scores-row"> 
+            <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 scores-col">
+                <h2>Tableau des scores</h2>  
 
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Rang</th>
-          <th>Nom</th>
-          <th>Points</th>
-        </tr>
-      </thead>
-      
-      <tbody>
-      <c:forEach items="${listeEquipes}" var="equipe">          
-      <c:set var="i" value="${i+1}"/>          
-        <tr>
-          <td>#${i}</td>
-          <td><a href="pageEquipe.do?tache=afficherPageEquipe&idEquipe=${equipe.idEquipe}">${equipe.nom}</a></td>
-          <td>${equipe.point}</td>
-        </tr>
-      </c:forEach>  
-      </tbody>
-      
-    </table>
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Rang</th>
+                          <th>Nom</th>
+                          <th>Points</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                      <c:forEach items="${listeEquipes}" var="equipe">          
+                      <c:set var="i" value="${i+1}"/>          
+                        <tr>
+                          <td>#${i}</td>
+                          <td><a href="pageEquipe.do?tache=afficherPageEquipe&idEquipe=${equipe.idEquipe}">${equipe.nom}</a></td>
+                          <td>${equipe.point}</td>
+                        </tr>
+                      </c:forEach>  
+                      </tbody>
+
+                    </table>
+            </div>
+        </div> 
     </body>
 </html>

@@ -9,6 +9,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="com.defiLecture.modele.Defi"%>
 <%@page import="com.defiLecture.modele.DefiDAO"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="jdbc.Config"%>
 <%@page import="jdbc.Connexion"%>
 
 <jsp:useBean id="connexion" scope="page" class="jdbc.Connexion"></jsp:useBean>  
@@ -18,9 +20,6 @@
 
 <c:set var="d" scope="page" value="${dao.read(param.id)}"/>
 <c:set var="choixReponse" scope="page" value="${d.choixReponse}"/>
-  
-  
-  
   <script>
        $(document).ready(function(){
           var value = ${choixReponse};
@@ -37,32 +36,41 @@
   </script>
 
     <body>
-        <h2>${d.nom}</h2>
-  
-        <div >      
-                <label for="description">Défi à relever : </label>
-                <textarea id="description" disabled class="form-control" name="description" rows="15" style="max-width:80%; resize:none">${d.description}</textarea>
-        </div>
+        <div class='row'> 
         
-        <div>
-                <label for="question">Question à répondre : </label>
-                <p id="question"> ${d.question} </p>
-        </div>
-          
-       <div>
-            <form action="*.do" method="post">
-                <label for="listeChoixReponse">Choix de réponse : </label>
-                <div id="listeChoixReponse"></div>
-                    <div>
-                        <input type="hidden" name="tache" value="effectuerInscriptionDefi">
-                        <input type="hidden" name="idDefi" value="${d.idDefi}">
+            <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 inscription-defi-col">
+                <div class="inscription-defi-form">
+                    <h2>${d.nom}</h2>
 
-                        <input type="submit" name="valider" value=" Valider ma réponse" />
-                        <input type="submit" name="annule" value=" Annuler" />
+                    <div >      
+                            <label for="description">Défi à relever : </label>
+                            <textarea id="description" disabled class="form-control" name="description" rows="15" style="max-width:80%; resize:none">${d.description}</textarea>
                     </div>
-                    
-            </form>
 
+                    <div>
+                            <label for="question">Question à répondre : </label>
+                            <p id="question" class="form-control"> ${d.question} </p>
+                    </div>
+
+                   <div>
+                        <form action="*.do" method="post">
+                            <div class="choixReponse">
+                            <label for="listeChoixReponse">Choix de réponse : </label>
+                            <div id="listeChoixReponse"></div>
+                            </div>
+                                <div>
+                                    <input type="hidden" name="tache" value="effectuerInscriptionDefi">
+                                    <input type="hidden" name="idDefi" value="${d.idDefi}">
+                                    <button type="submit" class="btn btn-info" name="annule"  >Annuler</button>
+                                    <button type="submit" class="btn btn-success" name="valider" >Valider ma réponse</button>
+                                    
+                                     
+                                </div>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
         </div>
-  
     </body>
