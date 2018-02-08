@@ -19,13 +19,13 @@
     <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 gestion-lecture-col">
         <h2>Liste de mes lectures</h2>
 
-<% 
-    Connexion.reinit();
-    Connection cnx = Connexion.startConnection(Config.DB_USER,Config.DB_PWD,Config.URL,Config.DRIVER);
-    LectureDAO dao = new LectureDAO(cnx);
-    List<Lecture> listeLectures = dao.findByIdCompteOrderByDate((int)(session.getAttribute("connecte")));
-    pageContext.setAttribute("listeLectures", listeLectures);
-  %>
+
+  <jsp:useBean id="connexion" scope="page" class="jdbc.Connexion"></jsp:useBean>  
+  <jsp:useBean id="dao" scope="page" class="com.defiLecture.modele.LectureDAO">
+      <jsp:setProperty name="dao" property="cnx" value="${connexion.connection}"></jsp:setProperty>
+  </jsp:useBean>
+  
+  <c:set var="listeLectures" value="${dao.findByIdCompteOrderByDate(sessionScope.connecte)}"/>
             <table class="table">
 
                 <thead>

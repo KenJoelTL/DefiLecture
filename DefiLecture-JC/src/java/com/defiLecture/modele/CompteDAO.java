@@ -22,6 +22,9 @@ import java.util.logging.Logger;
  */
 public class CompteDAO extends DAO<Compte>{
 
+    public CompteDAO() {
+    }
+
     public CompteDAO(Connection cnx) {
         super(cnx);
     }

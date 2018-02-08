@@ -12,18 +12,17 @@
 <%@page import="java.sql.Connection"%>
 <%@page import="jdbc.Config"%>
 <%@page import="jdbc.Connexion"%>
-<% 
-    Connexion.reinit();
-    Connection cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
-    DefiDAO dao = new DefiDAO(cnx);
-    Defi d = dao.read(request.getParameter("id"));
-    String choixReponse = d.getChoixReponse();
-    pageContext.setAttribute("d", d);
-  %>
 
+<jsp:useBean id="connexion" scope="page" class="jdbc.Connexion"></jsp:useBean>  
+<jsp:useBean id="dao" scope="page" class="com.defiLecture.modele.DefiDAO">
+    <jsp:setProperty name="dao" property="cnx" value="${connexion.connection}"></jsp:setProperty>
+</jsp:useBean>
+
+<c:set var="d" scope="page" value="${dao.read(param.id)}"/>
+<c:set var="choixReponse" scope="page" value="${d.choixReponse}"/>
   <script>
        $(document).ready(function(){
-          var value = <%=choixReponse%>;
+          var value = ${choixReponse};
           var s="";
           //Boucle pour afficher les choix de réponses en bouton radio
           for(i=0; i<value.length; i++ ){

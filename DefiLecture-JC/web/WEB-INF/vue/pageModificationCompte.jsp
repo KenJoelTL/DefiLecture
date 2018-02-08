@@ -10,21 +10,13 @@
 <%@page import="jdbc.Config"%>
 <%@page import="jdbc.Connexion"%>
 
-<script>  
-$(document).ready(
-        function () {
-                //alert('Le DOM est pret!');
-                $("#prenom").keyup(function(event) {
-                        $('#testAjax5').load('*.do?tache=testAjax&prenom='+event.target.value);
-                    }
-                );
-        }
-);  
-</script>
 
-<%  CompteDAO dao = new CompteDAO(Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
-    pageContext.setAttribute("compte", dao.read(request.getParameter("id"))); %>
-
+ <jsp:useBean id="connexion" class="jdbc.Connexion"></jsp:useBean>
+    <jsp:useBean id="dao" class="com.defiLecture.modele.CompteDAO">
+        <jsp:setProperty name="dao" property="cnx" value="${connexion.connection}"></jsp:setProperty>
+    </jsp:useBean>
+    <c:set var="compte" scope="page" value="${dao.read(param.id)}"/>
+    
         
 <body>
     <div class='row'> 
@@ -47,9 +39,6 @@ $(document).ready(
 
 
                 </form>
-
-
-
 
 
                 <form action="modification.do" method="post" >

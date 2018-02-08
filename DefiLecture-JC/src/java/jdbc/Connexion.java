@@ -14,52 +14,69 @@ import java.sql.SQLException;
  * @author Charles
  */
 public class Connexion {
-	private static Connection cnx;
+	private static Connection connection;
+        private Connection cnx;
 	private static String url;
 	private static String user;		
         private static String password;
-        //private static String encoding;
-        private Connexion()
-        {
+
+        public Connexion(){}
+        
+	public static Connection getInstance() {
+            if (connection == null)
+                try {
+                    if (user.equals(""))
+                        connection = DriverManager.getConnection(url);
+                    else
+                        connection = DriverManager.getConnection(url,user,password);
+
+                } catch (SQLException e) {
+                        e.printStackTrace();
+                }
+            return connection;
+	}
+        
+        public Connection getCnx(){
+            cnx = Connexion.getInstance();
+            return cnx;
         }
-	public static Connection getInstance()
-	{
-		if (cnx == null)
-			try {
-				if (user.equals(""))
-                                    cnx = DriverManager.getConnection(url);
-				else
-                                    cnx = DriverManager.getConnection(url,user,password);
-                                          
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		return cnx;
+        
+        public Connection getConnection(){
+            if (connection == null)
+                try {
+                    if (user.equals(""))
+                        connection = DriverManager.getConnection(url);
+                    else
+                        connection = DriverManager.getConnection(url,user,password);
+
+                } catch (SQLException e) {
+                        e.printStackTrace();
+                }
+            return connection;
+        }
+        
+	public static void reinit(){
+            close();
+            connection = null;
 	}
-	public static void reinit()
-	{
-                close();
-		cnx = null;
-	}
+        
 	public static void close()
 	{
-		try {
-			if (cnx!=null)
-                        {
-				cnx.close();
-                                cnx = null;
-                        }
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+            try {
+                if (connection!=null) {
+                    connection.close();
+                    connection = null;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
 	}
 	public static String getUrl() {
 		return url;
 	}
 	public static void setUrl(String url) {
 		Connexion.url = url;
-	}
-        
+	}     
         
 	public static String getUser() {
 		return user;
@@ -76,11 +93,15 @@ public class Connexion {
                 Connexion.password = password;
                 Connexion.url = url;
         }
+        
         /**
          * 
      * @param user
      * @param password
      * @param url
+     * @param driver
+     * @return Connection
+     * @throws java.lang.ClassNotFoundException
          */
         public static Connection startConnection(String user, String password, String url, String driver) throws ClassNotFoundException{
                 Class.forName(driver);

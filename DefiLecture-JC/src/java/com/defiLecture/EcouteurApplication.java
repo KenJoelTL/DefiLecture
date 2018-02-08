@@ -28,9 +28,7 @@ public class EcouteurApplication implements ServletContextListener {
         Config.URL = application.getInitParameter("urlBd");
         
         Equipe.NB_MAX_MEMBRES =              
-                Integer.parseInt(application.getInitParameter("nbParticipantMax"));
-        
-        //application.getInitParameter("userBD");
+                Integer.parseInt(application.getInitParameter("nbParticipantMax"));        
     }
 
     @Override

@@ -21,6 +21,9 @@ import jdbc.Connexion;
  * @author Charles
  */
 public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
+
+    public InscriptionDefiDAO() {
+    }
     
     public InscriptionDefiDAO(Connection c)
     {

@@ -11,8 +11,10 @@
 <%@page import="jdbc.Connexion"%>
 <%@ page pageEncoding="UTF-8" %>
 
-<%  CompteDAO dao = new CompteDAO(Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
-    pageContext.setAttribute("listeComptes", dao.findAll());   %>
+<jsp:useBean id="connexion" scope="page" class="jdbc.Connexion"></jsp:useBean>  
+<jsp:useBean id="dao" scope="page" class="com.defiLecture.modele.CompteDAO">
+    <jsp:setProperty name="dao" property="cnx" value="${connexion.connection}"></jsp:setProperty>
+</jsp:useBean>
 <div class="row listeCompte-row"> 
     <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 listeCompte-col">    
        <h2>Gestionnaire de comptes</h2>  
@@ -69,5 +71,5 @@
 
         </table>
     
-</div>
     </div>
+</div>

@@ -11,11 +11,13 @@ package com.defiLecture.modele;
  */
 public class DemandeEquipe {
     
-    public static int EN_ATTENTE = -1, //-1 : Le demande est visible, elle vient d'être créée 
-               SUSPENDUE = 0  , // 0 : Le participant est suspendu de l'équipe.
-               ACCEPTEE = 1   ; // 1 : Le participant fait présentement partie de l'équipe */
+    public final static int 
+        EN_ATTENTE = -1, //-1 : Le demande est visible, elle vient d'être créée 
+        SUSPENDUE = 0  , // 0 : Le participant est suspendu de l'équipe.
+        ACCEPTEE = 1   ; // 1 : Le participant fait présentement partie de l'équipe
                
-    private int idDemandeEquipe,
+    private int 
+        idDemandeEquipe,
         idCompte,
         idEquipe,
         point,
