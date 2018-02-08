@@ -26,7 +26,7 @@
 <%@page import="jdbc.Connexion"%>
 <h2>Liste des défis</h2>
 
-<% /*
+<% 
     Connexion.reinit();
     Connection cnx = Connexion.startConnection(Config.DB_USER,Config.DB_PWD,Config.URL,Config.DRIVER);
     DefiDAO daoDefi = new DefiDAO(cnx);
@@ -60,47 +60,8 @@ List<Defi> listeDefi;
     %>
 
 
-    <jsp:useBean id="connexion" class="jdbc.Connexion"></jsp:useBean>
-    <jsp:useBean id="daoDefi" class="com.defiLecture.modele.DefiDAO">
-        <jsp:setProperty name="daoDefi" property="cnx" value="${connexion.connection}"></jsp:setProperty>
-    </jsp:useBean>
     
-    <jsp:useBean id="daoCompte" class="com.defiLecture.modele.CompteDAO">
-        <jsp:setProperty name="daoCompte" property="cnx" value="${connexion.connection}"></jsp:setProperty>
-    </jsp:useBean>
-    
-    <c:set var="compte" scope="page" value="${dao.read(sessionScope.connecte)}"/>
-    <c:set var="role" scope="page" value="${compte.role}"/>
-    
-    <c:choose>
-        <c:when test="${ role gt 3 }">
-            <c:set var="listeDefi" scope="page" value="${daoDefi.findHistorique()}"/>
-        </c:when>
-        <c:otherwise>
-            <c:set var="listeDefi" scope="page" value="${daoDefi.findAllByIdCompte(sessionScope.connecte)}"/>
-        </c:otherwise>
-    </c:choose>
-    
-    <jsp:useBean id="daoInscriptionDefi" class="com.defiLecture.modele.InscriptionDefiDAO">
-        <jsp:setProperty name="daoInscriptionDefi" property="cnx" value="${connexion.connection}"></jsp:setProperty>
-    </jsp:useBean>
-    
-    <c:set var="listeInscriptionDefi" scope="page" value="${daoInscriptionDefi.findAllByIdCompte(sessionScope.connecte)}"/>
-
-    <jsp:useBean id="listeReussi" class="java.util.ArrayList"></jsp:useBean>
-    <jsp:useBean id="listeEchoue" class="java.util.ArrayList"></jsp:useBean>
-
-    <c:forEach items="${listeInscriptionDefi}" var="i">
-        <c:choose>
-            <c:when test="${i.estReussi eq 1}">
-                ${listeReussi.add(""+i.idDefi)}
-            </c:when>
-            <c:otherwise>
-                ${listeEchoue.add(""+i.idDefi)}
-            </c:otherwise>
-        </c:choose>
-    </c:forEach>
-<%/*
+<%
      for(InscriptionDefi i : listeInscriptionDefi){
         if(i.getEstReussi() == 1)
             listeReussi.add(""+i.getIdDefi());
@@ -111,7 +72,7 @@ List<Defi> listeDefi;
     pageContext.setAttribute("listeEchoue", listeEchoue);
     
     //Création de la liste d'historique des défis
-    Connection cnx = Connexion.startConnection(Config.DB_USER,Config.DB_PWD,Config.URL,Config.DRIVER);*/
+    //Connection cnx = Connexion.startConnection(Config.DB_USER,Config.DB_PWD,Config.URL,Config.DRIVER);
 %> 
   <table class="table">
         <thead>

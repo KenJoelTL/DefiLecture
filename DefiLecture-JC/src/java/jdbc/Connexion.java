@@ -15,10 +15,13 @@ import java.sql.SQLException;
  */
 public class Connexion {
 	private static Connection connection;
+        private Connection cnx;
 	private static String url;
 	private static String user;		
         private static String password;
 
+        public Connexion(){}
+        
 	public static Connection getInstance() {
             if (connection == null)
                 try {
@@ -33,8 +36,23 @@ public class Connexion {
             return connection;
 	}
         
+        public Connection getCnx(){
+            cnx = Connexion.getInstance();
+            return cnx;
+        }
+        
         public Connection getConnection(){
-            return Connexion.getInstance();
+            if (connection == null)
+                try {
+                    if (user.equals(""))
+                        connection = DriverManager.getConnection(url);
+                    else
+                        connection = DriverManager.getConnection(url,user,password);
+
+                } catch (SQLException e) {
+                        e.printStackTrace();
+                }
+            return connection;
         }
         
 	public static void reinit(){
