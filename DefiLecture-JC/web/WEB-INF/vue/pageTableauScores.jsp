@@ -8,7 +8,19 @@
 <%@page import="com.defiLecture.modele.EquipeDAO"%>
 <%@page import="jdbc.Config"%>
 <%@page import="jdbc.Connexion"%>
+<%@page import="java.sql.SQLException"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%  try{
+        EquipeDAO dao = new EquipeDAO(Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
+        pageContext.setAttribute("listeEquipes", dao.findAll());
+    }
+    catch(SQLException e){
+        response.sendError(response.SC_INTERNAL_SERVER_ERROR,"Erreur interne" + e.getMessage());
+	out.close();
+    } %>
+
+        
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,9 +29,7 @@
     </head>
     <body>
 
-<%  EquipeDAO dao = new EquipeDAO(Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
-    pageContext.setAttribute("listeEquipes", dao.findAll());   %>
-        <div class="row scores-row"> 
+        <div class="row scores-row">
             <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 scores-col">
                 <h2>Tableau des scores</h2>  
 

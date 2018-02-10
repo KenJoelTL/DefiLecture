@@ -17,7 +17,7 @@
             
         <c:when test="${ empty sessionScope.connecte }">
        <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 connexion-col"> 
-           <h1>Connection</h1>
+           <h1>Connexion</h1>
         <form class="connexion-form" action="connexion.do" method="post">
             <div class="form-group">
                 <label for="identifiant">Nom d'utilisateur :</label>

@@ -22,21 +22,17 @@ public class Connexion {
 
         public Connexion(){}
         
-	public static Connection getInstance() {
+	public static Connection getInstance() throws SQLException {
             if (connection == null)
-                try {
-                    if (user.equals(""))
-                        connection = DriverManager.getConnection(url);
-                    else
-                        connection = DriverManager.getConnection(url,user,password);
+                if (user.equals(""))
+                    connection = DriverManager.getConnection(url);
+                else
+                    connection = DriverManager.getConnection(url,user,password);
 
-                } catch (SQLException e) {
-                        e.printStackTrace();
-                }
             return connection;
 	}
         
-        public Connection getCnx(){
+        public Connection getCnx() throws SQLException{
             cnx = Connexion.getInstance();
             return cnx;
         }
@@ -103,7 +99,7 @@ public class Connexion {
      * @return Connection
      * @throws java.lang.ClassNotFoundException
          */
-        public static Connection startConnection(String user, String password, String url, String driver) throws ClassNotFoundException{
+        public static Connection startConnection(String user, String password, String url, String driver) throws ClassNotFoundException, SQLException{
                 Class.forName(driver);
                 Connexion.user = user;
                 Connexion.password = password;
