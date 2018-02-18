@@ -638,3 +638,92 @@ ul.dropdown-menu {
 .liste-equipes-col h2 {
   text-align: center;
 }
+
+
+/*Page Équipe*/
+
+
+.page-equipe-col {
+  background-image: url("../images/1_CONNEXION.png");
+  padding-bottom: 20px;
+  height: 800px;
+      display: flex;
+    flex-direction: column;
+}
+
+.page-equipe-col h1 {
+  text-align: center;
+}
+
+.page-equipe-col h2 {
+  padding-left: 5px;
+    color: black;
+    font-weight: 600;
+}
+
+
+.page-equipe-col label {
+  padding: 9px 25px 9px 4px;
+  font-size: 18px;
+  width: auto;
+}
+
+
+.page-equipe-col button {
+    font-size: 20px!important;
+    margin: 1% auto;
+
+}
+
+.page-equipe-col .jumbotron {
+  background-color: rgba(255,255,255,0.5);
+  color: black;
+}
+
+.page-equipe-col .jumbotron p {
+  text-align: center;
+}
+
+.page-equipe-col table th {
+  background-color: darkred!important;
+  color: white;
+  border-right: 1px solid;
+}
+
+.page-equipe-col table {
+  background-color: rgba(255,255,255,0.5);
+
+}
+
+.page-equipe-col .progress {
+  margin: 0!important;
+}
+
+
+.page-equipe-col #parametreEquipe{
+      background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    padding: 9px 25px;
+    color: black;
+    text-align: center;
+    font-size: 20px;
+}
+
+.page-equipe-col #parametreEquipe:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none!important;
+}
+
+/*Configuration équipe*/
+
+.page-equipe-col.configuration-equipe label {
+      background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    padding: 9px 25px;
+}
+
+@media (max-width: 530px) {
+.configuration-equipe .cacherSurMobile tr td:nth-child(3), .configuration-equipe .cacherSurMobile tr th:nth-child(3){
+  display: none;
+}
+}
