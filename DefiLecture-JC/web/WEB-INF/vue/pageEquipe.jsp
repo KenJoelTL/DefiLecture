@@ -12,14 +12,7 @@
 <%@page import="com.defiLecture.modele.Equipe"%>
 <%@page import="jdbc.Config"%>
 <%@page import="jdbc.Connexion"%>
-<style>
-    #toutPageEquipe { background-image: url("<c:url value='/images/arriere-plans/ocean.jpg'/>");
-                      background-repeat: no-repeat;
-                      background-position: right top;
-                      background-attachment: fixed;
-                      z-index: -1;
-    }
-</style>
+
 
 <c:if test="${empty param.idEquipe}">${param.idEquipe=1}</c:if>
 <%  Connection cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
@@ -34,47 +27,27 @@
     pageContext.setAttribute("daoDemEqp", daoDemEqp);
     pageContext.setAttribute("equipe", equipe);
     pageContext.setAttribute("listeMembres", daoCompte.findByIdEquipe(equipe.getIdEquipe())); %>
-    
-        <div id='toutPageEquipe' style='background-color: rgba(51, 122, 183, 0.5);'>    
+    <div class='row'> 
         
-            <div class='container-fluid'>
+            <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 page-equipe-col">
+ 
             
-                <div class='jumbotron' style=" background-color: rgba(34, 34, 34, 0.78); color: whitesmoke;"> 
-                    <div class='row'>
-                        
-                    <div class='col-md-1' ></div>
-                    <div class='col-md-6' >
-                        <p>Page de l'équipe<p>
-                        <p>${equipe.nom}<p>
-                    </div>
-                    <div class='col-md-5' >
-                        <div class='col-sm-6' ><p>Pointage Courant</p><p>${equipe.point} pts</p></div>
-
-                        <div class='col-sm-6' ><p>Rang</p><p>#${rang}</p></div>
-                    </div>
-                    </div>
+                <div class='jumbotron'> 
+                    
+                    <h1>${equipe.nom}</h1>
+                    <p>${equipe.point} pts</p>
+                    <p>Rang #${rang}</p>
+             
                 </div>
-            
-            </div>
-        </div>
-        
-        <div class='container'>
-            <div class='col-md-1'></div>
-            
-            <div class='col-lg-10 offset-md-3' style='margin-top: 15px'>
-                <div class="panel panel-default">
-                    <div class="panel-heading" style="background-color: #253849; color: #e9e9e9;">Performances
+                    
+              
                         <c:if test="${(!empty sessionScope.connecte) and (compteConnecte.idEquipe eq equipe.idEquipe)}">
-                            <a href="depart.do?tache=afficherPageModificationEquipe&idEquipe=${equipe.idEquipe}">
+                            <a id="parametreEquipe" href="depart.do?tache=afficherPageModificationEquipe&idEquipe=${equipe.idEquipe}">
                                 Paramètres <span class="glyphicon glyphicon-cog"></span>
                             </a>
                         </c:if>
-                    
-                    </div>
-                    <div class="panel-body">Dernière nouvelle !</div>
-                </div>
-                
-                <table class='table table-hover' style="background-color: rgb(255, 255, 255); border:1px lightgray solid">
+                    <h2>Membre de l'équipe</h2>
+                    <table class='table table-hover'>
                   <thead>
                     <tr>
                       <th>Prénom</th>
@@ -99,8 +72,8 @@
                     </c:forEach>
                   </tbody>
                 </table>
-                
-            </div>
+
+               </div>
         </div>
             
    
