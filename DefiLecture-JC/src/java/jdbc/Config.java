@@ -10,12 +10,12 @@ package jdbc;
  * @author Charles
  */
 public class Config {
-    
+    //valeur contenu dans le fichier web.xml - Joel
     public static String URL = "";
     public static String DB_HOST = "";
-    public static String DB_USER = ""; //utiliser les para de config
+    public static String DB_USER = "";
     public static String DB_PWD = "";
     public static String DB_NAME = "";
-    public static String DRIVER = ""; //Ajout de l'attribut contenant info du pilote - Joel
+    public static String DRIVER = ""; 
  
 }

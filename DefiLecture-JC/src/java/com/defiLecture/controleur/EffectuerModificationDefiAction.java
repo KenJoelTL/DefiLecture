@@ -17,6 +17,7 @@ import jdbc.Connexion;
 import com.defiLecture.modele.Compte;
 import com.defiLecture.modele.Defi;
 import com.defiLecture.modele.DefiDAO;
+import java.sql.SQLException;
 
 /**
  *
@@ -103,6 +104,10 @@ public class EffectuerModificationDefiAction implements Action, RequestAware, Se
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(EffectuerModificationLectureAction.class.getName()).log(Level.SEVERE, null, ex);
                 return "*.do?tache=afficherPageParticipationDefi";
+            } catch (SQLException ex) {
+                Logger.getLogger(EffectuerModificationDefiAction.class.getName()).log(Level.SEVERE, null, ex);
+                            return "*.do?tache=afficherPageParticipationDefi";
+
             }
         }
         else

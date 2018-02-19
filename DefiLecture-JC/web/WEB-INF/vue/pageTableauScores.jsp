@@ -11,15 +11,12 @@
 <%@page import="java.sql.SQLException"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%  try{
-        EquipeDAO dao = new EquipeDAO(Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
-        pageContext.setAttribute("listeEquipes", dao.findAll());
-    }
-    catch(SQLException e){
-        response.sendError(response.SC_INTERNAL_SERVER_ERROR,"Erreur interne" + e.getMessage());
-	out.close();
-    } %>
 
+ <jsp:useBean id="connexion" class="jdbc.Connexion"></jsp:useBean>
+ <jsp:useBean id="dao" class="com.defiLecture.modele.EquipeDAO">
+     <jsp:setProperty  name="dao" property="cnx" value="${connexion.connection}"></jsp:setProperty>
+ </jsp:useBean>
+ <c:set var="listeEquipes" value="${dao.findAll()}"></c:set>
         
 <!DOCTYPE html>
 <html>

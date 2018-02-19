@@ -15,6 +15,7 @@ import jdbc.Config;
 import jdbc.Connexion;
 import com.defiLecture.modele.Compte;
 import com.defiLecture.modele.CompteDAO;
+import java.sql.SQLException;
 
 /**
  *
@@ -54,6 +55,8 @@ public class AfficherPageModificationCompteAction implements Action, RequestAwar
                                    .class.getName()).log(Level.SEVERE, null, ex);
                 request.setAttribute("vue", "pageGestionListeCompte.jsp");
                 return "/index.jsp";
+            } catch (SQLException ex) {
+                Logger.getLogger(AfficherPageModificationCompteAction.class.getName()).log(Level.SEVERE, null, ex);
             }
             finally{
                 Connexion.close();

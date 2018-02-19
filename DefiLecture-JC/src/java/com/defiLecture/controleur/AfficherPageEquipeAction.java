@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import jdbc.Config;
 import jdbc.Connexion;
 import com.defiLecture.modele.EquipeDAO;
+import java.sql.SQLException;
 
 /**
  *
@@ -40,6 +41,8 @@ public class AfficherPageEquipeAction implements Action, RequestAware {
                 Logger.getLogger(AfficherPageEquipeAction
                                    .class.getName()).log(Level.SEVERE, null, ex);
                 request.setAttribute("vue", "accueil.jsp");
+            } catch (SQLException ex) {
+                Logger.getLogger(AfficherPageEquipeAction.class.getName()).log(Level.SEVERE, null, ex);
             }
             finally{
                 Connexion.close();

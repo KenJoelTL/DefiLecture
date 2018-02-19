@@ -18,6 +18,7 @@ import com.defiLecture.modele.CompteDAO;
 import com.defiLecture.modele.DemandeEquipe;
 import com.defiLecture.modele.DemandeEquipeDAO;
 import com.defiLecture.modele.Equipe;
+import java.sql.SQLException;
 
 /**
  *
@@ -72,6 +73,8 @@ public class EffectuerAcceptationDemandeAdhesionAction implements Action, Reques
                 Logger.getLogger(EffectuerAcceptationDemandeAdhesionAction
                         .class.getName()).log(Level.SEVERE, null, ex);
                 action = "echec.do?tache=afficherPageAcceuil";
+            } catch (SQLException ex) {
+                Logger.getLogger(EffectuerAcceptationDemandeAdhesionAction.class.getName()).log(Level.SEVERE, null, ex);
             }
             finally{Connexion.close();}
         }
