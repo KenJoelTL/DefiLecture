@@ -26,7 +26,7 @@
   </jsp:useBean>
   
   <c:set var="listeLectures" value="${dao.findByIdCompteOrderByDate(sessionScope.connecte)}"/>
-            <table class="table">
+            <table class="table cacherSurMobile">
 
                 <thead>
                 <tr>
