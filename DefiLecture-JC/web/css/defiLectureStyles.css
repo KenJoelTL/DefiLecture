@@ -692,6 +692,12 @@ input[type="radio"]:checked+label {
   text-align: center;
 }
 
+@media (max-width: 530px) {
+.gestion-lecture-col .cacherSurMobile tr td:nth-child(4), .gestion-lecture-col .cacherSurMobile tr th:nth-child(4), .gestion-lecture-col .cacherSurMobile tr td:nth-child(5), .gestion-lecture-col .cacherSurMobile tr th:nth-child(5), .gestion-lecture-col .cacherSurMobile tr td:nth-child(6), .gestion-lecture-col .cacherSurMobile tr th:nth-child(6){
+  display: none;
+}
+}
+
 
 /*Page Équipe*/
 
