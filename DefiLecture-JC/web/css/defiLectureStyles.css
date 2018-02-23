@@ -558,15 +558,16 @@ background-image: url("../images/2_ACCUEIL.png");
       background-size: cover;
     width: 110px;
     height: 110px;
+    cursor: pointer;
    
 }
 
-.dureeLecture .radio {
-   margin: 0!important;
-}
-
-.dureeLecture input {
-  display: none;
+.lecture-submit {
+   background-image: url("../images/CONFIRMER.png");
+   background-size: cover;
+        width: 161px!important;
+    height: 167px!important;
+    cursor: pointer;
 }
 
 .dureeLecture {
@@ -577,7 +578,6 @@ background-image: url("../images/2_ACCUEIL.png");
     margin-right: auto;
     align-items: center;
     justify-content: center;
-        width: 320px!important;
 }
 
 #lblDureeLecture{
@@ -586,9 +586,13 @@ background-image: url("../images/2_ACCUEIL.png");
 
 
 
+.dureeMinutes {
+      font-size: 33px!important;
+    padding-top: 0!important;
+}
 
-input[type="radio"]:checked+label {
-  border: 1px solid;
+.lecture-submit input {
+  display: none;
 }
 
 
@@ -599,15 +603,32 @@ input[type="radio"]:checked+label {
   border-radius: 20px;
 }
 
+.creation-lecture-form .form-group {
+  width: 280px;
+}
+
+.creation-lecture-form form {
+      display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .creation-lecture-col .lectureObligatoire {
       border: 2px solid white;
     border-radius: 20px;
     padding: 1%;
 }
 
-.creation-lecture-col div.lectureObligatoire .radio label {
-    padding-left: 30px!important;
+.lectureObligatoire .form-group .radio {
+      background-color: rgba(255,255,255,0.5);
 }
+
+.lectureObligatoire .form-group input {
+  display: none;
+}
+
+
+
 
 /*Inscription défi*/
 

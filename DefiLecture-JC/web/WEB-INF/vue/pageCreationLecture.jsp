@@ -12,40 +12,90 @@
         <title>Création d'une lecture</title>
         <script type="text/javascript">
             $(document).ready(function(){
-                $('.duree15').click(function() {
+                
+                $('.duree15').mousedown(function() {
                     $(this).css('border', '3px dotted goldenrod');
                     $(this).css('border-radius', '37px');
-                    $('.duree30').css('border', 'transparent');
-                    $('.duree45').css('border', 'transparent');
-                    $('.duree60').css('border', 'transparent');
+                    minutesTotal = parseInt($('.dureeMinutes').text())+15;
+                    $('#dureeMinutes').val(minutesTotal);
+                    $('.dureeMinutes').html(minutesTotal + " minutes");
+  
+                });
+                
+                 $('.duree15').mouseup(function() {
+                    $(this).css('border', 'transparent');
+
                     
                 });
-                $('.duree30').click(function() {
+                $('.duree30').mousedown(function() {
                      $(this).css('border', '3px dotted goldenrod');
                     $(this).css('border-radius', '37px');
-                    $('.duree15').css('border', 'transparent');
-                    $('.duree45').css('border', 'transparent');
-                    $('.duree60').css('border', 'transparent');
+                    minutesTotal = parseInt($('.dureeMinutes').text())+30;
+                    $('#dureeMinutes').val(minutesTotal);
+                    $('.dureeMinutes').html(minutesTotal+ " minutes");
+               
+
 
 
                 });
-                $('.duree45').click(function() {
+                
+                $('.duree30').mouseup(function() {
+                    $(this).css('border', 'transparent');
+
+                    
+                });
+                $('.duree45').mousedown(function() {
                     $(this).css('border', '3px dotted goldenrod');
                     $(this).css('border-radius', '37px');
-                    $('.duree30').css('border', 'transparent');
-                    $('.duree15').css('border', 'transparent');
-                    $('.duree60').css('border', 'transparent');
+                    minutesTotal = parseInt($('.dureeMinutes').text())+45;
+                    $('#dureeMinutes').val(minutesTotal);
+                    $('.dureeMinutes').html(minutesTotal+ " minutes");
+                 
+
 
 
                 });
-                $('.duree60').click(function() {
+                $('.duree45').mouseup(function() {
+                    $(this).css('border', 'transparent');
+
+                    
+                });
+                $('.duree60').mousedown(function() {
                      $(this).css('border', '3px dotted goldenrod');
                     $(this).css('border-radius', '37px');
-                    $('.duree30').css('border', 'transparent');
-                    $('.duree45').css('border', 'transparent');
-                    $('.duree15').css('border', 'transparent');
+                    minutesTotal = parseInt($('.dureeMinutes').text())+60;
+                    $('#dureeMinutes').val(minutesTotal);
+                    $('.dureeMinutes').html(minutesTotal+ " minutes");
+            
 
 
+
+                });
+                $('.duree60').mouseup(function() {
+                    $(this).css('border', 'transparent');
+
+                    
+                });
+                
+                 $('.lecture-submit').mousedown(function() {
+                     $(this).css('border', '3px dotted goldenrod');
+                    $(this).css('border-radius', '37px');
+
+
+                });
+                $('.lecture-submit').mouseup(function() {
+                    $(this).css('border', 'transparent');
+
+                    
+                });
+                
+                 $('.obligatoire-oui').click(function() {
+                     $(this).css('background-color', 'rgba(255,255,255,0.8)');
+                      $('.obligatoire-non').css('background-color', 'rgba(255,255,255,0.5)');
+                });
+                 $('.obligatoire-non').click(function() {
+                     $(this).css('background-color', 'rgba(255,255,255,0.8)');
+                      $('.obligatoire-oui').css('background-color', 'rgba(255,255,255,0.5)');
                 });
             });
             </script>
@@ -68,38 +118,43 @@
            
                             <div class="form-group">
                                 <label id="lblDureeLecture" >Durée de la lecture : </label>
+                                
+                                <label class="dureeMinutes">0 minute</label>
+                                <input type="hidden" name="dureeMinutes" id="dureeMinutes" required value=0>
+                                
                                 <div class="dureeLecture">
-                                <div class="radio">
-                                    <label class="duree15" id="duree15"><input  type="radio" name="dureeMinutes" value="15" required ></label>
-                                </div>
-                                   <div class="radio">
-                                    <label class="duree30"><input type="radio" name="dureeMinutes" value="30" required ></label>
-                                </div>
-                                   <div class="radio">
-                                    <label class="duree45"><input type="radio" name="dureeMinutes" value="45" required ></label>
-                                </div>
-                                   <div class="radio">
-                                    <label class="duree60"><input type="radio" name="dureeMinutes" value="60" required ></label>
-                                </div>
+                         
+                                    <label class="duree15" id="duree15"></label>
+                          
+                              
+                                    <label class="duree30"></label>
+                         
+                                    <label class="duree45"></label>
+                         
+                              
+                                    <label class="duree60"></label>
+                         
                              
                             </div>
                         </div>
+                        
+                        
                         
                         <div class="lectureObligatoire">
                             <div class="form-group">
                                 <label for="obligatoire">La lecture était-elle obligatoire? : </label>
 
-                                <div class="radio">
-                                    <label><input type="radio" name="obligatoire" value="1" required >oui</label>
+                                <div class="radio obligatoire-oui">
+                                    <label ><input type="radio" name="obligatoire" value="1" required >oui</label>
                                 </div>
-                                <div class="radio">
-                                    <label><input type="radio" name="obligatoire" value="0" required >non</label>
+                                <div class="radio obligatoire-non">
+                                    <label ><input type="radio" name="obligatoire" value="0" required >non</label>
                                 </div>
                             </div>
                         </div>
 
                         <input type="hidden" name="tache" value="effectuerCreationLecture">
-                        <button type="submit" class="btn btn-success" value="Ajouter" >Ajouter</button>
+                        <label class="lecture-submit"><input type="submit" class="btn btn-success" value="Ajouter" ></input></label>
                         
                     </form>
                 </div>
