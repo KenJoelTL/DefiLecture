@@ -68,7 +68,7 @@
              
             <c:choose>
                 <c:when test="${ !empty sessionScope.connecte }">
-                    <li><a href="*.do?tache=afficherPageProfil">Page de profil</a></li>
+                   <!-- <li><a href="*.do?tache=afficherPageProfil">Page de profil</a></li> -->
                     <c:choose>
                         <c:when test="${ (sessionScope.role eq 2) or (sessionScope.role eq 4) }">
                             <c:choose>

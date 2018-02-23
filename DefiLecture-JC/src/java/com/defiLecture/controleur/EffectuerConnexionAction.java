@@ -12,6 +12,9 @@ import jdbc.Config;
 import jdbc.Connexion;
 import com.defiLecture.modele.Compte;
 import com.defiLecture.modele.CompteDAO;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -43,12 +46,17 @@ public class EffectuerConnexionAction implements Action, RequestAware, SessionAw
                     session = request.getSession(true);
                     session.setAttribute("connecte", compte.getIdCompte());
                     session.setAttribute("role", compte.getRole());
-                    action = "*.do?tache=afficherPageAcceuil";
+                    if(compte.getRole() == 1 || compte.getRole() == 2 )
+                        action = "*.do?tache=afficherPageGestionLecture";
+                    else
+                        action = "*.do?tache=afficherPageTableauScores";
                 }
             }
             catch(ClassNotFoundException e){ 
                 System.out.println("Erreur dans le chargement du pilote :"+ e);
                 action = "*.do?tache=afficherPageConnexion";      
+            } catch (SQLException ex) {
+                Logger.getLogger(EffectuerConnexionAction.class.getName()).log(Level.SEVERE, null, ex);
             }
             finally{
                 Connexion.close();
