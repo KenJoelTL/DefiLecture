@@ -17,7 +17,7 @@ public class ActionBuilder {
             switch (actionName) {
                 
                 case "afficherPageAccueil":
-                    return new AfficherPageAccueilAction();
+                    return new AfficherPageTableauScoresAction();
                 case "afficherPageProfil":
                     return new AfficherPageProfilAction();
       //Inscription
@@ -107,6 +107,6 @@ public class ActionBuilder {
                 
             }
         
-        return new AfficherPageAccueilAction();
+        return new AfficherPageTableauScoresAction();
     }
 }

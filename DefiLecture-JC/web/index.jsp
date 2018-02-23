@@ -34,7 +34,7 @@
          <div class="container-fluid">
           
           <div class="navbar-header">
-            <a class="navbar-brand logo-navigation" href='*.do?tache=""'></a>
+            <a class="navbar-brand logo-navigation" href='*.do?tache=afficherPageTableauScores'></a>
             <!-- Apparait lorsque la fenêtre devient de la taille d'un téléphone mobile -->
             <button id="btn-burger" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#optionsNavigation">
               <span class="icon-bar"></span>
@@ -45,7 +45,6 @@
           <!-- Options contenues dans le bouton à son activation -->   
           <div class="collapse navbar-collapse" id="optionsNavigation">
             <ul class="nav navbar-nav">
-                <li ><a href='*.do?tache=""'>Acceuil</a></li>
            
              <c:if test="${ !empty sessionScope.connecte && sessionScope.role le 2 }">
                 
@@ -161,7 +160,7 @@
                             <jsp:include page="${vue}" ></jsp:include>
                         </c:when>
                         <c:otherwise>
-                            <jsp:include page="/WEB-INF/vue/accueil.jsp" ></jsp:include>
+                            <jsp:include page="/WEB-INF/vue/pageTableauScores.jsp" ></jsp:include>
                         </c:otherwise>
                     </c:choose>
                     
