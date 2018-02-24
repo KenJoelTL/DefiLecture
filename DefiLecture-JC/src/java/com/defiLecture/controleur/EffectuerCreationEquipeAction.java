@@ -34,8 +34,7 @@ public class EffectuerCreationEquipeAction implements Action, RequestAware, Sess
     @Override
     public String execute() {
         if(session.getAttribute("connecte") != null){
-         if((int)session.getAttribute("role")== Compte.CAPITAINE 
-            || (int)session.getAttribute("role")== Compte.ADMINISTRATEUR){
+         if((int)session.getAttribute("role")== Compte.CAPITAINE){
             String nom = request.getParameter("nom");
             if(nom != null){
                 Equipe equipe = new Equipe();
