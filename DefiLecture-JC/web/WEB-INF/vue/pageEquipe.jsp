@@ -48,7 +48,6 @@
         
             <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 page-equipe-col">
  
-            
                 <div class='jumbotron'> 
                     
                     <h1>${equipe.nom}</h1>
@@ -56,7 +55,7 @@
                     <p>Rang #${rang}</p>
              
                 </div>
-                    
+                 
                 <c:if test="${(!empty sessionScope.connecte) and (compteConnecte.idEquipe eq equipe.idEquipe)}">
                     <a id="parametreEquipe" href="depart.do?tache=afficherPageModificationEquipe&idEquipe=${equipe.idEquipe}">
                         Paramètres <span class="glyphicon glyphicon-cog"></span>
@@ -64,6 +63,7 @@
                 </c:if>
                     
                     <h2>Membre de l'équipe</h2>
+
                     <table class='table table-hover'>
                   <thead>
                     <tr>

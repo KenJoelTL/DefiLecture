@@ -55,3 +55,12 @@
         </div> 
     </body>
 </html>
+
+<% /* try{
+        EquipeDAO dao = new EquipeDAO(Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
+        pageContext.setAttribute("listeEquipes", dao.findAll());
+    }
+    catch(SQLException e){
+        response.sendError(response.SC_INTERNAL_SERVER_ERROR,"Erreur interne" + e.getMessage());
+	out.close();
+    } */ %>

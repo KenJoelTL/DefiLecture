@@ -37,7 +37,7 @@ h1, h2, h3, h4, h5, p, a, button, input, textarea, label {
     background: rgba(255,255,255,0.2);
 }
 
-ul.nav.navbar-nav.navbar-right {
+ul.nav.navbar-nav.navbar-right{
   height: 93px;
   display :flex;
 }
@@ -227,9 +227,12 @@ ul.dropdown-menu {
 /*Tableau des scores*/
 
 .scores-row {
-  background-image: url("../images/3_MODELE.png");
+background-image: url("../images/2_ACCUEIL.png");
   min-height: 800px;
   padding: 5%;
+      display: flex;
+    flex-direction: column;
+    align-items: center;
 
 }
 
@@ -264,7 +267,7 @@ ul.dropdown-menu {
   background-repeat: no-repeat;
   background-color: rgba(255,255,255,0.5);
   border-radius: 20px;
-  margin-top: 10%;
+  margin-bottom: 20px;
 }
 
 /*Creation défi*/
@@ -524,7 +527,8 @@ ul.dropdown-menu {
 .creation-lecture-col label {
   padding: 9px 25px 9px 4px;
   font-size: 18px;
-  width: auto;
+  width: 100%;
+  text-align: center;
 }
 
 
@@ -533,6 +537,62 @@ ul.dropdown-menu {
       margin: 2% auto;
     display: flex;
 
+}
+.dureeLecture .duree15 {
+  background-image: url("../images/15.png");
+}
+
+ .dureeLecture .duree30 {
+  background-image: url("../images/30.png");
+}
+
+.dureeLecture .duree45 {
+  background-image: url("../images/45.png");
+}
+
+.dureeLecture .duree60 {
+  background-image: url("../images/60.png");
+}
+
+.dureeLecture .duree15, .dureeLecture .duree30, .dureeLecture .duree45, .dureeLecture .duree60{
+      background-size: cover;
+    width: 110px;
+    height: 110px;
+    cursor: pointer;
+   
+}
+
+.lecture-submit {
+   background-image: url("../images/CONFIRMER.png");
+   background-size: cover;
+        width: 161px!important;
+    height: 167px!important;
+    cursor: pointer;
+}
+
+.dureeLecture {
+      display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    justify-content: center;
+}
+
+#lblDureeLecture{
+  text-align: center;
+}
+
+
+
+.dureeMinutes {
+      font-size: 33px!important;
+    padding-top: 0!important;
+}
+
+.lecture-submit input {
+  display: none;
 }
 
 
@@ -543,15 +603,32 @@ ul.dropdown-menu {
   border-radius: 20px;
 }
 
+.creation-lecture-form .form-group {
+  width: 280px;
+}
+
+.creation-lecture-form form {
+      display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .creation-lecture-col .lectureObligatoire {
       border: 2px solid white;
     border-radius: 20px;
     padding: 1%;
 }
 
-.creation-lecture-col div.lectureObligatoire .radio label {
-    padding-left: 30px!important;
+.lectureObligatoire .form-group .radio {
+      background-color: rgba(255,255,255,0.5);
 }
+
+.lectureObligatoire .form-group input {
+  display: none;
+}
+
+
+
 
 /*Inscription défi*/
 
@@ -637,6 +714,12 @@ ul.dropdown-menu {
 
 .liste-equipes-col h2 {
   text-align: center;
+}
+
+@media (max-width: 530px) {
+.gestion-lecture-col .cacherSurMobile tr td:nth-child(4), .gestion-lecture-col .cacherSurMobile tr th:nth-child(4), .gestion-lecture-col .cacherSurMobile tr td:nth-child(5), .gestion-lecture-col .cacherSurMobile tr th:nth-child(5), .gestion-lecture-col .cacherSurMobile tr td:nth-child(6), .gestion-lecture-col .cacherSurMobile tr th:nth-child(6){
+  display: none;
+}
 }
 
 
