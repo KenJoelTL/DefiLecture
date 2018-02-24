@@ -1,4 +1,3 @@
-
 <%-- 
     Document   : gestionListeComptes
     Created on : 2017-10-22
@@ -32,7 +31,8 @@
             </tr>
           </thead>
           <tbody>
-
+              
+          <c:set var="listeComptes" value="${dao.findAll()}"/>
           <c:forEach items="${listeComptes}" var="compte">
 
             <c:choose>
