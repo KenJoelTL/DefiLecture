@@ -22,6 +22,7 @@ import com.defiLecture.modele.Defi;
 import com.defiLecture.modele.DemandeEquipe;
 import com.defiLecture.modele.DemandeEquipeDAO;
 import com.defiLecture.modele.InscriptionDefi;
+import java.sql.SQLException;
 
 /**
  *
@@ -122,7 +123,10 @@ public class EffectuerInscriptionDefiAction implements Action, RequestAware, Req
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(EffectuerModificationCompteAction.class.getName()).log(Level.SEVERE, null, ex);
                 return "*.do?tache=afficherPageParticipationDefi";
-              }
+            } catch (SQLException ex) {
+                Logger.getLogger(EffectuerInscriptionDefiAction.class.getName()).log(Level.SEVERE, null, ex);
+                            return "*.do?tache=afficherPageParticipationDefi";
+            }
             
         }
         else

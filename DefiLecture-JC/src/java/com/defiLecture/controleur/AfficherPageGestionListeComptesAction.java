@@ -15,6 +15,7 @@ import jdbc.Config;
 import jdbc.Connexion;
 import com.defiLecture.modele.Compte;
 import com.defiLecture.modele.CompteDAO;
+import java.sql.SQLException;
 
 /**
  *
@@ -31,20 +32,20 @@ public class AfficherPageGestionListeComptesAction implements Action, RequestAwa
         if( session.getAttribute("connecte") != null && session.getAttribute("role") != null) 
         try {
             if( ( (int)session.getAttribute("role") == Compte.MODERATEUR) 
-             || ( (int)session.getAttribute("role") == Compte.ADMINISTRATEUR))   
+             || ( (int)session.getAttribute("role") == Compte.ADMINISTRATEUR)) {  
 
-            Class.forName(Config.DRIVER);
-            Connexion.setUrl(Config.URL);
-            Connexion.setUser(Config.DB_USER);
-            Connexion.setPassword(Config.DB_PWD);
-            Connection cnx = Connexion.getInstance();
-            CompteDAO dao = new CompteDAO(cnx);
-            
-            if(dao.read((int)session.getAttribute("connecte"))!=null)
-                request.setAttribute("vue", "pageGestionListeCompte.jsp");
-            
-            return "/index.jsp";
+                Class.forName(Config.DRIVER);
+                Connexion.setUrl(Config.URL);
+                Connexion.setUser(Config.DB_USER);
+                Connexion.setPassword(Config.DB_PWD);
+                Connection cnx = Connexion.getInstance();
+                CompteDAO dao = new CompteDAO(cnx);
 
+                if(dao.read((int)session.getAttribute("connecte"))!=null)
+                    request.setAttribute("vue", "pageGestionListeCompte.jsp");
+
+                return "/index.jsp";
+                }
         } catch (ClassNotFoundException ex) {
             System.out.println("Erreur dans le chargement du pilote");
             Logger.getLogger(AfficherPageGestionListeComptesAction.class.getName()).log(Level.SEVERE, null, ex);
@@ -54,6 +55,8 @@ public class AfficherPageGestionListeComptesAction implements Action, RequestAwa
         catch(NullPointerException ex){
             System.out.println("L'utilisateur n'existe pas");
             return "/index.jsp";
+        } catch (SQLException ex) {
+            Logger.getLogger(AfficherPageGestionListeComptesAction.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         finally{

@@ -19,6 +19,7 @@ import com.defiLecture.modele.DemandeEquipe;
 import com.defiLecture.modele.DemandeEquipeDAO;
 import com.defiLecture.modele.Equipe;
 import com.defiLecture.modele.EquipeDAO;
+import java.sql.SQLException;
 
 /**
  *
@@ -77,9 +78,8 @@ public class EffectuerDemandeAdhesionEquipeAction implements Action, SessionAwar
                     
                     
                 }
-        
                 
-            } catch (ClassNotFoundException ex) {
+            } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(EffectuerDemandeAdhesionEquipeAction.
                         class.getName()).log(Level.SEVERE, null, ex);
             }

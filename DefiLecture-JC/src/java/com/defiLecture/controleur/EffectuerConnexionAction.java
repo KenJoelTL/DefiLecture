@@ -46,10 +46,7 @@ public class EffectuerConnexionAction implements Action, RequestAware, SessionAw
                     session = request.getSession(true);
                     session.setAttribute("connecte", compte.getIdCompte());
                     session.setAttribute("role", compte.getRole());
-                    if(compte.getRole() == 1 || compte.getRole() == 2 )
-                        action = "*.do?tache=afficherPageGestionLecture";
-                    else
-                        action = "*.do?tache=afficherPageTableauScores";
+                    action = "*.do?tache=afficherPageAcceuil";
                 }
             }
             catch(ClassNotFoundException e){ 

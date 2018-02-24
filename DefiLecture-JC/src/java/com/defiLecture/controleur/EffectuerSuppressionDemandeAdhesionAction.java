@@ -16,6 +16,7 @@ import jdbc.Connexion;
 import com.defiLecture.modele.Compte;
 import com.defiLecture.modele.DemandeEquipe;
 import com.defiLecture.modele.DemandeEquipeDAO;
+import java.sql.SQLException;
 
 /**
  *
@@ -58,6 +59,8 @@ public class EffectuerSuppressionDemandeAdhesionAction implements Action, Sessio
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(EffectuerAcceptationDemandeAdhesionAction.class.getName()).log(Level.SEVERE, null, ex);
                 action = "echec.do?tache=afficherPageAcceuil";
+            } catch (SQLException ex) {
+                Logger.getLogger(EffectuerSuppressionDemandeAdhesionAction.class.getName()).log(Level.SEVERE, null, ex);
             }
             finally{Connexion.close();}
         }
