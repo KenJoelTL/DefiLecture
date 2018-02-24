@@ -61,9 +61,9 @@
                                 <div>
                                     <input type="hidden" name="tache" value="effectuerInscriptionDefi">
                                     <input type="hidden" name="idDefi" value="${d.idDefi}">
-                                    <button type="submit" class="btn btn-info" name="annule"  >Annuler</button>
-                                    <button type="submit" class="btn btn-success" name="valider" >Valider ma réponse</button>
                                     
+                                    <button type="submit" class="btn btn-success" name="valider" >Valider ma réponse</button>
+                                    <a href="*.do?tache=afficherPageParticipationDefi" class="retour"><span class="glyphicon glyphicon-circle-arrow-left"></span>retour à la liste des défis</a>
                                      
                                 </div>
 
