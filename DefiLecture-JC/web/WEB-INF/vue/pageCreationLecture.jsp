@@ -155,6 +155,7 @@
 
                         <input type="hidden" name="tache" value="effectuerCreationLecture">
                         <label class="lecture-submit"><input type="submit" class="btn btn-success" value="Ajouter" ></input></label>
+                        <a href="*.do?tache=afficherPageGestionLecture" class="retour"><span class="glyphicon glyphicon-circle-arrow-left"></span>retour à la liste des lectures</a>
                         
                     </form>
                 </div>
