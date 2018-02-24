@@ -56,7 +56,7 @@
              
                 </div>
                  
-                <c:if test="${(!empty sessionScope.connecte) and (compteConnecte.idEquipe eq equipe.idEquipe)}">
+                <c:if test="${(!empty sessionScope.connecte) and (compteConnecte.idEquipe eq equipe.idEquipe) and ((sessionScope.role eq 2) or (sessionScope.role eq 4))}">
                     <a id="parametreEquipe" href="depart.do?tache=afficherPageModificationEquipe&idEquipe=${equipe.idEquipe}">
                         Paramètres <span class="glyphicon glyphicon-cog"></span>
                     </a>
