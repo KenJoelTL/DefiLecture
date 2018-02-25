@@ -70,7 +70,7 @@
                 <c:when test="${ !empty sessionScope.connecte }">
                    <!-- <li><a href="*.do?tache=afficherPageProfil">Page de profil</a></li> -->
                     <c:choose>
-                        <c:when test="${ (sessionScope.role eq 2) or (sessionScope.role eq 4) }">
+                        <c:when test="${ (sessionScope.role eq 2) }">
                             <c:choose>
                                 <c:when test="${compteConnecte.idEquipe gt -1}">
                                     <li><a href="affichagePageEquipe.do?tache=afficherPageEquipe&idEquipe=${compteConnecte.idEquipe}">

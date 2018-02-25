@@ -19,6 +19,7 @@ import com.defiLecture.modele.DemandeEquipe;
 import com.defiLecture.modele.DemandeEquipeDAO;
 import com.defiLecture.modele.Equipe;
 import com.defiLecture.modele.EquipeDAO;
+import java.sql.SQLException;
 
 /**
  *
@@ -33,8 +34,7 @@ public class EffectuerCreationEquipeAction implements Action, RequestAware, Sess
     @Override
     public String execute() {
         if(session.getAttribute("connecte") != null){
-         if((int)session.getAttribute("role")== Compte.CAPITAINE 
-            || (int)session.getAttribute("role")== Compte.ADMINISTRATEUR){
+         if((int)session.getAttribute("role")== Compte.CAPITAINE){
             String nom = request.getParameter("nom");
             if(nom != null){
                 Equipe equipe = new Equipe();
@@ -67,6 +67,10 @@ public class EffectuerCreationEquipeAction implements Action, RequestAware, Sess
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(AfficherPageCreationEquipeAction.class.getName()).log(Level.SEVERE, null, ex);
                     return"creation.do?tache=afficherPageCreationEquipe";
+                } catch (SQLException ex) {
+                    Logger.getLogger(EffectuerCreationEquipeAction.class.getName()).log(Level.SEVERE, null, ex);
+                                        return"creation.do?tache=afficherPageCreationEquipe";
+
                 }            
                 finally{
                     Connexion.close();

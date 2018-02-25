@@ -19,6 +19,7 @@ import com.defiLecture.modele.DemandeEquipe;
 import com.defiLecture.modele.DemandeEquipeDAO;
 import com.defiLecture.modele.Equipe;
 import com.defiLecture.modele.EquipeDAO;
+import java.sql.SQLException;
 
 /**
  *
@@ -82,6 +83,8 @@ public class EffectuerSuspensionMembreEquipeAction implements Action, RequestAwa
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(EffectuerDepartEquipeAction.class.getName())
                         .log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(EffectuerSuspensionMembreEquipeAction.class.getName()).log(Level.SEVERE, null, ex);
             }
             finally{
                 Connexion.close();

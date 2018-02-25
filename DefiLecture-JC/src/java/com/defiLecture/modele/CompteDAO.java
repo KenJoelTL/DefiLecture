@@ -15,7 +15,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+//import com.google.common.hash.Hashing;
 /**
  *
  * @author Joel
@@ -44,7 +44,7 @@ public class CompteDAO extends DAO<Compte>{
               && x.getMotPasse() != null && !"".equals(x.getMotPasse().trim())     
               && x.getNom()      != null && !"".equals(x.getNom().trim())
               && x.getPrenom()   != null && !"".equals(x.getPrenom().trim())){
-
+//Hashing
                 paramStm.setString(1, Util.toUTF8(x.getCourriel()));
                 paramStm.setString(2, Util.toUTF8(x.getMotPasse()));
                 paramStm.setString(3, Util.toUTF8(x.getNom()));
@@ -238,7 +238,6 @@ public class CompteDAO extends DAO<Compte>{
                 paramStm = cnx.prepareStatement(req);
                 paramStm.setInt(1, x.getIdCompte());
 
-
                 int nbLignesAffectees= paramStm.executeUpdate();
                 
                 if (nbLignesAffectees>0) {
@@ -359,10 +358,11 @@ public class CompteDAO extends DAO<Compte>{
                 
                 // On vérifie s'il y a un résultat    
                 if(resultat.next()){
-                    if(!motPasse.equals(resultat.getString("MOT_PASSE")))
+                    //Vérification si la casse est bien respecté 
+                    if(!Util.toUTF8(motPasse).equals(resultat.getString("MOT_PASSE")))
                         return null;
-                    if(!identifiant.equals(resultat.getString("PSEUDONYME")) &&
-                       !identifiant.equals(resultat.getString("COURRIEL")) )
+                    if(!Util.toUTF8(identifiant).equals(resultat.getString("PSEUDONYME")) &&
+                       !Util.toUTF8(identifiant).equals(resultat.getString("COURRIEL")) )
                         return null;
                     
                     Compte c = new Compte();

@@ -17,6 +17,9 @@ import com.defiLecture.modele.DemandeEquipe;
 import com.defiLecture.modele.DemandeEquipeDAO;
 import com.defiLecture.modele.Lecture;
 import com.defiLecture.modele.LectureDAO;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -97,6 +100,8 @@ public class EffectuerCreationLectureAction implements Action, RequestAware, Ses
                 System.out.println("Erreur dans le chargement du pilote :"+ e);
                 //request.setAttribute("vue", "lecture.jsp");
                 return "*.do?tache=afficherPageGestionLecture";
+            } catch (SQLException ex) {
+                Logger.getLogger(EffectuerCreationLectureAction.class.getName()).log(Level.SEVERE, null, ex);
             }
             
 

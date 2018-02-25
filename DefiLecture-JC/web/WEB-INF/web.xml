@@ -5,7 +5,7 @@
         <param-value>com.mysql.jdbc.Driver</param-value>
     </context-param>
     <context-param>
-        <param-name>urlBd</param-name>
+        <param-name>urlDb</param-name>
         <param-value>jdbc:mysql://localhost/defilecture?useUnicode=true&amp;characterEncoding=UTF-8</param-value>
     </context-param>
     <context-param>
@@ -17,15 +17,15 @@
         <param-value>admin</param-value>
     </context-param>
     <context-param>
-        <param-name>userBD</param-name>
+        <param-name>userDB</param-name>
         <param-value>root</param-value>
     </context-param>
     <context-param>
-        <param-name>passwordBD</param-name>
+        <param-name>passwordDB</param-name>
         <param-value>root</param-value>
     </context-param>
     <context-param>
-        <description>Nombre de maximum de participant par équipe</description>
+        <description>Nombre maximum de participants par équipe</description>
         <param-name>nbParticipantMax</param-name>
         <param-value>3</param-value>
     </context-param>
@@ -44,7 +44,7 @@
     </servlet-mapping>
     <session-config>
         <session-timeout>
-            30
+            -1
         </session-timeout>
     </session-config>
 </web-app>

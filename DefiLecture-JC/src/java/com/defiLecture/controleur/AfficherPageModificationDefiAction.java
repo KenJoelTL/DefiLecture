@@ -19,6 +19,7 @@ import com.defiLecture.modele.Defi;
 import com.defiLecture.modele.DefiDAO;
 import com.defiLecture.modele.Lecture;
 import com.defiLecture.modele.LectureDAO;
+import java.sql.SQLException;
 
 
 /**
@@ -49,6 +50,8 @@ public class AfficherPageModificationDefiAction implements Action, RequestAware,
                 }
             
         } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AfficherPageModificationDefiAction.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
             Logger.getLogger(AfficherPageModificationDefiAction.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{

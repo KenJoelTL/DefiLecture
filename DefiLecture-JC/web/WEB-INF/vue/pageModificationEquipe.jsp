@@ -96,7 +96,7 @@
                                     </c:choose>
                                 </td>
                                 </c:if>
-                                <c:if test="${permissionAccordee or (sessionScope.connecte eq membre.idCompte)}">
+                                <c:if test="${permissionAccordee}">
                                 <td>
                                     <a href="depart.do?tache=effectuerDepartEquipe&idCompte=${membre.idCompte}&idEquipe=${equipe.idEquipe}">
                                         Retirer de l'équipe

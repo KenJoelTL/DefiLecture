@@ -17,6 +17,7 @@ import com.defiLecture.modele.Compte;
 import com.defiLecture.modele.CompteDAO;
 import com.defiLecture.modele.Equipe;
 import com.defiLecture.modele.EquipeDAO;
+import java.sql.SQLException;
 
 /**
  *
@@ -52,6 +53,8 @@ public class EffectuerModificationEquipeAction implements Action, RequestAware, 
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(EffectuerModificationEquipeAction.class.getName()).log(Level.SEVERE, null, ex);
                     action = "*.do?tache=afficherPageModificationEquipe&idEquipe="+request.getParameter("idEquipe");
+                } catch (SQLException ex) {
+                    Logger.getLogger(EffectuerModificationEquipeAction.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
           }

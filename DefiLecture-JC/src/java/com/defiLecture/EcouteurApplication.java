@@ -22,10 +22,10 @@ public class EcouteurApplication implements ServletContextListener {
         System.out.println("Application démarrée");
         ServletContext application = sce.getServletContext();
         
-        Config.DB_USER = application.getInitParameter("userBD");
-        Config.DB_PWD = application.getInitParameter("passwordBD");
+        Config.DB_USER = application.getInitParameter("userDB");
+        Config.DB_PWD = application.getInitParameter("passwordDB");
         Config.DRIVER = application.getInitParameter("piloteJDBC");
-        Config.URL = application.getInitParameter("urlBd");
+        Config.URL = application.getInitParameter("urlDb");
         
         Equipe.NB_MAX_MEMBRES =              
                 Integer.parseInt(application.getInitParameter("nbParticipantMax"));        
