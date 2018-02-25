@@ -32,7 +32,8 @@ public class EffectuerSuppressionDemandeAdhesionAction implements Action, Sessio
         String action = "*.do?tache=afficherPageAccueil";
         if(session.getAttribute("connecte") == null
             || session.getAttribute("role") == null
-            || request.getParameter("idDemandeEquipe") == null){
+            || request.getParameter("idDemandeEquipe") == null
+            ){
             action = ".do?tache=afficherPageAccueil";}      
         else{
             try {
@@ -48,9 +49,11 @@ public class EffectuerSuppressionDemandeAdhesionAction implements Action, Sessio
                     || ((int)session.getAttribute("role") == Compte.ADMINISTRATEUR)){
                         if(!deDao.delete(demandeEq))
                             action = "*.do?tache=afficherPageAccueil";
-                        else
-                            action = "refus.do?tache=afficherPageListeDemandesEquipe&ordre=recu";
-                    
+                        else                              
+                            if(request.getParameter("ordre") != null && "recu".equals(request.getParameter("ordre")) && (int)session.getAttribute("role") == Compte.CAPITAINE)
+                                action = "refus.do?tache=afficherPageListeDemandesEquipe&ordre=recu";
+                            else
+                                action = "refus.do?tache=afficherPageListeDemandesEquipe&ordre=envoyee";
                     }  
                        
                 }
