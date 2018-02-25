@@ -235,8 +235,9 @@ public class CompteDAO extends DAO<Compte>{
         PreparedStatement paramStm = null;
 
         try {
-                paramStm.setInt(1, x.getIdCompte());
                 paramStm = cnx.prepareStatement(req);
+                paramStm.setInt(1, x.getIdCompte());
+
 
                 int nbLignesAffectees= paramStm.executeUpdate();
                 

@@ -175,20 +175,20 @@ public class LectureDAO extends DAO<Lecture> {
     @Override
     public boolean delete(Lecture x) {
         String req = "DELETE FROM lecture WHERE `ID_LECTURE` = ?";
-        
+
         PreparedStatement paramStm = null;
 
         try {
+            paramStm = cnx.prepareStatement(req);
+
                 paramStm.setInt(1, x.getIdLecture());
-                paramStm = cnx.prepareStatement(req);
 
                 int nbLignesAffectees= paramStm.executeUpdate();
-                
+
                 if (nbLignesAffectees>0) {
                     paramStm.close();
                     return true;
                 }
-                
             return false;
         }
         catch (SQLException exp) {
