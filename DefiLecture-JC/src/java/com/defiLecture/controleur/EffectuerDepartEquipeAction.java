@@ -19,6 +19,7 @@ import com.defiLecture.modele.DemandeEquipe;
 import com.defiLecture.modele.EquipeDAO;
 import com.defiLecture.modele.DemandeEquipeDAO;
 import com.defiLecture.modele.Equipe;
+import java.sql.SQLException;
 
 /**
  *
@@ -77,7 +78,7 @@ public class EffectuerDepartEquipeAction implements Action, RequestAware, Requir
                     }
                 }
                 
-            } catch (ClassNotFoundException ex) {
+            } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(EffectuerDepartEquipeAction.class.getName())
                         .log(Level.SEVERE, null, ex);
             }

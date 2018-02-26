@@ -16,6 +16,7 @@ import jdbc.Connexion;
 import com.defiLecture.modele.Compte;
 import com.defiLecture.modele.Lecture;
 import com.defiLecture.modele.LectureDAO;
+import java.sql.SQLException;
 
 /**
  *
@@ -84,7 +85,7 @@ public class EffectuerModificationLectureAction implements Action, RequestAware,
         
                     }
                 }            
-            } catch (ClassNotFoundException ex) {
+            } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(EffectuerModificationLectureAction.class.getName()).log(Level.SEVERE, null, ex);
                 return "*.do?tache=afficherPageGestionLecture";
             }

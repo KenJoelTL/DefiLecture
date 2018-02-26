@@ -14,6 +14,9 @@ import jdbc.Connexion;
 import com.defiLecture.modele.Compte;
 import com.defiLecture.modele.Defi;
 import com.defiLecture.modele.DefiDAO;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -88,6 +91,10 @@ public class EffectuerCreationDefiAction implements Action, RequestAware, Sessio
                 System.out.println("Erreur dans le chargement du pilote :"+ e);
 
                 return "*.do?tache=afficherPageCreationDefi";
+            } catch (SQLException ex) {
+                Logger.getLogger(EffectuerCreationDefiAction.class.getName()).log(Level.SEVERE, null, ex);
+                                return "*.do?tache=afficherPageCreationDefi";
+
             }
             finally{
                Connexion.close();

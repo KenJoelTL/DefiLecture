@@ -39,73 +39,79 @@
     
     </head>
     <body>
-        <h1>Configuration d'une &eacute;quipe</h1>
-        <form action="modificationEquipe.do" method="post">
-        <div class="form-group">
-        <label for="nom">Nom de l'&eacute;quipe* :</label>
-        <input type="text" class="form-control" id="nom" value="${equipe.nom}" 
-               placeholder="Entrez le nouveau nom de votre &eacute;quipe" name="nom" ${permissionAccordee ? 'required': 'disabled'}/>
+        <div class='row'> 
+        
+            <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 page-equipe-col configuration-equipe">
+                <h1>Configuration de l'&eacute;quipe</h1>
+                <form action="modificationEquipe.do" method="post">
+                <div class="form-group">
+                <label for="nom">Nom de l'&eacute;quipe* :</label>
+                <input type="text" class="form-control" id="nom" value="${equipe.nom}" 
+                       placeholder="Entrez le nouveau nom de votre &eacute;quipe" name="nom" ${permissionAccordee ? 'required': 'disabled'}/>
+                </div>
+                <c:if test="${permissionAccordee}">
+                    <input type="hidden" name="tache" value="effectuerModificationEquipe">
+                    <input type="hidden" name="idEquipe" value="${equipe.idEquipe}">
+                    <button type="submit" class="btn btn-success" name='modifier' value="Enregistrer">Enregistrer</button>
+                     <button type="submit" class="btn btn-info" name='annuler' value="Annuler">Annuler</button>
+                    
+          
+                </c:if> 
+                </form>
+        
+                <table class='table table-hover cacherSurMobile' >
+                    <thead>
+                        <tr>
+                            <th>Prénom</th>
+                            <th>Nom</th>
+                            <th>Contributions</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach items="${listeMembres}" var="membre">      
+                        <tr>
+                            <td>${membre.prenom}</td>
+                            <td>${membre.nom}</td>
+                            <td>
+                                <c:set var="contribution" value="${demEquipeDao.findByIdCompteEquipe(membre.idCompte,equipe.idEquipe)}"></c:set>
+                                <div class="progress">
+                                  <div class="progress-bar" role="progressbar" aria-valuenow="${contribution.point}"
+                                    aria-valuemin="0" aria-valuemax="100" style="width:${(contribution.point/equipe.point)*100}%">
+                                  </div>
+                                </div>
+                            </td> 
+                            <td>
+                                <c:if test="${permissionAccordee}"> 
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${contribution.statutDemande eq 0}">                             
+                                            <a href="*.do?tache=effectuerReaffectationMembreEquipe&idCompte=${membre.idCompte}&idEquipe=${equipe.idEquipe}">R&eacute;afecter &agrave; l'&eacute;quipe</a>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <a href="*.do?tache=effectuerSuspensionMembreEquipe&idCompte=${membre.idCompte}&idEquipe=${equipe.idEquipe}">Suspendre de l'&eacute;quipe</a>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </td>
+                                </c:if>
+                                <c:if test="${permissionAccordee}">
+                                <td>
+                                    <a href="depart.do?tache=effectuerDepartEquipe&idCompte=${membre.idCompte}&idEquipe=${equipe.idEquipe}">
+                                        Retirer de l'équipe
+                                    </a>
+                                </td>
+                                </c:if>
+                            </td>
+                        </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+        
+        
+        
+            </div>
         </div>
-        <c:if test="${permissionAccordee}">
-            <input type="hidden" name="tache" value="effectuerModificationEquipe">
-            <input type="hidden" name="idEquipe" value="${equipe.idEquipe}">
-            <input type="submit"name='modifier' value="Enregistrer" />
-            <input type="submit" value="annuler" />
-        </c:if> 
-        </form>
-        
-        <table class='table table-hover' style="background-color: rgb(255, 255, 255); border:1px lightgray solid">
-            <thead>
-                <tr>
-                    <th>Prénom</th>
-                    <th>Nom</th>
-                    <th>Contributions</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <c:forEach items="${listeMembres}" var="membre">      
-                <tr>
-                    <td>${membre.prenom}</td>
-                    <td>${membre.nom}</td>
-                    <td>
-                        <c:set var="contribution" value="${demEquipeDao.findByIdCompteEquipe(membre.idCompte,equipe.idEquipe)}"></c:set>
-                        <div class="progress">
-                          <div class="progress-bar" role="progressbar" aria-valuenow="${contribution.point}"
-                            aria-valuemin="0" aria-valuemax="100" style="width:${(contribution.point/equipe.point)*100}%">
-                          </div>
-                        </div>
-                    </td> 
-                    <td>
-                        <c:if test="${permissionAccordee}"> 
-                        <td>
-                            <c:choose>
-                                <c:when test="${contribution.statutDemande eq 0}">                             
-                                    <a href="*.do?tache=effectuerReaffectationMembreEquipe&idCompte=${membre.idCompte}&idEquipe=${equipe.idEquipe}">R&eacute;afecter &agrave; l'&eacute;quipe</a>
-                                </c:when>
-                                <c:otherwise>
-                                    <a href="*.do?tache=effectuerSuspensionMembreEquipe&idCompte=${membre.idCompte}&idEquipe=${equipe.idEquipe}">Suspendre de l'&eacute;quipe</a>
-                                </c:otherwise>
-                            </c:choose>
-                        </td>
-                        </c:if>
-                        <c:if test="${permissionAccordee or (sessionScope.connecte eq membre.idCompte)}">
-                        <td>
-                            <a href="depart.do?tache=effectuerDepartEquipe&idCompte=${membre.idCompte}&idEquipe=${equipe.idEquipe}">
-                                Retirer de l'équipe
-                            </a>
-                        </td>
-                        </c:if>
-                    </td>
-                </tr>
-                </c:forEach>
-            </tbody>
-        </table>
-        
-        
-        
-        
     </body>
 </html>

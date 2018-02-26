@@ -16,6 +16,7 @@ import jdbc.Connexion;
 import com.defiLecture.modele.Compte;
 import com.defiLecture.modele.Lecture;
 import com.defiLecture.modele.LectureDAO;
+import java.sql.SQLException;
 
 /**
  *
@@ -44,6 +45,8 @@ public class AfficherPageModificationLectureAction implements Action, RequestAwa
                 }
             
         } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AfficherPageModificationLectureAction.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
             Logger.getLogger(AfficherPageModificationLectureAction.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{

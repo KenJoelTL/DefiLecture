@@ -14,6 +14,7 @@ import jdbc.Config;
 import jdbc.Connexion;
 import com.defiLecture.modele.Compte;
 import com.defiLecture.modele.CompteDAO;
+import java.sql.SQLException;
 
 /**
  *
@@ -45,6 +46,8 @@ public class AfficherPageCreationEquipeAction implements Action,RequestAware, Se
                 Logger.getLogger(AfficherPageCreationEquipeAction
                                    .class.getName()).log(Level.SEVERE, null, ex);
                  request.setAttribute("vue","accueil.jsp");
+            } catch (SQLException ex) {
+                Logger.getLogger(AfficherPageCreationEquipeAction.class.getName()).log(Level.SEVERE, null, ex);
             }
             finally{
                 Connexion.close();

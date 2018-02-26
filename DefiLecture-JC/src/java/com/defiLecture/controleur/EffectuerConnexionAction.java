@@ -12,6 +12,9 @@ import jdbc.Config;
 import jdbc.Connexion;
 import com.defiLecture.modele.Compte;
 import com.defiLecture.modele.CompteDAO;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -49,6 +52,8 @@ public class EffectuerConnexionAction implements Action, RequestAware, SessionAw
             catch(ClassNotFoundException e){ 
                 System.out.println("Erreur dans le chargement du pilote :"+ e);
                 action = "*.do?tache=afficherPageConnexion";      
+            } catch (SQLException ex) {
+                Logger.getLogger(EffectuerConnexionAction.class.getName()).log(Level.SEVERE, null, ex);
             }
             finally{
                 Connexion.close();

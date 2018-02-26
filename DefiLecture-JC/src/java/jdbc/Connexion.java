@@ -15,40 +15,32 @@ import java.sql.SQLException;
  */
 public class Connexion {
 	private static Connection connection;
-        private Connection cnx;
-	private static String url;
-	private static String user;		
-        private static String password;
+	private static String url = Config.URL;
+	private static String user = Config.DB_USER;		
+        private static String password = Config.DB_PWD;
 
-        public Connexion(){}
-        
-	public static Connection getInstance() throws SQLException {
-            if (connection == null)
-                if (user.equals(""))
-                    connection = DriverManager.getConnection(url);
-                else
-                    connection = DriverManager.getConnection(url,user,password);
-
-            return connection;
-	}
-        
-        public Connection getCnx() throws SQLException{
-            cnx = Connexion.getInstance();
-            return cnx;
+        public Connexion(){
         }
         
-        public Connection getConnection(){
-            if (connection == null)
-                try {
+	public static Connection getInstance() throws SQLException {
+            try{
+                if (connection == null){
                     if (user.equals(""))
                         connection = DriverManager.getConnection(url);
                     else
                         connection = DriverManager.getConnection(url,user,password);
-
-                } catch (SQLException e) {
-                        e.printStackTrace();
                 }
+            }
+            catch(SQLException e){
+                System.out.println("erreur connexion");
+                System.out.println(e);
+                connection = null;
+            }
             return connection;
+	}
+        
+        public Connection getConnection() throws SQLException, ClassNotFoundException{
+            return Connexion.startConnection(user, password, url, Config.DRIVER);
         }
         
 	public static void reinit(){

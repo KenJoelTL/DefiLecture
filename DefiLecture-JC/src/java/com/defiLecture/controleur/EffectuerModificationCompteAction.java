@@ -14,6 +14,7 @@ import jdbc.Config;
 import jdbc.Connexion;
 import com.defiLecture.modele.Compte;
 import com.defiLecture.modele.CompteDAO;
+import java.sql.SQLException;
 
 /**
  *
@@ -112,7 +113,10 @@ public class EffectuerModificationCompteAction implements Action, RequestAware, 
                 Logger.getLogger(EffectuerModificationCompteAction.class.getName()).log(Level.SEVERE, null, ex);
                 request.setAttribute("message", "Problèmes dans l'enregistrement des informations"); //mettre un message d'erreur
                 return"*.do?tache=afficherPageGestionConfigurationCompte&id="+request.getParameter("idCompte");
-            }
+            } catch (SQLException ex) {
+                Logger.getLogger(EffectuerModificationCompteAction.class.getName()).log(Level.SEVERE, null, ex);
+                                   return"*.do?tache=afficherPageGestionListeCompte";
+             }
         }
         else
             return"*.do?tache=afficherPageGestionListeCompte";
