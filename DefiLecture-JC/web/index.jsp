@@ -87,15 +87,17 @@
                         </c:when>
                         <c:otherwise>
                             <c:choose>
-                                <c:when test="${compteConnecte.idEquipe gt -1}">
-                                    <li><a href="affichagePageEquipe.do?tache=afficherPageEquipe&idEquipe=${compteConnecte.idEquipe}">
-                                            Page d'&eacutequipe</a>
-                                    </li>                        
+                                <c:when test="${sessionScope.role lt 3}">
+                                    <c:when test="${compteConnecte.idEquipe gt -1}">
+                                        <li><a href="affichagePageEquipe.do?tache=afficherPageEquipe&idEquipe=${compteConnecte.idEquipe}">
+                                                Page d'&eacute;quipe</a>
+                                        </li>                        
+                                    </c:when>
+                                    <c:otherwise>
+                                        <li><a href="joindreEquipe.do?tache=afficherPageListeEquipes">Joindre une &eacute;quipe</a></li>                                              
+                                        <li><a href="joindreEquipe.do?tache=afficherPageListeDemandesEquipe&ordre=envoyee">Acc&eacute;der aux demandes</a></li>                                              
+                                    </c:otherwise>
                                 </c:when>
-                                <c:otherwise>
-                                    <li><a href="joindreEquipe.do?tache=afficherPageListeEquipes">Joindre une &eacute;quipe</a></li>                                              
-                                    <li><a href="joindreEquipe.do?tache=afficherPageListeDemandesEquipe&ordre=envoyee">Acc&eacute;der aux demandes</a></li>                                              
-                                </c:otherwise>
                             </c:choose>
                         </c:otherwise>
                     
