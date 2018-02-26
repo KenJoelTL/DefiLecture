@@ -63,7 +63,7 @@
                     <td>Demande envoy&eacute;e par ${auteur.prenom} ${auteur.nom}</td>
                     <td>
                         <a href="accepter.do?tache=effectuerAcceptationDemandeAdhesion&idDemandeEquipe=${demande.idDemandeEquipe}">Accepter</a>
-                        <a href="refuser.do?tache=effectuerSuppressionDemandeAdhesion&idDemandeEquipe=${demande.idDemandeEquipe}">Refuser</a>
+                        <a href="refuser.do?tache=effectuerSuppressionDemandeAdhesion&idDemandeEquipe=${demande.idDemandeEquipe}&ordre=recu">Refuser</a>
                     </td>
                  </tr>
                </c:forEach>
