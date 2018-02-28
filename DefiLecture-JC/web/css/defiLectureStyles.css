@@ -545,6 +545,10 @@ background-image: url("../images/2_ACCUEIL.png");
 
 /*Creation lecture*/
 
+.remiseAzero {
+  cursor: pointer;
+}
+
 .creation-lecture-col {
   background-image: url("../images/1_CONNEXION.png");
   padding-bottom: 20px;
