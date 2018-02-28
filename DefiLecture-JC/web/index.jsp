@@ -61,8 +61,8 @@
             </c:if>
            
                 <li><a href="scoreboard.do?tache=afficherPageTableauScores">
-                    <span class="glyphicon glyphicon-stats"></span> 
-                    Tableau des scores
+                    <span class="glyphicon glyphicon-usd"></span> 
+                    Trésorerie
                     </a>
                 </li>
              
