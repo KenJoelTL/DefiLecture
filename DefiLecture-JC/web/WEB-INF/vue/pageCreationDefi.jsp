@@ -67,7 +67,7 @@
             
             
             <div class="form-group">
-                <label for="point">Nombre de minutes pour ce défi* : </label>
+                <label for="point">Quantité de doublons pour ce défi* : </label>
                 <input class="form-control" type="text" name="valeurMinute" required />
             </div>
             
