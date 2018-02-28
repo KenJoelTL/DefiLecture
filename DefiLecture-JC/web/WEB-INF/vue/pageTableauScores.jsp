@@ -25,8 +25,9 @@
         <title>JSP Page</title>
     </head>
     <body>
-
+ 
         <div class="row scores-row">
+           <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 accueil-col"></div>
             <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 scores-col">
                 <h2>Tableau des scores</h2>  
 
