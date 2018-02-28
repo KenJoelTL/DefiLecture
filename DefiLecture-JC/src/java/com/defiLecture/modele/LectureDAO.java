@@ -174,6 +174,7 @@ public class LectureDAO extends DAO<Lecture> {
 
     @Override
     public boolean delete(Lecture x) {
+        System.out.println("entrer dans DAOLecture");
         String req = "DELETE FROM lecture WHERE `ID_LECTURE` = ?";
 
         PreparedStatement paramStm = null;
