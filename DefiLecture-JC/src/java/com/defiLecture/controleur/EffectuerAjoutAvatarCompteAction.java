@@ -32,7 +32,7 @@ public class EffectuerAjoutAvatarCompteAction implements Action, RequestAware, S
     
     @Override
     public String execute() {
-        String action = "redirection.do?tache=afficherPageAcceuil";
+        String action = "redirection.do?tache=afficherTableauScores";
         if( session.getAttribute("connecte") != null) {
             action = "*.do?tache=afficherPageModificationCompte";
             OutputStream out = null;
