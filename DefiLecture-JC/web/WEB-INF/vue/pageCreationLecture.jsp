@@ -77,6 +77,15 @@
                     
                 });
                 
+                
+                 $('.remiseAzero').mousedown(function() {
+
+                    minutesTotal = 0;
+                    $('#dureeMinutes').val(minutesTotal);
+                    $('.dureeMinutes').html(minutesTotal+ " minute");
+
+                });
+                
                  $('.lecture-submit').mousedown(function() {
                      $(this).css('border', '3px dotted goldenrod');
                     $(this).css('border-radius', '37px');
@@ -138,7 +147,7 @@
                             </div>
                         </div>
                         
-                        
+                        <a class="retour remiseAzero"><span class="glyphicon glyphicon-repeat"></span>Remise à zéro </a>
                         
                         <div class="lectureObligatoire">
                             <div class="form-group">

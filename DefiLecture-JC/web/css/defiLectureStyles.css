@@ -5,6 +5,12 @@ h1, h2, h3, h4, h5, p, a, button, input, textarea, label {
   font-family: 'Goudy Bookletter 1911', serif;
 }
 
+td, td a {
+  font-size: 14px!important;
+  color: black;
+}
+
+
 
 .retour {
   display: flex;
@@ -26,6 +32,10 @@ h1, h2, h3, h4, h5, p, a, button, input, textarea, label {
 }
 
 /*Header*/
+
+span.glyphicon.glyphicon-log-in {
+  margin-right: 10px!important;
+}
 
 .logo-navigation {
 	width: 168px;
@@ -637,6 +647,7 @@ background-image: url("../images/2_ACCUEIL.png");
       border: 2px solid white;
     border-radius: 20px;
     padding: 1%;
+    margin-top: 20px;
 }
 
 .lectureObligatoire .form-group .radio {
