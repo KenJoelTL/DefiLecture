@@ -637,6 +637,7 @@ background-image: url("../images/2_ACCUEIL.png");
       border: 2px solid white;
     border-radius: 20px;
     padding: 1%;
+    margin-top: 20px;
 }
 
 .lectureObligatoire .form-group .radio {
