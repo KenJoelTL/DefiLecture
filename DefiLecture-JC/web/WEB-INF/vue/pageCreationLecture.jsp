@@ -13,7 +13,12 @@
         <script type="text/javascript">
             $(document).ready(function(){
                 
-                $('.duree15').mousedown(function() {
+                var mobile   = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent); 
+                var start = mobile ? "touchstart" : "mousedown";
+                var end =  mobile ? "touchend" : "mouseup";
+
+                         
+                $('.duree15').bind(start,function() {
                     $(this).css('border', '3px dotted goldenrod');
                     $(this).css('border-radius', '37px');
                     minutesTotal = parseInt($('.dureeMinutes').text())+15;
@@ -22,63 +27,56 @@
   
                 });
                 
-                 $('.duree15').mouseup(function() {
+                 $('.duree15').on(end+" mouseleave mouseout",function() {
                     $(this).css('border', 'transparent');
 
-                    
                 });
-                $('.duree30').mousedown(function() {
+                                
+                
+                $('.duree30').bind(start, function() {
                      $(this).css('border', '3px dotted goldenrod');
                     $(this).css('border-radius', '37px');
                     minutesTotal = parseInt($('.dureeMinutes').text())+30;
                     $('#dureeMinutes').val(minutesTotal);
                     $('.dureeMinutes').html(minutesTotal+ " minutes");
-               
-
-
 
                 });
                 
-                $('.duree30').mouseup(function() {
+                $('.duree30').on(end+" mouseleave mouseout",function() {
                     $(this).css('border', 'transparent');
 
                     
                 });
-                $('.duree45').mousedown(function() {
+                $('.duree45').bind(start, function() {
                     $(this).css('border', '3px dotted goldenrod');
                     $(this).css('border-radius', '37px');
                     minutesTotal = parseInt($('.dureeMinutes').text())+45;
                     $('#dureeMinutes').val(minutesTotal);
                     $('.dureeMinutes').html(minutesTotal+ " minutes");
-                 
-
-
 
                 });
-                $('.duree45').mouseup(function() {
+                
+                $('.duree45').on(end+" mouseleave mouseout",function() {
                     $(this).css('border', 'transparent');
 
                     
                 });
-                $('.duree60').mousedown(function() {
+                $('.duree60').bind(start,function() {
                      $(this).css('border', '3px dotted goldenrod');
                     $(this).css('border-radius', '37px');
                     minutesTotal = parseInt($('.dureeMinutes').text())+60;
                     $('#dureeMinutes').val(minutesTotal);
                     $('.dureeMinutes').html(minutesTotal+ " minutes");
-            
-
-
 
                 });
-                $('.duree60').mouseup(function() {
+                $('.duree60').on(end+" mouseleave mouseout", function() {
                     $(this).css('border', 'transparent');
 
                     
                 });
                 
                 
-                 $('.remiseAzero').mousedown(function() {
+                 $('.remiseAzero').on("mousedown", function() {
 
                     minutesTotal = 0;
                     $('#dureeMinutes').val(minutesTotal);
@@ -86,13 +84,13 @@
 
                 });
                 
-                 $('.lecture-submit').mousedown(function() {
+                 $('.lecture-submit').bind(start, function() {
                      $(this).css('border', '3px dotted goldenrod');
                     $(this).css('border-radius', '37px');
 
 
                 });
-                $('.lecture-submit').mouseup(function() {
+                $('.lecture-submit').on(end+" mouseleave mouseout", function() {
                     $(this).css('border', 'transparent');
 
                     
