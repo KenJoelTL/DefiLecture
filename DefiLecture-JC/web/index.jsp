@@ -52,7 +52,7 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Lectures
                     <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                      <li><a href="*.do?tache=afficherPageCreationLecture">Cr&eacute;er une lecture</a></li>
+                      <li><a href="*.do?tache=afficherPageCreationLecture">Ajouter une lecture</a></li>
                       <li><a href="*.do?tache=afficherPageGestionLecture">Voir mes lectures</a></li>
                     </ul>
                 </li>

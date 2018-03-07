@@ -35,7 +35,7 @@
                       <thead>
                         <tr>
                           <th>Rang</th>
-                          <th>Nom</th>
+                          <th>Nom de l'équipage</th>
                           <th>Doublons</th>
                         </tr>
                       </thead>

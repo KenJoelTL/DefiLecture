@@ -113,7 +113,7 @@
         
             <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 creation-lecture-col">
                 <div class="creation-lecture-form">
-                    <h1>Inscription d'une lecture</h1>
+                    <h1>Ajout d'une lecture</h1>
                     <form action="*.do" method="post">
                          
                         <div class="form-group">
@@ -124,7 +124,8 @@
                         
            
                             <div class="form-group">
-                                <label id="lblDureeLecture" >Durée de la lecture : </label>
+                                <label id="lblDureeLecture" >Durée de la lecture : <br> (cliquez sur les doublons pour afficher les minutes de lecture) </label>
+             
                                 
                                 <label class="dureeMinutes">0 minute</label>
                                 <input type="hidden" name="dureeMinutes" id="dureeMinutes" required value=0>
@@ -149,7 +150,7 @@
                         
                         <div class="lectureObligatoire">
                             <div class="form-group">
-                                <label for="obligatoire">La lecture était-elle obligatoire? : </label>
+                                <label for="obligatoire">La lecture était-elle obligatoire? <br>  (Lecture imposée dans le cadre d’un cours.) </label>
 
                                 <div class="radio obligatoire-oui">
                                     <label ><input type="radio" name="obligatoire" value="1" required >oui</label>
