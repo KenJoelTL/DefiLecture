@@ -80,8 +80,8 @@
                   <tr>
                     <th>Titre</th>
                     <th>Valeur</th>
-                    <th >Date debut</th>
-                    <th  >Date fin</th>
+                    <th >Début</th>
+                    <th  >Fin</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -110,11 +110,11 @@
 
                         <c:choose>
                                     <c:when test="${listeReussi.contains(d.idDefi.toString())}">
-                                    <td class="bg-success">REUSSI</td>
+                                        <td ><span class="glyphicon glyphicon-ok"></span></td>
 
                                     </c:when>
                                     <c:when test="${listeEchoue.contains(d.idDefi.toString())}">
-                                       <td class="bg-danger ">ECHOUE</td>
+                                        <td ><span class="glyphicon glyphicon-remove"></span></td>
                                     </c:when>
                                        <c:otherwise>
                                            <c:choose>
@@ -136,7 +136,7 @@
 
                        <tr>
                         <td>${d.nom}</td>
-                        <td>+ ${d.valeurMinute} minutes</td>
+                        <td>+ ${d.valeurMinute} doublons</td>
                         <c:catch>
                           <fmt:parseDate pattern="yyyy-MM-dd' 'HH:mm:ss.SS" value="${d.dateDebut}" var="dateDebutPARSE" />
                         </c:catch>

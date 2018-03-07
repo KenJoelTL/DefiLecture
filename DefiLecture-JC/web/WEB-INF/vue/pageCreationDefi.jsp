@@ -13,7 +13,7 @@
         
         <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 creation-defi-col">
             <div class="creation-defi-form">
-        <h1>Creation d'un defi</h1>
+        <h1>Création d'un defi</h1>
         <form action="*.do" method="post">
             <div class="form-group">
                 <label for="nom">Nom du défi* : </label>
@@ -32,7 +32,7 @@
                 <input class="form-control" type="datetime-local" name="dateFin" required />
             </div>
             <div class="form-group">
-                <label for="question">Question à répondre pour réussir ce défi* : </label>
+                <label for="question">Question à laquelle les participants devront répondre* : </label>
                 <input class="form-control" type="text" name="question" required />
             </div>
             
@@ -67,7 +67,7 @@
             
             
             <div class="form-group">
-                <label for="point">Quantité de doublons pour ce défi* : </label>
+                <label for="point">de doublons accordé pour la réussite de ce défi* : </label>
                 <input class="form-control" type="text" name="valeurMinute" required />
             </div>
             
