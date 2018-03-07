@@ -67,7 +67,7 @@
             
             
             <div class="form-group">
-                <label for="point">de doublons accordé pour la réussite de ce défi* : </label>
+                <label for="point">Nombre de doublons accordé pour la réussite de ce défi* : </label>
                 <input class="form-control" type="text" name="valeurMinute" required />
             </div>
             
