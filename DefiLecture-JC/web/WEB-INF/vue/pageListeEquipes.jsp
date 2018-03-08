@@ -36,7 +36,7 @@
               <thead>
                 <tr>
                   <th>Nom</th>
-                  <th>Points</th>
+                  <th>Doublons</th>
                   <th>État</th>
                 </tr>
               </thead>

@@ -5,6 +5,12 @@ h1, h2, h3, h4, h5, p, a, button, input, textarea, label {
   font-family: 'Goudy Bookletter 1911', serif;
 }
 
+td, td a {
+  font-size: 14px!important;
+  color: black;
+}
+
+
 
 .retour {
   display: flex;
@@ -26,6 +32,10 @@ h1, h2, h3, h4, h5, p, a, button, input, textarea, label {
 }
 
 /*Header*/
+
+span.glyphicon.glyphicon-log-in {
+  margin-right: 10px!important;
+}
 
 .logo-navigation {
 	width: 168px;
@@ -166,7 +176,7 @@ ul.dropdown-menu {
   border-radius: 10px;
   padding: 9px 35px;
   font-size: 18px;
-  width: 203px!important;
+  width: 225px!important;
 }
 .connexion-col h1 {
     font-size: 45px!important;
@@ -535,6 +545,10 @@ background-image: url("../images/2_ACCUEIL.png");
 
 /*Creation lecture*/
 
+.remiseAzero {
+  cursor: pointer;
+}
+
 .creation-lecture-col {
   background-image: url("../images/1_CONNEXION.png");
   padding-bottom: 20px;
@@ -637,6 +651,7 @@ background-image: url("../images/2_ACCUEIL.png");
       border: 2px solid white;
     border-radius: 20px;
     padding: 1%;
+    margin-top: 20px;
 }
 
 .lectureObligatoire .form-group .radio {

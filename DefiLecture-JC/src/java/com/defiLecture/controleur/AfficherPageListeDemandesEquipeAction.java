@@ -15,7 +15,7 @@ import com.defiLecture.modele.Compte;
  * @author Joel
  */
 public class AfficherPageListeDemandesEquipeAction implements Action, RequestAware, SessionAware {
-    private HttpServletResponse reponse;
+    private HttpServletResponse response;
     private HttpServletRequest request;
     private HttpSession session;
     
@@ -37,7 +37,7 @@ public class AfficherPageListeDemandesEquipeAction implements Action, RequestAwa
 
     @Override
     public void setResponse(HttpServletResponse response) {
-        this.reponse = response;
+        this.response = response;
     }
 
     @Override

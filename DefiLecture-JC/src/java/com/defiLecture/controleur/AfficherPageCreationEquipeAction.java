@@ -29,8 +29,7 @@ public class AfficherPageCreationEquipeAction implements Action,RequestAware, Se
     public String execute() {
         
         if( session.getAttribute ("connecte") != null && session.getAttribute("role") != null 
-        &&( (int)session.getAttribute("role") == Compte.CAPITAINE 
-        ||  (int)session.getAttribute("role") == Compte.ADMINISTRATEUR) ){
+        && (int)session.getAttribute("role") == Compte.CAPITAINE){
 
             int idCompte = (int)session.getAttribute("connecte");
             

@@ -53,7 +53,7 @@
                     <input type="hidden" name="tache" value="effectuerModificationEquipe">
                     <input type="hidden" name="idEquipe" value="${equipe.idEquipe}">
                     <button type="submit" class="btn btn-success" name='modifier' value="Enregistrer">Enregistrer</button>
-                     <button type="submit" class="btn btn-info" name='annuler' value="Annuler">Annuler</button>
+         
                     
           
                 </c:if> 
@@ -109,7 +109,7 @@
                     </tbody>
                 </table>
         
-        
+        <a href="*.do?tache=afficherPageEquipe&idEquipe=${equipe.idEquipe}" class="retour"><span class="glyphicon glyphicon-circle-arrow-left"></span>retour à la page d'équipe</a>
         
             </div>
         </div>

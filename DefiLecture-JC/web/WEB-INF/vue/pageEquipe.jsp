@@ -51,7 +51,7 @@
                 <div class='jumbotron'> 
                     
                     <h1>${equipe.nom}</h1>
-                    <p>${equipe.point} pts</p>
+                    <p>${equipe.point} doublons</p>
                     <p>Rang #${rang}</p>
              
                 </div>
