@@ -38,6 +38,8 @@ public class EffectuerCreationDefiAction implements Action, RequestAware, Sessio
         && request.getParameter("nom")!=null
         && request.getParameter("description")!=null
         && request.getParameter("dateFin")!=null
+        && request.getParameter("heureFin")!=null
+        && request.getParameter("heureDebut")!=null
         && request.getParameter("question")!=null
         && request.getParameter("choixReponseJSON")!=null
         && request.getParameter("reponse")!=null
@@ -46,13 +48,10 @@ public class EffectuerCreationDefiAction implements Action, RequestAware, Sessio
             String  nom = request.getParameter("nom"),
                     description = request.getParameter("description"),
                     dateDebut = request.getParameter("dateDebut"),
+                    heureDebut = request.getParameter("heureDebut"),
                     dateFin = request.getParameter("dateFin"),
+                    heureFin = request.getParameter("heureFin"),
                     question = request.getParameter("question"),
-                    /*choix1 = request.getParameter("choix1"),
-                    choix2 = request.getParameter("choix2"),
-                    choix3 = request.getParameter("choix3"),
-                    choix4 = request.getParameter("choix4"),*/
-                    //choixReponse = choix1+";"+choix2+";"+choix3+";"+choix4,
                     choixReponse = request.getParameter("choixReponseJSON"),
                     reponse = request.getParameter("reponse");
 
@@ -72,8 +71,8 @@ public class EffectuerCreationDefiAction implements Action, RequestAware, Sessio
                 defi.setIdCompte(idCompte);
                 defi.setNom(nom);
                 defi.setDescription(description);
-                defi.setDateDebut(dateDebut);
-                defi.setDateFin(dateFin);
+                defi.setDateDebut(dateDebut+" "+heureDebut);
+                defi.setDateFin(dateFin+" "+heureFin);
                 defi.setQuestion(question);
                 defi.setChoixReponse(choixReponse);
                 defi.setReponse(reponse);

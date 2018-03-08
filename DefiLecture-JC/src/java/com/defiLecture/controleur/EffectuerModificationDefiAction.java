@@ -41,8 +41,10 @@ public class EffectuerModificationDefiAction implements Action, RequestAware, Se
             
             String nom = request.getParameter("nom"),
                    description = request.getParameter("titre"),
-                    dateDebut = request.getParameter("dateDebut"),
-                    dateFin = request.getParameter("dateFin"),
+                    heureDebut = request.getParameter("heureDebut"),
+                    dateDebut = request.getParameter("dateDebut")+" "+heureDebut,
+                    heureFin = request.getParameter("heureFin"),
+                    dateFin = request.getParameter("dateFin")+" "+heureFin,
                     question = request.getParameter("question"),
                     reponse = request.getParameter("reponse"),
                     choixReponse = request.getParameter("choixReponseJSON"),

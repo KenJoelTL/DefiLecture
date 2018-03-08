@@ -27,10 +27,17 @@
             
             <div class="form-group">
                 <label for="dateDebut">Date de début* : </label>
-                <input class="form-control" type="datetime-local" name="dateDebut" required />
+                <input class="form-control" type="date" name="dateDebut" required />
+                <label for="dateDebut">Heure de début* : </label>
+                <input class="form-control" type="time" name="heureDebut" required />
                 <label for="dateDebut">Date de fin* : </label>
-                <input class="form-control" type="datetime-local" name="dateFin" required />
+                <input class="form-control" type="date" name="dateFin" required />
+                <label for="dateDebut">Heure de fin* : </label>
+                <input class="form-control" type="time" name="heureFin" required />
             </div>
+
+            
+            
             <div class="form-group">
                 <label for="question">Question à laquelle les participants devront répondre* : </label>
                 <input class="form-control" type="text" name="question" required />
