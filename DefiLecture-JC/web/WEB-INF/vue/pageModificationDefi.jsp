@@ -188,7 +188,7 @@
                 <input type="hidden" name="idDefi" value="${defi.idDefi}">
                 <input type="hidden" name="tache" value="effectuerModificationDefi">
                 <button type="submit" class="btn btn-success" name="modifie" >Enregistrer </button>
-                <button type="submit" class="btn btn-info" name="annule" >Annuler</button>
+                <a href="*.do?tache=afficherPageParticipationDefi" class="retour"><span class="glyphicon glyphicon-circle-arrow-left"></span>retour à la liste des défis</a>
             </form>
                 <br>
         </div>
