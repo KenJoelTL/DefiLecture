@@ -75,12 +75,13 @@
             
             <div class="form-group">
                 <label for="point">Nombre de doublons accordé pour la réussite de ce défi* : </label>
-                <input class="form-control" type="text" name="valeurMinute" required />
+                <input class="form-control" type="number" name="valeurMinute" required />
             </div>
             
             <input id="choixReponseJSON" type="hidden" name="choixReponseJSON" value="">
             <input type="hidden" name="tache" value="effectuerCreationDefi">
             <button type="submit" class="btn btn-success">Créer un défi! </button>
+            <a href="*.do?tache=afficherPageParticipationDefi" class="retour"><span class="glyphicon glyphicon-circle-arrow-left"></span>retour à la liste des défis</a>
      
         </form>
            </div>
