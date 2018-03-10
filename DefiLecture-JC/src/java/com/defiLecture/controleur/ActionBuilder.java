@@ -43,6 +43,8 @@ public class ActionBuilder {
                     return new AfficherPageModificationLectureAction();
                 case "effectuerModificationLecture":
                     return new EffectuerModificationLectureAction();
+                case "effectuerSuppressionLecture":
+                    return new EffectuerSuppressionLectureAction();
       //Defi
                 case "afficherPageCreationDefi":
                     return new AfficherPageCreationDefiAction();
