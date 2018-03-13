@@ -36,7 +36,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="courriel">Courriel :</label>
+                            <label for="courriel">Courriel* :</label>
                             <div class="input-group">
                                 <input id="courriel" type="email" class="form-control" name="courriel" required>
                             </div>
