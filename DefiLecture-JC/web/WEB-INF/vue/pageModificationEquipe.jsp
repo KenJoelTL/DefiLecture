@@ -99,7 +99,7 @@
                                 <c:if test="${permissionAccordee}">
                                 <td>
                                     <a href="depart.do?tache=effectuerDepartEquipe&idCompte=${membre.idCompte}&idEquipe=${equipe.idEquipe}">
-                                        Retirer de l'équipe
+                                        Retirer de l'équipage
                                     </a>
                                 </td>
                                 </c:if>

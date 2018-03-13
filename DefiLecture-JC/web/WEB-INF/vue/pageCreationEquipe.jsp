@@ -11,10 +11,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <h1>Cr&eacuteation d'une &eacute;quipe</h1>
+        <h1>Cr&eacuteation d'une &eacute;quipage</h1>
         <form action="creationEquipe.do" method="post">
         <div class="form-group">
-        <label for="nom">Nom de l'&eacute;quipe* :</label>
+        <label for="nom">Nom de l'&eacute;quipage* :</label>
         <input type="text" class="form-control" id="nom" placeholder="Entrez le nom de votre nouvelle &eacute;quipe" name="nom" required/>
         </div>
             <input type="hidden" name="tache" value="effectuerCreationEquipe">

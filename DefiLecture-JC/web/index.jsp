@@ -74,14 +74,14 @@
                             <c:choose>
                                 <c:when test="${compteConnecte.idEquipe gt -1}">
                                     <li><a href="affichagePageEquipe.do?tache=afficherPageEquipe&idEquipe=${compteConnecte.idEquipe}">
-                                            Page d'&eacute;quipe</a>
+                                            Page de l'équipage</a>
                                     </li>                        
                                     <li><a href="joindreEquipe.do?tache=afficherPageListeDemandesEquipe&ordre=recu">
                                             Acc&eacute;der aux demandes</a>
                                     </li>                                              
                                 </c:when>
                                 <c:otherwise>
-                                    <li><a href="creationEquipe.do?tache=afficherPageCreationEquipe">Cr&eacute;er une equipe</a></li>                                            
+                                    <li><a href="creationEquipe.do?tache=afficherPageCreationEquipe">Cr&eacute;er une équipage</a></li>                                            
                                 </c:otherwise>
                             </c:choose>
                         </c:when>
@@ -91,11 +91,11 @@
                                     <c:choose>
                                         <c:when test="${compteConnecte.idEquipe > -1}">
                                             <li><a href="affichagePageEquipe.do?tache=afficherPageEquipe&idEquipe=${compteConnecte.idEquipe}">
-                                                    Page d'&eacute;quipe</a>
+                                                    Page de l'équipage</a>
                                             </li>                        
                                         </c:when>
                                         <c:otherwise>
-                                            <li><a href="joindreEquipe.do?tache=afficherPageListeEquipes">Joindre une &eacute;quipe</a></li>                                              
+                                            <li><a href="joindreEquipe.do?tache=afficherPageListeEquipes">Joindre une équipage</a></li>                                              
                                             <li><a href="joindreEquipe.do?tache=afficherPageListeDemandesEquipe&ordre=envoyee">Acc&eacute;der aux demandes</a></li>                                              
                                         </c:otherwise>
                                     </c:choose>

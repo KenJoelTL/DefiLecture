@@ -62,7 +62,7 @@
                     </a>
                 </c:if>
                     
-                    <h2>Membres de l'équipe</h2>
+                    <h2>Membres de l'équipage</h2>
 
                     <table class='table table-hover'>
                   <thead>
