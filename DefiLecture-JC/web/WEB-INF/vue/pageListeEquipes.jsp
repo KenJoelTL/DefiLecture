@@ -30,7 +30,7 @@
     
 <div class="row liste-equipes-row"> 
     <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 liste-equipes-col">
-            <h2>Liste des équipes</h2>  
+            <h2>Liste des équipages</h2>  
 
             <table class="table">
               <thead>
