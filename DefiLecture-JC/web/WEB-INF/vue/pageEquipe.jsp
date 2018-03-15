@@ -51,7 +51,7 @@
                 <div class='jumbotron'> 
                     
                     <h1>${equipe.nom}</h1>
-                    <p>${equipe.point} pts</p>
+                    <p>${equipe.point} doublons</p>
                     <p>Rang #${rang}</p>
              
                 </div>
@@ -62,7 +62,7 @@
                     </a>
                 </c:if>
                     
-                    <h2>Membres de l'équipe</h2>
+                    <h2>Membres de l'équipage</h2>
 
                     <table class='table table-hover'>
                   <thead>

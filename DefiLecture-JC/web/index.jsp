@@ -52,7 +52,7 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Lectures
                     <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                      <li><a href="*.do?tache=afficherPageCreationLecture">Cr&eacute;er une lecture</a></li>
+                      <li><a href="*.do?tache=afficherPageCreationLecture">Ajouter une lecture</a></li>
                       <li><a href="*.do?tache=afficherPageGestionLecture">Voir mes lectures</a></li>
                     </ul>
                 </li>
@@ -61,8 +61,8 @@
             </c:if>
            
                 <li><a href="scoreboard.do?tache=afficherPageTableauScores">
-                    <span class="glyphicon glyphicon-stats"></span> 
-                    Tableau des scores
+                    <span class="glyphicon glyphicon-usd"></span> 
+                    Trésorerie
                     </a>
                 </li>
              
@@ -74,29 +74,31 @@
                             <c:choose>
                                 <c:when test="${compteConnecte.idEquipe gt -1}">
                                     <li><a href="affichagePageEquipe.do?tache=afficherPageEquipe&idEquipe=${compteConnecte.idEquipe}">
-                                            Page d'&eacute;quipe</a>
+                                            Page de l'équipage</a>
                                     </li>                        
                                     <li><a href="joindreEquipe.do?tache=afficherPageListeDemandesEquipe&ordre=recu">
                                             Acc&eacute;der aux demandes</a>
                                     </li>                                              
                                 </c:when>
                                 <c:otherwise>
-                                    <li><a href="creationEquipe.do?tache=afficherPageCreationEquipe">Cr&eacute;er une equipe</a></li>                                            
+                                    <li><a href="creationEquipe.do?tache=afficherPageCreationEquipe">Cr&eacute;er une équipage</a></li>                                            
                                 </c:otherwise>
                             </c:choose>
                         </c:when>
                         <c:otherwise>
                             <c:choose>
-                                <c:when test="${sessionScope.role lt 3}">
-                                    <c:when test="${compteConnecte.idEquipe gt -1}">
-                                        <li><a href="affichagePageEquipe.do?tache=afficherPageEquipe&idEquipe=${compteConnecte.idEquipe}">
-                                                Page d'&eacute;quipe</a>
-                                        </li>                        
-                                    </c:when>
-                                    <c:otherwise>
-                                        <li><a href="joindreEquipe.do?tache=afficherPageListeEquipes">Joindre une &eacute;quipe</a></li>                                              
-                                        <li><a href="joindreEquipe.do?tache=afficherPageListeDemandesEquipe&ordre=envoyee">Acc&eacute;der aux demandes</a></li>                                              
-                                    </c:otherwise>
+                                <c:when test="${sessionScope.role < 3}">
+                                    <c:choose>
+                                        <c:when test="${compteConnecte.idEquipe > -1}">
+                                            <li><a href="affichagePageEquipe.do?tache=afficherPageEquipe&idEquipe=${compteConnecte.idEquipe}">
+                                                    Page de l'équipage</a>
+                                            </li>                        
+                                        </c:when>
+                                        <c:otherwise>
+                                            <li><a href="joindreEquipe.do?tache=afficherPageListeEquipes">Joindre une équipage</a></li>                                              
+                                            <li><a href="joindreEquipe.do?tache=afficherPageListeDemandesEquipe&ordre=envoyee">Acc&eacute;der aux demandes</a></li>                                              
+                                        </c:otherwise>
+                                    </c:choose>
                                 </c:when>
                             </c:choose>
                         </c:otherwise>

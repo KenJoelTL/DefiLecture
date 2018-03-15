@@ -44,7 +44,7 @@
                       <td>${l.dureeMinutes} minutes</td>
                       <td>${l.dateInscription} </td>
                       <td>${l.estObligatoire eq 0 ? "NON" : "OUI"}</td>
-                      <td><a href="*.do?tache=effectuerSupressionLecture&idLecture=${l.idLecture}">Supprimer</a></td>
+                      <td><a href="*.do?tache=effectuerSuppressionLecture&idLecture=${l.idLecture}">Supprimer</a></td>
                     </tr>
                 </c:forEach>
 

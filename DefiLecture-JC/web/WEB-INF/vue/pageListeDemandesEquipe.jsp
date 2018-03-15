@@ -82,7 +82,7 @@
                     </c:when>
                     <c:otherwise>
                     <td>
-                        <span>Demande envoy&eacute;e &agrave; l'&eacute;quipe 
+                        <span>Demande envoy&eacute;e &agrave; l'&eacute;quipage 
                             <a href="equipe.do?tache=afficherPageEquipe&idEquipe=${equipe.idEquipe}">${equipe.nom}</a>
                         </span>
                     </td>

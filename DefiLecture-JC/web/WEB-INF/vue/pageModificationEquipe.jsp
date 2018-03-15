@@ -42,18 +42,18 @@
         <div class='row'> 
         
             <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 page-equipe-col configuration-equipe">
-                <h1>Configuration de l'&eacute;quipe</h1>
+                <h1>Configuration de l'&eacute;quipage</h1>
                 <form action="modificationEquipe.do" method="post">
                 <div class="form-group">
-                <label for="nom">Nom de l'&eacute;quipe* :</label>
+                <label for="nom">Nom de l'&eacute;quipage* :</label>
                 <input type="text" class="form-control" id="nom" value="${equipe.nom}" 
-                       placeholder="Entrez le nouveau nom de votre &eacute;quipe" name="nom" ${permissionAccordee ? 'required': 'disabled'}/>
+                       placeholder="Entrez le nouveau nom de votre &eacute;quipage" name="nom" ${permissionAccordee ? 'required': 'disabled'}/>
                 </div>
                 <c:if test="${permissionAccordee}">
                     <input type="hidden" name="tache" value="effectuerModificationEquipe">
                     <input type="hidden" name="idEquipe" value="${equipe.idEquipe}">
                     <button type="submit" class="btn btn-success" name='modifier' value="Enregistrer">Enregistrer</button>
-                     <button type="submit" class="btn btn-info" name='annuler' value="Annuler">Annuler</button>
+         
                     
           
                 </c:if> 
@@ -88,10 +88,10 @@
                                 <td>
                                     <c:choose>
                                         <c:when test="${contribution.statutDemande eq 0}">                             
-                                            <a href="*.do?tache=effectuerReaffectationMembreEquipe&idCompte=${membre.idCompte}&idEquipe=${equipe.idEquipe}">R&eacute;afecter &agrave; l'&eacute;quipe</a>
+                                            <a href="*.do?tache=effectuerReaffectationMembreEquipe&idCompte=${membre.idCompte}&idEquipe=${equipe.idEquipe}">R&eacute;afecter &agrave; l'&eacute;quipage</a>
                                         </c:when>
                                         <c:otherwise>
-                                            <a href="*.do?tache=effectuerSuspensionMembreEquipe&idCompte=${membre.idCompte}&idEquipe=${equipe.idEquipe}">Suspendre de l'&eacute;quipe</a>
+                                            <a href="*.do?tache=effectuerSuspensionMembreEquipe&idCompte=${membre.idCompte}&idEquipe=${equipe.idEquipe}">Suspendre de l'&eacute;quipage</a>
                                         </c:otherwise>
                                     </c:choose>
                                 </td>
@@ -99,7 +99,7 @@
                                 <c:if test="${permissionAccordee}">
                                 <td>
                                     <a href="depart.do?tache=effectuerDepartEquipe&idCompte=${membre.idCompte}&idEquipe=${equipe.idEquipe}">
-                                        Retirer de l'équipe
+                                        Retirer de l'équipage
                                     </a>
                                 </td>
                                 </c:if>
@@ -109,7 +109,7 @@
                     </tbody>
                 </table>
         
-        
+        <a href="*.do?tache=afficherPageEquipe&idEquipe=${equipe.idEquipe}" class="retour"><span class="glyphicon glyphicon-circle-arrow-left"></span>retour à la page d'équipe</a>
         
             </div>
         </div>

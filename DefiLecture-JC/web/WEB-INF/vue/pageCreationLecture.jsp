@@ -13,7 +13,12 @@
         <script type="text/javascript">
             $(document).ready(function(){
                 
-                $('.duree15').mousedown(function() {
+                var mobile   = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent); 
+                var start = mobile ? "touchstart" : "mousedown";
+                var end =  mobile ? "touchend" : "mouseup";
+
+                         
+                $('.duree15').bind(start,function() {
                     $(this).css('border', '3px dotted goldenrod');
                     $(this).css('border-radius', '37px');
                     minutesTotal = parseInt($('.dureeMinutes').text())+15;
@@ -22,68 +27,70 @@
   
                 });
                 
-                 $('.duree15').mouseup(function() {
+                 $('.duree15').on(end+" mouseleave mouseout",function() {
                     $(this).css('border', 'transparent');
 
-                    
                 });
-                $('.duree30').mousedown(function() {
+                                
+                
+                $('.duree30').bind(start, function() {
                      $(this).css('border', '3px dotted goldenrod');
                     $(this).css('border-radius', '37px');
                     minutesTotal = parseInt($('.dureeMinutes').text())+30;
                     $('#dureeMinutes').val(minutesTotal);
                     $('.dureeMinutes').html(minutesTotal+ " minutes");
-               
-
-
 
                 });
                 
-                $('.duree30').mouseup(function() {
+                $('.duree30').on(end+" mouseleave mouseout",function() {
                     $(this).css('border', 'transparent');
 
                     
                 });
-                $('.duree45').mousedown(function() {
+                $('.duree45').bind(start, function() {
                     $(this).css('border', '3px dotted goldenrod');
                     $(this).css('border-radius', '37px');
                     minutesTotal = parseInt($('.dureeMinutes').text())+45;
                     $('#dureeMinutes').val(minutesTotal);
                     $('.dureeMinutes').html(minutesTotal+ " minutes");
-                 
-
-
 
                 });
-                $('.duree45').mouseup(function() {
+                
+                $('.duree45').on(end+" mouseleave mouseout",function() {
                     $(this).css('border', 'transparent');
 
                     
                 });
-                $('.duree60').mousedown(function() {
+                $('.duree60').bind(start,function() {
                      $(this).css('border', '3px dotted goldenrod');
                     $(this).css('border-radius', '37px');
                     minutesTotal = parseInt($('.dureeMinutes').text())+60;
                     $('#dureeMinutes').val(minutesTotal);
                     $('.dureeMinutes').html(minutesTotal+ " minutes");
-            
-
-
 
                 });
-                $('.duree60').mouseup(function() {
+                $('.duree60').on(end+" mouseleave mouseout", function() {
                     $(this).css('border', 'transparent');
 
                     
                 });
                 
-                 $('.lecture-submit').mousedown(function() {
+                
+                 $('.remiseAzero').on("mousedown", function() {
+
+                    minutesTotal = 0;
+                    $('#dureeMinutes').val(minutesTotal);
+                    $('.dureeMinutes').html(minutesTotal+ " minute");
+
+                });
+                
+                 $('.lecture-submit').bind(start, function() {
                      $(this).css('border', '3px dotted goldenrod');
                     $(this).css('border-radius', '37px');
 
 
                 });
-                $('.lecture-submit').mouseup(function() {
+                $('.lecture-submit').on(end+" mouseleave mouseout", function() {
                     $(this).css('border', 'transparent');
 
                     
@@ -106,7 +113,7 @@
         
             <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 creation-lecture-col">
                 <div class="creation-lecture-form">
-                    <h1>Inscription d'une lecture</h1>
+                    <h1>Ajout d'une lecture</h1>
                     <form action="*.do" method="post">
                          
                         <div class="form-group">
@@ -117,7 +124,8 @@
                         
            
                             <div class="form-group">
-                                <label id="lblDureeLecture" >Durée de la lecture : </label>
+                                <label id="lblDureeLecture" >Durée de la lecture : <br> (cliquez sur les doublons pour afficher les minutes de lecture) </label>
+             
                                 
                                 <label class="dureeMinutes">0 minute</label>
                                 <input type="hidden" name="dureeMinutes" id="dureeMinutes" required value=0>
@@ -138,11 +146,11 @@
                             </div>
                         </div>
                         
-                        
+                        <a class="retour remiseAzero"><span class="glyphicon glyphicon-repeat"></span>Remise à zéro </a>
                         
                         <div class="lectureObligatoire">
                             <div class="form-group">
-                                <label for="obligatoire">La lecture était-elle obligatoire? : </label>
+                                <label for="obligatoire">La lecture était-elle obligatoire? <br>  (Lecture imposée dans le cadre d’un cours.) </label>
 
                                 <div class="radio obligatoire-oui">
                                     <label ><input type="radio" name="obligatoire" value="1" required >oui</label>

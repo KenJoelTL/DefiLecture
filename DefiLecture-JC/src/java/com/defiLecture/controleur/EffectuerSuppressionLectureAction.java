@@ -25,7 +25,7 @@ import jdbc.Connexion;
  *
  * @author Charles
  */
-public class EffectuerSupressionLectureAction implements Action, SessionAware, RequestAware, RequirePRGAction{
+public class EffectuerSuppressionLectureAction implements Action, SessionAware, RequestAware, RequirePRGAction{
     HttpServletRequest request;
     HttpServletResponse response;
     HttpSession session;
@@ -40,8 +40,7 @@ public class EffectuerSupressionLectureAction implements Action, SessionAware, R
 
             String idLecture = request.getParameter("idLecture");
             int idCompte = (int)session.getAttribute("connecte");
-  
-        
+
         try {
 
                 Connection cnx = Connexion.startConnection(Config.DB_USER,Config.DB_PWD,Config.URL,Config.DRIVER);

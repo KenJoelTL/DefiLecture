@@ -20,7 +20,7 @@
            <h1>Connexion</h1>
         <form class="connexion-form" action="connexion.do" method="post">
             <div class="form-group">
-                <label for="identifiant">Nom d'utilisateur :</label>
+                <label for="identifiant">Courriel ou pseudonyme:</label>
                 <div class="input-group">
           
                     <input id="identifiant" type="text" class="form-control" name="identifiant">

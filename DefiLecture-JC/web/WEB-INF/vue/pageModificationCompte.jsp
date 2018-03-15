@@ -80,7 +80,7 @@
                     <input type="hidden" name="idCompte" value="${compte.idCompte}">
                     <input type="hidden" name="tache" value="effectuerModificationCompte">
                     <button type="submit" class="btn btn-success" name="modifie" >Enregistrer</button>
-                    <button type="submit" class="btn btn-info" name="annule" >Annuler</button>
+                    
                     </div>
                 </form>
 
@@ -91,6 +91,7 @@
          
                     </form>
                 </div>
+                        <a href="*.do?tache=afficherPageGestionListeCompte" class="retour"><span class="glyphicon glyphicon-circle-arrow-left"></span>retour à la liste des comptes</a>
            </div>
         </div>
     </div>

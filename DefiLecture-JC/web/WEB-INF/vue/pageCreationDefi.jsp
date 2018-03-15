@@ -13,7 +13,7 @@
         
         <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 creation-defi-col">
             <div class="creation-defi-form">
-        <h1>Creation d'un defi</h1>
+        <h1>Création d'un defi</h1>
         <form action="*.do" method="post">
             <div class="form-group">
                 <label for="nom">Nom du défi* : </label>
@@ -27,12 +27,19 @@
             
             <div class="form-group">
                 <label for="dateDebut">Date de début* : </label>
-                <input class="form-control" type="datetime-local" name="dateDebut" required />
+                <input class="form-control" type="date" name="dateDebut" required />
+                <label for="dateDebut">Heure de début* : </label>
+                <input class="form-control" type="time" name="heureDebut" required />
                 <label for="dateDebut">Date de fin* : </label>
-                <input class="form-control" type="datetime-local" name="dateFin" required />
+                <input class="form-control" type="date" name="dateFin" required />
+                <label for="dateDebut">Heure de fin* : </label>
+                <input class="form-control" type="time" name="heureFin" required />
             </div>
+
+            
+            
             <div class="form-group">
-                <label for="question">Question à répondre pour réussir ce défi* : </label>
+                <label for="question">Question à laquelle les participants devront répondre* : </label>
                 <input class="form-control" type="text" name="question" required />
             </div>
             
@@ -67,13 +74,14 @@
             
             
             <div class="form-group">
-                <label for="point">Nombre de minutes pour ce défi* : </label>
-                <input class="form-control" type="text" name="valeurMinute" required />
+                <label for="point">Nombre de doublons accordé pour la réussite de ce défi* : </label>
+                <input class="form-control" type="number" name="valeurMinute" required />
             </div>
             
             <input id="choixReponseJSON" type="hidden" name="choixReponseJSON" value="">
             <input type="hidden" name="tache" value="effectuerCreationDefi">
             <button type="submit" class="btn btn-success">Créer un défi! </button>
+            <a href="*.do?tache=afficherPageParticipationDefi" class="retour"><span class="glyphicon glyphicon-circle-arrow-left"></span>retour à la liste des défis</a>
      
         </form>
            </div>
