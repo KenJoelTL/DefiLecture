@@ -25,7 +25,9 @@ public class EffectuerInscriptionAction implements Action, RequestAware, Require
     @Override
     public String execute() {
         String action = "echec.do?tache=afficherPageInscription";
-
+        
+        System.out.println(request.getParameter("devenirCapitaine"));
+        
         if( request.getParameter("courriel")    != null 
             && request.getParameter("prenom")   != null
             && request.getParameter("nom")      != null
@@ -39,7 +41,9 @@ public class EffectuerInscriptionAction implements Action, RequestAware, Require
                         nom = request.getParameter("nom"),
                         motPasse = request.getParameter("motPasse"),
                         programmeEtude = request.getParameter("programmeEtude"),
-                        pseudonyme = request.getParameter("pseudonyme"); 
+                        pseudonyme = request.getParameter("pseudonyme");
+                 
+
                 /*
                 //Étape 1 : chargement du pilote JDBC
                 Class.forName(Config.DRIVER);
@@ -58,6 +62,9 @@ public class EffectuerInscriptionAction implements Action, RequestAware, Require
                 compte.setMotPasse(motPasse);
                 compte.setPseudonyme(pseudonyme);
                 compte.setProgrammeEtude(programmeEtude);
+                if(request.getParameter("devenirCapitaine") != null)
+                    compte.setDevenirCapitaine(1);
+                
 
                 //faire vérification avec des findBy
                 if(dao.create(compte)){

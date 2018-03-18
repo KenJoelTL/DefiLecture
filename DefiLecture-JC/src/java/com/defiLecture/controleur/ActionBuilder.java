@@ -20,6 +20,13 @@ public class ActionBuilder {
                     return new AfficherPageTableauScoresAction();
                 case "afficherPageProfil":
                     return new AfficherPageProfilAction();
+                case "afficherPageCodeConduite":
+                    return new AfficherPageCodeConduiteAction();
+                case "afficherPageGlossaire":
+                    return new AfficherPageGlossaireAction();
+                    case "afficherPageContributeurs":
+                    return new AfficherPageContributeursAction();
+                    
       //Inscription
                 case "afficherPageInscription":
                     return new AfficherPageInscriptionAction(); 
