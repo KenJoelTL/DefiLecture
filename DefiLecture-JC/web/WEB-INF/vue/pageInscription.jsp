@@ -14,6 +14,9 @@
     <body>
         <div class='row'> 
                 <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 inscription-col"> 
+                    <c:if test="${!empty requestScope.data['erreurInscription']}">
+                    <div class="alert alert-danger"><strong>${requestScope.data['erreurInscription']}</strong></div>
+                    </c:if>
                     <h1>Inscription</h1>
                     <form class="inscription-form" action="inscription.do" method="post">
                         <div class="form-group">

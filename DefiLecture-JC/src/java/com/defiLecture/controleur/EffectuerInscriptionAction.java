@@ -103,8 +103,7 @@ public class EffectuerInscriptionAction implements Action, RequestAware, Require
                     
                 }
                 else if (dao.findByPseudonyme(pseudonyme) != null){
-                    System.out.println("Ce pseudonyme est déjà utilisé par un moussaillon");
-                    data.put("erreurPseudonyme","Ce courriel est déjà utilisé par un moussaillon");
+                    data.put("erreurPseudonyme","Ce pseudonyme est déjà utilisé par un moussaillon");
                 }
                 else{
                     if(dao.create(compte)){
