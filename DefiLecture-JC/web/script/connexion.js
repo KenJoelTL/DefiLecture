@@ -8,7 +8,7 @@
     $(document).ready(function(){
          $("#msgMDPoublie").hide();
        $("#lienMDPoublie").click(function(){
-            $("span.glyphicon").toggleClass("glyphicon-menu-up")
+            $("#spanMDP").toggleClass("glyphicon-menu-up")
            $("#msgMDPoublie").slideToggle();
        });
     });

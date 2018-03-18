@@ -37,11 +37,11 @@
                 </div>
             </div>
             <a id="lienMDPoublie" href="#">
-                Mot de passe oublié? <span class="glyphicon glyphicon-menu-down"></span>
+                Mot de passe oublié? <span id="spanMDP" class="glyphicon glyphicon-menu-down"></span>
             </a>
             <p id="msgMDPoublie">Si vous avez oublié votre mot de passe, veuillez contacter l'administrateur de l'application.</p>
             <input type="hidden" name="tache" value="effectuerConnexion">
-            <button type="submit" class="btn btn-danger">CONNEXION</button>
+            <button type="submit" class="btn btn-danger">À L'ABORDAGE!</button>
             
         </form>
       </div>

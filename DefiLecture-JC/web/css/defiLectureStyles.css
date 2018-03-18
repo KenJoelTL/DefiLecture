@@ -102,6 +102,7 @@ ul.dropdown-menu {
 
   ul.nav.navbar-nav.navbar-right {
   height: auto;
+  flex-direction: column;
 
   }
 
@@ -156,7 +157,7 @@ ul.dropdown-menu {
     justify-content: flex-start;
     align-items: center;
     text-align: center;
-    height: 800px;
+    min-height: 1080px;
     padding-top: 35px;
 }
 
@@ -168,6 +169,7 @@ ul.dropdown-menu {
 	background-image: url("../images/1_CONNEXION.png");
   background-repeat: repeat;
   background-size: contain;
+     min-height: 1080px;
 
 }
 
@@ -209,6 +211,13 @@ p#msgMDPoublie {
     align-items: center;
 }
 
+#lienMDPoublie {
+	font-weight: 600;
+}
+
+p#msgMDPoublie {
+	font-size: 16px;
+}
 
 /*Inscription*/
 
@@ -218,7 +227,7 @@ p#msgMDPoublie {
     justify-content: flex-start;
     align-items: center;
     text-align: center;
-    min-height: 800px;
+    min-height: 1080px;
     padding-top: 35px;
     padding-bottom: 35px;
 }
@@ -252,6 +261,7 @@ p#msgMDPoublie {
   background-image: url("../images/1_CONNEXION.png");
   background-repeat: repeat;
   background-size: contain;
+      min-height: 1080px;
 
 }
 
@@ -271,7 +281,7 @@ p#msgMDPoublie {
 
 .scores-row {
 background-image: url("../images/2_ACCUEIL.png");
-  min-height: 800px;
+     min-height: 1080px;
   padding: 5%;
       display: flex;
     flex-direction: column;
@@ -282,7 +292,7 @@ background-image: url("../images/2_ACCUEIL.png");
 .scores-col {
     background-color: rgba(255,255,255,0.5);
     border-radius: 20px;
-    min-height: 700px;
+    min-height: 1080px;
     padding: 5%;
   }
 
@@ -295,7 +305,7 @@ background-image: url("../images/2_ACCUEIL.png");
 
 .accueil-row {
   background-image: url("../images/2_ACCUEIL.png");
-  min-height: 800px;
+     min-height: 1080px;
   padding: 20px 40px;
   display: flex;
   justify-content: center;
@@ -379,7 +389,7 @@ background-image: url("../images/2_ACCUEIL.png");
 
 .demandes-row {
   background-image: url("../images/3_MODELE.png");
-  min-height: 800px;
+  min-height: 1080px;
   padding: 5%;
 
 }
@@ -387,7 +397,7 @@ background-image: url("../images/2_ACCUEIL.png");
 .demandes-col {
     background-color: rgba(255,255,255,0.5);
     border-radius: 20px;
-    min-height: 700px;
+    min-height: 1080px;
     padding: 5%;
   }
 
@@ -399,7 +409,7 @@ background-image: url("../images/2_ACCUEIL.png");
 
 .participationDefi-row {
   background-image: url("../images/3_MODELE.png");
-  min-height: 800px;
+  min-height: 1080px;
   padding: 5%;
 
 }
@@ -407,7 +417,7 @@ background-image: url("../images/2_ACCUEIL.png");
 .participationDefi-col {
     background-color: rgba(255,255,255,0.5);
     border-radius: 20px;
-    min-height: 700px;
+    min-height: 1080px;
     padding: 5%;
   }
 
@@ -426,7 +436,7 @@ background-image: url("../images/2_ACCUEIL.png");
 
 .listeCompte-row {
   background-image: url("../images/3_MODELE.png");
-  min-height: 800px;
+  min-height: 1080px;
   padding: 5%;
 
 }
@@ -434,7 +444,7 @@ background-image: url("../images/2_ACCUEIL.png");
 .listeCompte-col {
     background-color: rgba(255,255,255,0.5);
     border-radius: 20px;
-    min-height: 700px;
+    min-height: 1080px;
     padding: 5%!important;
   }
 
@@ -565,6 +575,7 @@ background-image: url("../images/2_ACCUEIL.png");
 .creation-lecture-col {
   background-image: url("../images/1_CONNEXION.png");
   padding-bottom: 20px;
+  min-height: 1080px;
 }
 
 .creation-lecture-col h1 {
@@ -730,7 +741,7 @@ background-image: url("../images/2_ACCUEIL.png");
 
  .gestion-lecture-row {
   background-image: url("../images/3_MODELE.png");
-  min-height: 800px;
+
   padding: 5%;
 
 }
@@ -738,7 +749,7 @@ background-image: url("../images/2_ACCUEIL.png");
 .gestion-lecture-col {
     background-color: rgba(255,255,255,0.5);
     border-radius: 20px;
-    min-height: 700px;
+    min-height: 1080px;
     padding: 5%;
   }
 
@@ -750,7 +761,7 @@ background-image: url("../images/2_ACCUEIL.png");
 
  .liste-equipes-row {
   background-image: url("../images/3_MODELE.png");
-  min-height: 800px;
+  min-height: 1080px;
   padding: 5%;
 
 }
@@ -758,7 +769,7 @@ background-image: url("../images/2_ACCUEIL.png");
 .liste-equipes-col {
     background-color: rgba(255,255,255,0.5);
     border-radius: 20px;
-    min-height: 700px;
+    min-height: 1080px;
     padding: 5%;
   }
 
@@ -779,7 +790,7 @@ background-image: url("../images/2_ACCUEIL.png");
 .page-equipe-col {
   background-image: url("../images/1_CONNEXION.png");
   padding-bottom: 20px;
-  height: 800px;
+  min-height: 1080px;
       display: flex;
     flex-direction: column;
 }
@@ -860,3 +871,53 @@ background-image: url("../images/2_ACCUEIL.png");
   display: none;
 }
 }
+
+
+
+
+
+/*Page code de conduite*/
+
+.pirateIcone {
+
+ background-image: url("../images/tete-de-mort-pirate.jpg");
+     height: 50px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 78px!important;
+
+}
+
+.code-conduite div {
+	    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    margin-right: 20px;
+    text-align: justify;
+    font-size: 20px!important;
+}
+
+.code-conduite label {
+	    padding: 9px 55px 9px 4px!important;
+}
+
+
+/*Glossaire*/
+
+.glossaire p {
+	 text-align: justify;
+    font-size: 20px!important;
+    margin: 10px;
+}
+
+/*Contributeurs*/
+
+.contributeurs p {
+	font-size: 20px!important;
+	margin: 10px;
+}
+
+.contributeurs h2 {
+	margin: 10px;
+}
+
