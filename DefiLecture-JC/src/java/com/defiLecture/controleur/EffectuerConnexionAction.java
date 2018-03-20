@@ -34,7 +34,7 @@ public class EffectuerConnexionAction implements Action, RequestAware, SessionAw
         && request.getParameter("motPasse")    != null)
         {
             String identifiant = request.getParameter("identifiant"),
-                   motPasse    = request.getParameter("motPasse"); 
+                   motPasse    = org.apache.commons.codec.digest.DigestUtils.sha1Hex(request.getParameter("motPasse")); 
             try{
                 CompteDAO dao =
                         new CompteDAO(Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));

@@ -44,7 +44,6 @@ public class CompteDAO extends DAO<Compte>{
               && x.getMotPasse() != null && !"".equals(x.getMotPasse().trim())     
               && x.getNom()      != null && !"".equals(x.getNom().trim())
               && x.getPrenom()   != null && !"".equals(x.getPrenom().trim())){
-//Hashing
                 paramStm.setString(1, Util.toUTF8(x.getCourriel()));
                 paramStm.setString(2, Util.toUTF8(x.getMotPasse()));
                 paramStm.setString(3, Util.toUTF8(x.getNom()));
@@ -496,5 +495,54 @@ public class CompteDAO extends DAO<Compte>{
         return nbMembre;
     }
     
+    public Compte findByCourriel(String courriel) {
+        String req = "SELECT * FROM compte WHERE `COURRIEL` = ?";
+        
+        PreparedStatement paramStm = null;
+        try {
+
+            paramStm = cnx.prepareStatement(req);
+
+            paramStm.setString(1, Util.toUTF8(courriel));
+
+            ResultSet resultat = paramStm.executeQuery();
+
+            // On vérifie s'il y a un résultat    
+            if(resultat.next()){
+
+                Compte c = new Compte();
+                c.setIdCompte(resultat.getInt("ID_COMPTE"));
+                c.setIdEquipe(resultat.getInt("ID_EQUIPE"));
+                c.setCourriel(resultat.getString("COURRIEL"));
+                c.setPrenom(resultat.getString("PRENOM"));             
+                c.setNom(resultat.getString("NOM"));
+                c.setPseudonyme(resultat.getString("PSEUDONYME"));             
+                c.setAvatar(resultat.getString("AVATAR"));             
+                c.setProgrammeEtude(resultat.getString("PROGRAMME_ETUDE"));
+                c.setMinutesRestantes(resultat.getInt("MINUTES_RESTANTES"));
+                c.setPoint(resultat.getInt("POINT"));
+                c.setRole(resultat.getInt("ROLE"));
+
+                resultat.close();
+                paramStm.close();
+                    return c;
+            }
+            
+            resultat.close();
+            paramStm.close();
+            return null;
+        }
+        catch (SQLException exp) {}
+        finally {
+            try{
+                if (paramStm!=null)
+                    paramStm.close();
+            }
+            catch (SQLException exp) {}
+        }        
+        
+        return null;
+
+    }
     
 }
