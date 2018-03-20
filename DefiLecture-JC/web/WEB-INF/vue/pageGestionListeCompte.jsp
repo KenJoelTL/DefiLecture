@@ -37,7 +37,14 @@
 
             <c:choose>
                 <c:when test="${compte.role eq 1}">
-                    <c:set var="role" value="Participant"></c:set>        
+                    <c:choose>
+                         <c:when test="${compte.devenirCapitaine eq 1}">
+                             <c:set var="role" value="Participant***"></c:set>
+                         </c:when>
+                        <c:otherwise>
+                            <c:set var="role" value="Participant"></c:set>   
+                        </c:otherwise>
+                    </c:choose>
                 </c:when>
                 <c:when test="${compte.role eq 2}">
                     <c:set var="role" value="Capitaine"></c:set>        
@@ -55,7 +62,7 @@
 
 
             <tr>
-              <td>${compte.prenom}</td>
+              <td>${compte.prenom} ${compte.devenirCapitaine}</td>
               <td>${compte.nom}</td>
               <td>${ empty compte.pseudonyme ? "---" : compte.pseudonyme}</td>
               <td>${compte.courriel}</td>

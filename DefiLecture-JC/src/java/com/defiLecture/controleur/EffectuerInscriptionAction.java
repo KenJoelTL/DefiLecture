@@ -1,4 +1,3 @@
-
 package com.defiLecture.controleur;
 
 import java.sql.Connection;
@@ -145,3 +144,4 @@ public class EffectuerInscriptionAction implements Action, RequestAware, Require
     }
 
 }
+

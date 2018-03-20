@@ -32,8 +32,8 @@ public class CompteDAO extends DAO<Compte>{
     @Override
     public boolean create(Compte x) {
         String req = "INSERT INTO compte (`COURRIEL` , `MOT_PASSE` , `NOM`, "
-                + "`PRENOM`, `PSEUDONYME`, `AVATAR`, `PROGRAMME_ETUDE`) VALUES "
-                +    "(?,?,?,?,?,?,?)";
+                + "`PRENOM`, `PSEUDONYME`, `AVATAR`, `PROGRAMME_ETUDE`,`DEVENIR_CAPITAINE` ) VALUES "
+                +    "(?,?,?,?,?,?,?,?)";
 
         PreparedStatement paramStm = null;
         try {
@@ -60,6 +60,8 @@ public class CompteDAO extends DAO<Compte>{
                     paramStm.setString(7, Util.toUTF8(x.getProgrammeEtude()));
                 else
                     paramStm.setString(7, null);
+                
+                paramStm.setInt(8, x.getDevenirCapitaine());
                 
                 int nbLignesAffectees= paramStm.executeUpdate();
                 
@@ -116,6 +118,7 @@ public class CompteDAO extends DAO<Compte>{
                 c.setMinutesRestantes(resultat.getInt("MINUTES_RESTANTES"));
                 c.setPoint(resultat.getInt("POINT"));
                 c.setRole(resultat.getInt("ROLE"));
+                c.setDevenirCapitaine(resultat.getInt("DEVENIR_CAPITAINE"));
 
                 resultat.close();
                 paramStm.close();
@@ -286,6 +289,7 @@ public class CompteDAO extends DAO<Compte>{
                 c.setAvatar(r.getString("AVATAR"));
                 c.setPseudonyme(r.getString("PSEUDONYME")); 
                 c.setRole(r.getInt("ROLE"));
+                c.setDevenirCapitaine(r.getInt("DEVENIR_CAPITAINE"));
                 
                 liste.add(c);
             }
@@ -327,6 +331,7 @@ public class CompteDAO extends DAO<Compte>{
                 c.setMinutesRestantes(resultat.getInt("MINUTES_RESTANTES"));
                 c.setPoint(resultat.getInt("POINT"));
                 c.setRole(resultat.getInt("ROLE"));
+                c.setDevenirCapitaine(resultat.getInt("DEVENIR_CAPITAINE"));
                 liste.add(c);
             }
             resultat.close();
@@ -380,6 +385,7 @@ public class CompteDAO extends DAO<Compte>{
                     c.setMinutesRestantes(resultat.getInt("MINUTES_RESTANTES"));
                     c.setPoint(resultat.getInt("POINT"));
                     c.setRole(resultat.getInt("ROLE"));
+                    c.setDevenirCapitaine(resultat.getInt("DEVENIR_CAPITAINE"));
                     
                     resultat.close();
                     paramStm.close();
@@ -433,7 +439,7 @@ public class CompteDAO extends DAO<Compte>{
                 c.setMinutesRestantes(resultat.getInt("MINUTES_RESTANTES"));
                 c.setPoint(resultat.getInt("POINT"));
                 c.setRole(resultat.getInt("ROLE"));
-
+                c.setDevenirCapitaine(resultat.getInt("DEVENIR_CAPITAINE"));
                 resultat.close();
                 paramStm.close();
                     return c;

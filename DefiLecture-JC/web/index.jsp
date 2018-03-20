@@ -137,6 +137,18 @@
                 
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                 
+                 <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Code du pirate   
+                        <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+         
+                          <li><a href='*.do?tache=afficherPageCodeConduite'>Code de conduite</a></li>
+                          <li><a href='*.do?tache=afficherPageGlossaire'>Glossaire</a></li>
+                          <li><a href='*.do?tache=afficherPageContributeurs'>Contributeurs</a></li>
+                        </ul>
+                    </li>
+                
             <c:choose>
                 <c:when test="${ empty sessionScope.connecte }">
                     <li><a href='*.do?tache=afficherPageConnexion'><span class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>        
