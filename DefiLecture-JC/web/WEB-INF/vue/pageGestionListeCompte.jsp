@@ -62,7 +62,7 @@
 
 
             <tr>
-              <td>${compte.prenom} ${compte.devenirCapitaine}</td>
+              <td>${compte.prenom}</td>
               <td>${compte.nom}</td>
               <td>${ empty compte.pseudonyme ? "---" : compte.pseudonyme}</td>
               <td>${compte.courriel}</td>

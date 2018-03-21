@@ -23,46 +23,41 @@
                     <p>
 
 
-                        <strong>Idéateurs et concepteurs</strong> : Monik Richard et Benoit Dugas, enseignants au
-                        département de Français
+                        <strong>Idéateurs et concepteurs</strong> : Monik Richard et Benoit Dugas, enseignants au département de Français
 
                     </p>
 
                     <p>
 
-                        <strong>Développeurs du site</strong> : Patrick Lafrance, enseignant au département d’informatique,
-                        Charles-André Fortin et Joël Teuday Lutumba, étudiants stagiaires
+                        <strong>Développeurs du site</strong> : Patrick Lafrance, enseignant au département d’Informatique, Charles-André Fortin et Joël Teuday Lutumba, étudiants stagiaires
 
                     </p>
 
                     <p>
 
-                        <strong>Concepteurs graphiques</strong> : Maxime Blanchet, enseignant au département de
-                        bureautique, Eléazar Désiré (logo) et Charlotte Ganivet (maquette du visuel), étudiants
+                        <strong>Concepteurs graphiques</strong> :  Maxime Blanchet, enseignant au département de Bureautique, Charlotte Ganivet, Eléazar Désiré et Alexandre Paillé, étudiants (concepts visuels retenus). Merci aux autres étudiants du cours Conception de sites web interactifs en Techniques de bureautique, Microédition et hypermédia pour les maquettes présentées à la session d’hiver 2017.
 
-
-
-                    </p>
-
-                    <p>
-
-                        <strong>Organisatrices, animatrices et trésorières</strong> : Alexandra Jarque et Mélanie Bergeron,
-                        enseignantes au département de Français
 
 
                     </p>
 
                     <p>
 
-                        <strong>Collaboratrices aux communications</strong> : Geneviève Gaudreault, conseillère en
-                        communications, Denise Courtine, technicienne en art graphique
+                        <strong>Organisatrices, animatrices et trésorières</strong> : Alexandra Jarque et Mélanie Bergeron, enseignantes au département de Français
+
+
+                    </p>
+
+                    <p>
+
+                        <strong>Collaboratrices aux communications</strong> : Geneviève Gaudreault, conseillère en communications, Denise Courtine, technicienne en art graphique
 
 
 
                     </p>
 
                     <p>
-                        <strong>Collaboratrice</strong> : Brigitte Lemay
+                        <strong>Collaboratrice</strong> : Brigitte Lemay, technicienne au CAF
 
                     </p>
                     <br>
@@ -70,20 +65,20 @@
 
                     <p>
 
-                        Librairie Coop Rosemont, Myriam Boivin-Belley, directrice
+                        <strong>Librairie Coop Rosemont</strong>, Myriam Boivin-Belley, directrice
 
                     </p>
 
                     <p>
-                        Éditions Interforum, pour Les Éditions Le Robert
+                        <strong>Éditions Interforum</strong>, pour Les Éditions Le Robert
 
                     </p>
                     <p>
-                        Direction des études et de la vie étudiante
+                        <strong>Direction des études et de la vie étudiante</strong>, Marie-Ève St-Denis, directrice adjointe aux études
 
                     </p>
                     <p>
-                        Département de Français
+                        <strong>Département de Français</strong>
 
                     </p>
 

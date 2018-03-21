@@ -17,15 +17,17 @@ public class ActionBuilder {
             switch (actionName) {
                 
                 case "afficherPageAccueil":
-                    return new AfficherPageTableauScoresAction();
+                    return new AfficherPageMarcheASuivreAction();
                 case "afficherPageProfil":
                     return new AfficherPageProfilAction();
                 case "afficherPageCodeConduite":
                     return new AfficherPageCodeConduiteAction();
                 case "afficherPageGlossaire":
                     return new AfficherPageGlossaireAction();
-                    case "afficherPageContributeurs":
+                case "afficherPageContributeurs":
                     return new AfficherPageContributeursAction();
+                case "afficherPageMarcheASuivre":
+                    return new AfficherPageMarcheASuivreAction();
                     
       //Inscription
                 case "afficherPageInscription":
@@ -116,6 +118,6 @@ public class ActionBuilder {
                 
             }
         
-        return new AfficherPageTableauScoresAction();
+        return new AfficherPageMarcheASuivreAction();
     }
 }
