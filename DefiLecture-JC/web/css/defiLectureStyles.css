@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Goudy+Bookletter+1911');
 
 
-h1, h2, h3, h4, h5, p, a, button, input, textarea, label {
+h1, h2, h3, h4, h5, p, a, button, input, textarea, label, li {
   font-family: 'Goudy Bookletter 1911', serif;
 }
 
-td, td a {
-  font-size: 14px!important;
+td, td a, p, li {
+  font-size: 18px!important;
   color: black;
 }
 
@@ -454,7 +454,7 @@ background-image: url("../images/2_ACCUEIL.png");
 
 
 @media (max-width: 668px) {
-  .listeCompte-col .cacherSurMobile tr td:nth-child(1), .listeCompte-col .cacherSurMobile tr td:nth-child(2), .listeCompte-col .cacherSurMobile tr td:nth-child(3), .listeCompte-col .cacherSurMobile tr th:nth-child(1), .listeCompte-col .cacherSurMobile tr th:nth-child(2), .listeCompte-col .cacherSurMobile tr th:nth-child(3) {
+  .listeCompte-col .cacherSurMobile tr td:nth-child(1), .listeCompte-col .cacherSurMobile tr td:nth-child(2), .listeCompte-col .cacherSurMobile tr td:nth-child(3), .listeCompte-col .cacherSurMobile tr td:nth-child(5), .listeCompte-col .cacherSurMobile tr th:nth-child(1), .listeCompte-col .cacherSurMobile tr th:nth-child(2), .listeCompte-col .cacherSurMobile tr th:nth-child(3), .listeCompte-col .cacherSurMobile tr th:nth-child(5) {
     display: none;
   }
 
@@ -778,7 +778,7 @@ background-image: url("../images/2_ACCUEIL.png");
 }
 
 @media (max-width: 530px) {
-.gestion-lecture-col .cacherSurMobile tr td:nth-child(4), .gestion-lecture-col .cacherSurMobile tr th:nth-child(4), .gestion-lecture-col .cacherSurMobile tr td:nth-child(5), .gestion-lecture-col .cacherSurMobile tr th:nth-child(5), .gestion-lecture-col .cacherSurMobile tr td:nth-child(6), .gestion-lecture-col .cacherSurMobile tr th:nth-child(6){
+.gestion-lecture-col .cacherSurMobile tr td:nth-child(4), .gestion-lecture-col .cacherSurMobile tr th:nth-child(4), .gestion-lecture-col .cacherSurMobile tr td:nth-child(3), .gestion-lecture-col .cacherSurMobile tr th:nth-child(3), .gestion-lecture-col .cacherSurMobile tr td:nth-child(6), .gestion-lecture-col .cacherSurMobile tr th:nth-child(6){
   display: none;
 }
 }
@@ -907,7 +907,7 @@ background-image: url("../images/2_ACCUEIL.png");
 .glossaire p {
 	 text-align: justify;
     font-size: 20px!important;
-    margin: 10px;
+    margin: 40px 10px;
 }
 
 /*Contributeurs*/
@@ -919,5 +919,27 @@ background-image: url("../images/2_ACCUEIL.png");
 
 .contributeurs h2 {
 	margin: 10px;
+	border-bottom: 1px solid;
 }
 
+/*Marche a suivre*/
+
+.marcheASuivre h1 {
+	text-align: center;
+}
+
+.pirateIconeMarcheASuivre {
+
+ background-image: url("../images/tete-de-mort-pirate.jpg");
+        height: 180px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 170px!important;
+
+}
+
+.divIconePirate {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
