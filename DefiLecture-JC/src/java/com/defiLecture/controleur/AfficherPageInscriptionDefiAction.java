@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Charles
  */
-public class AfficherPageInscriptionDefiAction implements Action, RequestAware {
+public class AfficherPageInscriptionDefiAction implements Action, RequestAware, DataReceiver {
 
      private HttpServletRequest request;
     private HttpServletResponse response;

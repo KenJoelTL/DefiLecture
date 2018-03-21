@@ -7,12 +7,13 @@ package com.defiLecture.controleur;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 
 /**
  *
@@ -32,46 +33,59 @@ public class ControleurFrontal extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
+
         String t = request.getParameter("tache");
+
+        //initialise le map s'il est null | Ce "tableau associatif" est propre à chaque session 
+        if((HashMap)request.getSession(true).getAttribute("data") == null){
+            Map<String, Object> data = new HashMap(); //un peu comme le view bag
+            request.getSession(true).setAttribute("data", data);
+        }
         
         if (t != null) {
             
             Action action = ActionBuilder.getAction(t);
             if (action instanceof RequestAware) {
-               ((RequestAware)action).setRequest(request);
-               ((RequestAware)action).setResponse(response);
+                if(action instanceof DataReceiver){
+                    Map<String, Object> data = new HashMap((HashMap)request.getSession(true).getAttribute("data"));
+                    request.setAttribute("data", data);
+                }
+                //On vide le contenu
+                ((HashMap)request.getSession(true).getAttribute("data")).clear();
+
+                ((RequestAware) action).setRequest(request);
+                ((RequestAware) action).setResponse(response);
             }
             if (action instanceof SessionAware) {
-               ((SessionAware)action).setSession(request.getSession(true));
+                ((SessionAware) action).setSession(request.getSession(true));
+            }
+            if (action instanceof DataSender) {
+                ((DataSender) action).setData((HashMap)request.getSession(true).getAttribute("data"));
             }
             
-            if(action instanceof SendAjaxResponse){
+            if (action instanceof SendAjaxResponse) {
                 action.execute();
-            }
-            else{
+            } 
+            else {
                 String vue = action.execute();
-            
+                
                 if (action instanceof RequirePRGAction) {
                     response.sendRedirect(vue);
-                }
+                } 
                 else {
-                     this.getServletContext().getRequestDispatcher(vue).forward(request, response);
+                    this.getServletContext().getRequestDispatcher(vue).forward(request, response);
                 }
+                
+                
             }
-            
-           
-        }
-        
-        else
-        {
+
+        } 
+        else {
             Action action = ActionBuilder.getAction("");
             String vue = action.execute();
             this.getServletContext().getRequestDispatcher(vue).forward(request, response);
-            
+
         }
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
