@@ -36,7 +36,7 @@
               <thead>
                 <tr>
                   <th>Nom</th>
-                  <th>Doublons</th>
+ 
                   <th>État</th>
                 </tr>
               </thead>
@@ -47,7 +47,7 @@
                 <tr>
                   <c:if test="${(compteConnecte.idEquipe eq -1) and (equipe.nbMembres lt 3)}">
                   <td><a href="pageEquipe.do?tache=afficherPageEquipe&idEquipe=${equipe.idEquipe}">${equipe.nom}</a></td>
-                  <td>${equipe.point} points</td>
+        
                    <td>
                     <c:set var="demande" value="${daoDemEq.findByIdCompteEquipe(compteConnecte.idCompte,equipe.idEquipe)}"/>          
                     <c:choose>

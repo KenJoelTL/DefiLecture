@@ -12,17 +12,19 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Charles
  */
-public class DefaultAction implements Action, RequestAware {
+public class AfficherPageMarcheASuivreAction implements Action, RequestAware  {
 
     private HttpServletRequest request;
     private HttpServletResponse response;
     
     @Override
-    public String execute() {      
+    public String execute() {
+        
         request.setAttribute("vue", "pageMarcheASuivre.jsp");
+        
         return "/index.jsp";
     }
-    
+
     @Override
     public void setRequest(HttpServletRequest request) {
         this.request = request;
@@ -32,4 +34,5 @@ public class DefaultAction implements Action, RequestAware {
     public void setResponse(HttpServletResponse response) {
         this.response = response;
     }
+    
 }

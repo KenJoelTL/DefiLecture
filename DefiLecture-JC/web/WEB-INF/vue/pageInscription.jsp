@@ -9,6 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
         <title>Page D'inscription</title>
     </head>
     <body>
@@ -39,7 +40,7 @@
                         </div>
                         
                         <div class="form-group">
-                            <label for="programmeEtude">Programme d'étude :</label>
+                            <label for="programmeEtude">Programme d'étude ou poste occupé au collège :</label>
                             <div class="input-group">
                                 <input id="programmeEtude" type="text" class="form-control" name="programmeEtude" value="${requestScope.data['programmeEtude']}">
                             </div>
@@ -66,18 +67,22 @@
                             <div class="alert alert-danger"><strong>${requestScope.data['erreurMotPasseIdentique']}</strong></div>
                             </c:if>
                         <div class="form-group">
-                            <label for="motPasse">Mot de passe (jusqu'à 12 caratères)* :</label>
+                            <label for="motPasse">Mot de passe (jusqu'à 12 caratères)*:</label>
                             <div class="input-group">
                                 <input id="motPasse" type="password" class="form-control" name="motPasse" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="confirmationMotPasse">Confirmation du mot de passe* :</label>
+                            <label for="confirmationMotPasse">Confirmation du mot de passe*:</label>
                             <div class="input-group">
                                 <input id="confirmationMotPasse" type="password" class="form-control" name="confirmationMotPasse" required>
                             </div>
                         </div> 
-
+                        
+                        <div class="form-group">
+                             <label for="devenirCapitaine"><input id="chkDevenirCapitaine" type="checkbox" name="devenirCapitaine" value="1">Je désire être capitaine d'un équipage (employé ou tuteur)</label>
+                        </div> 
+                        
                         <input type="hidden" name="tache" value="effectuerInscription">
                
                        <button type="submit" class="btn btn-danger btn-inscription">S'INSCRIRE</button>

@@ -34,7 +34,7 @@
          <div class="container-fluid">
           
           <div class="navbar-header">
-            <a class="navbar-brand logo-navigation" href='*.do?tache=afficherPageTableauScores'></a>
+            <a class="navbar-brand logo-navigation" href='*.do?tache=afficherPageMarcheASuivre'></a>
             <!-- Apparait lorsque la fenêtre devient de la taille d'un téléphone mobile -->
             <button id="btn-burger" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#optionsNavigation">
               <span class="icon-bar"></span>
@@ -81,7 +81,7 @@
                                     </li>                                              
                                 </c:when>
                                 <c:otherwise>
-                                    <li><a href="creationEquipe.do?tache=afficherPageCreationEquipe">Cr&eacute;er une équipage</a></li>                                            
+                                    <li><a href="creationEquipe.do?tache=afficherPageCreationEquipe">Cr&eacute;er un équipage</a></li>                                            
                                 </c:otherwise>
                             </c:choose>
                         </c:when>
@@ -95,7 +95,7 @@
                                             </li>                        
                                         </c:when>
                                         <c:otherwise>
-                                            <li><a href="joindreEquipe.do?tache=afficherPageListeEquipes">Joindre une équipage</a></li>                                              
+                                            <li><a href="joindreEquipe.do?tache=afficherPageListeEquipes">Joindre un équipage</a></li>                                              
                                             <li><a href="joindreEquipe.do?tache=afficherPageListeDemandesEquipe&ordre=envoyee">Acc&eacute;der aux demandes</a></li>                                              
                                         </c:otherwise>
                                     </c:choose>
@@ -137,6 +137,18 @@
                 
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                 
+                 <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Code du pirate   
+                        <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li><a href='*.do?tache=afficherPageMarcheASuivre'>Marche à suivre</a></li>
+                          <li><a href='*.do?tache=afficherPageCodeConduite'>Code de conduite</a></li>
+                          <li><a href='*.do?tache=afficherPageGlossaire'>Glossaire</a></li>
+                          <li><a href='*.do?tache=afficherPageContributeurs'>Contributeurs</a></li>
+                        </ul>
+                    </li>
+                
             <c:choose>
                 <c:when test="${ empty sessionScope.connecte }">
                     <li><a href='*.do?tache=afficherPageConnexion'><span class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>        

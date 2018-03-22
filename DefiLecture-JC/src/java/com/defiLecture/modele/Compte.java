@@ -21,7 +21,17 @@ public class Compte {
     
     private int role = Compte.PARTICIPANT,      //Utilisateur==0 | Participant==1 | Capitaine==2 | Animateur==3 | Administrateur==4
                 point,                          //Sommes des points gagnées par les lectures. 
-                minutesRestantes;
+                minutesRestantes,
+                devenirCapitaine;               //Utilisateur veut devenir capitaine = 1 sinon, 0.
+
+    public int getDevenirCapitaine() {
+        return devenirCapitaine;
+    }
+
+    public void setDevenirCapitaine(int devenirCapitaine) {
+        this.devenirCapitaine = devenirCapitaine;
+    }
+   
 
 //    String nomUtilisateur;                    //ancienne clé primaire
     private String pseudonyme,                  //l'utilisateur peut aussi s'inscrire avec un pseudo unique
