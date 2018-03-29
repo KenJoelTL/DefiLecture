@@ -14,6 +14,8 @@ import java.util.List;
 
 public abstract class DAO<T> {
 	protected Connection cnx;
+        protected Trieur trieur;
+        protected Paginateur paginateur;
 
         public DAO(){}
         
@@ -35,4 +37,5 @@ public abstract class DAO<T> {
 	public abstract boolean update(T x);    //UPDATE
 	public abstract boolean delete(T x);    //DELETE
 	public abstract List<T> findAll();      //SELECT
+//	public abstract List<T> findAll(int startingRow, int nbOfResult);      //SELECT
 }

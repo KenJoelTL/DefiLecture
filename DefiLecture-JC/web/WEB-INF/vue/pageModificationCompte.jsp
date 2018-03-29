@@ -87,6 +87,7 @@
                 <div class="form" action="suppression.do">
                     <form>
                         <input type="hidden" name="idCompte" value="${compte.idCompte}">
+                        <input type="hidden" name="tache" value="effectuerSuppressionCompte"
                         <button class="btn btn-danger" type="submit" name="supprime"  >Supprimer</button>
          
                     </form>
