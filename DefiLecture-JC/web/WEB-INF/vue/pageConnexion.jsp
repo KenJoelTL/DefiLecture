@@ -9,6 +9,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script language="javascript" src="./script/jquery-1.4.2.min.js"></script>
+        <script language="javascript" src="./script/connexion.js"></script>
         <title>Page de connexion</title>
     </head>
     <body class="connexion-body">
@@ -34,11 +36,12 @@
                     <input id="motPasse" type="password" class="form-control" name="motPasse"  >
                 </div>
             </div>
-            <a href="#">
-                Mot de passe oublié?.
+            <a id="lienMDPoublie" href="#">
+                Mot de passe oublié? <span id="spanMDP" class="glyphicon glyphicon-menu-down"></span>
             </a>
+            <p id="msgMDPoublie">Si vous avez oublié votre mot de passe, veuillez contacter l'administrateur de l'application.</p>
             <input type="hidden" name="tache" value="effectuerConnexion">
-            <button type="submit" class="btn btn-danger">ENVOYER</button>
+            <button type="submit" class="btn btn-danger">À L'ABORDAGE!</button>
             
         </form>
       </div>

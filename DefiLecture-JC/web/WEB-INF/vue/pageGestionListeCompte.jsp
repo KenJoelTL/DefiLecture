@@ -37,7 +37,14 @@
 
             <c:choose>
                 <c:when test="${compte.role eq 1}">
-                    <c:set var="role" value="Participant"></c:set>        
+                    <c:choose>
+                         <c:when test="${compte.devenirCapitaine eq 1}">
+                             <c:set var="role" value="Participant***"></c:set>
+                         </c:when>
+                        <c:otherwise>
+                            <c:set var="role" value="Participant"></c:set>   
+                        </c:otherwise>
+                    </c:choose>
                 </c:when>
                 <c:when test="${compte.role eq 2}">
                     <c:set var="role" value="Capitaine"></c:set>        
