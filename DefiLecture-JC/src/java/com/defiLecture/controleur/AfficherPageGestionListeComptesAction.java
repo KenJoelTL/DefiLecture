@@ -21,7 +21,7 @@ import java.sql.SQLException;
  *
  * @author Joel
  */
-public class AfficherPageGestionListeComptesAction implements Action, RequestAware , SessionAware {
+public class AfficherPageGestionListeComptesAction implements Action, RequestAware , SessionAware, DataReceiver {
     private HttpSession session;
     private HttpServletRequest request;
     private HttpServletResponse response;

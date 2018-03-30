@@ -271,7 +271,42 @@ public class CompteDAO extends DAO<Compte>{
         List<Compte> liste = new LinkedList<>();
         try {
             Statement stm = cnx.createStatement(); 
-            ResultSet r = stm.executeQuery("SELECT * FROM compte");
+            ResultSet r = stm.executeQuery("SELECT * FROM compte ORDER BY NOM");
+            while (r.next()) {
+                Compte c = new Compte();
+                c.setIdCompte(r.getInt("ID_COMPTE"));
+                if(r.getInt("ID_EQUIPE")==0)
+                    c.setIdEquipe(-1);
+                else    
+                    c.setIdEquipe(r.getInt("ID_EQUIPE"));
+                c.setCourriel(r.getString("COURRIEL"));
+                c.setMotPasse(r.getString("MOT_PASSE"));
+                c.setNom(r.getString("NOM"));
+                c.setPrenom(r.getString("PRENOM"));
+                c.setPoint(r.getInt("POINT"));
+                c.setMinutesRestantes(r.getInt("MINUTES_RESTANTES"));
+                c.setProgrammeEtude(r.getString("PROGRAMME_ETUDE"));
+                c.setAvatar(r.getString("AVATAR"));
+                c.setPseudonyme(r.getString("PSEUDONYME")); 
+                c.setRole(r.getInt("ROLE"));
+                
+                liste.add(c);
+            }
+            r.close();
+            stm.close();
+        }
+        catch (SQLException exp){
+        }
+        return liste;
+
+    }
+    
+    public List<Compte> findAll(int startingRow, int nbOfResult) {
+                        
+        List<Compte> liste = new LinkedList<>();
+        try {
+            Statement stm = cnx.createStatement(); 
+            ResultSet r = stm.executeQuery("SELECT * FROM compte LIMIT ?, ?");
             while (r.next()) {
                 Compte c = new Compte();
                 c.setIdCompte(r.getInt("ID_COMPTE"));
@@ -544,5 +579,5 @@ public class CompteDAO extends DAO<Compte>{
         return null;
 
     }
-    
+
 }

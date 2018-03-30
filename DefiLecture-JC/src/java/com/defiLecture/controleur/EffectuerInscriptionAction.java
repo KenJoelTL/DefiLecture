@@ -86,11 +86,6 @@ public class EffectuerInscriptionAction implements Action, RequestAware, Require
                 Connexion.setPassword(Config.DB_PWD);
                 //Étape 3 : ouverture de la connexion vers la base de données
                 Connection cnx = Connexion.getInstance();*/
-                
-                
-
-                
-                
                 Connection cnx = Connexion.startConnection(Config.DB_USER,Config.DB_PWD,Config.URL,Config.DRIVER);
                 CompteDAO dao = new CompteDAO(cnx);
                 Compte compte = new Compte();
@@ -100,9 +95,6 @@ public class EffectuerInscriptionAction implements Action, RequestAware, Require
                 compte.setMotPasse(motPasse);
                 compte.setPseudonyme(pseudonyme);
                 compte.setProgrammeEtude(programmeEtude);
-                if(request.getParameter("devenirCapitaine") != null){
-                    compte.setDevenirCapitaine(Integer.parseInt(request.getParameter("devenirCapitaine"))); 
-                }
 
                 //faire vérification avec des findBy
                 if(dao.findByCourriel(courriel) != null ){
