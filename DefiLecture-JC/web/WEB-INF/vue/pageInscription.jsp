@@ -19,21 +19,32 @@
                     <div class="alert alert-danger"><strong>${requestScope.data['erreurInscription']}</strong></div>
                     </c:if>
                     <h1>Inscription</h1>
+                     <c:if test="${!empty requestScope.data['erreurPrenom']}">
+                              <div class="alert alert-danger"><strong>${requestScope.data['erreurPrenom']}</strong></div>
+                            </c:if>
+                     <c:if test="${!empty requestScope.data['erreurNom']}">
+                            <div class="alert alert-danger"><strong>${requestScope.data['erreurNom']}</strong></div>
+                            </c:if>
+                    <c:if test="${!empty requestScope.data['erreurCourriel']}">
+                            <div class="alert alert-danger"><strong>${requestScope.data['erreurCourriel']}</strong></div>
+                            </c:if>
+                    <c:if test="${!empty requestScope.data['erreurPseudonyme']}">
+                            <div class="alert alert-danger"><strong>${requestScope.data['erreurPseudonyme']}</strong></div>
+                            </c:if>
+                    <c:if test="${!empty requestScope.data['erreurMotPasseIdentique']}">
+                            <div class="alert alert-danger"><strong>${requestScope.data['erreurMotPasseIdentique']}</strong></div>
+                            </c:if>
                     <form class="inscription-form" action="inscription.do" method="post">
                         <div class="form-group">
                             <label for="prenom">Prénom* :</label>
-                            <c:if test="${!empty requestScope.data['erreurPrenom']}">
-                              <div class="alert alert-danger"><strong>${requestScope.data['erreurPrenom']}</strong></div>
-                            </c:if>
+                           
                             <div class="input-group">
                                 <input id="prenom" type="text" class="form-control" name="prenom" value="${requestScope.data['prenom']}" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="nom">Nom* :</label>
-                            <c:if test="${!empty requestScope.data['erreurNom']}">
-                            <div class="alert alert-danger"><strong>${requestScope.data['erreurNom']}</strong></div>
-                            </c:if>
+                           
                             <div class="input-group">
                                 <input id="nom" type="text" class="form-control" name="nom" value="${requestScope.data['nom']}" required>
                             </div>
@@ -47,25 +58,19 @@
                         </div>
                         <div class="form-group">
                             <label for="courriel">Courriel* :</label>
-                            <c:if test="${!empty requestScope.data['erreurCourriel']}">
-                            <div class="alert alert-danger"><strong>${requestScope.data['erreurCourriel']}</strong></div>
-                            </c:if>
+                            
                             <div class="input-group">
                                 <input id="courriel" type="email" class="form-control" name="courriel" value="${requestScope.data['courriel']}" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="pseudonyme">Pseudonyme :</label>
-                            <c:if test="${!empty requestScope.data['erreurPseudonyme']}">
-                            <div class="alert alert-danger"><strong>${requestScope.data['erreurPseudonyme']}</strong></div>
-                            </c:if>
+                            
                             <div class="input-group">
                                 <input id="pseudonyme" type="text" class="form-control" name="pseudonyme" value="${requestScope.data['pseudonyme']}">
                             </div>
                         </div>
-                            <c:if test="${!empty requestScope.data['erreurMotPasseIdentique']}">
-                            <div class="alert alert-danger"><strong>${requestScope.data['erreurMotPasseIdentique']}</strong></div>
-                            </c:if>
+                            
                         <div class="form-group">
                             <label for="motPasse">Mot de passe (jusqu'à 12 caratères)*:</label>
                             <div class="input-group">

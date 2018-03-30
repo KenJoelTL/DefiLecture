@@ -110,7 +110,7 @@ public class EffectuerInscriptionAction implements Action, RequestAware, Require
                         action="succes.do?tache=afficherPageConnexion";
                     }
                     else{
-                        data.put("erreurInscription","Problème de création du compte");
+                        data.put("erreurInscription","Problème de création du compte. Veuillez réessayer. Si le problème survient à répétition, contactez un administrateur.");
                     }
                 }
             }

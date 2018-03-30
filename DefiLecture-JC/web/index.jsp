@@ -176,7 +176,7 @@
                             <jsp:include page="${vue}" ></jsp:include>
                         </c:when>
                         <c:otherwise>
-                            <jsp:include page="/WEB-INF/vue/pageTableauScores.jsp" ></jsp:include>
+                            <jsp:include page="/WEB-INF/vue/pageMarcheASuivre.jsp" ></jsp:include>
                         </c:otherwise>
                     </c:choose>
                     
