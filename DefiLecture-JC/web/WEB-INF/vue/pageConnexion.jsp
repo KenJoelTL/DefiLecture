@@ -15,11 +15,18 @@
     </head>
     <body class="connexion-body">
         <div class='row'> 
+
         <c:choose>
             
         <c:when test="${ empty sessionScope.connecte }">
-       <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 connexion-col"> 
+        <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 connexion-col"> 
            <h1>Connexion</h1>
+            <c:if test="${!empty requestScope.data['succesInscription']}">
+                <div class="alert alert-success"><strong>${requestScope.data['succesInscription']}</strong></div>
+            </c:if>
+            <c:if test="${!empty requestScope.data['erreurConnexion']}">
+                <div class="alert alert-danger"><strong>${requestScope.data['erreurConnexion']}</strong></div>
+            </c:if>
         <form class="connexion-form" action="connexion.do" method="post">
             <div class="form-group">
                 <label for="identifiant">Courriel ou pseudonyme:</label>
