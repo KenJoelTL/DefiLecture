@@ -943,3 +943,13 @@ background-image: url("../images/2_ACCUEIL.png");
 	align-items: center;
 	justify-content: center;
 }
+
+
+.fa.fa-facebook {
+	    background-color: #4267b2;
+    color: white;
+    width: 17px;
+    padding-left: 5px;
+    border-radius: 4px;
+    padding-top: 2px;
+}

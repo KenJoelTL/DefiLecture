@@ -9,6 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">   
         <title>Marche à suivre</title>
     </head>
     <body>
@@ -61,15 +62,15 @@
                     </ol>
                     </div>
 
+                    <h3>
+
+                        Consignez vos lectures et relevez les défis proposés du <b>9 au 29 avril 2018</b> 
+
+
+                    </h3>
+
                     <p>
-
-                        Consignez vos lectures et relevez les défis proposés du 9 au 29 avril 2018 
-
-
-                    </p>
-
-                    <p>
-                        Consultez la page Facebook Défi lecture – Collège de Rosemont pour ne rien manquer de l’aventure !
+                        <strong>Consultez la page <i class="fa fa-facebook"></i> Facebook <i>Défi lecture – Collège de Rosemont</i></strong> pour ne rien manquer de l’aventure et pour nous formuler vos commentaires au sujet de cette version 1.0 du Défi lecture!
 
                     </p>
                     <div class="divIconePirate">
