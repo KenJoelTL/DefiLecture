@@ -84,11 +84,11 @@
                     </div>
                 </form>
 
-                <div class="form" action="suppression.do">
-                    <form>
-                        <input type="hidden" name="idCompte" value="${compte.idCompte}">
-                        <input type="hidden" name="tache" value="effectuerSuppressionCompte"
-                        <button class="btn btn-danger" type="submit" name="supprime"  >Supprimer</button>
+                <div class="form" >
+                    <form action="suppression.do">
+                        <input type="hidden" name="idCompte" value="${compte.idCompte}"/>
+                        <input type="hidden" name="tache" value="effectuerSuppressionCompte"/>
+                        <button class="btn btn-danger" type="submit">Supprimer</button>
          
                     </form>
                 </div>

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.defiLecture.controleur;
 
 
@@ -78,6 +74,8 @@ public class ActionBuilder {
                     return new EffectuerModificationCompteAction();
                 case "effectuerAjoutAvatarCompte":
                     return new EffectuerAjoutAvatarCompteAction();
+                case "effectuerSuppressionCompte":
+                    return new EffectuerSuppressionCompteAction();
       //Equipe
                 case "afficherPageEquipe":
                     return new AfficherPageEquipeAction();
