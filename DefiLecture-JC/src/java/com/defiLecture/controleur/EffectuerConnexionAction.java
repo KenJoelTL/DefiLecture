@@ -12,6 +12,7 @@ import jdbc.Config;
 import jdbc.Connexion;
 import com.defiLecture.modele.Compte;
 import com.defiLecture.modele.CompteDAO;
+import com.util.Util;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -53,7 +54,7 @@ public class EffectuerConnexionAction implements Action, RequestAware, SessionAw
                     action = "*.do?tache=afficherTableauScores";
                 } else {
                     data.put("echecConnexion", "L'identifiant et/ou le mot de passe entré est invalide");
-                    data.put("identifiant", identifiant);
+                    data.put("identifiant", Util.toUTF8(identifiant));
                 }
             } catch (ClassNotFoundException e) {
                 System.out.println("Erreur dans le chargement du pilote :" + e);

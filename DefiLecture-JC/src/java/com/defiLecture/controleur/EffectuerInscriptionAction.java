@@ -8,6 +8,7 @@ import jdbc.Config;
 import jdbc.Connexion;
 import com.defiLecture.modele.Compte;
 import com.defiLecture.modele.CompteDAO;
+import com.util.Util;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,11 +31,11 @@ public class EffectuerInscriptionAction implements Action, RequestAware, Require
         String action = "echec.do?tache=afficherPageInscription";
 
         if(request.getParameter("pseudonyme")      != null){
-            data.put("pseudonyme",request.getParameter("pseudonyme"));
+            data.put("pseudonyme",Util.toUTF8(request.getParameter("pseudonyme")));
         }
         
         if(request.getParameter("programmeEtude")      != null){
-            data.put("programmeEtude",request.getParameter("programmeEtude"));
+            data.put("programmeEtude",Util.toUTF8(request.getParameter("programmeEtude")));
         }
 
 
@@ -44,7 +45,7 @@ public class EffectuerInscriptionAction implements Action, RequestAware, Require
             data.put("erreurCourriel","Veuillez entrer votre courriel");
         }
         else{
-            data.put("courriel",request.getParameter("courriel"));
+            data.put("courriel",Util.toUTF8(request.getParameter("courriel")));
         }
 
         if(request.getParameter("prenom")   == null){
@@ -52,7 +53,7 @@ public class EffectuerInscriptionAction implements Action, RequestAware, Require
             data.put("erreurPrenom","Veuillez entrer votre prenom");
         }
         else{
-            data.put("prenom",request.getParameter("prenom"));
+            data.put("prenom",Util.toUTF8(request.getParameter("prenom")));
         }
 
         if(request.getParameter("nom")      == null){
@@ -60,7 +61,7 @@ public class EffectuerInscriptionAction implements Action, RequestAware, Require
             data.put("erreurNom","Veuillez entrer votre nom");
         }
         else{
-            data.put("nom",request.getParameter("nom"));
+            data.put("nom",Util.toUTF8(request.getParameter("nom")));
         }
 
         if((request.getParameter("motPasse") != null)
