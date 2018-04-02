@@ -53,6 +53,7 @@ public class EffectuerConnexionAction implements Action, RequestAware, SessionAw
                     action = "*.do?tache=afficherTableauScores";
                 } else {
                     data.put("echecConnexion", "L'identifiant et/ou le mot de passe entré est invalide");
+                    data.put("identifiant", identifiant);
                 }
             } catch (ClassNotFoundException e) {
                 System.out.println("Erreur dans le chargement du pilote :" + e);
