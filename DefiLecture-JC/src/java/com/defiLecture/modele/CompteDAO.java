@@ -289,6 +289,7 @@ public class CompteDAO extends DAO<Compte>{
                 c.setAvatar(r.getString("AVATAR"));
                 c.setPseudonyme(r.getString("PSEUDONYME")); 
                 c.setRole(r.getInt("ROLE"));
+                c.setDevenirCapitaine(r.getInt("DEVENIR_CAPITAINE"));
                 
                 liste.add(c);
             }
