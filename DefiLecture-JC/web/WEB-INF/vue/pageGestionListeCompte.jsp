@@ -23,6 +23,9 @@
         <c:if test="${!empty requestScope.data['suppressionEchec']}">
             <div class="alert alert-danger"><strong>${requestScope.data['suppressionEchec']}</strong></div>
         </c:if>
+        <c:if test="${!empty requestScope.data['compteIntrouvable']}">
+            <div class="alert alert-warning"><strong>${requestScope.data['compteIntrouvable']}</strong></div>
+        </c:if>
         <h2>Gestionnaire de comptes</h2>  
 
         <table class="table cacherSurMobile">
@@ -66,14 +69,14 @@
                         </c:otherwise>
                     </c:choose>
 
-
+                    <c:set var="permissionAccordee" value="${sessionScope.role gt Compte.CAPITAINE and sessionScope.role gt compte.role}"></c:set>
                     <tr>
                         <td>${compte.prenom}</td>
                         <td>${compte.nom}</td>
                         <td>${ empty compte.pseudonyme ? "---" : compte.pseudonyme}</td>
                         <td>${compte.courriel}</td>
                         <td>${role}</td>
-                        <td><c:if test="${ (sessionScope.connecte eq compte.idCompte ) or (sessionScope.role gt compte.role)}">
+                        <td><c:if test="${ (sessionScope.connecte eq compte.idCompte ) or (permissionAccordee) }">
                                 <a href="details.do?tache=afficherPageModificationCompte&id=${compte.idCompte}">Modifier</a>
                             </c:if>
                         </td>

@@ -14,7 +14,7 @@ import com.defiLecture.modele.Compte;
  *
  * @author Joel
  */
-public class AfficherPageListeDemandesEquipeAction implements Action, RequestAware, SessionAware {
+public class AfficherPageListeDemandesEquipeAction implements Action, RequestAware, SessionAware, DataReceiver {
     private HttpServletResponse response;
     private HttpServletRequest request;
     private HttpSession session;

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Joel
  */
-public class AfficherPageModificationEquipeAction implements Action, RequestAware, SessionAware{
+public class AfficherPageModificationEquipeAction implements Action, RequestAware, SessionAware, DataReceiver{
     private HttpSession session;
     private HttpServletResponse response;
     private HttpServletRequest request;

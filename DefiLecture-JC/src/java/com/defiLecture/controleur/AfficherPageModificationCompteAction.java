@@ -21,7 +21,7 @@ import java.sql.SQLException;
  *
  * @author Joel
  */
-public class AfficherPageModificationCompteAction implements Action, RequestAware,SessionAware {
+public class AfficherPageModificationCompteAction implements Action, RequestAware,SessionAware, DataReceiver {
     private HttpSession session;
     private HttpServletRequest request;
     private HttpServletResponse response;
@@ -29,7 +29,7 @@ public class AfficherPageModificationCompteAction implements Action, RequestAwar
     @Override
     public String execute() {
 
-        request.setAttribute("vue", "pageGestionListeCompte.jsp");        
+        request.setAttribute("vue", "pageMarcheASuivre.jsp");        
         
         
         // On vérifie si l'utilisateur qui est selectionné est bien celui qui est connecté. 
@@ -48,12 +48,23 @@ public class AfficherPageModificationCompteAction implements Action, RequestAwar
 
                 if(dao.read(idCompte)!=null)
                     request.setAttribute("vue", "pageModificationCompte.jsp");
-                
+                else{
+                    if(((int)session.getAttribute("role") == Compte.ADMINISTRATEUR) || ((int)session.getAttribute("role") == Compte.MODERATEUR) ){
+                        request.setAttribute("vue", "pageGestionListeCompte.jsp");
+                    }
+                    else{//message d'erreur
+                        request.setAttribute("vue", "pageMarcheASuivre.jsp");
+                    }
+                }
+
             } 
             catch (ClassNotFoundException ex) {
                 Logger.getLogger(AfficherPageModificationCompteAction
                                    .class.getName()).log(Level.SEVERE, null, ex);
-                request.setAttribute("vue", "pageGestionListeCompte.jsp");
+                    if((request.getParameter("id").equals(session.getAttribute("connecte")+"")))
+                        request.setAttribute("vue", "pageMarcheASuivre.jsp");
+                    else
+                        request.setAttribute("vue", "pageGestionListeCompte.jsp");
                 return "/index.jsp";
             } catch (SQLException ex) {
                 Logger.getLogger(AfficherPageModificationCompteAction.class.getName()).log(Level.SEVERE, null, ex);
