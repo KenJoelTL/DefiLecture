@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Goudy+Bookletter+1911');
 
 
-h1, h2, h3, h4, h5, p, a, button, input, textarea, label, li {
+h1, h2, h3, h4, h5, p, a, button, input, textarea, label, li, th, td {
   font-family: 'Goudy Bookletter 1911', serif;
 }
 
@@ -67,7 +67,7 @@ span.glyphicon.glyphicon-log-in {
     background: rgba(255,255,255,0.2);
 }
 
-ul.nav.navbar-nav.navbar-right{
+ul.nav.navbar-nav{
   height: 93px;
   display :flex;
 }
@@ -85,6 +85,19 @@ ul.dropdown-menu {
     background : none!important;
   }
 
+  #facebook {
+  	background-image: url("../images/facebook.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 34px;
+  }
+
+  #li-facebook {
+  	display: flex;
+  	justify-content: center;
+  	align-items: center;
+  }
+
 
 @media (max-width: 1400px) {
 
@@ -98,9 +111,14 @@ ul.dropdown-menu {
     box-shadow: none;
   }
 
+  #li-facebook {
+  	justify-content: flex-start;
+  	margin-left: 12px!important;
+  }
 
 
-  ul.nav.navbar-nav.navbar-right {
+
+  ul.nav.navbar-nav {
   height: auto;
   flex-direction: column;
 
@@ -157,7 +175,7 @@ ul.dropdown-menu {
     justify-content: flex-start;
     align-items: center;
     text-align: center;
-    min-height: 1080px;
+    min-height: 700px;
     padding-top: 35px;
 }
 
@@ -165,20 +183,23 @@ ul.dropdown-menu {
 	width : 100%;
 }
 
-.connexion-col {
-	background-image: url("../images/1_CONNEXION.png");
-  background-repeat: repeat;
-  background-size: contain;
-     min-height: 1080px;
+.connexion-row {
+background-image: url("../images/1_CONNEXION.png");
+  padding: 5%;
+      display: flex;
+    flex-direction: column;
+    align-items: center;
 
 }
+
+
 
 .connexion-form label {
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 10px;
   padding: 9px 35px;
   font-size: 18px;
-  width: 250px!important;
+  width: 251px!important;
 }
 .connexion-col h1 {
     font-size: 45px!important;
@@ -257,11 +278,13 @@ p#msgMDPoublie {
   height: 45px;
 }
 
-.inscription-col {
-  background-image: url("../images/1_CONNEXION.png");
-  background-repeat: repeat;
-  background-size: contain;
-      min-height: 1080px;
+.inscription-row {
+background-image: url("../images/1_CONNEXION.png");
+     min-height: 1080px;
+  padding: 5%;
+      display: flex;
+    flex-direction: column;
+    align-items: center;
 
 }
 
@@ -281,7 +304,7 @@ p#msgMDPoublie {
 
 .scores-row {
 background-image: url("../images/2_ACCUEIL.png");
-     min-height: 1080px;
+
   padding: 5%;
       display: flex;
     flex-direction: column;
@@ -292,7 +315,7 @@ background-image: url("../images/2_ACCUEIL.png");
 .scores-col {
     background-color: rgba(255,255,255,0.5);
     border-radius: 20px;
-    min-height: 1080px;
+    min-height: 700px;
     padding: 5%;
   }
 
@@ -305,7 +328,7 @@ background-image: url("../images/2_ACCUEIL.png");
 
 .accueil-row {
   background-image: url("../images/2_ACCUEIL.png");
-     min-height: 1080px;
+
   padding: 20px 40px;
   display: flex;
   justify-content: center;
@@ -389,7 +412,6 @@ background-image: url("../images/2_ACCUEIL.png");
 
 .demandes-row {
   background-image: url("../images/3_MODELE.png");
-  min-height: 1080px;
   padding: 5%;
 
 }
@@ -397,7 +419,7 @@ background-image: url("../images/2_ACCUEIL.png");
 .demandes-col {
     background-color: rgba(255,255,255,0.5);
     border-radius: 20px;
-    min-height: 1080px;
+    min-height: 700px;
     padding: 5%;
   }
 
@@ -409,7 +431,6 @@ background-image: url("../images/2_ACCUEIL.png");
 
 .participationDefi-row {
   background-image: url("../images/3_MODELE.png");
-  min-height: 1080px;
   padding: 5%;
 
 }
@@ -417,7 +438,7 @@ background-image: url("../images/2_ACCUEIL.png");
 .participationDefi-col {
     background-color: rgba(255,255,255,0.5);
     border-radius: 20px;
-    min-height: 1080px;
+    min-height: 700px;
     padding: 5%;
   }
 
@@ -436,7 +457,6 @@ background-image: url("../images/2_ACCUEIL.png");
 
 .listeCompte-row {
   background-image: url("../images/3_MODELE.png");
-  min-height: 1080px;
   padding: 5%;
 
 }
@@ -444,7 +464,7 @@ background-image: url("../images/2_ACCUEIL.png");
 .listeCompte-col {
     background-color: rgba(255,255,255,0.5);
     border-radius: 20px;
-    min-height: 1080px;
+    min-height: 700px;
     padding: 5%!important;
   }
 
@@ -572,10 +592,22 @@ background-image: url("../images/2_ACCUEIL.png");
   cursor: pointer;
 }
 
+.creation-lecture-row {
+background-image: url("../images/2_ACCUEIL.png");
+  padding: 5%;
+      display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
 .creation-lecture-col {
-  background-image: url("../images/1_CONNEXION.png");
-  padding-bottom: 20px;
-  min-height: 1080px;
+
+    background-color: rgba(255,255,255,0.5);
+    border-radius: 20px;
+    min-height: 700px;
+    padding: 5%;
+
 }
 
 .creation-lecture-col h1 {
@@ -654,12 +686,7 @@ background-image: url("../images/2_ACCUEIL.png");
 }
 
 
-.creation-lecture-form {
-  background-color: rgba(255, 255, 255, 0.5);
-      padding: 1% 2%;
-    margin-top: 5%;
-  border-radius: 20px;
-}
+
 
 .creation-lecture-form .form-group {
   width: 280px;
@@ -692,6 +719,8 @@ background-image: url("../images/2_ACCUEIL.png");
 
 
 /*Inscription défi*/
+
+
 
 .inscription-defi-col {
   background-image: url("../images/1_CONNEXION.png");
@@ -749,7 +778,7 @@ background-image: url("../images/2_ACCUEIL.png");
 .gestion-lecture-col {
     background-color: rgba(255,255,255,0.5);
     border-radius: 20px;
-    min-height: 1080px;
+    min-height: 700px;
     padding: 5%;
   }
 
@@ -761,7 +790,6 @@ background-image: url("../images/2_ACCUEIL.png");
 
  .liste-equipes-row {
   background-image: url("../images/3_MODELE.png");
-  min-height: 1080px;
   padding: 5%;
 
 }
@@ -769,7 +797,7 @@ background-image: url("../images/2_ACCUEIL.png");
 .liste-equipes-col {
     background-color: rgba(255,255,255,0.5);
     border-radius: 20px;
-    min-height: 1080px;
+    min-height: 700px;
     padding: 5%;
   }
 
@@ -790,7 +818,7 @@ background-image: url("../images/2_ACCUEIL.png");
 .page-equipe-col {
   background-image: url("../images/1_CONNEXION.png");
   padding-bottom: 20px;
-  min-height: 1080px;
+  min-height: 700px;
       display: flex;
     flex-direction: column;
 }
