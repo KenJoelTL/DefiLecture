@@ -51,7 +51,12 @@
                 <div class='jumbotron'> 
                     
                     <h1>${equipe.nom}</h1>
-                    <p>${equipe.point} doublons</p>
+                    <c:if test="${equipe.point eq 0}">
+                        <p>${equipe.point} doublon</p>
+                    </c:if>
+                    <c:if test="${equipe.point ge 1}">
+                        <p>${equipe.point} doublons</p>
+                    </c:if> 
                     <p>Rang #${rang}</p>
              
                 </div>
