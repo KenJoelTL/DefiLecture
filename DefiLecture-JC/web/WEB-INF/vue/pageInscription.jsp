@@ -10,15 +10,16 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         
-        <title>Page D'inscription</title>
+        <title>Page d'inscription</title>
     </head>
     <body>
-        <div class='row'> 
+        <div class='row inscription-row'> 
                 <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 inscription-col"> 
                     <c:if test="${!empty requestScope.data['erreurInscription']}">
                     <div class="alert alert-danger"><strong>${requestScope.data['erreurInscription']}</strong></div>
                     </c:if>
-                    <h1>Inscription</h1>
+                    <h1>S'inscrire</h1>
+                   
                      <c:if test="${!empty requestScope.data['erreurPrenom']}">
                               <div class="alert alert-danger"><strong>${requestScope.data['erreurPrenom']}</strong></div>
                             </c:if>
@@ -35,6 +36,7 @@
                             <div class="alert alert-danger"><strong>${requestScope.data['erreurMotPasseIdentique']}</strong></div>
                             </c:if>
                     <form class="inscription-form" action="inscription.do" method="post">
+                        <strong><p>* champs obligatoires</p></strong>
                         <div class="form-group">
                             <label for="prenom">Prénom* :</label>
                            
@@ -72,13 +74,13 @@
                         </div>
                             
                         <div class="form-group">
-                            <label for="motPasse">Mot de passe (jusqu'à 12 caratères)*:</label>
+                            <label for="motPasse">Mot de passe (jusqu'à 12 caratères)* :</label>
                             <div class="input-group">
                                 <input id="motPasse" type="password" class="form-control" name="motPasse" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="confirmationMotPasse">Confirmation du mot de passe*:</label>
+                            <label for="confirmationMotPasse">Confirmation du mot de passe* :</label>
                             <div class="input-group">
                                 <input id="confirmationMotPasse" type="password" class="form-control" name="confirmationMotPasse" required>
                             </div>

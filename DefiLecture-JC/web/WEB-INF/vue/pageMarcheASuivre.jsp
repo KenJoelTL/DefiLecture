@@ -14,11 +14,11 @@
     </head>
     <body>
 
-        <div class="row scores-row">
-           <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 accueil-col"></div>
+        <div class="row creation-lecture-row">
+
             <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 scores-col marcheASuivre">
   
-                    <h1>Un nouveau défi pour tous !</h1>
+                    <h1>Un nouveau défi pour tous!</h1>
                     <p>
 
                         Organisé par le Centre d’aide en français dans le cadre de la Politique de valorisation de la langue, le Défi lecture s’adresse tant aux élèves qu’au personnel du Collège de Rosemont.
@@ -70,12 +70,10 @@
                     </h3>
 
                     <p>
-                        <strong>Consultez la page <i class="fa fa-facebook"></i> Facebook <i>Défi lecture – Collège de Rosemont</i></strong> pour ne rien manquer de l’aventure et pour nous formuler vos commentaires au sujet de cette version 1.0 du Défi lecture!
+                        <strong>Consultez la page <i class="fa fa-facebook"></i> Facebook <a  target="_blank" href='https://www.facebook.com/DefiLectureCollegeRosemont/'><i>Défi lecture – Collège de Rosemont</i></a></strong> pour ne rien manquer de l’aventure et pour nous formuler vos commentaires au sujet de cette version 1.0 du Défi lecture!
 
                     </p>
-                    <div class="divIconePirate">
-                   <label class="pirateIconeMarcheASuivre"></label>
-                    </div>
+
          
                 </div>
             </div>

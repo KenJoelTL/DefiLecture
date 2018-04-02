@@ -13,7 +13,7 @@
     </head>
     <body>
 
-        <div class='row'> 
+        <div class='row creation-lecture-row'> 
 
             <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 creation-lecture-col">
                 <div class="creation-lecture-form glossaire">
