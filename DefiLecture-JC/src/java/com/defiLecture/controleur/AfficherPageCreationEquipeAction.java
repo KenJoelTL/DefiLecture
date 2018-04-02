@@ -20,7 +20,7 @@ import java.sql.SQLException;
  *
  * @author Joel
  */
-public class AfficherPageCreationEquipeAction implements Action,RequestAware, SessionAware{
+public class AfficherPageCreationEquipeAction implements Action,RequestAware, SessionAware, DataReceiver{
     private HttpServletResponse response;
     private HttpServletRequest request;
     private HttpSession session;        
