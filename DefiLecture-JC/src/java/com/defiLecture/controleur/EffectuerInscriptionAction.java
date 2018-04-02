@@ -96,6 +96,11 @@ public class EffectuerInscriptionAction implements Action, RequestAware, Require
                 compte.setMotPasse(motPasse);
                 compte.setPseudonyme(pseudonyme);
                 compte.setProgrammeEtude(programmeEtude);
+                
+                if(request.getParameter("devenirCapitaine") != null)
+                {
+                    compte.setDevenirCapitaine(Integer.parseInt(request.getParameter("devenirCapitaine"))); 
+                }
 
                 //faire vérification avec des findBy
                 if(dao.findByCourriel(courriel) != null ){
