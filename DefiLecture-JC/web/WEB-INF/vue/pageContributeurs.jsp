@@ -13,7 +13,7 @@
     </head>
     <body>
 
-        <div class='row'> 
+        <div class='row creation-lecture-row'> 
 
             <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 creation-lecture-col">
                 <div class="creation-lecture-form contributeurs ">
@@ -35,7 +35,7 @@
 
                     <p>
 
-                        <strong>Concepteurs graphiques</strong> :  Maxime Blanchet, enseignant au département de Bureautique, Charlotte Ganivet, Eléazar Désiré et Alexandre Paillé, étudiants (concepts visuels retenus). Merci aux autres étudiants du cours Conception de sites web interactifs en Techniques de bureautique, Microédition et hypermédia pour les maquettes présentées à la session d’hiver 2017.
+                        <strong>Concepteurs graphiques</strong> :  Maxime Blanchet, enseignant au département de Bureautique, Charlotte Ganivet, Eléazar Désiré, Samony Chea et Alexandre Paillé, étudiants (concepts visuels retenus). Merci aux autres étudiants du cours Conception de sites web interactifs en Techniques de bureautique, Microédition et hypermédia pour les maquettes présentées à la session d’hiver 2017.
 
 
 
@@ -74,7 +74,7 @@
 
                     </p>
                     <p>
-                        <strong>Direction des études et de la vie étudiante</strong>, Marie-Ève St-Denis, directrice adjointe aux études
+                        <strong>Direction des études et de la vie étudiante</strong>, Marie-Ève St-Denis, directrice adjointe aux études et à la vie étudiante
 
                     </p>
                     <p>
