@@ -36,8 +36,13 @@ public class EffectuerModificationCompteAction implements Action, RequestAware, 
                     prenom = request.getParameter("prenom"),
                     nom = request.getParameter("nom"),
                     programmeEtude = request.getParameter("programmeEtude"),
-                    motPasse = org.apache.commons.codec.digest.DigestUtils.sha1Hex(request.getParameter("motPasse")),
+                    motPasse = request.getParameter("motPasse"),
                     pseudonyme = request.getParameter("pseudonyme");
+
+            if (motPasse != null) {
+                motPasse = org.apache.commons.codec.digest.DigestUtils.sha1Hex(request.getParameter("motPasse"));
+            }
+
             int idEquipe,
                     minutesRestantes,
                     pointage,
@@ -145,7 +150,7 @@ public class EffectuerModificationCompteAction implements Action, RequestAware, 
 
     @Override
     public void setData(Map<String, Object> data) {
-        this.data = (HashMap)data;
+        this.data = (HashMap) data;
     }
 
 }
