@@ -195,22 +195,22 @@ ALTER TABLE `lecture`
 -- AUTO_INCREMENT pour la table `compte`
 --
 ALTER TABLE `compte`
-  MODIFY `ID_COMPTE` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `ID_COMPTE` int(10) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `defi`
 --
 ALTER TABLE `defi`
-  MODIFY `ID_DEFI` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID_DEFI` int(10) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `demande_equipe`
 --
 ALTER TABLE `demande_equipe`
-  MODIFY `ID_DEMANDE_EQUIPE` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `ID_DEMANDE_EQUIPE` int(10) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `equipe`
 --
 ALTER TABLE `equipe`
-  MODIFY `ID_EQUIPE` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `ID_EQUIPE` int(10) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `inscription_defi`
 --
@@ -220,7 +220,7 @@ ALTER TABLE `inscription_defi`
 -- AUTO_INCREMENT pour la table `lecture`
 --
 ALTER TABLE `lecture`
-  MODIFY `ID_LECTURE` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `ID_LECTURE` int(10) NOT NULL AUTO_INCREMENT;
 --
 -- Contraintes pour les tables exportées
 --
