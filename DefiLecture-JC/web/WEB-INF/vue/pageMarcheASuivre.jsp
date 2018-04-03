@@ -26,7 +26,7 @@
                     </p>
 
                     <p>
-                        Empreint de l’imaginaire de la piraterie, cette activité vise à promouvoir la lecture en encourageant les membres de la communauté collégiale à former des équipes de corsaires, composées d’un capitaine et de deux matelots, qui consigneront leurs lectures sur un site Internet. Les différents équipages, à bord de leur fier vaisseau, se livreront un combat féroce pour obtenir le plus de doublons et ainsi damer le pion à leurs adversaires.
+                        Empreinte de l’imaginaire de la piraterie, cette activité vise à promouvoir la lecture en encourageant les membres de la communauté collégiale à former des équipes de corsaires, composées d’un capitaine et de deux matelots, qui consigneront leurs lectures sur un site Internet. Les différents équipages, à bord de leur fier vaisseau, se livreront un combat féroce pour obtenir le plus de doublons et ainsi damer le pion à leurs adversaires.
 
                     </p>
 
@@ -45,7 +45,7 @@
                         <h3>  <strong>Pour être capitaine :</strong></h3>
                     <ol>
                         <li>Inscrivez-vous </li>
-                        <li>Cochez : « Je désire être capitaine d’un équipage (employé ou tuteur) »</li>
+                        <li>Cochez : «&nbsp;Je désire être capitaine d’un équipage (employé ou tuteur)&nbsp;»</li>
                         <li>Attendez que nous approuvions votre inscription en tant que capitaine </li>
                         <li>Créez votre équipage en donnant un nom au navire</li>
                         <li>Invitez des élèves à joindre votre équipage en leur remettant le signet du Défi lecture</li>
@@ -57,7 +57,7 @@
                         <h3>  <strong>Pour vous joindre à un équipage :</strong></h3>
                     <ol>
                         <li>Inscrivez-vous </li>
-                        <li>Sélectionnez l’onglet « Joindre un équipage », choisissez l’équipage de votre choix et cliquez sur « Envoyer une demande d’adhésion » </li>
+                        <li>Sélectionnez l’onglet «&nbsp;Joindre un équipage&nbsp;», choisissez l’équipage de votre choix et cliquez sur «&nbsp;Envoyer une demande d’adhésion&nbsp;» </li>
                         <li>Attendez que le capitaine approuve votre demande</li>
                     </ol>
                     </div>
