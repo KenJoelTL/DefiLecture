@@ -27,7 +27,6 @@
     <body>
  
         <div class="row scores-row">
-           <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 accueil-col"></div>
             <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 scores-col">
                 <h2>La trésorerie</h2>  
 
@@ -36,7 +35,7 @@
                         <tr>
                           <th>Rang</th>
                           <th>Nom de l'équipage</th>
-                          <th>Doublons</th>
+                          <th style="text-align:center">Doublons</th>
                         </tr>
                       </thead>
 
@@ -44,9 +43,9 @@
                       <c:forEach items="${listeEquipes}" var="equipe">          
                       <c:set var="i" value="${i+1}"/>          
                         <tr>
-                          <td>#${i}</td>
+                          <td>${i}</td>
                           <td><a href="pageEquipe.do?tache=afficherPageEquipe&idEquipe=${equipe.idEquipe}">${equipe.nom}</a></td>
-                          <td>${equipe.point}</td>
+                          <td style="text-align:center">${equipe.point}</td>
                         </tr>
                       </c:forEach>  
                       </tbody>

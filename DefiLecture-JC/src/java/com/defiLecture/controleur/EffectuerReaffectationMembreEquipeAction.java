@@ -20,15 +20,18 @@ import com.defiLecture.modele.DemandeEquipeDAO;
 import com.defiLecture.modele.Equipe;
 import com.defiLecture.modele.EquipeDAO;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
  * @author Joel
  */
-public class EffectuerReaffectationMembreEquipeAction implements Action, RequestAware, SessionAware, RequirePRGAction {
+public class EffectuerReaffectationMembreEquipeAction implements Action, RequestAware, SessionAware, RequirePRGAction, DataSender {
     HttpServletResponse response;
     HttpServletRequest request;
     HttpSession session;
+    HashMap data;
 
     @Override
     public String execute() {
@@ -65,10 +68,13 @@ public class EffectuerReaffectationMembreEquipeAction implements Action, Request
                     
                     if(demandeEquipe != null && demandeEquipe.getStatutDemande() == DemandeEquipe.SUSPENDUE){
                         demandeEquipe.setStatutDemande(DemandeEquipe.ACCEPTEE);  
-                        if(demandeEqpDao.update(demandeEquipe))
+                        if(demandeEqpDao.update(demandeEquipe)){
                             action = "suspension.do?tache=afficherPageModificationEquipe&idEquipe="+idEquipe;
-                        else
+                            data.put("succesReafectation", "Le matelot "+ compte.getPrenom() + " " + compte.getNom() + " n'est plus à la cale");
+                        }else{
+                            data.put("echecReafectation", "Un erreur est survenue lors de la réafectation du matelot "+ compte.getPrenom() + " " + compte.getNom() + " à l'équipage");
                             action="tuRestes.do?tache=afficherPageEquipe&idEquipe="+idEquipe;
+                        }
                     }
                 }
                 
@@ -100,6 +106,11 @@ public class EffectuerReaffectationMembreEquipeAction implements Action, Request
     @Override
     public void setSession(HttpSession session) {
         this.session = session;
+    }
+
+    @Override
+    public void setData(Map<String, Object> data) {
+        this.data = (HashMap) data;
     }
     
     

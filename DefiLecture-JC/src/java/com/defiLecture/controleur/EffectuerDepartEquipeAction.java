@@ -20,15 +20,18 @@ import com.defiLecture.modele.EquipeDAO;
 import com.defiLecture.modele.DemandeEquipeDAO;
 import com.defiLecture.modele.Equipe;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
  * @author Joel
  */
-public class EffectuerDepartEquipeAction implements Action, RequestAware, RequirePRGAction, SessionAware{
+public class EffectuerDepartEquipeAction implements Action, RequestAware, RequirePRGAction, SessionAware, DataSender {
     private HttpServletRequest request;
     private HttpServletResponse response;
     private HttpSession session;
+    private HashMap data;
     
     @Override
     public String execute() {
@@ -62,9 +65,12 @@ public class EffectuerDepartEquipeAction implements Action, RequestAware, Requir
                             compte.setIdEquipe(-1);
                             compteDao.update(compte);
                             action="auRevoir.do?tache=afficherPageEquipe&idEquipe="+idEquipe;
+                            data.put("succesRetrait", "Le matelot "+ compte.getPrenom()+ " " + compte.getNom() + " a été envoyé par-dessus bord");
                         }
-                        else
+                        else{
                             action="tuRestes.do?tache=afficherPageEquipe&idEquipe="+idEquipe;
+                            data.put("erreurRetrait", "Le matelot "+ compte.getPrenom()+ " " + compte.getNom() + " n'a pas été envoyé par-dessus bord");
+
                        // demandeEquipe.setStatutDemande(0); //met à 0 si l'utilisateur est suspendu
                         //si l'un des enregistrements échouent alors on revient à l'état initial 
                      /*   if(!demandeEqpDao.update(demandeEquipe) || !compteDao.update(compte)){
@@ -72,9 +78,8 @@ public class EffectuerDepartEquipeAction implements Action, RequestAware, Requir
                             compte.setIdEquipe(equipe.getIdEquipe());
                             demandeEqpDao.update(demandeEquipe);
                             compteDao.update(compte);
-                            action = "echec.do?tache=afficherPageEquipe&idEquipe="+idEquipe; 
+                            action = "echec.do?tache=afficherPageEquipe&idEquipe="+idEquipe; */
                         }
-                        else{}*/
                     }
                 }
                 
@@ -106,6 +111,11 @@ public class EffectuerDepartEquipeAction implements Action, RequestAware, Requir
     @Override
     public void setSession(HttpSession session) {
         this.session = session;
+    }
+
+    @Override
+    public void setData(Map<String, Object> data) {
+        this.data = (HashMap) data;
     }
     
     

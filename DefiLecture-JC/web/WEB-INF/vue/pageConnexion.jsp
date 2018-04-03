@@ -14,18 +14,22 @@
         <title>Page de connexion</title>
     </head>
     <body class="connexion-body">
-        <div class='row'> 
-        <c:choose>
-            
-        <c:when test="${ empty sessionScope.connecte }">
-       <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 connexion-col"> 
-           <h1>Connexion</h1>
+        <div class='row connexion-row'> 
+
+        <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 connexion-col"> 
+           <h1>Se connecter</h1>
+            <c:if test="${!empty requestScope.data['succesInscription']}">
+                <div class="alert alert-success"><strong>${requestScope.data['succesInscription']}</strong></div>
+            </c:if>
+            <c:if test="${!empty requestScope.data['echecConnexion']}">
+                <div class="alert alert-danger"><strong>${requestScope.data['echecConnexion']}</strong></div>
+            </c:if>
         <form class="connexion-form" action="connexion.do" method="post">
             <div class="form-group">
-                <label for="identifiant">Courriel ou pseudonyme:</label>
+                <label for="identifiant">Courriel ou pseudonyme :</label>
                 <div class="input-group">
           
-                    <input id="identifiant" type="text" class="form-control" name="identifiant">
+                    <input id="identifiant" type="text" class="form-control" name="identifiant" value="${requestScope.data['identifiant']}">
                 </div>
             </div>
             
@@ -45,14 +49,7 @@
             
         </form>
       </div>
-        </c:when>
-        <c:otherwise>
-            <a href="accueil.do?tache=afficherPageAccueil">
-                Retourner &agrave; la page d'accueil.
-            </a>
-        </c:otherwise>
-        
-        </c:choose>
+       
             </div>
     </body>
 </html>

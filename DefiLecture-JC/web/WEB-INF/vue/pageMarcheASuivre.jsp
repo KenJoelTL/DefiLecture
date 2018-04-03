@@ -9,15 +9,16 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">   
         <title>Marche à suivre</title>
     </head>
     <body>
 
-        <div class="row scores-row">
-           <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 accueil-col"></div>
+        <div class="row creation-lecture-row">
+
             <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 scores-col marcheASuivre">
   
-                    <h1>Un nouveau défi pour tous !</h1>
+                    <h1>Un nouveau défi pour tous!</h1>
                     <p>
 
                         Organisé par le Centre d’aide en français dans le cadre de la Politique de valorisation de la langue, le Défi lecture s’adresse tant aux élèves qu’au personnel du Collège de Rosemont.
@@ -61,20 +62,18 @@
                     </ol>
                     </div>
 
+                    <h3>
+
+                        Consignez vos lectures et relevez les défis proposés du <b>9 au 29 avril 2018</b> 
+
+
+                    </h3>
+
                     <p>
-
-                        Consignez vos lectures et relevez les défis proposés du 9 au 29 avril 2018 
-
+                        <strong>Consultez la page <i class="fa fa-facebook"></i> Facebook <a  target="_blank" href='https://www.facebook.com/DefiLectureCollegeRosemont/'><i>Défi lecture – Collège de Rosemont</i></a></strong> pour ne rien manquer de l’aventure et pour nous formuler vos commentaires au sujet de cette version 1.0 du Défi lecture!
 
                     </p>
 
-                    <p>
-                        Consultez la page Facebook Défi lecture – Collège de Rosemont pour ne rien manquer de l’aventure !
-
-                    </p>
-                    <div class="divIconePirate">
-                   <label class="pirateIconeMarcheASuivre"></label>
-                    </div>
          
                 </div>
             </div>

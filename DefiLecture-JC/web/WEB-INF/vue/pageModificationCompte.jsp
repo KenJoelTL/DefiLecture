@@ -23,49 +23,64 @@
         <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 modification-compte-col">
            <div class="modification-compte-form">
                 <h1>Page de configuration</h1>
-                <span>${requestScope.message}</span>
-
+                <c:if test="${!empty requestScope.data['succesModification']}">
+                    <div class="alert alert-success"><strong>${requestScope.data['succesModification']}</strong></div>
+                </c:if>
+                <c:if test="${!empty requestScope.data['erreurCourriel']}">
+                    <div class="alert alert-danger"><strong>${requestScope.data['erreurCourriel']}</strong></div>
+                </c:if>
+                <c:if test="${!empty requestScope.data['erreurPseudonyme']}">
+                    <div class="alert alert-danger"><strong>${requestScope.data['erreurPseudonyme']}</strong></div>
+                </c:if>
+                <c:if test="${!empty requestScope.data['erreurModification']}">
+                    <div class="alert alert-danger"><strong>${requestScope.data['erreurModification']}</strong></div>
+                </c:if>
+                <c:if test="${!empty requestScope.data['succesAvatar']}">
+                    <div class="alert alert-success"><strong>${requestScope.data['succesAvatar']}</strong></div>
+                </c:if>
+                <c:if test="${!empty requestScope.data['erreurAvatar']}">
+                    <div class="alert alert-danger"><strong>${requestScope.data['erreurAvatar']}</strong></div>
+                </c:if>
+                    
 
                 <div style="background-image: url('<c:url value='${compte.avatar}'/>')"></div>
 
                 <img class="img-responsive avatar" src="<c:url value='${compte.avatar}'/>" alt="Avatar">
                 <form method="POST" action=".do" enctype="multipart/form-data">
                     <div class="form-group">
-                    <label for="nomFichier">Avatar : </label>
-                    <input type="file" name="nomFichier" id="file"  accept="image/*"/> <br/>
-                    <input type="hidden" name="tache" value="effectuerAjoutAvatarCompte" />
-                    <input type="submit" value="T&eacute;l&eacute;verser" name="upload" id="upload" />
-                      </div>
-
-
+                        <label for="nomFichier">Avatar : </label>
+                        <input type="file" name="nomFichier" id="file"  accept="image/*"/> <br/>
+                        <input type="hidden" name="tache" value="effectuerAjoutAvatarCompte" />
+                        <button id="upload" name="upload" class="btn btn-primary">T&eacute;l&eacute;verser</button>
+                    </div>
                 </form>
 
 
                 <form action="modification.do" method="post" >
                     <div class="form-group">
                         <label for="prenom">Pr&eacute;nom* : </label>
-                        <input type="text" class="form-control" id=prenom name="prenom" value="${compte.prenom}" required ${ compte.idCompte eq session.connecte ? '':'readonly' }/>
+                        <input type="text" class="form-control" id=prenom name="prenom" value="${compte.prenom}" required ${ compte.idCompte eq sessionScope.connecte ? '':'readonly' }/>
                     </div>
                     <div class="form-group">
                         <label for="nom">Nom* : </label>
-                        <input type="text" class="form-control" name="nom" value="${compte.nom}" required ${ compte.idCompte eq session.connecte ? '':'readonly' }/>
+                        <input type="text" class="form-control" name="nom" value="${compte.nom}" required ${ compte.idCompte eq sessionScope.connecte ? '':'readonly' }/>
                     </div>
                     <div class="form-group">
-                        <label for="programmeEtude">Programme d'&eacute;tude : </label>
-                         <input type="text" class="form-control" name="programmeEtude" value="${compte.programmeEtude}" ${ compte.idCompte eq session.connecte ? '':'readonly' }/>
+                        <label for="programmeEtude">Programme d'&eacute;tude ou poste occup&eacute; au coll&egrave;ge: </label>
+                         <input type="text" class="form-control" name="programmeEtude" value="${compte.programmeEtude}" ${ compte.idCompte eq sessionScope.connecte ? '':'readonly' }/>
                     </div>
                     <div class="form-group">
                          <label for="courriel">Courriel* : </label>
-                        <input type="email" class="form-control" name="courriel" value="${compte.courriel}" required ${ compte.idCompte eq session.connecte ? '':'readonly' }/>
+                        <input type="email" class="form-control" name="courriel" value="${compte.courriel}" required ${ compte.idCompte eq sessionScope.connecte ? '':'readonly' }/>
                     </div>
-                   <div class="form-group">
+                    <div class="form-group">
                         <label for="pseudonyme">Pseudonyme : </label>
-                        <input type="text" class="form-control"  name="pseudonyme" value="${compte.pseudonyme}" ${ compte.idCompte eq session.connecte ? '':'readonly' }/>
+                        <input type="text" class="form-control"  name="pseudonyme" value="${compte.pseudonyme}" ${ compte.idCompte eq sessionScope.connecte ? '':'readonly' }/>
                     </div>
 
+                    <c:if test="${sessionScope.role gt 3}">
                     <div class="form-group">
                         <label for="role">R&ocirc;le du compte : </label>
-
                         <c:set var="selected" value=" selected=\"selected\"" />
                         <select name="role" class="form-control">
                             <option value="1" ${ compte.role eq 1 ? selected:'' }>Participant</option>
@@ -76,6 +91,7 @@
                             </c:if>
                         </select>
                     </div>
+                    </c:if>
                     <div>
                     <input type="hidden" name="idCompte" value="${compte.idCompte}">
                     <input type="hidden" name="tache" value="effectuerModificationCompte">
@@ -84,10 +100,11 @@
                     </div>
                 </form>
 
-                <div class="form" action="suppression.do">
-                    <form>
-                        <input type="hidden" name="idCompte" value="${compte.idCompte}">
-                        <button class="btn btn-danger" type="submit" name="supprime"  >Supprimer</button>
+                <div class="form" >
+                    <form action="suppression.do">
+                        <input type="hidden" name="idCompte" value="${compte.idCompte}"/>
+                        <input type="hidden" name="tache" value="effectuerSuppressionCompte"/>
+                        <button class="btn btn-danger" type="submit">Supprimer</button>
          
                     </form>
                 </div>

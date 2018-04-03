@@ -48,6 +48,16 @@
            
              <c:if test="${ !empty sessionScope.connecte && sessionScope.role le 2 }">
                 
+                <!-- À CACHER PENDANT LA PÉRIODE D'INSCRIPTION
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Lectures
+                    <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="*.do?tache=afficherPageCreationLecture">Ajouter une lecture</a></li>
+                      <li><a href="*.do?tache=afficherPageGestionLecture">Voir mes lectures</a></li>
+                    </ul>
+                </li>
+                --> 
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Lectures
                     <span class="caret"></span></a>
@@ -61,7 +71,6 @@
             </c:if>
            
                 <li><a href="scoreboard.do?tache=afficherPageTableauScores">
-                    <span class="glyphicon glyphicon-usd"></span> 
                     Trésorerie
                     </a>
                 </li>
@@ -96,7 +105,6 @@
                                         </c:when>
                                         <c:otherwise>
                                             <li><a href="joindreEquipe.do?tache=afficherPageListeEquipes">Joindre un équipage</a></li>                                              
-                                            <li><a href="joindreEquipe.do?tache=afficherPageListeDemandesEquipe&ordre=envoyee">Acc&eacute;der aux demandes</a></li>                                              
                                         </c:otherwise>
                                     </c:choose>
                                 </c:when>
@@ -108,7 +116,7 @@
                 <c:otherwise>
                     <li >
                         <a href='*.do?tache=afficherPageInscription' " >
-                            <span class="glyphicon glyphicon-education"></span> S'inscrire</a>
+                             S'inscrire</a>
                     </li>
                 </c:otherwise>
             </c:choose>
@@ -137,6 +145,10 @@
                 
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                
+                <li id='li-facebook'>
+                    <a id='facebook'  target="_blank" href='https://www.facebook.com/DefiLectureCollegeRosemont/'></a>
+                </li>
                  
                  <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Code du pirate   
@@ -176,7 +188,7 @@
                             <jsp:include page="${vue}" ></jsp:include>
                         </c:when>
                         <c:otherwise>
-                            <jsp:include page="/WEB-INF/vue/pageTableauScores.jsp" ></jsp:include>
+                            <jsp:include page="/WEB-INF/vue/pageMarcheASuivre.jsp" ></jsp:include>
                         </c:otherwise>
                     </c:choose>
                     
