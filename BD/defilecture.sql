@@ -3,10 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Sam 21 Octobre 2017 à 12:41
+-- Généré le :  Mar 03 Avril 2018 à 00:33
 -- Version du serveur :  5.7.11
 -- Version de PHP :  5.6.18
--- Créée par : Charles-André Fortin
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -23,21 +22,46 @@ SET time_zone = "+00:00";
 
 -- --------------------------------------------------------
 
-SET FOREIGN_KEY_CHECKS=0;
+--
+-- Structure de la table `compte`
+--
 
-DROP TABLE IF EXISTS demande_equipe;
-DROP TABLE IF EXISTS inscription_defi;
-DROP TABLE IF EXISTS defi;
-DROP TABLE IF EXISTS lecture;
-DROP TABLE IF EXISTS equipe;
-DROP TABLE IF EXISTS compte;
+DROP TABLE IF EXISTS `compte`;
+CREATE TABLE `compte` (
+  `ID_COMPTE` int(10) NOT NULL,
+  `ID_EQUIPE` int(10) DEFAULT NULL,
+  `COURRIEL` varchar(255) NOT NULL,
+  `MOT_PASSE` varchar(50) NOT NULL,
+  `NOM` varchar(255) NOT NULL,
+  `PRENOM` varchar(255) NOT NULL,
+  `POINT` int(10) DEFAULT '0',
+  `MINUTES_RESTANTES` int(10) DEFAULT '0',
+  `PROGRAMME_ETUDE` varchar(255) DEFAULT NULL,
+  `AVATAR` varchar(255) DEFAULT '/images/avatars/avatarCompte_defaut.png',
+  `PSEUDONYME` varchar(255) DEFAULT NULL,
+  `ROLE` int(10) NOT NULL DEFAULT '1',
+  `DEVENIR_CAPITAINE` int(3) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-SET FOREIGN_KEY_CHECKS=1;
+--
+-- Vider la table avant d'insérer `compte`
+--
+
+TRUNCATE TABLE `compte`;
+--
+-- Contenu de la table `compte`
+--
+
+INSERT INTO `compte` (`ID_COMPTE`, `ID_EQUIPE`, `COURRIEL`, `MOT_PASSE`, `NOM`, `PRENOM`, `POINT`, `MINUTES_RESTANTES`, `PROGRAMME_ETUDE`, `PSEUDONYME`, `ROLE`, `DEVENIR_CAPITAINE`) VALUES
+(1, NULL, 'admin@mail.com', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'admin', 'Admin', 0, 0, '', 'admin', 4, 0),
+
+-- --------------------------------------------------------
 
 --
 -- Structure de la table `defi`
 --
 
+DROP TABLE IF EXISTS `defi`;
 CREATE TABLE `defi` (
   `ID_DEFI` int(10) NOT NULL,
   `ID_COMPTE` int(10) DEFAULT NULL,
@@ -51,19 +75,22 @@ CREATE TABLE `defi` (
   `VALEUR_MINUTE` int(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
 -- --------------------------------------------------------
 
 --
 -- Structure de la table `demande_equipe`
 --
 
+DROP TABLE IF EXISTS `demande_equipe`;
 CREATE TABLE `demande_equipe` (
   `ID_DEMANDE_EQUIPE` int(10) NOT NULL,
   `ID_COMPTE` int(10) NOT NULL,
   `ID_EQUIPE` int(10) NOT NULL,
-  `POINT` int(10) NOT NULL,
-  `STATUT_DEMANDE` int(10) NOT NULL DEFAULT '0' /*0=en attente; 1=acceptée; 2=refusée*/
+  `POINT` int(10) NOT NULL DEFAULT '0',
+  `STATUT_DEMANDE` int(10) NOT NULL DEFAULT '-1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 -- --------------------------------------------------------
 
@@ -71,9 +98,10 @@ CREATE TABLE `demande_equipe` (
 -- Structure de la table `equipe`
 --
 
+DROP TABLE IF EXISTS `equipe`;
 CREATE TABLE `equipe` (
   `ID_EQUIPE` int(10) NOT NULL,
-  `NOM` varchar(255) NOT NULL
+  `NOM` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -82,11 +110,12 @@ CREATE TABLE `equipe` (
 -- Structure de la table `inscription_defi`
 --
 
+DROP TABLE IF EXISTS `inscription_defi`;
 CREATE TABLE `inscription_defi` (
   `ID_INSCRIPTION_DEFI` int(10) NOT NULL,
   `ID_COMPTE` int(10) NOT NULL,
   `ID_DEFI` int(10) DEFAULT NULL,
-  `EST_REUSSI` int(10) DEFAULT '0', /*0=non réussi; 1=réussi*/
+  `EST_REUSSI` int(10) DEFAULT '0',
   `VALEUR_MINUTE` int(11) DEFAULT '0',
   `DATE_INSCRIPTION` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -97,41 +126,29 @@ CREATE TABLE `inscription_defi` (
 -- Structure de la table `lecture`
 --
 
+DROP TABLE IF EXISTS `lecture`;
 CREATE TABLE `lecture` (
   `ID_LECTURE` int(10) NOT NULL,
   `ID_COMPTE` int(10) NOT NULL,
   `TITRE` varchar(255) NOT NULL,
   `DATE_INSCRIPTION` datetime DEFAULT CURRENT_TIMESTAMP,
   `DUREE_MINUTES` int(10) NOT NULL,
-  `EST_OBLIGATOIRE` int(2) DEFAULT '0' /*0=lecture non obligatoire; 1=lecture obligatoire*/
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
--- --------------------------------------------------------
-
---
--- Structure de la table `compte`
---
-
-CREATE TABLE `compte` (
-  `ID_COMPTE` int(10) NOT NULL,
-  `ID_EQUIPE` int(10) DEFAULT NULL,
-  `COURRIEL` varchar(255) NOT NULL,
-  `MOT_PASSE` varchar(12) NOT NULL,
-  `NOM` varchar(255) NOT NULL,
-  `PRENOM` varchar(255) NOT NULL,
-  `POINT` int(10) DEFAULT '0',
-  `MINUTES_RESTANTES` int(10) DEFAULT '0',
-  `PROGRAMME_ETUDE` varchar(255) DEFAULT NULL,
-  `AVATAR` varchar(255) DEFAULT NULL,
-  `PSEUDONYME` varchar(255) DEFAULT NULL,
-  `ROLE` int(10) NOT NULL DEFAULT '0' /*0=participant; 1=capitaine; 2=modérateur; 3=administrateur*/
+  `EST_OBLIGATOIRE` int(2) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 --
 -- Index pour les tables exportées
 --
+
+--
+-- Index pour la table `compte`
+--
+ALTER TABLE `compte`
+  ADD PRIMARY KEY (`ID_COMPTE`),
+  ADD UNIQUE KEY `COURRIEL_UNQ` (`COURRIEL`),
+  ADD UNIQUE KEY `COMPTE_UNQ` (`PSEUDONYME`),
+  ADD KEY `ID_EQUIPE` (`ID_EQUIPE`);
 
 --
 -- Index pour la table `defi`
@@ -171,33 +188,29 @@ ALTER TABLE `lecture`
   ADD KEY `ID_COMPTE` (`ID_COMPTE`);
 
 --
--- Index pour la table `compte`
---
-ALTER TABLE `compte`
-  ADD PRIMARY KEY (`ID_COMPTE`),
-  ADD UNIQUE KEY `COURRIEL_UNQ` (`COURRIEL`),
-  ADD UNIQUE KEY `COMPTE_UNQ` (`PSEUDONYME`),
-  ADD KEY `ID_EQUIPE` (`ID_EQUIPE`);
-
---
 -- AUTO_INCREMENT pour les tables exportées
 --
 
 --
+-- AUTO_INCREMENT pour la table `compte`
+--
+ALTER TABLE `compte`
+  MODIFY `ID_COMPTE` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+--
 -- AUTO_INCREMENT pour la table `defi`
 --
 ALTER TABLE `defi`
-  MODIFY `ID_DEFI` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_DEFI` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `demande_equipe`
 --
 ALTER TABLE `demande_equipe`
-  MODIFY `ID_DEMANDE_EQUIPE` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_DEMANDE_EQUIPE` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 --
 -- AUTO_INCREMENT pour la table `equipe`
 --
 ALTER TABLE `equipe`
-  MODIFY `ID_EQUIPE` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_EQUIPE` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 --
 -- AUTO_INCREMENT pour la table `inscription_defi`
 --
@@ -207,15 +220,16 @@ ALTER TABLE `inscription_defi`
 -- AUTO_INCREMENT pour la table `lecture`
 --
 ALTER TABLE `lecture`
-  MODIFY `ID_LECTURE` int(10) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `compte`
---
-ALTER TABLE `compte`
-  MODIFY `ID_COMPTE` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_LECTURE` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- Contraintes pour les tables exportées
 --
+
+--
+-- Contraintes pour la table `compte`
+--
+ALTER TABLE `compte`
+  ADD CONSTRAINT `COMPTE_FK1` FOREIGN KEY (`ID_EQUIPE`) REFERENCES `equipe` (`ID_EQUIPE`) ON DELETE SET NULL;
 
 --
 -- Contraintes pour la table `defi`
@@ -230,7 +244,6 @@ ALTER TABLE `demande_equipe`
   ADD CONSTRAINT `DEMANDE_EQUIPE_FK1` FOREIGN KEY (`ID_COMPTE`) REFERENCES `compte` (`ID_COMPTE`) ON DELETE CASCADE,
   ADD CONSTRAINT `DEMANDE_EQUIPE_FK2` FOREIGN KEY (`ID_EQUIPE`) REFERENCES `equipe` (`ID_EQUIPE`) ON DELETE CASCADE;
 
-
 --
 -- Contraintes pour la table `inscription_defi`
 --
@@ -243,12 +256,6 @@ ALTER TABLE `inscription_defi`
 --
 ALTER TABLE `lecture`
   ADD CONSTRAINT `LECTURE_FK1` FOREIGN KEY (`ID_COMPTE`) REFERENCES `compte` (`ID_COMPTE`) ON DELETE CASCADE;
-
---
--- Contraintes pour la table `compte`
---
-ALTER TABLE `compte`
-  ADD CONSTRAINT `COMPTE_FK1` FOREIGN KEY (`ID_EQUIPE`) REFERENCES `equipe` (`ID_EQUIPE`) ON DELETE SET NULL;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
