@@ -21,7 +21,7 @@
                     <h1>Un nouveau défi pour tous!</h1>
                     <p>
 
-                        Organisé par le Centre d’aide en français dans le cadre de la Politique de valorisation de la langue, le Défi lecture s’adresse tant aux élèves qu’au personnel du Collège de Rosemont.
+                        Bienvenue à cette première édition du Défi lecture! Organisé par le Centre d’aide en français dans le cadre de la Politique de valorisation de la langue, le Défi lecture s’adresse tant aux élèves qu’au personnel du Collège de Rosemont.
 
                     </p>
 
@@ -71,6 +71,10 @@
 
                     <p>
                         <strong>Consultez la page <i class="fa fa-facebook"></i> Facebook <a  target="_blank" href='https://www.facebook.com/DefiLectureCollegeRosemont/'><i>Défi lecture – Collège de Rosemont</i></a></strong> pour ne rien manquer de l’aventure et pour nous formuler vos commentaires au sujet de cette version 1.0 du Défi lecture!
+
+                    </p>
+                    <p style="text-align: right">
+                        Personnes ressources : Alexandra Jarque et Mélanie Bergeron, CAF, local A-494
 
                     </p>
 

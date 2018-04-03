@@ -5,6 +5,10 @@ h1, h2, h3, h4, h5, p, a, button, input, textarea, label, li, th, td {
   font-family: 'Goudy Bookletter 1911', serif;
 }
 
+h1, h2, h3, h4, h5, p, button, input, textarea, label, li, th, td {
+  color: black;
+}
+
 td, td a, p, li {
   font-size: 18px!important;
   color: black;
