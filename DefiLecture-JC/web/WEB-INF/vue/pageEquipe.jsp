@@ -57,7 +57,7 @@
                     <c:if test="${equipe.point ge 1}">
                         <p>${equipe.point} doublons</p>
                     </c:if> 
-                    <p>Rang #${rang}</p>
+                    <p>Rang ${rang}</p>
              
                 </div>
                  
