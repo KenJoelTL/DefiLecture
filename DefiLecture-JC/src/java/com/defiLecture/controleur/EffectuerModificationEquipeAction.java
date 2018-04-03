@@ -17,16 +17,20 @@ import com.defiLecture.modele.Compte;
 import com.defiLecture.modele.CompteDAO;
 import com.defiLecture.modele.Equipe;
 import com.defiLecture.modele.EquipeDAO;
+import com.util.Util;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
  * @author Joel
  */
-public class EffectuerModificationEquipeAction implements Action, RequestAware, SessionAware, RequirePRGAction{
+public class EffectuerModificationEquipeAction implements Action, RequestAware, SessionAware, RequirePRGAction, DataSender{
     HttpServletResponse response;
     HttpServletRequest request;
     HttpSession session;
+    HashMap data;
 
     @Override
     public String execute() {
@@ -45,10 +49,16 @@ public class EffectuerModificationEquipeAction implements Action, RequestAware, 
                         equipe = equipeDao.read(compte.getIdEquipe());
                         equipe.setNom(request.getParameter("nom"));
                         
-                        if(equipeDao.update(equipe))
+                        if(equipeDao.update(equipe)){
                             action = "*.do?tache=afficherPageModificationEquipe&idEquipe="+request.getParameter("idEquipe");
-                        else
-                            System.out.println("\n=========================134654564654656");//mettre un message d'erreur
+                            data.put("succesNom", "L'enregistrement du nouveau nom s'est fait avec succès");
+                        }
+                        else{
+                            data.put("erreurModification", "Un problème est survenu lors de la modification des informations");
+                        }
+                    }else{
+                        data.put("erreurNom", "Le nom "+ Util.toUTF8(request.getParameter("nom")) +" est déjà utilisé par un autre équipage");
+                        action = "*.do?tache=afficherPageModificationEquipe&idEquipe="+request.getParameter("idEquipe");
                     }
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(EffectuerModificationEquipeAction.class.getName()).log(Level.SEVERE, null, ex);
@@ -75,5 +85,10 @@ public class EffectuerModificationEquipeAction implements Action, RequestAware, 
     @Override
     public void setSession(HttpSession session) {
         this.session = session;
+    }
+
+    @Override
+    public void setData(Map<String, Object> data) {
+        this.data = (HashMap) data;
     }
 }

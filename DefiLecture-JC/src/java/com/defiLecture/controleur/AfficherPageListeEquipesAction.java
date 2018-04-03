@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Joel
  */
-public class AfficherPageListeEquipesAction implements Action, RequestAware, SessionAware {
+public class AfficherPageListeEquipesAction implements Action, RequestAware, SessionAware, DataReceiver {
     private HttpServletRequest request;
     private HttpServletResponse response;
     private HttpSession session;

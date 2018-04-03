@@ -20,16 +20,19 @@ import com.defiLecture.modele.DemandeEquipeDAO;
 import com.defiLecture.modele.Equipe;
 import com.defiLecture.modele.EquipeDAO;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
  * @author Joel
  */
 public class EffectuerDemandeAdhesionEquipeAction implements Action, SessionAware, 
-                                                RequestAware, RequirePRGAction {
+                                                RequestAware, RequirePRGAction, DataSender {
     HttpServletRequest request;
     HttpServletResponse response;
     HttpSession session;
+    HashMap data;
     
     @Override
     public String execute() {
@@ -55,7 +58,7 @@ public class EffectuerDemandeAdhesionEquipeAction implements Action, SessionAwar
                     action = "connexion.do?tache=afficherPageConnexion";
                 }
                 else{
-                    DemandeEquipe demandeEq = new DemandeEquipe();
+                    DemandeEquipe demandeEq;
                     DemandeEquipeDAO demandeDao = new DemandeEquipeDAO(cnx);
                     demandeEq = demandeDao.findByIdCompteEquipe(compte.getIdCompte(), equipe.getIdEquipe());
                     
@@ -65,12 +68,14 @@ public class EffectuerDemandeAdhesionEquipeAction implements Action, SessionAwar
                         demandeEq = new DemandeEquipe();
                         demandeEq.setIdCompte(compte.getIdCompte());
                         demandeEq.setIdEquipe(equipe.getIdEquipe());
-
+                        
                         //Insertion dans la base de données
                         if(!demandeDao.create(demandeEq))
                             action = "demandeEchouee.do?tache=afficherPageListeEquipes";
-                        else
+                        else{
+                            data.put("succesDemande", "Un demande d'adhésion a été envoyée à l'équipage " + equipe.getNom());
                             action = "demandeEnvoyee.do?tache=afficherPageListeEquipes";
+                        }
                     }
                     else{//si la demande existe déjà alors on la rend visible
                         demandeEq.setStatutDemande(-1);
@@ -102,5 +107,10 @@ public class EffectuerDemandeAdhesionEquipeAction implements Action, SessionAwar
     @Override
     public void setSession(HttpSession session) {
         this.session = session;
+    }
+
+    @Override
+    public void setData(Map<String, Object> data) {
+        this.data = (HashMap) data;
     }
 }

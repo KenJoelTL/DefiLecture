@@ -43,20 +43,44 @@
         
             <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 page-equipe-col configuration-equipe">
                 <h1>Configuration de l'&eacute;quipage</h1>
+                <c:if test="${!empty requestScope.data['succesNom']}">
+                    <div class="alert alert-danger"><strong>${requestScope.data['succesNom']}</strong></div>
+                </c:if>
+                <c:if test="${!empty requestScope.data['erreurNom']}">
+                    <div class="alert alert-danger"><strong>${requestScope.data['erreurNom']}</strong></div>
+                </c:if>
+                <c:if test="${!empty requestScope.data['erreurModification']}">
+                    <div class="alert alert-danger"><strong>${requestScope.data['erreurModification']}</strong></div>
+                </c:if>
+                <c:if test="${!empty requestScope.data['succesSuspension']}">
+                    <div class="alert alert-success"><strong>${requestScope.data['succesSuspension']}</strong></div>
+                </c:if>
+                <c:if test="${!empty requestScope.data['erreurSuspension']}">
+                    <div class="alert alert-danger"><strong>${requestScope.data['erreurSuspension']}</strong></div>
+                </c:if>
+                <c:if test="${!empty requestScope.data['succesReafectation']}">
+                    <div class="alert alert-success"><strong>${requestScope.data['succesReafectation']}</strong></div>
+                </c:if>
+                <c:if test="${!empty requestScope.data['erreurSuspension']}">
+                    <div class="alert alert-danger"><strong>${requestScope.data['erreurSuspension']}</strong></div>
+                </c:if>
+                <c:if test="${!empty requestScope.data['succesRetrait']}">
+                    <div class="alert alert-success"><strong>${requestScope.data['succesRetrait']}</strong></div>
+                </c:if>
+                <c:if test="${!empty requestScope.data['erreurRetrait']}">
+                    <div class="alert alert-danger"><strong>${requestScope.data['erreurRetrait']}</strong></div>
+                </c:if>
                 <form action="modificationEquipe.do" method="post">
-                <div class="form-group">
-                <label for="nom">Nom de l'&eacute;quipage* :</label>
-                <input type="text" class="form-control" id="nom" value="${equipe.nom}" 
-                       placeholder="Entrez le nouveau nom de votre &eacute;quipage" name="nom" ${permissionAccordee ? 'required': 'disabled'}/>
-                </div>
-                <c:if test="${permissionAccordee}">
-                    <input type="hidden" name="tache" value="effectuerModificationEquipe">
-                    <input type="hidden" name="idEquipe" value="${equipe.idEquipe}">
-                    <button type="submit" class="btn btn-success" name='modifier' value="Enregistrer">Enregistrer</button>
-         
-                    
-          
-                </c:if> 
+                    <div class="form-group">
+                        <label for="nom">Nom de l'&eacute;quipage* :</label>
+                        <input type="text" class="form-control" id="nom" value="${equipe.nom}" 
+                               placeholder="Entrez le nouveau nom de votre &eacute;quipage" name="nom" ${permissionAccordee ? 'required': 'disabled'}/>
+                    </div>
+                    <c:if test="${permissionAccordee}">
+                        <input type="hidden" name="tache" value="effectuerModificationEquipe">
+                        <input type="hidden" name="idEquipe" value="${equipe.idEquipe}">
+                        <button type="submit" class="btn btn-success" name='modifier' value="Enregistrer">Enregistrer</button>
+                    </c:if> 
                 </form>
         
                 <table class='table table-hover cacherSurMobile' >

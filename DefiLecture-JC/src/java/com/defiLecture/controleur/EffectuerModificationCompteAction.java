@@ -17,40 +17,56 @@ import com.defiLecture.modele.CompteDAO;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Joel
  */
-public class EffectuerModificationCompteAction implements Action, RequestAware, RequirePRGAction, DataSender {
+public class EffectuerModificationCompteAction implements Action, RequestAware, RequirePRGAction, SessionAware, DataSender {
 
     private HttpServletResponse response;
     private HttpServletRequest request;
+    private HttpSession session;
     private HashMap data;
 
     @Override
     public String execute() {
-        if (request.getParameter("modifie") != null) {
+        
+        if(((session.getAttribute("connecte") != null && session.getAttribute("role") != null) &&
+            request.getParameter("idCompte").equals(session.getAttribute("connecte").toString()) ||
+            (!request.getParameter("idCompte").equals(session.getAttribute("connecte").toString()) && 
+              (int)session.getAttribute("role") > Compte.CAPITAINE )) &&
+        
+            (request.getParameter("modifie") != null))  {
             String idCompte = request.getParameter("idCompte"),
                     courriel = request.getParameter("courriel"),
                     prenom = request.getParameter("prenom"),
                     nom = request.getParameter("nom"),
                     programmeEtude = request.getParameter("programmeEtude"),
-                    motPasse = org.apache.commons.codec.digest.DigestUtils.sha1Hex(request.getParameter("motPasse")),
+                    motPasse = request.getParameter("motPasse"),
                     pseudonyme = request.getParameter("pseudonyme");
+
+            if (motPasse != null) {
+                motPasse = org.apache.commons.codec.digest.DigestUtils.sha1Hex(request.getParameter("motPasse"));
+            }
+
             int idEquipe,
                     minutesRestantes,
                     pointage,
                     role;
-
+            boolean erreurSurvenue = false;
             try {
                 Connection cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
 
                 CompteDAO dao = new CompteDAO(cnx);
                 Compte compte = dao.read(idCompte);
                 if (compte == null) {
-                    data.put("compteIntrouvale", "Le compte que vous tentez de modifier est introuvable");
-                    return "*.do?tache=afficherPageGestionListeCompte";
+                    data.put("compteIntrouvable", "Le compte que vous tentez de modifier est introuvable");
+                    if((int)session.getAttribute("role") > Compte.CAPITAINE)
+                        return "*.do?tache=afficherPageGestionListeCompte";
+                    else
+                        return "*.do?tache=afficherMarcheASuivre";
                 } else {
                     cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
                     dao.setCnx(cnx);
@@ -92,7 +108,12 @@ public class EffectuerModificationCompteAction implements Action, RequestAware, 
                         }
                     }
                     if (courriel != null && !"".equals(courriel.trim()) && !courriel.equals(compte.getCourriel())) {
-                        compte.setCourriel(courriel);
+                        if (dao.findByCourriel(courriel) != null) {
+                            erreurSurvenue = true;
+                            data.put("erreurCourriel", "Ce courriel est déjà utilié par un autre mattelot");
+                        } else {
+                            compte.setCourriel(courriel);
+                        }
                     }
                     if (prenom != null && !"".equals(prenom.trim()) && !prenom.equals(compte.getPrenom())) {
                         compte.setPrenom(prenom);
@@ -104,27 +125,34 @@ public class EffectuerModificationCompteAction implements Action, RequestAware, 
                         compte.setMotPasse(motPasse);
                     }
                     if (pseudonyme != null && !pseudonyme.equals(compte.getPseudonyme())) {
-                        compte.setPseudonyme(pseudonyme);
+                        if (dao.findByPseudonyme(pseudonyme) != null) {
+                            erreurSurvenue = true;
+                            data.put("erreurPseudonyme", "Ce pseudonyme est déjà utilié par un autre mattelot");
+                        } else {
+                            compte.setPseudonyme(pseudonyme);
+                        }
                     }
                     if (programmeEtude != null && !programmeEtude.equals(compte.getProgrammeEtude())) {
                         compte.setProgrammeEtude(programmeEtude);
                     }
 
-                    if (!dao.update(compte)) {
-                        request.setAttribute("message", "Problèmes dans l'enregistrement des informations"); //mettre un message d'erreur
+                    if (erreurSurvenue) {
+                        return "*.do?tache=afficherPageModificationCompte&id=" + compte.getIdCompte();
+                    } else if (!dao.update(compte)) {
+                        data.put("erreurModification", "Un problème est survenu lors de l'enregistrement des informations");
                         return "*.do?tache=afficherPageModificationCompte&id=" + compte.getIdCompte();
                     } else {
                         //il faut avertir que les changements ont étés faits
-                        return "*.do?tache=afficherPageGestionListeCompte";
-                        //                request.setAttribute("vue", "gestionConfigurationCompte.jsp");
+                        data.put("succesModification", "Le compte du moussaillon " + compte.getCourriel() + " a été correctement modifié");
+                        return "*.do?tache=afficherPageModificationCompte&id=" + compte.getIdCompte();
                     }
                 }
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(EffectuerModificationCompteAction.class.getName()).log(Level.SEVERE, null, ex);
-                request.setAttribute("message", "Problèmes dans l'enregistrement des informations"); //mettre un message d'erreur
-                return "*.do?tache=afficherPageGestionConfigurationCompte&id=" + request.getParameter("idCompte");
+//                Logger.getLogger(EffectuerModificationCompteAction.class.getName()).log(Level.SEVERE, null, ex);
+                data.put("erreurModification", "Un problème est survenu lors de l'enregistrement des informations");
+                return "*.do?tache=afficherPageModificationCompte&id=" + request.getParameter("idCompte");
             } catch (SQLException ex) {
-                Logger.getLogger(EffectuerModificationCompteAction.class.getName()).log(Level.SEVERE, null, ex);
+//                Logger.getLogger(EffectuerModificationCompteAction.class.getName()).log(Level.SEVERE, null, ex);
                 return "*.do?tache=afficherPageGestionListeCompte";
             }
         } else {
@@ -145,7 +173,12 @@ public class EffectuerModificationCompteAction implements Action, RequestAware, 
 
     @Override
     public void setData(Map<String, Object> data) {
-        this.data = (HashMap)data;
+        this.data = (HashMap) data;
+    }
+
+    @Override
+    public void setSession(HttpSession session) {
+        this.session = session;
     }
 
 }

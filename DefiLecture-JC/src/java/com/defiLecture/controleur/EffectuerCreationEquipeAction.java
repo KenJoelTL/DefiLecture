@@ -20,15 +20,18 @@ import com.defiLecture.modele.DemandeEquipeDAO;
 import com.defiLecture.modele.Equipe;
 import com.defiLecture.modele.EquipeDAO;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
  * @author Joel
  */
-public class EffectuerCreationEquipeAction implements Action, RequestAware, SessionAware, RequirePRGAction {
+public class EffectuerCreationEquipeAction implements Action, RequestAware, SessionAware, RequirePRGAction, DataSender {
     private HttpSession session;
     private HttpServletResponse response;
     private HttpServletRequest request;
+    private HashMap data;
     
     
     @Override
@@ -62,6 +65,10 @@ public class EffectuerCreationEquipeAction implements Action, RequestAware, Sess
                                 if(daoDemandeEquipe.create(demande))
                                     return"creationEquipeCompletee.do?tache=afficherPageEquipe&idEquipe="+equipe.getIdEquipe(); //soit afficher le page avec utilisateur pour pouvoir enoyer une demande
                             }
+                        }
+                        else{
+                            data.put("erreurNom", "Ce nom est déjà utilisé par un équipage");
+                            return"creation.do?tache=afficherPageCreationEquipe";
                         }
                     }
                 } catch (ClassNotFoundException ex) {
@@ -97,6 +104,11 @@ public class EffectuerCreationEquipeAction implements Action, RequestAware, Sess
     @Override
     public void setSession(HttpSession session) {
         this.session = session;
+    }
+
+    @Override
+    public void setData(Map<String, Object> data) {
+        this.data = (HashMap) data;
     }
     
     

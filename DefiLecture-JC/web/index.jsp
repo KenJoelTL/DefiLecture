@@ -98,7 +98,6 @@
                                         </c:when>
                                         <c:otherwise>
                                             <li><a href="joindreEquipe.do?tache=afficherPageListeEquipes">Joindre un équipage</a></li>                                              
-                                            <li><a href="joindreEquipe.do?tache=afficherPageListeDemandesEquipe&ordre=envoyee">Acc&eacute;der aux demandes</a></li>                                              
                                         </c:otherwise>
                                     </c:choose>
                                 </c:when>

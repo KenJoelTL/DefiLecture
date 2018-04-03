@@ -14,7 +14,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:useBean id="connexion" scope="page" class="jdbc.Connexion"></jsp:useBean>  
-    
+
 <jsp:useBean id="daoEquipe" scope="page" class="com.defiLecture.modele.EquipeDAO">
     <jsp:setProperty name="daoEquipe" property="cnx" value="${connexion.connection}"></jsp:setProperty>
 </jsp:useBean>
@@ -27,47 +27,54 @@
 
 <c:set var="compteConnecte" value="${daoCompte.read(sessionScope.connecte)}"/>
 <c:set var="listeEquipes" value="${daoEquipe.findAll()}"/>
-    
+
 <div class="row liste-equipes-row"> 
     <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 liste-equipes-col">
-            <h2>Liste des équipages</h2>  
+        <c:if test="${!empty requestScope.data['succesAnnulation']}">
+            <div class="alert alert-success"><strong>${requestScope.data['succesAnnulation']}</strong></div>
+        </c:if>
+        <c:if test="${!empty requestScope.data['succesDemande']}">
+            <div class="alert alert-success"><strong>${requestScope.data['succesDemande']}</strong></div>
+        </c:if>
+            
+        <h2>Liste des &eacute;quipages</h2>  
 
-            <table class="table">
-              <thead>
+        <table class="table">
+            <thead>
                 <tr>
-                  <th>Nom</th>
- 
-                  <th>État</th>
+                    <th>Nom</th>
+
+                    <th>&Eacute;tat de la demande</th>
                 </tr>
-              </thead>
+            </thead>
 
-              <c:set var="i" value="0"/>          
-              <tbody>
-              <c:forEach items="${listeEquipes}" var="equipe">          
-                <tr>
-                  <c:if test="${(compteConnecte.idEquipe eq -1) and (equipe.nbMembres lt 3)}">
-                  <td><a href="pageEquipe.do?tache=afficherPageEquipe&idEquipe=${equipe.idEquipe}">${equipe.nom}</a></td>
-        
-                   <td>
-                    <c:set var="demande" value="${daoDemEq.findByIdCompteEquipe(compteConnecte.idCompte,equipe.idEquipe)}"/>          
-                    <c:choose>
+            <c:set var="i" value="0"/>          
+            <tbody>
+                <c:forEach items="${listeEquipes}" var="equipe">          
+                    <tr>
+                        <c:if test="${(compteConnecte.idEquipe eq -1) and (equipe.nbMembres lt 3)}">
+                            <td><a href="pageEquipe.do?tache=afficherPageEquipe&idEquipe=${equipe.idEquipe}">${equipe.nom}</a></td>
 
-                    <c:when test="${empty demande or demande.statutDemande eq 0}">
-                       <a href="demande.do?tache=effectuerDemandeAdhesionEquipe&idCompte=${compteConnecte.idCompte}&idEquipe=${equipe.idEquipe}">
-                           Envoyer une demande d'adhésion
-                       </a>
-                    </c:when>
-                    <c:otherwise>
-                        <span>Envoyée</span>
-                    </c:otherwise>
-                    </c:choose>
+                            <td>
+                                <c:set var="demande" value="${daoDemEq.findByIdCompteEquipe(compteConnecte.idCompte,equipe.idEquipe)}"/>          
+                                <c:choose>
 
-                   </td>    
-                  </c:if>
-                </tr>
-              </c:forEach>  
-              </tbody>
+                                    <c:when test="${empty demande or demande.statutDemande eq 0}">
+                                        <a href="demande.do?tache=effectuerDemandeAdhesionEquipe&idCompte=${compteConnecte.idCompte}&idEquipe=${equipe.idEquipe}">
+                                            Envoyer une demande d'adh&eacute;sion
+                                        </a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a href="refuser.do?tache=effectuerSuppressionDemandeAdhesion&idDemandeEquipe=${demande.idDemandeEquipe}">Annuler la demande d'adh&eacute;sion</a>
+                                    </c:otherwise>
+                                </c:choose>
 
-            </table>
+                            </td>    
+                        </c:if>
+                    </tr>
+                </c:forEach>  
+            </tbody>
+
+        </table>
     </div>
 </div>

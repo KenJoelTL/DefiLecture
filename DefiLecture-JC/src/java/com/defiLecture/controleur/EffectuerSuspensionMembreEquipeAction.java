@@ -20,15 +20,18 @@ import com.defiLecture.modele.DemandeEquipeDAO;
 import com.defiLecture.modele.Equipe;
 import com.defiLecture.modele.EquipeDAO;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
  * @author Joel
  */
-public class EffectuerSuspensionMembreEquipeAction implements Action, RequestAware, SessionAware, RequirePRGAction {
-    private HttpServletResponse reponse;
+public class EffectuerSuspensionMembreEquipeAction implements Action, RequestAware, SessionAware, RequirePRGAction, DataSender {
+    private HttpServletResponse response;
     private HttpServletRequest request;
     private HttpSession session;
+    private HashMap data;
 
     @Override
     public String execute() {
@@ -72,11 +75,13 @@ public class EffectuerSuspensionMembreEquipeAction implements Action, RequestAwa
                             compte.setIdEquipe(equipe.getIdEquipe());
                             demandeEqpDao.update(demandeEquipe);
                             compteDao.update(compte);*/
+                            data.put("succesSuspension", "Le matelot "+ compte.getPrenom() + " " + compte.getNom() + " est maintenant à la cale");
                             action = "suspension.do?tache=afficherPageModificationEquipe&idEquipe="+idEquipe; 
                         }
-                        else
+                        else{
+                            data.put("erreurSuspension", "Un erreur est arrivé lors de la tentative d'envoie matelot "+ compte.getPrenom() + " " + compte.getNom() + " à la cale");
                             action="tuRestes.do?tache=afficherPageEquipe&idEquipe="+idEquipe;
-
+                        }
                     }
                 }
                 
@@ -102,11 +107,16 @@ public class EffectuerSuspensionMembreEquipeAction implements Action, RequestAwa
 
     @Override
     public void setResponse(HttpServletResponse response) {
-        this.reponse = response;
+        this.response = response;
     }
 
     @Override
     public void setSession(HttpSession session) {
         this.session = session;    
+    }
+
+    @Override
+    public void setData(Map<String, Object> data) {
+        this.data = (HashMap) data;
     }
 }
