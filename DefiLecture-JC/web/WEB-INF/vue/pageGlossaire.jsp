@@ -38,8 +38,7 @@
 
                     <p>
 
-                        <strong>Lecture</strong> : une lecture obligatoire est imposée dans le cadre d’un cours; une lecture libre renvoie à toute autre lecture littéraire (les journaux, Facebook ou autres médias strictement informatifs sont exclus).
-
+                        <strong>Lecture</strong> : une lecture obligatoire est imposée dans le cadre d’un cours; une lecture libre renvoie à toute autre lecture littéraire, incluant les essais, mais excluant les journaux et les médias sociaux. Ainsi, le temps de lecture d’un article scientifique ou d’un texte philosophique pourra être consigné, alors qu’on s’abstiendra de noter celui d’une chronique culinaire.
                     </p>
 
                     <p>
