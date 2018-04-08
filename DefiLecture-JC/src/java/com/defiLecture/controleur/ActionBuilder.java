@@ -36,7 +36,10 @@ public class ActionBuilder {
                 case "effectuerConnexion":
                     return new EffectuerConnexionAction();
                 case "effectuerDeconnexion":
-                    return new EffectuerDeconnexionAction();
+                    return new EffectuerDeconnexionAction();   
+                case "effectuerGenerationMotPasse":
+                    return new EffectuerGenerationMotPasseAction();
+                    
       //Lecture             
                 case "afficherPageCreationLecture":
                     return new AfficherPageCreationLectureAction();
