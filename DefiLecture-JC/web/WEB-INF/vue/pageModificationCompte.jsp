@@ -6,6 +6,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="com.defiLecture.modele.Compte"%>
 <%@page import="com.defiLecture.modele.CompteDAO"%>
+<%@page import="com.defiLecture.modele.Equipe"%>
+<%@page import="com.defiLecture.modele.EquipeDAO"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="jdbc.Config"%>
 <%@page import="jdbc.Connexion"%>
@@ -16,7 +18,11 @@
         <jsp:setProperty name="dao" property="cnx" value="${connexion.connection}"></jsp:setProperty>
     </jsp:useBean>
     <c:set var="compte" scope="page" value="${dao.read(param.id)}"/>
-    
+    <jsp:useBean id="daoEquipe" class="com.defiLecture.modele.EquipeDAO">
+        <jsp:setProperty name="daoEquipe" property="cnx" value="${connexion.connection}"></jsp:setProperty>
+    </jsp:useBean>    
+    <c:set var="equipe" scope="page" value="${daoEquipe.read(compte.idEquipe)}"/>
+
         
 <body>
     <div class='row connexion-row'> 
@@ -55,6 +61,11 @@
                 <div style="background-image: url('<c:url value='${compte.avatar}'/>')"></div>
 
                 <img class="img-responsive avatar" src="<c:url value='${compte.avatar}'/>" alt="Avatar">
+                <h2 style="text-align:center">${compte.prenom} ${compte.nom}</h2>
+                <c:if test="${ !empty equipe }">
+                    <h2 style="text-align:center">De l'équipage <a href="pageEquipe.do?tache=afficherPageEquipe&idEquipe=${equipe.idEquipe}">${equipe.nom}</a></h2>                
+                </c:if>
+
                 <form method="POST" action=".do" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="nomFichier">Avatar : </label>
