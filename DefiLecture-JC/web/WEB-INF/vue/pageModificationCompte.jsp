@@ -19,8 +19,8 @@
     
         
 <body>
-    <div class='row'> 
-        <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 modification-compte-col">
+    <div class='row connexion-row'> 
+        <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 connexion-col modification-compte-col">
            <div class="modification-compte-form">
                 <h1>Page de configuration</h1>
                 <c:if test="${!empty requestScope.data['succesModification']}">
@@ -152,7 +152,7 @@
                     </form>
                 </c:if>
 
-                <a href="*.do?tache=afficherPageGestionListeCompte" class="retour"><span class="glyphicon glyphicon-circle-arrow-left"></span>retour à la liste des comptes</a>
+                <a href="*.do?tache=afficherPageGestionListeCompte" class="retour modifCompte"><span class="glyphicon glyphicon-circle-arrow-left"></span>retour à la liste des comptes</a>
            </div>
         </div>
     </div>
