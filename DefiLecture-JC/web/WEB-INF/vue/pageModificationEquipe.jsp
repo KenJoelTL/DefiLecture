@@ -3,6 +3,7 @@
     Created on : 2017-11-01, 20:52:35
     Author     : Joel
 --%>
+<%@page import="java.util.List"%>
 <%@page import="com.defiLecture.modele.DemandeEquipeDAO"%>
 <%@page import="com.defiLecture.modele.Compte"%>
 <%@page import="com.defiLecture.modele.CompteDAO"%>
@@ -20,25 +21,19 @@
     Compte compteConnecte = compteDao.read((int)(session.getAttribute("connecte"))); //vérifier si son équipe n'Est pas null
    if(request.getParameter("idEquipe") != null)
        equipe = new EquipeDAO(cnx).read(request.getParameter("idEquipe"));
-   else{
-       
-       equipe =new EquipeDAO(cnx).read(compteConnecte.getIdEquipe());
-   }
-    DemandeEquipeDAO demEquipeDao = new DemandeEquipeDAO(cnx); 
+   else
+       equipe = new EquipeDAO(cnx).read(compteConnecte.getIdEquipe());
+    DemandeEquipeDAO demEquipeDao = new DemandeEquipeDAO(cnx);
+    List listeMembre  = compteDao.findByIdEquipe(equipe.getIdEquipe());
     pageContext.setAttribute("equipe", equipe);
-    pageContext.setAttribute("listeMembres", new CompteDAO(cnx).findByIdEquipe(equipe.getIdEquipe()));
+    pageContext.setAttribute("listeMembres", listeMembre);
+    pageContext.setAttribute("nbMembres", listeMembre.size());
     pageContext.setAttribute("demEquipeDao", demEquipeDao);      
     pageContext.setAttribute("compteConnecte", compteConnecte);      
 %>
 
 <c:set var="permissionAccordee" value="${((sessionScope.role eq Compte.CAPITAINE) 
                                     and (compteConnecte.idEquipe eq equipe.idEquipe)) or (sessionScope.role eq Compte.ADMINISTRATEUR)}"></c:set>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
-    </head>
-    <body>
         <div class='row'> 
         
             <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 page-equipe-col configuration-equipe">
@@ -107,8 +102,8 @@
                                   </div>
                                 </div>
                             </td> 
+                            <c:if test="${permissionAccordee and (sessionScope.connecte ne membre.idCompte)}"> 
                             <td>
-                                <c:if test="${permissionAccordee}"> 
                                 <td>
                                     <c:choose>
                                         <c:when test="${contribution.statutDemande eq 0}">                             
@@ -120,14 +115,14 @@
                                     </c:choose>
                                 </td>
                                 </c:if>
-                                <c:if test="${permissionAccordee}">
+                                <c:if test="${permissionAccordee and (sessionScope.connecte ne membre.idCompte)}">
                                 <td>
                                     <a href="depart.do?tache=effectuerDepartEquipe&idCompte=${membre.idCompte}&idEquipe=${equipe.idEquipe}">
                                         Retirer de l'équipage
                                     </a>
                                 </td>
-                                </c:if>
                             </td>
+                            </c:if>
                         </tr>
                         </c:forEach>
                     </tbody>
@@ -137,5 +132,4 @@
         
             </div>
         </div>
-    </body>
-</html>
+

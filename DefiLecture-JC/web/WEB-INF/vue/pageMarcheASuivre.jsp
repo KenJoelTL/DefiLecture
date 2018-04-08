@@ -77,7 +77,9 @@
                         Personnes ressources : Alexandra Jarque et Mélanie Bergeron, CAF, local A-494
 
                     </p>
-
+                    <div class='divIconePirate'>
+                    <label class='pirateIconeMarcheASuivre'></label>
+                    </div>
          
                 </div>
             </div>

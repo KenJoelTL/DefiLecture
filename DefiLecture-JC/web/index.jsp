@@ -116,7 +116,15 @@
                     
             <c:if test="${ !empty sessionScope.role }">
                  <c:if test="${ sessionScope.role eq 4 }">
-                     <li ><a href="*.do?tache=afficherPageGestionListeCompte">G&eacute;rer les comptes</a></li>
+                     
+                     <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Comptes
+                        <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li ><a href="*.do?tache=afficherPageGestionListeCompte">G&eacute;rer les comptes</a></li>
+                          <li ><a href="*.do?tache=afficherPageAdresseCourriel">Liste d'adresses</a></li>
+                        </ul>
+                    </li>
                  </c:if>
                  <c:if test="${ sessionScope.role ge 1 }">
                     
@@ -144,22 +152,34 @@
                 </li>
                  
                  <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Code du pirate   
-                        <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                          <li><a href='*.do?tache=afficherPageMarcheASuivre'>Marche à suivre</a></li>
-                          <li><a href='*.do?tache=afficherPageCodeConduite'>Code de conduite</a></li>
-                          <li><a href='*.do?tache=afficherPageGlossaire'>Glossaire</a></li>
-                          <li><a href='*.do?tache=afficherPageContributeurs'>Contributeurs</a></li>
-                        </ul>
-                    </li>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Code du pirate   
+                    <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li><a href='*.do?tache=afficherPageMarcheASuivre'>Marche à suivre</a></li>
+                      <li><a href='*.do?tache=afficherPageCodeConduite'>Code de conduite</a></li>
+                      <li><a href='*.do?tache=afficherPageGlossaire'>Glossaire</a></li>
+                      <li><a href='*.do?tache=afficherPageContributeurs'>Contributeurs</a></li>
+                    </ul>
+                </li>
                 
             <c:choose>
                 <c:when test="${ empty sessionScope.connecte }">
                     <li><a href='*.do?tache=afficherPageConnexion'><span class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>        
                 </c:when>
                 <c:otherwise>
-                    <li><a href='*.do?tache=effectuerDeconnexion'><span class="glyphicon glyphicon-log-in"></span> Se d&eacute;connecter</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">  
+                    <span class="glyphicon glyphicon-cog"></span>
+                    <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li><a href='details.do?tache=afficherPageModificationCompte&id=${sessionScope.connecte}'>
+                              <span class="glyphicon glyphicon-user"></span> Mon Compte</a>
+                      </li>
+                      <li><a href='*.do?tache=effectuerDeconnexion'>
+                              <span class="glyphicon glyphicon-log-in"></span> Se d&eacute;connecter</a>
+                      </li>
+                    </ul>
+                </li>
                 </c:otherwise>
             </c:choose>
    

@@ -17,15 +17,7 @@
      <jsp:setProperty  name="dao" property="cnx" value="${connexion.connection}"></jsp:setProperty>
  </jsp:useBean>
  <c:set var="listeEquipes" value="${dao.findAll()}"></c:set>
-        
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Défi lecture - trésorerie</title>
-    </head>
-    <body>
- 
+
         <div class="row scores-row">
             <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 scores-col">
                 <h2>La trésorerie</h2>  
@@ -53,14 +45,3 @@
                     </table>
             </div>
         </div> 
-    </body>
-</html>
-
-<% /* try{
-        EquipeDAO dao = new EquipeDAO(Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
-        pageContext.setAttribute("listeEquipes", dao.findAll());
-    }
-    catch(SQLException e){
-        response.sendError(response.SC_INTERNAL_SERVER_ERROR,"Erreur interne" + e.getMessage());
-	out.close();
-    } */ %>

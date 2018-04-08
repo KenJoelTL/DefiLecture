@@ -26,6 +26,10 @@ td, td a, p, li {
     text-decoration: none;
 }
 
+.retour.modifCompte {
+	display: block!important;
+}
+
 .retour:hover {
   color: white;
   text-decoration: none;
@@ -491,8 +495,10 @@ background-image: url("../images/2_ACCUEIL.png");
 /*Modification comptes*/
 
 .modification-compte-col {
-  background-image: url("../images/1_CONNEXION.png");
-  padding-bottom: 20px;
+background-color: rgba(255, 255, 255, 0.5);
+      padding: 1% 4%;
+  border-radius: 20px;
+
 }
 
 .modification-compte-col h1 {
@@ -513,16 +519,11 @@ background-image: url("../images/2_ACCUEIL.png");
 
 
 .modification-compte-form {
-  background-color: rgba(255, 255, 255, 0.5);
-      padding: 1% 4%;
-    margin-top: 5%;
-  border-radius: 20px;
+  
 }
 
 .modification-compte-col .btn-danger {
-      position: relative;
-    bottom: 39px;
-    left: 196px;
+      margin-left: 15px;
 }
 
 .modification-compte-col .avatar {
@@ -912,11 +913,12 @@ background-image: url("../images/2_ACCUEIL.png");
 
 .pirateIcone {
 
- background-image: url("../images/tete-de-mort-pirate.jpg");
+ background-image: url("../images/tete-de-mort-nb.png");
      height: 50px;
     background-size: contain;
     background-repeat: no-repeat;
     width: 78px!important;
+    margin-right: 15px;
 
 }
 
@@ -931,6 +933,15 @@ background-image: url("../images/2_ACCUEIL.png");
 
 .code-conduite label {
 	    padding: 9px 55px 9px 4px!important;
+}
+
+.code-conduite ul li {
+	    list-style: none;
+    display: flex;
+    align-items: center;
+}
+.code-conduite ul {
+	  padding: 0;
 }
 
 
@@ -962,7 +973,7 @@ background-image: url("../images/2_ACCUEIL.png");
 
 .pirateIconeMarcheASuivre {
 
- background-image: url("../images/tete-de-mort-pirate.jpg");
+ background-image: url("../images/tete-de-mort-nb.png");
         height: 180px;
     background-size: contain;
     background-repeat: no-repeat;
@@ -974,6 +985,7 @@ background-image: url("../images/2_ACCUEIL.png");
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	margin-top: 60px;
 }
 
 

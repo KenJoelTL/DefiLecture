@@ -36,7 +36,10 @@ public class ActionBuilder {
                 case "effectuerConnexion":
                     return new EffectuerConnexionAction();
                 case "effectuerDeconnexion":
-                    return new EffectuerDeconnexionAction();
+                    return new EffectuerDeconnexionAction();   
+                case "effectuerGenerationMotPasse":
+                    return new EffectuerGenerationMotPasseAction();
+                    
       //Lecture             
                 case "afficherPageCreationLecture":
                     return new AfficherPageCreationLectureAction();
@@ -68,6 +71,8 @@ public class ActionBuilder {
       //Compte        
                 case "afficherPageGestionListeCompte":
                     return new AfficherPageGestionListeComptesAction();
+                case "afficherPageAdresseCourriel":
+                    return new AfficherPageAdresseCourrielAction();
                 case "afficherPageModificationCompte":
                     return new AfficherPageModificationCompteAction();
                 case "effectuerModificationCompte":

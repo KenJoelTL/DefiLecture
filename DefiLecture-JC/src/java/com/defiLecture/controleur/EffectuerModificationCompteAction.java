@@ -18,6 +18,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
+import static org.apache.commons.codec.digest.DigestUtils.sha1Hex;
 
 /**
  *
@@ -32,23 +33,31 @@ public class EffectuerModificationCompteAction implements Action, RequestAware, 
 
     @Override
     public String execute() {
-        
-        if(((session.getAttribute("connecte") != null && session.getAttribute("role") != null) &&
-            request.getParameter("idCompte").equals(session.getAttribute("connecte").toString()) ||
-            (!request.getParameter("idCompte").equals(session.getAttribute("connecte").toString()) && 
-              (int)session.getAttribute("role") > Compte.CAPITAINE )) &&
-        
-            (request.getParameter("modifie") != null))  {
+
+        if (((session.getAttribute("connecte") != null && session.getAttribute("role") != null)
+                && request.getParameter("idCompte").equals(session.getAttribute("connecte").toString())
+                || (!request.getParameter("idCompte").equals(session.getAttribute("connecte").toString())
+                && (int) session.getAttribute("role") > Compte.CAPITAINE))
+                && (request.getParameter("modifie") != null)) {
+            
             String idCompte = request.getParameter("idCompte"),
                     courriel = request.getParameter("courriel"),
                     prenom = request.getParameter("prenom"),
                     nom = request.getParameter("nom"),
                     programmeEtude = request.getParameter("programmeEtude"),
-                    motPasse = request.getParameter("motPasse"),
+                    motPasseActuel = request.getParameter("motPasseActuel"),
+                    motPasseNouveau = request.getParameter("motPasseNouveau"),
+                    motPasseNouveauConfirmation = request.getParameter("motPasseNouveauConfirmation"),
                     pseudonyme = request.getParameter("pseudonyme");
 
-            if (motPasse != null) {
-                motPasse = org.apache.commons.codec.digest.DigestUtils.sha1Hex(request.getParameter("motPasse"));
+            if (motPasseActuel != null) {
+                motPasseActuel = sha1Hex(motPasseActuel);
+            }
+            if (motPasseNouveau != null) {
+                motPasseNouveau = sha1Hex(motPasseNouveau);
+            }
+            if (motPasseNouveauConfirmation != null) {
+                motPasseNouveauConfirmation = sha1Hex(motPasseNouveauConfirmation);
             }
 
             int idEquipe,
@@ -63,10 +72,11 @@ public class EffectuerModificationCompteAction implements Action, RequestAware, 
                 Compte compte = dao.read(idCompte);
                 if (compte == null) {
                     data.put("compteIntrouvable", "Le compte que vous tentez de modifier est introuvable");
-                    if((int)session.getAttribute("role") > Compte.CAPITAINE)
+                    if ((int) session.getAttribute("role") > Compte.CAPITAINE) {
                         return "*.do?tache=afficherPageGestionListeCompte";
-                    else
+                    } else {
                         return "*.do?tache=afficherMarcheASuivre";
+                    }
                 } else {
                     cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
                     dao.setCnx(cnx);
@@ -110,7 +120,7 @@ public class EffectuerModificationCompteAction implements Action, RequestAware, 
                     if (courriel != null && !"".equals(courriel.trim()) && !courriel.equals(compte.getCourriel())) {
                         if (dao.findByCourriel(courriel) != null) {
                             erreurSurvenue = true;
-                            data.put("erreurCourriel", "Ce courriel est déjà utilié par un autre mattelot");
+                            data.put("erreurCourriel", "Ce courriel est déjà utilisé par un autre matelot");
                         } else {
                             compte.setCourriel(courriel);
                         }
@@ -121,8 +131,18 @@ public class EffectuerModificationCompteAction implements Action, RequestAware, 
                     if (nom != null && !"".equals(nom.trim()) && !nom.equals(compte.getNom())) {
                         compte.setNom(nom);
                     }
-                    if (motPasse != null && !"".equals(motPasse.trim()) && !motPasse.equals(compte.getMotPasse())) {
-                        compte.setMotPasse(motPasse);
+                    if (motPasseNouveau != null && !"".equals(motPasseNouveau.trim())) {
+                        if (motPasseActuel != null && motPasseActuel.equals(compte.getMotPasse())) {
+                            if (motPasseNouveau.equals(motPasseNouveauConfirmation)) {
+                                compte.setMotPasse(motPasseNouveau);
+                            } else {
+                                erreurSurvenue = true;
+                                data.put("erreurMotPasse", "Les champs concernant le nouveau mot de passe doivent être identiques");
+                            }
+                        } else {
+                            erreurSurvenue = true;
+                            data.put("erreurMotPasse", "Le mot de passe entré n'est pas le bon");
+                        }
                     }
                     if (pseudonyme != null && !pseudonyme.equals(compte.getPseudonyme())) {
                         if (dao.findByPseudonyme(pseudonyme) != null) {
