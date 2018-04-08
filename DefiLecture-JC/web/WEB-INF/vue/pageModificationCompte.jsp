@@ -142,7 +142,7 @@
                 </c:if>
                                 
 
-
+                <c:if test="${sessionScope.role eq Compte.ADMINISTRATEUR}">
                     <form action="suppression.do" method="post">
                         <input type="hidden" name="idCompte" value="${compte.idCompte}"/>
                         <input type="hidden" name="tache" value="effectuerSuppressionCompte"/>
@@ -150,6 +150,7 @@
                             <button class="btn btn-danger" type="submit">Supprimer</button>
                         </div>
                     </form>
+                </c:if>
 
                 <a href="*.do?tache=afficherPageGestionListeCompte" class="retour"><span class="glyphicon glyphicon-circle-arrow-left"></span>retour à la liste des comptes</a>
            </div>
