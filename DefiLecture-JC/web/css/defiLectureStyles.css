@@ -913,11 +913,12 @@ background-image: url("../images/2_ACCUEIL.png");
 
 .pirateIcone {
 
- background-image: url("../images/tete-de-mort-pirate.jpg");
+ background-image: url("../images/tete-de-mort-nb.png");
      height: 50px;
     background-size: contain;
     background-repeat: no-repeat;
     width: 78px!important;
+    margin-right: 15px;
 
 }
 
@@ -932,6 +933,15 @@ background-image: url("../images/2_ACCUEIL.png");
 
 .code-conduite label {
 	    padding: 9px 55px 9px 4px!important;
+}
+
+.code-conduite ul li {
+	    list-style: none;
+    display: flex;
+    align-items: center;
+}
+.code-conduite ul {
+	  padding: 0;
 }
 
 
@@ -963,7 +973,7 @@ background-image: url("../images/2_ACCUEIL.png");
 
 .pirateIconeMarcheASuivre {
 
- background-image: url("../images/tete-de-mort-pirate.jpg");
+ background-image: url("../images/tete-de-mort-nb.png");
         height: 180px;
     background-size: contain;
     background-repeat: no-repeat;
@@ -975,6 +985,7 @@ background-image: url("../images/2_ACCUEIL.png");
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	margin-top: 60px;
 }
 
 
