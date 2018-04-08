@@ -71,6 +71,8 @@ public class ActionBuilder {
       //Compte        
                 case "afficherPageGestionListeCompte":
                     return new AfficherPageGestionListeComptesAction();
+                case "afficherPageAdresseCourriel":
+                    return new AfficherPageAdresseCourrielAction();
                 case "afficherPageModificationCompte":
                     return new AfficherPageModificationCompteAction();
                 case "effectuerModificationCompte":

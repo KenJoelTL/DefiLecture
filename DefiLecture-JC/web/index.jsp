@@ -116,7 +116,15 @@
                     
             <c:if test="${ !empty sessionScope.role }">
                  <c:if test="${ sessionScope.role eq 4 }">
-                     <li ><a href="*.do?tache=afficherPageGestionListeCompte">G&eacute;rer les comptes</a></li>
+                     
+                     <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Comptes
+                        <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li ><a href="*.do?tache=afficherPageGestionListeCompte">G&eacute;rer les comptes</a></li>
+                          <li ><a href="*.do?tache=afficherPageAdresseCourriel">Liste d'adresses</a></li>
+                        </ul>
+                    </li>
                  </c:if>
                  <c:if test="${ sessionScope.role ge 1 }">
                     
