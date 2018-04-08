@@ -32,6 +32,15 @@
                 <c:if test="${!empty requestScope.data['erreurPseudonyme']}">
                     <div class="alert alert-danger"><strong>${requestScope.data['erreurPseudonyme']}</strong></div>
                 </c:if>
+                <c:if test="${!empty requestScope.data['erreurMotPasse']}">
+                    <div class="alert alert-danger"><strong>${requestScope.data['erreurMotPasse']}</strong></div>
+                </c:if>
+                <c:if test="${!empty requestScope.data['erreurGenerationMotPasse']}">
+                    <div class="alert alert-danger"><strong>${requestScope.data['erreurGenerationMotPasse']}</strong></div>
+                </c:if>
+                <c:if test="${!empty requestScope.data['succesGenerationMotPasse']}">
+                    <div class="alert alert-success"><strong>${requestScope.data['succesGenerationMotPasse']}</strong></div>
+                </c:if>
                 <c:if test="${!empty requestScope.data['erreurModification']}">
                     <div class="alert alert-danger"><strong>${requestScope.data['erreurModification']}</strong></div>
                 </c:if>
@@ -55,29 +64,29 @@
                     </div>
                 </form>
 
-
                 <form action="modification.do" method="post" >
-                    <div class="form-group">
-                        <label for="prenom">Pr&eacute;nom* : </label>
+                    <div class="form-group col-lg-6 col-md-6">
+                        <label for="prenom">Pr&eacute;nom*</label>
                         <input type="text" class="form-control" id=prenom name="prenom" value="${compte.prenom}" required ${ compte.idCompte eq sessionScope.connecte ? '':'readonly' }/>
                     </div>
-                    <div class="form-group">
-                        <label for="nom">Nom* : </label>
+                    <div class="form-group col-lg-6 col-md-6">
+                        <label for="nom">Nom*</label>
                         <input type="text" class="form-control" name="nom" value="${compte.nom}" required ${ compte.idCompte eq sessionScope.connecte ? '':'readonly' }/>
                     </div>
-                    <div class="form-group">
-                        <label for="programmeEtude">Programme d'&eacute;tude ou poste occup&eacute; au coll&egrave;ge: </label>
+                    <div class="form-group col-lg-12">
+                        <label for="programmeEtude">Programme d'&eacute;tude ou poste occup&eacute; au coll&egrave;ge</label>
                          <input type="text" class="form-control" name="programmeEtude" value="${compte.programmeEtude}" ${ compte.idCompte eq sessionScope.connecte ? '':'readonly' }/>
                     </div>
-                    <div class="form-group">
-                         <label for="courriel">Courriel* : </label>
+                    <div class="form-group col-lg-6 col-md-6">
+                         <label for="courriel">Courriel*</label>
                         <input type="email" class="form-control" name="courriel" value="${compte.courriel}" required ${ compte.idCompte eq sessionScope.connecte ? '':'readonly' }/>
                     </div>
-                    <div class="form-group">
-                        <label for="pseudonyme">Pseudonyme : </label>
+                    <div class="form-group col-lg-6 col-md-6">
+                        <label for="pseudonyme">Pseudonyme</label>
                         <input type="text" class="form-control"  name="pseudonyme" value="${compte.pseudonyme}" ${ compte.idCompte eq sessionScope.connecte ? '':'readonly' }/>
                     </div>
-
+                    
+                    
                     <c:if test="${sessionScope.role gt 3}">
                     <div class="form-group">
                         <label for="role">R&ocirc;le du compte : </label>
@@ -86,29 +95,63 @@
                             <option value="1" ${ compte.role eq 1 ? selected:'' }>Participant</option>
                             <option value="2" ${ compte.role eq 2 ? selected:'' }>Capitaine</option>
                             <c:if test="${sessionScope.role eq 4}">
-                            <option value="3" ${ compte.role eq 3 ? selected:'' }>Modérateur</option>
+                            <option value="3" ${ compte.role eq 3 ? selected:'' }>Mod&eacute;rateur</option>
                             <option value="4" ${ compte.role eq 4 ? selected:'' }>Administrateur</option>
                             </c:if>
                         </select>
                     </div>
                     </c:if>
-                    <div>
-                    <input type="hidden" name="idCompte" value="${compte.idCompte}">
-                    <input type="hidden" name="tache" value="effectuerModificationCompte">
-                    <button type="submit" class="btn btn-success" name="modifie" >Enregistrer</button>
-                    
+                    <div class="form-group col-lg-12">
+                        <input type="hidden" name="idCompte" value="${compte.idCompte}">
+                        <input type="hidden" name="tache" value="effectuerModificationCompte">
+                        <button type="submit" class="btn btn-success" name="modifie" >Enregistrer</button>
                     </div>
                 </form>
 
-                <div class="form" >
-                    <form action="suppression.do">
+
+                <c:if test="${compte.idCompte eq sessionScope.connecte}">
+                    <form action="modification.do" method="post" >                     
+                        <div class="form-group col-lg-12">
+                            <label for="motPasseActuel">Mot de passe actuel*</label>
+                            <input type="password" class="form-control" name="motPasseActuel" required/>
+                        </div>
+                        <div class="form-group col-lg-12">
+                            <label for="motPasseNouveau">Nouveau mot de passe*</label>
+                            <input type="password" class="form-control" name="motPasseNouveau"/>
+                        </div>
+                        <div class="form-group col-lg-12">
+                            <label for="motPasseNouveauConfirmation">Confirmation du nouveau mot de passe*</label>
+                            <input type="password" class="form-control" name="motPasseNouveauConfirmation"/>
+                        </div>                        
+                        <div class="form-group col-lg-12">
+                            <input type="hidden" name="idCompte" value="${sessionScope.connecte}"/>
+                            <input type="hidden" name="tache" value="effectuerModificationCompte"/>
+                            <button class="btn btn-primary" type="submit" name="modifie">Modifier de mot de passe</button>
+                        </div>
+                    </form>
+                </c:if>
+                        
+                <c:if test="${compte.idCompte ne sessionScope.connecte and sessionScope.role eq Compte.ADMINISTRATEUR}">
+                    <form action="modification.do" method="post" >                     
+                        <div class="form-group col-lg-12">
+                            <input type="hidden" name="idCompte" value="${compte.idCompte}"/>
+                            <input type="hidden" name="tache" value="effectuerGenerationMotPasse"/>
+                            <button class="btn btn-info" type="submit" name="genere">Générer un mot de passe</button>
+                        </div>
+                    </form>
+                </c:if>
+                                
+
+
+                    <form action="suppression.do" method="post">
                         <input type="hidden" name="idCompte" value="${compte.idCompte}"/>
                         <input type="hidden" name="tache" value="effectuerSuppressionCompte"/>
-                        <button class="btn btn-danger" type="submit">Supprimer</button>
-         
+                        <div class="form-group">
+                            <button class="btn btn-danger" type="submit">Supprimer</button>
+                        </div>
                     </form>
-                </div>
-                        <a href="*.do?tache=afficherPageGestionListeCompte" class="retour"><span class="glyphicon glyphicon-circle-arrow-left"></span>retour à la liste des comptes</a>
+
+                <a href="*.do?tache=afficherPageGestionListeCompte" class="retour"><span class="glyphicon glyphicon-circle-arrow-left"></span>retour à la liste des comptes</a>
            </div>
         </div>
     </div>
