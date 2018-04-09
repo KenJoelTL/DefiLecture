@@ -43,7 +43,7 @@
             <a id="lienMDPoublie" href="#">
                 Mot de passe oublié? <span id="spanMDP" class="glyphicon glyphicon-menu-down"></span>
             </a>
-            <p id="msgMDPoublie">Si vous avez oublié votre mot de passe, veuillez contacter l'administrateur de l'application.</p>
+            <p id="msgMDPoublie">Veuillez contacter l'administrateur de l'application pour qu'il puisse réinitialiser votre mot de passe.</p>
             <input type="hidden" name="tache" value="effectuerConnexion">
             <button type="submit" class="btn btn-danger">À L'ABORDAGE!</button>
             

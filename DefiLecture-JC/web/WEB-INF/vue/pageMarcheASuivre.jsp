@@ -42,7 +42,7 @@
                     
                     <div>
 
-                        <h3>  <strong>Pour être capitaine :</strong></h3>
+                        <h3>  <strong>Pour être capitaine&nbsp;:</strong></h3>
                     <ol>
                         <li>Inscrivez-vous </li>
                         <li>Cochez : «&nbsp;Je désire être capitaine d’un équipage (employé ou tuteur)&nbsp;»</li>
@@ -54,7 +54,7 @@
                     </div>
                     <div>
 
-                        <h3>  <strong>Pour vous joindre à un équipage :</strong></h3>
+                        <h3>  <strong>Pour vous joindre à un équipage&nbsp;:</strong></h3>
                     <ol>
                         <li>Inscrivez-vous </li>
                         <li>Sélectionnez l’onglet «&nbsp;Joindre un équipage&nbsp;», choisissez l’équipage de votre choix et cliquez sur «&nbsp;Envoyer une demande d’adhésion&nbsp;» </li>
