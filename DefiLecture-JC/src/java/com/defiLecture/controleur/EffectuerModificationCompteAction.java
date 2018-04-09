@@ -118,7 +118,8 @@ public class EffectuerModificationCompteAction implements Action, RequestAware, 
                         }
                     }
                     if (courriel != null && !"".equals(courriel.trim()) && !courriel.equals(compte.getCourriel())) {
-                        if (dao.findByCourriel(courriel) != null) {
+                        Compte compteTemp = dao.findByCourriel(courriel);
+                        if ( compteTemp != null && (compteTemp.getIdCompte() != compte.getIdCompte())) {
                             erreurSurvenue = true;
                             data.put("erreurCourriel", "Ce courriel est déjà utilisé par un autre matelot");
                         } else {
@@ -145,9 +146,10 @@ public class EffectuerModificationCompteAction implements Action, RequestAware, 
                         }
                     }
                     if (pseudonyme != null && !pseudonyme.equals(compte.getPseudonyme())) {
-                        if (dao.findByPseudonyme(pseudonyme) != null) {
+                        Compte compteTemp = dao.findByPseudonyme(pseudonyme);
+                        if ( compteTemp != null && (compteTemp.getIdCompte() != compte.getIdCompte())) {
                             erreurSurvenue = true;
-                            data.put("erreurPseudonyme", "Ce pseudonyme est déjà utilié par un autre mattelot");
+                            data.put("erreurPseudonyme", "Ce pseudonyme est déjà utilisé par un autre matelot");
                         } else {
                             compte.setPseudonyme(pseudonyme);
                         }

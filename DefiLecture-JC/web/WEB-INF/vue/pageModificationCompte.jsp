@@ -137,7 +137,7 @@
                         <div class="form-group col-lg-12">
                             <input type="hidden" name="idCompte" value="${sessionScope.connecte}"/>
                             <input type="hidden" name="tache" value="effectuerModificationCompte"/>
-                            <button class="btn btn-primary" type="submit" name="modifie">Modifier de mot de passe</button>
+                            <button class="btn btn-primary" type="submit" name="modifie">Modifier le mot de passe</button>
                         </div>
                     </form>
                 </c:if>
@@ -161,9 +161,9 @@
                             <button class="btn btn-danger" type="submit">Supprimer</button>
                         </div>
                     </form>
-                </c:if>
 
-                <a href="*.do?tache=afficherPageGestionListeCompte" class="retour modifCompte"><span class="glyphicon glyphicon-circle-arrow-left"></span>retour à la liste des comptes</a>
+                    <a href="*.do?tache=afficherPageGestionListeCompte" class="retour modifCompte"><span class="glyphicon glyphicon-circle-arrow-left"></span>retour à la liste des comptes</a>
+                </c:if>
            </div>
         </div>
     </div>

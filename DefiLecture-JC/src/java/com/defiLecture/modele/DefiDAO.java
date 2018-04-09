@@ -37,7 +37,6 @@ public class DefiDAO extends DAO<Defi> {
         String req = "INSERT INTO defi (`ID_COMPTE` , `NOM` , `DESCRIPTION`, `DATE_DEBUT` , `DATE_FIN`, `QUESTION`, `CHOIX_REPONSE`, `REPONSE`, `VALEUR_MINUTE`) VALUES "+
 			     "(?,?,?,?,?,?,?,?,?)";
 				 		 
-
         PreparedStatement paramStm = null;
         try 
         {
@@ -66,6 +65,7 @@ public class DefiDAO extends DAO<Defi> {
         }
         catch (SQLException exp)
         {
+		Logger.getLogger(DefiDAO.class.getName()).log(Level.SEVERE, null, exp);
         }
         finally
         {

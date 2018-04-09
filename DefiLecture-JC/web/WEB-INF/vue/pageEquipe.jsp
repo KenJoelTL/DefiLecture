@@ -72,6 +72,7 @@
                     <table class='table table-hover'>
                   <thead>
                     <tr>
+		      <th>Pseudonyme</th>
                       <th>Prénom</th>
                       <th>Nom</th>
                       <th>Contributions</th>
@@ -80,6 +81,7 @@
                   <tbody>
                     <c:forEach items="${listeMembres}" var="membre">      
                     <tr>
+                      <td>${membre.pseudonyme}</td>
                       <td>${membre.prenom}</td>
                       <td>${membre.nom}</td>
                       <td>
