@@ -150,7 +150,7 @@ public class DefiDAO extends DAO<Defi> {
     public boolean update(Defi x) {
                  String req = "UPDATE defi SET NOM = ? , DESCRIPTION = ?,"
                            + "DATE_DEBUT = ?, DATE_FIN = ?, CHOIX_REPONSE = ?,"
-                         + "REPONSE = ?, VALEUR_MINUTE = ? WHERE ID_DEFI = ?";
+                         + "REPONSE = ?, VALEUR_MINUTE = ?, QUESTION = ? WHERE ID_DEFI = ?";
 
         PreparedStatement paramStm = null;
         try {
@@ -163,7 +163,8 @@ public class DefiDAO extends DAO<Defi> {
                 paramStm.setString(5, Util.toUTF8(x.getChoixReponse()));
                 paramStm.setString(6, Util.toUTF8(x.getReponse()));
                 paramStm.setInt(7, x.getValeurMinute());
-                paramStm.setInt(8, x.getIdDefi());
+		paramStm.setString(8, x.getQuestion());
+                paramStm.setInt(9, x.getIdDefi());
 
                 int nbLignesAffectees= paramStm.executeUpdate();
                 
