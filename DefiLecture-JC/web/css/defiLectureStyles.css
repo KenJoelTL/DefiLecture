@@ -14,6 +14,15 @@ td, td a, p, li {
   color: black;
 }
 
+body {
+      background-color: #e9dcc8;
+}
+
+h1 {
+      font-size: 45px!important;
+    text-align: center!important;
+}
+
 
 
 .retour {
@@ -192,12 +201,16 @@ ul.dropdown-menu {
 }
 
 .connexion-row {
-background-image: url("../images/1_CONNEXION.png");
+background-image: url("../images/index_poste.jpg");
   padding: 5%;
       display: flex;
     flex-direction: column;
     align-items: center;
 
+}
+
+.connexion-row h1, .inscription-row h1 {
+      border-bottom: 8px double;
 }
 
 
@@ -213,7 +226,11 @@ background-image: url("../images/1_CONNEXION.png");
     font-size: 45px!important;
     text-align: center;
   }
-
+.connexion-col {
+  background-color: rgba(255, 255, 255, 0.5);
+      padding: 1% 4%;
+  border-radius: 20px;
+}
 .connexion-form button {
 	font-size: 20px;
 }
@@ -277,6 +294,12 @@ p#msgMDPoublie {
     text-align: center;
   }
 
+.inscription-col{
+  background-color: rgba(255, 255, 255, 0.5);
+      padding: 1% 4%;
+  border-radius: 20px;
+}
+
 .btn-inscription {
   font-size: 20px;
 }
@@ -287,7 +310,7 @@ p#msgMDPoublie {
 }
 
 .inscription-row {
-background-image: url("../images/1_CONNEXION.png");
+background-image: url("../images/index_poste.jpg");
      min-height: 1080px;
   padding: 5%;
       display: flex;
@@ -311,12 +334,13 @@ background-image: url("../images/1_CONNEXION.png");
 /*Tableau des scores*/
 
 .scores-row {
-background-image: url("../images/2_ACCUEIL.png");
+background-image: url("../images/accueil_poste.jpg");
 
   padding: 5%;
       display: flex;
     flex-direction: column;
     align-items: center;
+    background-size: cover;
 
 }
 
@@ -327,7 +351,7 @@ background-image: url("../images/2_ACCUEIL.png");
     padding: 5%;
   }
 
-.scores-col h2 {
+.scores-col h1 {
   text-align: center;
 }
 
@@ -335,12 +359,13 @@ background-image: url("../images/2_ACCUEIL.png");
 /*Accueil*/
 
 .accueil-row {
-  background-image: url("../images/2_ACCUEIL.png");
+  background-image: url("../images/accueil_poste.jpg");
 
   padding: 20px 40px;
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  background-size: cover;
 }
 
 .accueil-col {
@@ -357,7 +382,7 @@ background-image: url("../images/2_ACCUEIL.png");
 /*Creation défi*/
 
 .creation-defi-col {
-  background-image: url("../images/1_CONNEXION.png");
+  background-image: url("../images/index_poste.jpg");
 }
 
 .creation-defi-col h1 {
@@ -419,7 +444,7 @@ background-image: url("../images/2_ACCUEIL.png");
 /*Accéder aux demandes*/
 
 .demandes-row {
-  background-image: url("../images/3_MODELE.png");
+  background-image: url("../images/template_poste.jpg");
   padding: 5%;
 
 }
@@ -438,7 +463,7 @@ background-image: url("../images/2_ACCUEIL.png");
 /*Participation défi*/
 
 .participationDefi-row {
-  background-image: url("../images/3_MODELE.png");
+  background-image: url("../images/template_poste.jpg");
   padding: 5%;
 
 }
@@ -464,7 +489,7 @@ background-image: url("../images/2_ACCUEIL.png");
 /*Gestion liste comptes*/
 
 .listeCompte-row {
-  background-image: url("../images/3_MODELE.png");
+  background-image: url("../images/template_poste.jpg");
   padding: 5%;
 
 }
@@ -535,7 +560,7 @@ background-color: rgba(255, 255, 255, 0.5);
 
 
 .modification-defi-col {
-  background-image: url("../images/1_CONNEXION.png");
+  background-image: url("../images/index_poste.jpg");
 }
 
 .modification-defi-col h1 {
@@ -598,11 +623,12 @@ background-color: rgba(255, 255, 255, 0.5);
 }
 
 .creation-lecture-row {
-background-image: url("../images/2_ACCUEIL.png");
+background-image: url("../images/accueil_poste.jpg");
   padding: 5%;
       display: flex;
     flex-direction: column;
     align-items: center;
+    background-size: cover;
 
 }
 
@@ -728,7 +754,7 @@ background-image: url("../images/2_ACCUEIL.png");
 
 
 .inscription-defi-col {
-  background-image: url("../images/1_CONNEXION.png");
+  background-image: url("../images/index_poste.jpg");
   padding-bottom: 20px;
 }
 
@@ -774,7 +800,7 @@ background-image: url("../images/2_ACCUEIL.png");
  /*Page gestion lecture*/
 
  .gestion-lecture-row {
-  background-image: url("../images/3_MODELE.png");
+  background-image: url("../images/template_poste.jpg");
 
   padding: 5%;
 
@@ -794,7 +820,7 @@ background-image: url("../images/2_ACCUEIL.png");
 /*Page gestion liste équipe*/
 
  .liste-equipes-row {
-  background-image: url("../images/3_MODELE.png");
+  background-image: url("../images/template_poste.jpg");
   padding: 5%;
 
 }
@@ -821,7 +847,7 @@ background-image: url("../images/2_ACCUEIL.png");
 
 
 .page-equipe-col {
-  background-image: url("../images/1_CONNEXION.png");
+  background-image: url("../images/index_poste.jpg");
   padding-bottom: 20px;
   min-height: 700px;
       display: flex;
@@ -996,4 +1022,30 @@ background-image: url("../images/2_ACCUEIL.png");
     padding-left: 5px;
     border-radius: 4px;
     padding-top: 2px;
+}
+
+
+
+/*Background*/
+
+ .creation-lecture-row, .scores-row, .accueil-row, .connexion-row, .inscription-row, .creation-defi-col, .modification-defi-col, .inscription-defi-col, .page-equipe-col, .demandes-row, .participationDefi-row, .listeCompte-row,  .gestion-lecture-row,  .liste-equipes-row {
+    min-height: 968px; 
+ }
+
+  .creation-lecture-row, .scores-row, .accueil-row,  .demandes-row, .participationDefi-row, .listeCompte-row,  .gestion-lecture-row,  .liste-equipes-row {
+        background-position: center;
+  }
+
+  .connexion-row, .inscription-row, .creation-defi-col, .modification-defi-col, .inscription-defi-col, .page-equipe-col {
+    background-position: bottom;
+  }
+
+@media (max-width: 668px) {
+  .creation-lecture-row, .scores-row, .accueil-row, .connexion-row, .inscription-row, .creation-defi-col, .modification-defi-col, .inscription-defi-col, .page-equipe-col, .demandes-row, .participationDefi-row, .listeCompte-row,  .gestion-lecture-row,  .liste-equipes-row {
+    background-size: contain;
+    background-position: top;
+  }
+
+ 
+
 }

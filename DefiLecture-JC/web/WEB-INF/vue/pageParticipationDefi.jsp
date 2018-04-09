@@ -27,7 +27,7 @@
 <div class="row participationDefi-row"> 
         <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 participationDefi-col">
             
-<h2>Liste des défis</h2>
+<h1>Liste des défis</h1>
 
 <% 
     Connexion.reinit();

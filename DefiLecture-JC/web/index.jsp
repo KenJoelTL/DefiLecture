@@ -27,7 +27,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
-    <body style="background-color: whitesmoke;">
+    <body >
 
         <div class='container-fluid'  style="margin-bottom: 90px" >
         <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -48,7 +48,7 @@
            
              <c:if test="${ !empty sessionScope.connecte && sessionScope.role le 2 }">
                 
-                <!-- À CACHER PENDANT LA PÉRIODE D'INSCRIPTION
+          
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Lectures
                     <span class="caret"></span></a>
@@ -57,7 +57,7 @@
                       <li><a href="*.do?tache=afficherPageGestionLecture">Voir mes lectures</a></li>
                     </ul>
                 </li>
-                --> 
+      
 
                 
                 
