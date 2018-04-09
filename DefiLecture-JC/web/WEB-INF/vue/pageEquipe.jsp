@@ -72,18 +72,14 @@
                     <table class='table table-hover'>
                   <thead>
                     <tr>
-		      <th>Pseudonyme</th>
-                      <th>Prénom</th>
-                      <th>Nom</th>
+                      <th width=50%>Pirate</th>
                       <th>Contributions</th>
                     </tr>
                   </thead>
                   <tbody>
                     <c:forEach items="${listeMembres}" var="membre">      
                     <tr>
-                      <td>${membre.pseudonyme}</td>
-                      <td>${membre.prenom}</td>
-                      <td>${membre.nom}</td>
+                      <td>${membre.prenom} «${membre.pseudonyme}» ${membre.nom}</td>
                       <td>
                           <c:set var="contribution" value="${daoDemEqp.findByIdCompteEquipe(membre.idCompte,equipe.idEquipe)}"></c:set>
                         <div class="progress">
