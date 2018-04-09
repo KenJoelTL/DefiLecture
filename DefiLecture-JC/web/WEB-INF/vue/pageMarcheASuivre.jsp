@@ -37,7 +37,7 @@
 
                     </p>
 
-                    <h2>Inscrivez-vous du 3 au 8 avril 2018</h2>
+                    <h2>Inscrivez-vous</h2>
                     
                     
                     <div>
@@ -62,12 +62,12 @@
                     </ol>
                     </div>
 
-                    <h3>
+                    <h2>
 
                         Consignez vos lectures et relevez les défis proposés du <b>9 au 29 avril 2018</b> 
 
 
-                    </h3>
+                    </h2>
 
                     <p>
                         <strong>Consultez la page <i class="fa fa-facebook"></i> Facebook <a  target="_blank" href='https://www.facebook.com/DefiLectureCollegeRosemont/'><i>Défi lecture – Collège de Rosemont</i></a></strong> pour ne rien manquer de l’aventure et pour nous formuler vos commentaires au sujet de cette version 1.0 du Défi lecture!
