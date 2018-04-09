@@ -25,112 +25,112 @@ import java.sql.SQLException;
  */
 public class EffectuerModificationDefiAction implements Action, RequestAware, SessionAware, RequirePRGAction {
 
-     private HttpSession session;
-    private HttpServletResponse response;
-    private HttpServletRequest request;
+	private HttpSession session;
+	private HttpServletResponse response;
+	private HttpServletRequest request;
 
-    @Override
-    public String execute() {
-  
-        
-        if(session.getAttribute("connecte") != null
-        && session.getAttribute("role") != null
-        && ( ((int)session.getAttribute("role") == Compte.MODERATEUR)
-            || ((int)session.getAttribute("role") == Compte.ADMINISTRATEUR) )
-        && request.getParameter("modifie")!=null){
-            
-            String nom = request.getParameter("nom"),
-                   description = request.getParameter("titre"),
-                    heureDebut = request.getParameter("heureDebut"),
-                    dateDebut = request.getParameter("dateDebut")+" "+heureDebut,
-                    heureFin = request.getParameter("heureFin"),
-                    dateFin = request.getParameter("dateFin")+" "+heureFin,
-                    question = request.getParameter("question"),
-                    reponse = request.getParameter("reponse"),
-                    choixReponse = request.getParameter("choixReponseJSON"),
-                    idDefi = request.getParameter("idDefi");
-                   
-            int valeurMinute; 
-                
-              
-            try {
-                Connection cnx = Connexion.startConnection(Config.DB_USER,Config.DB_PWD,Config.URL,Config.DRIVER);
-                
-                Defi defi = new DefiDAO(cnx).read(idDefi);
-                if(defi == null){
-                    
-                    return "*.do?tache=afficherPageParticipationDefi";
-                }
-                else{
-                    
-                   
-                    if(nom != null && !"".equals(nom.trim()) && !nom.equals(defi.getNom()))
-                        defi.setNom(nom);
-                    
-                    if(request.getParameter("valeurMinute") != null){
-                        try{
-                            valeurMinute = Integer.parseInt(request.getParameter("valeurMinute"));
-                            if(valeurMinute != defi.getValeurMinute())
-                                defi.setValeurMinute(valeurMinute);
-                        }
-                        catch(NumberFormatException e){
-                        }
-                    }
-                    
-                    if(dateDebut != defi.getDateDebut())
-                        defi.setDateDebut(dateDebut);
-                    if(dateFin != defi.getDateFin())
-                        defi.setDateFin(dateFin);
-                    
-                 
-                 
-                    if(description != null && !"".equals(description.trim()) && !description.equals(defi.getDescription()))
-                        defi.setDescription(description);
-                 
-                    if(question != null && !"".equals(question.trim()) && !question.equals(defi.getQuestion()))
-                        defi.setQuestion(question);
-                 
-                    if(choixReponse != defi.getChoixReponse())
-                        defi.setChoixReponse(choixReponse);
-                    if(reponse != defi.getReponse())
-                        defi.setReponse(reponse);
-                 
-                    cnx = Connexion.startConnection(Config.DB_USER,Config.DB_PWD,Config.URL,Config.DRIVER);
-                    
-                    DefiDAO dao = new DefiDAO(cnx);
-                    if(!dao.update(defi))
-                        return "*.do?tache=afficherPageParticipationDefi";
-                    else
-                        return "*.do?tache=afficherPageParticipationDefi";
-                }            
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(EffectuerModificationLectureAction.class.getName()).log(Level.SEVERE, null, ex);
-                return "*.do?tache=afficherPageParticipationDefi";
-            } catch (SQLException ex) {
-                Logger.getLogger(EffectuerModificationDefiAction.class.getName()).log(Level.SEVERE, null, ex);
-                            return "*.do?tache=afficherPageParticipationDefi";
+	@Override
+	public String execute() {
 
-            }
-        }
-        else
-            return "*.do?tache=afficherPageParticipationDefi";
-        
-    }
 
-    @Override
-    public void setRequest(HttpServletRequest request) {
-        this.request = request;
-    }
+		if(session.getAttribute("connecte") != null
+				&& session.getAttribute("role") != null
+				&& ( ((int)session.getAttribute("role") == Compte.MODERATEUR)
+					|| ((int)session.getAttribute("role") == Compte.ADMINISTRATEUR) )
+				&& request.getParameter("modifie")!=null){
 
-    @Override
-    public void setResponse(HttpServletResponse response) {
-        this.response = response;
-    }
+			String nom = request.getParameter("nom"),
+			       description = request.getParameter("description"),
+			       heureDebut = request.getParameter("heureDebut"),
+			       dateDebut = request.getParameter("dateDebut")+" "+heureDebut,
+			       heureFin = request.getParameter("heureFin"),
+			       dateFin = request.getParameter("dateFin")+" "+heureFin,
+			       question = request.getParameter("question"),
+			       reponse = request.getParameter("reponse"),
+			       choixReponse = request.getParameter("choixReponseJSON"),
+			       idDefi = request.getParameter("idDefi");
 
-    @Override
-    public void setSession(HttpSession session) {
-        this.session = session;
-    }
-    
-    
+			int valeurMinute; 
+
+
+			try {
+				Connection cnx = Connexion.startConnection(Config.DB_USER,Config.DB_PWD,Config.URL,Config.DRIVER);
+
+				Defi defi = new DefiDAO(cnx).read(idDefi);
+				if(defi == null){
+
+					return "*.do?tache=afficherPageParticipationDefi";
+				}
+				else{
+
+
+					if(nom != null && !"".equals(nom.trim()) && !nom.equals(defi.getNom()))
+						defi.setNom(nom);
+
+					if(request.getParameter("valeurMinute") != null){
+						try{
+							valeurMinute = Integer.parseInt(request.getParameter("valeurMinute"));
+							if(valeurMinute != defi.getValeurMinute())
+								defi.setValeurMinute(valeurMinute);
+						}
+						catch(NumberFormatException e){
+						}
+					}
+
+					if(dateDebut != defi.getDateDebut())
+						defi.setDateDebut(dateDebut);
+					if(dateFin != defi.getDateFin())
+						defi.setDateFin(dateFin);
+
+
+
+					if(description != null && !"".equals(description.trim()) && !description.equals(defi.getDescription()))
+						defi.setDescription(description);
+
+					if(question != null && !"".equals(question.trim()) && !question.equals(defi.getQuestion()))
+						defi.setQuestion(question);
+
+					if(choixReponse != defi.getChoixReponse())
+						defi.setChoixReponse(choixReponse);
+					if(reponse != defi.getReponse())
+						defi.setReponse(reponse);
+
+					cnx = Connexion.startConnection(Config.DB_USER,Config.DB_PWD,Config.URL,Config.DRIVER);
+
+					DefiDAO dao = new DefiDAO(cnx);
+					if(!dao.update(defi))
+						return "*.do?tache=afficherPageParticipationDefi";
+					else
+						return "*.do?tache=afficherPageParticipationDefi";
+				}            
+			} catch (ClassNotFoundException ex) {
+				Logger.getLogger(EffectuerModificationLectureAction.class.getName()).log(Level.SEVERE, null, ex);
+				return "*.do?tache=afficherPageParticipationDefi";
+			} catch (SQLException ex) {
+				Logger.getLogger(EffectuerModificationDefiAction.class.getName()).log(Level.SEVERE, null, ex);
+				return "*.do?tache=afficherPageParticipationDefi";
+
+			}
+				}
+		else
+			return "*.do?tache=afficherPageParticipationDefi";
+
+	}
+
+	@Override
+	public void setRequest(HttpServletRequest request) {
+		this.request = request;
+	}
+
+	@Override
+	public void setResponse(HttpServletResponse response) {
+		this.response = response;
+	}
+
+	@Override
+	public void setSession(HttpSession session) {
+		this.session = session;
+	}
+
+
 }
