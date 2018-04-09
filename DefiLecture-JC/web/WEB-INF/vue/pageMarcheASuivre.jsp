@@ -48,7 +48,7 @@
                         <li>Cochez : «&nbsp;Je désire être capitaine d’un équipage (employé ou tuteur)&nbsp;»</li>
                         <li>Attendez que nous approuvions votre inscription en tant que capitaine </li>
                         <li>Créez votre équipage en donnant un nom au navire</li>
-                        <li>Invitez des élèves à joindre votre équipage en leur remettant le signet du Défi lecture</li>
+                        <li>Invitez des élèves à joindre votre équipage.</li>
                     </ol>
 
                     </div>
