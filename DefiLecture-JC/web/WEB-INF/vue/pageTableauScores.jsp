@@ -20,7 +20,7 @@
 
         <div class="row scores-row">
             <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 scores-col">
-                <h2>La trésorerie</h2>  
+                <h1>La trésorerie</h1>  
 
                     <table class="table">
                       <thead>

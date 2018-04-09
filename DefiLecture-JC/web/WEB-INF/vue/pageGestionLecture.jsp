@@ -18,7 +18,7 @@
 
 <div class="row gestion-lecture-row"> 
     <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 gestion-lecture-col">
-        <h2>Liste de mes lectures</h2>
+        <h1>Liste de mes lectures</h1>
 
 
   <jsp:useBean id="connexion" scope="page" class="jdbc.Connexion"></jsp:useBean>  
