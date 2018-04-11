@@ -91,12 +91,10 @@ public class EffectuerInscriptionDefiAction implements Action, RequestAware, Req
                         CompteDAO daoCompte = new CompteDAO(cnx);
                         Compte compte = new Compte();
                         compte = daoCompte.read(idCompte);
-                        int pointDefi = (defi.getValeurMinute() + compte.getMinutesRestantes()) / 15;
+                        int pointDefi = defi.getValeurMinute();
                         int pointCompte = compte.getPoint() + pointDefi;
                         //Les minutes restantes sont gardées en mémoire ici
-                        int minutesRestantes = (defi.getValeurMinute() + compte.getMinutesRestantes()) % 15;
                         compte.setPoint(pointCompte);
-                        compte.setMinutesRestantes(minutesRestantes);
                         daoCompte.update(compte);
                 
                         //Mise à jour des points dans demande_equipe (pour calculer le total des points de l'équipe)
