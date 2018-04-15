@@ -156,12 +156,12 @@ public class DefiDAO extends DAO<Defi> {
         try {
                 paramStm = cnx.prepareStatement(req);
 
-                paramStm.setString(1, Util.toUTF8(x.getNom()));
-                paramStm.setString(2, Util.toUTF8(x.getDescription()));
+                paramStm.setString(1, x.getNom());
+                paramStm.setString(2, x.getDescription());
                 paramStm.setString(3, x.getDateDebut());
                 paramStm.setString(4, x.getDateFin());
-                paramStm.setString(5, Util.toUTF8(x.getChoixReponse()));
-                paramStm.setString(6, Util.toUTF8(x.getReponse()));
+                paramStm.setString(5, x.getChoixReponse());
+                paramStm.setString(6, x.getReponse());
                 paramStm.setInt(7, x.getValeurMinute());
 		paramStm.setString(8, x.getQuestion());
                 paramStm.setInt(9, x.getIdDefi());
