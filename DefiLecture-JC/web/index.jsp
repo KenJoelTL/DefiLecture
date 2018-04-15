@@ -135,6 +135,7 @@
                         <ul class="dropdown-menu">
                             <c:if test="${ sessionScope.role ge 3 }">
                           <li><a href="*.do?tache=afficherPageCreationDefi">Cr&eacute;er un d&eacute;fi</a></li>
+                          <li><a href="*.do?tache=afficherPageDefisReussis">Liste défis réussis</a></li>
                           </c:if>
                           <li><a href="*.do?tache=afficherPageParticipationDefi">Voir les d&eacute;fis</a></li>
                         </ul>
