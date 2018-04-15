@@ -123,6 +123,7 @@
                         <ul class="dropdown-menu">
                           <li ><a href="*.do?tache=afficherPageGestionListeCompte">G&eacute;rer les comptes</a></li>
                           <li ><a href="*.do?tache=afficherPageAdresseCourriel">Liste d'adresses</a></li>
+                          <li ><a href="*.do?tache=afficherPageListeLectures">Liste des lectures</a></li>
                         </ul>
                     </li>
                  </c:if>
@@ -135,6 +136,7 @@
                         <ul class="dropdown-menu">
                             <c:if test="${ sessionScope.role ge 3 }">
                           <li><a href="*.do?tache=afficherPageCreationDefi">Cr&eacute;er un d&eacute;fi</a></li>
+                          <li><a href="*.do?tache=afficherPageDefisReussis">Liste défis réussis</a></li>
                           </c:if>
                           <li><a href="*.do?tache=afficherPageParticipationDefi">Voir les d&eacute;fis</a></li>
                         </ul>

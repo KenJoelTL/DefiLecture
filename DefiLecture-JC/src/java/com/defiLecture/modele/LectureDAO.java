@@ -142,7 +142,7 @@ public class LectureDAO extends DAO<Lecture> {
         try {
                 paramStm = cnx.prepareStatement(req);
 
-                paramStm.setString(1, Util.toUTF8(x.getTitre()));
+                paramStm.setString(1, x.getTitre());
                 paramStm.setInt(2, x.getDureeMinutes());
                 paramStm.setInt(3, x.getEstObligatoire());
                 paramStm.setInt(4, x.getIdLecture());
@@ -215,7 +215,7 @@ public class LectureDAO extends DAO<Lecture> {
         try 
             {
                 Statement stm = cnx.createStatement(); 
-                ResultSet r = stm.executeQuery("SELECT * FROM lecture");
+                ResultSet r = stm.executeQuery("SELECT * FROM lecture ORDER BY TITRE ASC");
                 while (r.next()){
                     Lecture l = new Lecture();
                     l.setIdLecture(r.getInt("ID_LECTURE"));

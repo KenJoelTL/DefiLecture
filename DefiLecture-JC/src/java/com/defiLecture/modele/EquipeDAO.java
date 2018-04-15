@@ -136,7 +136,7 @@ public class EquipeDAO extends DAO<Equipe>{
                 if(x.getNom() == null || "".equals(x.getNom().trim()))
                     paramStm.setString(1, null);
                 else
-                    paramStm.setString(1, Util.toUTF8(x.getNom()));
+                    paramStm.setString(1, x.getNom());
                 paramStm.setInt(2, x.getIdEquipe());
                 
                 int nbLignesAffectees= paramStm.executeUpdate();

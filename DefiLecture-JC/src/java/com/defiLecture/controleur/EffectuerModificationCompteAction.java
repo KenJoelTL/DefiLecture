@@ -14,6 +14,7 @@ import jdbc.Config;
 import jdbc.Connexion;
 import com.defiLecture.modele.Compte;
 import com.defiLecture.modele.CompteDAO;
+import com.util.Util;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -123,19 +124,19 @@ public class EffectuerModificationCompteAction implements Action, RequestAware, 
                             erreurSurvenue = true;
                             data.put("erreurCourriel", "Ce courriel est déjà utilisé par un autre matelot");
                         } else {
-                            compte.setCourriel(courriel);
+                            compte.setCourriel(Util.toUTF8(courriel));
                         }
                     }
                     if (prenom != null && !"".equals(prenom.trim()) && !prenom.equals(compte.getPrenom())) {
-                        compte.setPrenom(prenom);
+                        compte.setPrenom(Util.toUTF8(prenom));
                     }
                     if (nom != null && !"".equals(nom.trim()) && !nom.equals(compte.getNom())) {
-                        compte.setNom(nom);
+                        compte.setNom(Util.toUTF8(nom));
                     }
                     if (motPasseNouveau != null && !"".equals(motPasseNouveau.trim())) {
                         if (motPasseActuel != null && motPasseActuel.equals(compte.getMotPasse())) {
                             if (motPasseNouveau.equals(motPasseNouveauConfirmation)) {
-                                compte.setMotPasse(motPasseNouveau);
+                                compte.setMotPasse(Util.toUTF8(motPasseNouveau));
                             } else {
                                 erreurSurvenue = true;
                                 data.put("erreurMotPasse", "Les champs concernant le nouveau mot de passe doivent être identiques");
@@ -151,11 +152,11 @@ public class EffectuerModificationCompteAction implements Action, RequestAware, 
                             erreurSurvenue = true;
                             data.put("erreurPseudonyme", "Ce pseudonyme est déjà utilisé par un autre matelot");
                         } else {
-                            compte.setPseudonyme(pseudonyme);
+                            compte.setPseudonyme(Util.toUTF8(pseudonyme));
                         }
                     }
                     if (programmeEtude != null && !programmeEtude.equals(compte.getProgrammeEtude())) {
-                        compte.setProgrammeEtude(programmeEtude);
+                        compte.setProgrammeEtude(Util.toUTF8(programmeEtude));
                     }
 
                     if (erreurSurvenue) {

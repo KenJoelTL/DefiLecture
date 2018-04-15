@@ -16,6 +16,7 @@ import jdbc.Connexion;
 import com.defiLecture.modele.Compte;
 import com.defiLecture.modele.Lecture;
 import com.defiLecture.modele.LectureDAO;
+import com.util.Util;
 import java.sql.SQLException;
 
 /**
@@ -70,7 +71,7 @@ public class EffectuerModificationLectureAction implements Action, RequestAware,
                     
                  
                     if(titre != null && !"".equals(titre.trim()) && !titre.equals(lecture.getTitre()))
-                        lecture.setTitre(titre);
+                        lecture.setTitre(Util.toUTF8(titre));
                     
                     
                     if(!dao.update(lecture)){
