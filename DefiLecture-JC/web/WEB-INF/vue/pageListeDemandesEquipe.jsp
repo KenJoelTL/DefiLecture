@@ -45,8 +45,15 @@
  <div class="row demandes-row"> 
     <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 demandes-col">
         <h2>Liste des demandes</h2>
-
-
+        <c:if test="${!empty requestScope.data['erreurDemande']}">
+            <div class="alert alert-danger"><strong>${requestScope.data['erreurDemande']}</strong></div>
+        </c:if>
+        <c:if test="${!empty requestScope.data['succesDemande']}">
+            <div class="alert alert-success"><strong>${requestScope.data['succesDemande']}</strong></div>
+        </c:if>
+        <c:if test="${!empty requestScope.data['avertissementDemande']}">
+            <div class="alert alert-warning"><strong>${requestScope.data['avertissementDemande']}</strong></div>
+        </c:if>
           <c:if test="${(param.ordre eq 'recu') and (sessionScope.role eq Compte.CAPITAINE) }">
               <c:choose>
                   <c:when test="${ equipe.nbMembres lt Equipe.NB_MAX_MEMBRES }">
