@@ -19,15 +19,19 @@ import com.defiLecture.modele.DemandeEquipe;
 import com.defiLecture.modele.DemandeEquipeDAO;
 import com.defiLecture.modele.Equipe;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
 
 /**
  *
  * @author Joel
  */
-public class EffectuerAcceptationDemandeAdhesionAction implements Action, RequestAware, SessionAware, RequirePRGAction{
+public class EffectuerAcceptationDemandeAdhesionAction implements Action, RequestAware, SessionAware, RequirePRGAction, DataSender{
     HttpServletResponse response;
     HttpServletRequest request;
     HttpSession session;
+    HashMap data;
 
     @Override
     public String execute() {
@@ -47,13 +51,21 @@ public class EffectuerAcceptationDemandeAdhesionAction implements Action, Reques
                 DemandeEquipeDAO deDao = new DemandeEquipeDAO(cnx);
                 DemandeEquipe demandeEq = deDao.read(idDemandeEq);
                 
-                if(demandeEq == null)
-                    action = "*.do?tache=afficherPageAccueil";
+                if(demandeEq == null) {
+                    action = "*.do?tache=afficherPageListeDemandesEquipe&ordre=recu";
+                    data.put("avertissementDemande", "Impossible d'accepter la demande puisqu'elle a été retirée par le matelot");
+                }
                 else{
                     CompteDAO compteDao = new CompteDAO(cnx);
                     Compte cpt = compteDao.read(demandeEq.getIdCompte());
-                    if(cpt == null || cpt.getIdEquipe() !=-1)
-                        action = "*.do?tache=afficherPageAccueil";
+                    action = "*.do?tache=afficherPageListeDemandesEquipe&ordre=recu";
+                    if(cpt == null) {
+                        action = "*.do?tache=afficherPageListeDemandesEquipe&ordre=recu";
+                        data.put("erreurDemande", "Le matelot auteur de cette demande est à la retraite.");
+                    }
+                    else if(cpt.getIdEquipe() !=-1){
+                        data.put("erreurDemande", "Le matelot "+ cpt.getPrenom() +"«"+ cpt.getPseudonyme() +"»"+ cpt.getNom() +" fait déjà partie d'un équipage.");
+                    }
                     else{
                         int idEquipe = demandeEq.getIdEquipe();
                         int nbMembre = compteDao.countCompteByIdEquipe(idEquipe);
@@ -62,7 +74,17 @@ public class EffectuerAcceptationDemandeAdhesionAction implements Action, Reques
                             demandeEq.setStatutDemande(DemandeEquipe.ACCEPTEE);
                             if(deDao.update(demandeEq) && compteDao.update(cpt)){
                                 action = "ajoutReussi.do?tache=afficherPageListeDemandesEquipe&ordre=recu";
+                                data.put("succesDemande", "Le matelot "+ cpt.getPrenom() +" «"+ cpt.getPseudonyme() +"» "+ cpt.getNom() +" fait maintenant partie de votre équipage !");
+                                // suppression des autres demandes
+                                LinkedList<DemandeEquipe> listeDemandes = (LinkedList<DemandeEquipe>) deDao.findByIdCompte(cpt.getIdCompte());
+                                listeDemandes.forEach(demande->{
+                                    if (demande.getIdDemandeEquipe() != demandeEq.getIdDemandeEquipe()) {
+                                        deDao.delete(demande);
+                                }});
+                                
                             }
+                        }else{
+                            data.put("avertissementDemande", "Impossible d'accepter la demande puisque votre équipe est pleine");
                         }
                    
                     }   
@@ -94,5 +116,10 @@ public class EffectuerAcceptationDemandeAdhesionAction implements Action, Reques
     @Override
     public void setSession(HttpSession session) {
         this.session = session;
+    }
+
+    @Override
+    public void setData(Map<String, Object> data) {
+        this.data = (HashMap) data;
     }
 }

@@ -47,7 +47,7 @@ public class EffectuerModificationEquipeAction implements Action, RequestAware, 
                     Equipe equipe = equipeDao.findByNom(request.getParameter("nom"));
                     if(compte != null && equipe ==null && compte.getIdEquipe() != -1){
                         equipe = equipeDao.read(compte.getIdEquipe());
-                        equipe.setNom(request.getParameter("nom"));
+                        equipe.setNom(Util.toUTF8(request.getParameter("nom")));
                         
                         if(equipeDao.update(equipe)){
                             action = "*.do?tache=afficherPageModificationEquipe&idEquipe="+request.getParameter("idEquipe");

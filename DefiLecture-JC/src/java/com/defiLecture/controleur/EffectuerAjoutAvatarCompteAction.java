@@ -7,6 +7,7 @@ package com.defiLecture.controleur;
 
 import com.defiLecture.modele.Compte;
 import com.defiLecture.modele.CompteDAO;
+import com.util.Util;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -72,7 +73,7 @@ public class EffectuerAjoutAvatarCompteAction implements Action, RequestAware, S
                 CompteDAO dao = new CompteDAO(cnx);
                 Compte compte = dao.read(idCompte);
                 if (compte != null) {
-                    compte.setAvatar(relativePath);
+                    compte.setAvatar(Util.toUTF8(relativePath));
                     if (dao.update(compte)) {
                         data.put("succesAvatar","L'enregistrement de l'avatar s'est effectué avec succès");
                     } else {
