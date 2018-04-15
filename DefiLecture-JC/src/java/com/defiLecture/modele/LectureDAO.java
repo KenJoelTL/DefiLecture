@@ -215,7 +215,7 @@ public class LectureDAO extends DAO<Lecture> {
         try 
             {
                 Statement stm = cnx.createStatement(); 
-                ResultSet r = stm.executeQuery("SELECT * FROM lecture");
+                ResultSet r = stm.executeQuery("SELECT * FROM lecture ORDER BY TITRE ASC");
                 while (r.next()){
                     Lecture l = new Lecture();
                     l.setIdLecture(r.getInt("ID_LECTURE"));
