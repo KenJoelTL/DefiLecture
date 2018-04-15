@@ -272,6 +272,56 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
         return listeInscriptionDefi;
         
     }
+        
+        public List<InscriptionDefi> findByDefiReussi() {
+            
+            String req = "SELECT * FROM inscription_defi WHERE `EST_REUSSI` = 1";
+            List<InscriptionDefi> listeInscriptionDefi = new ArrayList<InscriptionDefi>();
+
+        PreparedStatement paramStm = null;
+        try {
+
+                paramStm = cnx.prepareStatement(req);
+
+           
+                ResultSet resultat = paramStm.executeQuery();
+
+                // On vérifie s'il y a un résultat    
+                while(resultat.next()){
+
+                    InscriptionDefi i = new InscriptionDefi();
+
+                    i.setIdInscriptionDefi(resultat.getInt("ID_INSCRIPTION_DEFI"));
+                    i.setIdCompte(resultat.getInt("ID_COMPTE"));
+                    i.setIdDefi(resultat.getInt("ID_DEFI"));
+                    i.setValeurMinute(resultat.getInt("VALEUR_MINUTE"));
+                    i.setEstReussi(resultat.getInt("EST_REUSSI"));
+                    i.setDateInscription(resultat.getString("DATE_INSCRIPTION"));
+
+                    listeInscriptionDefi.add(i);
+
+                }
+                resultat.close();
+                paramStm.close();
+                return listeInscriptionDefi;
+
+        }
+        catch (SQLException exp) {
+        }
+        finally {
+            try{
+                if (paramStm!=null)
+                    paramStm.close();
+            }
+            catch (SQLException exp) {
+            }
+             catch (Exception e) {
+            }
+        }        
+
+        return listeInscriptionDefi;
+        
+    }
     
     
 }

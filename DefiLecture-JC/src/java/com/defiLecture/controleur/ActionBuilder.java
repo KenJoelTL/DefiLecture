@@ -62,6 +62,8 @@ public class ActionBuilder {
                     return new AfficherPageParticipationDefiAction();
                 case "afficherPageInscriptionDefi":
                     return new AfficherPageInscriptionDefiAction();
+                case "afficherPageDefisReussis":
+                    return new AfficherPageDefisReussisAction();
                 case "effectuerInscriptionDefi":
                     return new EffectuerInscriptionDefiAction();
                 case "afficherPageModificationDefi":
