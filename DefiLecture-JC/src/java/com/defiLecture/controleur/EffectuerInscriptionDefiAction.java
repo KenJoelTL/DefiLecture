@@ -23,16 +23,19 @@ import com.defiLecture.modele.DemandeEquipe;
 import com.defiLecture.modele.DemandeEquipeDAO;
 import com.defiLecture.modele.InscriptionDefi;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
  * @author Charles
  */
-public class EffectuerInscriptionDefiAction implements Action, RequestAware, RequirePRGAction, SessionAware {
+public class EffectuerInscriptionDefiAction implements Action, RequestAware, RequirePRGAction, SessionAware, DataSender {
 
     private HttpServletRequest request;
     private HttpServletResponse response;
     private HttpSession session;
+    private HashMap data;
     
     
     
@@ -147,6 +150,11 @@ public class EffectuerInscriptionDefiAction implements Action, RequestAware, Req
     @Override
     public void setSession(HttpSession session) {
         this.session = session;
+    }
+
+    @Override
+    public void setData(Map<String, Object> data) {
+        this.data = (HashMap) data;
     }
 
 
