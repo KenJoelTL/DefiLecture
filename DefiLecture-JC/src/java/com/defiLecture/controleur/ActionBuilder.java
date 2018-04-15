@@ -49,6 +49,8 @@ public class ActionBuilder {
                     return new EffectuerCreationLectureAction();
                 case "afficherPageModificationLecture":
                     return new AfficherPageModificationLectureAction();
+                case "afficherPageListeLectures":
+                    return new AfficherPageListeLecturesAction();
                 case "effectuerModificationLecture":
                     return new EffectuerModificationLectureAction();
                 case "effectuerSuppressionLecture":
