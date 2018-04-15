@@ -173,25 +173,25 @@ public class CompteDAO extends DAO<Compte>{
                 && x.getNom()      != null && !"".equals(x.getNom().trim())     
                 && x.getPrenom()   != null && !"".equals(x.getPrenom().trim()))
             {
-                paramStm.setString(1, Util.toUTF8(x.getCourriel()));
-                paramStm.setString(2, Util.toUTF8(x.getMotPasse()));
-                paramStm.setString(3, Util.toUTF8(x.getNom()));
-                paramStm.setString(4, Util.toUTF8(x.getPrenom()));
+                paramStm.setString(1, x.getCourriel());
+                paramStm.setString(2, x.getMotPasse());
+                paramStm.setString(3, x.getNom());
+                paramStm.setString(4, x.getPrenom());
 
                 if(x.getPseudonyme() == null || "".equals(x.getPseudonyme().trim()))
                     paramStm.setString(5, null);
                 else
-                    paramStm.setString(5, Util.toUTF8(x.getPseudonyme()));
+                    paramStm.setString(5, x.getPseudonyme());
 
                 if(x.getAvatar() == null || "".equals(x.getAvatar().trim()))
                     paramStm.setString(6, null);
                 else
-                    paramStm.setString(6, Util.toUTF8(x.getAvatar()));
+                    paramStm.setString(6, x.getAvatar());
 
                 if(x.getProgrammeEtude() == null || "".equals(x.getProgrammeEtude().trim()))
                     paramStm.setString(7, null);
                 else
-                    paramStm.setString(7, Util.toUTF8(x.getProgrammeEtude()));
+                    paramStm.setString(7, x.getProgrammeEtude());
 
                 if(x.getIdEquipe() == -1){
                     paramStm.setNull(8, java.sql.Types.INTEGER);

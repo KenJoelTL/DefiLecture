@@ -7,6 +7,8 @@ package com.defiLecture.controleur;
 
 import com.defiLecture.modele.Compte;
 import com.defiLecture.modele.CompteDAO;
+import com.util.Util;
+import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -64,7 +66,6 @@ public class EffectuerGenerationMotPasseAction implements Action, RequestAware, 
                     }
 
                 } else {
-
                     data.put("erreurGenerationMotPasse", "Le compte que vous tentez de modifier est introuvable");
                 }
 
