@@ -36,6 +36,15 @@ SET time_zone = "+00:00";
 -- Base de données :  `defilecture`
 --
 
+DROP USER IF EXISTS defilecture;
+DROP DATABASE IF EXISTS defilecture;
+CREATE DATABASE defilecture;
+
+USE defilecture;
+
+CREATE USER defilecture IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES on defilecture.* to 'defilecture'@'%';
+
 -- --------------------------------------------------------
 
 --
@@ -69,7 +78,7 @@ TRUNCATE TABLE `compte`;
 --
 
 INSERT INTO `compte` (`ID_COMPTE`, `ID_EQUIPE`, `COURRIEL`, `MOT_PASSE`, `NOM`, `PRENOM`, `POINT`, `MINUTES_RESTANTES`, `PROGRAMME_ETUDE`, `PSEUDONYME`, `ROLE`, `DEVENIR_CAPITAINE`) VALUES
-(1, NULL, 'admin@mail.com', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'admin', 'Admin', 0, 0, '', 'admin', 4, 0),
+(1, NULL, 'admin@mail.com', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'admin', 'Admin', 0, 0, '', 'admin', 4, 0);
 
 -- --------------------------------------------------------
 
