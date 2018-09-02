@@ -89,7 +89,7 @@
                   <thead>
                     <tr>
                       <th width=50%>Pirate</th>
-                      <th>Contributions</th>
+                      <th>Contribution</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -100,7 +100,8 @@
                           <c:set var="contribution" value="${daoDemEqp.findByIdCompteEquipe(membre.idCompte,equipe.idEquipe)}"></c:set>
                         <div class="progress">
                           <div class="progress-bar" role="progressbar" aria-valuenow="${contribution.point}"
-                            aria-valuemin="0" aria-valuemax="100" style="width:${(contribution.point/equipe.point)*100}%">
+                               aria-valuemin="0" aria-valuemax="100" style="width:${(contribution.point/equipe.point)*100}%">
+			    ${contribution.point}
                           </div>
                         </div>
                       </td>
