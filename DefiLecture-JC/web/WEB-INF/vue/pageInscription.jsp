@@ -90,7 +90,7 @@
                         </div>
                             
                         <div class="form-group">
-                            <label for="motPasse">Mot de passe (jusqu'à 12 caratères)* :</label>
+                            <label for="motPasse">Mot de passe* :</label>
                             <div class="input-group">
                                 <input id="motPasse" type="password" class="form-control" name="motPasse" required>
                             </div>
