@@ -36,7 +36,7 @@
                     <h1>Code de conduite <br> du pirate</h1>
 
                     <ul>
-                        <li><label class='pirateIcone'></label><span> Le <strong>capitaine</strong> baptise son navire et recrute son <strong>équipage</strong> formé de deux matelots avant d’appareiller à la date prescrite.</span></li>
+                        <li><label class='pirateIcone'></label><span> Le <strong>capitaine</strong> baptise son navire et recrute son <strong>équipage</strong> formé de trois matelots avant d’appareiller à la date prescrite.</span></li>
                         <br>
                         <li><label class='pirateIcone'></label><span> Le capitaine est responsable de stimuler l’ardeur de son équipage pour amasser le plus de <strong>doublons</strong> possible.</span></li> 
                         <br>

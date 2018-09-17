@@ -97,6 +97,13 @@
                         <strong>Département de Français</strong>
 
                     </p>
+                    <p>
+                        <strong>Le syndicat des professeur-e-s du Collège de Rosemont</strong>
+
+                    </p>
+		    <p>
+			<strong>Les éditions Stanké</strong>
+		    </p>
 
 
 
