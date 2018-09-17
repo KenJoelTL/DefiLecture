@@ -1,3 +1,19 @@
+--    This file is part of DefiLecture.
+--
+--    DefiLecture is free software: you can redistribute it and/or modify
+--    it under the terms of the GNU General Public License as published by
+--    the Free Software Foundation, either version 3 of the License, or
+--    (at your option) any later version.
+--
+--    DefiLecture is distributed in the hope that it will be useful,
+--    but WITHOUT ANY WARRANTY; without even the implied warranty of
+--    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+--    GNU General Public License for more details.
+--
+--    You should have received a copy of the GNU General Public License
+--    along with DefiLecture.  If not, see <http://www.gnu.org/licenses/>.
+
+
 -- phpMyAdmin SQL Dump
 -- version 4.5.4.1
 -- http://www.phpmyadmin.net
@@ -19,6 +35,15 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `defilecture`
 --
+
+DROP USER IF EXISTS defilecture;
+DROP DATABASE IF EXISTS defilecture;
+CREATE DATABASE defilecture;
+
+USE defilecture;
+
+CREATE USER defilecture IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES on defilecture.* to 'defilecture'@'%';
 
 -- --------------------------------------------------------
 
@@ -53,7 +78,7 @@ TRUNCATE TABLE `compte`;
 --
 
 INSERT INTO `compte` (`ID_COMPTE`, `ID_EQUIPE`, `COURRIEL`, `MOT_PASSE`, `NOM`, `PRENOM`, `POINT`, `MINUTES_RESTANTES`, `PROGRAMME_ETUDE`, `PSEUDONYME`, `ROLE`, `DEVENIR_CAPITAINE`) VALUES
-(1, NULL, 'admin@mail.com', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'admin', 'Admin', 0, 0, '', 'admin', 4, 0),
+(1, NULL, 'admin@mail.com', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'admin', 'Admin', 0, 0, '', 'admin', 4, 0);
 
 -- --------------------------------------------------------
 
@@ -66,11 +91,11 @@ CREATE TABLE `defi` (
   `ID_DEFI` int(10) NOT NULL,
   `ID_COMPTE` int(10) DEFAULT NULL,
   `NOM` varchar(255) NOT NULL,
-  `DESCRIPTION` varchar(255) DEFAULT NULL,
-  `DATE_DEBUT` varchar(255) NOT NULL,
-  `DATE_FIN` varchar(255) NOT NULL,
-  `QUESTION` varchar(255) DEFAULT NULL,
-  `CHOIX_REPONSE` varchar(255) DEFAULT NULL,
+  `DESCRIPTION` varchar(1024) DEFAULT NULL,
+  `DATE_DEBUT` datetime(2) NOT NULL,
+  `DATE_FIN` datetime(2) NOT NULL,
+  `QUESTION` varchar(1024) DEFAULT NULL,
+  `CHOIX_REPONSE` varchar(1024) DEFAULT NULL,
   `REPONSE` varchar(255) DEFAULT NULL,
   `VALEUR_MINUTE` int(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

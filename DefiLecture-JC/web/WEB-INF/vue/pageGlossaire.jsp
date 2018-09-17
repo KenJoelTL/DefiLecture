@@ -1,3 +1,19 @@
+<!--
+    This file is part of DefiLecture.
+
+    DefiLecture is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    DefiLecture is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with DefiLecture.  If not, see <http://www.gnu.org/licenses/>.
+-->
 <%-- 
     Document   : pageGlossaire
     Created on : 2018-03-18, 15:26:36
@@ -25,7 +41,7 @@
                     </p>
 
                     <p>
-                        <strong>Matelot</strong> : étudiant, membre du personnel ou professeur, les matelots doivent demander à joindre un équipage et obtenir l’approbation du capitaine au moment de l’inscription. Ils sont au nombre de deux dans chaque équipe.
+                        <strong>Matelot</strong> : étudiant, membre du personnel ou professeur, les matelots doivent demander à joindre un équipage et obtenir l’approbation du capitaine au moment de l’inscription. Ils sont au nombre de trois dans chaque équipe.
 
                     </p>
 
