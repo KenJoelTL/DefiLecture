@@ -26,7 +26,7 @@ package com.defiLecture.modele;
  * @author Joel
  */
 public class Equipe implements Comparable<Equipe>{
-    public static int NB_MAX_MEMBRES = 3;
+    public static int NB_MAX_MEMBRES = 4;
     private int idEquipe, //clé primaire
                 point,
                 nbMembres;
