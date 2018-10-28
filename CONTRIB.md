@@ -3,7 +3,7 @@ Alors vous avez décidé de contribué au projet DéfiLecture? Merveilleux! Le D
 Avant de contribuer, il y a quelques choses à savoir :
 
 # Licence
-Le projet DéfiLecture est placé sous licence GPLv3 [!licence GPLv3](https://www.gnu.org/licenses/gpl-3.0.fr.html). En contribuant au projet, vous acceptez de placer vos contributions à ce projet sous la même licence.
+Le projet DéfiLecture est placé sous [licence GPLv3](https://www.gnu.org/licenses/gpl-3.0.fr.html). En contribuant au projet, vous acceptez de placer vos contributions à ce projet sous la même licence.
 
 # Normes de contribution
 
@@ -34,7 +34,7 @@ Les exemples suivants supposent l'utilisation de NetBeans mais tous les IDEs qui
 
 5. Lorsque vous créez un nouveau fichier, n'oubliez pas d'inclure en en-tête la notice de license GPLv3.
 
-6. N'utilisez jamais `git add *` pour ajouter des fichiers à vos commits. Vous risquez fort d'inclure des fichiers qui n'ont aucun lien avec votre commit. Utilisez `git add -u` pour mettre à jour tous les fichiers déjà connus de git et encore, seulement si vous êtes certain de ce que vous faites.
+6. N'utilisez jamais `git add *` pour ajouter des fichiers à vos commits. Vous risquez fort d'inclure des fichiers qui n'ont aucun lien avec votre commit. Utilisez `git add -u` pour mettre à jour tous les fichiers déjà connus de git et encore, seulement si vous êtes certain de ce que vous faites. Quoi qu'il en soit...
 
 7. Avant de faire un commit, assurez-vous que tous les changements que vous vous apprêtez à commiter et ce dans chacun des fichiers, sont corrects et conformes aux normes. Utilisez `git diff` pour réviser vos changements et vous en assurer.
 
