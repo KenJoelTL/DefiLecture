@@ -30,13 +30,17 @@ La plupart des changements devant être apportés au projets sont consignés dan
 
 ## Contribuer
 
-### Divergences : Afin de faciliter la gestion des contributeurs et minimiser le nombre de branches concurrente sur le projet source, toutes les contributions devront être faites à partir d'une divergence (ou bifurcation ou «fork»). Plusieurs développeurs peuvent collaborer sur la même divergence, selon leur mode de fonctionnement personnel.
+### Divergences : 
+Afin de faciliter la gestion des contributeurs et minimiser le nombre de branches concurrente sur le projet source, toutes les contributions devront être faites à partir d'une divergence (ou bifurcation ou «fork»). Plusieurs développeurs peuvent collaborer sur la même divergence, selon leur mode de fonctionnement personnel.
 
-### Branches : Normalement, les modifications apportées au projet devraient être développées sur une branche idoine. Seulement lorsqu'elles sont complétées devraient-elles être fusionnées à la branche principale, master.
+### Branches : 
+Normalement, les modifications apportées au projet devraient être développées sur une branche idoine. Seulement lorsqu'elles sont complétées devraient-elles être fusionnées à la branche principale, master.
 
-### Demande de fusion dans une divergence : Lorsque votre travail vous semble digne d'être intégré à la branche master, vous en faites la fusion dans votre divergence. Seul le créateur de la divergence a ce pouvoir. Les autres collaborateurs devraient lui envoyer une «demande de fusion» (merge request), qu'il aura le loisir d'appliquer ou non. Attention, dans gitlab, la branche cible sélectionnée par défaut lors d'une de la création d'une demande de fusion est celle du projet d'origine et non celle de la divergence; assurez-vous de bien sélectionner la branche sur votre divergence.
+### Demande de fusion dans une divergence : 
+Lorsque votre travail vous semble digne d'être intégré à la branche master, vous en faites la fusion dans votre divergence. Seul le créateur de la divergence a ce pouvoir. Les autres collaborateurs devraient lui envoyer une «demande de fusion» (merge request), qu'il aura le loisir d'appliquer ou non. Attention, dans gitlab, la branche cible sélectionnée par défaut lors d'une de la création d'une demande de fusion est celle du projet d'origine et non celle de la divergence; assurez-vous de bien sélectionner la branche sur votre divergence.
 
-### Demande de fusion sur le projet d'origine : Lorsque votre travail est terminé et qu'il peut être ajouté au projet principal, le créateur de la divergence doit produire une demande de fusion entre la branche «master» de sa divergence et celle du projet d'origine.
+### Demande de fusion sur le projet d'origine : 
+Lorsque votre travail est terminé et qu'il peut être ajouté au projet principal, le créateur de la divergence doit produire une demande de fusion entre la branche «master» de sa divergence et celle du projet d'origine.
 
 # Normes de contribution
 
