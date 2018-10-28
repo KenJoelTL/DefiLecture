@@ -5,6 +5,39 @@ Avant de contribuer, il y a quelques choses à savoir :
 # Licence
 Le projet DéfiLecture est placé sous [licence GPLv3](https://www.gnu.org/licenses/gpl-3.0.fr.html). En contribuant au projet, vous acceptez de placer vos contributions à ce projet sous la même licence.
 
+# Gitlab
+
+Le projet duquel est tiré l'application mise en production lors de l'événement Défi Lecture au Collège de Rosemont est hébergé sur le serveur Gitlab du département des techniques de l'informatique : https://git.dept-info.crosemont.quebec/plafrance/DefiLecture
+
+## Branches Le projet possède deux branches principales : master et live.
+
+- La branche live est celle présentement mise en production.
+
+- La branche master est la branche qui sera mise en production lors de la prochaine mise à jour.
+
+## Étiquettes
+
+- À chaque nouvelle mise à jour en production, une étiquette portant un numéro de version est appliquée à la branche live.
+
+- Les versions ont la forme M.m.c où :
+  - M est le numéro de révision majeure
+  - m est le numéro de révision mineure (incrémenté à chaque itération du Défi Lecture)
+  - c est un numéro de changement mineure intervenues au cours de l'événement (principalement des corrections de bug)
+
+## Tickets
+
+La plupart des changements devant être apportés au projets sont consignés dans des tickets sur Gitlab. Lorsque vous décidez de travailler sur un de ces tickets, ajoutez un commentaire sous le ticket mentionnant vos intentions. C'est aussi l'endroit tout désigné pour demander ou apporter plus de précisions.
+
+## Contribuer
+
+### Divergences : Afin de faciliter la gestion des contributeurs et minimiser le nombre de branches concurrente sur le projet source, toutes les contributions devront être faites à partir d'une divergence (ou bifurcation ou «fork»). Plusieurs développeurs peuvent collaborer sur la même divergence, selon leur mode de fonctionnement personnel.
+
+### Branches : Normalement, les modifications apportées au projet devraient être développées sur une branche idoine. Seulement lorsqu'elles sont complétées devraient-elles être fusionnées à la branche principale, master.
+
+### Demande de fusion dans une divergence : Lorsque votre travail vous semble digne d'être intégré à la branche master, vous en faites la fusion dans votre divergence. Seul le créateur de la divergence a ce pouvoir. Les autres collaborateurs devraient lui envoyer une «demande de fusion» (merge request), qu'il aura le loisir d'appliquer ou non. Attention, dans gitlab, la branche cible sélectionnée par défaut lors d'une de la création d'une demande de fusion est celle du projet d'origine et non celle de la divergence; assurez-vous de bien sélectionner la branche sur votre divergence.
+
+### Demande de fusion sur le projet d'origine : Lorsque votre travail est terminé et qu'il peut être ajouté au projet principal, le créateur de la divergence doit produire une demande de fusion entre la branche «master» de sa divergence et celle du projet d'origine.
+
 # Normes de contribution
 
 Afin d'uniformiser toutes les contributions au code source, veuillez respecter les quelques règles suivantes dans chacun de vos commits :
