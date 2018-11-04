@@ -23,6 +23,7 @@ package com.defiLecture.modele;
 
 import com.util.Util;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -123,7 +124,7 @@ public class CompteDAO extends DAO<Compte>{
                 if(resultat.getInt("ID_EQUIPE") == 0)
                     c.setIdEquipe(-1);
                 else
-                    c.setIdEquipe(resultat.getInt("ID_EQUIPE"));
+                c.setIdEquipe(resultat.getInt("ID_EQUIPE"));
                 c.setCourriel(resultat.getString("COURRIEL"));
                 c.setPrenom(resultat.getString("PRENOM"));             
                 c.setNom(resultat.getString("NOM"));
@@ -164,7 +165,16 @@ public class CompteDAO extends DAO<Compte>{
     }
 
     @Override
-    public Compte read(String id) { //refait a cause que cest trash
+    public Compte read(String id) {
+        try{
+            return this.read(Integer.parseInt(id));
+        }
+        catch(NumberFormatException e){
+            return null;
+        }        
+    }
+    public Compte find(int id){
+                /*
         Compte c = new Compte();
         c.setAvatar("");
         c.setCourriel("fuck@fuck.com");
@@ -172,7 +182,6 @@ public class CompteDAO extends DAO<Compte>{
         c.setIdEquipe(1);
         c.setNom("dick");
         c.setPrenom("bob");
-        /*
         try{
             return this.read(Integer.parseInt(id));
         }
@@ -180,7 +189,43 @@ public class CompteDAO extends DAO<Compte>{
             return null;
         }   
         */
-        return c;
+        Connection con=null;
+        ResultSet rs=null;
+        Statement sqlQuery=null;
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/defilecture?user=root&password=root");
+            String requete;
+            requete = "SELECT * FROM compte WHERE ID_COMPTE = 4";
+            sqlQuery=con.createStatement();
+            rs = sqlQuery.executeQuery(requete);
+            
+            if(rs.next()){
+                Compte comp = new Compte();
+                comp.setIdEquipe(rs.getInt("ID_EQUIPE"));
+                comp.setCourriel(rs.getString("COURRIEL"));
+                comp.setPrenom(rs.getString("PRENOM"));             
+                comp.setNom(rs.getString("NOM"));
+                comp.setMotPasse(rs.getString("MOT_PASSE"));
+                comp.setPseudonyme(rs.getString("PSEUDONYME"));             
+                comp.setAvatar(rs.getString("AVATAR"));             
+                comp.setProgrammeEtude(rs.getString("PROGRAMME_ETUDE"));
+                comp.setMinutesRestantes(rs.getInt("MINUTES_RESTANTES"));
+                comp.setPoint(rs.getInt("POINT"));
+                comp.setRole(rs.getInt("ROLE"));
+                comp.setDevenirCapitaine(rs.getInt("DEVENIR_CAPITAINE"));
+                return comp;
+            }
+            else{
+                Compte comp = new Compte();
+                comp.setPrenom("Pas trouver");
+                return comp;
+            }
+        }catch(Exception e){
+            Compte comp = new Compte();
+            comp.setPrenom(""+e);
+            return comp;
+        }
     }
     
     @Override

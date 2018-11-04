@@ -24,9 +24,8 @@
 <%@ page pageEncoding="UTF-8" %>
 <% 
     CompteDAO dao = new CompteDAO();
-    //dao.read("3");
     String id = request.getParameter("id");
-    Compte comp = dao.read(id);
+    Compte comp = dao.find(4);
 %>
 <html>
     <head>
@@ -44,15 +43,15 @@
                 <p class='bold'>Prénom :</p>
                 <p><% out.println(comp.getPrenom()); %></p>
                 <p class='bold'>Nom :</p>
-                <p></p>
+                <p><% out.println(comp.getNom()); %></p>
                 <p class='bold'>Courriel : </p> <!-- tcheker que cest son profil -->
-                <p></p>
+                <p><% out.println(comp.getCourriel()); %></p>
             </div>
             <div class='col-lg-6'>
                 <p class='bold'>Département :</p>
-                <p></p>
+                <p><% out.println(comp.getProgrammeEtude()); %></p>
                 <p class='bold'>Liste des lectures :</p>
-                <p></p>
+                <p><% out.println("à faire"); %></p>
             </div>
         </div>
     </body>
