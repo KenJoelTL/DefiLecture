@@ -45,7 +45,7 @@ public class AfficherPageModificationCompteAction implements Action, RequestAwar
     @Override
     public String execute() {
 
-        request.setAttribute("vue", "pageMarcheASuivre.jsp");        
+        //request.setAttribute("vue", "pageMarcheASuivre.jsp");        
         
         
         // On vérifie si l'utilisateur qui est selectionné est bien celui qui est connecté. 

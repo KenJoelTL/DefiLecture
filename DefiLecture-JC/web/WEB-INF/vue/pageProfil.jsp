@@ -1,3 +1,5 @@
+<%@page import="com.defiLecture.modele.CompteDAO"%>
+<%@page import="com.defiLecture.modele.Compte"%>
 <!--
     This file is part of DefiLecture.
 
@@ -19,8 +21,40 @@
     Created on : 2017-10-22, 08:26:14
     Author     : Charles
 --%>
-
-
 <%@ page pageEncoding="UTF-8" %>
-<h2>Page profil</h2>
+<% 
+    CompteDAO dao = new CompteDAO();
+    //dao.read("3");
+    String id = request.getParameter("id");
+    Compte comp = dao.read(id);
+%>
+<html>
+    <head>
+        <title>Profil </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+    <body style='background-color:grey;'>
+        <div class='row' style='background-color:white; margin-top: 3em;'>
+            <h2>Profil :</h2> <!-- ecrire Mon profile si cest le profile du user -->
+            <div class='col-lg-6'>
+                <p class='bold'>Prénom :</p>
+                <p><% out.println(comp.getPrenom()); %></p>
+                <p class='bold'>Nom :</p>
+                <p></p>
+                <p class='bold'>Courriel : </p> <!-- tcheker que cest son profil -->
+                <p></p>
+            </div>
+            <div class='col-lg-6'>
+                <p class='bold'>Département :</p>
+                <p></p>
+                <p class='bold'>Liste des lectures :</p>
+                <p></p>
+            </div>
+        </div>
+    </body>
+</html>
 

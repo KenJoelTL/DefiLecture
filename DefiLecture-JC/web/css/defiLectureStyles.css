@@ -1045,7 +1045,9 @@ background-image: url("../images/accueil_poste.jpg");
     background-size: contain;
     background-position: top;
   }
+}
 
- 
-
+/* Page profil */
+.bold{
+    font-weight: bold;
 }

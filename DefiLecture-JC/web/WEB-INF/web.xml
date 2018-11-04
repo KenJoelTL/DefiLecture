@@ -6,23 +6,23 @@
     </context-param>
     <context-param>
         <param-name>urlDb</param-name>
-        <param-value>jdbc:mysql://172.21.0.2/defilecture?useUnicode=true&amp;characterEncoding=UTF-8</param-value>
+        <param-value>jdbc:mysql://localhost/defilecture?useUnicode=true&amp;characterEncoding=UTF-8</param-value>
     </context-param>
     <context-param>
         <param-name>adminName</param-name>
-        <param-value>admin</param-value>
+        <param-value>root</param-value>
     </context-param>
     <context-param>
         <param-name>adminPassword</param-name>
-        <param-value>admin</param-value>
+        <param-value>root</param-value>
     </context-param>
     <context-param>
         <param-name>userDB</param-name>
-        <param-value>defilecture</param-value>
+        <param-value>root</param-value>
     </context-param>
     <context-param>
         <param-name>passwordDB</param-name>
-        <param-value>password</param-value>
+        <param-value>root</param-value>
     </context-param>
     <context-param>
         <description>Nombre maximum de participants par équipe</description>

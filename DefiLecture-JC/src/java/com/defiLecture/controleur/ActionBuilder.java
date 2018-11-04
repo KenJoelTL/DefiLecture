@@ -30,6 +30,7 @@ public class ActionBuilder {
                 
                 case "afficherPageAccueil":
                     return new AfficherPageMarcheASuivreAction();
+                //Celui que je fais :
                 case "afficherPageProfil":
                     return new AfficherPageProfilAction();
                 case "afficherPageCodeConduite":

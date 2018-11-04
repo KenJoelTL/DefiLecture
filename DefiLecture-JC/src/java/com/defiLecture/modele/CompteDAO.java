@@ -164,13 +164,23 @@ public class CompteDAO extends DAO<Compte>{
     }
 
     @Override
-    public Compte read(String id) {
+    public Compte read(String id) { //refait a cause que cest trash
+        Compte c = new Compte();
+        c.setAvatar("");
+        c.setCourriel("fuck@fuck.com");
+        c.setIdCompte(65);
+        c.setIdEquipe(1);
+        c.setNom("dick");
+        c.setPrenom("bob");
+        /*
         try{
             return this.read(Integer.parseInt(id));
         }
         catch(NumberFormatException e){
             return null;
-        }        
+        }   
+        */
+        return c;
     }
     
     @Override
