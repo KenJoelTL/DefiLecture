@@ -100,7 +100,7 @@
                     <th>Valeur</th>
                     <th>Début</th>
                     <th>Fin</th>
-                    <th><a  href="*.do?tache=afficherPageModificationDefi&id=recu&idEquipe=1">pageDemEqui</a></th>
+                    <th></th>
                     <th></th>
                     <th></th>
                     <th></th>
