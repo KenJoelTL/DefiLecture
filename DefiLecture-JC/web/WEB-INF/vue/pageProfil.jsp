@@ -105,8 +105,11 @@
                             <p>
                                 Lectures
                                 <c:if test="${memeUser == true}">
-                                 <a href="?tache=afficherPageGestionLecture">
+                                <a href="?tache=afficherPageGestionLecture">
                                     <span class="glyphicon glyphicon-edit lienTitreProfil"></span>
+                                </a>
+                                <a href="?tache=afficherPageCreationLecture">
+                                    <span style="margin-right: 1em;" class="glyphicon glyphicon-plus lienTitreProfil"></span>
                                 </a>
                                 </c:if>
                             </p>
