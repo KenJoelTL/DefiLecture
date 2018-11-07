@@ -46,13 +46,16 @@
                     <img class="imgProfil" src="<c:url value='${compte.avatar}'/>">
                     <h1><c:out value="${compte.pseudonyme}"/> </h1>
                 </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
                 <c:if test="${memeUser == true}">
                     <a href="?tache=afficherPageModificationCompte&id=${compte.idCompte}">
                         <button type="button" class="btn btn-primary btnModif">Modifier</button>  
                     </a>
                 </c:if>
+                </div>
             </div>
-            
             <div class="row">
                 <div class="col-lg-5 col-lg-offset-1"> <!-- Informations perso -->
                     <div class="panel panel-default">
@@ -115,35 +118,35 @@
                             </p>
                         </div>
                         <c:choose>
-                        <c:when test="${fn:length(listeLectures) > 0}" >
-                            <table class="table table-hover table-bordered table-striped">
-                                <thead class="enteteTabLect">
-                                  <tr>
-                                    <th scope="col">Titre</th>
-                                    <th scope="col">Durée (Mins)</th>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">Obligatoire</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                    <c:forEach items="${listeLectures}" var="lecture">
-                                        <tr>
-                                            <th scope="row">${lecture.titre}</th>
-                                            <td>${lecture.dureeMinutes}</td>
-                                            <td>${lecture.dateInscription}</td>
-                                            <c:choose>
-                                                <c:when test="${lecture.estObligatoire == 0}">
-                                                    <td>Non</td>
-                                                </c:when>
-                                                <c:when test="${lecture.estObligatoire == 1}">
-                                                    <td>Oui</td>
-                                                </c:when>
-                                            </c:choose>
-                                        </tr>
-                                    </c:forEach>
-                                </tbody>
-                            </table>
-                        </c:when>
+                            <c:when test="${fn:length(listeLectures) > 0}" >
+                                <table class="table table-hover table-bordered table-striped">
+                                    <thead class="enteteTabLect">
+                                      <tr>
+                                        <th scope="col">Titre</th>
+                                        <th scope="col">Durée (Mins)</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Obligatoire</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach items="${listeLectures}" var="lecture">
+                                            <tr>
+                                                <th scope="row">${lecture.titre}</th>
+                                                <td>${lecture.dureeMinutes}</td>
+                                                <td>${lecture.dateInscription}</td>
+                                                <c:choose>
+                                                    <c:when test="${lecture.estObligatoire == 0}">
+                                                        <td>Non</td>
+                                                    </c:when>
+                                                    <c:when test="${lecture.estObligatoire == 1}">
+                                                        <td>Oui</td>
+                                                    </c:when>
+                                                </c:choose>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </c:when>
                             <c:otherwise>
                                 <p class="pErreur"><c:out value="${compte.pseudonyme} n'a pas effectué de lecture." /></p>
                             </c:otherwise>
