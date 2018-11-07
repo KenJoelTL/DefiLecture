@@ -1066,15 +1066,6 @@ background-image: url("../images/accueil_poste.jpg");
     float:left;
     margin: 0.7em 0em 0em 1em;
 }
-.ctnProfil{
-    background-color: #f5f5f5;
-    color: #a19999;
-    margin: 1em 1em 0.5em 0em;
-    border-color: #a19999;
-    border-width:1px;
-    border-style: solid;
-    border-radius: 8px;
-}
 .panInfo{
     margin-top: 0.8em;
 }
