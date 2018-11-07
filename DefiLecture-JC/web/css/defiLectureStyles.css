@@ -1047,7 +1047,48 @@ background-image: url("../images/accueil_poste.jpg");
   }
 }
 
-/* Page profil */
+/* Page profil Gabriel Grenier */
 .bold{
     font-weight: bold;
+}
+.contProfil{
+    border-color: #a19999;
+    border-width:1px;
+    border-style: solid;
+    border-radius: 8px;
+}
+.contenuEnteteProfil{
+    padding: 2em;
+}
+.contenuEnteteProfil h1{
+    font-family: Acme;
+    position: relative;
+    float:left;
+    margin: 0.7em 0em 0em 1em;
+}
+.ctnProfil{
+    background-color: #f5f5f5;
+    color: #a19999;
+    margin: 1em 1em 0.5em 0em;
+    border-color: #a19999;
+    border-width:1px;
+    border-style: solid;
+    border-radius: 8px;
+}
+.panInfo{
+    margin-top: 0.8em;
+}
+.panInfo p{
+    margin-left: 1em;
+}
+.imgProfil {
+    padding: 3px;
+    height: 8em;
+    width: 8em;
+    background-color:white;
+    border-width:3px;
+    border-style:solid;
+    border-color:#7D7D7D;
+    /*box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);*/
+    float: left;
 }
