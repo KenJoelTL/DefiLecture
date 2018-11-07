@@ -53,16 +53,14 @@ public class AfficherPageModificationDefiAction implements Action, RequestAware,
         try {
             //Seuls les Capitaines et les Participants peuvent ajouter et modifier leurs lectures.
             if( session.getAttribute("connecte") != null && session.getAttribute("role") != null && request.getParameter("id")!=null)
-                if( ( (int)session.getAttribute("role") == Compte.MODERATEUR)
-                 || ( (int)session.getAttribute("role") == Compte.ADMINISTRATEUR) ){
-                   Connection cnx = Connexion.startConnection
-                        (Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
+                if( ( (int)session.getAttribute("role") == Compte.MODERATEUR)|| ( (int)session.getAttribute("role") == Compte.ADMINISTRATEUR) ){
+                   Connection cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
                    Defi d = new DefiDAO(cnx).read(request.getParameter("id"));
                     
                     
-                 //seul celui qui a ajouté la lecture peut la modifier
-                if(d != null && d.getIdCompte() == (int)session.getAttribute("connecte"))
-                    request.setAttribute("vue", "pageModificationDefi.jsp");
+                    //seul celui qui a ajouté la lecture peut la modifier
+                    if(d.getIdCompte() == (int)session.getAttribute("connecte"))
+                        request.setAttribute("vue", "pageModificationDefi.jsp");
                 }
             
         } catch (ClassNotFoundException ex) {

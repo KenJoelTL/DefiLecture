@@ -354,8 +354,8 @@ public class CompteDAO extends DAO<Compte>{
 
     }
     
-    public List<Compte> findByIdEquipe(int idEquipe){
-        List<Compte> liste = new LinkedList<>();
+    public LinkedList<Compte> findByIdEquipe(int idEquipe){
+        LinkedList<Compte> liste = new LinkedList<>();
         String req = "SELECT * FROM compte WHERE `ID_EQUIPE` = ?";
         
         PreparedStatement paramStm = null;
