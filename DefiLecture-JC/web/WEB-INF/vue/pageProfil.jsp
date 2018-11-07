@@ -8,6 +8,7 @@
 
 <%@ page pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:useBean id="connexion" class="jdbc.Connexion"></jsp:useBean>
 
 <!--Objet du compte-->
@@ -24,22 +25,21 @@
     </jsp:useBean>    
 <c:set var="equipe" scope="page" value="${daoEquipe.read(compte.idEquipe)}"/>
 
+<!-- Liste des lectures du user -->
+<jsp:useBean id="daoLecture" scope="page" class="com.defiLecture.modele.LectureDAO">
+    <jsp:setProperty name="daoLecture" property="cnx" value="${connexion.connection}"></jsp:setProperty>
+</jsp:useBean>
+<c:set var="listeLectures" value="${daoLecture.findByIdCompte(compte.idCompte)}"/>
+
 <!--Regarde si c'est le profil du user connecter-->
 <c:if test="${compte.idCompte == currentId}">
     <c:set var="memeUser" scope="page" value="${true}" />
 </c:if>
-
 <html>
     <head>
-        <title>Profil </title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Acme" rel="stylesheet">
     </head>
-    <body style='background-color:lightgrey;'>
+    <body>
         <div class="container-fluid contProfil" style="background-color:white;">
             <div class="row contenuEnteteProfil">
                 <div class="col-lg-12">
@@ -77,19 +77,78 @@
                             <p>
                                 Équipe
                                 <a href="?tache=afficherPageEquipe&idEquipe=${equipe.idEquipe}">
-                                    <span class="glyphicon glyphicon-eye-open lienAffEquipe"></span>
+                                    <span class="glyphicon glyphicon-eye-open lienTitreProfil"></span>
                                 </a>
                             </p>
                         </div>
-                        <div class="panInfo">
-                            <p class='bold'>Nom de l'équipe :</p>
-                            <p><c:out value="${equipe.nom}" /></p>
-                            <p class='bold'>Points de l'équpe :</p>
-                            <p><c:out value="${equipe.point}" /></p>
-                        </div>
+                        <c:choose>
+                            <c:when test="${!empty equipe}" >
+                                <div class="panInfo">
+                                    <p class='bold'>Nom de l'équipe :</p>
+                                    <p><c:out value="${equipe.nom}" /></p>
+                                    <p class='bold'>Points de l'équpe :</p>
+                                    <p><c:out value="${equipe.point}" /></p>
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <p class="pErreur"><c:out value="${compte.pseudonyme} ne fait pas partie d'une équipe"/></p>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </div>
-            </div> 
+            </div>
+            <div class="row">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-10">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <p>
+                                Lectures
+                                <c:if test="${memeUser == true}">
+                                 <a href="?tache=afficherPageGestionLecture">
+                                    <span class="glyphicon glyphicon-edit lienTitreProfil"></span>
+                                </a>
+                                </c:if>
+                            </p>
+                        </div>
+                        <c:choose>
+                        <c:when test="${fn:length(listeLectures) > 0}" >
+                            <table class="table table-hover table-bordered table-striped">
+                                <thead class="enteteTabLect">
+                                  <tr>
+                                    <th scope="col">Titre</th>
+                                    <th scope="col">Durée (Mins)</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Obligatoire</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    <c:forEach items="${listeLectures}" var="lecture">
+                                        <tr>
+                                            <th scope="row">${lecture.titre}</th>
+                                            <td>${lecture.dureeMinutes}</td>
+                                            <td>${lecture.dateInscription}</td>
+                                            <c:choose>
+                                                <c:when test="${lecture.estObligatoire == 0}">
+                                                    <td>Non</td>
+                                                </c:when>
+                                                <c:when test="${lecture.estObligatoire == 1}">
+                                                    <td>Oui</td>
+                                                </c:when>
+                                            </c:choose>
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
+                        </c:when>
+                            <c:otherwise>
+                                <p class="pErreur"><c:out value="${compte.pseudonyme} n'a pas effectué de lecture." /></p>
+                            </c:otherwise>
+                        </c:choose>
+                    </div>
+                </div>
+                <div class="col-lg-1"></div>
+            </div>
         </div>
     </body>
 </html>
