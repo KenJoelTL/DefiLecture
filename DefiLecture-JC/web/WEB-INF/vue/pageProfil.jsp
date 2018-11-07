@@ -1,41 +1,34 @@
 <%@page import="com.defiLecture.modele.CompteDAO"%>
 <%@page import="com.defiLecture.modele.Compte"%>
-<!--
-    This file is part of DefiLecture.
-
-    DefiLecture is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    DefiLecture is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with DefiLecture.  If not, see <http://www.gnu.org/licenses/>.
--->
 <%-- 
     Document   : pageProfil
-    Created on : 2017-10-22, 08:26:14
-    Author     : Charles
+    Created on : 2018-1-11
+    Author     : Gabriel Grenier
 --%>
+
 <%@ page pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:useBean id="connexion" class="jdbc.Connexion"></jsp:useBean>
+
+<!--Objet du compte-->
 <jsp:useBean id="dao" class="com.defiLecture.modele.CompteDAO">
     <jsp:setProperty name="dao" property="cnx" value="${connexion.connection}"></jsp:setProperty>
 </jsp:useBean>
-    
 <c:set var="compte" scope="page" value="${dao.read(param.id)}"/>
 <c:set var="currentId" scope="page" value="${sessionScope['currentId']}" />
 <c:set var="memeUser" scope="page" value="${false}" />
  
+<!--Objet de l'équipe-->
+<jsp:useBean id="daoEquipe" class="com.defiLecture.modele.EquipeDAO">
+        <jsp:setProperty name="daoEquipe" property="cnx" value="${connexion.connection}"></jsp:setProperty>
+    </jsp:useBean>    
+<c:set var="equipe" scope="page" value="${daoEquipe.read(compte.idEquipe)}"/>
+
+<!--Regarde si c'est le profil du user connecter-->
 <c:if test="${compte.idCompte == currentId}">
     <c:set var="memeUser" scope="page" value="${true}" />
 </c:if>
-<c:out value="${memeUser}"/>
+
 <html>
     <head>
         <title>Profil </title>
@@ -51,13 +44,19 @@
             <div class="row contenuEnteteProfil">
                 <div class="col-lg-12">
                     <img class="imgProfil" src="<c:url value='${compte.avatar}'/>">
-                    <h1><c:out value="${compte.pseudonyme}"/></h1>
+                    <h1><c:out value="${compte.pseudonyme}"/> </h1>
                 </div>
+                <c:if test="${memeUser == true}">
+                    <a href="?tache=afficherPageModificationCompte&id=${compte.idCompte}">
+                        <button type="button" class="btn btn-primary btnModif">Modifier</button>  
+                    </a>
+                </c:if>
             </div>
+            
             <div class="row">
-                <div class="col-lg-5 col-lg-offset-1">
+                <div class="col-lg-5 col-lg-offset-1"> <!-- Informations perso -->
                     <div class="panel panel-default">
-                        <div class="panel-heading">Informations</div>
+                        <div class="panel-heading"><p>Informations</p></div>
                         <div class="panInfo">
                             <p class='bold'>Prénom :</p>
                             <p> <c:out value="${compte.prenom}"/></p>
@@ -71,11 +70,23 @@
                             <p> <c:out value="${compte.programmeEtude}"/></p>
                         </div>
                     </div>
-                </div>
-                        
-                <div class="col-lg-5">
+                </div>     
+                <div class="col-lg-5"> <!-- Informations de l'équipe -->
                     <div class="panel panel-default">
-                        <div class="panel-heading">Équipe</div>
+                        <div class="panel-heading">
+                            <p>
+                                Équipe
+                                <a href="?tache=afficherPageEquipe&idEquipe=${equipe.idEquipe}">
+                                    <span class="glyphicon glyphicon-eye-open lienAffEquipe"></span>
+                                </a>
+                            </p>
+                        </div>
+                        <div class="panInfo">
+                            <p class='bold'>Nom de l'équipe :</p>
+                            <p><c:out value="${equipe.nom}" /></p>
+                            <p class='bold'>Points de l'équpe :</p>
+                            <p><c:out value="${equipe.point}" /></p>
+                        </div>
                     </div>
                 </div>
             </div> 
