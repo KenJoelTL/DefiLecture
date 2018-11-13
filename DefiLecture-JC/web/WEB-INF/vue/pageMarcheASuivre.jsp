@@ -31,10 +31,6 @@
     <body>
 
         <div class="row creation-lecture-row">
-            <form action="?tache=afficherPageProfil&id=<%=session.getAttribute("connecte")%>" method="post"> <!-- faire que sa soit l'id des autres users -->
-                <input type="submit">
-            </form>
-
             <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 scores-col marcheASuivre">
   
                     <h1>Un nouveau défi pour tous!</h1>
