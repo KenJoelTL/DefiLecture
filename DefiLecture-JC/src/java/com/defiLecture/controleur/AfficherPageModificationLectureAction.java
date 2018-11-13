@@ -49,7 +49,8 @@ public class AfficherPageModificationLectureAction implements Action, RequestAwa
         try {
             //Seuls les Capitaines et les Participants peuvent ajouter et modifier leurs lectures.
             if( session.getAttribute("connecte") != null && session.getAttribute("role") != null && request.getParameter("id")!=null)
-                if( ( (int)session.getAttribute("role") == Compte.CAPITAINE) || ( (int)session.getAttribute("role") == Compte.PARTICIPANT) ){
+                if( ( (int)session.getAttribute("role") == Compte.CAPITAINE) 
+                 || ( (int)session.getAttribute("role") == Compte.PARTICIPANT) ){
                     Connection cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
                     Lecture l = new LectureDAO(cnx).read(request.getParameter("id"));
 
