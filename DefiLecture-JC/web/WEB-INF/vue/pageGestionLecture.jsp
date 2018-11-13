@@ -63,7 +63,6 @@
                       <td>${l.estObligatoire eq 0 ? "NON" : "OUI"}</td>
                       <td>
                           <a href="*.do?tache=effectuerSuppressionLecture&idLecture=${l.idLecture}">Supprimer</a>
-                          <a href="*.do?tache=afficherPageModificationLecture&id=${l.idLecture}">Modifier</a>
                       </td>
                     </tr>
                 </c:forEach>
