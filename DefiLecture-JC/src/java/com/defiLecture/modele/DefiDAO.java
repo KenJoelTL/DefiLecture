@@ -431,7 +431,6 @@ public class DefiDAO extends DAO<Defi> {
                     d.setChoixReponse(resultat.getString("CHOIX_REPONSE"));
                     d.setReponse(resultat.getString("REPONSE"));
                     d.setValeurMinute(resultat.getInt("VALEUR_MINUTE"));
-                    System.out.println("**********test");
                     listeDefi.add(d);
                         
                 }
