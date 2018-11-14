@@ -214,8 +214,8 @@ public class DefiDAO extends DAO<Defi> {
         PreparedStatement paramStm = null;
 
         try {
-                paramStm.setInt(1, x.getIdDefi());
                 paramStm = cnx.prepareStatement(req);
+                paramStm.setInt(1, x.getIdDefi());
 
                 int nbLignesAffectees= paramStm.executeUpdate();
                 

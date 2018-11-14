@@ -27,6 +27,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -161,8 +162,8 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
         PreparedStatement paramStm = null;
 
         try {
-                paramStm.setInt(1, x.getIdInscriptionDefi());
                 paramStm = cnx.prepareStatement(req);
+                paramStm.setInt(1, x.getIdInscriptionDefi());
 
                 int nbLignesAffectees= paramStm.executeUpdate();
                 
@@ -338,6 +339,52 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
         return listeInscriptionDefi;
         
     }
-    
+        
+    // Trouver les incription par un id d'un défi
+    public List<InscriptionDefi> findByIdDefi(int id) {
+            
+            String req = "SELECT * FROM inscription_defi WHERE `ID_DEFI` = '"+id+"'";
+            List<InscriptionDefi> listeInscriptionDefi = new ArrayList<InscriptionDefi>();
+
+        PreparedStatement paramStm = null;
+        try {
+
+                paramStm = cnx.prepareStatement(req);
+
+           
+                ResultSet resultat = paramStm.executeQuery();
+
+                // On vérifie s'il y a un résultat    
+                while(resultat.next()){
+
+                    InscriptionDefi i = new InscriptionDefi();
+
+                    i.setIdInscriptionDefi(resultat.getInt("ID_INSCRIPTION_DEFI"));
+                    i.setIdCompte(resultat.getInt("ID_COMPTE"));
+                    i.setIdDefi(resultat.getInt("ID_DEFI"));
+                    i.setValeurMinute(resultat.getInt("VALEUR_MINUTE"));
+                    i.setEstReussi(resultat.getInt("EST_REUSSI"));
+                    i.setDateInscription(resultat.getString("DATE_INSCRIPTION"));
+
+                    listeInscriptionDefi.add(i);
+
+                }
+                resultat.close();
+                paramStm.close();
+                return listeInscriptionDefi;
+
+        }
+        catch (Exception e) {
+        }
+        finally {
+            try{
+                if (paramStm!=null)
+                    paramStm.close();
+            }
+            catch (Exception e) {
+            }
+        }
+        return listeInscriptionDefi;        
+    }
     
 }

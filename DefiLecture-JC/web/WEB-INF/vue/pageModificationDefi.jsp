@@ -203,10 +203,18 @@
                 <input id="choixReponseJSON" type="hidden" name="choixReponseJSON" value="">
                 <input type="hidden" name="idDefi" value="${defi.idDefi}">
                 <input type="hidden" name="tache" value="effectuerModificationDefi">
-                <button type="submit" class="btn btn-success" name="modifie" >Enregistrer </button>
-                <a href="*.do?tache=afficherPageParticipationDefi" class="retour"><span class="glyphicon glyphicon-circle-arrow-left"></span>retour à la liste des défis</a>
+                <button type="submit" class="btn btn-success" name="modifie" >Enregistrer </button> 
             </form>
-                <br>
+                <br />
+                
+            <form>
+                <input type="hidden" name="idDefiSup" value="${defi.idDefi}">
+                <input type="hidden" name="tache" value="supprimerDefi">
+                <button type="submit" class="btn btn-danger">Supprimer</button>
+            </form>
+                
+            <a href="*.do?tache=afficherPageParticipationDefi" class="retour"><span class="glyphicon glyphicon-circle-arrow-left"></span>retour à la liste des défis</a>
+            <br />
         </div>
     </div>
 </div>
