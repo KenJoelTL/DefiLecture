@@ -1080,7 +1080,6 @@ background-image: url("../images/accueil_poste.jpg");
 }
 @media screen and (max-width: 557px) {
     .contenuEnteteProfil h1{
-        color:red;
         position: static;
         text-align: center;
         margin: 0;
