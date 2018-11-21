@@ -28,7 +28,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Collections;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -215,7 +215,7 @@ public class EquipeDAO extends DAO<Equipe>{
 
     @Override
     public List<Equipe> findAll() {
-        List<Equipe> liste = new LinkedList<>();
+        List<Equipe> liste = new ArrayList<>();
         try {
             Statement stm = cnx.createStatement(); 
             ResultSet r = stm.executeQuery("SELECT * FROM equipe");

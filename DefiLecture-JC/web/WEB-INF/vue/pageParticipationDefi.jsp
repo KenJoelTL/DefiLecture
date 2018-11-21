@@ -63,7 +63,7 @@
 <c:set var="role" scope="page" value="${compte.role}"/>
 
 <!-- Prendre la liste complete des defis -->
-<jsp:useBean id="listeDefi" class="java.util.LinkedList" />
+<jsp:useBean id="listeDefi" class="java.util.ArrayList" />
 <c:choose>
    <c:when test="${role<3}">
       <c:set var="listeDefi" scope="page" value="${daoDefi.findHistorique()}"></c:set>
@@ -77,8 +77,8 @@
 <c:set var="listeInscriptionDefi" scope="page" value="${daoInscriptionDefi.findAllByIdCompte(sessionScope.connecte)}"/>
 
 <!-- Création des liste réussi et echoue, déterminer si le partcipant a déjà participé au défis -->
-<jsp:useBean id="listeReussi" class="java.util.LinkedList" />
-<jsp:useBean id="listeEchoue" class="java.util.LinkedList" />
+<jsp:useBean id="listeReussi" class="java.util.ArrayList" />
+<jsp:useBean id="listeEchoue" class="java.util.ArrayList" />
 <c:forEach items="${pageScope.listeInscriptionDefi}" var="defi">
    <c:choose>
        <c:when test="${defi.getEstReussi() == 1}">

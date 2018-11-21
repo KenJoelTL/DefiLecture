@@ -28,7 +28,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -227,7 +226,7 @@ public class LectureDAO extends DAO<Lecture> {
 
     @Override
     public List<Lecture> findAll() {
-                    List<Lecture> liste = new LinkedList<>();
+                    List<Lecture> liste = new ArrayList<>();
         try 
             {
                 Statement stm = cnx.createStatement(); 
