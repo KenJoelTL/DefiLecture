@@ -19,7 +19,7 @@
     Created on : 2017-11-01, 20:52:35
     Author     : Joel
 --%>
-<%@page import="java.util.LinkedList"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="com.defiLecture.modele.DemandeEquipeDAO"%>
 <%@page import="com.defiLecture.modele.Compte"%>
 <%@page import="com.defiLecture.modele.CompteDAO"%>
