@@ -239,6 +239,36 @@ public class EquipeDAO extends DAO<Equipe>{
         }
         return liste;
     }
+    
+    public List<Equipe> findAllByNom(String nom) {
+        List<Equipe> liste = new LinkedList<>();
+        String req = "SELECT * FROM equipe WHERE `NOM` LIKE ?";
+        PreparedStatement paramStm = null;
+        try {
+            paramStm = cnx.prepareStatement(req);      
+            paramStm.setString(1, "%" + Util.toUTF8(nom) + "%");
+
+            ResultSet r = paramStm.executeQuery();
+            while (r.next()) {
+                Equipe e = new Equipe();
+                e.setIdEquipe(r.getInt("ID_EQUIPE"));
+                e.setNom(r.getString("NOM"));
+                
+                //appelle les DAO DEMANDE Compte et DemandeEquipe
+                e.setPoint(new DemandeEquipeDAO(cnx).sumPointByidEquipe(r.getInt("ID_EQUIPE")));
+                e.setNbMembres(new CompteDAO(cnx).countCompteByIdEquipe(r.getInt("ID_EQUIPE")));
+		
+                liste.add(e);
+            }
+            Collections.sort(liste);
+            Collections.reverse(liste);
+            r.close();
+            paramStm.close();
+        }
+        catch (SQLException exp) {
+        }
+        return liste;
+    }
 
     public Equipe findByNom(String nom) {
         String req = "SELECT * FROM equipe WHERE `NOM` = ?";

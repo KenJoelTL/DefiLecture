@@ -354,6 +354,49 @@ public class CompteDAO extends DAO<Compte>{
 
     }
     
+    public List<Compte> findAllByName(String nom){
+        List<Compte> liste = new LinkedList<>();
+        String req = "SELECT * FROM compte WHERE `NOM` LIKE ? OR `PRENOM` LIKE ? OR `PSEUDONYME` LIKE ?";
+        
+        PreparedStatement paramStm = null;
+        try {
+
+            paramStm = cnx.prepareStatement(req);
+            paramStm.setString(1, "%" + Util.toUTF8(nom) + "%");
+            paramStm.setString(2, "%" + Util.toUTF8(nom) + "%");
+            paramStm.setString(3, "%" + Util.toUTF8(nom) + "%");
+
+            ResultSet resultat = paramStm.executeQuery();
+            while (resultat.next()) {
+                Compte c = new Compte();
+                c.setIdCompte(resultat.getInt("ID_COMPTE"));
+                if(resultat.getInt("ID_EQUIPE") == 0)
+                    c.setIdEquipe(-1);
+                else
+                    c.setIdEquipe(resultat.getInt("ID_EQUIPE"));
+                c.setCourriel(resultat.getString("COURRIEL"));
+                c.setPrenom(resultat.getString("PRENOM"));             
+                c.setNom(resultat.getString("NOM"));
+                c.setMotPasse(resultat.getString("MOT_PASSE"));
+                c.setPseudonyme(resultat.getString("PSEUDONYME"));             
+                c.setAvatar(resultat.getString("AVATAR"));             
+                c.setProgrammeEtude(resultat.getString("PROGRAMME_ETUDE"));
+                c.setMinutesRestantes(resultat.getInt("MINUTES_RESTANTES"));
+                c.setPoint(resultat.getInt("POINT"));
+                c.setRole(resultat.getInt("ROLE"));
+                c.setDevenirCapitaine(resultat.getInt("DEVENIR_CAPITAINE"));
+                
+                liste.add(c);
+            }
+            resultat.close();
+            paramStm.close();
+        }
+        catch (SQLException exp){
+        }
+        return liste;    
+    
+    }
+    
     public List<Compte> findByIdEquipe(int idEquipe){
         List<Compte> liste = new LinkedList<>();
         String req = "SELECT * FROM compte WHERE `ID_EQUIPE` = ?";
