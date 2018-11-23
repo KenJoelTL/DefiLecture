@@ -240,7 +240,7 @@ public class EquipeDAO extends DAO<Equipe>{
         return liste;
     }
     
-    public List<Equipe> findAllByNom(String nom) {
+    public List<Equipe> findAllByNom(String nom) throws SQLException {
         List<Equipe> liste = new LinkedList<>();
         String req = "SELECT * FROM equipe WHERE `NOM` LIKE ?";
         PreparedStatement paramStm = null;
@@ -266,14 +266,15 @@ public class EquipeDAO extends DAO<Equipe>{
             paramStm.close();
         }
         catch (SQLException exp) {
+            Logger.getLogger(EquipeDAO.class.getName()).log(Level.SEVERE, null, exp);
+            throw exp;
         }
         finally {
             try {
                 if (paramStm!=null)
                     paramStm.close();
             } catch (SQLException ex) {
-                Logger.getLogger(EquipeDAO.class.getName())
-                    .log(Level.SEVERE, null, ex);
+                Logger.getLogger(EquipeDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return liste;

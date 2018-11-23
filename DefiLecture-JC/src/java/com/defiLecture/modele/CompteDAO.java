@@ -354,7 +354,7 @@ public class CompteDAO extends DAO<Compte>{
 
     }
     
-    public List<Compte> findAllByName(String nom){
+    public List<Compte> findAllByName(String nom) throws SQLException{
         List<Compte> liste = new LinkedList<>();
         String req = "SELECT * FROM compte WHERE `NOM` LIKE ? OR `PRENOM` LIKE ? OR `PSEUDONYME` LIKE ?";
         
@@ -392,14 +392,15 @@ public class CompteDAO extends DAO<Compte>{
             paramStm.close();
         }
         catch (SQLException exp){
+            Logger.getLogger(CompteDAO.class.getName()).log(Level.SEVERE, null, exp);
+            throw exp;
         }
         finally {
             try {
                 if (paramStm!=null)
                     paramStm.close();
             } catch (SQLException ex) {
-                Logger.getLogger(CompteDAO.class.getName())
-                    .log(Level.SEVERE, null, ex);
+                Logger.getLogger(CompteDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return liste;    
