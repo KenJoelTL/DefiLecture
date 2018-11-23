@@ -393,6 +393,15 @@ public class CompteDAO extends DAO<Compte>{
         }
         catch (SQLException exp){
         }
+        finally {
+            try {
+                if (paramStm!=null)
+                    paramStm.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(CompteDAO.class.getName())
+                    .log(Level.SEVERE, null, ex);
+            }
+        }
         return liste;    
     
     }

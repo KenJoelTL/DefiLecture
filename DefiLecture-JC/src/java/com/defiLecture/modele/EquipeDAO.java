@@ -267,6 +267,15 @@ public class EquipeDAO extends DAO<Equipe>{
         }
         catch (SQLException exp) {
         }
+        finally {
+            try {
+                if (paramStm!=null)
+                    paramStm.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(EquipeDAO.class.getName())
+                    .log(Level.SEVERE, null, ex);
+            }
+        }
         return liste;
     }
 
