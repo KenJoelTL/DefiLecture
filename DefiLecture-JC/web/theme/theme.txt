@@ -9,31 +9,31 @@
 //VOCABULAIRE DE L'APPLICATION///
 /////////////////////////////////
 
-vocTheme= 		Sirène
+vocTheme= 		Pirate
 
-vocThemePluriel= 	Sirènes
+vocThemePluriel= 	Pirates
 
 vocParticipant= 	Sirène
 
 vocParticipants= 	Sirènes
 
-vocEquipe= 		banc de poisson
+vocEquipe= 		Équipage
 
-vocEquipePluriel= 	bancs de poisson
+vocEquipePluriel= 	Équipages
 
-vocChef= 		Poissirène
+vocChef= 		Capitaine
 
-vocChefPluriel= 	Poissirènes
+vocChefPluriel= 	Capitaines
 
-vocPoint= 		coquillage
+vocPoint= 		Doublon
 
-vocPoints=		coquillages
+vocPoints=		Doublons
 
-vocBanque= 		Recif de corail
+vocBanque= 		Tresorerie
 
-vocConnexion= 	En Marche!
+vocConnexion=           À l'abordage!
 
-vocCode= 	Code de la Sirène
+vocCode=                Code du Pirate
 
 
 
@@ -60,15 +60,13 @@ cssImageLogo=           "../images/Logo_DL_INV_700x300.png"
 
 cssImageAccueilCol=     "../images/Logo_DL_NB_700x300.png"
 
-cssImageBackConnection= "../images/sireneBack.jpg"
+cssImageBackConnection= "../images/index_poste.jpg"
 
-cssImageBackPrincipal=  "../images/sireneBack2.jpg"
-
-cssImageDemande=        "../images/sireneBack2.jpg"
+cssImageBackPrincipal=  "../images/accueil_poste.jpg"
 
 cssImageConfirmer=      "../images/CONFIRMER.png"
 
-cssImageIcone=          "../images/iconeSirene.png"
+cssImageIcone=          "../images/tete-de-mort-nb.png"
 
 cssImageDuree15=        "../images/15.png"
 
@@ -79,8 +77,8 @@ cssImageDuree45=        "../images/45.png"
 cssImageduree60=        "../images/60.png"
 
 
-cssCouleurNavBack=      pink
+cssCouleurNavBack=      black
 
-cssCouleurBack=         pink
+cssCouleurBack=         black
 
 cssCouleurNavText=      white

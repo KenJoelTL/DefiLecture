@@ -452,7 +452,7 @@ background-image: url(cssImageBackPrincipal);
 /*Accéder aux demandes*/
 
 .demandes-row {
-  background-image: url(cssImageDemande);
+  background-image: url(cssImageBackPrincipal);
   padding: 5%;
 
 }
@@ -471,7 +471,7 @@ background-image: url(cssImageBackPrincipal);
 /*Participation défi*/
 
 .participationDefi-row {
-  background-image: url(cssImageDemande);
+  background-image: url(cssImageBackPrincipal);
   padding: 5%;
 
 }
@@ -497,7 +497,7 @@ background-image: url(cssImageBackPrincipal);
 /*Gestion liste comptes*/
 
 .listeCompte-row {
-  background-image: url(cssImageDemande);
+  background-image: url(cssImageBackPrincipal);
   padding: 5%;
 
 }
@@ -568,7 +568,7 @@ background-color: rgba(255, 255, 255, 0.5);
 
 
 .modification-defi-col {
-  background-image: url(cssImageDemande);
+  background-image: url(cssImageBackPrincipal);
 }
 
 .modification-defi-col h1 {
@@ -808,7 +808,7 @@ background-image: url(cssImageBackPrincipal);
  /*Page gestion lecture*/
 
  .gestion-lecture-row {
-  background-image: url(cssImageDemande);
+  background-image: url(cssImageBackPrincipal);
 
   padding: 5%;
 
@@ -828,7 +828,7 @@ background-image: url(cssImageBackPrincipal);
 /*Page gestion liste équipe*/
 
  .liste-equipes-row {
-  background-image: url(cssImageDemande);
+  background-image: url(cssImageBackPrincipal);
   padding: 5%;
 
 }
