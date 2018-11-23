@@ -1,0 +1,86 @@
+//Bienvenue dans les réglages !
+//Configurez l'application comme bon vous semble
+//D'abord, quelques petites regles :
+//1 - Toutes les lignes contenant par//sont ignorées!
+//2- Un élément par ligne
+
+
+/////////////////////////////////
+//VOCABULAIRE DE L'APPLICATION///
+/////////////////////////////////
+
+vocTheme= 		Sirène
+
+vocThemePluriel= 	Sirènes
+
+vocParticipant= 	Sirène
+
+vocParticipants= 	Sirènes
+
+vocEquipe= 		banc de poisson
+
+vocEquipePluriel= 	bancs de poisson
+
+vocChef= 		Poissirène
+
+vocChefPluriel= 	Poissirènes
+
+vocPoint= 		coquillage
+
+vocPoints=		coquillages
+
+vocBanque= 		Recif de corail
+
+vocConnexion= 	En Marche!
+
+vocCode= 	Code de la Sirène
+
+
+
+/////////////////////////////////
+////TEXTE DE L'APPLICATION///////
+/////////////////////////////////
+
+txtCodeConduite=	codeConduite.txt
+
+txtContributeurs=	contributeurs.txt
+
+txtGlossaire=		glossaire.txt
+
+txtMarcheASuivre= 	marcheASuivre.txt
+
+
+
+/////////////////////////////////
+/////////////CSS/////////////////
+/////////////////////////////////
+//Rajoutez vos clefs dans defiLectureStylesPattern.css
+
+cssImageLogo=           "../images/Logo_DL_INV_700x300.png"
+
+cssImageAccueilCol=     "../images/Logo_DL_NB_700x300.png"
+
+cssImageBackConnection= "../images/sireneBack.jpg"
+
+cssImageBackPrincipal=  "../images/sireneBack2.jpg"
+
+cssImageDemande=        "../images/sireneBack2.jpg"
+
+cssImageConfirmer=      "../images/CONFIRMER.png"
+
+cssImageIcone=          "../images/iconeSirene.png"
+
+cssImageDuree15=        "../images/15.png"
+
+cssImageDuree30=        "../images/30.png"
+
+cssImageDuree45=        "../images/45.png"
+
+cssImageduree60=        "../images/60.png"
+
+
+cssCouleurNavBack=      pink
+
+cssCouleurBack=         pink
+
+cssCouleurNavText=      white
