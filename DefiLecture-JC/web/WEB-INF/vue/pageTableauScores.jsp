@@ -30,11 +30,14 @@
 
  <jsp:useBean id="connexion" class="jdbc.Connexion"></jsp:useBean>
  <jsp:useBean id="daoEquipe" class="com.defiLecture.modele.EquipeDAO">
-     <jsp:setProperty  name="daoEquipe" property="cnx" value="${connexion.connection}"></jsp:setProperty>
+    <jsp:setProperty name="daoEquipe" property="cnx" value="${connexion.connection}"></jsp:setProperty>
  </jsp:useBean>
  <jsp:useBean id="daoCompte" class="com.defiLecture.modele.CompteDAO">
-     <jsp:setProperty  name="daoCompte" property="cnx" value="${connexion.connection}"></jsp:setProperty>
+    <jsp:setProperty name="daoCompte" property="cnx" value="${connexion.connection}"></jsp:setProperty>
  </jsp:useBean>
+ <jsp:useBean id="daoDemEqp" class="com.defiLecture.modele.DemandeEquipeDAO">
+    <jsp:setProperty name="daoDemEqp" property="cnx" value="${connexion.connection}"></jsp:setProperty>
+</jsp:useBean>
  <c:set var="listeEquipes" value="${daoEquipe.findAll()}"></c:set>
  <c:if test="${not empty param.recherche}">
      <c:set var="listeEquipes" value="${daoEquipe.findAllByNom(param.recherche)}"></c:set>
@@ -63,7 +66,7 @@
                       <c:forEach items="${listeEquipes}" var="equipe">          
                       <c:set var="i" value="${i+1}"/>          
                         <tr>
-                          <td>${i}</td>
+                          <td>${daoEquipe.findAll().indexOf(equipe)+1}</td>
                           <td><a href="pageEquipe.do?tache=afficherPageEquipe&idEquipe=${equipe.idEquipe}">${equipe.nom}</a></td>
                           <td style="text-align:center">${equipe.point}</td>
                         </tr>
@@ -87,18 +90,19 @@
                             </thead>
 
                             <tbody>
-                                <c:forEach items="${listeComptes}" var="compte">      
+                                <c:forEach items="${listeComptes}" var="compte">
                                 <tr>
-                                  <td><a href="pageEquipe.do?tache=afficherPageEquipe&idEquipe=${compte.idEquipe}">${compte.prenom} «${compte.pseudonyme}» ${compte.nom}</a></td>
-                                  <td>
-                                      <c:set var="contribution" value="${daoDemEqp.findByIdCompteEquipe(compte.idCompte,compte.idEquipe)}"></c:set>
-                                    <div class="progress">
-                                      <div class="progress-bar" role="progressbar" aria-valuenow="${contribution.point}"
-                                           aria-valuemin="0" aria-valuemax="100" style="width:${(contribution.point/compte.point)*100}%">
-                                        ${contribution.point}
-                                      </div>
-                                    </div>
-                                  </td>
+                                    <td><a href="pageEquipe.do?tache=afficherPageEquipe&idEquipe=${compte.idEquipe}">${compte.prenom} «${compte.pseudonyme}» ${compte.nom}</a></td>
+                                    <td>
+                                        <c:set var="equipe" value="${daoEquipe.read(compte.idEquipe)}"/>
+                                        <c:set var="contribution" value="${daoDemEqp.findByIdCompteEquipe(compte.idCompte,equipe.idEquipe)}"></c:set>
+                                        <div class="progress">
+                                            <div class="progress-bar" role="progressbar" aria-valuenow="${contribution.point}"
+                                                aria-valuemin="0" aria-valuemax="100" style="width:${(contribution.point/equipe.point)*100}%">
+                                                ${contribution.point}
+                                            </div>
+                                        </div>
+                                    </td>
                                 </tr>
                                 </c:forEach>
                             </tbody>
