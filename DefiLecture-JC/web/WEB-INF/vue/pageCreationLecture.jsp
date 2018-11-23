@@ -140,7 +140,7 @@
                         
            
                             <div class="form-group">
-                                <label id="lblDureeLecture" >Durée de la lecture : <br> (cliquez sur les doublons pour afficher les minutes de lecture) </label>
+                                <label id="lblDureeLecture" >Durée de la lecture : <br> (cliquez sur les <% out.println(application.getAttribute("vocPoints"));%> pour afficher les minutes de lecture) </label>
              
                                 
                                 <label class="dureeMinutes">0 minute</label>

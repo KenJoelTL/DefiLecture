@@ -53,7 +53,7 @@
         <div class='row'> 
         
             <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 page-equipe-col configuration-equipe">
-                <h1>Configuration de l'&eacute;quipage</h1>
+                <h1>Configuration de l'équipe</h1>
                 <c:if test="${!empty requestScope.data['succesNom']}">
                     <div class="alert alert-danger"><strong>${requestScope.data['succesNom']}</strong></div>
                 </c:if>
@@ -83,7 +83,7 @@
                 </c:if>
                 <form action="modificationEquipe.do" method="post">
                     <div class="form-group">
-                        <label for="nom">Nom de l'&eacute;quipage* :</label>
+                        <label for="nom">Nom de l'équipe :</label>
                         <input type="text" class="form-control" id="nom" value="${equipe.nom}" 
                                placeholder="Entrez le nouveau nom de votre &eacute;quipage" name="nom" ${permissionAccordee ? 'required': 'disabled'}/>
                     </div>
@@ -145,7 +145,7 @@
                     </tbody>
                 </table>
         
-        <a href="*.do?tache=afficherPageEquipe&idEquipe=${equipe.idEquipe}" class="retour"><span class="glyphicon glyphicon-circle-arrow-left"></span>retour à la page d'équipe</a>
+        <a href="*.do?tache=afficherPageEquipe&idEquipe=${equipe.idEquipe}" class="retour"><span class="glyphicon glyphicon-circle-arrow-left"></span>retour à la page de l'équipe</a>
         
             </div>
         </div>

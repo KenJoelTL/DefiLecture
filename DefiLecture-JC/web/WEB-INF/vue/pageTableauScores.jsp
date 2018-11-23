@@ -42,7 +42,7 @@
                       <thead>
                         <tr>
                           <th>Rang</th>
-                          <th>Nom de l'équipage</th>
+                          <th>Nom de l'équipe</th>
                           <th style="text-align:center">Doublons</th>
                         </tr>
                       </thead>

@@ -46,7 +46,7 @@
 
 <div class="row liste-equipes-row"> 
     <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 liste-equipes-col">
-        <h2>Liste des &eacute;quipages</h2>  
+        <h2>Liste des &eacute;quipes</h2>  
 
         <c:if test="${!empty requestScope.data['succesAnnulation']}">
             <div class="alert alert-success"><strong>${requestScope.data['succesAnnulation']}</strong></div>

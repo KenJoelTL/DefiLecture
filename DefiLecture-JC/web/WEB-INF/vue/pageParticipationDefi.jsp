@@ -112,7 +112,7 @@
                       <c:if test="${(pageScope.role lt 3) and (listeReussi.contains(d.idDefi.toString()) or listeEchoue.contains(d.idDefi.toString()) or d.dateFin gt dateMaintenant) }">
                         <tr >
                         <td>${d.nom}</td>
-                        <td>+ ${d.valeurMinute} doublons</td>
+                        <td>+ ${d.valeurMinute} <% out.println(application.getAttribute("vocPoints"));%></td>
                         <c:catch>
                           <fmt:parseDate pattern="yyyy-MM-dd' 'HH:mm:ss.SS" value="${d.dateDebut}" var="dateDebutPARSE" />
                         </c:catch>

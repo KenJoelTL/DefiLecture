@@ -196,7 +196,7 @@
 
 
                 <div class="form-group">
-                    <label for="point">Quantité de doublons pour ce défi* : </label>
+                    <label for="point">Quantité de <% out.println(application.getAttribute("vocPoints"));%> pour ce défi* : </label>
                     <input class="form-control" type="text" name="valeurMinute" value="${defi.valeurMinute}" required />
                 </div>
 

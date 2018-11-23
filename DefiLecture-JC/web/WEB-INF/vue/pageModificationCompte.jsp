@@ -120,7 +120,7 @@
                         <c:set var="selected" value=" selected=\"selected\"" />
                         <select name="role" class="form-control">
                             <option value="1" ${ compte.role eq 1 ? selected:'' }>Participant</option>
-                            <option value="2" ${ compte.role eq 2 ? selected:'' }>Capitaine</option>
+                            <option value="2" ${ compte.role eq 2 ? selected:'' }><% out.println(application.getAttribute("vocChef"));%></option>
                             <c:if test="${sessionScope.role eq 4}">
                             <option value="3" ${ compte.role eq 3 ? selected:'' }>Mod&eacute;rateur</option>
                             <option value="4" ${ compte.role eq 4 ? selected:'' }>Administrateur</option>

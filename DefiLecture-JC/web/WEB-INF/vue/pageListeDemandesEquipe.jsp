@@ -99,7 +99,7 @@
             </table>
               </c:when>
                   <c:otherwise>
-                      <div class="alert alert-warning" style="text-align:center">Votre &eacute;quipage est plein<div>
+                      <div class="alert alert-warning" style="text-align:center">Votre &eacute;quipe est complèete<div>
                   </c:otherwise>
               </c:choose>
           </c:if>
