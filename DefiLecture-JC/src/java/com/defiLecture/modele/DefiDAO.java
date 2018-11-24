@@ -50,8 +50,8 @@ public class DefiDAO extends DAO<Defi> {
     public boolean create(Defi x) {
                
         System.out.println("entrer dans le DAO");
-        String req = "INSERT INTO defi (`ID_COMPTE` , `DEBUT_OUVERTURE` , `FIN_OUVERTURE`, `DEBUT_INSCRIPTION` , `FIN_INSCRIPTION`, `DEBUT_LECTURE`, `FIN_LECTURE`, `DEBUT_FERMETURE`, `FIN_FERMETURE`, `NBMATELOT`) VALUES "+
-			     "(?,?,?,?,?,?,?,?,?,?)";
+        String req = "INSERT INTO defi (`ID_COMPTE` , `DEBUT_OUVERTURE` , `FIN_OUVERTURE`, `DEBUT_INSCRIPTION` , `FIN_INSCRIPTION`, `DEBUT_LECTURE`, `FIN_LECTURE`, `DEBUT_FERMETURE`) VALUES "+
+			     "(?,?,?,?,?,?,?,?)";
 				 		 
         PreparedStatement paramStm = null;
         try 
