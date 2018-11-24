@@ -139,7 +139,7 @@ public class ActionBuilder {
                 case "effectuerModificationConfig":
                     return new EffectuerModificationConfigAction();
                 case "effectuerSupressionBD":
-                    return new EffectuerSupressionBDAction();
+                    return new EffectuerSuppressionBDAction();
       //Test Ajax
                 case "testAjax":
                     return new ExempleClasseActionAjax();
