@@ -14,11 +14,6 @@
     You should have received a copy of the GNU General Public License
     along with DefiLecture.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<%-- 
-    Document   : pageProfil
-    Created on : 2018-1-11
-    Author     : Gabriel Grenier
---%>
 
 <%@page import="com.defiLecture.modele.CompteDAO"%>
 <%@page import="com.defiLecture.modele.Compte"%>
