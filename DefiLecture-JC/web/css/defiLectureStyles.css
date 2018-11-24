@@ -1024,6 +1024,25 @@ background-image: url("../images/accueil_poste.jpg");
     padding-top: 2px;
 }
 
+/*Page de configuration*/
+#configSite input{
+    font-size: 18px;
+}
+#configSite #panelConfig, #panelReset{
+    margin: 5% 5% 0 15%;
+    min-width: 486px;
+}
+#configSite #reset{
+    margin-left: 42%;
+}
+#configSite #resetConfirm{
+    margin-left: 37%;
+    text-align: center;
+}
+#configSite #enregistrerConfig{
+    margin: 2% 0 0 42%;
+} 
+
 
 
 /*Background*/

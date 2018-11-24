@@ -132,6 +132,14 @@ public class ActionBuilder {
                     return new EffectuerSuspensionMembreEquipeAction();
                 case "effectuerReaffectationMembreEquipe":
                     return new EffectuerReaffectationMembreEquipeAction();
+       
+      //Administation
+                case "afficherPageConfiguration":
+                    return new AfficherPageConfigAction();
+                case "effectuerModificationConfig":
+                    return new EffectuerModificationConfigAction();
+                case "effectuerSupressionBD":
+                    return new EffectuerSupressionBDAction();
       //Test Ajax
                 case "testAjax":
                     return new ExempleClasseActionAjax();

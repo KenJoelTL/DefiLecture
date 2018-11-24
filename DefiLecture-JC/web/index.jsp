@@ -159,6 +159,13 @@
                     </li>
                     
                  </c:if>
+                 <c:if test="${ sessionScope.role >=3 }">
+                    <li>
+                        <a href="*.do?tache=afficherPageConfiguration">
+                            Configuration du site
+                        </a>
+                    </li>
+                 </c:if>
             </c:if>
             
                 
