@@ -412,5 +412,36 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
         }
         return liste;
     }
-    
+    public boolean deleteTable() {
+        String req = "DELETE FROM demande_equipe";
+        
+        PreparedStatement paramStm = null;
+
+        try {
+                paramStm = cnx.prepareStatement(req);
+
+                int nbLignesAffectees= paramStm.executeUpdate();
+                
+                if (nbLignesAffectees>0) {
+                    paramStm.close();
+                    return true;
+                }
+                
+            return false;
+        }
+        catch (SQLException exp) {
+        }
+        catch (Exception exp) {
+        }
+        finally {
+                try {
+                    if (paramStm!=null)
+                        paramStm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(DemandeEquipeDAO.class.getName())
+                            .log(Level.SEVERE, null, ex);
+                }
+        }
+        return false;
+    }
 }

@@ -50,8 +50,8 @@ public class DefiDAO extends DAO<Defi> {
     public boolean create(Defi x) {
                
         System.out.println("entrer dans le DAO");
-        String req = "INSERT INTO defi (`ID_COMPTE` , `NOM` , `DESCRIPTION`, `DATE_DEBUT` , `DATE_FIN`, `QUESTION`, `CHOIX_REPONSE`, `REPONSE`, `VALEUR_MINUTE`) VALUES "+
-			     "(?,?,?,?,?,?,?,?,?)";
+        String req = "INSERT INTO defi (`ID_COMPTE` , `DEBUT_OUVERTURE` , `FIN_OUVERTURE`, `DEBUT_INSCRIPTION` , `FIN_INSCRIPTION`, `DEBUT_LECTURE`, `FIN_LECTURE`, `DEBUT_FERMETURE`, `FIN_FERMETURE`, `NBMATELOT`) VALUES "+
+			     "(?,?,?,?,?,?,?,?,?,?)";
 				 		 
         PreparedStatement paramStm = null;
         try 
@@ -454,7 +454,38 @@ public class DefiDAO extends DAO<Defi> {
         
         return listeDefi;
     }
-    
+    public boolean deleteTable() {
+        String req = "DELETE FROM defi";
+        
+        PreparedStatement paramStm = null;
+
+        try {
+                paramStm = cnx.prepareStatement(req);
+
+                int nbLignesAffectees= paramStm.executeUpdate();
+                
+                if (nbLignesAffectees>0) {
+                    paramStm.close();
+                    return true;
+                }
+                
+            return false;
+        }
+        catch (SQLException exp) {
+        }
+        catch (Exception exp) {
+        }
+        finally {
+                try {
+                    if (paramStm!=null)
+                        paramStm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(DefiDAO.class.getName())
+                            .log(Level.SEVERE, null, ex);
+                }
+        }
+        return false;
+    }
     
 }
 
