@@ -1,3 +1,19 @@
+/**
+    This file is part of DefiLecture.
+
+    DefiLecture is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    DefiLecture is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with DefiLecture.  If not, see <http://www.gnu.org/licenses/>.
+*/
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -28,7 +44,6 @@ import javax.servlet.http.HttpSession;
 import jdbc.Config;
 import jdbc.Connexion;
 
-//Maxime Young - TP1 Gestion de projet:
 public class SupprimerDefiAction implements Action, SessionAware, RequestAware, RequirePRGAction {
     private HttpServletResponse response;
     private HttpServletRequest request;
@@ -67,11 +82,14 @@ public class SupprimerDefiAction implements Action, SessionAware, RequestAware, 
             boolean delete = Ddao.delete(defi);
             System.out.println(delete);
         } 
-        catch (ClassNotFoundException ex) {
-            //throw "not implement";
-        } 
         catch (SQLException ex) {
-            //Logger.getLogger(SupprimerDefiAction.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SupprimerDefiAction.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        catch (Exception ex) {
+            Logger.getLogger(SupprimerDefiAction.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        finally {
+            Connexion.close();
         }
         return action;
     }

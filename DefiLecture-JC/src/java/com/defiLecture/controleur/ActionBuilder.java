@@ -88,7 +88,6 @@ public class ActionBuilder {
                     return new AfficherPageModificationDefiAction();
                 case "effectuerModificationDefi":
                     return new EffectuerModificationDefiAction();
-                // Maxime Young - TP1 Gestion de projets
                 case "supprimerDefi":
                     return new SupprimerDefiAction();
       //Compte        

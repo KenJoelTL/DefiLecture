@@ -273,7 +273,7 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
                 return listeInscriptionDefi;
 
         }
-        catch (SQLException exp) {
+        catch (SQLException ex) {
         }
         finally {
             try{
@@ -282,7 +282,7 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
             }
             catch (SQLException exp) {
             }
-             catch (Exception e) {
+            catch (Exception e) {
             }
         }        
 
@@ -307,7 +307,7 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
                 while(resultat.next()){
 
                     InscriptionDefi i = new InscriptionDefi();
-
+                    
                     i.setIdInscriptionDefi(resultat.getInt("ID_INSCRIPTION_DEFI"));
                     i.setIdCompte(resultat.getInt("ID_COMPTE"));
                     i.setIdDefi(resultat.getInt("ID_DEFI"));
@@ -332,7 +332,7 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
             }
             catch (SQLException exp) {
             }
-             catch (Exception e) {
+            catch (Exception e) {
             }
         }        
 
@@ -341,16 +341,17 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
     }
         
     // Trouver les incription par un id d'un défi
-    public List<InscriptionDefi> findByIdDefi(int id) {
+    public List<InscriptionDefi> findByIdDefi(int id) throws Exception {
             
-            String req = "SELECT * FROM inscription_defi WHERE `ID_DEFI` = '"+id+"'";
+            String req = "SELECT * FROM inscription_defi WHERE `ID_DEFI` = ?";
             List<InscriptionDefi> listeInscriptionDefi = new ArrayList<InscriptionDefi>();
 
         PreparedStatement paramStm = null;
         try {
 
                 paramStm = cnx.prepareStatement(req);
-
+                
+                paramStm.setInt(1, id);
            
                 ResultSet resultat = paramStm.executeQuery();
 
@@ -374,17 +375,26 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
                 return listeInscriptionDefi;
 
         }
+        catch (SQLException ex) {
+                Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
         catch (Exception e) {
+                Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, e);
         }
         finally {
             try{
                 if (paramStm!=null)
                     paramStm.close();
             }
-            catch (Exception e) {
+            catch (SQLException ex) {
+                Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-        return listeInscriptionDefi;        
+            catch (Exception e) {
+                Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, e);
+            }
+
+        } 
+        return listeInscriptionDefi;
     }
     
 }
