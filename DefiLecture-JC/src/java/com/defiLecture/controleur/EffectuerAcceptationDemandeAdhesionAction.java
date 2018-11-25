@@ -36,7 +36,7 @@ import com.defiLecture.modele.DemandeEquipeDAO;
 import com.defiLecture.modele.Equipe;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.Map;
 
 /**
@@ -92,7 +92,7 @@ public class EffectuerAcceptationDemandeAdhesionAction implements Action, Reques
                                 action = "ajoutReussi.do?tache=afficherPageListeDemandesEquipe&ordre=recu";
                                 data.put("succesDemande", "Le matelot "+ cpt.getPrenom() +" «"+ cpt.getPseudonyme() +"» "+ cpt.getNom() +" fait maintenant partie de votre équipage !");
                                 // suppression des autres demandes
-                                LinkedList<DemandeEquipe> listeDemandes = (LinkedList<DemandeEquipe>) deDao.findByIdCompte(cpt.getIdCompte());
+                                ArrayList<DemandeEquipe> listeDemandes = (ArrayList<DemandeEquipe>) deDao.findByIdCompte(cpt.getIdCompte());
                                 listeDemandes.forEach(demande->{
                                     if (demande.getIdDemandeEquipe() != demandeEq.getIdDemandeEquipe()) {
                                         deDao.delete(demande);
