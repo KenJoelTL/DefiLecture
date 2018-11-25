@@ -472,8 +472,12 @@ public class DefiDAO extends DAO<Defi> {
             return false;
         }
         catch (SQLException exp) {
+            Logger.getLogger(DefiDAO.class.getName())
+                            .log(Level.SEVERE, null, exp);
         }
         catch (Exception exp) {
+            Logger.getLogger(DefiDAO.class.getName())
+                            .log(Level.SEVERE, null, exp);
         }
         finally {
                 try {

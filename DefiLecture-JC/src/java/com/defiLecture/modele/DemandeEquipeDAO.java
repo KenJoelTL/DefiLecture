@@ -430,10 +430,12 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
             return false;
         }
         catch (SQLException exp) {
-                System.out.println(exp.getMessage());
+                Logger.getLogger(DemandeEquipeDAO.class.getName())
+                            .log(Level.SEVERE, null, exp);
             }
         catch (Exception e) {
-                System.out.println(e.getMessage());
+                Logger.getLogger(DemandeEquipeDAO.class.getName())
+                            .log(Level.SEVERE, null, e);
         }
         finally {
                 try {

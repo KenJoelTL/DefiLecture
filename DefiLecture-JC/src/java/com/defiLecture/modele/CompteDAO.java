@@ -614,10 +614,12 @@ public class CompteDAO extends DAO<Compte>{
             return false;
         }
         catch (SQLException exp) {
-                System.out.println(exp.getMessage());
+                Logger.getLogger(CompteDAO.class.getName())
+                            .log(Level.SEVERE, null, exp);
             }
         catch (Exception e) {
-                System.out.println(e.getMessage());
+                Logger.getLogger(CompteDAO.class.getName())
+                            .log(Level.SEVERE, null, e);
         }
         finally {
                 try {

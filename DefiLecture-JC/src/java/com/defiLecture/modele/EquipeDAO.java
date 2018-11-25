@@ -304,10 +304,12 @@ public class EquipeDAO extends DAO<Equipe>{
             return false;
         }
         catch (SQLException exp) {
-                System.out.println(exp.getMessage());
+                Logger.getLogger(EquipeDAO.class.getName())
+                            .log(Level.SEVERE, null, exp);
             }
         catch (Exception e) {
-                System.out.println(e.getMessage());
+                Logger.getLogger(EquipeDAO.class.getName())
+                            .log(Level.SEVERE, null, e);
         }
         finally {
                 try {

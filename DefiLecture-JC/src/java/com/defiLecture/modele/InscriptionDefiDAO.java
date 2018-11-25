@@ -359,8 +359,12 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
             return false;
         }
         catch (SQLException exp) {
+            Logger.getLogger(InscriptionDefiDAO.class.getName())
+                            .log(Level.SEVERE, null, exp);
         }
         catch (Exception exp) {
+            Logger.getLogger(InscriptionDefiDAO.class.getName())
+                            .log(Level.SEVERE, null, exp);
         }
         finally {
                 try {

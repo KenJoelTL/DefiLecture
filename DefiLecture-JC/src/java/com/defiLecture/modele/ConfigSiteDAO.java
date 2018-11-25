@@ -116,6 +116,8 @@ public class ConfigSiteDAO extends DAO<ConfigSite>{
                 
         }
         catch (SQLException exp) {
+            Logger.getLogger(ConfigSiteDAO.class.getName())
+                            .log(Level.SEVERE, null, exp);
         }
         finally {
             try{
@@ -160,7 +162,8 @@ public class ConfigSiteDAO extends DAO<ConfigSite>{
                 return false;
         }
         catch (SQLException exp) {
-            System.out.println(exp.getMessage());
+            Logger.getLogger(ConfigSiteDAO.class.getName())
+                            .log(Level.SEVERE, null, exp);
         }
         finally {
                 try {
@@ -193,10 +196,12 @@ public class ConfigSiteDAO extends DAO<ConfigSite>{
             return false;
         }
         catch (SQLException exp) {
-            System.out.println(exp.getMessage());
+            Logger.getLogger(ConfigSiteDAO.class.getName())
+                            .log(Level.SEVERE, null, exp);
         }
         catch (Exception exp) {
-            System.out.println(exp.getMessage());
+            Logger.getLogger(ConfigSiteDAO.class.getName())
+                            .log(Level.SEVERE, null, exp);
         }
         finally {
                 try {
@@ -230,10 +235,12 @@ public class ConfigSiteDAO extends DAO<ConfigSite>{
              return false;
         }
         catch (SQLException exp) {
-            System.out.println(exp.getMessage());
+            Logger.getLogger(ConfigSiteDAO.class.getName())
+                            .log(Level.SEVERE, null, exp);
         }
         catch (Exception exp) {
-            System.out.println(exp.getMessage());
+            Logger.getLogger(ConfigSiteDAO.class.getName())
+                            .log(Level.SEVERE, null, exp);
         }
         finally {
                 try {
@@ -275,6 +282,8 @@ public class ConfigSiteDAO extends DAO<ConfigSite>{
                 
         }
         catch (SQLException exp) {
+            Logger.getLogger(ConfigSiteDAO.class.getName())
+                            .log(Level.SEVERE, null, exp);
         }
         finally {
             try{
@@ -282,10 +291,12 @@ public class ConfigSiteDAO extends DAO<ConfigSite>{
                     stm.close();
             }
             catch (SQLException exp) {
-                System.out.println(exp.getMessage());
+                Logger.getLogger(ConfigSiteDAO.class.getName())
+                            .log(Level.SEVERE, null, exp);
             }
              catch (Exception e) {
-                 System.out.println(e.getMessage());
+                 Logger.getLogger(ConfigSiteDAO.class.getName())
+                            .log(Level.SEVERE, null, e);
             }
         }        
         
@@ -321,7 +332,8 @@ public class ConfigSiteDAO extends DAO<ConfigSite>{
                 
         }
         catch (SQLException exp) {
-            System.out.println(exp.getMessage());
+            Logger.getLogger(ConfigSiteDAO.class.getName())
+                            .log(Level.SEVERE, null, exp);
         }
         finally {
             try{
@@ -329,10 +341,12 @@ public class ConfigSiteDAO extends DAO<ConfigSite>{
                     paramStm.close();
             }
             catch (SQLException exp) {
-                System.out.println(exp.getMessage());
+                Logger.getLogger(ConfigSiteDAO.class.getName())
+                            .log(Level.SEVERE, null, exp);
             }
              catch (Exception e) {
-                 System.out.println(e.getMessage());
+                Logger.getLogger(ConfigSiteDAO.class.getName())
+                            .log(Level.SEVERE, null, e);
             }
         }        
         
