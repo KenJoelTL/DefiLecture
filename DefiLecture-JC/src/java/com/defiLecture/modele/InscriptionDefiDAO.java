@@ -75,8 +75,11 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
                 return true;
             }
         }
-        catch (SQLException exp)
-        {
+        catch (SQLException exp) {
+                System.out.println(exp.getMessage());
+            }
+        catch (Exception e) {
+                System.out.println(e.getMessage());
         }
         finally
         {

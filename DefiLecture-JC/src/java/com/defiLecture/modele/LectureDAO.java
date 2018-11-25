@@ -364,8 +364,10 @@ public class LectureDAO extends DAO<Lecture> {
             return false;
         }
         catch (SQLException exp) {
-        }
-        catch (Exception exp) {
+                System.out.println(exp.getMessage());
+            }
+        catch (Exception e) {
+                System.out.println(e.getMessage());
         }
         finally {
                 try {
