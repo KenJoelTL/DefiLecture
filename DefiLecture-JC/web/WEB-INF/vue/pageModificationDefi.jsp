@@ -209,10 +209,43 @@
                 <input id="choixReponseJSON" type="hidden" name="choixReponseJSON" value="">
                 <input type="hidden" name="idDefi" value="${defi.idDefi}">
                 <input type="hidden" name="tache" value="effectuerModificationDefi">
-                <button type="submit" class="btn btn-success" name="modifie" >Enregistrer </button>
-                <a href="*.do?tache=afficherPageParticipationDefi" class="retour"><span class="glyphicon glyphicon-circle-arrow-left"></span>retour à la liste des défis</a>
+                <button type="submit" class="btn btn-success" name="modifie" >Enregistrer </button> 
             </form>
-                <br>
+            <br />
+            
+            <form>
+              <input type="hidden" name="idDefiSup" value="${defi.idDefi}">
+              <input type="hidden" name="tache" value="supprimerDefi">
+              
+              <!-- Bouton de suppression -->
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#supprimerModal">
+                Supprimer
+              </button>
+
+              <!-- Boîte de dialogue de confirmation -->
+              <div class="modal fade" id="supprimerModal" tabindex="-1" role="dialog" aria-labelledby="supprimerModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="supprimerModalLabel">Confirmer la suppression</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      Voulez-vous vraiment supprimer le défi?
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-primary" data-dismiss="modal">Non</button>
+                      <button type="submit" class="btn btn-secondary">Oui</button>
+                    </div>
+                  </div>
+                </div>
+              </div>              
+            </form>
+            
+            <a href="*.do?tache=afficherPageParticipationDefi" class="retour"><span class="glyphicon glyphicon-circle-arrow-left"></span>retour à la liste des défis</a>
+            <br />
         </div>
     </div>
 </div>

@@ -88,6 +88,8 @@ public class ActionBuilder {
                     return new AfficherPageModificationDefiAction();
                 case "effectuerModificationDefi":
                     return new EffectuerModificationDefiAction();
+                case "supprimerDefi":
+                    return new SupprimerDefiAction();
       //Compte        
                 case "afficherPageGestionListeCompte":
                     return new AfficherPageGestionListeComptesAction();
