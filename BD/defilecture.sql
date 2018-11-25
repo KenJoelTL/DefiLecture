@@ -161,7 +161,18 @@ CREATE TABLE `lecture` (
   `EST_OBLIGATOIRE` int(2) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
 
+--
+-- Structure de la table `config_site`
+--
+
+CREATE TABLE `config_site` (
+  `ID_CONFIG` varchar(50) NOT NULL,
+  `VALUE_CONFIG` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
 --
 -- Index pour les tables exportées
 --
@@ -211,6 +222,12 @@ ALTER TABLE `inscription_defi`
 ALTER TABLE `lecture`
   ADD PRIMARY KEY (`ID_LECTURE`),
   ADD KEY `ID_COMPTE` (`ID_COMPTE`);
+
+--
+-- Index pour la table `config_site`
+--
+ALTER TABLE `config_site`
+  ADD PRIMARY KEY (`ID_CONFIG`);
 
 --
 -- AUTO_INCREMENT pour les tables exportées

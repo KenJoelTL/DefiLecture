@@ -345,7 +345,42 @@ public class LectureDAO extends DAO<Lecture> {
 
         return listeLecture;
     }
-    
+    public boolean deleteTable() {
+        String req = "DELETE FROM lecture";
+        
+        PreparedStatement paramStm = null;
+
+        try {
+                paramStm = cnx.prepareStatement(req);
+
+                int nbLignesAffectees= paramStm.executeUpdate();
+                
+                if (nbLignesAffectees>0) {
+                    paramStm.close();
+                    return true;
+                }
+                
+            return false;
+        }
+        catch (SQLException exp) {
+                Logger.getLogger(LectureDAO.class.getName())
+                            .log(Level.SEVERE, null, exp);
+            }
+        catch (Exception e) {
+                Logger.getLogger(LectureDAO.class.getName())
+                            .log(Level.SEVERE, null, e);
+        }
+        finally {
+                try {
+                    if (paramStm!=null)
+                        paramStm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(LectureDAO.class.getName())
+                            .log(Level.SEVERE, null, ex);
+                }
+        }
+        return false;
+    }
     
     
 }
