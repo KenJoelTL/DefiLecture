@@ -1041,6 +1041,9 @@ background-image: url("../images/accueil_poste.jpg");
 }
 #configSite #enregistrerConfig{
     margin: 2% 0 0 42%;
+}
+#configSite .dateConfig{
+    margin-bottom: 2%;
 } 
 
 

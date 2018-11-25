@@ -42,33 +42,24 @@
                         <div class="panel-heading"><h2>Configuration :</h2></div>
                         <div class="panel-body">
                             <form action="configSite.do" method="post">
-                                <h4>Ouverture :</h4>
+                                <h4>Accès :</h4>
                                 <div class="input-daterange input-group dateConfig">
-                                    <span class="input-group-addon">De</span>
-                                    <input type="date" id="dOuverture" name="dOuverture" class="input-sm form-control" value="<c:out value="${daoConfig.getString('dOuverture')}" />"/>
+                                    <span class="input-group-addon">De:</span>
+                                    <input type="datetime-local" id="accesDe" name="accesDe" class="input-sm form-control" value="<c:out value="${daoConfig.getString('accesDe')}" />"/>
                                     <span class="input-group-addon">à</span>
-                                    <input type="date" id="fOuverture" name="fOuverture" class="input-sm form-control" value="<c:out value="${daoConfig.getString('fOuverture')}" />"/>
+                                    <input type="datetime-local" id="accesA" name="accesA" class="input-sm form-control" value="<c:out value="${daoConfig.getString('accesA')}" />"/>
                                 </div>
-                                <h4>Inscriptions :</h4>
+                                <h4>Inscription à partir:</h4>
                                 <div class="input-daterange input-group dateConfig">
-                                    <span class="input-group-addon">De</span>
-                                    <input type="date" id="dInscription" name="dInscription" class="input-sm form-control" value="<c:out value="${daoConfig.getString('dInscription')}" />"/>
-                                    <span class="input-group-addon">à</span>
-                                    <input type="date" id="fInscription" name="fInscription" class="input-sm form-control" value="<c:out value="${daoConfig.getString('fInscription')}" />"/>
+                                    <span class="input-group-addon">De :</span>
+                                    <input type="datetime-local" id="dInscription" name="dInscription" class="input-sm form-control" value="<c:out value="${daoConfig.getString('dInscription')}" />"/>
                                 </div>
                                 <h4>Lectures :</h4>
                                 <div class="input-daterange input-group dateConfig">
-                                    <span class="input-group-addon">De</span>
-                                    <input type="date" id="dLecture" name="dLecture" class="input-sm form-control" value="<c:out value="${daoConfig.getString('dLecture')}" />"/>
+                                    <span class="input-group-addon">De :</span>
+                                    <input type="datetime-local" id="dLecture" name="dLecture" class="input-sm form-control" value="<c:out value="${daoConfig.getString('dLecture')}" />"/>
                                     <span class="input-group-addon">à</span>
-                                    <input type="date" id="fLecture" name="fLecture" class="input-sm form-control" value="<c:out value="${daoConfig.getString('fLecture')}" />"/>
-                                </div>
-                                <h4>Fermeture :</h4>
-                                <div class="input-daterange input-group dateConfig">
-                                    <span class="input-group-addon">De</span>
-                                    <input type="date" id="dFermeture" name="dFermeture" class="input-sm form-control" value="<c:out value="${daoConfig.getString('dFermeture')}" />"/>
-                                    <span class="input-group-addon">à</span>
-                                    <input type="date" id="fFermeture" name="fFermeture" class="input-sm form-control" value="<c:out value="${daoConfig.getString('fFermeture')}" />" />
+                                    <input type="datetime-local" id="fLecture" name="fLecture" class="input-sm form-control" value="<c:out value="${daoConfig.getString('fLecture')}" />"/>
                                 </div>
                                 <h4>Nombre de matelots :</h4>
                                 <input id="nbMatelot" name="nbMatelot" class="form-control" type="text" value="<c:out value="${daoConfig.getString('nbmatelot')}" />" pattern="[-+]?[0-9]*[.,]?[0-9]+"/>
