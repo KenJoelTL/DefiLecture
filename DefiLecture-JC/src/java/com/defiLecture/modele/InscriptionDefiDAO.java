@@ -76,8 +76,8 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
                 return true;
             }
         }
-        catch (SQLException exp)
-        {
+        catch (SQLException exp){
+            Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, exp);
         }
         finally
         {
@@ -135,6 +135,7 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
                 
         }
         catch (SQLException exp) {
+            Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, exp);
         }
         finally {
             try{
@@ -142,8 +143,10 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
                     paramStm.close();
             }
             catch (SQLException exp) {
+                Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, exp);
             }
              catch (Exception e) {
+                 Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, e);
             }
         }        
         
@@ -175,16 +178,17 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
             return false;
         }
         catch (SQLException exp) {
+            Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, exp);
         }
         catch (Exception exp) {
+            Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, exp);
         }
         finally {
                 try {
                     if (paramStm!=null)
                         paramStm.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(LectureDAO.class.getName())
-                            .log(Level.SEVERE, null, ex);
+                    Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, ex);
                 }
         }
         return false;
@@ -224,6 +228,7 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
                 
         }
         catch (SQLException exp) {
+            Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, exp);
         }
         finally {
             try{
@@ -231,8 +236,10 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
                     stm.close();
             }
             catch (SQLException exp) {
+                Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, exp);
             }
-             catch (Exception e) {
+            catch (Exception e) {
+                Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, e);
             }
         }        
         
@@ -274,6 +281,7 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
 
         }
         catch (SQLException ex) {
+            Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally {
             try{
@@ -281,8 +289,10 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
                     paramStm.close();
             }
             catch (SQLException exp) {
+                Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, exp);
             }
             catch (Exception e) {
+                Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, e);
             }
         }        
 
@@ -324,6 +334,7 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
 
         }
         catch (SQLException exp) {
+            Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, exp);
         }
         finally {
             try{
@@ -331,8 +342,10 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
                     paramStm.close();
             }
             catch (SQLException exp) {
+                Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, exp);
             }
             catch (Exception e) {
+                Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, e);
             }
         }        
 
