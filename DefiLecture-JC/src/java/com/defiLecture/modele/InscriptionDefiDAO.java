@@ -27,6 +27,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -75,8 +76,8 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
                 return true;
             }
         }
-        catch (SQLException exp)
-        {
+        catch (SQLException exp){
+            Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, exp);
         }
         finally
         {
@@ -134,6 +135,7 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
                 
         }
         catch (SQLException exp) {
+            Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, exp);
         }
         finally {
             try{
@@ -141,8 +143,10 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
                     paramStm.close();
             }
             catch (SQLException exp) {
+                Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, exp);
             }
              catch (Exception e) {
+                 Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, e);
             }
         }        
         
@@ -161,8 +165,8 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
         PreparedStatement paramStm = null;
 
         try {
-                paramStm.setInt(1, x.getIdInscriptionDefi());
                 paramStm = cnx.prepareStatement(req);
+                paramStm.setInt(1, x.getIdInscriptionDefi());
 
                 int nbLignesAffectees= paramStm.executeUpdate();
                 
@@ -174,16 +178,17 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
             return false;
         }
         catch (SQLException exp) {
+            Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, exp);
         }
         catch (Exception exp) {
+            Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, exp);
         }
         finally {
                 try {
                     if (paramStm!=null)
                         paramStm.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(LectureDAO.class.getName())
-                            .log(Level.SEVERE, null, ex);
+                    Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, ex);
                 }
         }
         return false;
@@ -223,6 +228,7 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
                 
         }
         catch (SQLException exp) {
+            Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, exp);
         }
         finally {
             try{
@@ -230,8 +236,10 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
                     stm.close();
             }
             catch (SQLException exp) {
+                Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, exp);
             }
-             catch (Exception e) {
+            catch (Exception e) {
+                Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, e);
             }
         }        
         
@@ -272,7 +280,8 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
                 return listeInscriptionDefi;
 
         }
-        catch (SQLException exp) {
+        catch (SQLException ex) {
+            Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally {
             try{
@@ -280,8 +289,10 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
                     paramStm.close();
             }
             catch (SQLException exp) {
+                Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, exp);
             }
-             catch (Exception e) {
+            catch (Exception e) {
+                Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, e);
             }
         }        
 
@@ -306,7 +317,7 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
                 while(resultat.next()){
 
                     InscriptionDefi i = new InscriptionDefi();
-
+                    
                     i.setIdInscriptionDefi(resultat.getInt("ID_INSCRIPTION_DEFI"));
                     i.setIdCompte(resultat.getInt("ID_COMPTE"));
                     i.setIdDefi(resultat.getInt("ID_DEFI"));
@@ -323,6 +334,7 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
 
         }
         catch (SQLException exp) {
+            Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, exp);
         }
         finally {
             try{
@@ -330,14 +342,72 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
                     paramStm.close();
             }
             catch (SQLException exp) {
+                Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, exp);
             }
-             catch (Exception e) {
+            catch (Exception e) {
+                Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, e);
             }
         }        
 
         return listeInscriptionDefi;
         
     }
-    
+        
+    // Trouver les incription par un id d'un défi
+    public List<InscriptionDefi> findByIdDefi(int id){
+            
+            String req = "SELECT * FROM inscription_defi WHERE `ID_DEFI` = ?";
+            List<InscriptionDefi> listeInscriptionDefi = new ArrayList<InscriptionDefi>();
+
+        PreparedStatement paramStm = null;
+        try {
+
+                paramStm = cnx.prepareStatement(req);
+                
+                paramStm.setInt(1, id);
+           
+                ResultSet resultat = paramStm.executeQuery();
+
+                // On vérifie s'il y a un résultat    
+                while(resultat.next()){
+
+                    InscriptionDefi i = new InscriptionDefi();
+
+                    i.setIdInscriptionDefi(resultat.getInt("ID_INSCRIPTION_DEFI"));
+                    i.setIdCompte(resultat.getInt("ID_COMPTE"));
+                    i.setIdDefi(resultat.getInt("ID_DEFI"));
+                    i.setValeurMinute(resultat.getInt("VALEUR_MINUTE"));
+                    i.setEstReussi(resultat.getInt("EST_REUSSI"));
+                    i.setDateInscription(resultat.getString("DATE_INSCRIPTION"));
+
+                    listeInscriptionDefi.add(i);
+
+                }
+                resultat.close();
+                paramStm.close();
+                return listeInscriptionDefi;
+
+        }
+        catch (SQLException ex) {
+                Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        catch (Exception e) {
+                Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        finally {
+            try{
+                if (paramStm!=null)
+                    paramStm.close();
+            }
+            catch (SQLException ex) {
+                Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            catch (Exception e) {
+                Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, e);
+            }
+
+        } 
+        return listeInscriptionDefi;
+    }
     
 }
