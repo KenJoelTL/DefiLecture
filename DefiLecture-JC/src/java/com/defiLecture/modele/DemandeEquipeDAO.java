@@ -28,7 +28,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -222,7 +222,7 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
 
     @Override
     public List<DemandeEquipe> findAll() {
-                List<DemandeEquipe> liste = new LinkedList<>();
+                List<DemandeEquipe> liste = new ArrayList<>();
         
         try {
             String req = "SELECT * FROM demande_equipe";
@@ -252,7 +252,7 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
     }
     
     public List<DemandeEquipe> findByIdCompte(int idCompte) {
-        List<DemandeEquipe> liste = new LinkedList<>();
+        List<DemandeEquipe> liste = new ArrayList<>();
         
         try {
             String req = "SELECT * FROM demande_equipe WHERE `ID_COMPTE` = ?";
@@ -285,7 +285,7 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
     }
     
     public List<DemandeEquipe> findByIdEquipe(int idEquipe) {
-        List<DemandeEquipe> liste = new LinkedList<>();
+        List<DemandeEquipe> liste = new ArrayList<>();
         
         try {
             String req = "SELECT * FROM demande_equipe WHERE `ID_EQUIPE` = ?";
@@ -380,7 +380,7 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe>{
     
     
     public List<DemandeEquipe> findByIdEquipeStatutDemande(int idEquipe, int statutDemande) {
-        List<DemandeEquipe> liste = new LinkedList<>();
+        List<DemandeEquipe> liste = new ArrayList<>();
         
         try {
             String req = "SELECT * FROM demande_equipe WHERE `ID_EQUIPE` = ? and STATUT_DEMANDE = ?";

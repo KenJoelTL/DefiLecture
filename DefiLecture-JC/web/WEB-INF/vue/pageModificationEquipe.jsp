@@ -19,7 +19,7 @@
     Created on : 2017-11-01, 20:52:35
     Author     : Joel
 --%>
-<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="com.defiLecture.modele.DemandeEquipeDAO"%>
 <%@page import="com.defiLecture.modele.Compte"%>
 <%@page import="com.defiLecture.modele.CompteDAO"%>
@@ -30,24 +30,43 @@
 <%@page import="jdbc.Config"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<% Connection cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
-   Equipe equipe;
-   CompteDAO compteDao = new CompteDAO(cnx); 
-    Compte compteConnecte = compteDao.read((int)(session.getAttribute("connecte"))); //vérifier si son équipe n'Est pas null
-   if(request.getParameter("idEquipe") != null)
-       equipe = new EquipeDAO(cnx).read(request.getParameter("idEquipe"));
-   else
-       equipe = new EquipeDAO(cnx).read(compteConnecte.getIdEquipe());
-    DemandeEquipeDAO demEquipeDao = new DemandeEquipeDAO(cnx);
-    List listeMembre  = compteDao.findByIdEquipe(equipe.getIdEquipe());
-    pageContext.setAttribute("equipe", equipe);
-    pageContext.setAttribute("listeMembres", listeMembre);
-    pageContext.setAttribute("nbMembres", listeMembre.size());
-    pageContext.setAttribute("demEquipeDao", demEquipeDao);      
-    pageContext.setAttribute("compteConnecte", compteConnecte);      
-%>
 
+<!-- Faire la connexion -->
+<jsp:useBean id="connexion" class="jdbc.Connexion"/>
+
+<!-- Cree les DAOs -->
+<jsp:useBean id="compteDao" class="com.defiLecture.modele.CompteDAO">
+    <jsp:setProperty name="compteDao" property="cnx" value="${connexion.connection}"/>
+</jsp:useBean>
+<jsp:useBean id="equipeDao" class="com.defiLecture.modele.EquipeDAO">
+    <jsp:setProperty name="equipeDao" property="cnx" value="${connexion.connection}"/>
+</jsp:useBean>
+<jsp:useBean id="demEquipeDao" class="com.defiLecture.modele.DemandeEquipeDAO">
+    <jsp:setProperty name="demEquipeDao" property="cnx" value="${connexion.connection}"/>
+</jsp:useBean>
+
+<!--Initier les variables -->
+<jsp:useBean id="equipe" class="com.defiLecture.modele.Equipe" scope="page"/>
+<jsp:useBean id="compteConnecte" class="com.defiLecture.modele.Compte" scope="page"/>
+
+<!-- Assigner la valeur aux variables -->
+<c:set var="compteConnecte" value="${compteDao.read(sessionScope.connecte)}"/>
+
+<!-- Verifier que son equipe ne soit pas null-->
+<c:choose>
+    <c:when test="${!empty param.idEquipe}">
+        <c:set var="equipe" value="${equipeDao.read(param.idEquipe)}"/>
+    </c:when>
+    <c:otherwise>
+        <c:set var="equipe" value="${equipeDao.read(compteConnecte.getIdEquipe())}"/>
+    </c:otherwise>
+</c:choose>
+
+<!-- Ajouter l'equipe dans les variables -->
+<c:set var="listeMembres" value="${compteDao.findByIdEquipe(equipe.getIdEquipe())}"/>
+<c:set var="nbMembres" value="${listeMembres.size()}"/>
+
+<!-- Reste du code -->
 <c:set var="permissionAccordee" value="${((sessionScope.role eq Compte.CAPITAINE) 
                                     and (compteConnecte.idEquipe eq equipe.idEquipe)) or (sessionScope.role eq Compte.ADMINISTRATEUR)}"></c:set>
         <div class='row'> 

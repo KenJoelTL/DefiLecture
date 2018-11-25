@@ -27,7 +27,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -284,7 +284,7 @@ public class CompteDAO extends DAO<Compte>{
     @Override
     public List<Compte> findAll() {
                         
-        List<Compte> liste = new LinkedList<>();
+        List<Compte> liste = new ArrayList<Compte>();
         try {
             Statement stm = cnx.createStatement(); 
             ResultSet r = stm.executeQuery("SELECT * FROM compte ORDER BY NOM");
@@ -320,7 +320,7 @@ public class CompteDAO extends DAO<Compte>{
     
     public List<Compte> findAll(int startingRow, int nbOfResult) {
                         
-        List<Compte> liste = new LinkedList<>();
+        List<Compte> liste = new ArrayList<>();
         try {
             Statement stm = cnx.createStatement(); 
             ResultSet r = stm.executeQuery("SELECT * FROM compte LIMIT ?, ?");
@@ -354,8 +354,8 @@ public class CompteDAO extends DAO<Compte>{
 
     }
     
-    public List<Compte> findByIdEquipe(int idEquipe){
-        List<Compte> liste = new LinkedList<>();
+    public ArrayList<Compte> findByIdEquipe(int idEquipe){
+        ArrayList<Compte> liste = new ArrayList<>();
         String req = "SELECT * FROM compte WHERE `ID_EQUIPE` = ?";
         
         PreparedStatement paramStm = null;

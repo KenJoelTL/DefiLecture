@@ -30,21 +30,27 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <script language="javascript" src="./script/jquery-1.4.2.min.js"></script>
 
-<% 
-    Connection cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
-    DefiDAO daoDefi = new DefiDAO(cnx);
-    Defi defi = daoDefi.read(request.getParameter("id"));
-    String choixReponse = defi.getChoixReponse();
-    String bonneReponse = defi.getReponse();
-    pageContext.setAttribute("defi", defi);
+<!-- Faire la connexion -->
+<jsp:useBean id="connexion" class="jdbc.Connexion"/>
 
-%>
+<!-- Cree les DAOs -->
+<jsp:useBean id="daoDefi" class="com.defiLecture.modele.DefiDAO" scope="page">
+    <jsp:setProperty name="daoDefi" property="cnx" value="${connexion.connection}"/>
+</jsp:useBean>
+
+<!-- Declarer les classes-->
+<jsp:useBean id="defi" class="com.defiLecture.modele.Defi" scope="page"/>
+
+<!-- Assigner les variables-->
+<c:set var="defi" value="${daoDefi.read(param.id)}" scope="page"/>
+<c:set var="choixReponse" value="${defi.getChoixReponse()}" scope="page"/>
+<c:set var="bonneReponse" value="${defi.getReponse()}" scope="page"/>
 
 
 <script>
     $(document).ready(function(){
-          var value = <%=choixReponse%>; //chaine string venant de la BD qui contient les choix de réponse
-          var reponse = <%=bonneReponse%>; //valeur de la bonne réponse
+          var value = ${choixReponse}; //chaine string venant de la BD qui contient les choix de réponse
+          var reponse = ${bonneReponse}; //valeur de la bonne réponse
           var sBonneReponse=""; //chaine string qui contiendra le code HTML pour recréer les radio boutons de la bonne réponse
           var sChoixReponse=""; //chaine string qui contiendra le code HTML pour recréer les inputs text pour les choix de réponse
  

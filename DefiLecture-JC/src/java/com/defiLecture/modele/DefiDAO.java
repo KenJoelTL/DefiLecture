@@ -406,14 +406,15 @@ public class DefiDAO extends DAO<Defi> {
      public List<Defi> findHistorique() {
         
         String req = "SELECT * FROM defi WHERE defi.DATE_DEBUT <= SYSDATE() ORDER BY defi.DATE_DEBUT desc";
-        List<Defi> listeDefi = new ArrayList<Defi>();
+        List<Defi> listeDefi = new ArrayList<>();
+        ResultSet resultat;
         
         Statement stm = null;
         try {
 
                 stm = cnx.createStatement();
 
-                ResultSet resultat = stm.executeQuery(req);
+                resultat = stm.executeQuery(req);
                 
                 // On vérifie s'il y a un résultat    
                 while(resultat.next()){
@@ -430,7 +431,6 @@ public class DefiDAO extends DAO<Defi> {
                     d.setChoixReponse(resultat.getString("CHOIX_REPONSE"));
                     d.setReponse(resultat.getString("REPONSE"));
                     d.setValeurMinute(resultat.getInt("VALEUR_MINUTE"));
-                    
                     listeDefi.add(d);
                         
                 }
