@@ -341,7 +341,7 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
     }
         
     // Trouver les incription par un id d'un défi
-    public List<InscriptionDefi> findByIdDefi(int id) throws Exception {
+    public List<InscriptionDefi> findByIdDefi(int id){
             
             String req = "SELECT * FROM inscription_defi WHERE `ID_DEFI` = ?";
             List<InscriptionDefi> listeInscriptionDefi = new ArrayList<InscriptionDefi>();
