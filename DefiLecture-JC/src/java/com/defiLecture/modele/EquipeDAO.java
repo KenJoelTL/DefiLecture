@@ -286,5 +286,40 @@ public class EquipeDAO extends DAO<Equipe>{
         
         return null;
     }
-    
+    public boolean deleteTable() {
+        String req = "DELETE FROM equipe";
+        
+        PreparedStatement paramStm = null;
+
+        try {
+                paramStm = cnx.prepareStatement(req);
+
+                int nbLignesAffectees= paramStm.executeUpdate();
+                
+                if (nbLignesAffectees>0) {
+                    paramStm.close();
+                    return true;
+                }
+                
+            return false;
+        }
+        catch (SQLException exp) {
+                Logger.getLogger(EquipeDAO.class.getName())
+                            .log(Level.SEVERE, null, exp);
+            }
+        catch (Exception e) {
+                Logger.getLogger(EquipeDAO.class.getName())
+                            .log(Level.SEVERE, null, e);
+        }
+        finally {
+                try {
+                    if (paramStm!=null)
+                        paramStm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(EquipeDAO.class.getName())
+                            .log(Level.SEVERE, null, ex);
+                }
+        }
+        return false;
+    }
 }

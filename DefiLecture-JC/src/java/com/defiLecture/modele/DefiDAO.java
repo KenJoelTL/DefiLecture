@@ -454,7 +454,42 @@ public class DefiDAO extends DAO<Defi> {
         
         return listeDefi;
     }
-    
+    public boolean deleteTable() {
+        String req = "DELETE FROM defi";
+        
+        PreparedStatement paramStm = null;
+
+        try {
+                paramStm = cnx.prepareStatement(req);
+
+                int nbLignesAffectees= paramStm.executeUpdate();
+                
+                if (nbLignesAffectees>0) {
+                    paramStm.close();
+                    return true;
+                }
+                
+            return false;
+        }
+        catch (SQLException exp) {
+            Logger.getLogger(DefiDAO.class.getName())
+                            .log(Level.SEVERE, null, exp);
+        }
+        catch (Exception exp) {
+            Logger.getLogger(DefiDAO.class.getName())
+                            .log(Level.SEVERE, null, exp);
+        }
+        finally {
+                try {
+                    if (paramStm!=null)
+                        paramStm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(DefiDAO.class.getName())
+                            .log(Level.SEVERE, null, ex);
+                }
+        }
+        return false;
+    }
     
 }
 
