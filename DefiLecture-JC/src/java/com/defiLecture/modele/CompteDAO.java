@@ -354,8 +354,8 @@ public class CompteDAO extends DAO<Compte>{
 
     }
     
-    public List<Compte> findAllByName(String nom) throws SQLException{
-        List<Compte> liste = new LinkedList<>();
+    public List<Compte> findAllByNom(String nom) throws SQLException{
+        List<Compte> liste = new ArrayList<>();
         String req = "SELECT * FROM compte WHERE `NOM` LIKE ? OR `PRENOM` LIKE ? OR `PSEUDONYME` LIKE ?";
         
         PreparedStatement paramStm = null;
