@@ -66,7 +66,7 @@
 <jsp:useBean id="listeDefi" class="java.util.ArrayList" />
 <c:choose>
    <c:when test="${role<3}">
-      <c:set var="listeDefi" scope="page" value="${daoDefi.findHistorique()}"></c:set>
+      <c:set var="listeDefi" scope="page" value="${daoDefi.findAll()}"></c:set>
    </c:when>
    <c:otherwise>
       <c:set var="listeDefi" scope="page" value="${daoDefi.findAllByIdCompte(sessionScope.connecte)}"></c:set>
@@ -113,7 +113,7 @@
                 <fmt:formatDate var="dateMaintenant" value="${now}" pattern="yyyy-MM-dd' 'HH:mm:ss.S" />
                 <c:forEach items="${listeDefi}" var="d">
                     <%-- Condition qui permet au participant de voir tous les défis qu'il a réussi ou échoué, et de voir les nouveaux défis à relever--%>
-                    <c:if test="${(pageScope.role lt 3) and (listeReussi.contains(d.idDefi) or listeEchoue.contains(d.idDefi) or d.dateFin gt dateMaintenant) }">
+                    <c:if test="${(pageScope.role lt 3)}">
                         <tr>
                             <td>${d.nom}</td>
                             <td>+ ${d.valeurMinute} doublons</td>
@@ -140,13 +140,16 @@
                                 <c:otherwise>
                                     <c:choose>
                                         <c:when test="${d.dateFin lt dateMaintenant}">
-                                            <td> TERMINÉ </td>
+                                            <td class="bg-danger"> TERMINÉ </td>
                                         </c:when>
-                                        <c:otherwise>
-                                            <td> <a class="btn btn-info" role="button" href="*.do?tache=afficherPageInscriptionDefi&id=${d.idDefi}">Relever le défi</a></td>
-                                        </c:otherwise>
+                                       <c:when test="${d.dateDebut gt dateMaintenant}">
+                                           <td> PROCHAINEMENT </td>
+                                       </c:when>
+                                       <c:otherwise>
+                                           <td> <a class="btn btn-info" role="button" href="*.do?tache=afficherPageInscriptionDefi&id=${d.idDefi}">Relever le défi</a></td>
+                                       </c:otherwise>
                                     </c:choose>
-                                </c:otherwise>
+                                </c:otherwise>                                   
                             </c:choose>
                         </tr>
                     </c:if>
@@ -173,14 +176,14 @@
 
                              <%-- Sert à identifier si les défi sont en cours, en attente, ou terminé--%>
                             <c:choose>
-                                <c:when test="${(d.dateDebut lt dateMaintenant) and (d.dateFin gt dateMaintenant)}">
-                                    <td class="bg-success"> EN COURS </td>
-                                </c:when>
                                 <c:when test="${d.dateFin lt dateMaintenant}">
                                     <td class="bg-danger"> TERMINÉ </td>
                                 </c:when>
+                               <c:when test="${d.dateDebut gt dateMaintenant}">
+                                   <td> PROCHAINEMENT </td>
+                               </c:when>
                                 <c:otherwise>
-                                    <td> EN ATTENTE </td>
+                                    <td class="bg-success"> EN COURS </td>
                                 </c:otherwise>
                             </c:choose>
                         </tr>
