@@ -165,11 +165,6 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
         PreparedStatement paramStm = null;
 
         try {
-<<<<<<< HEAD
-                paramStm = cnx.prepareStatement(req);
-                paramStm.setInt(1, x.getIdInscriptionDefi());
-=======
->>>>>>> issue64
                 paramStm = cnx.prepareStatement(req);
                 paramStm.setInt(1, x.getIdInscriptionDefi());
 
