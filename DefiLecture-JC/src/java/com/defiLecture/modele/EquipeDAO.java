@@ -241,7 +241,7 @@ public class EquipeDAO extends DAO<Equipe>{
     }
     
     public List<Equipe> findAllByNom(String nom) throws SQLException {
-        List<Equipe> liste = new LinkedList<>();
+        List<Equipe> liste = new ArrayList<>();
         String req = "SELECT * FROM equipe WHERE `NOM` LIKE ?";
         PreparedStatement paramStm = null;
         try {

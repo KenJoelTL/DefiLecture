@@ -41,7 +41,7 @@
  <c:set var="listeEquipes" value="${daoEquipe.findAll()}"></c:set>
  <c:if test="${not empty param.recherche}">
      <c:set var="listeEquipes" value="${daoEquipe.findAllByNom(param.recherche)}"></c:set>
-     <c:set var="listeComptes" value="${daoCompte.findAllByName(param.recherche)}"></c:set>
+     <c:set var="listeComptes" value="${daoCompte.findAllByNom(param.recherche)}"></c:set>
  </c:if>
 
         <div class="row scores-row">
