@@ -165,9 +165,13 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
         PreparedStatement paramStm = null;
 
         try {
+<<<<<<< HEAD
                 paramStm = cnx.prepareStatement(req);
                 paramStm.setInt(1, x.getIdInscriptionDefi());
+=======
+>>>>>>> issue64
                 paramStm = cnx.prepareStatement(req);
+                paramStm.setInt(1, x.getIdInscriptionDefi());
 
                 int nbLignesAffectees= paramStm.executeUpdate();
                 
@@ -318,7 +322,7 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
                 while(resultat.next()){
 
                     InscriptionDefi i = new InscriptionDefi();
-
+                    
                     i.setIdInscriptionDefi(resultat.getInt("ID_INSCRIPTION_DEFI"));
                     i.setIdCompte(resultat.getInt("ID_COMPTE"));
                     i.setIdDefi(resultat.getInt("ID_DEFI"));
