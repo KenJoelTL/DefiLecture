@@ -29,6 +29,8 @@
 <%@ page pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<script language="javascript" src="./script/jsPageListeEquipe.js"></script>
+
 <jsp:useBean id="connexion" scope="page" class="jdbc.Connexion"></jsp:useBean>  
 
 <jsp:useBean id="daoEquipe" scope="page" class="com.defiLecture.modele.EquipeDAO">
@@ -48,17 +50,14 @@
     <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 liste-equipes-col">
         <h2>Liste des &eacute;quipages</h2>  
 
-        <c:if test="${!empty requestScope.data['succesAnnulation']}">
-            <div class="alert alert-success"><strong>${requestScope.data['succesAnnulation']}</strong></div>
-        </c:if>
-        <c:if test="${!empty requestScope.data['succesDemande']}">
-            <div class="alert alert-success"><strong>${requestScope.data['succesDemande']}</strong></div>
-        </c:if>
+ 
+        <div class="alert alert-success"><strong id="msg">${requestScope.data['succesDemande']}</strong></div>
+        
 
         <table class="table">
             <thead>
                 <tr>
-                    <th>Nom</th>
+                    <th>Nom</th> 
                     <th>&Eacute;tat de la demande</th>
                 </tr>
             </thead>
@@ -70,23 +69,26 @@
                         <c:if test="${(compteConnecte.idEquipe eq -1) and (equipe.nbMembres lt 3)}">
                             <td><a href="pageEquipe.do?tache=afficherPageEquipe&idEquipe=${equipe.idEquipe}">${equipe.nom}</a></td>
 
-                            <td>
+                            <td id="Lien-${i}">
                                 <c:set var="demande" value="${daoDemEq.findByIdCompteEquipe(compteConnecte.idCompte,equipe.idEquipe)}"/>          
                                 <c:choose>
 
                                     <c:when test="${empty demande or demande.statutDemande eq 0}">
-                                        <a href="demande.do?tache=effectuerDemandeAdhesionEquipe&idCompte=${compteConnecte.idCompte}&idEquipe=${equipe.idEquipe}">
+                                        <a id="demandeLien-${i}" onclick="Demande(${compteConnecte.idCompte},${equipe.idEquipe},${i})" >
                                             Envoyer une demande d'adh&eacute;sion
                                         </a>
                                     </c:when>
                                     <c:otherwise>
-                                        <a href="refuser.do?tache=effectuerSuppressionDemandeAdhesion&idDemandeEquipe=${demande.idDemandeEquipe}">Annuler la demande d'adh&eacute;sion</a>
+                                        <a id="annulationLien-${i}" onclick="Annulation(${demande.idDemandeEquipe},${compteConnecte.idCompte},${equipe.idEquipe},${i})">
+                                            Annuler la demande d'adh&eacute;sion
+                                        </a>
                                     </c:otherwise>
                                 </c:choose>
 
                             </td>    
                         </c:if>
                     </tr>
+                    <c:set var="i" value="${i + 1}"/>
                 </c:forEach>  
             </tbody>
 

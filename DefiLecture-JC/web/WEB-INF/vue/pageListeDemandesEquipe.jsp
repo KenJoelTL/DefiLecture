@@ -30,59 +30,43 @@
 <%@page import="jdbc.Connexion"%>
 <%@page pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<script language="javascript" src="./script/jsPageListeDemandeEquipe.js"></script>
 <c:if test="${empty sessionScope.connecte or (!(sessionScope.role eq 2) and (requestScope.ordre eq 'recu'))}">
     <jsp:forward page="*.do?tache=afficherPageAccueil"></jsp:forward>
 </c:if>
 
-<!-- Faire la connexion -->
-<jsp:useBean id="connexion" class="jdbc.Connexion"/>
 
-<!-- Cree les DAOs -->
-<jsp:useBean id="eqpDao" class="com.defiLecture.modele.EquipeDAO" scope="page">
-    <jsp:setProperty name="eqpDao" property="cnx" value="${connexion.connection}"/>
-</jsp:useBean>
-<jsp:useBean id="demandeEqDao" class="com.defiLecture.modele.DemandeEquipeDAO" scope="page">
-    <jsp:setProperty name="demandeEqDao" property="cnx" value="${connexion.connection}"/>
-</jsp:useBean>
+<%  Connection cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
+    DemandeEquipeDAO demandeEqDao = new DemandeEquipeDAO(cnx);
+    EquipeDAO eqpDao = new EquipeDAO(cnx);
 
-<!-- Si l'ordre est recu -->
-<c:choose>
-    <c:when test="${param.ordre eq 'recu'}">
-        <!-- Cree les DAOs -->
-        <jsp:useBean id="cptDao" class="com.defiLecture.modele.CompteDAO" scope="page">
-            <jsp:setProperty name="cptDao" property="cnx" value="${connexion.connection}"/>
-        </jsp:useBean>
-
-        <!-- Declarer les variables-->
-        <jsp:useBean id="compte" class="com.defiLecture.modele.Compte" scope="page"/>
-        <jsp:useBean id="equipe" class="com.defiLecture.modele.Equipe" scope="page"/>
-        <!-- Si l'equipe n'est pas scpecifier -->
-        <c:if test="${empty param.idEquipe}">
-            <c:set var="compte" value="${cptDao.read(sessionScope.connecte)}"/>
-        </c:if>
-        
-        <c:set var="equipe" value="${eqpDao.read(compte.getIdEquipe())}" scope="page"/>
-        <c:set var="listeDemandes" value="${demandeEqDao.findByIdEquipeStatutDemande(compte.getIdEquipe(),DemandeEquipe.EN_ATTENTE)}"/>
-    </c:when>
-        
-    <c:otherwise>
-        <c:set var="listeDemandes" value="${demandeEqDao.findByIdCompte(sessionScope.connecte)}"/>
-    </c:otherwise>
-</c:choose>
+    if("recu".equals(request.getParameter("ordre"))){
+        CompteDAO cptDao = new CompteDAO(cnx);
+        Compte compte = new Compte();
+        Equipe equipe = new Equipe();
+        if(request.getParameter("idEquipe")==null){
+            compte = cptDao.read((int)session.getAttribute("connecte"));
+        }
+        equipe = eqpDao.read(compte.getIdEquipe());
+        pageContext.setAttribute("cptDao", cptDao);
+        pageContext.setAttribute("equipe", equipe);
+        pageContext.setAttribute("listeDemandes", demandeEqDao.findByIdEquipeStatutDemande(compte.getIdEquipe(),DemandeEquipe.EN_ATTENTE));
+    }
+    else{
+        pageContext.setAttribute("equipeDao", eqpDao);
+        pageContext.setAttribute("listeDemandes", demandeEqDao.findByIdCompte((int)session.getAttribute("connecte")));
+    }
+%>
 
 
  <div class="row demandes-row"> 
     <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 demandes-col">
         <h2>Liste des demandes</h2>
-        <c:if test="${!empty requestScope.data['erreurDemande']}">
-            <div class="alert alert-danger"><strong>${requestScope.data['erreurDemande']}</strong></div>
-        </c:if>
-        <c:if test="${!empty requestScope.data['succesDemande']}">
-            <div class="alert alert-success"><strong>${requestScope.data['succesDemande']}</strong></div>
-        </c:if>
-        <c:if test="${!empty requestScope.data['avertissementDemande']}">
-            <div class="alert alert-warning"><strong>${requestScope.data['avertissementDemande']}</strong></div>
-        </c:if>
+        
+        <div id='notification'></div>
+        
+        
           <c:if test="${(param.ordre eq 'recu') and (sessionScope.role eq Compte.CAPITAINE) }">
               <c:choose>
                   <c:when test="${ equipe.nbMembres lt Equipe.NB_MAX_MEMBRES }">
@@ -97,15 +81,17 @@
               </thead>
 
               <tbody>
+               <c:set var="i" value="0"/>
                <c:forEach items="${listeDemandes}" var="demande">
                  <c:set var="auteur" value="${cptDao.read(demande.idCompte)}"/>
-                 <tr>
+                 <tr id='utilisateur-${i}'>
                     <td>Demande envoy&eacute;e par ${auteur.prenom} ${auteur.nom}</td>
                     <td>
-                        <a href="accepter.do?tache=effectuerAcceptationDemandeAdhesion&idDemandeEquipe=${demande.idDemandeEquipe}">Accepter</a>
-                        <a href="refuser.do?tache=effectuerSuppressionDemandeAdhesion&idDemandeEquipe=${demande.idDemandeEquipe}&ordre=recu">Refuser</a>
+                        <a id="btnAccepter" onclick="Accepter(${demande.idDemandeEquipe},${i})">Accepter</a>
+                        <a id="btnRefuser" onclick="Refuser(${demande.idDemandeEquipe},${i})">Refuser</a>
                     </td>
                  </tr>
+                 <c:set var="i" value="${i + 1}"/>
                </c:forEach>
               </tbody>
 
