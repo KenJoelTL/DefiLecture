@@ -132,9 +132,17 @@
                     <h1>Ajouter une lecture</h1>
                     <form action="*.do" method="post">
                          
-                        <div class="form-group">
-                            <label for="titre">Titre* : </label>
-                            <input class="form-control" type="text" name="titre" required />
+                                                <div class="form-group">
+                        <input list="browsers" name="titre" required/></label>
+                        <datalist id="browsers">                        <jsp:useBean id="connexion" scope="page" class="jdbc.Connexion"></jsp:useBean>  
+                            <jsp:useBean id="dao" scope="page" class="com.defiLecture.modele.LectureDAO">
+                            <jsp:setProperty name="dao" property="cnx" value="${connexion.connection}"></jsp:setProperty>
+                            </jsp:useBean>
+                            <c:set var="listeLectures" value="${dao.findByIdCompteOrderByDate(sessionScope.connecte)}"/>
+                            <c:forEach items="${listeLectures}" var="l">
+                                <option value=${l.titre}>   
+                                </c:forEach> 
+                            </datalist>
                         </div>
                 
                         
