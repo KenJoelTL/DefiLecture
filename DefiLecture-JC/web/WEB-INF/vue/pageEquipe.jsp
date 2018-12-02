@@ -79,11 +79,11 @@
                  
                 <c:if test="${(!empty sessionScope.connecte) and (compteConnecte.idEquipe eq equipe.idEquipe) and ((sessionScope.role eq 2) or (sessionScope.role eq 4))}">
                     <a id="parametreEquipe" href="depart.do?tache=afficherPageModificationEquipe&idEquipe=${equipe.idEquipe}">
-                        Paramètres <span class="glyphicon glyphicon-cog"></span>
+                        Paramtres <span class="glyphicon glyphicon-cog"></span>
                     </a>
                 </c:if>
                     
-                    <h2>Membres de l'équipe</h2>
+                    <h2>Membres de  <% out.println(application.getAttribute("vocEquipe1"));%> </h2>
 
                     <table class='table table-hover'>
                   <thead>
@@ -95,7 +95,7 @@
                   <tbody>
                     <c:forEach items="${listeMembres}" var="membre">      
                     <tr>
-                      <td>${membre.prenom} «${membre.pseudonyme}» ${membre.nom}</td>
+                      <td>${membre.prenom} ${membre.pseudonyme} ${membre.nom}</td>
                       <td>
                           <c:set var="contribution" value="${daoDemEqp.findByIdCompteEquipe(membre.idCompte,equipe.idEquipe)}"></c:set>
                         <div class="progress">
