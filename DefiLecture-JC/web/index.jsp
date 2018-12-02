@@ -29,6 +29,11 @@
 <%@page import="com.theme.theme"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:if test="${ !empty sessionScope.connecte}">
+<% CompteDAO dao = new CompteDAO(Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
+    pageContext.setAttribute("compteConnecte", dao.read(session.getAttribute("connecte").toString())); %>
+</c:if> 
+
 <%
     theme t= new theme();
     Iterator<Map.Entry<String, String>> it = t.getTheme().entrySet().iterator();
