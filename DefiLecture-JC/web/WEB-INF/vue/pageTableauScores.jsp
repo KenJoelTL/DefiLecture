@@ -42,7 +42,7 @@
                       <thead>
                         <tr>
                           <th>Rang</th>
-                          <th>Nom de l'équipe</th>
+                          <th>Nom <% out.println(application.getAttribute("vocEquipe1"));%> </th>
                           <th style="text-align:center">Doublons</th>
                         </tr>
                       </thead>
