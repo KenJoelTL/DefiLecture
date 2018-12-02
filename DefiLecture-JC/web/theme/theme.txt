@@ -1,7 +1,7 @@
 //Bienvenue dans les réglages !
-//Configurez l'application comme bon vous semble
+//Configurez l'application comme bon vous semble.
 //D'abord, quelques petites regles :
-//1 - Toutes les lignes contenant par//sont ignorées!
+//1 - Toutes les lignes commençant  par // sont ignorées!
 //2- Un élément par ligne
 
 
@@ -17,9 +17,22 @@ vocParticipant= 	Sirène
 
 vocParticipants= 	Sirènes
 
-vocEquipe= 		Équipage
 
-vocEquipePluriel= 	Équipages
+// Mots liés à l'équipe
+
+vocEquipe= 		équipage
+
+vocEquipePluriel= 	équipages
+
+vocEquipe1= 		de l'équipage
+
+vocEquipe2= 		d'un équipage
+
+vocEquipe3=		un équipage
+
+vocEquipeComplete=	Votre équipage est plein!
+
+//
 
 vocChef= 		Capitaine
 
