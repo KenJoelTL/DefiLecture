@@ -103,7 +103,7 @@
                         </div> 
                         
                         <div class="form-group">
-                             <label for="devenirCapitaine"><input id="chkDevenirCapitaine" type="checkbox" name="devenirCapitaine" value="1">Je désire être <% out.println(application.getAttribute("vocChef"));%> d'une équipe (employé ou tuteur)</label>
+                             <label for="devenirCapitaine"><input id="chkDevenirCapitaine" type="checkbox" name="devenirCapitaine" value="1">Je désire être <% out.println(application.getAttribute("vocChef"));%> <% out.println(application.getAttribute("vocEquipe2"));%> (employé ou tuteur)</label>
                         </div> 
                         
                         <input type="hidden" name="tache" value="effectuerInscription">
