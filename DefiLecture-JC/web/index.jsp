@@ -111,7 +111,7 @@
                                     </li>                                              
                                 </c:when>
                                 <c:otherwise>
-                                    <li><a href="creationEquipe.do?tache=afficherPageCreationEquipe">Cr&eacute;er une équipe</a></li>                                            
+                                    <li><a href="creationEquipe.do?tache=afficherPageCreationEquipe">Cr&eacute;er <% out.println(application.getAttribute("vocEquipe3"));%></a></li>                                            
                                 </c:otherwise>
                             </c:choose>
                         </c:when>
@@ -121,11 +121,11 @@
                                     <c:choose>
                                         <c:when test="${compteConnecte.idEquipe > -1}">
                                             <li><a href="affichagePageEquipe.do?tache=afficherPageEquipe&idEquipe=${compteConnecte.idEquipe}">
-                                                    Page de l'équipe</a>
+                                                    Page <% out.println(application.getAttribute("vocEquipe1"));%></a>
                                             </li>                        
                                         </c:when>
                                         <c:otherwise>
-                                            <li><a href="joindreEquipe.do?tache=afficherPageListeEquipes">Joindre une équipe</a></li>                                              
+                                            <li><a href="joindreEquipe.do?tache=afficherPageListeEquipes">Joindre<% out.println(application.getAttribute("vocEquipe3"));%></a></li>                                              
                                         </c:otherwise>
                                     </c:choose>
                                 </c:when>
