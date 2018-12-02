@@ -53,7 +53,7 @@
         <div class='row'> 
         
             <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 page-equipe-col configuration-equipe">
-                <h1>Configuration de l'équipe</h1>
+                <h1>Configuration de <% out.println(application.getAttribute("vocEquipe1"));%> </h1>
                 <c:if test="${!empty requestScope.data['succesNom']}">
                     <div class="alert alert-danger"><strong>${requestScope.data['succesNom']}</strong></div>
                 </c:if>
