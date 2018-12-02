@@ -104,7 +104,7 @@
                             <c:choose>
                                 <c:when test="${compteConnecte.idEquipe gt -1}">
                                     <li><a href="affichagePageEquipe.do?tache=afficherPageEquipe&idEquipe=${compteConnecte.idEquipe}">
-                                            Page de l'équipe</a>
+                                            Page <% out.println(application.getAttribute("vocEquipe1"));%></a>
                                     </li>                        
                                     <li><a href="joindreEquipe.do?tache=afficherPageListeDemandesEquipe&ordre=recu">
                                             Acc&eacute;der aux demandes</a>
