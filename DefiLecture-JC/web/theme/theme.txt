@@ -20,7 +20,7 @@ vocParticipants= 	Sirènes
 
 // Mots liés à l'équipe
 
-vocEquipe= 		équipage
+vocEquipe= 		    équipage
 
 vocEquipePluriel= 	équipages
 
@@ -28,25 +28,28 @@ vocEquipe1= 		de l'équipage
 
 vocEquipe2= 		d'un équipage
 
-vocEquipe3=		un équipage
+vocEquipe3=		    un équipage
+vocEquipe4= 		l'équipage
 
 vocEquipeComplete=	Votre équipage est plein!
 
+vocEquipeNouvelle = nouvel équipage
+
 //
 
-vocChef= 		Capitaine
+vocChef= 		    Capitaine
 
 vocChefPluriel= 	Capitaines
 
-vocPoint= 		Doublon
+vocPoint= 		    Doublon
 
-vocPoints=		Doublons
+vocPoints=		    Doublons
 
-vocBanque= 		Tresorerie
+vocBanque= 		    Trésorerie
 
-vocConnexion=           À l'abordage!
+vocConnexion=       À l'abordage!
 
-vocCode=                Code du Pirate
+vocCode=            Code du Pirate
 
 
 
@@ -90,8 +93,8 @@ cssImageDuree45=        "../images/45.png"
 cssImageduree60=        "../images/60.png"
 
 
-cssCouleurNavBack=      black
+cssCouleurNavBack=      #e9dcc8
 
-cssCouleurBack=         black
+cssCouleurBack=         #e9dcc8
 
 cssCouleurNavText=      white
