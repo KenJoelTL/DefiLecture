@@ -92,7 +92,6 @@ ul.nav.navbar-nav{
 
 a.dropdown-toggle{
     background-color: cssCouleurNavBack !important;
-    max-height: 10px;
 }
 div#optionsNavigation {
   max-height: 100%!important;
@@ -108,6 +107,7 @@ ul.dropdown-menu {
 }
 
   .navbar-nav .open .dropdown-menu li a:hover {
+      background : none!important;
   }
 
   #facebook {
@@ -131,7 +131,7 @@ ul.dropdown-menu {
     float: none;
     width: auto;
     margin-top: 0;
-    background-color: cssCouleurNavBack !important;
+    background-color: transparent;
     border: 0;
     box-shadow: none;
   }
@@ -1031,6 +1031,28 @@ background-image: url(cssImageBackPrincipal);
     border-radius: 4px;
     padding-top: 2px;
 }
+
+/*Page de configuration*/
+#configSite input{
+    font-size: 18px;
+}
+#configSite #panelConfig, #panelReset{
+    margin: 5% 5% 0 15%;
+    min-width: 486px;
+}
+#configSite #reset{
+    margin-left: 42%;
+}
+#configSite #resetConfirm{
+    margin-left: 37%;
+    text-align: center;
+}
+#configSite #enregistrerConfig{
+    margin: 2% 0 0 42%;
+}
+#configSite .dateConfig{
+    margin-bottom: 2%;
+} 
 
 
 
