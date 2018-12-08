@@ -93,7 +93,7 @@ cssImageDuree45=        "../images/45.png"
 cssImageduree60=        "../images/60.png"
 
 
-cssCouleurNavBack=      #e9dcc8
+cssCouleurNavBack=      black
 
 cssCouleurBack=         #e9dcc8
 
