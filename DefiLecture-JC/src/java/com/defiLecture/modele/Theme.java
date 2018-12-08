@@ -19,7 +19,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.theme;
+package com.defiLecture.modele;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -32,7 +32,7 @@ import java.util.*;
  *
  * @author AC
  */
-public class theme {
+public class Theme {
     private  String ReadFile(String nomFile) throws FileNotFoundException, IOException {
         File f = new File(this.getURL(nomFile));
         FileWriter fw;
@@ -52,7 +52,7 @@ public class theme {
     
     
     public String getURL(String nomFile){
-    return this.getClass().getResource("../../../../"+nomFile).toString().replace("file:","");
+    return this.getClass().getResource("../../../../../"+nomFile).toString().replace("file:","");
     }
     public void Theme(){
     }

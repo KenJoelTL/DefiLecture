@@ -26,7 +26,7 @@
 <%@page import="com.defiLecture.modele.CompteDAO"%>
 <%@page import="jdbc.Connexion"%>
 <%@page import="jdbc.Config"%>
-<%@page import="com.theme.theme"%>
+<%@page import="com.defiLecture.modele.Theme"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:if test="${ !empty sessionScope.connecte}">
@@ -35,7 +35,7 @@
 </c:if> 
 
 <%
-    theme t= new theme();
+    Theme t= new Theme();
     Iterator<Map.Entry<String, String>> it = t.getTheme().entrySet().iterator();
     while (it.hasNext()) {
         Map.Entry<String, String> pair = it.next();
