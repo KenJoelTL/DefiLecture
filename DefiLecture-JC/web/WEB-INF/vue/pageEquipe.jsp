@@ -95,7 +95,7 @@
                   <tbody>
                     <c:forEach items="${listeMembres}" var="membre">      
                     <tr>
-                      <td>${membre.prenom} «${membre.pseudonyme}» ${membre.nom}</td>
+                    <td><a href="?tache=afficherPageProfil&id=${membre.idCompte}">${membre.prenom} «${membre.pseudonyme}» ${membre.nom}</a></td>
                       <td>
                           <c:set var="contribution" value="${daoDemEqp.findByIdCompteEquipe(membre.idCompte,equipe.idEquipe)}"></c:set>
                         <div class="progress">

@@ -197,7 +197,7 @@
                     <span class="glyphicon glyphicon-cog"></span>
                     <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                      <li><a href='details.do?tache=afficherPageModificationCompte&id=${sessionScope.connecte}'>
+                      <li><a href='details.do?tache=afficherPageProfil&id=${sessionScope.connecte}'>
                               <span class="glyphicon glyphicon-user"></span> Mon Compte</a>
                       </li>
                       <li><a href='*.do?tache=effectuerDeconnexion'>

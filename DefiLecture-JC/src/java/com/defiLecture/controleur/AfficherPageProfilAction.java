@@ -38,12 +38,7 @@ public class AfficherPageProfilAction implements Action, RequestAware, SessionAw
     
     @Override
      public String execute() {
-    
-        if(session.getAttribute("connecte") != null && session.getAttribute("role") != null 
-        && ( ((int)session.getAttribute("role")== Compte.CAPITAINE) 
-        ||   ((int)session.getAttribute("role")== Compte.PARTICIPANT)) )
-            request.setAttribute("vue", "pageProfil.jsp");
-        
+        request.setAttribute("vue", "pageProfil.jsp");
         return "/index.jsp";
     }
 
