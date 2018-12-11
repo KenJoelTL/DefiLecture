@@ -112,7 +112,7 @@
             </table>
               </c:when>
                   <c:otherwise>
-                      <div class="alert alert-warning" style="text-align:center">Votre &eacute;quipage est plein<div>
+                      <div class="alert alert-warning" style="text-align:center"><% out.println(application.getAttribute("vocEquipeComplete"));%> <div>
                   </c:otherwise>
               </c:choose>
           </c:if>

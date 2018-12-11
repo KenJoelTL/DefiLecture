@@ -1,0 +1,100 @@
+//Bienvenue dans les réglages !
+//Configurez l'application comme bon vous semble.
+//D'abord, quelques petites regles :
+//1 - Toutes les lignes commençant  par // sont ignorées!
+//2- Un élément par ligne
+
+
+/////////////////////////////////
+//VOCABULAIRE DE L'APPLICATION///
+/////////////////////////////////
+
+vocTheme=Pirate
+
+vocThemePluriel=Pirates
+
+vocParticipant=Sirène
+
+vocParticipants=Sirènes
+
+
+// Mots liés à l'équipe
+
+vocEquipe=équipage
+
+vocEquipePluriel=équipages
+
+vocEquipe1=de l'équipage
+
+vocEquipe2=d'un équipage
+
+vocEquipe3=un équipage
+vocEquipe4=l'équipage
+
+vocEquipeComplete=Votre équipage est plein!
+
+vocEquipeNouvelle =nouvel équipage
+
+//
+
+vocChef=Capitaine
+
+vocChefPluriel=Capitaines
+
+vocPoint=Doublon
+
+vocPoints=Doublons
+
+vocBanque=Trésorerie
+
+vocConnexion=À l'abordage!
+
+vocCode=Code du Pirate
+
+
+
+/////////////////////////////////
+////TEXTE DE L'APPLICATION///////
+/////////////////////////////////
+
+txtCodeConduite=codeConduite.txt
+
+txtContributeurs=contributeurs.txt
+
+txtGlossaire=glossaire.txt
+
+txtMarcheASuivre=marcheASuivre.txt
+
+
+
+/////////////////////////////////
+/////////////CSS/////////////////
+/////////////////////////////////
+//Rajoutez vos clefs dans defiLectureStylesPattern.css
+
+cssImageLogo="../images/Logo_DL_INV_700x300.png"
+
+cssImageAccueilCol="../images/Logo_DL_NB_700x300.png"
+
+cssImageBackConnection="../images/index_poste.jpg"
+
+cssImageBackPrincipal="../images/accueil_poste.jpg"
+
+cssImageConfirmer="../images/CONFIRMER.png"
+
+cssImageIcone="../images/tete-de-mort-nb.png"
+
+cssImageDuree15="../images/15.png"
+
+cssImageDuree30="../images/30.png"
+
+cssImageDuree45="../images/45.png"
+
+cssImageduree60="../images/60.png"
+
+
+cssCouleurNavBack=black
+
+cssCouleurBack=#e9dcc8
+
+cssCouleurNavText=white

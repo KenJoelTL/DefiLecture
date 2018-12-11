@@ -63,7 +63,6 @@
                       <td>${lecture.dateInscription} </td>
                       <td>${lecture.estObligatoire eq 0 ? "NON" : "OUI"}</td>
                     </tr>
-
           
                 </c:forEach>
 
