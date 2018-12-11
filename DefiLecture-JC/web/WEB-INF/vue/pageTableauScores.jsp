@@ -57,7 +57,7 @@
                       <thead>
                         <tr>
                           <th>Rang</th>
-                          <th>Nom de l'équipage</th>
+                          <th>Nom <% out.println(application.getAttribute("vocEquipe1"));%> </th>
                           <th style="text-align:center">Doublons</th>
                         </tr>
                       </thead>
@@ -92,7 +92,7 @@
                             <tbody>
                                 <c:forEach items="${listeComptes}" var="compte">
                                 <tr>
-                                    <td><a href="pageEquipe.do?tache=afficherPageEquipe&idEquipe=${compte.idEquipe}">${compte.prenom} «${compte.pseudonyme}» ${compte.nom}</a></td>
+                                    <td><a href="pageEquipe.do?tache=afficherPageProfil&id=${compte.idCompte}">${compte.prenom} «${compte.pseudonyme}» ${compte.nom}</a></td>
                                     <td>
                                         <c:set var="equipe" value="${daoEquipe.read(compte.idEquipe)}"/>
                                         <c:set var="contribution" value="${daoDemEqp.findByIdCompteEquipe(compte.idCompte,equipe.idEquipe)}"></c:set>

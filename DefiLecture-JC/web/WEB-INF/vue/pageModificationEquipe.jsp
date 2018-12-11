@@ -72,7 +72,7 @@
         <div class='row'> 
         
             <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 page-equipe-col configuration-equipe">
-                <h1>Configuration de l'&eacute;quipage</h1>
+                <h1>Configuration de <% out.println(application.getAttribute("vocEquipe1"));%> </h1>
                 <c:if test="${!empty requestScope.data['succesNom']}">
                     <div class="alert alert-danger"><strong>${requestScope.data['succesNom']}</strong></div>
                 </c:if>
@@ -102,7 +102,7 @@
                 </c:if>
                 <form action="modificationEquipe.do" method="post">
                     <div class="form-group">
-                        <label for="nom">Nom de l'&eacute;quipage* :</label>
+                        <label for="nom">Nom  <% out.println(application.getAttribute("vocEquipe1"));%> :</label>
                         <input type="text" class="form-control" id="nom" value="${equipe.nom}" 
                                placeholder="Entrez le nouveau nom de votre &eacute;quipage" name="nom" ${permissionAccordee ? 'required': 'disabled'}/>
                     </div>
@@ -143,10 +143,10 @@
                                 <td>
                                     <c:choose>
                                         <c:when test="${contribution.statutDemande eq 0}">                             
-                                            <a href="*.do?tache=effectuerReaffectationMembreEquipe&idCompte=${membre.idCompte}&idEquipe=${equipe.idEquipe}">R&eacute;afecter &agrave; l'&eacute;quipage</a>
+                                            <a href="*.do?tache=effectuerReaffectationMembreEquipe&idCompte=${membre.idCompte}&idEquipe=${equipe.idEquipe}">R&eacute;afecter &agrave;<% out.println(application.getAttribute("vocEquipe4"));%></a>
                                         </c:when>
                                         <c:otherwise>
-                                            <a href="*.do?tache=effectuerSuspensionMembreEquipe&idCompte=${membre.idCompte}&idEquipe=${equipe.idEquipe}">Suspendre de l'&eacute;quipage</a>
+                                            <a href="*.do?tache=effectuerSuspensionMembreEquipe&idCompte=${membre.idCompte}&idEquipe=${equipe.idEquipe}">Suspendre <% out.println(application.getAttribute("vocEquipe1"));%></a>
                                         </c:otherwise>
                                     </c:choose>
                                 </td>
@@ -154,7 +154,7 @@
                                 <c:if test="${permissionAccordee and (sessionScope.connecte ne membre.idCompte)}">
                                 <td>
                                     <a href="depart.do?tache=effectuerDepartEquipe&idCompte=${membre.idCompte}&idEquipe=${equipe.idEquipe}">
-                                        Retirer de l'équipage
+                                        Retirer <% out.println(application.getAttribute("vocEquipe1"));%>
                                     </a>
                                 </td>
                             </td>
@@ -164,7 +164,7 @@
                     </tbody>
                 </table>
         
-        <a href="*.do?tache=afficherPageEquipe&idEquipe=${equipe.idEquipe}" class="retour"><span class="glyphicon glyphicon-circle-arrow-left"></span>retour à la page d'équipe</a>
+        <a href="*.do?tache=afficherPageEquipe&idEquipe=${equipe.idEquipe}" class="retour"><span class="glyphicon glyphicon-circle-arrow-left"></span>retour à la page <% out.println(application.getAttribute("vocEquipe1"));%></a>
         
             </div>
         </div>

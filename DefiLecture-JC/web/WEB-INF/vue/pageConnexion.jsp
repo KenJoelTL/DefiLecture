@@ -61,7 +61,7 @@
             </a>
             <p id="msgMDPoublie">Veuillez contacter l'administrateur de l'application pour qu'il puisse réinitialiser votre mot de passe.</p>
             <input type="hidden" name="tache" value="effectuerConnexion">
-            <button type="submit" class="btn btn-danger">À L'ABORDAGE!</button>
+            <button type="submit" class="btn btn-danger"><% application.getAttribute("vocConnexion");%></button>
             
         </form>
       </div>
