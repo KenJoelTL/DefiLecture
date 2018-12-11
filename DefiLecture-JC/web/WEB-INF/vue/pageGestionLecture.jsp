@@ -16,9 +16,7 @@
 -->
 
 <%-- 
-    Document   : pageGestionLecture
-    Created on : 2017-10-24, 13:08:08
-    Author     : Charles
+     
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -58,8 +56,6 @@
                 <c:forEach items="${listeLectures}" var="l">
                     <tr>
                       <td><c:out value="${l.titre}"/></td> 
-                      <!--Dans la zone texte de la creation lecture,une fois que le script y est inséré,il n'aura 
-                       pas d'effet,mais va juste s'afficher dans la liste de lecture comme un simple texte.-->
                       <td>${l.dureeMinutes} minutes</td>
                       <td>${l.dateInscription} </td>
                       <td>${l.estObligatoire eq 0 ? "NON" : "OUI"}</td>
