@@ -57,13 +57,13 @@
               <tbody>
                 <c:forEach items="${listeLectures}" var="l">
                     <tr>
-                      <td>${l.titre}</td>
+                      <td><c:out value="${l.titre}"/></td> 
+                      <!--Dans la zone texte de la creation lecture,une fois que le script y est inséré,il n'aura 
+                       pas d'effet,mais va juste s'afficher dans la liste de lecture comme un simple texte.-->
                       <td>${l.dureeMinutes} minutes</td>
                       <td>${l.dateInscription} </td>
                       <td>${l.estObligatoire eq 0 ? "NON" : "OUI"}</td>
-                      <td>
-                          <a href="*.do?tache=effectuerSuppressionLecture&idLecture=${l.idLecture}">Supprimer</a>
-                      </td>
+                      <td><a href="*.do?tache=effectuerSuppressionLecture&idLecture=${l.idLecture}">Supprimer</a></td>
                     </tr>
                 </c:forEach>
 

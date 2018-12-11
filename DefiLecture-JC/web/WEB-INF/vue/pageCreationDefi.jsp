@@ -15,9 +15,9 @@
     along with DefiLecture.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <%-- 
-    Document   : defi
-    Created on : 2017-10-22, 14:22:35
-    Author     : Charles
+    Document   : pageGestionLecture
+    Created on : 2017-10-24, 13:08:08
+    Author     : Patrick Beya et Jean-pascal Beon pour Double submit et injection javascripts
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
