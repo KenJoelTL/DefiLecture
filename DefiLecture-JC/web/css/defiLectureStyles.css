@@ -1087,7 +1087,6 @@ background-image: url("../images/accueil_poste.jpg");
     padding: 2em;
 }
 .contenuEnteteProfil h1{
-    font-family: Acme;
     position: relative;
     float:left;
     margin: 0.7em 0em 0em 1em;
