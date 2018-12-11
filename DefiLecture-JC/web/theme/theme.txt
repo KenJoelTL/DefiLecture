@@ -9,47 +9,47 @@
 //VOCABULAIRE DE L'APPLICATION///
 /////////////////////////////////
 
-vocTheme= 		Pirate
+vocTheme=Pirate
 
-vocThemePluriel= 	Pirates
+vocThemePluriel=Pirates
 
-vocParticipant= 	Sirène
+vocParticipant=Sirène
 
-vocParticipants= 	Sirènes
+vocParticipants=Sirènes
 
 
 // Mots liés à l'équipe
 
-vocEquipe= 		    équipage
+vocEquipe=équipage
 
-vocEquipePluriel= 	équipages
+vocEquipePluriel=équipages
 
-vocEquipe1= 		de l'équipage
+vocEquipe1=de l'équipage
 
-vocEquipe2= 		d'un équipage
+vocEquipe2=d'un équipage
 
-vocEquipe3=		    un équipage
-vocEquipe4= 		l'équipage
+vocEquipe3=un équipage
+vocEquipe4=l'équipage
 
-vocEquipeComplete=	Votre équipage est plein!
+vocEquipeComplete=Votre équipage est plein!
 
-vocEquipeNouvelle = nouvel équipage
+vocEquipeNouvelle =nouvel équipage
 
 //
 
-vocChef= 		    Capitaine
+vocChef=Capitaine
 
-vocChefPluriel= 	Capitaines
+vocChefPluriel=Capitaines
 
-vocPoint= 		    Doublon
+vocPoint=Doublon
 
-vocPoints=		    Doublons
+vocPoints=Doublons
 
-vocBanque= 		    Trésorerie
+vocBanque=Trésorerie
 
-vocConnexion=       À l'abordage!
+vocConnexion=À l'abordage!
 
-vocCode=            Code du Pirate
+vocCode=Code du Pirate
 
 
 
@@ -57,13 +57,13 @@ vocCode=            Code du Pirate
 ////TEXTE DE L'APPLICATION///////
 /////////////////////////////////
 
-txtCodeConduite=	codeConduite.txt
+txtCodeConduite=codeConduite.txt
 
-txtContributeurs=	contributeurs.txt
+txtContributeurs=contributeurs.txt
 
-txtGlossaire=		glossaire.txt
+txtGlossaire=glossaire.txt
 
-txtMarcheASuivre= 	marcheASuivre.txt
+txtMarcheASuivre=marcheASuivre.txt
 
 
 
@@ -72,29 +72,29 @@ txtMarcheASuivre= 	marcheASuivre.txt
 /////////////////////////////////
 //Rajoutez vos clefs dans defiLectureStylesPattern.css
 
-cssImageLogo=           "../images/Logo_DL_INV_700x300.png"
+cssImageLogo="../images/Logo_DL_INV_700x300.png"
 
-cssImageAccueilCol=     "../images/Logo_DL_NB_700x300.png"
+cssImageAccueilCol="../images/Logo_DL_NB_700x300.png"
 
-cssImageBackConnection= "../images/index_poste.jpg"
+cssImageBackConnection="../images/index_poste.jpg"
 
-cssImageBackPrincipal=  "../images/accueil_poste.jpg"
+cssImageBackPrincipal="../images/accueil_poste.jpg"
 
-cssImageConfirmer=      "../images/CONFIRMER.png"
+cssImageConfirmer="../images/CONFIRMER.png"
 
-cssImageIcone=          "../images/tete-de-mort-nb.png"
+cssImageIcone="../images/tete-de-mort-nb.png"
 
-cssImageDuree15=        "../images/15.png"
+cssImageDuree15="../images/15.png"
 
-cssImageDuree30=        "../images/30.png"
+cssImageDuree30="../images/30.png"
 
-cssImageDuree45=        "../images/45.png"
+cssImageDuree45="../images/45.png"
 
-cssImageduree60=        "../images/60.png"
+cssImageduree60="../images/60.png"
 
 
-cssCouleurNavBack=      black
+cssCouleurNavBack=black
 
-cssCouleurBack=         #e9dcc8
+cssCouleurBack=#e9dcc8
 
-cssCouleurNavText=      white
+cssCouleurNavText=white
