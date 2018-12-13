@@ -15,12 +15,6 @@
     along with DefiLecture.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
-<%-- 
-    Document   : pageGestionLecture
-    Created on : 2017-10-24, 13:08:08
-    Author     : Charles
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="jdbc.Config"%>
@@ -57,13 +51,11 @@
               <tbody>
                 <c:forEach items="${listeLectures}" var="l">
                     <tr>
-                      <td>${l.titre}</td>
+                      <td><c:out value="${l.titre}"/></td> 
                       <td>${l.dureeMinutes} minutes</td>
                       <td>${l.dateInscription} </td>
                       <td>${l.estObligatoire eq 0 ? "NON" : "OUI"}</td>
-                      <td>
-                          <a href="*.do?tache=effectuerSuppressionLecture&idLecture=${l.idLecture}">Supprimer</a>
-                      </td>
+                      <td><a href="*.do?tache=effectuerSuppressionLecture&idLecture=${l.idLecture}">Supprimer</a></td>
                     </tr>
                 </c:forEach>
 
