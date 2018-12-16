@@ -414,15 +414,6 @@ public class CompteDAO extends DAO<Compte>{
                 
                 // On vérifie s'il y a un résultat    
                 if(resultat.next()){
-                    //Vérification si la casse est bien respecté 
-                    if(!Util.toUTF8(motPasse).equals(resultat.getString("MOT_PASSE")))
-                        return null;
-                    //Pour avoir un login indifférent à la casse il ne faut pas ces lignes de code
-                    /*
-                    if(!Util.toUTF8(identifiant).equals(resultat.getString("PSEUDONYME")) &&
-                       !Util.toUTF8(identifiant).equals(resultat.getString("COURRIEL")) )
-                        return null;
-*/
                     
                     Compte c = new Compte();
                     c.setIdCompte(resultat.getInt("ID_COMPTE"));
