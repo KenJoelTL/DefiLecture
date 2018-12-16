@@ -138,7 +138,7 @@
                             <jsp:useBean id="dao" scope="page" class="com.defiLecture.modele.LectureDAO">
                             <jsp:setProperty name="dao" property="cnx" value="${connexion.connection}"></jsp:setProperty>
                             </jsp:useBean>
-                            <c:set var="listeLectures" value="${dao.findByIdCompteOrderByDate(sessionScope.connecte)}"/>
+                            <c:set var="listeLectures" value="${dao.findByIdCompteOrderByTitre(sessionScope.connecte)}"/>
                             <c:forEach items="${listeLectures}" var="l">
                                 <option value=${l.titre}>   
                                 </c:forEach> 
