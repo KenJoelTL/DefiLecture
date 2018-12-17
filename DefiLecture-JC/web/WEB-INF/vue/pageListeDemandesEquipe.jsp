@@ -35,29 +35,44 @@
 <c:if test="${empty sessionScope.connecte or (!(sessionScope.role eq 2) and (requestScope.ordre eq 'recu'))}">
     <jsp:forward page="*.do?tache=afficherPageAccueil"></jsp:forward>
 </c:if>
+<!-- Faire la connexion -->
+<jsp:useBean id="connexion" class="jdbc.Connexion"/>
+
+<!-- Cree les DAOs -->
+<jsp:useBean id="eqpDao" class="com.defiLecture.modele.EquipeDAO" scope="page">
+    <jsp:setProperty name="eqpDao" property="cnx" value="${connexion.connection}"/>
+</jsp:useBean>
+<jsp:useBean id="demandeEqDao" class="com.defiLecture.modele.DemandeEquipeDAO" scope="page">
+    <jsp:setProperty name="demandeEqDao" property="cnx" value="${connexion.connection}"/>
+</jsp:useBean>
+
+<!-- Si l'ordre est recu -->
+<c:choose>
+    <c:when test="${param.ordre eq 'recu'}">
+        <!-- Cree les DAOs -->
+        <jsp:useBean id="cptDao" class="com.defiLecture.modele.CompteDAO" scope="page">
+            <jsp:setProperty name="cptDao" property="cnx" value="${connexion.connection}"/>
+        </jsp:useBean>
+<!-- Declarer les variables-->
+        <jsp:useBean id="compte" class="com.defiLecture.modele.Compte" scope="page"/>
+        <jsp:useBean id="equipe" class="com.defiLecture.modele.Equipe" scope="page"/>
+        <!-- Si l'equipe n'est pas scpecifier -->
+        <c:if test="${empty param.idEquipe}">
+            <c:set var="compte" value="${cptDao.read(sessionScope.connecte)}"/>
+        </c:if>
+        
+        <c:set var="equipe" value="${eqpDao.read(compte.getIdEquipe())}" scope="page"/>
+        <c:set var="listeDemandes" value="${demandeEqDao.findByIdEquipeStatutDemande(compte.getIdEquipe(),DemandeEquipe.EN_ATTENTE)}"/>
+    </c:when>
+        
+    <c:otherwise>
+        <c:set var="listeDemandes" value="${demandeEqDao.findByIdCompte(sessionScope.connecte)}"/>
+    </c:otherwise>
+</c:choose>
 
 
-<%  Connection cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
-    DemandeEquipeDAO demandeEqDao = new DemandeEquipeDAO(cnx);
-    EquipeDAO eqpDao = new EquipeDAO(cnx);
 
-    if("recu".equals(request.getParameter("ordre"))){
-        CompteDAO cptDao = new CompteDAO(cnx);
-        Compte compte = new Compte();
-        Equipe equipe = new Equipe();
-        if(request.getParameter("idEquipe")==null){
-            compte = cptDao.read((int)session.getAttribute("connecte"));
-        }
-        equipe = eqpDao.read(compte.getIdEquipe());
-        pageContext.setAttribute("cptDao", cptDao);
-        pageContext.setAttribute("equipe", equipe);
-        pageContext.setAttribute("listeDemandes", demandeEqDao.findByIdEquipeStatutDemande(compte.getIdEquipe(),DemandeEquipe.EN_ATTENTE));
-    }
-    else{
-        pageContext.setAttribute("equipeDao", eqpDao);
-        pageContext.setAttribute("listeDemandes", demandeEqDao.findByIdCompte((int)session.getAttribute("connecte")));
-    }
-%>
+
 
 
  <div class="row demandes-row"> 

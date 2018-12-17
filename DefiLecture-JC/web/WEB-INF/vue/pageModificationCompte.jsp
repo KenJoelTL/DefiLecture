@@ -115,7 +115,7 @@
                     
                     
                     <c:if test="${sessionScope.role gt 3}">
-                    <div class="form-group col-lg-12">
+                    <div class="form-group col-lg-12"> 
                         <label for="role">R&ocirc;le du compte : </label>
                         <c:set var="selected" value=" selected=\"selected\"" />
                         <select name="role" class="form-control">

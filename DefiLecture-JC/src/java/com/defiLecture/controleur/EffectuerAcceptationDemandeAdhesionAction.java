@@ -37,7 +37,7 @@ import com.defiLecture.modele.Equipe;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.Map;
 
 /**
@@ -114,15 +114,15 @@ public class EffectuerAcceptationDemandeAdhesionAction implements Action, Reques
                             if(deDao.update(demandeEq) && compteDao.update(cpt)){
                                 action = "ajoutReussi.do?tache=afficherPageListeDemandesEquipe&ordre=recu";
                                 
-                            try {
-                                String msg= "Le matelot "+ cpt.getPrenom() +"«"+ cpt.getPseudonyme() +"»"+ cpt.getNom() +" fait maintenant partie de votre équipage !";
-                                String json = "{\"msg\":\""+msg+"\",\"typeAlert\" :\"succes\"}"; 
-                                response.getWriter().write(json);
-                                
-                            } catch (IOException ex) {
-                                Logger.getLogger(EffectuerDemandeAdhesionEquipeAction.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                                LinkedList<DemandeEquipe> listeDemandes = (LinkedList<DemandeEquipe>) deDao.findByIdCompte(cpt.getIdCompte());
+                                try {
+                                    String msg= "Le matelot "+ cpt.getPrenom() +"«"+ cpt.getPseudonyme() +"»"+ cpt.getNom() +" fait maintenant partie de votre équipage !";
+                                    String json = "{\"msg\":\""+msg+"\",\"typeAlert\" :\"succes\"}"; 
+                                    response.getWriter().write(json);
+
+                                } catch (IOException ex) {
+                                    Logger.getLogger(EffectuerDemandeAdhesionEquipeAction.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                                ArrayList<DemandeEquipe> listeDemandes = (ArrayList<DemandeEquipe>) deDao.findByIdCompte(cpt.getIdCompte());
                                 listeDemandes.forEach(demande->{
                                     if (demande.getIdDemandeEquipe() != demandeEq.getIdDemandeEquipe()) {
                                         deDao.delete(demande);
