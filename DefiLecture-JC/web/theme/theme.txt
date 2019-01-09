@@ -13,9 +13,9 @@ vocTheme=Pirate
 
 vocThemePluriel=Pirates
 
-vocParticipant=Sirène
+vocParticipant=Pirate
 
-vocParticipants=Sirènes
+vocParticipants=Pirates
 
 
 // Mots liés à l'équipe
