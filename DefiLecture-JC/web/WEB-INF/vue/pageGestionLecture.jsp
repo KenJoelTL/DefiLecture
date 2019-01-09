@@ -25,6 +25,7 @@
 <%@page import="com.defiLecture.modele.CompteDAO"%>
 <%@page import="com.defiLecture.modele.LectureDAO"%>
 <%@page import="jdbc.Connexion"%>
+<script language="javascript" src="./script/jsPageGestionLectures.js"></script>
 
 <div class="row gestion-lecture-row"> 
     <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 gestion-lecture-col">
@@ -45,17 +46,16 @@
                   <th>Durée</th>
                   <th>Date d'inscription</th>
                   <th>Obligatoire</th>
-                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
                 <c:forEach items="${listeLectures}" var="l">
-                    <tr>
-                      <td><c:out value="${l.titre}"/></td> 
+                    <tr id="lecture-${l.idLecture}">
+                      <td>${l.titre}</td>
                       <td>${l.dureeMinutes} minutes</td>
                       <td>${l.dateInscription} </td>
                       <td>${l.estObligatoire eq 0 ? "NON" : "OUI"}</td>
-                      <td><a href="*.do?tache=effectuerSuppressionLecture&idLecture=${l.idLecture}">Supprimer</a></td>
+                      <td><a id="supp" onclick="supprimer(${l.idLecture}) ">Supprimer</a></td>
                     </tr>
                 </c:forEach>
 
@@ -65,4 +65,7 @@
     
     </div>
 </div>
+
+      
+
 

@@ -136,7 +136,7 @@
                 </c:when>
                 <c:otherwise>
                     <li >
-                        <a href='*.do?tache=afficherPageInscription' " >
+                        <a href='*.do?tache=afficherPageInscription'  >
                              S'inscrire</a>
                     </li>
                 </c:otherwise>

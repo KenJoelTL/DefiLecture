@@ -1,7 +1,7 @@
 <h1>Un nouveau défi pour tous!</h1>
                     <p>Bienvenue à cette nouvelle édition du Défi lecture! Organisé par le Centre d’aide en français dans le cadre de la Politique de valorisation de la langue, le Défi lecture s’adresse tant aux élèves qu’au personnel du Collège de Rosemont.</p>
 
-                    <p>Empreinte de l’imaginaire des mondes de sirènes, 
+                    <p>Empreinte de l’imaginaire des mondes de pirates, 
                         cette activité vise à promouvoir la lecture en encourageant 
                         les membres de la communauté collégiale à former des équipes de
 			corsaires, composées d’un capitaine et de trois matelots,
