@@ -35,6 +35,7 @@ import com.defiLecture.modele.DemandeEquipe;
 import com.defiLecture.modele.DemandeEquipeDAO;
 import com.defiLecture.modele.Equipe;
 import com.defiLecture.modele.EquipeDAO;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -43,7 +44,7 @@ import java.util.Map;
  *
  * @author Joel
  */
-public class EffectuerSuppressionDemandeAdhesionAction implements Action, SessionAware, RequestAware, RequirePRGAction, DataSender {
+public class EffectuerSuppressionDemandeAdhesionAction implements Action, SessionAware, RequestAware, RequirePRGAction, DataSender,SendAjaxResponse {
 
     HttpServletRequest request;
     HttpServletResponse response;
@@ -64,6 +65,7 @@ public class EffectuerSuppressionDemandeAdhesionAction implements Action, Sessio
 
                 DemandeEquipeDAO deDao = new DemandeEquipeDAO(cnx);
                 DemandeEquipe demandeEq = deDao.read(idDemandeEq);
+                response.setContentType("text/plain");
 
                 if (demandeEq != null) {
                     EquipeDAO eqDao = new EquipeDAO(cnx);
@@ -79,15 +81,36 @@ public class EffectuerSuppressionDemandeAdhesionAction implements Action, Sessio
                             action = "annulation.do?tache=afficherPageListeEquipes";
                             if ((int) session.getAttribute("role") == Compte.CAPITAINE){
                                 action = "annulation.do?tache=afficherPageListeDemandesEquipe&ordre=recu";
-                                data.put("avertissementDemande", "Impossible de refuser la demande puisqu'elle a été retirée par le matelot");
+                                
+                                try {
+                                    String msg= "Impossible de refuser la demande puisqu'elle a été retirée par le matelot";
+                                    String json = "{\"msg\":\""+msg+"\",\"typeAlert\" :\"avertissement\"}"; 
+                                    response.getWriter().write(json);
+                                    
+                                } catch (IOException ex) {
+                                    Logger.getLogger(EffectuerDemandeAdhesionEquipeAction.class.getName()).log(Level.SEVERE, null, ex);
+                                }
                             }        
                         } else {
                             if (request.getParameter("ordre") != null && "recu".equals(request.getParameter("ordre")) && (int) session.getAttribute("role") == Compte.CAPITAINE) {
-                                data.put("succesDemande", "Demande du matelot " + compte.getPrenom() +
-                                        " «" + compte.getPseudonyme() + "» " + compte.getNom() + " refusée");
+                                try {
+                                    String msg= "Demande du matelot " + compte.getPrenom() +" «" + compte.getPseudonyme() + "» " + compte.getNom() + " refusée";
+                                    String json = "{\"msg\":\""+msg+"\",\"typeAlert\" :\"succes\"}"; 
+                                    response.getWriter().write(json);
+                                } catch (IOException ex) {
+                                    Logger.getLogger(EffectuerDemandeAdhesionEquipeAction.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                                
+                                
                                 action = "refus.do?tache=afficherPageListeDemandesEquipe&ordre=recu";
                             } else {
-                                data.put("succesAnnulation", "Votre demande d'adhésion à l'équipage " + eq.getNom() + " a été retirée");
+                                try {
+                                    String msg= "Votre demande d'adhésion à l'équipage " + eq.getNom() + " a été retirée";
+                                    String json = "{\"msg\":\""+msg+"\",\"typeAlert\" :\"succes\"}"; 
+                                    response.getWriter().write(json);
+                                } catch (IOException ex) {
+                                    Logger.getLogger(EffectuerDemandeAdhesionEquipeAction.class.getName()).log(Level.SEVERE, null, ex);
+                                }
                                 action = "annulation.do?tache=afficherPageListeEquipes";
                             }
                         }
@@ -97,7 +120,13 @@ public class EffectuerSuppressionDemandeAdhesionAction implements Action, Sessio
                     action = "annulation.do?tache=afficherPageListeEquipes";
                     if ((int) session.getAttribute("role") == Compte.CAPITAINE){
                         action = "annulation.do?tache=afficherPageListeDemandesEquipe&ordre=recu";
-                        data.put("avertissementDemande", "Impossible de refuser la demande puisqu'elle a été retirée par le matelot");
+                            try {
+                                String msg= "Impossible de refuser la demande puisqu'elle a été retirée par le matelot";
+                                String json = "{\"msg\":\""+msg+"\",\"typeAlert\" :\"avertissement\"}"; 
+                                response.getWriter().write(json);
+                            } catch (IOException ex) {
+                                Logger.getLogger(EffectuerDemandeAdhesionEquipeAction.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                     }
 
                 }

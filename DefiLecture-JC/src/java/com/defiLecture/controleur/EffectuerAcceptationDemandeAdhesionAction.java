@@ -34,6 +34,7 @@ import com.defiLecture.modele.CompteDAO;
 import com.defiLecture.modele.DemandeEquipe;
 import com.defiLecture.modele.DemandeEquipeDAO;
 import com.defiLecture.modele.Equipe;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ import java.util.Map;
  *
  * @author Joel
  */
-public class EffectuerAcceptationDemandeAdhesionAction implements Action, RequestAware, SessionAware, RequirePRGAction, DataSender{
+public class EffectuerAcceptationDemandeAdhesionAction implements Action, RequestAware, SessionAware, RequirePRGAction, DataSender,SendAjaxResponse {
     HttpServletResponse response;
     HttpServletRequest request;
     HttpSession session;
@@ -66,10 +67,18 @@ public class EffectuerAcceptationDemandeAdhesionAction implements Action, Reques
                 
                 DemandeEquipeDAO deDao = new DemandeEquipeDAO(cnx);
                 DemandeEquipe demandeEq = deDao.read(idDemandeEq);
+                response.setContentType("text/plain");
                 
                 if(demandeEq == null) {
                     action = "*.do?tache=afficherPageListeDemandesEquipe&ordre=recu";
-                    data.put("avertissementDemande", "Impossible d'accepter la demande puisqu'elle a été retirée par le matelot");
+                    try {
+                            String msg= "Impossible d'accepter la demande puisqu'elle a été retirée par le matelot";
+                            String json = "{\"msg\":\""+msg+"\",\"typeAlert\" :\"avertissement\"}"; 
+                            response.getWriter().write(json);
+                            
+                        } catch (IOException ex) {
+                            Logger.getLogger(EffectuerDemandeAdhesionEquipeAction.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                 }
                 else{
                     CompteDAO compteDao = new CompteDAO(cnx);
@@ -77,10 +86,24 @@ public class EffectuerAcceptationDemandeAdhesionAction implements Action, Reques
                     action = "*.do?tache=afficherPageListeDemandesEquipe&ordre=recu";
                     if(cpt == null) {
                         action = "*.do?tache=afficherPageListeDemandesEquipe&ordre=recu";
-                        data.put("erreurDemande", "Le matelot auteur de cette demande est à la retraite.");
+                        try {
+                            String msg= "Le matelot auteur de cette demande est à la retraite.";
+                            String json = "{\"msg\":\""+msg+"\",\"typeAlert\" :\"danger\"}"; 
+                            response.getWriter().write(json);
+                            
+                        } catch (IOException ex) {
+                            Logger.getLogger(EffectuerDemandeAdhesionEquipeAction.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
                     else if(cpt.getIdEquipe() !=-1){
-                        data.put("erreurDemande", "Le matelot "+ cpt.getPrenom() +"«"+ cpt.getPseudonyme() +"»"+ cpt.getNom() +" fait déjà partie d'un équipage.");
+                        try {
+                            
+                            String msg= "Le matelot "+ cpt.getPrenom() +"«"+ cpt.getPseudonyme() +"»"+ cpt.getNom() +" fait déjà partie d'un équipage.";
+                            String json = "{\"msg\":\""+msg+"\",\"typeAlert\" :\"danger\"}"; 
+                            response.getWriter().write(json);
+                        } catch (IOException ex) {
+                            Logger.getLogger(EffectuerDemandeAdhesionEquipeAction.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
                     else{
                         int idEquipe = demandeEq.getIdEquipe();
@@ -90,8 +113,15 @@ public class EffectuerAcceptationDemandeAdhesionAction implements Action, Reques
                             demandeEq.setStatutDemande(DemandeEquipe.ACCEPTEE);
                             if(deDao.update(demandeEq) && compteDao.update(cpt)){
                                 action = "ajoutReussi.do?tache=afficherPageListeDemandesEquipe&ordre=recu";
-                                data.put("succesDemande", "Le matelot "+ cpt.getPrenom() +" «"+ cpt.getPseudonyme() +"» "+ cpt.getNom() +" fait maintenant partie de votre équipage !");
-                                // suppression des autres demandes
+                                
+                                try {
+                                    String msg= "Le matelot "+ cpt.getPrenom() +"«"+ cpt.getPseudonyme() +"»"+ cpt.getNom() +" fait maintenant partie de votre équipage !";
+                                    String json = "{\"msg\":\""+msg+"\",\"typeAlert\" :\"succes\"}"; 
+                                    response.getWriter().write(json);
+
+                                } catch (IOException ex) {
+                                    Logger.getLogger(EffectuerDemandeAdhesionEquipeAction.class.getName()).log(Level.SEVERE, null, ex);
+                                }
                                 ArrayList<DemandeEquipe> listeDemandes = (ArrayList<DemandeEquipe>) deDao.findByIdCompte(cpt.getIdCompte());
                                 listeDemandes.forEach(demande->{
                                     if (demande.getIdDemandeEquipe() != demandeEq.getIdDemandeEquipe()) {
@@ -100,7 +130,15 @@ public class EffectuerAcceptationDemandeAdhesionAction implements Action, Reques
                                 
                             }
                         }else{
-                            data.put("avertissementDemande", "Impossible d'accepter la demande puisque votre équipe est pleine");
+                             try {
+                                 String msg= "Impossible d'accepter la demande puisque votre équipe est pleine";
+                                 String json = "{\"msg\":\""+msg+"\",\"typeAlert\" :\"avertissement\"}"; 
+                                response.getWriter().write(json);
+                                
+                                
+                            } catch (IOException ex) {
+                                Logger.getLogger(EffectuerDemandeAdhesionEquipeAction.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                         }
                    
                     }   
