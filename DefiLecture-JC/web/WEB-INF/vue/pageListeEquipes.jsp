@@ -48,7 +48,7 @@
 
 <div class="row liste-equipes-row"> 
     <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 liste-equipes-col">
-        <h2>Liste des &eacute;quipages</h2>  
+        <h2>Liste des <% out.println(application.getAttribute("vocEquipePluriel"));%> </h2>  
 
  
         <div class="alert alert-success"><strong id="msg">${requestScope.data['succesDemande']}</strong></div>

@@ -25,10 +25,16 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.DateFormat"%>
 <%@page import="java.util.Locale"%>
+<%@page import="com.defiLecture.modele.Compte"%>
+<%@page import="com.defiLecture.modele.CompteDAO"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="com.defiLecture.modele.InscriptionDefi"%>
+<%@page import="com.defiLecture.modele.InscriptionDefiDAO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="jdbc.Config"%>
+<%@page import="com.defiLecture.modele.Defi"%>
 <%@page import="java.util.List"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="com.defiLecture.modele.CompteDAO"%>
@@ -154,6 +160,7 @@
                         </tr>
                     </c:if>
 
+                        </c:if>
 
                     <%-- Condition qui permet au modérateur ou à l'administrateur de voir tous les défis qu'il a créé--%>                              
                     <c:if test="${pageScope.role ge 3}">

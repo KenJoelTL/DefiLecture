@@ -20,16 +20,28 @@
     Author     : Joel & Charles
 --%>
 
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.Map.Entry"%>
 <%@page import="com.defiLecture.modele.CompteDAO"%>
 <%@page import="jdbc.Connexion"%>
 <%@page import="jdbc.Config"%>
+<%@page import="com.defiLecture.modele.Theme"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:if test="${ !empty sessionScope.connecte}">
 <% CompteDAO dao = new CompteDAO(Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
     pageContext.setAttribute("compteConnecte", dao.read(session.getAttribute("connecte").toString())); %>
 </c:if> 
-    
+
+<%
+    Theme t= new Theme();
+    Iterator<Map.Entry<String, String>> it = t.getTheme().entrySet().iterator();
+    while (it.hasNext()) {
+        Map.Entry<String, String> pair = it.next();
+         application.setAttribute(pair.getKey(), pair.getValue());
+             }
+ %>  
 <!DOCTYPE html>
 <!-- Layout -->
 <html>
@@ -80,7 +92,7 @@
             </c:if>
            
                 <li><a href="scoreboard.do?tache=afficherPageTableauScores">
-                    Trésorerie
+                    <% out.println(application.getAttribute("vocBanque"));%>
                     </a>
                 </li>
              
@@ -92,14 +104,14 @@
                             <c:choose>
                                 <c:when test="${compteConnecte.idEquipe gt -1}">
                                     <li><a href="affichagePageEquipe.do?tache=afficherPageEquipe&idEquipe=${compteConnecte.idEquipe}">
-                                            Page de l'équipage</a>
+                                            Page <% out.println(application.getAttribute("vocEquipe1"));%></a>
                                     </li>                        
                                     <li><a href="joindreEquipe.do?tache=afficherPageListeDemandesEquipe&ordre=recu">
                                             Acc&eacute;der aux demandes</a>
                                     </li>                                              
                                 </c:when>
                                 <c:otherwise>
-                                    <li><a href="creationEquipe.do?tache=afficherPageCreationEquipe">Cr&eacute;er un équipage</a></li>                                            
+                                    <li><a href="creationEquipe.do?tache=afficherPageCreationEquipe">Cr&eacute;er <% out.println(application.getAttribute("vocEquipe3"));%></a></li>                                            
                                 </c:otherwise>
                             </c:choose>
                         </c:when>
@@ -109,11 +121,11 @@
                                     <c:choose>
                                         <c:when test="${compteConnecte.idEquipe > -1}">
                                             <li><a href="affichagePageEquipe.do?tache=afficherPageEquipe&idEquipe=${compteConnecte.idEquipe}">
-                                                    Page de l'équipage</a>
+                                                    Page <% out.println(application.getAttribute("vocEquipe1"));%></a>
                                             </li>                        
                                         </c:when>
                                         <c:otherwise>
-                                            <li><a href="joindreEquipe.do?tache=afficherPageListeEquipes">Joindre un équipage</a></li>                                              
+                                            <li><a href="joindreEquipe.do?tache=afficherPageListeEquipes">Joindre<% out.println(application.getAttribute("vocEquipe3"));%></a></li>                                              
                                         </c:otherwise>
                                     </c:choose>
                                 </c:when>
@@ -177,7 +189,7 @@
                 </li>
                  
                  <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Code du pirate   
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"><% out.println(application.getAttribute("vocCode"));%>   
                     <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                       <li><a href='*.do?tache=afficherPageMarcheASuivre'>Marche à suivre</a></li>
@@ -197,7 +209,7 @@
                     <span class="glyphicon glyphicon-cog"></span>
                     <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                      <li><a href='details.do?tache=afficherPageModificationCompte&id=${sessionScope.connecte}'>
+                      <li><a href='details.do?tache=afficherPageProfil&id=${sessionScope.connecte}'>
                               <span class="glyphicon glyphicon-user"></span> Mon Compte</a>
                       </li>
                       <li><a href='*.do?tache=effectuerDeconnexion'>

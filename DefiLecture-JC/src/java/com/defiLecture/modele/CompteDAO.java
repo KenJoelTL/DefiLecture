@@ -123,7 +123,7 @@ public class CompteDAO extends DAO<Compte>{
                 if(resultat.getInt("ID_EQUIPE") == 0)
                     c.setIdEquipe(-1);
                 else
-                    c.setIdEquipe(resultat.getInt("ID_EQUIPE"));
+                c.setIdEquipe(resultat.getInt("ID_EQUIPE"));
                 c.setCourriel(resultat.getString("COURRIEL"));
                 c.setPrenom(resultat.getString("PRENOM"));             
                 c.setNom(resultat.getString("NOM"));
@@ -172,7 +172,6 @@ public class CompteDAO extends DAO<Compte>{
             return null;
         }        
     }
-    
     @Override
     public boolean update(Compte x) {
                 String req = "UPDATE compte SET COURRIEL = ?, MOT_PASSE = ?,"

@@ -68,10 +68,10 @@
                     
                     <h1>${equipe.nom}</h1>
                     <c:if test="${equipe.point eq 0}">
-                        <p>${equipe.point} doublon</p>
+                        <p>${equipe.point} <% out.println(application.getAttribute("vocPoint"));%></p>
                     </c:if>
                     <c:if test="${equipe.point ge 1}">
-                        <p>${equipe.point} doublons</p>
+                        <p>${equipe.point} <% out.println(application.getAttribute("vocPoints"));%></p>
                     </c:if> 
                     <p>Rang ${rang}</p>
              
@@ -83,19 +83,19 @@
                     </a>
                 </c:if>
                     
-                    <h2>Membres de l'équipage</h2>
+                    <h2>Membres de  <% out.println(application.getAttribute("vocEquipe1"));%> </h2>
 
                     <table class='table table-hover'>
                   <thead>
                     <tr>
-                      <th width=50%>Pirate</th>
+                      <th width=50%><% out.println(application.getAttribute("vocParticipant"));%></th>
                       <th>Contribution</th>
                     </tr>
                   </thead>
                   <tbody>
                     <c:forEach items="${listeMembres}" var="membre">      
                     <tr>
-                      <td>${membre.prenom} «${membre.pseudonyme}» ${membre.nom}</td>
+                    <td><a href="?tache=afficherPageProfil&id=${membre.idCompte}">${membre.prenom} «${membre.pseudonyme}» ${membre.nom}</a></td>
                       <td>
                           <c:set var="contribution" value="${daoDemEqp.findByIdCompteEquipe(membre.idCompte,equipe.idEquipe)}"></c:set>
                         <div class="progress">

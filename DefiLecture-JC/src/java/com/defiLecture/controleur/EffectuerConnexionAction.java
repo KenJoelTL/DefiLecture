@@ -67,6 +67,7 @@ public class EffectuerConnexionAction implements Action, RequestAware, SessionAw
                     session = request.getSession(true);
                     session.setAttribute("connecte", compte.getIdCompte());
                     session.setAttribute("role", compte.getRole());
+                    session.setAttribute("currentId", compte.getIdCompte());
                     action = "*.do?tache=afficherTableauScores";
                 } else {
                     data.put("echecConnexion", "L'identifiant et/ou le mot de passe entré est invalide");
