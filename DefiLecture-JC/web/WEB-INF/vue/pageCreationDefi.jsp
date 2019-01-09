@@ -90,7 +90,7 @@
             
             
             <div class="form-group">
-                <label for="point">Nombre de doublons accordé pour la réussite de ce défi* : </label>
+                <label for="point">Nombre de <% out.println(application.getAttribute("vocPoints"));%> accordé pour la réussite de ce défi* : </label>
                 <input class="form-control" type="number" name="valeurMinute" required />
             </div>
             

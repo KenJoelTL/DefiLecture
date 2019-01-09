@@ -1,4 +1,5 @@
-<!--
+/* 
+ <!--
     This file is part of DefiLecture.
 
     DefiLecture is free software: you can redistribute it and/or modify
@@ -15,27 +16,25 @@
     along with DefiLecture.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <%-- 
-    Document   : pageCodeConduite
-    Created on : 2018-03-18, 15:15:32
-    Author     : Charles
+    Document   : jsPageGestionLectures
+    Created on : 2018-12-16, 20:52:35
+    Author     : Roodney Aladin
 --%>
+ */
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Code de conduite</title>
-    </head>
-    <body>
 
-        <div class='row creation-lecture-row'> 
 
-            <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 creation-lecture-col">
-                <div class="creation-lecture-form code-conduite">
-                    <% out.println(application.getAttribute("txtCodeConduite"));%>
-                </div>
-            </div>
-        </div>
-    </body>
-</html>
+function supprimer(idLecture){
+
+  $.ajax({
+        url: '*.do?tache=effectuerSuppressionLecture&idLecture='+idLecture, 
+        cache    : false,
+        complete: function () {
+          $("tr#lecture-"+ idLecture).remove();
+        
+        }
+    });
+    
+    
+
+  }

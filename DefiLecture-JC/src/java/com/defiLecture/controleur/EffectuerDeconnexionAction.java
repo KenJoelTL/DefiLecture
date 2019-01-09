@@ -40,6 +40,7 @@ public class EffectuerDeconnexionAction implements Action, RequestAware, Session
         
         if(session != null)
             session.invalidate();
+            session = request.getSession(false);
         
         return action;
     }

@@ -79,7 +79,7 @@
                 <img class="img-responsive avatar" src="<c:url value='${compte.avatar}'/>" alt="Avatar">
                 <h2 style="text-align:center">${compte.prenom} ${compte.nom}</h2>
                 <c:if test="${ !empty equipe }">
-                    <h2 style="text-align:center">De l'équipage <a href="pageEquipe.do?tache=afficherPageEquipe&idEquipe=${equipe.idEquipe}">${equipe.nom}</a></h2>                
+                    <h2 style="text-align:center">De  <% out.println(application.getAttribute("vocEquipe4"));%> <a href="pageEquipe.do?tache=afficherPageEquipe&idEquipe=${equipe.idEquipe}">${equipe.nom}</a></h2>                
                 </c:if>
 
                 <form method="POST" action=".do" enctype="multipart/form-data">
@@ -115,12 +115,12 @@
                     
                     
                     <c:if test="${sessionScope.role gt 3}">
-                    <div class="form-group col-lg-12">
+                    <div class="form-group col-lg-12"> 
                         <label for="role">R&ocirc;le du compte : </label>
                         <c:set var="selected" value=" selected=\"selected\"" />
                         <select name="role" class="form-control">
                             <option value="1" ${ compte.role eq 1 ? selected:'' }>Participant</option>
-                            <option value="2" ${ compte.role eq 2 ? selected:'' }>Capitaine</option>
+                            <option value="2" ${ compte.role eq 2 ? selected:'' }><% out.println(application.getAttribute("vocChef"));%></option>
                             <c:if test="${sessionScope.role eq 4}">
                             <option value="3" ${ compte.role eq 3 ? selected:'' }>Mod&eacute;rateur</option>
                             <option value="4" ${ compte.role eq 4 ? selected:'' }>Administrateur</option>

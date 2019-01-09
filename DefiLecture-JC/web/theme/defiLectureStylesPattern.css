@@ -15,7 +15,7 @@ td, td a, p, li {
 }
 
 body {
-      background-color: #e9dcc8;
+      background-color: cssCouleurBack;
 }
 
 h1 {
@@ -32,7 +32,7 @@ h1 {
   justify-content: center;
   font-size: 25px;
   color: black;
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .retour.modifCompte {
@@ -57,14 +57,15 @@ span.glyphicon.glyphicon-log-in {
 .logo-navigation {
 	width: 168px;
     height: 73px;
-    background-image: url("../images/Logo_DL_INV_700x300.png");
+    background-image: url(cssImageLogo);
     background-repeat: no-repeat;
     background-size: cover;
     margin: 10px 10px;
 }
 
 .navbar {
-	background-color: black!important;
+	background-color: cssCouleurNavBack !important;
+        
 }
 
 .navbar li {
@@ -76,7 +77,7 @@ span.glyphicon.glyphicon-log-in {
       height: 100%;
     display: flex;
     align-items: center;
-    color: white!important;
+    color: cssCouleurNavText !important;
     font-size: 20px;
 }
 
@@ -89,17 +90,24 @@ ul.nav.navbar-nav{
   display :flex;
 }
 
+a.dropdown-toggle{
+    background-color: cssCouleurNavBack !important;
+}
 div#optionsNavigation {
   max-height: 100%!important;
 }
 
 ul.dropdown-menu {
-  background-color: black;
+  background-color: cssCouleurNavBack !important;
+}
 
+
+.dropdown{
+    background-color: inherit; 
 }
 
   .navbar-nav .open .dropdown-menu li a:hover {
-    background : none!important;
+      background : none!important;
   }
 
   #facebook {
@@ -201,7 +209,7 @@ ul.dropdown-menu {
 }
 
 .connexion-row {
-background-image: url("../images/index_poste.jpg");
+background-image: url(cssImageBackConnection);
   padding: 5%;
       display: flex;
     flex-direction: column;
@@ -310,7 +318,7 @@ p#msgMDPoublie {
 }
 
 .inscription-row {
-background-image: url("../images/index_poste.jpg");
+background-image: url(cssImageBackConnection);
      min-height: 1080px;
   padding: 5%;
       display: flex;
@@ -334,7 +342,7 @@ background-image: url("../images/index_poste.jpg");
 /*Tableau des scores*/
 
 .scores-row {
-background-image: url("../images/accueil_poste.jpg");
+background-image: url(cssImageBackPrincipal);
 
   padding: 5%;
       display: flex;
@@ -359,7 +367,7 @@ background-image: url("../images/accueil_poste.jpg");
 /*Accueil*/
 
 .accueil-row {
-  background-image: url("../images/accueil_poste.jpg");
+  background-image: url(cssImageBackPrincipal);
 
   padding: 20px 40px;
   display: flex;
@@ -369,7 +377,7 @@ background-image: url("../images/accueil_poste.jpg");
 }
 
 .accueil-col {
-  background-image: url("../images/Logo_DL_NB_700x300.png");
+  background-image: url(cssImageAccueilCol);
   min-height:130px;
   width: 280px;
   background-size: contain;
@@ -382,7 +390,7 @@ background-image: url("../images/accueil_poste.jpg");
 /*Creation défi*/
 
 .creation-defi-col {
-  background-image: url("../images/index_poste.jpg");
+  background-image: url(cssImageBackConnection);
 }
 
 .creation-defi-col h1 {
@@ -444,7 +452,7 @@ background-image: url("../images/accueil_poste.jpg");
 /*Accéder aux demandes*/
 
 .demandes-row {
-  background-image: url("../images/template_poste.jpg");
+  background-image: url(cssImageBackPrincipal);
   padding: 5%;
 
 }
@@ -463,7 +471,7 @@ background-image: url("../images/accueil_poste.jpg");
 /*Participation défi*/
 
 .participationDefi-row {
-  background-image: url("../images/template_poste.jpg");
+  background-image: url(cssImageBackPrincipal);
   padding: 5%;
 
 }
@@ -489,7 +497,7 @@ background-image: url("../images/accueil_poste.jpg");
 /*Gestion liste comptes*/
 
 .listeCompte-row {
-  background-image: url("../images/template_poste.jpg");
+  background-image: url(cssImageBackPrincipal);
   padding: 5%;
 
 }
@@ -560,7 +568,7 @@ background-color: rgba(255, 255, 255, 0.5);
 
 
 .modification-defi-col {
-  background-image: url("../images/index_poste.jpg");
+  background-image: url(cssImageBackPrincipal);
 }
 
 .modification-defi-col h1 {
@@ -623,7 +631,7 @@ background-color: rgba(255, 255, 255, 0.5);
 }
 
 .creation-lecture-row {
-background-image: url("../images/accueil_poste.jpg");
+background-image: url(cssImageBackPrincipal);
   padding: 5%;
       display: flex;
     flex-direction: column;
@@ -660,19 +668,19 @@ background-image: url("../images/accueil_poste.jpg");
 
 }
 .dureeLecture .duree15 {
-  background-image: url("../images/15.png");
+  background-image: url(cssImageDuree15);
 }
 
  .dureeLecture .duree30 {
-  background-image: url("../images/30.png");
+  background-image: url(cssImageDuree30);
 }
 
 .dureeLecture .duree45 {
-  background-image: url("../images/45.png");
+  background-image: url(cssImageDuree45);
 }
 
 .dureeLecture .duree60 {
-  background-image: url("../images/60.png");
+  background-image: url(cssImageDuree60);
 }
 
 .dureeLecture .duree15, .dureeLecture .duree30, .dureeLecture .duree45, .dureeLecture .duree60{
@@ -684,7 +692,7 @@ background-image: url("../images/accueil_poste.jpg");
 }
 
 .lecture-submit {
-   background-image: url("../images/CONFIRMER.png");
+   background-image: url();
    background-size: cover;
         width: 161px!important;
     height: 167px!important;
@@ -754,7 +762,7 @@ background-image: url("../images/accueil_poste.jpg");
 
 
 .inscription-defi-col {
-  background-image: url("../images/index_poste.jpg");
+  background-image: url(cssImageBackConnection);
   padding-bottom: 20px;
 }
 
@@ -800,7 +808,7 @@ background-image: url("../images/accueil_poste.jpg");
  /*Page gestion lecture*/
 
  .gestion-lecture-row {
-  background-image: url("../images/template_poste.jpg");
+  background-image: url(cssImageBackPrincipal);
 
   padding: 5%;
 
@@ -820,7 +828,7 @@ background-image: url("../images/accueil_poste.jpg");
 /*Page gestion liste équipe*/
 
  .liste-equipes-row {
-  background-image: url("../images/template_poste.jpg");
+  background-image: url(cssImageBackPrincipal);
   padding: 5%;
 
 }
@@ -847,7 +855,7 @@ background-image: url("../images/accueil_poste.jpg");
 
 
 .page-equipe-col {
-  background-image: url("../images/index_poste.jpg");
+  background-image: url(cssImageBackConnection);
   padding-bottom: 20px;
   min-height: 700px;
       display: flex;
@@ -937,9 +945,9 @@ background-image: url("../images/accueil_poste.jpg");
 
 /*Page code de conduite*/
 
-.pirateIcone {
+.petiteIcone {
 
- background-image: url("../images/tete-de-mort-nb.png");
+ background-image: url(cssImageIcone);
      height: 50px;
     background-size: contain;
     background-repeat: no-repeat;
@@ -997,9 +1005,9 @@ background-image: url("../images/accueil_poste.jpg");
 	text-align: center;
 }
 
-.pirateIconeMarcheASuivre {
+.petiteIconeMarcheASuivre {
 
- background-image: url("../images/tete-de-mort-nb.png");
+ background-image: url(cssImageIcone);
         height: 180px;
     background-size: contain;
     background-repeat: no-repeat;
@@ -1007,7 +1015,7 @@ background-image: url("../images/accueil_poste.jpg");
 
 }
 
-.divIconePirate {
+.divPetiteIcone {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -1016,7 +1024,7 @@ background-image: url("../images/accueil_poste.jpg");
 
 
 .fa.fa-facebook {
-	    background-color: #4267b2;
+    background-color: #4267b2;
     color: white;
     width: 17px;
     padding-left: 5px;
@@ -1067,63 +1075,7 @@ background-image: url("../images/accueil_poste.jpg");
     background-size: contain;
     background-position: top;
   }
-}
 
-/* Page profil */
-.bold{
-    font-weight: bold;
-}
-.imgProfil {
-    padding: 3px;
-    height: 8em;
-    width: 8em;
-    background-color:white;
-    border-width:3px;
-    border-style:solid;
-    border-color:#212529;
-    float: left;
-}
-.contenuEnteteProfil{
-    padding: 2em;
-}
-.contenuEnteteProfil h1{
-    position: relative;
-    float:left;
-    margin: 0.7em 0em 0em 1em;
-}
-@media screen and (max-width: 557px) {
-    .contenuEnteteProfil h1{
-        position: static;
-        text-align: center;
-        margin: 0;
-    }
-    .imgProfil{
-        margin-right: 4em;
-    }
-}
-.panInfo{
-    margin-top: 0.8em;
-}
-.panInfo p{
-    margin-left: 1em;
-}
-.glyphProfil{
-    margin-top:5px;
-    position: relative;
-    float:right;
-    transition:0.5s;
-}
-.glyphProfil:hover{
-    transform: scale(1.3);
-}
-.btnModif{
-    width: 5.6em;
-    transition: 0.5s;
-}
-.btnModif:hover{
-    transform: scale(1.1);
-}
-.pErreur{
-    text-align: center;
-    font-weight: bold;
+ 
+
 }
