@@ -35,6 +35,7 @@ import com.defiLecture.modele.DemandeEquipe;
 import com.defiLecture.modele.DemandeEquipeDAO;
 import com.defiLecture.modele.Equipe;
 import com.defiLecture.modele.EquipeDAO;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -44,7 +45,7 @@ import java.util.Map;
  * @author Joel
  */
 public class EffectuerDemandeAdhesionEquipeAction implements Action, SessionAware, 
-                                                RequestAware, RequirePRGAction, DataSender {
+                                                RequestAware, RequirePRGAction, DataSender,SendAjaxResponse{
     HttpServletRequest request;
     HttpServletResponse response;
     HttpSession session;
@@ -89,7 +90,16 @@ public class EffectuerDemandeAdhesionEquipeAction implements Action, SessionAwar
                         if(!demandeDao.create(demandeEq))
                             action = "demandeEchouee.do?tache=afficherPageListeEquipes";
                         else{
-                            data.put("succesDemande", "Un demande d'adhésion a été envoyée à l'équipage " + equipe.getNom());
+                            response.setContentType("text/plain");
+                            try {
+                                String msg= "Une demande d'adhésion a été envoyée à l'équipage " + equipe.getNom();
+                                demandeEq = demandeDao.findByIdCompteEquipe(compte.getIdCompte(), equipe.getIdEquipe());
+                                int idDemandeEquipe = demandeEq.getIdDemandeEquipe();
+                                String json = "{\"msg\":\""+msg+"\",\"idDemandeEquipe\" :\""+idDemandeEquipe+"\"}"; 
+                                response.getWriter().write(json);
+                            } catch (IOException ex) {
+                                Logger.getLogger(EffectuerDemandeAdhesionEquipeAction.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                             action = "demandeEnvoyee.do?tache=afficherPageListeEquipes";
                         }
                     }
