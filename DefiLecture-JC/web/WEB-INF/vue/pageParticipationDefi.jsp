@@ -160,8 +160,6 @@
                         </tr>
                     </c:if>
 
-                        </c:if>
-
                     <%-- Condition qui permet au modérateur ou à l'administrateur de voir tous les défis qu'il a créé--%>                              
                     <c:if test="${pageScope.role ge 3}">
                         <tr>
