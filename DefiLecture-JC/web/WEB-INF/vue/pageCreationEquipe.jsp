@@ -36,7 +36,7 @@
                 <form action="creationEquipe.do" method="post">
                     <div class="form-group">
                         <label for="nom">Nom <% out.println(application.getAttribute("vocEquipe1"));%> :</label>
-                        <input type="text" class="form-control" id="nom" placeholder="Entrez le nom de votre <% out.println(application.getAttribute("vocEquipeNouvelle"));%> name="nom" required/>
+                        <input type="text" class="form-control" id="nom" placeholder="Entrez le nom de votre <% out.println(application.getAttribute("vocEquipeNouvelle"));%>" name="nom" required/>
                     </div>
                     <input type="hidden" name="tache" value="effectuerCreationEquipe">
                     <button type="submit" class="btn btn-success">CRÉER</button>
