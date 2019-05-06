@@ -263,6 +263,9 @@ ALTER TABLE `inscription_defi`
 --
 ALTER TABLE `lecture`
   MODIFY `ID_LECTURE` int(10) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `compte`
+ MODIFY `MOT_PASSE` varchar(50) NOT NULL COLLATE utf8_bin;
 --
 -- Contraintes pour les tables exportées
 --
