@@ -1,3 +1,5 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <div class='container-fluid'  style="margin-bottom: 90px" >
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
