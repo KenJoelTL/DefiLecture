@@ -98,6 +98,9 @@ public class ControleurFrontal extends HttpServlet {
         } 
         else {
             Action action = ActionBuilder.getAction("");
+            ((RequestAware) action).setRequest(request);
+            ((RequestAware) action).setResponse(response);
+
             String vue = action.execute();
             this.getServletContext().getRequestDispatcher(vue).forward(request, response);
 
