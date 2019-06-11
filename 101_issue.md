@@ -89,15 +89,15 @@ Blocs catch vides
 
 Autres blocs vides
 ------------------------
-./java/com/defiLecture/controleur/EffectuerModificationLectureAction.java:79: catch(NumberFormatException e){ }
-./java/com/defiLecture/controleur/EffectuerModificationDefiAction.java:93: } catch (NumberFormatException e) { }
+- [ ] ./java/com/defiLecture/controleur/EffectuerModificationLectureAction.java:79: catch(NumberFormatException e){ }
+- [ ] ./java/com/defiLecture/controleur/EffectuerModificationDefiAction.java:93: } catch (NumberFormatException e) { }
 
 Autres blocs catch
 ==================
-./java/jdbc/Connexion.java:74: } catch (SQLException e) { e.printStackTrace(); }
-./java/com/defiLecture/controleur/EffectuerCreationLectureAction.java:119: } catch (SQLException ex) { Logger.getLogger(EffectuerCreationLectureAction.class.getName()).log(Level.SEVERE, null, ex); }
-./java/com/defiLecture/controleur/AfficherPageGestionListeComptesAction.java:74: } catch (SQLException ex) { Logger.getLogger(AfficherPageGestionListeComptesAction.class.getName()).log(Level.SEVERE, null, ex); }
-./java/com/defiLecture/controleur/EffectuerGenerationMotPasseAction.java:88: } catch (ClassNotFoundException | SQLException ex) { Logger.getLogger(EffectuerGenerationMotPasseAction.class.getName()).log(Level.SEVERE, null, ex); }
+- [ ] ./java/jdbc/Connexion.java:74: } catch (SQLException e) { e.printStackTrace(); }
+- [ ] ./java/com/defiLecture/controleur/EffectuerCreationLectureAction.java:119: } catch (SQLException ex) { Logger.getLogger(EffectuerCreationLectureAction.class.getName()).log(Level.SEVERE, null, ex); }
+- [ ] ./java/com/defiLecture/controleur/AfficherPageGestionListeComptesAction.java:74: } catch (SQLException ex) { Logger.getLogger(AfficherPageGestionListeComptesAction.class.getName()).log(Level.SEVERE, null, ex); }
+- [ ] ./java/com/defiLecture/controleur/EffectuerGenerationMotPasseAction.java:88: } catch (ClassNotFoundException | SQLException ex) { Logger.getLogger(EffectuerGenerationMotPasseAction.class.getName()).log(Level.SEVERE, null, ex); }
 
 ./java/com/defiLecture/controleur/EffectuerAcceptationDemandeAdhesionAction.java
 ------------------------
@@ -110,11 +110,11 @@ Autres blocs catch
 
 ./java/com/defiLecture/controleur/EffectuerSuppressionDemandeAdhesionAction.java
 ------------------------
-90: } catch (IOException ex) { Logger.getLogger(EffectuerDemandeAdhesionEquipeAction.class.getName()).log(Level.SEVERE, null, ex); }
-100: } catch (IOException ex) { Logger.getLogger(EffectuerDemandeAdhesionEquipeAction.class.getName()).log(Level.SEVERE, null, ex); }
-111: } catch (IOException ex) { Logger.getLogger(EffectuerDemandeAdhesionEquipeAction.class.getName()).log(Level.SEVERE, null, ex); }
-127: } catch (IOException ex) { Logger.getLogger(EffectuerDemandeAdhesionEquipeAction.class.getName()).log(Level.SEVERE, null, ex); }
-137: } catch (SQLException ex) { Logger.getLogger(EffectuerSuppressionDemandeAdhesionAction.class.getName()).log(Level.SEVERE, null, ex); } finally {
+- [ ] l.90: } catch (IOException ex) { Logger.getLogger(EffectuerDemandeAdhesionEquipeAction.class.getName()).log(Level.SEVERE, null, ex); }
+- [ ] l.100: } catch (IOException ex) { Logger.getLogger(EffectuerDemandeAdhesionEquipeAction.class.getName()).log(Level.SEVERE, null, ex); }
+- [ ] l.111: } catch (IOException ex) { Logger.getLogger(EffectuerDemandeAdhesionEquipeAction.class.getName()).log(Level.SEVERE, null, ex); }
+- [ ] l.127: } catch (IOException ex) { Logger.getLogger(EffectuerDemandeAdhesionEquipeAction.class.getName()).log(Level.SEVERE, null, ex); }
+- [ ] l.137: } catch (SQLException ex) { Logger.getLogger(EffectuerSuppressionDemandeAdhesionAction.class.getName()).log(Level.SEVERE, null, ex); } finally {
 
 ./java/com/defiLecture/modele/DemandeEquipeDAO.java
 ------------------------
@@ -230,29 +230,29 @@ Autres blocs catch
 Autres blocs catch
 ------------------------
 
-./java/com/defiLecture/controleur/EffectuerReaffectationMembreEquipeAction.java:97: } catch (ClassNotFoundException ex) { Logger.getLogger(EffectuerDepartEquipeAction.class.getName()).log(Level.SEVERE, null, ex); } catch (SQLException ex) {
-./java/com/defiLecture/controleur/AfficherPageDefisReussisAction.java:74: } catch (SQLException ex) { Logger.getLogger(AfficherPageGestionListeComptesAction.class.getName()).log(Level.SEVERE, null, ex); }
-./java/com/defiLecture/controleur/EffectuerModificationEquipeAction.java:82: } catch (SQLException ex) { Logger.getLogger(EffectuerModificationEquipeAction.class.getName()).log(Level.SEVERE, null, ex); }
-./java/com/defiLecture/controleur/EffectuerSuspensionMembreEquipeAction.java:104: } catch (ClassNotFoundException ex) { Logger.getLogger(EffectuerDepartEquipeAction.class.getName()).log(Level.SEVERE, null, ex); } catch (SQLException ex) {
-./java/com/defiLecture/controleur/EffectuerSuppressionCompteAction.java:82: } catch (ClassNotFoundException ex) { Logger.getLogger(EffectuerDepartEquipeAction.class.getName()).log(Level.SEVERE, null, ex); } catch (SQLException ex) {
-./java/com/defiLecture/controleur/AfficherPageModificationLectureAction.java:62: } catch (ClassNotFoundException ex) { Logger.getLogger(AfficherPageModificationLectureAction.class.getName()).log(Level.SEVERE, null, ex); } catch (SQLException ex) {
-./java/com/defiLecture/controleur/AfficherPageEquipeAction.java:60: } catch (SQLException ex) { Logger.getLogger(AfficherPageEquipeAction.class.getName()).log(Level.SEVERE, null, ex); }
-./java/com/defiLecture/controleur/AfficherPageModificationDefiAction.java:67: } catch (ClassNotFoundException ex) { Logger.getLogger(AfficherPageModificationDefiAction.class.getName()).log(Level.SEVERE, null, ex); } catch (SQLException ex) {
-./java/com/defiLecture/controleur/SupprimerDefiAction.java:85: catch (SQLException ex) { Logger.getLogger(SupprimerDefiAction.class.getName()).log(Level.SEVERE, null, ex); } 
-./java/com/defiLecture/controleur/SupprimerDefiAction.java:88: catch (Exception ex) { Logger.getLogger(SupprimerDefiAction.class.getName()).log(Level.SEVERE, null, ex); } 
-./java/com/defiLecture/controleur/EffectuerDemandeAdhesionEquipeAction.java:100: } catch (IOException ex) { Logger.getLogger(EffectuerDemandeAdhesionEquipeAction.class.getName()).log(Level.SEVERE, null, ex); }
-./java/com/defiLecture/controleur/EffectuerDemandeAdhesionEquipeAction.java:113: } catch (ClassNotFoundException | SQLException ex) { Logger.getLogger(EffectuerDemandeAdhesionEquipeAction.class.getName()).log(Level.SEVERE, null, ex); }
-./java/com/defiLecture/controleur/EffectuerAjoutAvatarCompteAction.java:105: } catch (IOException | ServletException | ClassNotFoundException | SQLException ex) { Logger.getLogger(EffectuerAjoutAvatarCompteAction.class.getName()).log(Level.SEVERE, null, ex); } finally {
-./java/com/defiLecture/controleur/EffectuerAjoutAvatarCompteAction.java:111: } catch (IOException ex) { Logger.getLogger(EffectuerAjoutAvatarCompteAction.class.getName()).log(Level.SEVERE, null, ex); }
-./java/com/defiLecture/controleur/EffectuerAjoutAvatarCompteAction.java:118: } catch (IOException ex) { Logger.getLogger(EffectuerAjoutAvatarCompteAction.class.getName()).log(Level.SEVERE, null, ex); }
-./java/com/defiLecture/controleur/AfficherPageModificationCompteAction.java:85: } catch (SQLException ex) { Logger.getLogger(AfficherPageModificationCompteAction.class.getName()).log(Level.SEVERE, null, ex); }
-./java/com/defiLecture/controleur/EffectuerModificationConfigAction.java:71: catch (ClassNotFoundException ex) { Logger.getLogger(EffectuerModificationConfigAction.class.getName()).log(Level.SEVERE, null, ex); } catch (SQLException ex) {
-./java/com/defiLecture/controleur/EffectuerDepartEquipeAction.java:102: } catch (ClassNotFoundException | SQLException ex) { Logger.getLogger(EffectuerDepartEquipeAction.class.getName()).log(Level.SEVERE, null, ex); }
-./java/com/defiLecture/controleur/EffectuerInscriptionAction.java:141: } catch (SQLException ex) { Logger.getLogger(EffectuerInscriptionAction.class.getName()).log(Level.SEVERE, null, ex); }
-./java/com/defiLecture/controleur/AfficherPageAdresseCourrielAction.java:74: } catch (SQLException ex) { Logger.getLogger(AfficherPageGestionListeComptesAction.class.getName()).log(Level.SEVERE, null, ex); }
-./java/com/defiLecture/controleur/AfficherPageCreationEquipeAction.java:64: } catch (SQLException ex) { Logger.getLogger(AfficherPageCreationEquipeAction.class.getName()).log(Level.SEVERE, null, ex); }
-./java/com/defiLecture/controleur/EffectuerSuppressionLectureAction.java:112: } catch (SQLException ex) { Logger.getLogger(EffectuerModificationLectureAction.class.getName()).log(Level.SEVERE, null, ex); }
-./java/com/defiLecture/controleur/AfficherPageListeLecturesAction.java:74: } catch (SQLException ex) { Logger.getLogger(AfficherPageGestionListeComptesAction.class.getName()).log(Level.SEVERE, null, ex); }
-./java/com/defiLecture/controleur/EffectuerConnexionAction.java:81: } catch (SQLException ex) { Logger.getLogger(EffectuerConnexionAction.class.getName()).log(Level.SEVERE, null, ex); } finally {
+- [ ] ./java/com/defiLecture/controleur/EffectuerReaffectationMembreEquipeAction.java:97: } catch (ClassNotFoundException ex) { Logger.getLogger(EffectuerDepartEquipeAction.class.getName()).log(Level.SEVERE, null, ex); } catch (SQLException ex) {
+- [ ] ./java/com/defiLecture/controleur/AfficherPageDefisReussisAction.java:74: } catch (SQLException ex) { Logger.getLogger(AfficherPageGestionListeComptesAction.class.getName()).log(Level.SEVERE, null, ex); }
+- [ ] ./java/com/defiLecture/controleur/EffectuerModificationEquipeAction.java:82: } catch (SQLException ex) { Logger.getLogger(EffectuerModificationEquipeAction.class.getName()).log(Level.SEVERE, null, ex); }
+- [ ] ./java/com/defiLecture/controleur/EffectuerSuspensionMembreEquipeAction.java:104: } catch (ClassNotFoundException ex) { Logger.getLogger(EffectuerDepartEquipeAction.class.getName()).log(Level.SEVERE, null, ex); } catch (SQLException ex) {
+- [ ] ./java/com/defiLecture/controleur/EffectuerSuppressionCompteAction.java:82: } catch (ClassNotFoundException ex) { Logger.getLogger(EffectuerDepartEquipeAction.class.getName()).log(Level.SEVERE, null, ex); } catch (SQLException ex) {
+- [ ] ./java/com/defiLecture/controleur/AfficherPageModificationLectureAction.java:62: } catch (ClassNotFoundException ex) { Logger.getLogger(AfficherPageModificationLectureAction.class.getName()).log(Level.SEVERE, null, ex); } catch (SQLException ex) {
+- [ ] ./java/com/defiLecture/controleur/AfficherPageEquipeAction.java:60: } catch (SQLException ex) { Logger.getLogger(AfficherPageEquipeAction.class.getName()).log(Level.SEVERE, null, ex); }
+- [ ] ./java/com/defiLecture/controleur/AfficherPageModificationDefiAction.java:67: } catch (ClassNotFoundException ex) { Logger.getLogger(AfficherPageModificationDefiAction.class.getName()).log(Level.SEVERE, null, ex); } catch (SQLException ex) {
+- [ ] ./java/com/defiLecture/controleur/SupprimerDefiAction.java:85: catch (SQLException ex) { Logger.getLogger(SupprimerDefiAction.class.getName()).log(Level.SEVERE, null, ex); } 
+- [ ] ./java/com/defiLecture/controleur/SupprimerDefiAction.java:88: catch (Exception ex) { Logger.getLogger(SupprimerDefiAction.class.getName()).log(Level.SEVERE, null, ex); } 
+- [ ] ./java/com/defiLecture/controleur/EffectuerDemandeAdhesionEquipeAction.java:100: } catch (IOException ex) { Logger.getLogger(EffectuerDemandeAdhesionEquipeAction.class.getName()).log(Level.SEVERE, null, ex); }
+- [ ] ./java/com/defiLecture/controleur/EffectuerDemandeAdhesionEquipeAction.java:113: } catch (ClassNotFoundException | SQLException ex) { Logger.getLogger(EffectuerDemandeAdhesionEquipeAction.class.getName()).log(Level.SEVERE, null, ex); }
+- [ ] ./java/com/defiLecture/controleur/EffectuerAjoutAvatarCompteAction.java:105: } catch (IOException | ServletException | ClassNotFoundException | SQLException ex) { Logger.getLogger(EffectuerAjoutAvatarCompteAction.class.getName()).log(Level.SEVERE, null, ex); } finally {
+- [ ] ./java/com/defiLecture/controleur/EffectuerAjoutAvatarCompteAction.java:111: } catch (IOException ex) { Logger.getLogger(EffectuerAjoutAvatarCompteAction.class.getName()).log(Level.SEVERE, null, ex); }
+- [ ] ./java/com/defiLecture/controleur/EffectuerAjoutAvatarCompteAction.java:118: } catch (IOException ex) { Logger.getLogger(EffectuerAjoutAvatarCompteAction.class.getName()).log(Level.SEVERE, null, ex); }
+- [ ] ./java/com/defiLecture/controleur/AfficherPageModificationCompteAction.java:85: } catch (SQLException ex) { Logger.getLogger(AfficherPageModificationCompteAction.class.getName()).log(Level.SEVERE, null, ex); }
+- [ ] ./java/com/defiLecture/controleur/EffectuerModificationConfigAction.java:71: catch (ClassNotFoundException ex) { Logger.getLogger(EffectuerModificationConfigAction.class.getName()).log(Level.SEVERE, null, ex); } catch (SQLException ex) {
+- [ ] ./java/com/defiLecture/controleur/EffectuerDepartEquipeAction.java:102: } catch (ClassNotFoundException | SQLException ex) { Logger.getLogger(EffectuerDepartEquipeAction.class.getName()).log(Level.SEVERE, null, ex); }
+- [ ] ./java/com/defiLecture/controleur/EffectuerInscriptionAction.java:141: } catch (SQLException ex) { Logger.getLogger(EffectuerInscriptionAction.class.getName()).log(Level.SEVERE, null, ex); }
+- [ ] ./java/com/defiLecture/controleur/AfficherPageAdresseCourrielAction.java:74: } catch (SQLException ex) { Logger.getLogger(AfficherPageGestionListeComptesAction.class.getName()).log(Level.SEVERE, null, ex); }
+- [ ] ./java/com/defiLecture/controleur/AfficherPageCreationEquipeAction.java:64: } catch (SQLException ex) { Logger.getLogger(AfficherPageCreationEquipeAction.class.getName()).log(Level.SEVERE, null, ex); }
+- [ ] ./java/com/defiLecture/controleur/EffectuerSuppressionLectureAction.java:112: } catch (SQLException ex) { Logger.getLogger(EffectuerModificationLectureAction.class.getName()).log(Level.SEVERE, null, ex); }
+- [ ] ./java/com/defiLecture/controleur/AfficherPageListeLecturesAction.java:74: } catch (SQLException ex) { Logger.getLogger(AfficherPageGestionListeComptesAction.class.getName()).log(Level.SEVERE, null, ex); }
+- [ ] ./java/com/defiLecture/controleur/EffectuerConnexionAction.java:81: } catch (SQLException ex) { Logger.getLogger(EffectuerConnexionAction.class.getName()).log(Level.SEVERE, null, ex); } finally {
 
 
