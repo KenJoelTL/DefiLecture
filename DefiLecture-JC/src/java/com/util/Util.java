@@ -17,9 +17,15 @@
 package com.util;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.nio.charset.StandardCharsets.UTF_16;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -55,4 +61,27 @@ public class Util {
         return value;
     }
 
+    /**
+     * Retourne un String hashé et salé du mot de passe
+     * donné en paramètre.
+     *
+     * @param p_mdp Le mot de passe 
+     * @return String Mot de passe hashé en SHA256 et salé
+     */
+
+    public static String hasherEtSaler(String p_mdp) {
+        try {
+            SecureRandom random = new SecureRandom();
+            byte[] sel = new byte[16];
+            random.nextBytes(sel);
+            
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            md.update(sel);
+            byte[] mdpHashe = md.digest(p_mdp.getBytes(StandardCharsets.UTF_8));
+            
+            return new String(mdpHashe);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(Util.class.getName()).log(Level.SEVERE, null, ex);
+        }                
+    }
 }
