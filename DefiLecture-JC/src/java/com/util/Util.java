@@ -62,16 +62,15 @@ public class Util {
     }
 
     /**
-     * Retourne un String hashé et salé du mot de passe
+     * Retourne un String hashé en SHA256 et salé du mot de passe
      * donné en paramètre.
      *
-     * @param p_mdp Le mot de passe 
+     * @param p_mdp Le mot de passe à hasher avec sel
+     * @param p_sel Un sel qui a déjà été généré 
      * @return String Mot de passe hashé en SHA256 et salé
      */
-    public static String hasherEtSaler(String p_mdp) {
-        
-        
-         return null; // À compléter.  
+    public static String hasherAvecSel(String p_mdp, String p_sel) {
+         return genererSHA256(p_mdp + p_sel);  
     }
     
     /**
@@ -97,11 +96,11 @@ public class Util {
      * 
      * @return Sel généré aléatoirement
      */
-    public static byte[] genererSel() {
+    public static String genererSel() {
         SecureRandom random = new SecureRandom();
         byte[] sel = new byte[16];
         random.nextBytes(sel);
         
-        return sel;
+        return DatatypeConverter.printBase64Binary(sel);
     }
 }
