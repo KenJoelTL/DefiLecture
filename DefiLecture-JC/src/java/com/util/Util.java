@@ -17,7 +17,6 @@
 package com.util;
 
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.nio.charset.StandardCharsets.UTF_16;
@@ -26,6 +25,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.xml.bind.DatatypeConverter;
 
 /**
  *
@@ -68,20 +68,40 @@ public class Util {
      * @param p_mdp Le mot de passe 
      * @return String Mot de passe hashé en SHA256 et salé
      */
-
     public static String hasherEtSaler(String p_mdp) {
+        
+        
+         return null; // À compléter.  
+    }
+    
+    /**
+     * Retourne un hash SHA256 de la chaîne de 
+     * caractères fournie en paramètre.
+     *
+     * @param p_chaine La chaîne à hasher
+     * @return String Chaîne hashée en SHA256
+     */
+    public static String genererSHA256(String p_chaine) {
         try {
-            SecureRandom random = new SecureRandom();
-            byte[] sel = new byte[16];
-            random.nextBytes(sel);
-            
             MessageDigest md = MessageDigest.getInstance("SHA-256");
-            md.update(sel);
-            byte[] mdpHashe = md.digest(p_mdp.getBytes(StandardCharsets.UTF_8));
-            
-            return new String(mdpHashe);
-        } catch (NoSuchAlgorithmException ex) {
+            byte[] hash = md.digest(p_chaine.getBytes("UTF-8"));
+            return DatatypeConverter.printHexBinary(hash);
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
             Logger.getLogger(Util.class.getName()).log(Level.SEVERE, null, ex);
-        }                
+        }
+        return null; // Une valeur nulle est retournée si on sort du try/catch.
+    }
+    
+    /**
+     * Retourne un sel généré aléatoirement.
+     * 
+     * @return Sel généré aléatoirement
+     */
+    public static byte[] genererSel() {
+        SecureRandom random = new SecureRandom();
+        byte[] sel = new byte[16];
+        random.nextBytes(sel);
+        
+        return sel;
     }
 }
