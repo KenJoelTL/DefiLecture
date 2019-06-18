@@ -12,20 +12,40 @@
  * <p>You should have received a copy of the GNU General Public License along with DefiLecture. If
  * not, see <http://www.gnu.org/licenses/>.
  */
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package jdbc;
+package com.defilecture.modele;
 
-/** @author Charles */
-public class Config {
-  // valeur contenu dans le fichier web.xml - Joel
-  public static String URL = "";
-  public static String DB_HOST = "";
-  public static String DB_USER = "";
-  public static String DB_PWD = "";
-  public static String DB_NAME = "";
-  public static String DRIVER = "";
+/** @author Joel */
+public class Trieur {
+
+  /**
+   * @param order
+   * @return
+   */
+  public String OrderBy(String order) {
+    switch (order) {
+      case "desc":
+        order = " DESC";
+        break;
+      case "asc":
+        order = " ASC";
+        break;
+      case "nom":
+        order = " ORDER BY NAME";
+        break;
+      case "role":
+        order = " ORDER BY ROLE";
+        break;
+      case "courriel":
+        order = " ORDER BY COURRIEL";
+        break;
+      default:
+        order = "";
+    }
+
+    return order;
+  }
+
+  public String OrderBy() {
+    return OrderBy("");
+  }
 }

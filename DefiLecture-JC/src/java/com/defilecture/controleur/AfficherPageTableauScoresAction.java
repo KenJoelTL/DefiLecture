@@ -12,20 +12,29 @@
  * <p>You should have received a copy of the GNU General Public License along with DefiLecture. If
  * not, see <http://www.gnu.org/licenses/>.
  */
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package jdbc;
+package com.defilecture.controleur;
 
-/** @author Charles */
-public class Config {
-  // valeur contenu dans le fichier web.xml - Joel
-  public static String URL = "";
-  public static String DB_HOST = "";
-  public static String DB_USER = "";
-  public static String DB_PWD = "";
-  public static String DB_NAME = "";
-  public static String DRIVER = "";
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/** @author Joel */
+public class AfficherPageTableauScoresAction implements Action, RequestAware {
+  private HttpServletResponse response;
+  private HttpServletRequest request;
+
+  @Override
+  public String execute() {
+    request.setAttribute("vue", "pageTableauScores.jsp");
+    return "/index.jsp";
+  }
+
+  @Override
+  public void setRequest(HttpServletRequest request) {
+    this.request = request;
+  }
+
+  @Override
+  public void setResponse(HttpServletResponse response) {
+    this.response = response;
+  }
 }
