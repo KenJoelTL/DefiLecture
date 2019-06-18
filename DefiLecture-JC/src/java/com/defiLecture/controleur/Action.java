@@ -15,17 +15,41 @@
     along with DefiLecture.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.defiLecture.controleur;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Charles
+ * @author Mikael Nadeau
  */
-public interface Action {
-    public String execute();
+abstract public class Action implements Executable, RequestAware, SessionAware {
+    protected private HttpServletRequest request;
+    protected private HttpServletResponse response;
+    private HttpSession session;
+
+    @Override
+    public void setRequest(HttpServletRequest request) {
+        this.request = request;
+    }
+    
+    @Override
+    public void setResponse(HttpServletResponse response) {
+        this.response = response;
+    }
+    
+    @Override
+    public void setSession(HttpSession session) {
+        this.session = session;
+    }
+
+    protected boolean userIsAdmin() {
+        return (int)session.getAttribute("role") == Compte.ADMINISTRATEUR;
+    }
+
+    protected boolean userIsModerateur() {
+        return (int)session.getAttribute("role") == Compte.MODERATEUR;
+    }
 }

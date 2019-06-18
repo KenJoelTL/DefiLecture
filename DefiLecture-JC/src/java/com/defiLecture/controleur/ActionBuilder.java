@@ -21,13 +21,12 @@ package com.defiLecture.controleur;
 /**
  *
  * @author Charles et Joel
+ * @author Mikaël Nadeau
  */
 public class ActionBuilder {
     public static Action getAction(String actionName) {
-        //System.out.print("entrer dans l'action builder");
-        if (actionName != null)
+        if (actionName != null) {
             switch (actionName) {
-                
                 case "afficherPageAccueil":
                     return new AfficherPageMarcheASuivreAction();
                 case "afficherPageProfil":
@@ -41,12 +40,13 @@ public class ActionBuilder {
                 case "afficherPageMarcheASuivre":
                     return new AfficherPageMarcheASuivreAction();
                     
-      //Inscription
+                //Inscription
                 case "afficherPageInscription":
                     return new AfficherPageInscriptionAction(); 
                 case "effectuerInscription":
-                    return new EffectuerInscriptionAction();  
-      //Connexion
+                    return new EffectuerInscriptionAction();
+
+                //Connexion
                 case "afficherPageConnexion":
                     return new AfficherPageConnexionAction();    
                 case "effectuerConnexion":
@@ -56,7 +56,7 @@ public class ActionBuilder {
                 case "effectuerGenerationMotPasse":
                     return new EffectuerGenerationMotPasseAction();
                     
-      //Lecture             
+                //Lecture             
                 case "afficherPageCreationLecture":
                     return new AfficherPageCreationLectureAction();
                 case "afficherPageGestionLecture":
@@ -71,7 +71,8 @@ public class ActionBuilder {
                     return new EffectuerModificationLectureAction();
                 case "effectuerSuppressionLecture":
                     return new EffectuerSuppressionLectureAction();
-      //Defi
+
+                //Defi
                 case "afficherPageCreationDefi":
                     return new AfficherPageCreationDefiAction();
                 case "effectuerCreationDefi":
@@ -90,7 +91,8 @@ public class ActionBuilder {
                     return new EffectuerModificationDefiAction();
                 case "supprimerDefi":
                     return new SupprimerDefiAction();
-      //Compte        
+
+                //Compte
                 case "afficherPageGestionListeCompte":
                     return new AfficherPageGestionListeComptesAction();
                 case "afficherPageAdresseCourriel":
@@ -103,7 +105,8 @@ public class ActionBuilder {
                     return new EffectuerAjoutAvatarCompteAction();
                 case "effectuerSuppressionCompte":
                     return new EffectuerSuppressionCompteAction();
-      //Equipe
+
+                //Equipe
                 case "afficherPageEquipe":
                     return new AfficherPageEquipeAction();
                 case "afficherPageCreationEquipe":
@@ -119,7 +122,7 @@ public class ActionBuilder {
                 case "effectuerModificationEquipe":
                     return new EffectuerModificationEquipeAction();
                
-      //DemandeEquipe          
+                //DemandeEquipe
                 case "effectuerDemandeAdhesionEquipe":
                     return new EffectuerDemandeAdhesionEquipeAction();
                 case "afficherPageListeDemandesEquipe":
@@ -135,22 +138,20 @@ public class ActionBuilder {
                 case "effectuerReaffectationMembreEquipe":
                     return new EffectuerReaffectationMembreEquipeAction();
        
-      //Administation
+                //Administation
                 case "afficherPageConfiguration":
                     return new AfficherPageConfigAction();
                 case "effectuerModificationConfig":
                     return new EffectuerModificationConfigAction();
                 case "effectuerSupressionBD":
                     return new EffectuerSuppressionBDAction();
-      //Test Ajax
-                case "testAjax":
-                    return new ExempleClasseActionAjax();
-                    
+
+                // Default Action
                 default:
                     return new DefaultAction();
                 
             }
-        
+        }
         return new AfficherPageMarcheASuivreAction();
     }
 }

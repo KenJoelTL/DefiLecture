@@ -24,9 +24,6 @@ package com.defiLecture.controleur;
 import java.sql.Connection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import jdbc.Config;
 import jdbc.Connexion;
 import com.defiLecture.modele.Compte;
@@ -36,75 +33,46 @@ import java.sql.SQLException;
 /**
  *
  * @author Joel
+ * @author Mikaël
  */
-public class AfficherPageModificationCompteAction implements Action, RequestAware,SessionAware, DataReceiver {
-    private HttpSession session;
-    private HttpServletRequest request;
-    private HttpServletResponse response;
-    
+public class AfficherPageModificationCompteAction implements Action {
     @Override
     public String execute() {
-
         request.setAttribute("vue", "pageMarcheASuivre.jsp");        
         
-        
-        // On vérifie si l'utilisateur qui est selectionné est bien celui qui est connecté. 
-        // Autrement, seuls les administrateurs et les modérateurs peuvent accéder à la page de configuration d'autrui
-        if( session.getAttribute("connecte") != null && session.getAttribute("role") != null && request.getParameter("id")!=null) 
-            if( ( !request.getParameter("id").equals(session.getAttribute("connecte")+"")
-             && ( ((int)session.getAttribute("role") == Compte.ADMINISTRATEUR) || ((int)session.getAttribute("role") == Compte.MODERATEUR) ) ) 
-             || (request.getParameter("id").equals(session.getAttribute("connecte")+"")) ){
+        if(session.getAttribute("connecte") != null && session.getAttribute("role") != null && request.getParameter("id")!=null) {
+            if( (request.getParameter("id") != session.getAttribute("connecte")
+                    && (userIsAdmin() || userIsModerateur()))
+                || request.getParameter("id") == session.getAttribute("connecte")) {
 
-            String idCompte = request.getParameter("id");
-            try {
-                Connection cnx = Connexion.startConnection
-                       (Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
+                String idCompte = request.getParameter("id");
+                try {
+                    Connection cnx = Connexion.startConnection
+                           (Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
 
-                CompteDAO dao = new CompteDAO(cnx);
+                    CompteDAO dao = new CompteDAO(cnx);
 
-                if(dao.read(idCompte)!=null)
-                    request.setAttribute("vue", "pageModificationCompte.jsp");
-                else{
-                    if(((int)session.getAttribute("role") == Compte.ADMINISTRATEUR) || ((int)session.getAttribute("role") == Compte.MODERATEUR) ){
-                        request.setAttribute("vue", "pageGestionListeCompte.jsp");
+                    if(dao.read(idCompte)!=null) {
+                        request.setAttribute("vue", "pageModificationCompte.jsp");
                     }
-                    else{//message d'erreur
-                        request.setAttribute("vue", "pageMarcheASuivre.jsp");
+                    else{
+                        if(userIsAdmin() || userIsModerateur()){
+                            request.setAttribute("vue", "pageGestionListeCompte.jsp");
+                        }
+                        else{
+                            request.setAttribute("vue", "pageMarcheASuivre.jsp");
+                        }
                     }
                 }
-
-            } 
-            catch (ClassNotFoundException ex) {
-                Logger.getLogger(AfficherPageModificationCompteAction
-                                   .class.getName()).log(Level.SEVERE, null, ex);
-                    if((request.getParameter("id").equals(session.getAttribute("connecte")+"")))
-                        request.setAttribute("vue", "pageMarcheASuivre.jsp");
-                    else
-                        request.setAttribute("vue", "pageGestionListeCompte.jsp");
-                return "/index.jsp";
-            } catch (SQLException ex) {
-                Logger.getLogger(AfficherPageModificationCompteAction.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            finally{
-                Connexion.close();
+                catch (SQLException ex) {
+                    Logger.getLogger(AfficherPageModificationCompteAction.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                finally{
+                    Connexion.close();
+                }
             }
         }
+
         return "/index.jsp";
     }
-
-    @Override
-    public void setRequest(HttpServletRequest request) {
-        this.request = request;
-    }
-
-    @Override
-    public void setResponse(HttpServletResponse response) {
-        this.response = response;
-    }
-
-    @Override
-    public void setSession(HttpSession session) {
-        this.session = session;
-    }
-    
 }

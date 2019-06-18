@@ -21,18 +21,12 @@
  */
 package com.defiLecture.controleur;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 /**
  *
  * @author Charles
+ * @author Mikaël
  */
-public class AfficherPageInscriptionDefiAction implements Action, RequestAware, DataReceiver {
-
-     private HttpServletRequest request;
-    private HttpServletResponse response;
-    
+public class AfficherPageInscriptionDefiAction implements Action {
     @Override
     public String execute() {
         
@@ -40,17 +34,4 @@ public class AfficherPageInscriptionDefiAction implements Action, RequestAware, 
         
         return "/index.jsp";
     }
-
-    @Override
-    public void setRequest(HttpServletRequest request) {
-        this.request = request;
-    }
-    
-    @Override
-    public void setResponse(HttpServletResponse response) {
-        this.response = response;
-    }
-    
-    
-    
 }

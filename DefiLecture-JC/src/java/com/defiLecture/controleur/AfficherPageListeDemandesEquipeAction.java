@@ -21,44 +21,21 @@
  */
 package com.defiLecture.controleur;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import com.defiLecture.modele.Compte;
-
 /**
  *
  * @author Joel
+ * @author Mikaël
  */
-public class AfficherPageListeDemandesEquipeAction implements Action, RequestAware, SessionAware, DataReceiver {
-    private HttpServletResponse response;
-    private HttpServletRequest request;
-    private HttpSession session;
-    
+public class AfficherPageListeDemandesEquipeAction implements Action {
     @Override
     public String execute() { 
-        
-        if(session.getAttribute("connecte") == null)
+        if(session.getAttribute("connecte") == null) {
            request.setAttribute("vue", "pageConnexion");        
-        else
+        }
+        else {
             request.setAttribute("vue", "pageListeDemandesEquipe.jsp");
-
-        return"/index.jsp";
+        }
+        return "/index.jsp";
     }
-
-    @Override
-    public void setRequest(HttpServletRequest request) {
-        this.request = request;
-    }
-
-    @Override
-    public void setResponse(HttpServletResponse response) {
-        this.response = response;
-    }
-
-    @Override
-    public void setSession(HttpSession session) {
-        this.session = session;
-    }
-    
 }

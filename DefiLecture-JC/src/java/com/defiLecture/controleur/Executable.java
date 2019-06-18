@@ -14,6 +14,7 @@
     You should have received a copy of the GNU General Public License
     along with DefiLecture.  If not, see <http://www.gnu.org/licenses/>.
 */
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -24,12 +25,7 @@ package com.defiLecture.controleur;
 /**
  *
  * @author Charles
- * @author Mikaël Nadeau
  */
-public class AfficherPageCodeConduiteAction extends Action {
-    @Override
-    public String execute() {
-        request.setAttribute("vue", "pageCodeConduite.jsp");
-        return "/index.jsp";
-    }
+public interface Executable {
+    public String execute();
 }

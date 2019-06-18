@@ -23,9 +23,6 @@ package com.defiLecture.controleur;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import jdbc.Config;
 import jdbc.Connexion;
 import com.defiLecture.modele.Compte;
@@ -35,17 +32,13 @@ import java.sql.SQLException;
 /**
  *
  * @author Joel
+ * @author Mikaël
  */
-public class AfficherPageCreationEquipeAction implements Action,RequestAware, SessionAware, DataReceiver{
-    private HttpServletResponse response;
-    private HttpServletRequest request;
-    private HttpSession session;        
-            
+public class AfficherPageCreationEquipeAction implements Action{
     @Override
     public String execute() {
-        
         if( session.getAttribute ("connecte") != null && session.getAttribute("role") != null 
-        && (int)session.getAttribute("role") == Compte.CAPITAINE){
+            && (int)session.getAttribute("role") == Compte.CAPITAINE) {
 
             int idCompte = (int)session.getAttribute("connecte");
             
@@ -57,11 +50,13 @@ public class AfficherPageCreationEquipeAction implements Action,RequestAware, Se
                 if(compte.getIdEquipe()==-1)
                     request.setAttribute("vue", "pageCreationEquipe.jsp");
                 
-            } catch (ClassNotFoundException ex) {
+            }
+            catch (ClassNotFoundException ex) {
                 Logger.getLogger(AfficherPageCreationEquipeAction
                                    .class.getName()).log(Level.SEVERE, null, ex);
                  request.setAttribute("vue","accueil.jsp");
-            } catch (SQLException ex) {
+            }
+            catch (SQLException ex) {
                 Logger.getLogger(AfficherPageCreationEquipeAction.class.getName()).log(Level.SEVERE, null, ex);
             }
             finally{
@@ -71,22 +66,4 @@ public class AfficherPageCreationEquipeAction implements Action,RequestAware, Se
         
         return"/index.jsp";
     }
-    
-    
-    @Override
-    public void setRequest(HttpServletRequest request) {
-        this.request = request;
-    }
-
-    @Override
-    public void setResponse(HttpServletResponse response) {
-        this.response = response;
-    }
-
-    @Override
-    public void setSession(HttpSession session) {
-        this.session = session;
-    }
-
-    
 }

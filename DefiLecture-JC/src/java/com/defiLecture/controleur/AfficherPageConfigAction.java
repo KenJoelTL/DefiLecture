@@ -16,29 +16,14 @@
 */
 package com.defiLecture.controleur;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-public class AfficherPageConfigAction implements Action , RequestAware{
-    
-    private HttpServletRequest request;
-    private HttpServletResponse response;
-    
+/**
+ *
+ * @author Mikaël Nadeau
+ */
+public class AfficherPageConfigAction implements Action {
     @Override
     public String execute() {
-        
         request.setAttribute("vue", "pageConfiguration.jsp");
-        
         return "/index.jsp";
-    }
-
-    @Override
-    public void setRequest(HttpServletRequest request) {
-        this.request = request;
-    }
-    
-    @Override
-    public void setResponse(HttpServletResponse response) {
-        this.response = response;
     }
 }
