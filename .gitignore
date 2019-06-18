@@ -4,3 +4,7 @@ DefiLecture-JC/nbproject/private/private.xml
 DefiLecture-JC/build/
 data/*
 DefiLecture-JC/nbproject/*
+build
+reset_db
+restart
+stop
