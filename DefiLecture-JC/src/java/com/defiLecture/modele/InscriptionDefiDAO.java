@@ -1,19 +1,17 @@
 /**
-    This file is part of DefiLecture.
-
-    DefiLecture is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    DefiLecture is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with DefiLecture.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ * This file is part of DefiLecture.
+ *
+ * <p>DefiLecture is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * <p>DefiLecture is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * <p>You should have received a copy of the GNU General Public License along with DefiLecture. If
+ * not, see <http://www.gnu.org/licenses/>.
+ */
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -27,424 +25,360 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jdbc.Connexion;
 
-/**
- *
- * @author Charles
- */
+/** @author Charles */
 public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
 
-    public InscriptionDefiDAO() {
+  public InscriptionDefiDAO() {}
+
+  public InscriptionDefiDAO(Connection c) {
+    super(c);
+  }
+
+  @Override
+  public boolean create(InscriptionDefi x) {
+
+    String req =
+        "INSERT INTO inscription_defi (`ID_COMPTE` ,`ID_DEFI` ,`VALEUR_MINUTE` , `EST_REUSSI`) VALUES "
+            + "(?,?,?,?)";
+
+    PreparedStatement paramStm = null;
+    try {
+
+      paramStm = cnx.prepareStatement(req);
+
+      paramStm.setInt(1, x.getIdCompte());
+      paramStm.setInt(2, x.getIdDefi());
+      paramStm.setInt(3, x.getValeurMinute());
+      paramStm.setInt(4, x.getEstReussi());
+
+      int n = paramStm.executeUpdate();
+
+      if (n > 0) {
+        paramStm.close();
+        return true;
+      }
+    } catch (SQLException exp) {
+      Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, exp);
+    } finally {
+      try {
+        if (paramStm != null) paramStm.close();
+      } catch (SQLException ex) {
+        Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, ex);
+      }
     }
-    
-    public InscriptionDefiDAO(Connection c)
-    {
-        super(c);
-    }
+    return false;
+  }
 
-    @Override
-    public boolean create(InscriptionDefi x) {
-               
-        String req = "INSERT INTO inscription_defi (`ID_COMPTE` ,`ID_DEFI` ,`VALEUR_MINUTE` , `EST_REUSSI`) VALUES "+
-			     "(?,?,?,?)";
-				 		 
+  @Override
+  public InscriptionDefi read(String id) {
+    return (this.read(Integer.parseInt(id)));
+  }
 
-        PreparedStatement paramStm = null;
-        try 
-        {
+  @Override
+  public InscriptionDefi read(int id) {
+    String req = "SELECT * FROM inscription_defi WHERE `ID_INSCRIPTION_DEFI` = ?";
 
-            paramStm = cnx.prepareStatement(req);
+    PreparedStatement paramStm = null;
 
-                
-                
-            paramStm.setInt(1, x.getIdCompte());
-            paramStm.setInt(2, x.getIdDefi());
-            paramStm.setInt(3, x.getValeurMinute());
-            paramStm.setInt(4, x.getEstReussi());
-                
+    try {
 
-            int n= paramStm.executeUpdate();
-                
-            if (n>0)
-            {
-                paramStm.close();
-                return true;
-            }
-        }
-        catch (SQLException exp){
-            Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, exp);
-        }
-        finally
-        {
-                try {
-                    if (paramStm!=null)
-                        paramStm.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, ex);
-                }
-         
-        }
-        return false;
-    }
+      paramStm = cnx.prepareStatement(req);
 
-    @Override
-    public InscriptionDefi read(String id) {
-        return(this.read(Integer.parseInt(id)));
-    }
+      paramStm.setInt(1, id);
 
-    @Override
-    public InscriptionDefi read(int id) {
-        String req = "SELECT * FROM inscription_defi WHERE `ID_INSCRIPTION_DEFI` = ?";
- 
-        PreparedStatement paramStm = null;
-		
-        try {
-		
-                paramStm = cnx.prepareStatement(req);
+      ResultSet resultat = paramStm.executeQuery();
 
-                paramStm.setInt(1, id);
+      // On vérifie s'il y a un résultat
+      if (resultat.next()) {
 
-                ResultSet resultat = paramStm.executeQuery();
-                
-                // On vérifie s'il y a un résultat    
-                if(resultat.next()){
-                    
-                    InscriptionDefi i = new InscriptionDefi();
+        InscriptionDefi i = new InscriptionDefi();
 
-                    i.setIdInscriptionDefi(resultat.getInt("ID_INSCRIPTION_DEFI"));
-                    i.setIdCompte(resultat.getInt("ID_COMPTE"));
-                    i.setIdDefi(resultat.getInt("ID_DEFI"));
-                    i.setValeurMinute(resultat.getInt("VALEUR_MINUTE"));
-                    i.setEstReussi(resultat.getInt("EST_REUSSI"));
-                    i.setDateInscription(resultat.getString("DATE_INSCRIPTION"));
-                    
-                    resultat.close();
-                    paramStm.close();
-                    return i;
-                    
-                        
-                }
-                resultat.close();
-                paramStm.close();
-                return null;
-                
-        }
-        catch (SQLException exp) {
-            Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, exp);
-        }
-        finally {
-            try{
-                if (paramStm!=null)
-                    paramStm.close();
-            }
-            catch (SQLException exp) {
-                Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, exp);
-            }
-             catch (Exception e) {
-                 Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, e);
-            }
-        }        
-        
-        return null;
+        i.setIdInscriptionDefi(resultat.getInt("ID_INSCRIPTION_DEFI"));
+        i.setIdCompte(resultat.getInt("ID_COMPTE"));
+        i.setIdDefi(resultat.getInt("ID_DEFI"));
+        i.setValeurMinute(resultat.getInt("VALEUR_MINUTE"));
+        i.setEstReussi(resultat.getInt("EST_REUSSI"));
+        i.setDateInscription(resultat.getString("DATE_INSCRIPTION"));
+
+        resultat.close();
+        paramStm.close();
+        return i;
+      }
+      resultat.close();
+      paramStm.close();
+      return null;
+
+    } catch (SQLException exp) {
+      Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, exp);
+    } finally {
+      try {
+        if (paramStm != null) paramStm.close();
+      } catch (SQLException exp) {
+        Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, exp);
+      } catch (Exception e) {
+        Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, e);
+      }
     }
 
-    @Override
-    public boolean update(InscriptionDefi x) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    return null;
+  }
+
+  @Override
+  public boolean update(InscriptionDefi x) {
+    throw new UnsupportedOperationException(
+        "Not supported yet."); // To change body of generated methods, choose Tools | Templates.
+  }
+
+  @Override
+  public boolean delete(InscriptionDefi x) {
+    String req = "DELETE FROM inscription_defi WHERE `ID_INSCRIPTION_DEFI` = ?";
+
+    PreparedStatement paramStm = null;
+
+    try {
+      paramStm = cnx.prepareStatement(req);
+      paramStm.setInt(1, x.getIdInscriptionDefi());
+
+      int nbLignesAffectees = paramStm.executeUpdate();
+
+      if (nbLignesAffectees > 0) {
+        paramStm.close();
+        return true;
+      }
+
+      return false;
+    } catch (SQLException exp) {
+      Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, exp);
+    } catch (Exception exp) {
+      Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, exp);
+    } finally {
+      try {
+        if (paramStm != null) paramStm.close();
+      } catch (SQLException ex) {
+        Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, ex);
+      }
+    }
+    return false;
+  }
+
+  @Override
+  public List<InscriptionDefi> findAll() {
+
+    String req = "SELECT * FROM inscription_defi";
+    List<InscriptionDefi> listeInscriptionDefi = new ArrayList<InscriptionDefi>();
+
+    Statement stm = null;
+    try {
+
+      stm = cnx.createStatement();
+
+      ResultSet resultat = stm.executeQuery(req);
+
+      // On vérifie s'il y a un résultat
+      while (resultat.next()) {
+
+        InscriptionDefi i = new InscriptionDefi();
+
+        i.setIdInscriptionDefi(resultat.getInt("ID_INSCRIPTION_DEFI"));
+        i.setIdCompte(resultat.getInt("ID_COMPTE"));
+        i.setIdDefi(resultat.getInt("ID_DEFI"));
+        i.setValeurMinute(resultat.getInt("VALEUR_MINUTE"));
+        i.setEstReussi(resultat.getInt("EST_REUSSI"));
+        i.setDateInscription(resultat.getString("DATE_INSCRIPTION"));
+
+        listeInscriptionDefi.add(i);
+      }
+      resultat.close();
+      stm.close();
+      return listeInscriptionDefi;
+
+    } catch (SQLException exp) {
+      Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, exp);
+    } finally {
+      try {
+        if (stm != null) stm.close();
+      } catch (SQLException exp) {
+        Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, exp);
+      } catch (Exception e) {
+        Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, e);
+      }
     }
 
-    @Override
-    public boolean delete(InscriptionDefi x) {
-        String req = "DELETE FROM inscription_defi WHERE `ID_INSCRIPTION_DEFI` = ?";
-        
-        PreparedStatement paramStm = null;
+    return listeInscriptionDefi;
+  }
 
-        try {
-                paramStm = cnx.prepareStatement(req);
-                paramStm.setInt(1, x.getIdInscriptionDefi());
+  public List<InscriptionDefi> findAllByIdCompte(int idCompte) {
 
-                int nbLignesAffectees= paramStm.executeUpdate();
-                
-                if (nbLignesAffectees>0) {
-                    paramStm.close();
-                    return true;
-                }
-                
-            return false;
-        }
-        catch (SQLException exp) {
-            Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, exp);
-        }
-        catch (Exception exp) {
-            Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, exp);
-        }
-        finally {
-                try {
-                    if (paramStm!=null)
-                        paramStm.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, ex);
-                }
-        }
-        return false;
+    String req = "SELECT * FROM inscription_defi WHERE `ID_COMPTE` = ?";
+    List<InscriptionDefi> listeInscriptionDefi = new ArrayList<InscriptionDefi>();
+
+    PreparedStatement paramStm = null;
+    try {
+
+      paramStm = cnx.prepareStatement(req);
+
+      paramStm.setInt(1, idCompte);
+
+      ResultSet resultat = paramStm.executeQuery();
+
+      // On vérifie s'il y a un résultat
+      while (resultat.next()) {
+
+        InscriptionDefi i = new InscriptionDefi();
+
+        i.setIdInscriptionDefi(resultat.getInt("ID_INSCRIPTION_DEFI"));
+        i.setIdCompte(resultat.getInt("ID_COMPTE"));
+        i.setIdDefi(resultat.getInt("ID_DEFI"));
+        i.setValeurMinute(resultat.getInt("VALEUR_MINUTE"));
+        i.setEstReussi(resultat.getInt("EST_REUSSI"));
+        i.setDateInscription(resultat.getString("DATE_INSCRIPTION"));
+
+        listeInscriptionDefi.add(i);
+      }
+      resultat.close();
+      paramStm.close();
+      return listeInscriptionDefi;
+
+    } catch (SQLException ex) {
+      Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+      try {
+        if (paramStm != null) paramStm.close();
+      } catch (SQLException exp) {
+        Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, exp);
+      } catch (Exception e) {
+        Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, e);
+      }
     }
 
-    @Override
-    public List<InscriptionDefi> findAll() {
-        
-        String req = "SELECT * FROM inscription_defi";
-		List<InscriptionDefi> listeInscriptionDefi = new ArrayList<InscriptionDefi>();
-        
-        Statement stm = null;
-        try {
+    return listeInscriptionDefi;
+  }
 
-                stm = cnx.createStatement();
+  public List<InscriptionDefi> findByDefiReussi() {
 
-                ResultSet resultat = stm.executeQuery(req);
-                
-                // On vérifie s'il y a un résultat    
-                while(resultat.next()){
-                    
-                    InscriptionDefi i = new InscriptionDefi();
+    String req = "SELECT * FROM inscription_defi WHERE `EST_REUSSI` = 1";
+    List<InscriptionDefi> listeInscriptionDefi = new ArrayList<InscriptionDefi>();
 
-                    i.setIdInscriptionDefi(resultat.getInt("ID_INSCRIPTION_DEFI"));
-                    i.setIdCompte(resultat.getInt("ID_COMPTE"));
-                    i.setIdDefi(resultat.getInt("ID_DEFI"));
-                    i.setValeurMinute(resultat.getInt("VALEUR_MINUTE"));
-                    i.setEstReussi(resultat.getInt("EST_REUSSI"));
-                    i.setDateInscription(resultat.getString("DATE_INSCRIPTION"));
+    PreparedStatement paramStm = null;
+    try {
 
-                    listeInscriptionDefi.add(i);
-                        
-                }
-                resultat.close();
-                stm.close();
-                return listeInscriptionDefi;
-                
-        }
-        catch (SQLException exp) {
-            Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, exp);
-        }
-        finally {
-            try{
-                if (stm!=null)
-                    stm.close();
-            }
-            catch (SQLException exp) {
-                Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, exp);
-            }
-            catch (Exception e) {
-                Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, e);
-            }
-        }        
-        
-        return listeInscriptionDefi;
+      paramStm = cnx.prepareStatement(req);
+
+      ResultSet resultat = paramStm.executeQuery();
+
+      // On vérifie s'il y a un résultat
+      while (resultat.next()) {
+
+        InscriptionDefi i = new InscriptionDefi();
+
+        i.setIdInscriptionDefi(resultat.getInt("ID_INSCRIPTION_DEFI"));
+        i.setIdCompte(resultat.getInt("ID_COMPTE"));
+        i.setIdDefi(resultat.getInt("ID_DEFI"));
+        i.setValeurMinute(resultat.getInt("VALEUR_MINUTE"));
+        i.setEstReussi(resultat.getInt("EST_REUSSI"));
+        i.setDateInscription(resultat.getString("DATE_INSCRIPTION"));
+
+        listeInscriptionDefi.add(i);
+      }
+      resultat.close();
+      paramStm.close();
+      return listeInscriptionDefi;
+
+    } catch (SQLException exp) {
+      Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, exp);
+    } finally {
+      try {
+        if (paramStm != null) paramStm.close();
+      } catch (SQLException exp) {
+        Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, exp);
+      } catch (Exception e) {
+        Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, e);
+      }
     }
-	
-	public List<InscriptionDefi> findAllByIdCompte(int idCompte) {
-            
-            String req = "SELECT * FROM inscription_defi WHERE `ID_COMPTE` = ?";
-            List<InscriptionDefi> listeInscriptionDefi = new ArrayList<InscriptionDefi>();
 
-        PreparedStatement paramStm = null;
-        try {
+    return listeInscriptionDefi;
+  }
 
-                paramStm = cnx.prepareStatement(req);
+  // Trouver les incription par un id d'un défi
+  public List<InscriptionDefi> findByIdDefi(int id) {
 
-                paramStm.setInt(1, idCompte);
+    String req = "SELECT * FROM inscription_defi WHERE `ID_DEFI` = ?";
+    List<InscriptionDefi> listeInscriptionDefi = new ArrayList<InscriptionDefi>();
 
-                ResultSet resultat = paramStm.executeQuery();
+    PreparedStatement paramStm = null;
+    try {
 
-                // On vérifie s'il y a un résultat    
-                while(resultat.next()){
+      paramStm = cnx.prepareStatement(req);
 
-                    InscriptionDefi i = new InscriptionDefi();
+      paramStm.setInt(1, id);
 
-                    i.setIdInscriptionDefi(resultat.getInt("ID_INSCRIPTION_DEFI"));
-                    i.setIdCompte(resultat.getInt("ID_COMPTE"));
-                    i.setIdDefi(resultat.getInt("ID_DEFI"));
-                    i.setValeurMinute(resultat.getInt("VALEUR_MINUTE"));
-                    i.setEstReussi(resultat.getInt("EST_REUSSI"));
-                    i.setDateInscription(resultat.getString("DATE_INSCRIPTION"));
+      ResultSet resultat = paramStm.executeQuery();
 
-                    listeInscriptionDefi.add(i);
+      // On vérifie s'il y a un résultat
+      while (resultat.next()) {
 
-                }
-                resultat.close();
-                paramStm.close();
-                return listeInscriptionDefi;
+        InscriptionDefi i = new InscriptionDefi();
 
-        }
-        catch (SQLException ex) {
-            Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        finally {
-            try{
-                if (paramStm!=null)
-                    paramStm.close();
-            }
-            catch (SQLException exp) {
-                Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, exp);
-            }
-            catch (Exception e) {
-                Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, e);
-            }
-        }        
+        i.setIdInscriptionDefi(resultat.getInt("ID_INSCRIPTION_DEFI"));
+        i.setIdCompte(resultat.getInt("ID_COMPTE"));
+        i.setIdDefi(resultat.getInt("ID_DEFI"));
+        i.setValeurMinute(resultat.getInt("VALEUR_MINUTE"));
+        i.setEstReussi(resultat.getInt("EST_REUSSI"));
+        i.setDateInscription(resultat.getString("DATE_INSCRIPTION"));
 
-        return listeInscriptionDefi;
-        
+        listeInscriptionDefi.add(i);
+      }
+      resultat.close();
+      paramStm.close();
+      return listeInscriptionDefi;
+
+    } catch (SQLException ex) {
+      Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (Exception e) {
+      Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, e);
+    } finally {
+      try {
+        if (paramStm != null) paramStm.close();
+      } catch (SQLException ex) {
+        Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, ex);
+      } catch (Exception e) {
+        Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, e);
+      }
     }
-        
-        public List<InscriptionDefi> findByDefiReussi() {
-            
-            String req = "SELECT * FROM inscription_defi WHERE `EST_REUSSI` = 1";
-            List<InscriptionDefi> listeInscriptionDefi = new ArrayList<InscriptionDefi>();
+    return listeInscriptionDefi;
+  }
 
-        PreparedStatement paramStm = null;
-        try {
+  public boolean deleteTable() {
+    String req = "DELETE FROM inscription_defi";
 
-                paramStm = cnx.prepareStatement(req);
+    PreparedStatement paramStm = null;
 
-           
-                ResultSet resultat = paramStm.executeQuery();
+    try {
+      paramStm = cnx.prepareStatement(req);
 
-                // On vérifie s'il y a un résultat    
-                while(resultat.next()){
+      int nbLignesAffectees = paramStm.executeUpdate();
 
-                    InscriptionDefi i = new InscriptionDefi();
-                    
-                    i.setIdInscriptionDefi(resultat.getInt("ID_INSCRIPTION_DEFI"));
-                    i.setIdCompte(resultat.getInt("ID_COMPTE"));
-                    i.setIdDefi(resultat.getInt("ID_DEFI"));
-                    i.setValeurMinute(resultat.getInt("VALEUR_MINUTE"));
-                    i.setEstReussi(resultat.getInt("EST_REUSSI"));
-                    i.setDateInscription(resultat.getString("DATE_INSCRIPTION"));
+      if (nbLignesAffectees > 0) {
+        paramStm.close();
+        return true;
+      }
 
-                    listeInscriptionDefi.add(i);
-
-                }
-                resultat.close();
-                paramStm.close();
-                return listeInscriptionDefi;
-
-        }
-        catch (SQLException exp) {
-            Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, exp);
-        }
-        finally {
-            try{
-                if (paramStm!=null)
-                    paramStm.close();
-            }
-            catch (SQLException exp) {
-                Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, exp);
-            }
-            catch (Exception e) {
-                Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, e);
-            }
-        }        
-
-        return listeInscriptionDefi;
-        
+      return false;
+    } catch (SQLException exp) {
+      Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, exp);
+    } catch (Exception exp) {
+      Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, exp);
+    } finally {
+      try {
+        if (paramStm != null) paramStm.close();
+      } catch (SQLException ex) {
+        Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, ex);
+      }
     }
-        
-    // Trouver les incription par un id d'un défi
-    public List<InscriptionDefi> findByIdDefi(int id){
-            
-        String req = "SELECT * FROM inscription_defi WHERE `ID_DEFI` = ?";
-        List<InscriptionDefi> listeInscriptionDefi = new ArrayList<InscriptionDefi>();
-
-        PreparedStatement paramStm = null;
-        try {
-
-            paramStm = cnx.prepareStatement(req);
-                
-            paramStm.setInt(1, id);
-           
-            ResultSet resultat = paramStm.executeQuery();
-
-            // On vérifie s'il y a un résultat    
-            while(resultat.next()){
-
-                InscriptionDefi i = new InscriptionDefi();
-
-                i.setIdInscriptionDefi(resultat.getInt("ID_INSCRIPTION_DEFI"));
-                i.setIdCompte(resultat.getInt("ID_COMPTE"));
-                i.setIdDefi(resultat.getInt("ID_DEFI"));
-                i.setValeurMinute(resultat.getInt("VALEUR_MINUTE"));
-                i.setEstReussi(resultat.getInt("EST_REUSSI"));
-                i.setDateInscription(resultat.getString("DATE_INSCRIPTION"));
-
-                listeInscriptionDefi.add(i);
-
-            }
-            resultat.close();
-            paramStm.close();
-            return listeInscriptionDefi;
-
-        }
-        catch (SQLException ex) {
-            Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        catch (Exception e) {
-            Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, e);
-        }
-        finally {
-            try{
-                if (paramStm!=null)
-                    paramStm.close();
-            }
-            catch (SQLException ex) {
-                Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            catch (Exception e) {
-                Logger.getLogger(InscriptionDefiDAO.class.getName()).log(Level.SEVERE, null, e);
-            }
-
-        } 
-        return listeInscriptionDefi;
-    }
-    
-    public boolean deleteTable() {
-        String req = "DELETE FROM inscription_defi";
-        
-        PreparedStatement paramStm = null;
-
-        try {
-            paramStm = cnx.prepareStatement(req);
-
-            int nbLignesAffectees= paramStm.executeUpdate();
-                
-            if (nbLignesAffectees>0) {
-                paramStm.close();
-                return true;
-            }
-                
-            return false;
-        }
-        catch (SQLException exp) {
-            Logger.getLogger(InscriptionDefiDAO.class.getName())
-                .log(Level.SEVERE, null, exp);
-        }
-        catch (Exception exp) {
-            Logger.getLogger(InscriptionDefiDAO.class.getName())
-                .log(Level.SEVERE, null, exp);
-        }
-        finally {
-            try {
-                if (paramStm!=null)
-                    paramStm.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(InscriptionDefiDAO.class.getName())
-                    .log(Level.SEVERE, null, ex);
-            }
-        }
-        return false;
-    }
-    
+    return false;
+  }
 }

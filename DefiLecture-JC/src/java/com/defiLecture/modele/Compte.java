@@ -1,19 +1,17 @@
 /**
-    This file is part of DefiLecture.
-
-    DefiLecture is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    DefiLecture is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with DefiLecture.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ * This file is part of DefiLecture.
+ *
+ * <p>DefiLecture is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * <p>DefiLecture is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * <p>You should have received a copy of the GNU General Public License along with DefiLecture. If
+ * not, see <http://www.gnu.org/licenses/>.
+ */
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -21,171 +19,187 @@
  */
 package com.defiLecture.modele;
 
-/**
- *
- * @author Joel
- */
+/** @author Joel */
 public class Compte {
-    public static int PARTICIPANT    = 1;
-    public static int CAPITAINE      = 2;
-    public static int MODERATEUR     = 3;
-    public static int ADMINISTRATEUR = 4;
-    public static String AVATAR_DEFAUT ="/images/avatars/avatarCompte_defaut.png";
-       
-    private int idCompte,                       //clé primaire
-                idEquipe =-1;                   //équipe dont le participant fait partie -1:le compte en question ne fait pas partie d'une équipe
-    
-    private int role = Compte.PARTICIPANT,      //Utilisateur==0 | Participant==1 | Capitaine==2 | Animateur==3 | Administrateur==4
-                point,                          //Sommes des points gagnées par les lectures. 
-                minutesRestantes,
-                devenirCapitaine;               //Utilisateur veut devenir capitaine = 1 sinon, 0.
+  public static int PARTICIPANT = 1;
+  public static int CAPITAINE = 2;
+  public static int MODERATEUR = 3;
+  public static int ADMINISTRATEUR = 4;
+  public static String AVATAR_DEFAUT = "/images/avatars/avatarCompte_defaut.png";
 
-    public int getDevenirCapitaine() {
-        return devenirCapitaine;
-    }
+  private int idCompte, // clé primaire
+      idEquipe =
+          -1; // équipe dont le participant fait partie -1:le compte en question ne fait pas partie
+              // d'une équipe
+  private int
+      role =
+          Compte
+              .PARTICIPANT, // Utilisateur==0 | Participant==1 | Capitaine==2 | Animateur==3 |
+                            // Administrateur==4
+      point, // Sommes des points gagnées par les lectures.
+      minutesRestantes,
+      devenirCapitaine; // Utilisateur veut devenir capitaine = 1 sinon, 0.
 
-    public void setDevenirCapitaine(int devenirCapitaine) {
-        this.devenirCapitaine = devenirCapitaine;
-    }
-   
+  public int getDevenirCapitaine() {
+    return devenirCapitaine;
+  }
 
-//    String nomUtilisateur;                    //ancienne clé primaire
-    private String pseudonyme,                  //l'utilisateur peut aussi s'inscrire avec un pseudo unique
-                   nom,
-                   prenom,
-                   courriel,
-                   motPasse,
-                   programmeEtude,              //programme scolaire
-                   avatar = AVATAR_DEFAUT;      //Pour l'instant l'avatar sera représenté par le chemin vers l'image
-    
-    public Compte(){
-    
-    }
+  public void setDevenirCapitaine(int devenirCapitaine) {
+    this.devenirCapitaine = devenirCapitaine;
+  }
 
-    public Compte(int idCompte, int idEquipe, String pseudonyme, String nom, String prenom,
-                            String courriel, String programme, String avatar, int role, int pointage, int minutesRestantes) {
-        this.idCompte = idCompte;
-        this.idEquipe = idEquipe;
-        this.pseudonyme = pseudonyme;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.courriel = courriel;
-        this.programmeEtude = programme;
-        this.avatar = avatar;
-        this.role = role;
-        this.point = pointage;
-        this.minutesRestantes = minutesRestantes;
-    }
+  //    String nomUtilisateur;                    //ancienne clé primaire
+  private String pseudonyme, // l'utilisateur peut aussi s'inscrire avec un pseudo unique
+      nom,
+      prenom,
+      courriel,
+      motPasse,
+      programmeEtude, // programme scolaire
+      avatar = AVATAR_DEFAUT; // Pour l'instant l'avatar sera représenté par le chemin vers l'image
 
-    public Compte(int idEquipe, String pseudonyme, String nom, String prenom, String courriel,
-                            String programme, String avatar, int role, int pointage, int minutesRestantes) {
-        this.idEquipe = idEquipe;
-        this.pseudonyme = pseudonyme;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.courriel = courriel;
-        this.programmeEtude = programme;
-        this.avatar = avatar;
-        this.role = role;
-        this.point = pointage;
-        this.minutesRestantes = minutesRestantes;
-    }
+  public Compte() {}
 
-    public int getIdCompte() {
-        return idCompte;
-    }
+  public Compte(
+      int idCompte,
+      int idEquipe,
+      String pseudonyme,
+      String nom,
+      String prenom,
+      String courriel,
+      String programme,
+      String avatar,
+      int role,
+      int pointage,
+      int minutesRestantes) {
+    this.idCompte = idCompte;
+    this.idEquipe = idEquipe;
+    this.pseudonyme = pseudonyme;
+    this.nom = nom;
+    this.prenom = prenom;
+    this.courriel = courriel;
+    this.programmeEtude = programme;
+    this.avatar = avatar;
+    this.role = role;
+    this.point = pointage;
+    this.minutesRestantes = minutesRestantes;
+  }
 
-    public void setIdCompte(int idCompte) {
-        this.idCompte = idCompte;
-    }
+  public Compte(
+      int idEquipe,
+      String pseudonyme,
+      String nom,
+      String prenom,
+      String courriel,
+      String programme,
+      String avatar,
+      int role,
+      int pointage,
+      int minutesRestantes) {
+    this.idEquipe = idEquipe;
+    this.pseudonyme = pseudonyme;
+    this.nom = nom;
+    this.prenom = prenom;
+    this.courriel = courriel;
+    this.programmeEtude = programme;
+    this.avatar = avatar;
+    this.role = role;
+    this.point = pointage;
+    this.minutesRestantes = minutesRestantes;
+  }
 
-    public int getIdEquipe() {
-        return idEquipe;
-    }
+  public int getIdCompte() {
+    return idCompte;
+  }
 
-    public void setIdEquipe(int idEquipe) {
-        this.idEquipe = idEquipe;
-    }
+  public void setIdCompte(int idCompte) {
+    this.idCompte = idCompte;
+  }
 
-    public int getMinutesRestantes() {
-        return minutesRestantes;
-    }
+  public int getIdEquipe() {
+    return idEquipe;
+  }
 
-    public void setMinutesRestantes(int minutesRestantes) {
-        this.minutesRestantes = minutesRestantes;
-    }
+  public void setIdEquipe(int idEquipe) {
+    this.idEquipe = idEquipe;
+  }
 
-    public String getPseudonyme() {
-        return pseudonyme;
-    }
+  public int getMinutesRestantes() {
+    return minutesRestantes;
+  }
 
-    public void setPseudonyme(String pseudonyme) {
-        this.pseudonyme = pseudonyme;
-    }
+  public void setMinutesRestantes(int minutesRestantes) {
+    this.minutesRestantes = minutesRestantes;
+  }
 
-    public String getNom() {
-        return nom;
-    }
+  public String getPseudonyme() {
+    return pseudonyme;
+  }
 
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
+  public void setPseudonyme(String pseudonyme) {
+    this.pseudonyme = pseudonyme;
+  }
 
-    public String getPrenom() {
-        return prenom;
-    }
+  public String getNom() {
+    return nom;
+  }
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
+  public void setNom(String nom) {
+    this.nom = nom;
+  }
 
-    public String getCourriel() {
-        return courriel;
-    }
+  public String getPrenom() {
+    return prenom;
+  }
 
-    public void setCourriel(String courriel) {
-        this.courriel = courriel;
-    }
+  public void setPrenom(String prenom) {
+    this.prenom = prenom;
+  }
 
-    public String getProgrammeEtude() {
-        return programmeEtude;
-    }
+  public String getCourriel() {
+    return courriel;
+  }
 
-    public void setProgrammeEtude(String programmeEtude) {
-        this.programmeEtude = programmeEtude;
-    }
+  public void setCourriel(String courriel) {
+    this.courriel = courriel;
+  }
 
-    public String getAvatar() {
-        return avatar;
-    }
+  public String getProgrammeEtude() {
+    return programmeEtude;
+  }
 
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
+  public void setProgrammeEtude(String programmeEtude) {
+    this.programmeEtude = programmeEtude;
+  }
 
-    public int getRole() {
-        return role;
-    }
+  public String getAvatar() {
+    return avatar;
+  }
 
-    public void setRole(int role) {
-        this.role = role;
-    }
+  public void setAvatar(String avatar) {
+    this.avatar = avatar;
+  }
 
-    public int getPoint() {
-        return point;
-    }
+  public int getRole() {
+    return role;
+  }
 
-    public void setPoint(int point) {
-        this.point = point;
-    }
+  public void setRole(int role) {
+    this.role = role;
+  }
 
-    public String getMotPasse() {
-        return motPasse;
-    }
+  public int getPoint() {
+    return point;
+  }
 
-    public void setMotPasse(String motPasse) {
-        this.motPasse = motPasse;
-    }
-       
-    
+  public void setPoint(int point) {
+    this.point = point;
+  }
+
+  public String getMotPasse() {
+    return motPasse;
+  }
+
+  public void setMotPasse(String motPasse) {
+    this.motPasse = motPasse;
+  }
 }
