@@ -43,8 +43,7 @@ public class AfficherPageEquipeAction extends Action {
 
         if(idEquipe!=null) {
             try {
-                Connection cnx = Connexion.startConnection
-                        (Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
+                Connection cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
                 EquipeDAO dao = new EquipeDAO(cnx);
                 if(dao.read(idEquipe) != null)
                     request.setAttribute("vue", "pageEquipe.jsp");
