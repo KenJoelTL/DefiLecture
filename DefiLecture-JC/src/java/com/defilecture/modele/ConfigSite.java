@@ -14,7 +14,7 @@
     You should have received a copy of the GNU General Public License
     along with DefiLecture.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.defiLecture.modele;
+package com.defilecture.modele;
 
 import java.util.HashMap;
 import java.util.Map;

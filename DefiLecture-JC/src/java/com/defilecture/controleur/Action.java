@@ -15,8 +15,9 @@
     along with DefiLecture.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package com.defiLecture.controleur;
+package com.defilecture.controleur;
 
+import com.defilecture.modele.Compte;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -26,9 +27,9 @@ import javax.servlet.http.HttpSession;
  * @author Mikael Nadeau
  */
 abstract public class Action implements Executable, RequestAware, SessionAware {
-    protected private HttpServletRequest request;
-    protected private HttpServletResponse response;
-    private HttpSession session;
+    protected HttpServletRequest request;
+    protected HttpServletResponse response;
+    protected HttpSession session;
 
     @Override
     public void setRequest(HttpServletRequest request) {
