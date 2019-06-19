@@ -97,7 +97,7 @@ public class EffectuerAjoutAvatarCompteAction extends Action implements RequireP
 
             } catch (FileNotFoundException fne) {
                 System.out.println("\nImpossible d'atteindre la destination : " + absolutePath);
-            } catch (IOException | ServletException | ClassNotFoundException | SQLException ex) {
+            } catch (IOException | ServletException | SQLException ex) {
                 Logger.getLogger(EffectuerAjoutAvatarCompteAction.class.getName()).log(Level.SEVERE, null, ex);
             } finally {
                 if (out != null) {

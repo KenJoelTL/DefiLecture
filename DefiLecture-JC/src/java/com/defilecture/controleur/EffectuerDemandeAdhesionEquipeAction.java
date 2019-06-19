@@ -105,7 +105,7 @@ public class EffectuerDemandeAdhesionEquipeAction extends Action implements
                     
                 }
                 
-            } catch (ClassNotFoundException | SQLException ex) {
+            } catch (SQLException ex) {
                 Logger.getLogger(EffectuerDemandeAdhesionEquipeAction.
                         class.getName()).log(Level.SEVERE, null, ex);
             }

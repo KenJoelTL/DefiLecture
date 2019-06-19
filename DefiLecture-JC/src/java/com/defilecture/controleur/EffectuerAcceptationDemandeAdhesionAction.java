@@ -140,11 +140,7 @@ public class EffectuerAcceptationDemandeAdhesionAction extends Action implements
                 }
                     
                 
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(EffectuerAcceptationDemandeAdhesionAction
-                        .class.getName()).log(Level.SEVERE, null, ex);
-                action = "echec.do?tache=afficherPageAcceuil";
-            } catch (SQLException ex) {
+            } catch(SQLException ex) {
                 Logger.getLogger(EffectuerAcceptationDemandeAdhesionAction.class.getName()).log(Level.SEVERE, null, ex);
             }
             finally{Connexion.close();}

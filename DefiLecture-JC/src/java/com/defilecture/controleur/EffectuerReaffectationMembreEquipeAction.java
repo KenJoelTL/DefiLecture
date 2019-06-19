@@ -89,10 +89,7 @@ public class EffectuerReaffectationMembreEquipeAction extends Action implements 
                     }
                 }
                 
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(EffectuerDepartEquipeAction.class.getName())
-                        .log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
+            } catch(SQLException ex) {
                 Logger.getLogger(EffectuerReaffectationMembreEquipeAction.class.getName()).log(Level.SEVERE, null, ex);
             }
             finally{

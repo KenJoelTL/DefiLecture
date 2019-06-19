@@ -74,10 +74,7 @@ public class EffectuerSuppressionCompteAction extends Action implements RequireP
                     data.put("suppressionEchec", "Le compte que vous tentez de supprimer n'existe pas");
                 }
 
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(EffectuerDepartEquipeAction.class.getName())
-                        .log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
+            } catch(SQLException ex) {
                 Logger.getLogger(EffectuerSuppressionCompteAction.class.getName()).log(Level.SEVERE, null, ex);
             } finally {
                 Connexion.close();

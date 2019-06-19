@@ -96,10 +96,7 @@ public class EffectuerSuspensionMembreEquipeAction extends Action implements Req
                     }
                 }
                 
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(EffectuerDepartEquipeAction.class.getName())
-                        .log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
+            } catch(SQLException ex) {
                 Logger.getLogger(EffectuerSuspensionMembreEquipeAction.class.getName()).log(Level.SEVERE, null, ex);
             }
             finally{

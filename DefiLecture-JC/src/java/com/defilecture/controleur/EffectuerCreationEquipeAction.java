@@ -82,10 +82,7 @@ public class EffectuerCreationEquipeAction extends Action implements RequirePRGA
                             return"creation.do?tache=afficherPageCreationEquipe";
                         }
                     }
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(AfficherPageCreationEquipeAction.class.getName()).log(Level.SEVERE, null, ex);
-                    return"creation.do?tache=afficherPageCreationEquipe";
-                } catch (SQLException ex) {
+                } catch(SQLException ex) {
                     Logger.getLogger(EffectuerCreationEquipeAction.class.getName()).log(Level.SEVERE, null, ex);
                                         return"creation.do?tache=afficherPageCreationEquipe";
 

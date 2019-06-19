@@ -69,12 +69,7 @@ public class EffectuerSuppressionBDAction extends Action implements RequirePRGAc
                     daoCompte.deleteTable();
                     return "*.do?tache=effectuerDeconnexion";
                 }
-            }
-            catch(ClassNotFoundException e){
-                System.out.println("Erreur dans le chargement du pilote :"+ e);
-                return "*.do?tache=afficherPageConfiguration";
-            } 
-            catch (SQLException ex) {
+            } catch (SQLException ex) {
                 Logger.getLogger(EffectuerSuppressionBDAction.class.getName()).log(Level.SEVERE, null, ex);
                 return "*.do?tache=afficherPageConfiguration";
 

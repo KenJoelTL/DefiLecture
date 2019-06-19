@@ -87,15 +87,7 @@ public class EffectuerInscriptionAction extends Action implements RequirePRGActi
                         motPasse = org.apache.commons.codec.digest.DigestUtils.sha1Hex( request.getParameter("motPasse") ),
                         programmeEtude = request.getParameter("programmeEtude"), 
                         pseudonyme = request.getParameter("pseudonyme");
-                /*
-                //Étape 1 : chargement du pilote JDBC
-                Class.forName(Config.DRIVER);
-                //Étape 2 : configurer les paramètres de la connexion vers la base de données
-                Connexion.setUrl(Config.URL);
-                Connexion.setUser(Config.DB_USER);
-                Connexion.setPassword(Config.DB_PWD);
-                //Étape 3 : ouverture de la connexion vers la base de données
-                Connection cnx = Connexion.getInstance();*/
+
                 Connection cnx = Connexion.startConnection(Config.DB_USER,Config.DB_PWD,Config.URL,Config.DRIVER);
                 CompteDAO dao = new CompteDAO(cnx);
                 Compte compte = new Compte();
@@ -128,9 +120,6 @@ public class EffectuerInscriptionAction extends Action implements RequirePRGActi
                         data.put("erreurInscription","Problème de création du compte. Veuillez réessayer. Si le problème survient à répétition, contactez un administrateur.");
                     }
                 }
-            }
-            catch(ClassNotFoundException e){
-                System.out.println("Erreur dans le chargement du pilote :"+ e);
             } catch (SQLException ex) {
                 Logger.getLogger(EffectuerInscriptionAction.class.getName()).log(Level.SEVERE, null, ex);
             }

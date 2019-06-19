@@ -120,9 +120,6 @@ public class EffectuerModificationDefiAction extends Action implements RequirePR
                         return "*.do?tache=afficherPageParticipationDefi";
                     }
                 }
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(EffectuerModificationLectureAction.class.getName()).log(Level.SEVERE, null, ex);
-                return "*.do?tache=afficherPageParticipationDefi";
             } catch (SQLException ex) {
                 Logger.getLogger(EffectuerModificationDefiAction.class.getName()).log(Level.SEVERE, null, ex);
                 return "*.do?tache=afficherPageParticipationDefi";

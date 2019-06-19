@@ -68,11 +68,6 @@ public class EffectuerConnexionAction extends Action implements RequirePRGAction
                     data.put("echecConnexion", "L'identifiant et/ou le mot de passe entré est invalide");
                     data.put("identifiant", Util.toUTF8(identifiant));
                 }
-            } catch (ClassNotFoundException e) {
-                System.out.println("Erreur dans le chargement du pilote :" + e);
-                action = "*.do?tache=afficherPageConnexion";
-                data.put("echecConnexion", "Un problème est survenu lors de la connexion");
-
             } catch (SQLException ex) {
                 Logger.getLogger(EffectuerConnexionAction.class.getName()).log(Level.SEVERE, null, ex);
             } finally {

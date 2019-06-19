@@ -71,9 +71,6 @@ public class EffectuerModificationEquipeAction extends Action implements Require
                         data.put("erreurNom", "Le nom "+ Util.toUTF8(request.getParameter("nom")) +" est déjà utilisé par un autre équipage");
                         action = "*.do?tache=afficherPageModificationEquipe&idEquipe="+request.getParameter("idEquipe");
                     }
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(EffectuerModificationEquipeAction.class.getName()).log(Level.SEVERE, null, ex);
-                    action = "*.do?tache=afficherPageModificationEquipe&idEquipe="+request.getParameter("idEquipe");
                 } catch (SQLException ex) {
                     Logger.getLogger(EffectuerModificationEquipeAction.class.getName()).log(Level.SEVERE, null, ex);
                 }

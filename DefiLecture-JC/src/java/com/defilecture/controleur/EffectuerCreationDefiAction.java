@@ -94,11 +94,6 @@ public class EffectuerCreationDefiAction extends Action implements RequirePRGAct
                     System.out.println("Problème de création du défi");
 
                 return "*.do?tache=afficherPageParticipationDefi";
-            }
-            catch(ClassNotFoundException e){
-                System.out.println("Erreur dans le chargement du pilote :"+ e);
-
-                return "*.do?tache=afficherPageCreationDefi";
             } catch (SQLException ex) {
                 Logger.getLogger(EffectuerCreationDefiAction.class.getName()).log(Level.SEVERE, null, ex);
                                 return "*.do?tache=afficherPageCreationDefi";

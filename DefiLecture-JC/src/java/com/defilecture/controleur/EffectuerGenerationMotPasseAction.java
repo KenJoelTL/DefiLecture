@@ -80,7 +80,7 @@ public class EffectuerGenerationMotPasseAction extends Action implements DataSen
                     data.put("erreurGenerationMotPasse", "Le compte que vous tentez de modifier est introuvable");
                 }
 
-            } catch (ClassNotFoundException | SQLException ex) {
+            } catch (SQLException ex) {
                 Logger.getLogger(EffectuerGenerationMotPasseAction.class.getName()).log(Level.SEVERE, null, ex);
             }
 

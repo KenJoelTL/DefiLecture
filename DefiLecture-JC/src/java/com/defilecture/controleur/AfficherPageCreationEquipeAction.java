@@ -52,13 +52,7 @@ public class AfficherPageCreationEquipeAction extends Action {
                 if(compte.getIdEquipe()==-1)
                     request.setAttribute("vue", "pageCreationEquipe.jsp");
                 
-            }
-            catch (ClassNotFoundException ex) {
-                Logger.getLogger(AfficherPageCreationEquipeAction
-                                   .class.getName()).log(Level.SEVERE, null, ex);
-                 request.setAttribute("vue","accueil.jsp");
-            }
-            catch (SQLException ex) {
+            } catch (SQLException ex) {
                 Logger.getLogger(AfficherPageCreationEquipeAction.class.getName()).log(Level.SEVERE, null, ex);
             }
             finally{

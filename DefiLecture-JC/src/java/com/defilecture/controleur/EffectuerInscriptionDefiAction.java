@@ -127,9 +127,6 @@ public class EffectuerInscriptionDefiAction extends Action implements RequirePRG
                     
                 }
 
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(EffectuerModificationCompteAction.class.getName()).log(Level.SEVERE, null, ex);
-                return "*.do?tache=afficherPageParticipationDefi";
             } catch (SQLException ex) {
                 Logger.getLogger(EffectuerInscriptionDefiAction.class.getName()).log(Level.SEVERE, null, ex);
                             return "*.do?tache=afficherPageParticipationDefi";

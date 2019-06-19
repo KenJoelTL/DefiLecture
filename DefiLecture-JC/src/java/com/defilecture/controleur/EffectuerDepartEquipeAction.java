@@ -94,7 +94,7 @@ public class EffectuerDepartEquipeAction extends Action implements RequirePRGAct
                     }
                 }
                 
-            } catch (ClassNotFoundException | SQLException ex) {
+            } catch (SQLException ex) {
                 Logger.getLogger(EffectuerDepartEquipeAction.class.getName())
                         .log(Level.SEVERE, null, ex);
             }

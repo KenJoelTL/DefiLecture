@@ -94,7 +94,7 @@ public class EffectuerModificationLectureAction extends Action implements Requir
         
                     }
                 }            
-            } catch (ClassNotFoundException | SQLException ex) {
+            } catch (SQLException ex) {
                 Logger.getLogger(EffectuerModificationLectureAction.class.getName()).log(Level.SEVERE, null, ex);
                 return "*.do?tache=afficherPageGestionLecture";
             }

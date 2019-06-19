@@ -54,8 +54,6 @@ public class AfficherPageModificationLectureAction extends Action {
                         request.setAttribute("vue", "pageModificationLecture.jsp");
                 }
             
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AfficherPageModificationLectureAction.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(AfficherPageModificationLectureAction.class.getName()).log(Level.SEVERE, null, ex);
         }

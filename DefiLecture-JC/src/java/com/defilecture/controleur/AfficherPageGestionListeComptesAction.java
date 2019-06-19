@@ -46,7 +46,6 @@ public class AfficherPageGestionListeComptesAction extends Action {
                 if( ( (int)session.getAttribute("role") == Compte.MODERATEUR) 
                  || ( (int)session.getAttribute("role") == Compte.ADMINISTRATEUR)) {  
 
-                    Class.forName(Config.DRIVER);
                     Connexion.setUrl(Config.URL);
                     Connexion.setUser(Config.DB_USER);
                     Connexion.setPassword(Config.DB_PWD);
@@ -58,14 +57,7 @@ public class AfficherPageGestionListeComptesAction extends Action {
 
                     return "/index.jsp";
                     }
-            }
-            catch (ClassNotFoundException ex) {
-                System.out.println("Erreur dans le chargement du pilote");
-                Logger.getLogger(AfficherPageGestionListeComptesAction.class.getName()).log(Level.SEVERE, null, ex);
-                request.setAttribute("vue", "accueil.jsp");
-                return "/index.jsp";
-            }
-            catch(NullPointerException ex){
+            } catch (NullPointerException ex){
                 System.out.println("L'utilisateur n'existe pas");
                 return "/index.jsp";
             }

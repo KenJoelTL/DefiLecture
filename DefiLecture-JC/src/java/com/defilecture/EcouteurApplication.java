@@ -19,9 +19,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.defiLecture;
+package com.defilecture;
 
-import com.defiLecture.modele.Equipe;
+import com.defilecture.modele.Equipe;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;

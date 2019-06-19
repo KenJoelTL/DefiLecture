@@ -50,7 +50,8 @@ public class EffectuerModificationCompteAction extends Action implements Require
                 && request.getParameter("idCompte").equals(session.getAttribute("connecte").toString())
                 || (!request.getParameter("idCompte").equals(session.getAttribute("connecte").toString())
                 && (int) session.getAttribute("role") > Compte.CAPITAINE))
-                && (request.getParameter("modifie") != null)) {
+                && (request.getParameter("modifie") != null))
+        {
             
             String idCompte = request.getParameter("idCompte"),
                     courriel = request.getParameter("courriel"),
@@ -178,21 +179,18 @@ public class EffectuerModificationCompteAction extends Action implements Require
                     } else {
                         //il faut avertir que les changements ont étés faits
                         data.put("succesModification", "Le compte du moussaillon " + compte.getCourriel() + " a été correctement modifié");
-                        return "*.do?tache=afficherPageModificationCompte&id=" + compte.getIdCompte();
+                            return "*.do?tache=afficherPageModificationCompte&id=" + compte.getIdCompte();
                     }
                 }
-            } catch (ClassNotFoundException ex) {
-//                Logger.getLogger(EffectuerModificationCompteAction.class.getName()).log(Level.SEVERE, null, ex);
-                data.put("erreurModification", "Un problème est survenu lors de l'enregistrement des informations");
-                return "*.do?tache=afficherPageModificationCompte&id=" + request.getParameter("idCompte");
             } catch (SQLException ex) {
-//                Logger.getLogger(EffectuerModificationCompteAction.class.getName()).log(Level.SEVERE, null, ex);
-                return "*.do?tache=afficherPageGestionListeCompte";
+                data.put(
+                    "erreurModification",
+                    "Un problème est survenu lors de l'enregistrement des informations");
+                return "*.do?tache=afficherPageModificationCompte&id=" + request.getParameter("idCompte");
             }
         } else {
-            return "*.do?tache=afficherPageGestionListeCompte";
+          return "*.do?tache=afficherPageGestionListeCompte";
         }
-
     }
 
     @Override

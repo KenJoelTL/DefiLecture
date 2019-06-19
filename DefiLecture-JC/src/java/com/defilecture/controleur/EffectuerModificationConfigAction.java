@@ -62,10 +62,7 @@ public class EffectuerModificationConfigAction extends Action implements Require
                 }
                 configDAO.update(configUpdate);
                 configDAO.create(configCreate);
-            }
-            catch (ClassNotFoundException ex) {
-                Logger.getLogger(EffectuerModificationConfigAction.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
+            } catch(SQLException ex) {
                 Logger.getLogger(EffectuerModificationConfigAction.class.getName()).log(Level.SEVERE, null, ex);
             }
             finally{

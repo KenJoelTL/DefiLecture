@@ -106,11 +106,6 @@ public class EffectuerCreationLectureAction extends Action implements RequirePRG
               }
 
             
-            }
-            catch(ClassNotFoundException e){
-                System.out.println("Erreur dans le chargement du pilote :"+ e);
-                //request.setAttribute("vue", "lecture.jsp");
-                return "*.do?tache=afficherPageGestionLecture";
             } catch (SQLException ex) {
                 Logger.getLogger(EffectuerCreationLectureAction.class.getName()).log(Level.SEVERE, null, ex);
             }

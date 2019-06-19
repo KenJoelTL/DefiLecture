@@ -101,9 +101,6 @@ public class EffectuerSuppressionLectureAction extends Action implements Require
         
                     }
                 }            
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(EffectuerModificationLectureAction.class.getName()).log(Level.SEVERE, null, ex);
-                return "*.do?tache=afficherPageGestionLecture";
             } catch (SQLException ex) {
                 Logger.getLogger(EffectuerModificationLectureAction.class.getName()).log(Level.SEVERE, null, ex);
             }
