@@ -456,23 +456,23 @@ public class CompteDAO extends DAO<Compte>{
         PreparedStatement paramStm = null;
         try {
 
-                paramStm = cnx.prepareStatement(req);
+            paramStm = cnx.prepareStatement(req);
 
-                paramStm.setString(1, Util.toUTF8(identifiant));
-                paramStm.setString(2, Util.toUTF8(identifiant));
-                paramStm.setString(3, Util.toUTF8(motPasse));
+            paramStm.setString(1, Util.toUTF8(identifiant));
+            paramStm.setString(2, Util.toUTF8(identifiant));
+            paramStm.setString(3, Util.toUTF8(motPasse));
 
-                resultat = paramStm.executeQuery();
+            resultat = paramStm.executeQuery();
+            
+            // On vérifie s'il y a un résultat    
+            if(resultat.next()){
                 
-                // On vérifie s'il y a un résultat    
-                if(resultat.next()){
-                    
-                    Compte c = new Compte();
-                    c.setIdCompte(resultat.getInt("ID_COMPTE"));
-                    if(resultat.getInt("ID_EQUIPE") == 0)
-                        c.setIdEquipe(-1);
-                    else
-                        c.setIdEquipe(resultat.getInt("ID_EQUIPE"));
+                Compte c = new Compte();
+                c.setIdCompte(resultat.getInt("ID_COMPTE"));
+                if(resultat.getInt("ID_EQUIPE") == 0) {
+                    c.setIdEquipe(-1);
+                } else {
+                    c.setIdEquipe(resultat.getInt("ID_EQUIPE"));
                     c.setCourriel(resultat.getString("COURRIEL"));
                     c.setPrenom(resultat.getString("PRENOM"));             
                     c.setNom(resultat.getString("NOM"));
@@ -484,10 +484,11 @@ public class CompteDAO extends DAO<Compte>{
                     c.setPoint(resultat.getInt("POINT"));
                     c.setRole(resultat.getInt("ROLE"));
                     c.setDevenirCapitaine(resultat.getInt("DEVENIR_CAPITAINE"));
-                    
+                
                     resultat.close();
                     paramStm.close();
-                        return c;
+                    return c;
+                }
                 }
             resultat.close();
             paramStm.close();
