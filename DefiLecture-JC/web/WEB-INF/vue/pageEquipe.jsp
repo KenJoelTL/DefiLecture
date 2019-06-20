@@ -21,11 +21,11 @@
 --%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="com.defiLecture.modele.DemandeEquipeDAO"%>
+<%@page import="com.defilecture.modele.DemandeEquipeDAO"%>
 <%@page import="java.sql.Connection"%>
-<%@page import="com.defiLecture.modele.EquipeDAO"%>
-<%@page import="com.defiLecture.modele.CompteDAO"%>
-<%@page import="com.defiLecture.modele.Equipe"%>
+<%@page import="com.defilecture.modele.EquipeDAO"%>
+<%@page import="com.defilecture.modele.CompteDAO"%>
+<%@page import="com.defilecture.modele.Equipe"%>
 <%@page import="jdbc.Config"%>
 <%@page import="jdbc.Connexion"%>
 
@@ -39,15 +39,15 @@
         <c:redirect url="redirection.do?tache=afficherPageAccueil"></c:redirect>
     </c:if>
     
-    <jsp:useBean id="daoEquipe" scope="page"  class="com.defiLecture.modele.EquipeDAO">
+    <jsp:useBean id="daoEquipe" scope="page"  class="com.defilecture.modele.EquipeDAO">
         <jsp:setProperty name="daoEquipe" property="cnx" value="${cnx}"></jsp:setProperty>
     </jsp:useBean>
 
-    <jsp:useBean id="daoDemEqp" scope="page"  class="com.defiLecture.modele.DemandeEquipeDAO">
+    <jsp:useBean id="daoDemEqp" scope="page"  class="com.defilecture.modele.DemandeEquipeDAO">
         <jsp:setProperty name="daoDemEqp" property="cnx" value="${cnx}"></jsp:setProperty>
     </jsp:useBean>
     
-    <jsp:useBean id="daoCompte" scope="page"  class="com.defiLecture.modele.CompteDAO">
+    <jsp:useBean id="daoCompte" scope="page"  class="com.defilecture.modele.CompteDAO">
         <jsp:setProperty name="daoCompte" property="cnx" value="${cnx}"></jsp:setProperty>
     </jsp:useBean>
     

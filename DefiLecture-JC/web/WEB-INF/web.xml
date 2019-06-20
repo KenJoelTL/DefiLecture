@@ -31,12 +31,12 @@
     </context-param>
     
     <listener>
-        <listener-class>com.defiLecture.EcouteurApplication</listener-class>
+        <listener-class>com.defilecture.EcouteurApplication</listener-class>
     </listener>
     
     <servlet>
         <servlet-name>CF</servlet-name>
-        <servlet-class>com.defiLecture.controleur.ControleurFrontal</servlet-class>
+        <servlet-class>com.defilecture.controleur.ControleurFrontal</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>CF</servlet-name>

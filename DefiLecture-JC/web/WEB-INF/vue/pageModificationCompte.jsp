@@ -20,21 +20,21 @@
     Author     : Joel
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="com.defiLecture.modele.Compte"%>
-<%@page import="com.defiLecture.modele.CompteDAO"%>
-<%@page import="com.defiLecture.modele.Equipe"%>
-<%@page import="com.defiLecture.modele.EquipeDAO"%>
+<%@page import="com.defilecture.modele.Compte"%>
+<%@page import="com.defilecture.modele.CompteDAO"%>
+<%@page import="com.defilecture.modele.Equipe"%>
+<%@page import="com.defilecture.modele.EquipeDAO"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="jdbc.Config"%>
 <%@page import="jdbc.Connexion"%>
 
 
  <jsp:useBean id="connexion" class="jdbc.Connexion"></jsp:useBean>
-    <jsp:useBean id="dao" class="com.defiLecture.modele.CompteDAO">
+    <jsp:useBean id="dao" class="com.defilecture.modele.CompteDAO">
         <jsp:setProperty name="dao" property="cnx" value="${connexion.connection}"></jsp:setProperty>
     </jsp:useBean>
     <c:set var="compte" scope="page" value="${dao.read(param.id)}"/>
-    <jsp:useBean id="daoEquipe" class="com.defiLecture.modele.EquipeDAO">
+    <jsp:useBean id="daoEquipe" class="com.defilecture.modele.EquipeDAO">
         <jsp:setProperty name="daoEquipe" property="cnx" value="${connexion.connection}"></jsp:setProperty>
     </jsp:useBean>    
     <c:set var="equipe" scope="page" value="${daoEquipe.read(compte.idEquipe)}"/>

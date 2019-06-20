@@ -22,11 +22,11 @@ Author     : Charles
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@page import="java.sql.Connection"%>
-<%@page import="com.defiLecture.modele.LectureDAO"%>
+<%@page import="com.defilecture.modele.LectureDAO"%>
 <%@page import="jdbc.Connexion"%>
 
 <jsp:useBean id="connexion" scope="page" class="jdbc.Connexion"></jsp:useBean>  
-<jsp:useBean id="dao" scope="page" class="com.defiLecture.modele.LectureDAO">
+<jsp:useBean id="dao" scope="page" class="com.defilecture.modele.LectureDAO">
     <jsp:setProperty name="dao" property="cnx" value="${connexion.connection}"></jsp:setProperty>
 </jsp:useBean>
 
