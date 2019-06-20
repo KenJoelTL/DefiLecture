@@ -19,12 +19,12 @@
     Created on : 2017-10-28, 08:15:58
     Author     : Joel
 --%>
-<%@page import="com.defiLecture.modele.Equipe"%>
-<%@page import="com.defiLecture.modele.DemandeEquipe"%>
-<%@page import="com.defiLecture.modele.EquipeDAO"%>
-<%@page import="com.defiLecture.modele.Compte"%>
-<%@page import="com.defiLecture.modele.CompteDAO"%>
-<%@page import="com.defiLecture.modele.DemandeEquipeDAO"%>
+<%@page import="com.defilecture.modele.Equipe"%>
+<%@page import="com.defilecture.modele.DemandeEquipe"%>
+<%@page import="com.defilecture.modele.EquipeDAO"%>
+<%@page import="com.defilecture.modele.Compte"%>
+<%@page import="com.defilecture.modele.CompteDAO"%>
+<%@page import="com.defilecture.modele.DemandeEquipeDAO"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="jdbc.Config"%>
 <%@page import="jdbc.Connexion"%>
@@ -39,10 +39,10 @@
 <jsp:useBean id="connexion" class="jdbc.Connexion"/>
 
 <!-- Cree les DAOs -->
-<jsp:useBean id="eqpDao" class="com.defiLecture.modele.EquipeDAO" scope="page">
+<jsp:useBean id="eqpDao" class="com.defilecture.modele.EquipeDAO" scope="page">
     <jsp:setProperty name="eqpDao" property="cnx" value="${connexion.connection}"/>
 </jsp:useBean>
-<jsp:useBean id="demandeEqDao" class="com.defiLecture.modele.DemandeEquipeDAO" scope="page">
+<jsp:useBean id="demandeEqDao" class="com.defilecture.modele.DemandeEquipeDAO" scope="page">
     <jsp:setProperty name="demandeEqDao" property="cnx" value="${connexion.connection}"/>
 </jsp:useBean>
 
@@ -50,12 +50,12 @@
 <c:choose>
     <c:when test="${param.ordre eq 'recu'}">
         <!-- Cree les DAOs -->
-        <jsp:useBean id="cptDao" class="com.defiLecture.modele.CompteDAO" scope="page">
+        <jsp:useBean id="cptDao" class="com.defilecture.modele.CompteDAO" scope="page">
             <jsp:setProperty name="cptDao" property="cnx" value="${connexion.connection}"/>
         </jsp:useBean>
 <!-- Declarer les variables-->
-        <jsp:useBean id="compte" class="com.defiLecture.modele.Compte" scope="page"/>
-        <jsp:useBean id="equipe" class="com.defiLecture.modele.Equipe" scope="page"/>
+        <jsp:useBean id="compte" class="com.defilecture.modele.Compte" scope="page"/>
+        <jsp:useBean id="equipe" class="com.defilecture.modele.Equipe" scope="page"/>
         <!-- Si l'equipe n'est pas scpecifier -->
         <c:if test="${empty param.idEquipe}">
             <c:set var="compte" value="${cptDao.read(sessionScope.connecte)}"/>

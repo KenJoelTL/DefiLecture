@@ -26,7 +26,7 @@
         <c:redirect url="redirection.do?tache=afficherPageAccueil"></c:redirect>
     </c:if>
     
-    <jsp:useBean id="daoConfig" scope="page"  class="com.defiLecture.modele.ConfigSiteDAO">
+    <jsp:useBean id="daoConfig" scope="page"  class="com.defilecture.modele.ConfigSiteDAO">
         <jsp:setProperty name="daoConfig" property="cnx" value="${cnx}"></jsp:setProperty>
     </jsp:useBean>
     

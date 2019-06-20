@@ -22,11 +22,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<%@page import="com.defiLecture.modele.Defi"%>
+<%@page import="com.defilecture.modele.Defi"%>
 <%@page import="jdbc.Config"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="jdbc.Connexion"%>
-<%@page import="com.defiLecture.modele.DefiDAO"%>
+<%@page import="com.defilecture.modele.DefiDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <script language="javascript" src="./script/jquery-1.4.2.min.js"></script>
 
@@ -34,12 +34,12 @@
 <jsp:useBean id="connexion" class="jdbc.Connexion"/>
 
 <!-- Cree les DAOs -->
-<jsp:useBean id="daoDefi" class="com.defiLecture.modele.DefiDAO" scope="page">
+<jsp:useBean id="daoDefi" class="com.defilecture.modele.DefiDAO" scope="page">
     <jsp:setProperty name="daoDefi" property="cnx" value="${connexion.connection}"/>
 </jsp:useBean>
 
 <!-- Declarer les classes-->
-<jsp:useBean id="defi" class="com.defiLecture.modele.Defi" scope="page"/>
+<jsp:useBean id="defi" class="com.defilecture.modele.Defi" scope="page"/>
 
 <!-- Assigner les variables-->
 <c:set var="defi" value="${daoDefi.read(param.id)}" scope="page"/>

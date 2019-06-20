@@ -20,10 +20,10 @@
     Author     : Joel
 --%>
 
-<%@page import="com.defiLecture.modele.DemandeEquipeDAO"%>
-<%@page import="com.defiLecture.modele.CompteDAO"%>
+<%@page import="com.defilecture.modele.DemandeEquipeDAO"%>
+<%@page import="com.defilecture.modele.CompteDAO"%>
 <%@page import="java.sql.Connection"%>
-<%@page import="com.defiLecture.modele.EquipeDAO"%>
+<%@page import="com.defilecture.modele.EquipeDAO"%>
 <%@page import="jdbc.Config"%>
 <%@page import="jdbc.Connexion"%>
 <%@ page pageEncoding="UTF-8" %>
@@ -33,13 +33,13 @@
 
 <jsp:useBean id="connexion" scope="page" class="jdbc.Connexion"></jsp:useBean>  
 
-<jsp:useBean id="daoEquipe" scope="page" class="com.defiLecture.modele.EquipeDAO">
+<jsp:useBean id="daoEquipe" scope="page" class="com.defilecture.modele.EquipeDAO">
     <jsp:setProperty name="daoEquipe" property="cnx" value="${connexion.connection}"></jsp:setProperty>
 </jsp:useBean>
-<jsp:useBean id="daoCompte" scope="page" class="com.defiLecture.modele.CompteDAO">
+<jsp:useBean id="daoCompte" scope="page" class="com.defilecture.modele.CompteDAO">
     <jsp:setProperty name="daoCompte" property="cnx" value="${connexion.connection}"></jsp:setProperty>
 </jsp:useBean>
-<jsp:useBean id="daoDemEq" scope="page" class="com.defiLecture.modele.DemandeEquipeDAO">
+<jsp:useBean id="daoDemEq" scope="page" class="com.defilecture.modele.DemandeEquipeDAO">
     <jsp:setProperty name="daoDemEq" property="cnx" value="${connexion.connection}"></jsp:setProperty>
 </jsp:useBean>
 

@@ -21,8 +21,8 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="com.defiLecture.modele.Lecture"%>
-<%@page import="com.defiLecture.modele.LectureDAO"%>
+<%@page import="com.defilecture.modele.Lecture"%>
+<%@page import="com.defilecture.modele.LectureDAO"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="jdbc.Config"%>
 <%@page import="jdbc.Connexion"%>
@@ -30,10 +30,10 @@
 <!-- Connexion -->
 <jsp:useBean id="connexion" scope="page" class="jdbc.Connexion"></jsp:useBean>  
 
-<jsp:useBean id="dao" scope="page" class="com.defiLecture.modele.LectureDAO">
+<jsp:useBean id="dao" scope="page" class="com.defilecture.modele.LectureDAO">
     <jsp:setProperty name="dao" property="cnx" value="${connexion.connection}"></jsp:setProperty>
 </jsp:useBean>
-<jsp:useBean id="l" class="com.defiLecture.modele.Lecture" scope="page"></jsp:useBean>
+<jsp:useBean id="l" class="com.defilecture.modele.Lecture" scope="page"></jsp:useBean>
 <c:set var="l" value="${dao.read(param.id)}"/>
 
     <body>

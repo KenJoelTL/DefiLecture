@@ -15,15 +15,15 @@
     along with DefiLecture.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
-<%@page import="com.defiLecture.modele.CompteDAO"%>
-<%@page import="com.defiLecture.modele.Compte"%>
+<%@page import="com.defilecture.modele.CompteDAO"%>
+<%@page import="com.defilecture.modele.Compte"%>
 <%@ page pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:useBean id="connexion" class="jdbc.Connexion"></jsp:useBean>
 
 <!--Objet du compte-->
-<jsp:useBean id="dao" class="com.defiLecture.modele.CompteDAO">
+<jsp:useBean id="dao" class="com.defilecture.modele.CompteDAO">
     <jsp:setProperty name="dao" property="cnx" value="${connexion.connection}"></jsp:setProperty>
 </jsp:useBean>
 <c:set var="compte" scope="page" value="${dao.read(param.id)}"/>
@@ -31,13 +31,13 @@
 <c:set var="memeUser" scope="page" value="${false}" />
  
 <!--Objet de l'équipe-->
-<jsp:useBean id="daoEquipe" class="com.defiLecture.modele.EquipeDAO">
+<jsp:useBean id="daoEquipe" class="com.defilecture.modele.EquipeDAO">
         <jsp:setProperty name="daoEquipe" property="cnx" value="${connexion.connection}"></jsp:setProperty>
     </jsp:useBean>    
 <c:set var="equipe" scope="page" value="${daoEquipe.read(compte.idEquipe)}"/>
 
 <!-- Liste des lectures du user -->
-<jsp:useBean id="daoLecture" scope="page" class="com.defiLecture.modele.LectureDAO">
+<jsp:useBean id="daoLecture" scope="page" class="com.defilecture.modele.LectureDAO">
     <jsp:setProperty name="daoLecture" property="cnx" value="${connexion.connection}"></jsp:setProperty>
 </jsp:useBean>
 <c:set var="listeLectures" value="${daoLecture.findByIdCompte(compte.idCompte)}"/>
