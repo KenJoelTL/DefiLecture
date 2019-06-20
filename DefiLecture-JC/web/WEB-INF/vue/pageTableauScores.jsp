@@ -21,7 +21,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="com.defiLecture.modele.EquipeDAO"%>
+<%@page import="com.defilecture.modele.EquipeDAO"%>
 <%@page import="jdbc.Config"%>
 <%@page import="jdbc.Connexion"%>
 <%@page import="java.sql.SQLException"%>
@@ -29,13 +29,13 @@
 
 
  <jsp:useBean id="connexion" class="jdbc.Connexion"></jsp:useBean>
- <jsp:useBean id="daoEquipe" class="com.defiLecture.modele.EquipeDAO">
+ <jsp:useBean id="daoEquipe" class="com.defilecture.modele.EquipeDAO">
     <jsp:setProperty name="daoEquipe" property="cnx" value="${connexion.connection}"></jsp:setProperty>
  </jsp:useBean>
- <jsp:useBean id="daoCompte" class="com.defiLecture.modele.CompteDAO">
+ <jsp:useBean id="daoCompte" class="com.defilecture.modele.CompteDAO">
     <jsp:setProperty name="daoCompte" property="cnx" value="${connexion.connection}"></jsp:setProperty>
  </jsp:useBean>
- <jsp:useBean id="daoDemEqp" class="com.defiLecture.modele.DemandeEquipeDAO">
+ <jsp:useBean id="daoDemEqp" class="com.defilecture.modele.DemandeEquipeDAO">
     <jsp:setProperty name="daoDemEqp" property="cnx" value="${connexion.connection}"></jsp:setProperty>
 </jsp:useBean>
  <c:set var="listeEquipes" value="${daoEquipe.findAll()}"></c:set>

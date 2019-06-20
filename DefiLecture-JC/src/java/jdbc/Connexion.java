@@ -33,15 +33,9 @@ public class Connexion {
   public Connexion() {}
 
   public static Connection getInstance() throws SQLException {
-    try {
-      if (connection == null) {
-        if (user.equals("")) connection = DriverManager.getConnection(url);
-        else connection = DriverManager.getConnection(url, user, password);
-      }
-    } catch (SQLException e) {
-      System.out.println("erreur connexion");
-      System.out.println(e);
-      connection = null;
+    if (connection == null) {
+      if (user.equals("")) connection = DriverManager.getConnection(url);
+      else connection = DriverManager.getConnection(url, user, password);
     }
     return connection;
   }

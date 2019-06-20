@@ -20,11 +20,11 @@
     Author     : Joel
 --%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.defiLecture.modele.DemandeEquipeDAO"%>
-<%@page import="com.defiLecture.modele.Compte"%>
-<%@page import="com.defiLecture.modele.CompteDAO"%>
-<%@page import="com.defiLecture.modele.Equipe"%>
-<%@page import="com.defiLecture.modele.EquipeDAO"%>
+<%@page import="com.defilecture.modele.DemandeEquipeDAO"%>
+<%@page import="com.defilecture.modele.Compte"%>
+<%@page import="com.defilecture.modele.CompteDAO"%>
+<%@page import="com.defilecture.modele.Equipe"%>
+<%@page import="com.defilecture.modele.EquipeDAO"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="jdbc.Connexion"%>
 <%@page import="jdbc.Config"%>
@@ -35,19 +35,19 @@
 <jsp:useBean id="connexion" class="jdbc.Connexion"/>
 
 <!-- Cree les DAOs -->
-<jsp:useBean id="compteDao" class="com.defiLecture.modele.CompteDAO">
+<jsp:useBean id="compteDao" class="com.defilecture.modele.CompteDAO">
     <jsp:setProperty name="compteDao" property="cnx" value="${connexion.connection}"/>
 </jsp:useBean>
-<jsp:useBean id="equipeDao" class="com.defiLecture.modele.EquipeDAO">
+<jsp:useBean id="equipeDao" class="com.defilecture.modele.EquipeDAO">
     <jsp:setProperty name="equipeDao" property="cnx" value="${connexion.connection}"/>
 </jsp:useBean>
-<jsp:useBean id="demEquipeDao" class="com.defiLecture.modele.DemandeEquipeDAO">
+<jsp:useBean id="demEquipeDao" class="com.defilecture.modele.DemandeEquipeDAO">
     <jsp:setProperty name="demEquipeDao" property="cnx" value="${connexion.connection}"/>
 </jsp:useBean>
 
 <!--Initier les variables -->
-<jsp:useBean id="equipe" class="com.defiLecture.modele.Equipe" scope="page"/>
-<jsp:useBean id="compteConnecte" class="com.defiLecture.modele.Compte" scope="page"/>
+<jsp:useBean id="equipe" class="com.defilecture.modele.Equipe" scope="page"/>
+<jsp:useBean id="compteConnecte" class="com.defilecture.modele.Compte" scope="page"/>
 
 <!-- Assigner la valeur aux variables -->
 <c:set var="compteConnecte" value="${compteDao.read(sessionScope.connecte)}"/>

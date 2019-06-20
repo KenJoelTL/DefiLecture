@@ -25,24 +25,24 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.DateFormat"%>
 <%@page import="java.util.Locale"%>
-<%@page import="com.defiLecture.modele.Compte"%>
-<%@page import="com.defiLecture.modele.CompteDAO"%>
+<%@page import="com.defilecture.modele.Compte"%>
+<%@page import="com.defilecture.modele.CompteDAO"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.defiLecture.modele.InscriptionDefi"%>
-<%@page import="com.defiLecture.modele.InscriptionDefiDAO"%>
+<%@page import="com.defilecture.modele.InscriptionDefi"%>
+<%@page import="com.defilecture.modele.InscriptionDefiDAO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="jdbc.Config"%>
-<%@page import="com.defiLecture.modele.Defi"%>
+<%@page import="com.defilecture.modele.Defi"%>
 <%@page import="java.util.List"%>
 <%@page import="java.sql.Connection"%>
-<%@page import="com.defiLecture.modele.CompteDAO"%>
-<%@page import="com.defiLecture.modele.DefiDAO"%>
-<%@page import="com.defiLecture.modele.InscriptionDefiDAO"%>
-<%@page import="com.defiLecture.modele.InscriptionDefi"%>
-<%@page import="com.defiLecture.modele.Compte"%>
-<%@page import="com.defiLecture.modele.Defi"%>
+<%@page import="com.defilecture.modele.CompteDAO"%>
+<%@page import="com.defilecture.modele.DefiDAO"%>
+<%@page import="com.defilecture.modele.InscriptionDefiDAO"%>
+<%@page import="com.defilecture.modele.InscriptionDefi"%>
+<%@page import="com.defilecture.modele.Compte"%>
+<%@page import="com.defilecture.modele.Defi"%>
 <%@page import="jdbc.Config"%>
 <%@page import="jdbc.Connexion"%>
 
@@ -50,18 +50,18 @@
 <jsp:useBean id="connexion" class="jdbc.Connexion"></jsp:useBean>
 
 <!-- Declaration des daos -->
-<jsp:useBean id="daoInscriptionDefi" class="com.defiLecture.modele.InscriptionDefiDAO">
+<jsp:useBean id="daoInscriptionDefi" class="com.defilecture.modele.InscriptionDefiDAO">
     <jsp:setProperty  name="daoInscriptionDefi" property="cnx" value="${connexion.connection}"></jsp:setProperty>
 </jsp:useBean>
-<jsp:useBean id="daoDefi" class="com.defiLecture.modele.DefiDAO">
+<jsp:useBean id="daoDefi" class="com.defilecture.modele.DefiDAO">
     <jsp:setProperty  name="daoDefi" property="cnx" value="${connexion.connection}"></jsp:setProperty>
 </jsp:useBean>
-<jsp:useBean id="daoCompte" class="com.defiLecture.modele.CompteDAO">
+<jsp:useBean id="daoCompte" class="com.defilecture.modele.CompteDAO">
     <jsp:setProperty  name="daoCompte" property="cnx" value="${connexion.connection}"></jsp:setProperty>
 </jsp:useBean>
 
 <!-- Declaration des entiters -->
-<jsp:useBean id="compte" class="com.defiLecture.modele.Compte"></jsp:useBean>
+<jsp:useBean id="compte" class="com.defilecture.modele.Compte"></jsp:useBean>
 
 <!-- Setter le compte -->
 <c:set var="compte" value="${daoCompte.read(sessionScope.connecte)}"/>

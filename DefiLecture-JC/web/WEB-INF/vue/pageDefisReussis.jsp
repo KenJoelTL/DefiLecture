@@ -21,21 +21,21 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="jdbc.Config"%>
-<%@page import="com.defiLecture.modele.Compte"%>
+<%@page import="com.defilecture.modele.Compte"%>
 <%@page import="java.sql.Connection"%>
-<%@page import="com.defiLecture.modele.CompteDAO"%>
+<%@page import="com.defilecture.modele.CompteDAO"%>
 <%@page import="jdbc.Connexion"%>
 <%@ page pageEncoding="UTF-8" %>
 
 <jsp:useBean id="connexion" scope="page" class="jdbc.Connexion"></jsp:useBean>  
 
-<jsp:useBean id="daoDefi" scope="page" class="com.defiLecture.modele.DefiDAO">
+<jsp:useBean id="daoDefi" scope="page" class="com.defilecture.modele.DefiDAO">
     <jsp:setProperty name="daoDefi" property="cnx" value="${connexion.connection}"></jsp:setProperty>
 </jsp:useBean>
-<jsp:useBean id="daoInscriptionDefi" scope="page" class="com.defiLecture.modele.InscriptionDefiDAO">
+<jsp:useBean id="daoInscriptionDefi" scope="page" class="com.defilecture.modele.InscriptionDefiDAO">
     <jsp:setProperty name="daoInscriptionDefi" property="cnx" value="${connexion.connection}"></jsp:setProperty>
 </jsp:useBean>
-<jsp:useBean id="daoCompte" scope="page" class="com.defiLecture.modele.CompteDAO">
+<jsp:useBean id="daoCompte" scope="page" class="com.defilecture.modele.CompteDAO">
     <jsp:setProperty name="daoCompte" property="cnx" value="${connexion.connection}"></jsp:setProperty>
 </jsp:useBean>
 <div class="row listeCompte-row"> 
