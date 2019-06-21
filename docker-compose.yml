@@ -21,7 +21,9 @@ services:
     restart: on-failure
 
   defilecture:
-    image: tomcat:latest
+    build:
+      context: tomcat/
+      dockerfile: Dockerfile
     container_name: defilecture
     networks:
       defilecturenet:
