@@ -22,8 +22,8 @@ services:
 
   defilecture:
     build:
-      context: tomcat/
-      dockerfile: Dockerfile
+      context: docker/
+      dockerfile: defilecture.df
     container_name: defilecture
     networks:
       defilecturenet:
