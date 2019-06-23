@@ -42,7 +42,7 @@ public class EffectuerSuppressionCompteAction extends Action
   @Override
   public String execute() {
     String action = "Acceuil.do?tache=afficherPageAccueil";
-    if (session.getAttribute("connecte") == null
+    if (!userIsConnected()
         || session.getAttribute("role") == null
         || request.getParameter("idCompte") == null) {
     } else if (!request.getParameter("idCompte").equals(session.getAttribute("connecte") + "")

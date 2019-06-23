@@ -43,7 +43,7 @@ public class EffectuerModificationCompteAction extends Action
   @Override
   public String execute() {
 
-    if (((session.getAttribute("connecte") != null && session.getAttribute("role") != null)
+    if (((userIsConnected())
                 && request
                     .getParameter("idCompte")
                     .equals(session.getAttribute("connecte").toString())

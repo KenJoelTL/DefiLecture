@@ -19,7 +19,6 @@
  */
 package com.defilecture.controleur;
 
-import com.defilecture.modele.Compte;
 import com.defilecture.modele.Lecture;
 import com.defilecture.modele.LectureDAO;
 import java.sql.Connection;
@@ -39,19 +38,16 @@ public class AfficherPageModificationLectureAction extends Action {
   public String execute() {
     try {
       // Seuls les Capitaines et les Participants peuvent ajouter et modifier leurs lectures.
-      if (session.getAttribute("connecte") != null
-          && session.getAttribute("role") != null
-          && request.getParameter("id") != null)
-        if (((int) session.getAttribute("role") == Compte.CAPITAINE)
-            || ((int) session.getAttribute("role") == Compte.PARTICIPANT)) {
+      if (userIsConnected() && request.getParameter("id") != null) {
+        if (userIsCapitaine() || userIsParticipant()) {
           Connection cnx =
               Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
-          Lecture l = new LectureDAO(cnx).read(request.getParameter("id"));
+          Lecture lecture = new LectureDAO(cnx).read(request.getParameter("id"));
 
-          // seul celui qui a ajouté la lecture peut la modifier
-          if (l != null && l.getIdCompte() == (int) session.getAttribute("connecte"))
+          if (lecture != null && lecture.getIdCompte() == (int) session.getAttribute("connecte"))
             request.setAttribute("vue", "pageModificationLecture.jsp");
         }
+      }
 
     } catch (SQLException ex) {
       Logger.getLogger(AfficherPageModificationLectureAction.class.getName())

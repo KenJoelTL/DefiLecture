@@ -17,8 +17,6 @@ package com.defilecture.controleur;
 /**
  * @author Charles et Joel
  * @author Mikaël Nadeau
- * @author Mikaël Nadeau
- * @author Mikaël Nadeau
  */
 public class ActionBuilder {
   public static Action getAction(String actionName) {

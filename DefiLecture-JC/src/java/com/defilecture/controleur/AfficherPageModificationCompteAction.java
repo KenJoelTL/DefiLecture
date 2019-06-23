@@ -15,7 +15,6 @@
 package com.defilecture.controleur;
 
 import com.defilecture.modele.CompteDAO;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,36 +24,31 @@ import jdbc.Connexion;
 /**
  * @author Joel
  * @author Mikaël Nadeau
- * @author Mikaël
- * @author Mikaël Nadeau
  */
 public class AfficherPageModificationCompteAction extends Action {
   @Override
   public String execute() {
     request.setAttribute("vue", "pageMarcheASuivre.jsp");
 
-    if (session.getAttribute("connecte") != null
-        && session.getAttribute("role") != null
-        && request.getParameter("id") != null) {
-      if ((request.getParameter("id") != session.getAttribute("connecte")
-              && (userIsAdmin() || userIsModerateur()))
+    if (userIsConnected() && request.getParameter("id") != null) {
+      if ((userIsAdmin() || userIsModerateur())
           || request.getParameter("id") == session.getAttribute("connecte")) {
 
         String idCompte = request.getParameter("id");
         try {
-          Connection cnx =
-              Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
-
-          CompteDAO dao = new CompteDAO(cnx);
+          CompteDAO dao =
+              new CompteDAO(
+                  Connexion.startConnection(
+                      Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
 
           if (dao.read(idCompte) != null) {
             request.setAttribute("vue", "pageModificationCompte.jsp");
           } else {
-            if (userIsAdmin() || userIsModerateur()) {
-              request.setAttribute("vue", "pageGestionListeCompte.jsp");
-            } else {
-              request.setAttribute("vue", "pageMarcheASuivre.jsp");
-            }
+            request.setAttribute(
+                "vue",
+                userIsAdmin() || userIsModerateur()
+                    ? "pageGestionListeCompte.jsp"
+                    : "pageMarcheASuivre.jsp");
           }
         } catch (SQLException ex) {
           Logger.getLogger(AfficherPageModificationCompteAction.class.getName())

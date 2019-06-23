@@ -22,17 +22,13 @@ package com.defilecture.controleur;
 /**
  * @author Joel
  * @author Mikaël Nadeau
- * @author Mikaël
- * @author Mikaël Nadeau
  */
 public class AfficherPageListeDemandesEquipeAction extends Action {
   @Override
   public String execute() {
-    if (session.getAttribute("connecte") == null) {
-      request.setAttribute("vue", "pageConnexion");
-    } else {
-      request.setAttribute("vue", "pageListeDemandesEquipe.jsp");
-    }
+    request.setAttribute(
+        "vue", !userIsConnected() ? "pageConnexion" : "pageListeDemandesEquipe.jsp");
+
     return "/index.jsp";
   }
 }

@@ -15,8 +15,6 @@
 package com.defilecture.controleur;
 
 import com.defilecture.modele.Compte;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -31,31 +29,40 @@ public abstract class Action implements Executable, RequestAware, SessionAware {
 
   @Override
   public void setRequest(HttpServletRequest request) {
-    Logger.getLogger("Action").log(Level.SEVERE, "Changed request to : " + request);
     this.request = request;
   }
 
   @Override
   public void setResponse(HttpServletResponse response) {
-    Logger.getLogger("Action").log(Level.SEVERE, "Changed request to : " + response);
     this.response = response;
   }
 
   @Override
   public void setSession(HttpSession session) {
-    Logger.getLogger("Action").log(Level.SEVERE, "Changed request to : " + session);
     this.session = session;
   }
 
   public String toString() {
-    return "OK";
+    return Action.class.getName();
   }
-/*
+
   protected boolean userIsAdmin() {
     return (int) session.getAttribute("role") == Compte.ADMINISTRATEUR;
   }
 
   protected boolean userIsModerateur() {
     return (int) session.getAttribute("role") == Compte.MODERATEUR;
-  }*/
+  }
+
+  protected boolean userIsCapitaine() {
+    return (int) session.getAttribute("role") == Compte.CAPITAINE;
+  }
+
+  protected boolean userIsParticipant() {
+    return (int) session.getAttribute("role") == Compte.PARTICIPANT;
+  }
+
+  protected boolean userIsConnected() {
+    return session.getAttribute("connecte") != null;
+  }
 }

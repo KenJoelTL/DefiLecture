@@ -47,8 +47,7 @@ public class EffectuerModificationEquipeAction extends Action
     if (request.getParameter("idEquipe") != null) {
       action = "*.do?tache=afficherPageEquipe&idEquipe=" + request.getParameter("idEquipe");
       if (request.getParameter("modifier") != null) {
-        if (session.getAttribute("connecte") != null
-            && session.getAttribute("role") != null
+        if (userIsConnected()
             && (int) session.getAttribute("role") == Compte.CAPITAINE
             && request.getParameter("nom") != null) {
           try {

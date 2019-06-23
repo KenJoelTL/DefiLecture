@@ -35,8 +35,7 @@ public class EffectuerModificationConfigAction extends Action implements Require
 
   @Override
   public String execute() {
-    if ((session.getAttribute("connecte") != null && session.getAttribute("role") != null)
-        && (int) session.getAttribute("role") >= 3) {
+    if ((userIsConnected()) && (int) session.getAttribute("role") >= 3) {
       try {
         Connection cnx =
             Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);

@@ -47,7 +47,7 @@ public class EffectuerSuppressionDemandeAdhesionAction extends Action
   @Override
   public String execute() {
     String action = "bienvenue.do?tache=afficherPageAccueil";
-    if (session.getAttribute("connecte") == null
+    if (!userIsConnected()
         || session.getAttribute("role") == null
         || request.getParameter("idDemandeEquipe") == null) {
       action = "bienvenue.do?tache=afficherPageAccueil";

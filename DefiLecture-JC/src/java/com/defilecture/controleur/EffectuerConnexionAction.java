@@ -43,12 +43,11 @@ public class EffectuerConnexionAction extends Action implements RequirePRGAction
     String action = "*.do?tache=afficherPageConnexion";
     data.put("echecConnexion", "L'identifiant et/ou le mot de passe entré est invalide");
 
-    if (session.getAttribute("connecte") == null
-        && request.getParameter("identifiant") != null
-        && request.getParameter("motPasse") != null) {
+    if (request.getParameter("identifiant") != null && request.getParameter("motPasse") != null) {
       String identifiant = request.getParameter("identifiant"),
           motPasse =
               org.apache.commons.codec.digest.DigestUtils.sha1Hex(request.getParameter("motPasse"));
+      Logger.getLogger(EffectuerConnexionAction.class.getName()).log(Level.SEVERE, motPasse);
       try {
         CompteDAO dao =
             new CompteDAO(
@@ -56,8 +55,14 @@ public class EffectuerConnexionAction extends Action implements RequirePRGAction
                     Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
         Compte compte = dao.findByIdentifiantMotPasse(identifiant, motPasse);
 
+        Logger.getLogger(EffectuerConnexionAction.class.getName())
+            .log(Level.SEVERE, "About to connect : " + compte);
         // On vérifie s'il y a un résultat
         if (compte != null) {
+          Logger.getLogger(EffectuerConnexionAction.class.getName())
+              .log(
+                  Level.SEVERE,
+                  compte.getNom() + " (" + compte.getIdCompte() + ") s'est connecté.");
           session = request.getSession(true);
           session.setAttribute("connecte", compte.getIdCompte());
           session.setAttribute("role", compte.getRole());
@@ -68,6 +73,7 @@ public class EffectuerConnexionAction extends Action implements RequirePRGAction
           data.put("identifiant", Util.toUTF8(identifiant));
         }
       } catch (SQLException ex) {
+        session = null;
         Logger.getLogger(EffectuerConnexionAction.class.getName()).log(Level.SEVERE, null, ex);
       } finally {
         Connexion.close();

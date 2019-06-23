@@ -19,21 +19,14 @@
  */
 package com.defilecture.controleur;
 
-import com.defilecture.modele.Compte;
-
 /**
  * @author Charles
- * @author Mikaël Nadeau
- * @author Mikaël
  * @author Mikaël Nadeau
  */
 public class AfficherPageCreationLectureAction extends Action {
   @Override
   public String execute() {
-    if (session.getAttribute("connecte") != null
-        && session.getAttribute("role") != null
-        && ((int) session.getAttribute("role") == Compte.CAPITAINE
-            || (int) session.getAttribute("role") == Compte.PARTICIPANT))
+    if (userIsConnected() && (userIsCapitaine() || userIsParticipant()))
       request.setAttribute("vue", "pageCreationLecture.jsp");
 
     return "/index.jsp";

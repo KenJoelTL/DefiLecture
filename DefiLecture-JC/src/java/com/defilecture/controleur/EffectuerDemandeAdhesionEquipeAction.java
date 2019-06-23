@@ -47,7 +47,7 @@ public class EffectuerDemandeAdhesionEquipeAction extends Action
   public String execute() {
     // action envoyée au controleur frontal
     String action = "connexion.do?tache=afficherPageConnexion";
-    if (session.getAttribute("connecte") == null
+    if (!userIsConnected()
         || request.getParameter("idEquipe") == null
         || request.getParameter("idCompte") == null)
       action = "connexion.do?tache=afficherPageConnexion";

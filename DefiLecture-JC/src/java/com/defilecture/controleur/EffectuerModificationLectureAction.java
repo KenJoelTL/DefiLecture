@@ -39,8 +39,7 @@ public class EffectuerModificationLectureAction extends Action implements Requir
   @Override
   public String execute() {
 
-    if (session.getAttribute("connecte") != null
-        && session.getAttribute("role") != null
+    if (userIsConnected()
         && (((int) session.getAttribute("role") == Compte.PARTICIPANT)
             || ((int) session.getAttribute("role") == Compte.CAPITAINE))
         && request.getParameter("modifie") != null) {

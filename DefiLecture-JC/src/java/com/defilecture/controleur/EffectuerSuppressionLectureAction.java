@@ -40,8 +40,7 @@ public class EffectuerSuppressionLectureAction extends Action implements Require
 
   @Override
   public String execute() {
-    if (session.getAttribute("connecte") != null
-        && session.getAttribute("role") != null
+    if (userIsConnected()
         && (((int) session.getAttribute("role") == Compte.PARTICIPANT)
             || ((int) session.getAttribute("role") == Compte.CAPITAINE))) {
 

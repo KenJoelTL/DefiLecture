@@ -43,7 +43,7 @@ public class EffectuerCreationEquipeAction extends Action implements RequirePRGA
 
   @Override
   public String execute() {
-    if (session.getAttribute("connecte") != null) {
+    if (userIsConnected()) {
       if ((int) session.getAttribute("role") == Compte.CAPITAINE) {
         String nom = request.getParameter("nom");
         if (nom != null) {

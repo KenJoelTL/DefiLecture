@@ -22,8 +22,6 @@ package com.defilecture.controleur;
 /**
  * @author Charles
  * @author Mikaël Nadeau
- * @author Mikaël
- * @author Mikaël Nadeau
  */
 public class AfficherPageGestionLectureAction extends Action {
   @Override

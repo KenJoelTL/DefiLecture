@@ -17,8 +17,6 @@ package com.defilecture.controleur;
 /**
  * @author Charles
  * @author Mikaël Nadeau
- * @author Mikaël
- * @author Mikaël Nadeau
  */
 public class AfficherPageMarcheASuivreAction extends Action {
   @Override

@@ -22,14 +22,11 @@ package com.defilecture.controleur;
 /**
  * @author Charles
  * @author Mikaël Nadeau
- * @author Mikaël
- * @author Mikaël Nadeau
  */
 public class AfficherPageInscriptionAction extends Action {
   @Override
   public String execute() {
-    if (session.getAttribute("connecte") == null)
-      request.setAttribute("vue", "pageInscription.jsp");
+    if (!userIsConnected()) request.setAttribute("vue", "pageInscription.jsp");
 
     return "/index.jsp";
   }

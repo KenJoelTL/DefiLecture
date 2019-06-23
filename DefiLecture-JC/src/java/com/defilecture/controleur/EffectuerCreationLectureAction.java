@@ -43,8 +43,7 @@ public class EffectuerCreationLectureAction extends Action implements RequirePRG
 
     System.out.println("Entrer dans l'action créer lecture");
 
-    if (session.getAttribute("connecte") != null
-        && session.getAttribute("role") != null
+    if (userIsConnected()
         && (((int) session.getAttribute("role") == Compte.PARTICIPANT)
             || ((int) session.getAttribute("role") == Compte.CAPITAINE))
         && request.getParameter("titre") != null

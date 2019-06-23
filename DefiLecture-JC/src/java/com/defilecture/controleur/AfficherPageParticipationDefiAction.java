@@ -27,9 +27,7 @@ public class AfficherPageParticipationDefiAction extends Action {
 
   @Override
   public String execute() {
-
     request.setAttribute("vue", "pageParticipationDefi.jsp");
-
     return "/index.jsp";
   }
 }

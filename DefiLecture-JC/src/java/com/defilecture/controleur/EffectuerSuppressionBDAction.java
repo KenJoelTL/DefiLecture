@@ -41,8 +41,7 @@ public class EffectuerSuppressionBDAction extends Action implements RequirePRGAc
 
   @Override
   public String execute() {
-    if ((session.getAttribute("connecte") != null && session.getAttribute("role") != null)
-        && (int) session.getAttribute("role") > 3) {
+    if ((userIsConnected()) && (int) session.getAttribute("role") > 3) {
       try {
         Connexion.reinit();
         Connection cnx =

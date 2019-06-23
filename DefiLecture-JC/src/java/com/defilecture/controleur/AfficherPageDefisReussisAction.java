@@ -19,9 +19,7 @@
  */
 package com.defilecture.controleur;
 
-import com.defilecture.modele.Compte;
 import com.defilecture.modele.CompteDAO;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,24 +29,19 @@ import jdbc.Connexion;
 /**
  * @author Charles
  * @author Mikaël Nadeau
- * @author Mikaël
- * @author Mikaël Nadeau
  */
 public class AfficherPageDefisReussisAction extends Action {
   @Override
   public String execute() {
-    if (session.getAttribute("connecte") != null && session.getAttribute("role") != null) {
+    if (userIsConnected()) {
       try {
-        if ((int) session.getAttribute("role") == Compte.MODERATEUR
-            || (int) session.getAttribute("role") == Compte.ADMINISTRATEUR) {
+        if (userIsAdmin() || userIsModerateur()) {
+          CompteDAO dao =
+              new CompteDAO(
+                  Connexion.startConnection(
+                      Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
 
-          Connexion.setUrl(Config.URL);
-          Connexion.setUser(Config.DB_USER);
-          Connexion.setPassword(Config.DB_PWD);
-          Connection cnx = Connexion.getInstance();
-          CompteDAO dao = new CompteDAO(cnx);
-
-          if (dao.read((int) session.getAttribute("connecte")) != null)
+          if (dao.read((int) session.getAttribute("currentId")) != null)
             request.setAttribute("vue", "pageDefisReussis.jsp");
 
           return "/index.jsp";

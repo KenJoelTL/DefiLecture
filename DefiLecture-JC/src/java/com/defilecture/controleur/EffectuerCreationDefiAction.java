@@ -39,8 +39,7 @@ public class EffectuerCreationDefiAction extends Action implements RequirePRGAct
 
   @Override
   public String execute() {
-    if (session.getAttribute("connecte") != null
-        && session.getAttribute("role") != null
+    if (userIsConnected()
         && (((int) session.getAttribute("role") == Compte.MODERATEUR)
             || ((int) session.getAttribute("role") == Compte.ADMINISTRATEUR))
         && request.getParameter("nom") != null

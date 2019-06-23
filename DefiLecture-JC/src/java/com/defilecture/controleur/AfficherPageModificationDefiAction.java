@@ -27,17 +27,13 @@ import jdbc.Connexion;
 /**
  * @author Charles
  * @author Mikaël Nadeau
- * @author Mikaël
- * @author Mikaël Nadeau
  */
 public class AfficherPageModificationDefiAction extends Action {
   @Override
   public String execute() {
     try {
       // Seuls les Capitaines et les Participants peuvent ajouter et modifier leurs lectures.
-      if (session.getAttribute("connecte") != null
-          && session.getAttribute("role") != null
-          && request.getParameter("id") != null)
+      if (userIsConnected() && request.getParameter("id") != null)
         if (((int) session.getAttribute("role") == Compte.MODERATEUR)
             || ((int) session.getAttribute("role") == Compte.ADMINISTRATEUR)) {
           Connection cnx =

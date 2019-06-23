@@ -19,9 +19,7 @@
  */
 package com.defilecture.controleur;
 
-import com.defilecture.modele.Compte;
 import com.defilecture.modele.CompteDAO;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,23 +29,18 @@ import jdbc.Connexion;
 /**
  * @author Joel
  * @author Mikaël Nadeau
- * @author Mikaël
- * @author Mikaël Nadeau
  */
 public class AfficherPageGestionListeComptesAction extends Action {
   @Override
   public String execute() {
     // Exclusivement pour l'Admin et le Modérateur.
-    if (session.getAttribute("connecte") != null && session.getAttribute("role") != null) {
+    if (userIsConnected()) {
       try {
-        if (((int) session.getAttribute("role") == Compte.MODERATEUR)
-            || ((int) session.getAttribute("role") == Compte.ADMINISTRATEUR)) {
-
-          Connexion.setUrl(Config.URL);
-          Connexion.setUser(Config.DB_USER);
-          Connexion.setPassword(Config.DB_PWD);
-          Connection cnx = Connexion.getInstance();
-          CompteDAO dao = new CompteDAO(cnx);
+        if (userIsAdmin() || userIsModerateur()) {
+          CompteDAO dao =
+              new CompteDAO(
+                  Connexion.startConnection(
+                      Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
 
           if (dao.read((int) session.getAttribute("connecte")) != null)
             request.setAttribute("vue", "pageGestionListeCompte.jsp");

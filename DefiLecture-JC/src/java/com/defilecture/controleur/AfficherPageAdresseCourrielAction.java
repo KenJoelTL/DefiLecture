@@ -12,16 +12,9 @@
  * <p>You should have received a copy of the GNU General Public License along with DefiLecture. If
  * not, see <http://www.gnu.org/licenses/>.
  */
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.defilecture.controleur;
 
-import com.defilecture.modele.Compte;
 import com.defilecture.modele.CompteDAO;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,26 +24,20 @@ import jdbc.Connexion;
 /**
  * @author Charles
  * @author Mikaël Nadeau
- * @author Mikaël Nadeau
- * @author Mikaël Nadeau
  */
 public class AfficherPageAdresseCourrielAction extends Action {
   @Override
   public String execute() {
-    if (session.getAttribute("connecte") != null && session.getAttribute("role") != null) {
+    if (userIsConnected()) {
       try {
-        if ((int) session.getAttribute("role") == Compte.MODERATEUR
-            || (int) session.getAttribute("role") == Compte.ADMINISTRATEUR) {
-          Connexion.setUrl(Config.URL);
-          Connexion.setUser(Config.DB_USER);
-          Connexion.setPassword(Config.DB_PWD);
-          Connection cnx = Connexion.getInstance();
-          CompteDAO dao = new CompteDAO(cnx);
+        if (userIsModerateur() || userIsAdmin()) {
+          CompteDAO dao =
+              new CompteDAO(
+                  Connexion.startConnection(
+                      Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
 
-          if (dao.read((int) session.getAttribute("connecte")) != null)
+          if (dao.read((int) session.getAttribute("currentId")) != null)
             request.setAttribute("vue", "pageAdresseCourriel.jsp");
-
-          return "/index.jsp";
         }
       } catch (SQLException ex) {
         Logger.getLogger(AfficherPageGestionListeComptesAction.class.getName())
@@ -59,6 +46,7 @@ public class AfficherPageAdresseCourrielAction extends Action {
         Connexion.close();
       }
     }
+
     return "/index.jsp";
   }
 }

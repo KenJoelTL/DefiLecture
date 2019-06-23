@@ -45,7 +45,7 @@ public class EffectuerSuspensionMembreEquipeAction extends Action
   @Override
   public String execute() {
     String action = "Acceuil.do?tache=afficherPageAccueil";
-    if (session.getAttribute("connecte") == null
+    if (!userIsConnected()
         || session.getAttribute("role") == null
         || request.getParameter("idEquipe") == null
         || request.getParameter("idCompte") == null) {

@@ -53,8 +53,8 @@ public class EffectuerAjoutAvatarCompteAction extends Action
   @Override
   public String execute() {
     String action = "redirection.do?tache=afficherTableauScores";
-    //      Seul le membre connecté peut modifier son propre avatar
-    if (session.getAttribute("connecte") != null) {
+    // Seul le membre connecté peut modifier son propre avatar
+    if (userIsConnected()) {
       int idCompte = (int) session.getAttribute("connecte");
       action = "*.do?tache=afficherPageModificationCompte&id=" + idCompte;
       OutputStream out = null;
@@ -78,6 +78,7 @@ public class EffectuerAjoutAvatarCompteAction extends Action
         while ((nbOctetsLus = filecontent.read(bytes)) != -1) {
           out.write(bytes, 0, nbOctetsLus);
         }
+
         Connection cnx =
             Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
         CompteDAO dao = new CompteDAO(cnx);
@@ -95,26 +96,21 @@ public class EffectuerAjoutAvatarCompteAction extends Action
         }
 
       } catch (FileNotFoundException fne) {
-        System.out.println("\nImpossible d'atteindre la destination : " + absolutePath);
+        Logger.getLogger(EffectuerAjoutAvatarCompteAction.class.getName())
+            .log(Level.SEVERE, "\nImpossible d'atteindre la destination : " + absolutePath, fne);
       } catch (IOException | ServletException | SQLException ex) {
         Logger.getLogger(EffectuerAjoutAvatarCompteAction.class.getName())
             .log(Level.SEVERE, null, ex);
       } finally {
-        if (out != null) {
-          try {
+        try {
+          if (out != null) {
             out.close();
-          } catch (IOException ex) {
-            Logger.getLogger(EffectuerAjoutAvatarCompteAction.class.getName())
-                .log(Level.SEVERE, null, ex);
-          }
-        }
-        if (filecontent != null) {
-          try {
+          } else if (filecontent != null) {
             filecontent.close();
-          } catch (IOException ex) {
-            Logger.getLogger(EffectuerAjoutAvatarCompteAction.class.getName())
-                .log(Level.SEVERE, null, ex);
           }
+        } catch (IOException ex) {
+          Logger.getLogger(EffectuerAjoutAvatarCompteAction.class.getName())
+              .log(Level.SEVERE, null, ex);
         }
       }
     }

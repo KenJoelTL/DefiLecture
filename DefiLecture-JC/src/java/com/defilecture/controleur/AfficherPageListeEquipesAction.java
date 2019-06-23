@@ -17,14 +17,11 @@ package com.defilecture.controleur;
 /**
  * @author Joel
  * @author Mikaël Nadeau
- * @author Mikaël
- * @author Mikaël Nadeau
  */
 public class AfficherPageListeEquipesAction extends Action {
   @Override
   public String execute() {
-    if (session.getAttribute("connecte") != null && session.getAttribute("role") != null)
-      request.setAttribute("vue", "pageListeEquipes.jsp");
+    if (userIsConnected()) request.setAttribute("vue", "pageListeEquipes.jsp");
 
     return "/index.jsp";
   }

@@ -19,20 +19,14 @@
  */
 package com.defilecture.controleur;
 
-import com.defilecture.modele.Compte;
-
 /**
  * @author Charles
- * @author Mikaël Nadeau
- * @author Mikaël
  * @author Mikaël Nadeau
  */
 public class AfficherPageCreationDefiAction extends Action {
   @Override
   public String execute() {
-    if (session.getAttribute("connecte") != null
-        && ((int) session.getAttribute("role") == Compte.MODERATEUR
-            || (int) session.getAttribute("role") == Compte.ADMINISTRATEUR))
+    if (userIsConnected() && (userIsAdmin() || userIsModerateur()))
       request.setAttribute("vue", "pageCreationDefi.jsp");
 
     return "/index.jsp";

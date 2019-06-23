@@ -44,7 +44,7 @@ public class EffectuerDepartEquipeAction extends Action implements RequirePRGAct
   @Override
   public String execute() {
     String action = "echec.do?tache=afficherPageAccueil";
-    if (session.getAttribute("connecte") == null
+    if (!userIsConnected()
         || session.getAttribute("role") == null
         || request.getParameter("idEquipe") == null
         || request.getParameter("idCompte") == null) {

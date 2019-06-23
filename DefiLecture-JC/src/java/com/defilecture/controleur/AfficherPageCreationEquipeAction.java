@@ -30,16 +30,11 @@ import jdbc.Connexion;
 /**
  * @author Joel
  * @author Mikaël Nadeau
- * @author Mikaël
- * @author Mikaël Nadeau
  */
 public class AfficherPageCreationEquipeAction extends Action {
   @Override
   public String execute() {
-    if (session.getAttribute("connecte") != null
-        && session.getAttribute("role") != null
-        && (int) session.getAttribute("role") == Compte.CAPITAINE) {
-
+    if (userIsConnected() && userIsCapitaine()) {
       int idCompte = (int) session.getAttribute("connecte");
 
       try {

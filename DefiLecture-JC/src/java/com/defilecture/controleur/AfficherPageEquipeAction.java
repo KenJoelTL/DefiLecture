@@ -30,8 +30,6 @@ import jdbc.Connexion;
 /**
  * @author Charles
  * @author Mikaël Nadeau
- * @author Mikaël
- * @author Mikaël Nadeau
  */
 public class AfficherPageEquipeAction extends Action {
   @Override
@@ -43,6 +41,7 @@ public class AfficherPageEquipeAction extends Action {
         Connection cnx =
             Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
         EquipeDAO dao = new EquipeDAO(cnx);
+
         if (dao.read(idEquipe) != null) request.setAttribute("vue", "pageEquipe.jsp");
 
       } catch (SQLException ex) {

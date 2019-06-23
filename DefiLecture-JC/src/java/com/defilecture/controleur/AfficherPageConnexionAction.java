@@ -12,23 +12,17 @@
  * <p>You should have received a copy of the GNU General Public License along with DefiLecture. If
  * not, see <http://www.gnu.org/licenses/>.
  */
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.defilecture.controleur;
 
 /**
  * @author Charles
  * @author Mikaël Nadeau
- * @author Mikaël Nadeau
- * @author Mikaël Nadeau
  */
 public class AfficherPageConnexionAction extends Action {
   @Override
   public String execute() {
-    if (session.getAttribute("connecte") == null) request.setAttribute("vue", "pageConnexion.jsp");
+    if (!userIsConnected()) request.setAttribute("vue", "pageConnexion.jsp");
+
     return "/index.jsp";
   }
 }
