@@ -25,7 +25,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.xml.bind.DatatypeConverter;
+import java.util.Base64;
 
 /**
  *
@@ -84,7 +84,7 @@ public class Util {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             byte[] hash = md.digest(p_chaine.getBytes("UTF-8"));
-            return DatatypeConverter.printHexBinary(hash);
+            return octetsVersHex(hash);
         } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
             Logger.getLogger(Util.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -98,9 +98,21 @@ public class Util {
      */
     public static String genererSel() {
         SecureRandom random = new SecureRandom();
+        
         byte[] sel = new byte[15];
         random.nextBytes(sel);
-        
-        return DatatypeConverter.printBase64Binary(sel);
+               
+        return Base64.getEncoder().encodeToString(sel);
     }
+    
+    private static String octetsVersHex(byte[] hash) {
+        StringBuilder sb = new StringBuilder();
+        
+        for (byte b : hash) {
+            sb.append(String.format("%02x", b));
+        }
+        
+        return sb.toString();
+    }
+    
 }
