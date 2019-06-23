@@ -21,7 +21,6 @@ package com.defilecture.controleur;
 
 import com.defilecture.modele.Compte;
 import com.defilecture.modele.CompteDAO;
-import com.util.Util;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,6 +32,7 @@ import jdbc.Connexion;
 /**
  * @author Joel
  * @author Mikaël Nadeau
+ * @author Alexandre Dupré
  */
 public class EffectuerConnexionAction extends Action implements RequirePRGAction, DataSender {
 
@@ -45,9 +45,8 @@ public class EffectuerConnexionAction extends Action implements RequirePRGAction
 
     if (request.getParameter("identifiant") != null && request.getParameter("motPasse") != null) {
       String identifiant = request.getParameter("identifiant"),
-          motPasse =
-              org.apache.commons.codec.digest.DigestUtils.sha1Hex(request.getParameter("motPasse"));
-      Logger.getLogger(EffectuerConnexionAction.class.getName()).log(Level.SEVERE, motPasse);
+             motPasse = request.getParameter("motPasse");
+      
       try {
         CompteDAO dao =
             new CompteDAO(
@@ -70,7 +69,7 @@ public class EffectuerConnexionAction extends Action implements RequirePRGAction
           action = "*.do?tache=afficherTableauScores";
         } else {
           data.put("echecConnexion", "L'identifiant et/ou le mot de passe entré est invalide");
-          data.put("identifiant", Util.toUTF8(identifiant));
+          data.put("identifiant", identifiant);
         }
       } catch (SQLException ex) {
         session = null;

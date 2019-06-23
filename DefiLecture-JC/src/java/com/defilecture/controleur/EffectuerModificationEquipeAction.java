@@ -23,7 +23,6 @@ import com.defilecture.modele.Compte;
 import com.defilecture.modele.CompteDAO;
 import com.defilecture.modele.Equipe;
 import com.defilecture.modele.EquipeDAO;
-import com.util.Util;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -58,7 +57,7 @@ public class EffectuerModificationEquipeAction extends Action
             Equipe equipe = equipeDao.findByNom(request.getParameter("nom"));
             if (compte != null && equipe == null && compte.getIdEquipe() != -1) {
               equipe = equipeDao.read(compte.getIdEquipe());
-              equipe.setNom(Util.toUTF8(request.getParameter("nom")));
+              equipe.setNom(request.getParameter("nom"));
 
               if (equipeDao.update(equipe)) {
                 action =
@@ -74,7 +73,7 @@ public class EffectuerModificationEquipeAction extends Action
               data.put(
                   "erreurNom",
                   "Le nom "
-                      + Util.toUTF8(request.getParameter("nom"))
+                      + request.getParameter("nom")
                       + " est déjà utilisé par un autre équipage");
               action =
                   "*.do?tache=afficherPageModificationEquipe&idEquipe="

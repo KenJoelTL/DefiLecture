@@ -22,7 +22,6 @@ package com.defilecture.controleur;
 import com.defilecture.modele.Compte;
 import com.defilecture.modele.Lecture;
 import com.defilecture.modele.LectureDAO;
-import com.util.Util;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -72,7 +71,7 @@ public class EffectuerModificationLectureAction extends Action implements Requir
             lecture.setEstObligatoire(estObligatoire);
 
           if (titre != null && !"".equals(titre.trim()) && !titre.equals(lecture.getTitre()))
-            lecture.setTitre(Util.toUTF8(titre));
+            lecture.setTitre(titre);
 
           if (!dao.update(lecture)) {
 

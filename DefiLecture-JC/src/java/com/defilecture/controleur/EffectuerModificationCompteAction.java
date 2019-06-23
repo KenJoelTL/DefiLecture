@@ -23,7 +23,6 @@ import static org.apache.commons.codec.digest.DigestUtils.sha1Hex;
 
 import com.defilecture.modele.Compte;
 import com.defilecture.modele.CompteDAO;
-import com.util.Util;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -137,19 +136,19 @@ public class EffectuerModificationCompteAction extends Action
               erreurSurvenue = true;
               data.put("erreurCourriel", "Ce courriel est déjà utilisé par un autre matelot");
             } else {
-              compte.setCourriel(Util.toUTF8(courriel));
+              compte.setCourriel(courriel);
             }
           }
           if (prenom != null && !"".equals(prenom.trim()) && !prenom.equals(compte.getPrenom())) {
-            compte.setPrenom(Util.toUTF8(prenom));
+            compte.setPrenom(prenom);
           }
           if (nom != null && !"".equals(nom.trim()) && !nom.equals(compte.getNom())) {
-            compte.setNom(Util.toUTF8(nom));
+            compte.setNom(nom);
           }
           if (motPasseNouveau != null && !"".equals(motPasseNouveau.trim())) {
             if (motPasseActuel != null && motPasseActuel.equals(compte.getMotPasse())) {
               if (motPasseNouveau.equals(motPasseNouveauConfirmation)) {
-                compte.setMotPasse(Util.toUTF8(motPasseNouveau));
+                compte.setMotPasse(motPasseNouveau);
               } else {
                 erreurSurvenue = true;
                 data.put(
@@ -167,11 +166,11 @@ public class EffectuerModificationCompteAction extends Action
               erreurSurvenue = true;
               data.put("erreurPseudonyme", "Ce pseudonyme est déjà utilisé par un autre matelot");
             } else {
-              compte.setPseudonyme(Util.toUTF8(pseudonyme));
+              compte.setPseudonyme(pseudonyme);
             }
           }
           if (programmeEtude != null && !programmeEtude.equals(compte.getProgrammeEtude())) {
-            compte.setProgrammeEtude(Util.toUTF8(programmeEtude));
+            compte.setProgrammeEtude(programmeEtude);
           }
 
           if (erreurSurvenue) {

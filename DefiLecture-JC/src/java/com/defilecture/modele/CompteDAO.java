@@ -25,8 +25,11 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-// import com.google.common.hash.Hashing;
-/** @author Joel */
+/** 
+ * @author Joel 
+ * @author Alexandre Dupré
+ */
+
 public class CompteDAO extends DAO<Compte> {
 
   public CompteDAO() {}
@@ -39,7 +42,7 @@ public class CompteDAO extends DAO<Compte> {
   public boolean create(Compte compte) {
     String req =
         "INSERT INTO compte (`COURRIEL` , `MOT_PASSE` , `NOM`, "
-            + "`PRENOM`, `PSEUDONYME`, `AVATAR`, `PROGRAMME_ETUDE`,`DEVENIR_CAPITAINE` ) VALUES "
+            + "`PRENOM`, `PSEUDONYME`, `AVATAR`, `PROGRAMME_ETUDE`,`DEVENIR_CAPITAINE`, `SEL`) VALUES "
             + "(?,?,?,?,?,?,?,?)";
     PreparedStatement paramStm = null;
 
@@ -47,14 +50,15 @@ public class CompteDAO extends DAO<Compte> {
       paramStm = cnx.prepareStatement(req);
 
       if (compte != null) {
-        paramStm.setString(1, Util.toUTF8(compte.getCourriel()));
-        paramStm.setString(2, Util.toUTF8(compte.getMotPasse()));
-        paramStm.setString(3, Util.toUTF8(compte.getNom()));
-        paramStm.setString(4, Util.toUTF8(compte.getPrenom()));
-        paramStm.setString(5, Util.toUTF8(compte.getPseudonyme()));
-        paramStm.setString(6, Util.toUTF8(compte.getAvatar()));
-        paramStm.setString(7, Util.toUTF8(compte.getProgrammeEtude()));
+        paramStm.setString(1, compte.getCourriel());
+        paramStm.setString(2, compte.getMotPasse());
+        paramStm.setString(3, compte.getNom());
+        paramStm.setString(4, compte.getPrenom());
+        paramStm.setString(5, compte.getPseudonyme());
+        paramStm.setString(6, compte.getAvatar());
+        paramStm.setString(7, compte.getProgrammeEtude());
         paramStm.setInt(8, compte.getDevenirCapitaine());
+        paramStm.setString(Util.genererSel());
       }
       int nbLignesAffectees = paramStm.executeUpdate();
 
@@ -108,13 +112,13 @@ public class CompteDAO extends DAO<Compte> {
     PreparedStatement paramStm = null;
     try {
       paramStm = cnx.prepareStatement(req);
-      paramStm.setString(1, Util.toUTF8(compte.getCourriel()));
-      paramStm.setString(2, Util.toUTF8(compte.getMotPasse()));
-      paramStm.setString(3, Util.toUTF8(compte.getNom()));
-      paramStm.setString(4, Util.toUTF8(compte.getPrenom()));
-      paramStm.setString(5, Util.toUTF8(compte.getPseudonyme()));
-      paramStm.setString(6, Util.toUTF8(compte.getAvatar()));
-      paramStm.setString(7, Util.toUTF8(compte.getProgrammeEtude()));
+      paramStm.setString(1, compte.getCourriel());
+      paramStm.setString(2, compte.getMotPasse());
+      paramStm.setString(3, compte.getNom());
+      paramStm.setString(4, compte.getPrenom());
+      paramStm.setString(5, compte.getPseudonyme());
+      paramStm.setString(6, compte.getAvatar());
+      paramStm.setString(7, compte.getProgrammeEtude());
 
       if (compte.getIdEquipe() == -1) {
         paramStm.setNull(8, java.sql.Types.INTEGER);
@@ -202,9 +206,9 @@ public class CompteDAO extends DAO<Compte> {
     PreparedStatement paramStm = null;
     try {
       paramStm = cnx.prepareStatement(req);
-      paramStm.setString(1, "%" + Util.toUTF8(nom) + "%");
-      paramStm.setString(2, "%" + Util.toUTF8(nom) + "%");
-      paramStm.setString(3, "%" + Util.toUTF8(nom) + "%");
+      paramStm.setString(1, "%" + nom + "%");
+      paramStm.setString(2, "%" + nom + "%");
+      paramStm.setString(3, "%" + nom + "%");
 
       ResultSet resultat = paramStm.executeQuery();
       while (resultat.next()) liste.add(getCompteFromResultSet(resultat));
@@ -239,17 +243,31 @@ public class CompteDAO extends DAO<Compte> {
   }
 
   public Compte findByIdentifiantMotPasse(String identifiant, String motPasse) {
-    String req =
-        "SELECT * FROM compte WHERE (`COURRIEL` = ? or " + "`PSEUDONYME` = ?) and `MOT_PASSE` = ?";
+    String sel = "";
+    
+    // Requête pour trouver le sel de l'utilisateur correspondant
+    String reqSel = "SELECT SEL FROM compte WHERE `COURRIEL` = ? or `PSEUDONYME` = ?";
+    // Requête pour trouver le compte (avec mot de passe valide)
+    String req = "SELECT * FROM compte WHERE (`COURRIEL` = ? or " + "`PSEUDONYME` = ?) and `MOT_PASSE` = ?";
+    
     ResultSet resultat;
     Compte compte = null;
     PreparedStatement paramStm = null;
 
     try {
+      // Définition des paramètres de la requête pour le sel
+      paramStm = cnx.prepareStatement(req);  
+      paramStm.setString(1, identifiant);
+      paramStm.setString(2, identifiant);
+      resultat = paramStm.executeQuery();
+      sel = resultat.getString("SEL");
+      
+      // Définition des paramètres de la requête pour l'accès au compte
       paramStm = cnx.prepareStatement(req);
-      paramStm.setString(1, Util.toUTF8(identifiant));
-      paramStm.setString(2, Util.toUTF8(identifiant));
-      paramStm.setString(3, Util.toUTF8(motPasse));
+      paramStm.setString(1, identifiant);
+      paramStm.setString(2, identifiant);
+      // Le mot de passe est hashé avec le sel du compte (si trouvé)
+      paramStm.setString(3, Util.hasherAvecSel(motPasse, sel));
       resultat = paramStm.executeQuery();
 
       if (resultat.next()) compte = getCompteFromResultSet(resultat);
@@ -270,7 +288,7 @@ public class CompteDAO extends DAO<Compte> {
 
     try {
       paramStm = cnx.prepareStatement(req);
-      paramStm.setString(1, Util.toUTF8(pseudo));
+      paramStm.setString(1, pseudo);
       ResultSet resultat = paramStm.executeQuery();
 
       if (resultat.next()) compte = getCompteFromResultSet(resultat);
@@ -312,7 +330,7 @@ public class CompteDAO extends DAO<Compte> {
 
     try {
       paramStm = cnx.prepareStatement(req);
-      paramStm.setString(1, Util.toUTF8(courriel));
+      paramStm.setString(1, courriel);
       ResultSet resultat = paramStm.executeQuery();
 
       if (resultat.next()) compte = getCompteFromResultSet(resultat);

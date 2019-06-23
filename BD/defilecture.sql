@@ -56,7 +56,7 @@ CREATE TABLE `compte` (
   `ID_COMPTE` int(10) NOT NULL,
   `ID_EQUIPE` int(10) DEFAULT NULL,
   `COURRIEL` varchar(255) NOT NULL,
-  `MOT_PASSE` varchar(50) NOT NULL,
+  `MOT_PASSE` varchar(64) NOT NULL,
   `NOM` varchar(255) NOT NULL,
   `PRENOM` varchar(255) NOT NULL,
   `POINT` int(10) DEFAULT '0',
@@ -78,8 +78,34 @@ TRUNCATE TABLE `compte`;
 -- Contenu de la table `compte`
 --
 
-INSERT INTO `compte` (`ID_COMPTE`, `ID_EQUIPE`, `COURRIEL`, `MOT_PASSE`, `NOM`, `PRENOM`, `POINT`, `MINUTES_RESTANTES`, `PROGRAMME_ETUDE`, `PSEUDONYME`, `ROLE`, `DEVENIR_CAPITAINE`) VALUES
-(1, NULL, 'admin@mail.com', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'admin', 'Admin', 0, 0, '', 'admin', 4, 0);
+INSERT INTO `compte` 
+(`ID_COMPTE`, 
+`ID_EQUIPE`, 
+`COURRIEL`, 
+`MOT_PASSE`, 
+`NOM`, 
+`PRENOM`, 
+`POINT`, 
+`MINUTES_RESTANTES`, 
+`PROGRAMME_ETUDE`, 
+`PSEUDONYME`, 
+`ROLE`, 
+`DEVENIR_CAPITAINE`,
+`SEL`) 
+VALUES
+(1, 
+NULL, 
+'admin@mail.com', 
+'d7306b69d6144db293e52c0bbf1f3fa3210b42ed8e122aaaf2dad7db0aa4ac93',
+'admin', 
+'Admin', 
+0, 
+0, 
+'', 
+'admin', 
+4, 
+0,
+'ungraindeselpourtest');
 
 -- --------------------------------------------------------
 

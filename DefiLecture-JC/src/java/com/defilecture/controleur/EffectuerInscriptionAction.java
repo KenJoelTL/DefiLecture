@@ -16,7 +16,6 @@ package com.defilecture.controleur;
 
 import com.defilecture.modele.Compte;
 import com.defilecture.modele.CompteDAO;
-import com.util.Util;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -41,32 +40,32 @@ public class EffectuerInscriptionAction extends Action implements RequirePRGActi
     String action = "echec.do?tache=afficherPageInscription";
 
     if (request.getParameter("pseudonyme") != null) {
-      data.put("pseudonyme", Util.toUTF8(request.getParameter("pseudonyme")));
+      data.put("pseudonyme", request.getParameter("pseudonyme"));
     }
 
     if (request.getParameter("programmeEtude") != null) {
-      data.put("programmeEtude", Util.toUTF8(request.getParameter("programmeEtude")));
+      data.put("programmeEtude", request.getParameter("programmeEtude"));
     }
 
     if (request.getParameter("courriel") == null) {
       erreur = true;
       data.put("erreurCourriel", "Veuillez entrer votre courriel");
     } else {
-      data.put("courriel", Util.toUTF8(request.getParameter("courriel")));
+      data.put("courriel", request.getParameter("courriel"));
     }
 
     if (request.getParameter("prenom") == null) {
       erreur = true;
       data.put("erreurPrenom", "Veuillez entrer votre prenom");
     } else {
-      data.put("prenom", Util.toUTF8(request.getParameter("prenom")));
+      data.put("prenom", request.getParameter("prenom"));
     }
 
     if (request.getParameter("nom") == null) {
       erreur = true;
       data.put("erreurNom", "Veuillez entrer votre nom");
     } else {
-      data.put("nom", Util.toUTF8(request.getParameter("nom")));
+      data.put("nom", request.getParameter("nom"));
     }
 
     if ((request.getParameter("motPasse") != null)

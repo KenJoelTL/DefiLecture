@@ -25,16 +25,19 @@ import java.util.logging.Logger;
 import java.util.Base64;
 import java.io.UnsupportedEncodingException;
 
-/** @author Joel */
+/** 
+ *  @author Joel
+ *  @author Alexandre Dupré
+ */
 public class Util {
 
     /**
      * Retourne un String hashé en SHA256 et salé du mot de passe
      * donné en paramètre.
      *
-     * @param p_mdp Le mot de passe à hasher avec sel
-     * @param p_sel Un sel qui a déjà été généré 
-     * @return String Mot de passe hashé en SHA256 et salé
+     * @param p_mdp : Le mot de passe à hasher avec sel
+     * @param p_sel : Un sel qui a déjà été généré 
+     * @return String : Mot de passe hashé en SHA256 et salé
      */
     public static String hasherAvecSel(String p_mdp, String p_sel) {
          return genererSHA256(p_mdp + p_sel);  
@@ -44,8 +47,8 @@ public class Util {
      * Retourne un hash SHA256 de la chaîne de 
      * caractères fournie en paramètre.
      *
-     * @param p_chaine La chaîne à hasher
-     * @return String Chaîne hashée en SHA256
+     * @param p_chaine : La chaîne à hasher
+     * @return String : Chaîne hashée en SHA256
      */
     public static String genererSHA256(String p_chaine) {
         try {
@@ -61,7 +64,7 @@ public class Util {
     /**
      * Retourne un sel généré aléatoirement.
      * 
-     * @return Sel généré aléatoirement
+     * @return String : Sel généré aléatoirement
      */
     public static String genererSel() {
         SecureRandom random = new SecureRandom();
@@ -72,6 +75,12 @@ public class Util {
         return Base64.getEncoder().encodeToString(sel);
     }
     
+    /**
+     * Convertit un tableau d'octets en chaîne de caractères.
+     * 
+     * @param hash : Le hash sous forme de tableau d'octets
+     * @return String : Chaîne de caractères du tableau d'octets 
+     */
     private static String octetsVersHex(byte[] hash) {
         StringBuilder sb = new StringBuilder();
         

@@ -22,7 +22,6 @@ package com.defilecture.controleur;
 import com.defilecture.modele.Compte;
 import com.defilecture.modele.Defi;
 import com.defilecture.modele.DefiDAO;
-import com.util.Util;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -73,7 +72,7 @@ public class EffectuerModificationDefiAction extends Action
         } else {
 
           if (nom != null && !"".equals(nom.trim()) && !nom.equals(defi.getNom())) {
-            defi.setNom(Util.toUTF8(nom));
+            defi.setNom(nom);
           }
 
           if (request.getParameter("valeurMinute") != null) {
@@ -96,20 +95,20 @@ public class EffectuerModificationDefiAction extends Action
           if (description != null
               && !"".equals(description.trim())
               && !description.equals(defi.getDescription())) {
-            defi.setDescription(Util.toUTF8(description));
+            defi.setDescription(description);
           }
 
           if (question != null
               && !"".equals(question.trim())
               && !question.equals(defi.getQuestion())) {
-            defi.setQuestion(Util.toUTF8(question));
+            defi.setQuestion(question);
           }
 
           if (choixReponse != defi.getChoixReponse()) {
-            defi.setChoixReponse(Util.toUTF8(choixReponse));
+            defi.setChoixReponse(choixReponse);
           }
           if (reponse != defi.getReponse()) {
-            defi.setReponse(Util.toUTF8(reponse));
+            defi.setReponse(reponse);
           }
 
           cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);

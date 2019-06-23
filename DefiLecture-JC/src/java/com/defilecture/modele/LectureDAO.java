@@ -19,7 +19,6 @@
  */
 package com.defilecture.modele;
 
-import com.util.Util;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -52,7 +51,7 @@ public class LectureDAO extends DAO<Lecture> {
       paramStm = cnx.prepareStatement(req);
 
       paramStm.setInt(1, x.getIdCompte());
-      paramStm.setString(2, Util.toUTF8(x.getTitre()));
+      paramStm.setString(2, x.getTitre());
       paramStm.setInt(3, x.getDureeMinutes());
       paramStm.setInt(4, x.getEstObligatoire());
       int n = paramStm.executeUpdate();
