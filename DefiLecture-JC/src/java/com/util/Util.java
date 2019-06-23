@@ -98,7 +98,7 @@ public class Util {
      */
     public static String genererSel() {
         SecureRandom random = new SecureRandom();
-        byte[] sel = new byte[16];
+        byte[] sel = new byte[15];
         random.nextBytes(sel);
         
         return DatatypeConverter.printBase64Binary(sel);
