@@ -65,7 +65,8 @@ CREATE TABLE `compte` (
   `AVATAR` varchar(255) DEFAULT '/images/avatars/avatarCompte_defaut.png',
   `PSEUDONYME` varchar(255) DEFAULT NULL,
   `ROLE` int(10) NOT NULL DEFAULT '1',
-  `DEVENIR_CAPITAINE` int(3) NOT NULL DEFAULT '0'
+  `DEVENIR_CAPITAINE` int(3) NOT NULL DEFAULT '0',
+  `SEL` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
