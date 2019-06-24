@@ -25,11 +25,10 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/** 
- * @author Joel 
+/**
+ * @author Joel
  * @author Alexandre Dupré
  */
-
 public class CompteDAO extends DAO<Compte> {
 
   public CompteDAO() {}
@@ -244,24 +243,25 @@ public class CompteDAO extends DAO<Compte> {
 
   public Compte findByIdentifiantMotPasse(String identifiant, String motPasse) {
     String sel = "";
-    
+
     // Requête pour trouver le sel de l'utilisateur correspondant
     String reqSel = "SELECT SEL FROM compte WHERE `COURRIEL` = ? or `PSEUDONYME` = ?";
     // Requête pour trouver le compte (avec mot de passe valide)
-    String req = "SELECT * FROM compte WHERE (`COURRIEL` = ? or " + "`PSEUDONYME` = ?) and `MOT_PASSE` = ?";
-    
+    String req =
+        "SELECT * FROM compte WHERE (`COURRIEL` = ? or " + "`PSEUDONYME` = ?) and `MOT_PASSE` = ?";
+
     ResultSet resultat;
     Compte compte = null;
     PreparedStatement paramStm = null;
 
     try {
       // Définition des paramètres de la requête pour le sel
-      paramStm = cnx.prepareStatement(req);  
+      paramStm = cnx.prepareStatement(req);
       paramStm.setString(1, identifiant);
       paramStm.setString(2, identifiant);
       resultat = paramStm.executeQuery();
       sel = resultat.getString("SEL");
-      
+
       // Définition des paramètres de la requête pour l'accès au compte
       paramStm = cnx.prepareStatement(req);
       paramStm.setString(1, identifiant);

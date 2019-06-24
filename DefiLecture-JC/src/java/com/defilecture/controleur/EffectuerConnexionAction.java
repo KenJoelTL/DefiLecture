@@ -45,8 +45,8 @@ public class EffectuerConnexionAction extends Action implements RequirePRGAction
 
     if (request.getParameter("identifiant") != null && request.getParameter("motPasse") != null) {
       String identifiant = request.getParameter("identifiant"),
-             motPasse = request.getParameter("motPasse");
-      
+          motPasse = request.getParameter("motPasse");
+
       try {
         CompteDAO dao =
             new CompteDAO(
