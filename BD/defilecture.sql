@@ -36,14 +36,6 @@ SET time_zone = "+00:00";
 -- Base de données :  `defilecture`
 --
 
-DROP TABLE IF EXISTS `lecture`;
-DROP TABLE IF EXISTS `config_site`;
-DROP TABLE IF EXISTS `inscription_defi`;
-DROP TABLE IF EXISTS `demande_equipe`;
-DROP TABLE IF EXISTS `defi`;
-DROP TABLE IF EXISTS `compte`;
-DROP TABLE IF EXISTS `equipe`;
-
 DROP USER IF EXISTS defilecture;
 DROP DATABASE IF EXISTS defilecture;
 CREATE DATABASE defilecture;
@@ -59,6 +51,7 @@ GRANT ALL PRIVILEGES on defilecture.* to 'defilecture'@'%';
 -- Structure de la table `compte`
 --
 
+DROP TABLE IF EXISTS `compte`;
 CREATE TABLE `compte` (
   `ID_COMPTE` int(10) NOT NULL,
   `ID_EQUIPE` int(10) DEFAULT NULL,
@@ -120,6 +113,7 @@ NULL,
 -- Structure de la table `defi`
 --
 
+DROP TABLE IF EXISTS `defi`;
 CREATE TABLE `defi` (
   `ID_DEFI` int(10) NOT NULL,
   `ID_COMPTE` int(10) DEFAULT NULL,
@@ -140,6 +134,7 @@ CREATE TABLE `defi` (
 -- Structure de la table `demande_equipe`
 --
 
+DROP TABLE IF EXISTS `demande_equipe`;
 CREATE TABLE `demande_equipe` (
   `ID_DEMANDE_EQUIPE` int(10) NOT NULL,
   `ID_COMPTE` int(10) NOT NULL,
@@ -155,6 +150,7 @@ CREATE TABLE `demande_equipe` (
 -- Structure de la table `equipe`
 --
 
+DROP TABLE IF EXISTS `equipe`;
 CREATE TABLE `equipe` (
   `ID_EQUIPE` int(10) NOT NULL,
   `NOM` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
@@ -166,6 +162,7 @@ CREATE TABLE `equipe` (
 -- Structure de la table `inscription_defi`
 --
 
+DROP TABLE IF EXISTS `inscription_defi`;
 CREATE TABLE `inscription_defi` (
   `ID_INSCRIPTION_DEFI` int(10) NOT NULL,
   `ID_COMPTE` int(10) NOT NULL,
@@ -181,6 +178,7 @@ CREATE TABLE `inscription_defi` (
 -- Structure de la table `lecture`
 --
 
+DROP TABLE IF EXISTS `lecture`;
 CREATE TABLE `lecture` (
   `ID_LECTURE` int(10) NOT NULL,
   `ID_COMPTE` int(10) NOT NULL,
