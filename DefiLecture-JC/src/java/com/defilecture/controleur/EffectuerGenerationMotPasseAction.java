@@ -19,8 +19,6 @@
  */
 package com.defilecture.controleur;
 
-import static org.apache.commons.codec.digest.DigestUtils.sha1Hex;
-
 import com.defilecture.modele.Compte;
 import com.defilecture.modele.CompteDAO;
 import java.sql.Connection;
@@ -65,9 +63,10 @@ public class EffectuerGenerationMotPasseAction extends Action
             builder.append(ALPHA_NUMERIC_STRING.charAt(character));
             longueur--;
           }
+          
           String motPasse = builder.toString();
-          String motPasseHash = sha1Hex(motPasse);
-          compte.setMotPasse(motPasseHash);
+          compte.setMotPasse(motPasse);
+          
           if (dao.update(compte)) {
             data.put("succesGenerationMotPasse", "Nouveau mot de passe : " + motPasse);
           } else {
