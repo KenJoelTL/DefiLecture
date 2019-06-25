@@ -19,8 +19,6 @@
  */
 package com.defilecture.controleur;
 
-import static org.apache.commons.codec.digest.DigestUtils.sha1Hex;
-
 import com.defilecture.modele.Compte;
 import com.defilecture.modele.CompteDAO;
 import java.sql.Connection;
@@ -63,13 +61,13 @@ public class EffectuerModificationCompteAction extends Action
           pseudonyme = request.getParameter("pseudonyme");
 
       if (motPasseActuel != null) {
-        motPasseActuel = sha1Hex(motPasseActuel);
+        motPasseActuel = motPasseActuel;
       }
       if (motPasseNouveau != null) {
-        motPasseNouveau = sha1Hex(motPasseNouveau);
+        motPasseNouveau = motPasseNouveau;
       }
       if (motPasseNouveauConfirmation != null) {
-        motPasseNouveauConfirmation = sha1Hex(motPasseNouveauConfirmation);
+        motPasseNouveauConfirmation = motPasseNouveauConfirmation;
       }
 
       int idEquipe, minutesRestantes, pointage, role;

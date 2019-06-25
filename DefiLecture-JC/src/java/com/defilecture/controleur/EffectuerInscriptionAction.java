@@ -81,9 +81,7 @@ public class EffectuerInscriptionAction extends Action implements RequirePRGActi
         String courriel = request.getParameter("courriel"),
             prenom = request.getParameter("prenom"),
             nom = request.getParameter("nom"),
-            motPasse =
-                org.apache.commons.codec.digest.DigestUtils.sha1Hex(
-                    request.getParameter("motPasse")),
+            motPasse = request.getParameter("motPasse"),
             programmeEtude = request.getParameter("programmeEtude"),
             pseudonyme = request.getParameter("pseudonyme");
 
