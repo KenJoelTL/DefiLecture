@@ -57,7 +57,7 @@ public class CompteDAO extends DAO<Compte> {
         paramStm.setString(6, compte.getAvatar());
         paramStm.setString(7, compte.getProgrammeEtude());
         paramStm.setInt(8, compte.getDevenirCapitaine());
-        paramStm.setString(Util.genererSel());
+        paramStm.setString(9, Util.genererSel());
       }
       int nbLignesAffectees = paramStm.executeUpdate();
 
@@ -256,24 +256,29 @@ public class CompteDAO extends DAO<Compte> {
 
     try {
       // Définition des paramètres de la requête pour le sel
-      paramStm = cnx.prepareStatement(req);
+      paramStm = cnx.prepareStatement(reqSel);
       paramStm.setString(1, identifiant);
       paramStm.setString(2, identifiant);
       resultat = paramStm.executeQuery();
-      sel = resultat.getString("SEL");
+      if (resultat.next()) {
+        sel = resultat.getString("SEL");
+        Logger.getLogger(CompteDAO.class.getName()).log(Level.SEVERE, sel);
 
-      // Définition des paramètres de la requête pour l'accès au compte
-      paramStm = cnx.prepareStatement(req);
-      paramStm.setString(1, identifiant);
-      paramStm.setString(2, identifiant);
-      // Le mot de passe est hashé avec le sel du compte (si trouvé)
-      paramStm.setString(3, Util.hasherAvecSel(motPasse, sel));
-      resultat = paramStm.executeQuery();
+        // Définition des paramètres de la requête pour l'accès au compte
+        paramStm = cnx.prepareStatement(req);
+        paramStm.setString(1, identifiant);
+        paramStm.setString(2, identifiant);
+        String mdp = Util.hasherAvecSel(motPasse, sel);
+        Logger.getLogger(CompteDAO.class.getName()).log(Level.SEVERE, mdp);
+        // Le mot de passe est hashé avec le sel du compte (si trouvé)
+        paramStm.setString(3, mdp);
+        resultat = paramStm.executeQuery();
 
-      if (resultat.next()) compte = getCompteFromResultSet(resultat);
+        if (resultat.next()) compte = getCompteFromResultSet(resultat);
 
-      resultat.close();
-      paramStm.close();
+        resultat.close();
+        paramStm.close();
+      }
     } catch (SQLException ex) {
       Logger.getLogger(CompteDAO.class.getName()).log(Level.SEVERE, null, ex);
     }
