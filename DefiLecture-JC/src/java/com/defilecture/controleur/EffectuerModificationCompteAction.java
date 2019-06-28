@@ -48,7 +48,7 @@ public class EffectuerModificationCompteAction
             || (!request
                     .getParameter("idCompte")
                     .equals(session.getAttribute("connecte").toString())
-                && (int) session.getAttribute("role") > Compte.CAPITAINE))
+                && (int) session.getAttribute("role") == Compte.ADMINISTRATEUR))
         && (request.getParameter("modifie") != null)) {
 
       String idCompte = request.getParameter("idCompte"),
@@ -90,43 +90,45 @@ public class EffectuerModificationCompteAction
           cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
           dao.setCnx(cnx);
 
-          if (request.getParameter("role") != null) {
-            try {
-              role = Integer.parseInt(request.getParameter("role"));
-              if (role != compte.getRole()) {
-                compte.setRole(role);
-              }
-            } catch (NumberFormatException e) {
-            }
-          }
-          if (request.getParameter("minutesRestantes") != null) {
-            try {
-              minutesRestantes = Integer.parseInt(request.getParameter("minutesRestantes"));
-              if (minutesRestantes != compte.getMinutesRestantes()) {
-                compte.setMinutesRestantes(minutesRestantes);
-              }
-            } catch (NumberFormatException e) {
-            }
-          }
-          if (request.getParameter("pointage") != null) {
-            try {
-              pointage = Integer.parseInt(request.getParameter("pointage"));
-              if (pointage != compte.getPoint()) {
-                compte.setPoint(pointage);
-              }
-            } catch (NumberFormatException e) {
-            }
-          }
-          if (request.getParameter("idEquipe")
-              != null) { // lorsque quelqu'un quitte son equipe idEquipe = -1
-            try {
-              idEquipe = Integer.parseInt(request.getParameter("idEquipe"));
-              if (idEquipe != compte.getIdEquipe()) {
-                compte.setIdEquipe(idEquipe);
-              }
-            } catch (NumberFormatException e) {
-            }
-          }
+	  if ((int)session.getAttribute("role") == Compte.ADMINISTRATEUR){
+	      if (request.getParameter("role") != null) {
+		  try {
+		      role = Integer.parseInt(request.getParameter("role"));
+		      if (role != compte.getRole()) {
+			  compte.setRole(role);
+		      }
+		  } catch (NumberFormatException e) {
+		  }
+	      }
+	      if (request.getParameter("minutesRestantes") != null) {
+		  try {
+		      minutesRestantes = Integer.parseInt(request.getParameter("minutesRestantes"));
+		      if (minutesRestantes != compte.getMinutesRestantes()) {
+			  compte.setMinutesRestantes(minutesRestantes);
+		      }
+		  } catch (NumberFormatException e) {
+		  }
+	      }
+	      if (request.getParameter("pointage") != null) {
+		  try {
+		      pointage = Integer.parseInt(request.getParameter("pointage"));
+		      if (pointage != compte.getPoint()) {
+			  compte.setPoint(pointage);
+		      }
+		  } catch (NumberFormatException e) {
+		  }
+	      }
+	      if (request.getParameter("idEquipe")
+		  != null) { // lorsque quelqu'un quitte son equipe idEquipe = -1
+		  try {
+		      idEquipe = Integer.parseInt(request.getParameter("idEquipe"));
+		      if (idEquipe != compte.getIdEquipe()) {
+			  compte.setIdEquipe(idEquipe);
+		      }
+		  } catch (NumberFormatException e) {
+		  }
+	      }
+	  }
           if (courriel != null
               && !"".equals(courriel.trim())
               && !courriel.equals(compte.getCourriel())) {
