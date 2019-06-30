@@ -44,14 +44,11 @@ public class EffectuerSuspensionMembreEquipeAction extends Action
 
   @Override
   public String execute() {
-    String action = "Acceuil.do?tache=afficherPageAccueil";
-    if (!userIsConnected()
-        || session.getAttribute("role") == null
-        || request.getParameter("idEquipe") == null
-        || request.getParameter("idCompte") == null) {
-    } else if (!request.getParameter("idCompte").equals(session.getAttribute("connecte") + "")
-        && (((int) session.getAttribute("role") == Compte.CAPITAINE)
-            || ((int) session.getAttribute("role") == Compte.ADMINISTRATEUR))) {
+    if (userIsConnected()
+        && request.getParameter("idEquipe") == null
+        && request.getParameter("idCompte") == null
+        && !request.getParameter("idCompte").equals(session.getAttribute("currentId"))
+        && (userIsCapitaine() || userIsAdmin())) {
       try {
         String idCompte = request.getParameter("idCompte");
         String idEquipe = request.getParameter("idEquipe");
@@ -60,7 +57,7 @@ public class EffectuerSuspensionMembreEquipeAction extends Action
         EquipeDAO equipeDao = new EquipeDAO(cnx);
         CompteDAO compteDao = new CompteDAO(cnx);
         Compte compte = compteDao.read(idCompte);
-        Compte compteSup = compteDao.read((int) session.getAttribute("connecte"));
+        Compte compteSup = compteDao.read((int) session.getAttribute("currentId"));
         Equipe equipe = equipeDao.read(idEquipe);
 
         // si le compte connecté est au niveau de Capitaine, alors il faut qu'il soit membre
@@ -84,11 +81,6 @@ public class EffectuerSuspensionMembreEquipeAction extends Action
             demandeEquipe.setStatutDemande(DemandeEquipe.SUSPENDUE);
             // si l'un des enregistrements échouent alors on revient à l'état initial
             if (demandeEqpDao.update(demandeEquipe)) {
-              /*
-              demandeEquipe.setStatutDemande(1);
-              compte.setIdEquipe(equipe.getIdEquipe());
-              demandeEqpDao.update(demandeEquipe);
-              compteDao.update(compte);*/
               data.put(
                   "succesSuspension",
                   "Le matelot "
@@ -96,7 +88,7 @@ public class EffectuerSuspensionMembreEquipeAction extends Action
                       + " "
                       + compte.getNom()
                       + " est maintenant à la cale");
-              action = "suspension.do?tache=afficherPageModificationEquipe&idEquipe=" + idEquipe;
+              return "suspension.do?tache=afficherPageModificationEquipe&idEquipe=" + idEquipe;
             } else {
               data.put(
                   "erreurSuspension",
@@ -105,11 +97,10 @@ public class EffectuerSuspensionMembreEquipeAction extends Action
                       + " "
                       + compte.getNom()
                       + " à la cale");
-              action = "tuRestes.do?tache=afficherPageEquipe&idEquipe=" + idEquipe;
+              return "tuRestes.do?tache=afficherPageEquipe&idEquipe=" + idEquipe;
             }
           }
         }
-
       } catch (SQLException ex) {
         Logger.getLogger(EffectuerSuspensionMembreEquipeAction.class.getName())
             .log(Level.SEVERE, null, ex);
@@ -118,7 +109,7 @@ public class EffectuerSuspensionMembreEquipeAction extends Action
       }
     }
 
-    return action;
+    return "Accueil.do?tache=afficherPageAccueil";
   }
 
   @Override

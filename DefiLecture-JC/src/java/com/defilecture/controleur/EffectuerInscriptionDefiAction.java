@@ -48,11 +48,10 @@ public class EffectuerInscriptionDefiAction extends Action implements RequirePRG
   @Override
   public String execute() {
     if (userIsConnected()
-        && (((int) session.getAttribute("role") == Compte.PARTICIPANT)
-            || ((int) session.getAttribute("role") == Compte.CAPITAINE))
+        && (userIsParticipant() || userIsCapitaine())
         && request.getParameter("valider") != null) {
       String reponseParticipant = request.getParameter("reponseParticipant");
-      int idCompte = (int) (session.getAttribute("connecte")),
+      int idCompte = (int) (session.getAttribute("currentId")),
           idDefi = Integer.parseInt(request.getParameter("idDefi"));
       InscriptionDefi inscriptionDefi = new InscriptionDefi();
 
@@ -62,10 +61,7 @@ public class EffectuerInscriptionDefiAction extends Action implements RequirePRG
         DefiDAO daoDefi = new DefiDAO(cnx);
         Defi defi = daoDefi.read(idDefi);
 
-        System.out.println("test1");
-        if (defi == null) return "*.do?tache=afficherPageParticipationDefi";
-        else {
-          System.out.println("test2");
+        if (defi != null) {
           // Si le participant a déjà fait le défi, on ne crée pas une nouvelle
           // inscription_defi
           cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
@@ -123,16 +119,14 @@ public class EffectuerInscriptionDefiAction extends Action implements RequirePRG
 
           // Création de l'inscription_defi dans la base de données
           daoInscriptionDefi.create(inscriptionDefi);
-          return "*.do?tache=afficherPageParticipationDefi";
         }
 
       } catch (SQLException ex) {
         Logger.getLogger(EffectuerInscriptionDefiAction.class.getName())
             .log(Level.SEVERE, null, ex);
-        return "*.do?tache=afficherPageParticipationDefi";
       }
-
-    } else return "*.do?tache=afficherPageParticipationDefi";
+    }
+    return "*.do?tache=afficherPageParticipationDefi";
   }
 
   @Override

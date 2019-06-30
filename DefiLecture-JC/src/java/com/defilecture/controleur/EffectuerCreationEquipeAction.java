@@ -44,26 +44,32 @@ public class EffectuerCreationEquipeAction extends Action implements RequirePRGA
   @Override
   public String execute() {
     if (userIsConnected()) {
-      if ((int) session.getAttribute("role") == Compte.CAPITAINE) {
+      if (userIsCapitaine()) {
+        int idCompte = (int) session.getAttribute("currentId");
         String nom = request.getParameter("nom");
-        if (nom != null) {
+        if (nom != null && !"".equals(nom.trim())) {
           Equipe equipe = new Equipe();
           equipe.setNom(nom);
-          // equipe.setIdCapitaine((int)session.getAttribute("id"));
+
           try {
             Connection cnx =
                 Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
             EquipeDAO daoEquipe = new EquipeDAO(cnx);
-            // idéalement créer le tout seulement si et seulement si toutes les
-            // conditions sont
-            // vraies
+
             if (daoEquipe.create(equipe)) {
+              Logger.getLogger(EffectuerCreationEquipeAction.class.getName())
+                  .log(Level.SEVERE, "Équipe créée.");
               equipe = daoEquipe.findByNom(equipe.getNom());
               if (equipe != null) {
+                Logger.getLogger(EffectuerCreationEquipeAction.class.getName())
+                    .log(Level.SEVERE, "Équipe trouvée. " + equipe.getIdEquipe());
                 CompteDAO daoCompte = new CompteDAO(cnx);
-                Compte compte = daoCompte.read((int) session.getAttribute("connecte"));
-
+                Compte compte = daoCompte.read(idCompte);
                 compte.setIdEquipe(equipe.getIdEquipe());
+                Logger.getLogger(EffectuerCreationEquipeAction.class.getName())
+                    .log(
+                        Level.SEVERE,
+                        "Ajout du compte " + idCompte + " à l'équipe " + equipe.getIdEquipe());
 
                 if (daoCompte.update(compte)) {
                   DemandeEquipeDAO daoDemandeEquipe = new DemandeEquipeDAO(cnx);
@@ -72,12 +78,12 @@ public class EffectuerCreationEquipeAction extends Action implements RequirePRGA
                   demande.setIdEquipe(compte.getIdEquipe());
 
                   demande.setStatutDemande(1);
-                  if (daoDemandeEquipe.create(demande))
+                  if (daoDemandeEquipe.create(demande)) {
+                    Logger.getLogger(EffectuerCreationEquipeAction.class.getName())
+                        .log(Level.SEVERE, "Demande complétée");
                     return "creationEquipeCompletee.do?tache=afficherPageEquipe&idEquipe="
-                        + equipe.getIdEquipe(); // soit afficher le page
-                  // avec utilisateur pour
-                  // pouvoir
-                  // enoyer une demande
+                        + equipe.getIdEquipe();
+                  }
                 }
               } else {
                 data.put("erreurNom", "Ce nom est déjà utilisé par un équipage");

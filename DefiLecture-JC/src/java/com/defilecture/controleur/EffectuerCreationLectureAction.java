@@ -44,8 +44,7 @@ public class EffectuerCreationLectureAction extends Action implements RequirePRG
     System.out.println("Entrer dans l'action créer lecture");
 
     if (userIsConnected()
-        && (((int) session.getAttribute("role") == Compte.PARTICIPANT)
-            || ((int) session.getAttribute("role") == Compte.CAPITAINE))
+        && (userIsParticipant() || userIsCapitaine())
         && request.getParameter("titre") != null
         && request.getParameter("dureeMinutes") != null
         && request.getParameter("obligatoire") != null) {
@@ -53,7 +52,7 @@ public class EffectuerCreationLectureAction extends Action implements RequirePRG
       String titre = request.getParameter("titre");
       int dureeMinutes = Integer.parseInt(request.getParameter("dureeMinutes")),
           obligatoire = Integer.parseInt(request.getParameter("obligatoire")),
-          idCompte = (int) session.getAttribute("connecte");
+          idCompte = (int) session.getAttribute("currentId");
 
       Lecture lecture;
 
@@ -78,7 +77,9 @@ public class EffectuerCreationLectureAction extends Action implements RequirePRG
           CompteDAO daoCompte = new CompteDAO(cnx);
           Compte compte = new Compte();
           compte = daoCompte.read(idCompte);
-          if (lecture.getEstObligatoire() == Lecture.NON_OBLIGATOIRE) dureeMinutes *= 2;
+          if (lecture.getEstObligatoire() == Lecture.NON_OBLIGATOIRE) {
+            dureeMinutes *= 2;
+          }
           int pointLecture = (dureeMinutes + compte.getMinutesRestantes()) / 15;
           int pointCompte = compte.getPoint() + pointLecture;
           // Les minutes restantes sont gardées en mémoire ici
@@ -99,7 +100,9 @@ public class EffectuerCreationLectureAction extends Action implements RequirePRG
 
             System.out.println("Une lecture a été créée avec succès");
 
-          } else System.out.println("Problème de création de la lecture");
+          } else {
+            System.out.println("Problème de création de la lecture");
+          }
         }
 
       } catch (SQLException ex) {

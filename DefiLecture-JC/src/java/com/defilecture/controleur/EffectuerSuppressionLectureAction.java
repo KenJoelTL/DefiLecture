@@ -40,12 +40,9 @@ public class EffectuerSuppressionLectureAction extends Action implements Require
 
   @Override
   public String execute() {
-    if (userIsConnected()
-        && (((int) session.getAttribute("role") == Compte.PARTICIPANT)
-            || ((int) session.getAttribute("role") == Compte.CAPITAINE))) {
-
+    if (userIsConnected() && (userIsCapitaine() || userIsParticipant())) {
       String idLecture = request.getParameter("idLecture");
-      int idCompte = (int) session.getAttribute("connecte");
+      int idCompte = (int) session.getAttribute("currentId");
 
       try {
 
@@ -54,11 +51,7 @@ public class EffectuerSuppressionLectureAction extends Action implements Require
 
         LectureDAO daoLecture = new LectureDAO(cnx);
         Lecture lecture = daoLecture.read(idLecture);
-        if (lecture == null) {
-
-          return "*.do?tache=afficherPageGestionLecture";
-        } else {
-
+        if (lecture != null) {
           cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
 
           CompteDAO daoCompte = new CompteDAO(cnx);
@@ -85,19 +78,13 @@ public class EffectuerSuppressionLectureAction extends Action implements Require
 
           daoLecture.setCnx(cnx);
 
-          if (!daoLecture.delete(lecture)) {
-
-            return "*.do?tache=afficherPageGestionLecture";
-          } else {
-
-            return "*.do?tache=afficherPageGestionLecture";
-          }
+          daoLecture.delete(lecture);
         }
       } catch (SQLException ex) {
         Logger.getLogger(EffectuerModificationLectureAction.class.getName())
             .log(Level.SEVERE, null, ex);
       }
-    } else return "*.do?tache=afficherPageGestionLecture";
-    return null;
+    }
+    return "*.do?tache=afficherPageGestionLecture";
   }
 }

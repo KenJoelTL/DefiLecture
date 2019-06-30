@@ -34,8 +34,6 @@ public class EffectuerInscriptionAction extends Action implements RequirePRGActi
 
   @Override
   public String execute() {
-    Logger.getLogger("EffectuerInscriptionAction")
-        .log(Level.SEVERE, "STARTING TO EXECUTE INSCRIPTION");
     boolean erreur = false;
     String action = "echec.do?tache=afficherPageInscription";
 
@@ -76,6 +74,7 @@ public class EffectuerInscriptionAction extends Action implements RequirePRGActi
           "erreurMotPasseIdentique",
           "Les deux champs concernant les mots de passe ne sont pas identiques");
     }
+
     if (!erreur) {
       try {
         String courriel = request.getParameter("courriel"),
@@ -97,7 +96,7 @@ public class EffectuerInscriptionAction extends Action implements RequirePRGActi
         compte.setMotPasse(motPasse);
         compte.setPseudonyme(pseudonyme);
         compte.setProgrammeEtude(programmeEtude);
-        Logger.getLogger("Compte", "Courriel : " + courriel);
+
         if (request.getParameter("devenirCapitaine") != null) {
           compte.setDevenirCapitaine(Integer.parseInt(request.getParameter("devenirCapitaine")));
         }
@@ -125,11 +124,6 @@ public class EffectuerInscriptionAction extends Action implements RequirePRGActi
       }
     }
     return action;
-  }
-
-  @Override
-  public String toString() {
-    return "OK";
   }
 
   @Override

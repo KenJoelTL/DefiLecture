@@ -45,24 +45,21 @@ public class EffectuerModificationEquipeAction extends Action
     String action = "*.do?tache=afficherPageAccueil";
     if (request.getParameter("idEquipe") != null) {
       action = "*.do?tache=afficherPageEquipe&idEquipe=" + request.getParameter("idEquipe");
+
       if (request.getParameter("modifier") != null) {
-        if (userIsConnected()
-            && (int) session.getAttribute("role") == Compte.CAPITAINE
-            && request.getParameter("nom") != null) {
+        if (userIsConnected() && userIsCapitaine() && request.getParameter("nom") != null) {
           try {
             Connection cnx =
                 Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
-            Compte compte = new CompteDAO(cnx).read((int) session.getAttribute("connecte"));
+            Compte compte = new CompteDAO(cnx).read((int) session.getAttribute("currentId"));
             EquipeDAO equipeDao = new EquipeDAO(cnx);
             Equipe equipe = equipeDao.findByNom(request.getParameter("nom"));
+
             if (compte != null && equipe == null && compte.getIdEquipe() != -1) {
               equipe = equipeDao.read(compte.getIdEquipe());
               equipe.setNom(request.getParameter("nom"));
 
               if (equipeDao.update(equipe)) {
-                action =
-                    "*.do?tache=afficherPageModificationEquipe&idEquipe="
-                        + request.getParameter("idEquipe");
                 data.put("succesNom", "L'enregistrement du nouveau nom s'est fait avec succès");
               } else {
                 data.put(
@@ -75,9 +72,6 @@ public class EffectuerModificationEquipeAction extends Action
                   "Le nom "
                       + request.getParameter("nom")
                       + " est déjà utilisé par un autre équipage");
-              action =
-                  "*.do?tache=afficherPageModificationEquipe&idEquipe="
-                      + request.getParameter("idEquipe");
             }
           } catch (SQLException ex) {
             Logger.getLogger(EffectuerModificationEquipeAction.class.getName())

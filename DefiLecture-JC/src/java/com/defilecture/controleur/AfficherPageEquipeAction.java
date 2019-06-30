@@ -42,7 +42,9 @@ public class AfficherPageEquipeAction extends Action {
             Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
         EquipeDAO dao = new EquipeDAO(cnx);
 
-        if (dao.read(idEquipe) != null) request.setAttribute("vue", "pageEquipe.jsp");
+        if (dao.read(idEquipe) != null) {
+          request.setAttribute("vue", "pageEquipe.jsp");
+        }
 
       } catch (SQLException ex) {
         Logger.getLogger(AfficherPageEquipeAction.class.getName()).log(Level.SEVERE, null, ex);

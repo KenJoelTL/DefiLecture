@@ -36,13 +36,15 @@ public class AfficherPageDefisReussisAction extends Action {
     if (userIsConnected()) {
       try {
         if (userIsAdmin() || userIsModerateur()) {
+          int idCompte = (int) session.getAttribute("currentId");
           CompteDAO dao =
               new CompteDAO(
                   Connexion.startConnection(
                       Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
 
-          if (dao.read((int) session.getAttribute("currentId")) != null)
+          if (dao.read(idCompte) != null) {
             request.setAttribute("vue", "pageDefisReussis.jsp");
+          }
 
           return "/index.jsp";
         }

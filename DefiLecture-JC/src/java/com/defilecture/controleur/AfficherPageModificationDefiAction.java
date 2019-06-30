@@ -14,7 +14,6 @@
  */
 package com.defilecture.controleur;
 
-import com.defilecture.modele.Compte;
 import com.defilecture.modele.Defi;
 import com.defilecture.modele.DefiDAO;
 import java.sql.Connection;
@@ -34,15 +33,15 @@ public class AfficherPageModificationDefiAction extends Action {
     try {
       // Seuls les Capitaines et les Participants peuvent ajouter et modifier leurs lectures.
       if (userIsConnected() && request.getParameter("id") != null)
-        if (((int) session.getAttribute("role") == Compte.MODERATEUR)
-            || ((int) session.getAttribute("role") == Compte.ADMINISTRATEUR)) {
+        if (userIsAdmin() || userIsModerateur()) {
           Connection cnx =
               Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
           Defi d = new DefiDAO(cnx).read(request.getParameter("id"));
 
           // seul celui qui a ajouté la lecture peut la modifier
-          if (d != null && d.getIdCompte() == (int) session.getAttribute("connecte"))
+          if (d != null && d.getIdCompte() == (int) session.getAttribute("currentId")) {
             request.setAttribute("vue", "pageModificationDefi.jsp");
+          }
         }
 
     } catch (SQLException ex) {

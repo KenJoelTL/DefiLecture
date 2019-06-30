@@ -44,14 +44,10 @@ public class EffectuerReaffectationMembreEquipeAction extends Action
 
   @Override
   public String execute() {
-    String action = "Acceuil.do?tache=afficherPageAccueil";
-    if (!userIsConnected()
-        || session.getAttribute("role") == null
-        || request.getParameter("idEquipe") == null
-        || request.getParameter("idCompte") == null) {
-    } else if (!request.getParameter("idCompte").equals(session.getAttribute("connecte") + "")
-        && (((int) session.getAttribute("role") == Compte.CAPITAINE)
-            || ((int) session.getAttribute("role") == Compte.ADMINISTRATEUR))) {
+    String action = "Accueil.do?tache=afficherPageAccueil";
+    if (userIsConnected()
+        && !request.getParameter("idCompte").equals(session.getAttribute("currentId"))
+        && (userIsCapitaine() || userIsAdmin())) {
       try {
         String idCompte = request.getParameter("idCompte");
         String idEquipe = request.getParameter("idEquipe");
@@ -60,7 +56,7 @@ public class EffectuerReaffectationMembreEquipeAction extends Action
         EquipeDAO equipeDao = new EquipeDAO(cnx);
         CompteDAO compteDao = new CompteDAO(cnx);
         Compte compte = compteDao.read(idCompte);
-        Compte compteSup = compteDao.read((int) session.getAttribute("connecte"));
+        Compte compteSup = compteDao.read((int) session.getAttribute("currentId"));
         Equipe equipe = equipeDao.read(idEquipe);
 
         // si le compte connecté est au niveau de Capitaine, alors il faut qu'il soit membre
@@ -72,9 +68,8 @@ public class EffectuerReaffectationMembreEquipeAction extends Action
             && equipe != null
             && compteSup != null
             && equipe.getIdEquipe() == compte.getIdEquipe()
-            && ((compte.getIdEquipe() == compteSup.getIdEquipe()
-                    && compteSup.getRole() == Compte.CAPITAINE)
-                || compteSup.getRole() == Compte.ADMINISTRATEUR)) {
+            && ((compte.getIdEquipe() == compteSup.getIdEquipe() && userIsCapitaine())
+                || userIsAdmin())) {
 
           DemandeEquipeDAO demandeEqpDao = new DemandeEquipeDAO(cnx);
           DemandeEquipe demandeEquipe =

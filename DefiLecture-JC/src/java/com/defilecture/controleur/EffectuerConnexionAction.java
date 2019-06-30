@@ -54,14 +54,8 @@ public class EffectuerConnexionAction extends Action implements RequirePRGAction
                     Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
         Compte compte = dao.findByIdentifiantMotPasse(identifiant, motPasse);
 
-        Logger.getLogger(EffectuerConnexionAction.class.getName())
-            .log(Level.SEVERE, "About to connect : " + compte);
         // On vérifie s'il y a un résultat
         if (compte != null) {
-          Logger.getLogger(EffectuerConnexionAction.class.getName())
-              .log(
-                  Level.SEVERE,
-                  compte.getNom() + " (" + compte.getIdCompte() + ") s'est connecté.");
           session = request.getSession(true);
           session.setAttribute("connecte", compte.getIdCompte());
           session.setAttribute("role", compte.getRole());
@@ -72,7 +66,6 @@ public class EffectuerConnexionAction extends Action implements RequirePRGAction
           data.put("identifiant", identifiant);
         }
       } catch (SQLException ex) {
-        session = null;
         Logger.getLogger(EffectuerConnexionAction.class.getName()).log(Level.SEVERE, null, ex);
       } finally {
         Connexion.close();

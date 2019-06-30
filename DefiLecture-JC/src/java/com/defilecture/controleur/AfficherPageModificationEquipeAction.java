@@ -27,7 +27,9 @@ public class AfficherPageModificationEquipeAction extends Action implements Data
 
   @Override
   public String execute() {
-    if (userIsConnected()) request.setAttribute("vue", "pageModificationEquipe.jsp");
+    if (userIsConnected()) {
+      request.setAttribute("vue", "pageModificationEquipe.jsp");
+    }
     return "/index.jsp";
   }
 }

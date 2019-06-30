@@ -26,7 +26,6 @@ package com.defilecture.controleur;
 public class AfficherPageInscriptionDefiAction extends Action {
   @Override
   public String execute() {
-
     request.setAttribute("vue", "pageInscriptionDefi.jsp");
 
     return "/index.jsp";

@@ -45,8 +45,7 @@ public class EffectuerGenerationMotPasseAction extends Action
   public String execute() {
 
     String action = "";
-    if ((int) session.getAttribute("role") == Compte.ADMINISTRATEUR
-        && request.getParameter("idCompte") != null) {
+    if (userIsAdmin() && request.getParameter("idCompte") != null) {
       try {
         Connection cnx =
             Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
@@ -68,14 +67,11 @@ public class EffectuerGenerationMotPasseAction extends Action
           String motPasse = builder.toString();
           String motPasseHash = sha1Hex(motPasse);
           compte.setMotPasse(motPasseHash);
-          if (dao.update(compte)) {
-            data.put("succesGenerationMotPasse", "Nouveau mot de passe : " + motPasse);
-          } else {
-            data.put(
-                "erreurGenerationMotPasse",
-                "Une erreur est survenue lors de la modification du compte");
-          }
-
+          data.put(
+              "succesGenerationMotPasse",
+              dao.update(compte)
+                  ? "Nouveau mot de passe : " + motPasse
+                  : "Une erreur est survenue lors de la modification du compte");
         } else {
           data.put(
               "erreurGenerationMotPasse", "Le compte que vous tentez de modifier est introuvable");

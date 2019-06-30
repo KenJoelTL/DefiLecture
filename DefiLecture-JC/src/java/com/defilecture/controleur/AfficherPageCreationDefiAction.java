@@ -26,8 +26,9 @@ package com.defilecture.controleur;
 public class AfficherPageCreationDefiAction extends Action {
   @Override
   public String execute() {
-    if (userIsConnected() && (userIsAdmin() || userIsModerateur()))
+    if (userIsConnected() && (userIsAdmin() || userIsModerateur())) {
       request.setAttribute("vue", "pageCreationDefi.jsp");
+    }
 
     return "/index.jsp";
   }

@@ -35,7 +35,7 @@ public class EffectuerModificationConfigAction extends Action implements Require
 
   @Override
   public String execute() {
-    if ((userIsConnected()) && (int) session.getAttribute("role") >= 3) {
+    if (userIsConnected() && (userIsAdmin() || userIsModerateur())) {
       try {
         Connection cnx =
             Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
@@ -45,18 +45,22 @@ public class EffectuerModificationConfigAction extends Action implements Require
         configUpdate = new ConfigSite();
         configCreate = new ConfigSite();
         verification = new ConfigSite();
+
         // Modification et création des paramètres dans la même action
         for (String id : parameterNames) {
           verification = configDAO.read(id);
           // Vérification que l'input n'est pas vide
           String verif = request.getParameter(id).trim();
+
           if (verification != null && !"tache".equals(id) && !verif.isEmpty()) {
             configUpdate.getConfig().put(id, request.getParameter(id));
           }
+
           if (verification == null && !"tache".equals(id) && !verif.isEmpty()) {
             configCreate.getConfig().put(id, request.getParameter(id));
           }
         }
+
         configDAO.update(configUpdate);
         configDAO.create(configCreate);
       } catch (SQLException ex) {

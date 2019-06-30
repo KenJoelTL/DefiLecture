@@ -108,8 +108,9 @@ public class EffectuerAcceptationDemandeAdhesionAction extends Action
                         (ArrayList<DemandeEquipe>) deDao.findByIdCompte(cpt.getIdCompte());
                     listeDemandes.forEach(
                         demande -> {
-                          if (demande.getIdDemandeEquipe() != demandeEq.getIdDemandeEquipe())
+                          if (demande.getIdDemandeEquipe() != demandeEq.getIdDemandeEquipe()) {
                             deDao.delete(demande);
+                          }
                         });
                   }
                 } else {

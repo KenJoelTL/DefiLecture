@@ -21,7 +21,9 @@ package com.defilecture.controleur;
 public class AfficherPageConnexionAction extends Action {
   @Override
   public String execute() {
-    if (!userIsConnected()) request.setAttribute("vue", "pageConnexion.jsp");
+    if (!userIsConnected()) {
+      request.setAttribute("vue", "pageConnexion.jsp");
+    }
 
     return "/index.jsp";
   }
