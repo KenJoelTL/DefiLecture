@@ -47,11 +47,9 @@ public class EffectuerDemandeAdhesionEquipeAction extends Action
   public String execute() {
     // action envoyée au controleur frontal
     String action = "connexion.do?tache=afficherPageConnexion";
-    if (!userIsConnected()
-        || request.getParameter("idEquipe") == null
-        || request.getParameter("idCompte") == null)
-      action = "connexion.do?tache=afficherPageConnexion";
-    else {
+    if (userIsConnected()
+        || request.getParameter("idEquipe") != null
+        || request.getParameter("idCompte") != null) {
       try {
         String idEquipe = request.getParameter("idEquipe");
         String idCompte = request.getParameter("idCompte");
@@ -63,9 +61,7 @@ public class EffectuerDemandeAdhesionEquipeAction extends Action
         Compte compte = new CompteDAO(cnx).read(idCompte);
 
         // Cherche si le compte existe
-        if (compte == null || equipe == null) {
-          action = "connexion.do?tache=afficherPageConnexion";
-        } else {
+        if (compte != null || equipe != null) {
           DemandeEquipe demandeEq;
           DemandeEquipeDAO demandeDao = new DemandeEquipeDAO(cnx);
           demandeEq = demandeDao.findByIdCompteEquipe(compte.getIdCompte(), equipe.getIdEquipe());
@@ -78,9 +74,7 @@ public class EffectuerDemandeAdhesionEquipeAction extends Action
             demandeEq.setIdEquipe(equipe.getIdEquipe());
 
             // Insertion dans la base de données
-            if (!demandeDao.create(demandeEq))
-              action = "demandeEchouee.do?tache=afficherPageListeEquipes";
-            else {
+            if (demandeDao.create(demandeEq)) {
               response.setContentType("text/plain");
               try {
                 String msg = "Une demande d'adhésion a été envoyée à l'équipage " + equipe.getNom();
@@ -94,13 +88,14 @@ public class EffectuerDemandeAdhesionEquipeAction extends Action
                 Logger.getLogger(EffectuerDemandeAdhesionEquipeAction.class.getName())
                     .log(Level.SEVERE, null, ex);
               }
-              action = "demandeEnvoyee.do?tache=afficherPageListeEquipes";
             }
-          } else { // si la demande existe déjà alors on la rend visible
+
+            action = "demandeEchouee.do?tache=afficherPageListeEquipes";
+          } else {
+            // si la demande existe déjà alors on la rend visible
             demandeEq.setStatutDemande(-1);
           }
         }
-
       } catch (SQLException ex) {
         Logger.getLogger(EffectuerDemandeAdhesionEquipeAction.class.getName())
             .log(Level.SEVERE, null, ex);

@@ -43,8 +43,7 @@ public class EffectuerGenerationMotPasseAction extends Action
   public String execute() {
 
     String action = "";
-    if ((int) session.getAttribute("role") == Compte.ADMINISTRATEUR
-        && request.getParameter("idCompte") != null) {
+    if (userIsAdmin() && request.getParameter("idCompte") != null) {
       try {
         Connection cnx =
             Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
@@ -74,7 +73,6 @@ public class EffectuerGenerationMotPasseAction extends Action
                 "erreurGenerationMotPasse",
                 "Une erreur est survenue lors de la modification du compte");
           }
-
         } else {
           data.put(
               "erreurGenerationMotPasse", "Le compte que vous tentez de modifier est introuvable");

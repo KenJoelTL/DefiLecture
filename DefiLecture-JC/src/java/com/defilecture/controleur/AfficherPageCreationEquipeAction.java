@@ -35,7 +35,7 @@ public class AfficherPageCreationEquipeAction extends Action {
   @Override
   public String execute() {
     if (userIsConnected() && userIsCapitaine()) {
-      int idCompte = (int) session.getAttribute("connecte");
+      int idCompte = (int) session.getAttribute("currentID");
 
       try {
         CompteDAO dao =
@@ -44,7 +44,9 @@ public class AfficherPageCreationEquipeAction extends Action {
                     Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
         Compte compte = dao.read(idCompte);
 
-        if (compte.getIdEquipe() == -1) request.setAttribute("vue", "pageCreationEquipe.jsp");
+        if (compte.getIdEquipe() == -1) {
+          request.setAttribute("vue", "pageCreationEquipe.jsp");
+        }
 
       } catch (SQLException ex) {
         Logger.getLogger(AfficherPageCreationEquipeAction.class.getName())

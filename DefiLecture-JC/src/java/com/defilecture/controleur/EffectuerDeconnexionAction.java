@@ -27,11 +27,11 @@ public class EffectuerDeconnexionAction extends Action implements RequirePRGActi
 
   @Override
   public String execute() {
-    String action = "accueil.do?tache=afficherPageAccueil";
-
-    if (session != null) session.invalidate();
+    if (session != null) {
+      session.invalidate();
+    }
     session = request.getSession(false);
 
-    return action;
+    return "accueil.do?tache=afficherPageAccueil";
   }
 }

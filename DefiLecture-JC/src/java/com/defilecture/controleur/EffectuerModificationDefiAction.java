@@ -19,7 +19,6 @@
  */
 package com.defilecture.controleur;
 
-import com.defilecture.modele.Compte;
 import com.defilecture.modele.Defi;
 import com.defilecture.modele.DefiDAO;
 import java.sql.Connection;
@@ -44,8 +43,7 @@ public class EffectuerModificationDefiAction extends Action
   public String execute() {
 
     if (userIsConnected()
-        && (((int) session.getAttribute("role") == Compte.MODERATEUR)
-            || ((int) session.getAttribute("role") == Compte.ADMINISTRATEUR))
+        && (userIsAdmin() || userIsModerateur())
         && request.getParameter("modifie") != null) {
 
       String nom = request.getParameter("nom"),
@@ -66,22 +64,16 @@ public class EffectuerModificationDefiAction extends Action
             Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
 
         Defi defi = new DefiDAO(cnx).read(idDefi);
-        if (defi == null) {
-
-          return "*.do?tache=afficherPageParticipationDefi";
-        } else {
+        if (defi != null) {
 
           if (nom != null && !"".equals(nom.trim()) && !nom.equals(defi.getNom())) {
             defi.setNom(nom);
           }
 
           if (request.getParameter("valeurMinute") != null) {
-            try {
-              valeurMinute = Integer.parseInt(request.getParameter("valeurMinute"));
-              if (valeurMinute != defi.getValeurMinute()) {
-                defi.setValeurMinute(valeurMinute);
-              }
-            } catch (NumberFormatException e) {
+            valeurMinute = Integer.parseInt(request.getParameter("valeurMinute"));
+            if (valeurMinute != defi.getValeurMinute()) {
+              defi.setValeurMinute(valeurMinute);
             }
           }
 
@@ -107,6 +99,7 @@ public class EffectuerModificationDefiAction extends Action
           if (choixReponse != defi.getChoixReponse()) {
             defi.setChoixReponse(choixReponse);
           }
+
           if (reponse != defi.getReponse()) {
             defi.setReponse(reponse);
           }
@@ -114,9 +107,11 @@ public class EffectuerModificationDefiAction extends Action
           cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
 
           DefiDAO dao = new DefiDAO(cnx);
-          if (!dao.update(defi)) {
+          if (dao.update(defi)) {
             return "*.do?tache=afficherPageParticipationDefi";
           } else {
+            Logger.getLogger(EffectuerModificationDefiAction.class.getName())
+                .log(Level.WARNING, "Mise à jour défi échouée.");
             return "*.do?tache=afficherPageParticipationDefi";
           }
         }
@@ -124,10 +119,13 @@ public class EffectuerModificationDefiAction extends Action
         Logger.getLogger(EffectuerModificationDefiAction.class.getName())
             .log(Level.SEVERE, null, ex);
         return "*.do?tache=afficherPageParticipationDefi";
+      } catch (NumberFormatException ex) {
+        Logger.getLogger(EffectuerModificationDefiAction.class.getName())
+            .log(Level.SEVERE, null, ex);
+        return "*.do?tache=afficherPageParticipationDefi";
       }
-    } else {
-      return "*.do?tache=afficherPageParticipationDefi";
     }
+    return "*.do?tache=afficherPageParticipationDefi";
   }
 
   @Override

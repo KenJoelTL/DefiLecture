@@ -41,43 +41,42 @@ public class EffectuerSuppressionCompteAction extends Action
 
   @Override
   public String execute() {
-    String action = "Acceuil.do?tache=afficherPageAccueil";
-    if (!userIsConnected()
-        || session.getAttribute("role") == null
-        || request.getParameter("idCompte") == null) {
-    } else if (!request.getParameter("idCompte").equals(session.getAttribute("connecte") + "")
-        && ((int) session.getAttribute("role") == Compte.ADMINISTRATEUR)) {
-      try {
-        String idCompte = request.getParameter("idCompte");
-        Connection cnx =
-            Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
-        CompteDAO compteDao = new CompteDAO(cnx);
-        Compte compte = compteDao.read(idCompte);
+    if (userIsConnected() && userIsAdmin() && request.getParameter("idCompte") != null) {
+      if (!request.getParameter("idCompte").equals(session.getAttribute("currentId"))
+          && userIsAdmin()) {
+        try {
+          String idCompte = request.getParameter("idCompte");
+          Connection cnx =
+              Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
+          CompteDAO compteDao = new CompteDAO(cnx);
+          Compte compte = compteDao.read(idCompte);
 
-        if (compte != null) {
-          if (compteDao.delete(compte)) {
-            action = "succes.do?tache=afficherPageGestionListeCompte";
-            data.put(
-                "suppressionSucces", "Le compte " + compte.getCourriel() + " a bien été supprimé");
+          if (compte != null) {
+            if (compteDao.delete(compte)) {
+              data.put(
+                  "suppressionSucces",
+                  "Le compte " + compte.getCourriel() + " a bien été supprimé");
+              return "succes.do?tache=afficherPageGestionListeCompte";
+            } else {
+              data.put("suppressionEchec", "Une erreur est survenue lors de la suppression");
+              return "echec.do?tache=afficherPageGestionListCompte";
+            }
+
           } else {
-            action = "echec.do?tache=afficherPageGestionListCompte";
-            data.put("suppressionEchec", "Une erreur est survenue lors de la suppression");
+            data.put("suppressionEchec", "Le compte que vous tentez de supprimer n'existe pas");
+            return "echec.do?tache=afficherPageGestionListCompte";
           }
 
-        } else {
-          action = "echec.do?tache=afficherPageGestionListCompte";
-          data.put("suppressionEchec", "Le compte que vous tentez de supprimer n'existe pas");
+        } catch (SQLException ex) {
+          Logger.getLogger(EffectuerSuppressionCompteAction.class.getName())
+              .log(Level.SEVERE, null, ex);
+        } finally {
+          Connexion.close();
         }
-
-      } catch (SQLException ex) {
-        Logger.getLogger(EffectuerSuppressionCompteAction.class.getName())
-            .log(Level.SEVERE, null, ex);
-      } finally {
-        Connexion.close();
       }
     }
 
-    return action;
+    return "Accueil.do?tache=afficherPageAccueil";
   }
 
   @Override

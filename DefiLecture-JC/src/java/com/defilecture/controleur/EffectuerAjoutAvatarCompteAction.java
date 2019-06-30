@@ -52,9 +52,10 @@ public class EffectuerAjoutAvatarCompteAction extends Action
   @Override
   public String execute() {
     String action = "redirection.do?tache=afficherTableauScores";
+
     // Seul le membre connecté peut modifier son propre avatar
     if (userIsConnected()) {
-      int idCompte = (int) session.getAttribute("connecte");
+      int idCompte = (int) session.getAttribute("currentId");
       action = "*.do?tache=afficherPageModificationCompte&id=" + idCompte;
       OutputStream out = null;
       InputStream filecontent = null;

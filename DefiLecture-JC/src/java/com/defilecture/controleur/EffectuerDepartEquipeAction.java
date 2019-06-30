@@ -44,14 +44,13 @@ public class EffectuerDepartEquipeAction extends Action implements RequirePRGAct
   @Override
   public String execute() {
     String action = "echec.do?tache=afficherPageAccueil";
-    if (!userIsConnected()
-        || session.getAttribute("role") == null
-        || request.getParameter("idEquipe") == null
-        || request.getParameter("idCompte") == null) {
-    } else if (!request.getParameter("idCompte").equals(session.getAttribute("connecte") + "")
-        && ((int) session.getAttribute("role") != Compte.CAPITAINE)
-        && ((int) session.getAttribute("role") != Compte.ADMINISTRATEUR)) {
-    } else {
+    if (userIsConnected()
+        && session.getAttribute("role") != null
+        && request.getParameter("idEquipe") != null
+        && request.getParameter("idCompte") != null
+        && (userIsAdmin()
+            || userIsCapitaine()
+            || request.getParameter("idCompte").equals(session.getAttribute("currentId")))) {
       try {
         String idCompte = request.getParameter("idCompte");
         String idEquipe = request.getParameter("idEquipe");
@@ -61,8 +60,8 @@ public class EffectuerDepartEquipeAction extends Action implements RequirePRGAct
         CompteDAO compteDao = new CompteDAO(cnx);
         Compte compte = compteDao.read(idCompte);
         Equipe equipe = equipeDao.read(idEquipe);
-        if (compte != null && equipe != null && equipe.getIdEquipe() == compte.getIdEquipe()) {
 
+        if (compte != null && equipe != null && equipe.getIdEquipe() == compte.getIdEquipe()) {
           DemandeEquipeDAO demandeEqpDao = new DemandeEquipeDAO(cnx);
           DemandeEquipe demandeEquipe =
               demandeEqpDao.findByIdCompteEquipe(compte.getIdCompte(), equipe.getIdEquipe());
@@ -88,21 +87,9 @@ public class EffectuerDepartEquipeAction extends Action implements RequirePRGAct
                       + " "
                       + compte.getNom()
                       + " n'a pas été envoyé par-dessus bord");
-
-              // demandeEquipe.setStatutDemande(0); //met à 0 si l'utilisateur est
-              // suspendu
-              // si l'un des enregistrements échouent alors on revient à l'état
-              // initial
-              /*   if(!demandeEqpDao.update(demandeEquipe) || !compteDao.update(compte)){
-              demandeEquipe.setStatutDemande(1);
-              compte.setIdEquipe(equipe.getIdEquipe());
-              demandeEqpDao.update(demandeEquipe);
-              compteDao.update(compte);
-              action = "echec.do?tache=afficherPageEquipe&idEquipe="+idEquipe; */
             }
           }
         }
-
       } catch (SQLException ex) {
         Logger.getLogger(EffectuerDepartEquipeAction.class.getName()).log(Level.SEVERE, null, ex);
       } finally {

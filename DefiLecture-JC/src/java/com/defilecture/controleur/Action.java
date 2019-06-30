@@ -42,10 +42,6 @@ public abstract class Action implements Executable, RequestAware, SessionAware {
     this.session = session;
   }
 
-  public String toString() {
-    return Action.class.getName();
-  }
-
   protected boolean userIsAdmin() {
     return (int) session.getAttribute("role") == Compte.ADMINISTRATEUR;
   }

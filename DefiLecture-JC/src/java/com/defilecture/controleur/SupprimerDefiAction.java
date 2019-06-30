@@ -75,8 +75,7 @@ public class SupprimerDefiAction extends Action implements RequirePRGAction {
             profil.setPoint(profil.getPoint() - insDe.getValeurMinute());
             Cdao.update(profil);
           });
-      boolean delete = Ddao.delete(defi);
-      System.out.println(delete);
+      Ddao.delete(defi);
     } catch (SQLException ex) {
       Logger.getLogger(SupprimerDefiAction.class.getName()).log(Level.SEVERE, null, ex);
     } catch (Exception ex) {

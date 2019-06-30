@@ -19,7 +19,6 @@
  */
 package com.defilecture.controleur;
 
-import com.defilecture.modele.Compte;
 import com.defilecture.modele.Defi;
 import com.defilecture.modele.DefiDAO;
 import java.sql.Connection;
@@ -40,8 +39,7 @@ public class EffectuerCreationDefiAction extends Action implements RequirePRGAct
   @Override
   public String execute() {
     if (userIsConnected()
-        && (((int) session.getAttribute("role") == Compte.MODERATEUR)
-            || ((int) session.getAttribute("role") == Compte.ADMINISTRATEUR))
+        && (userIsAdmin() || userIsModerateur())
         && request.getParameter("nom") != null
         && request.getParameter("description") != null
         && request.getParameter("dateFin") != null
@@ -62,10 +60,8 @@ public class EffectuerCreationDefiAction extends Action implements RequirePRGAct
           choixReponse = request.getParameter("choixReponseJSON"),
           reponse = request.getParameter("reponse");
 
-      int idCompte = (int) session.getAttribute("connecte"),
+      int idCompte = (int) session.getAttribute("currentId"),
           valeurMinute = Integer.parseInt(request.getParameter("valeurMinute"));
-
-      Defi defi;
 
       try {
 
@@ -73,7 +69,7 @@ public class EffectuerCreationDefiAction extends Action implements RequirePRGAct
         Connection cnx =
             Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
         dao = new DefiDAO(cnx);
-        defi = new Defi();
+        Defi defi = new Defi();
         defi.setIdCompte(idCompte);
         defi.setNom(nom);
         defi.setDescription(description);
@@ -83,16 +79,17 @@ public class EffectuerCreationDefiAction extends Action implements RequirePRGAct
         defi.setChoixReponse(choixReponse);
         defi.setReponse(reponse);
         defi.setValeurMinute(valeurMinute);
-        if (dao.create(defi)) {
 
+        if (dao.create(defi)) {
           System.out.println("Un defi a été créé avec succès");
-        } else System.out.println("Problème de création du défi");
+        } else {
+          System.out.println("Problème de création du défi");
+        }
 
         return "*.do?tache=afficherPageParticipationDefi";
       } catch (SQLException ex) {
         Logger.getLogger(EffectuerCreationDefiAction.class.getName()).log(Level.SEVERE, null, ex);
         return "*.do?tache=afficherPageCreationDefi";
-
       } finally {
         Connexion.close();
       }

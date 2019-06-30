@@ -26,8 +26,9 @@ package com.defilecture.controleur;
 public class AfficherPageCreationLectureAction extends Action {
   @Override
   public String execute() {
-    if (userIsConnected() && (userIsCapitaine() || userIsParticipant()))
+    if (userIsConnected() && (userIsCapitaine() || userIsParticipant())) {
       request.setAttribute("vue", "pageCreationLecture.jsp");
+    }
 
     return "/index.jsp";
   }
