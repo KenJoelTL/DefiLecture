@@ -30,6 +30,7 @@ public class Compte {
       prenom,
       courriel,
       motPasse,
+      sel,
       programmeEtude,
       avatar = AVATAR_DEFAUT;
 
@@ -40,6 +41,7 @@ public class Compte {
       int idEquipe,
       String pseudonyme,
       String motPasse,
+      String sel,
       String nom,
       String prenom,
       String courriel,
@@ -53,6 +55,7 @@ public class Compte {
     this.idEquipe = idEquipe;
     this.pseudonyme = pseudonyme;
     this.motPasse = motPasse;
+    this.sel = sel;
     this.nom = nom;
     this.prenom = prenom;
     this.courriel = courriel;
@@ -80,6 +83,7 @@ public class Compte {
         idCompte,
         idEquipe,
         pseudonyme,
+        null,
         null,
         nom,
         prenom,
@@ -203,6 +207,14 @@ public class Compte {
 
   public void setPoint(int point) {
     this.point = point;
+  }
+
+  public String getSel() {
+    return sel;
+  }
+
+  public void setSel(String nouveauSel) {
+    this.sel = nouveauSel;
   }
 
   public String getMotPasse() {

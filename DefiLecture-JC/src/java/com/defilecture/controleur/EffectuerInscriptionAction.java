@@ -16,6 +16,7 @@ package com.defilecture.controleur;
 
 import com.defilecture.modele.Compte;
 import com.defilecture.modele.CompteDAO;
+import com.util.Util;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -82,7 +83,8 @@ public class EffectuerInscriptionAction extends Action implements RequirePRGActi
             nom = request.getParameter("nom"),
             motPasse = request.getParameter("motPasse"),
             programmeEtude = request.getParameter("programmeEtude"),
-            pseudonyme = request.getParameter("pseudonyme");
+            pseudonyme = request.getParameter("pseudonyme"),
+            sel = Util.genererSel();
 
         Connection cnx =
             Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
@@ -91,7 +93,8 @@ public class EffectuerInscriptionAction extends Action implements RequirePRGActi
         compte.setCourriel(courriel);
         compte.setPrenom(prenom);
         compte.setNom(nom);
-        compte.setMotPasse(motPasse);
+        compte.setMotPasse(Util.hasherAvecSel(motPasse, sel));
+        compte.setSel(sel);
         compte.setPseudonyme(pseudonyme);
         compte.setProgrammeEtude(programmeEtude);
 

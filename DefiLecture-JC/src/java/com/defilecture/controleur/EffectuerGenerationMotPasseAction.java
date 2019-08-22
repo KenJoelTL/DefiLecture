@@ -62,10 +62,10 @@ public class EffectuerGenerationMotPasseAction extends Action
             builder.append(ALPHA_NUMERIC_STRING.charAt(character));
             longueur--;
           }
-          
+
           String motPasse = builder.toString();
           compte.setMotPasse(motPasse);
-          
+
           if (dao.update(compte)) {
             data.put("succesGenerationMotPasse", "Nouveau mot de passe : " + motPasse);
           } else {

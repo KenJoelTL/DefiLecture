@@ -50,9 +50,9 @@ public class CompteDAO extends DAO<Compte> {
 
       if (compte != null) {
         // Un sel aléatoire est généré pour ajouter au calcul du hash
-        String sel = Util.genererSel();  
+        String sel = Util.genererSel();
         String mdpHashe = Util.hasherAvecSel(compte.getMotPasse(), sel);
-          
+
         paramStm.setString(1, compte.getCourriel());
         paramStm.setString(2, mdpHashe);
         paramStm.setString(3, compte.getNom());
@@ -107,7 +107,7 @@ public class CompteDAO extends DAO<Compte> {
   @Override
   public boolean update(Compte compte) {
     String reqSel = "SELECT SEL FROM compte WHERE ID_COMPTE = ?";
-    
+
     String req =
         "UPDATE compte SET COURRIEL = ?, MOT_PASSE = ?, "
             + "NOM = ?, PRENOM = ?, PSEUDONYME = ?, AVATAR = ?, "
@@ -115,17 +115,17 @@ public class CompteDAO extends DAO<Compte> {
             + "POINT = ?, ROLE = ? WHERE ID_COMPTE = ?";
 
     PreparedStatement paramStm = null;
-    
+
     try {
       // Requête pour le sel du compte à modifier
       paramStm = cnx.prepareStatement(reqSel);
       paramStm.setInt(1, compte.getIdCompte());
       ResultSet resultat = paramStm.executeQuery();
-      
+
       if (resultat.next()) {
         String sel = resultat.getString("SEL");
         String mdp = Util.hasherAvecSel(compte.getMotPasse(), sel);
-    
+
         paramStm = cnx.prepareStatement(req);
         paramStm.setString(1, compte.getCourriel());
         paramStm.setString(2, mdp);
@@ -144,15 +144,15 @@ public class CompteDAO extends DAO<Compte> {
         paramStm.setInt(9, compte.getMinutesRestantes());
         paramStm.setInt(10, compte.getPoint());
         paramStm.setInt(11, compte.getRole());
-        paramStm.setInt(12, compte.getIdCompte());      
-        
+        paramStm.setInt(12, compte.getIdCompte());
+
         int nbLignesAffectees = paramStm.executeUpdate();
-        
+
         resultat.close();
         paramStm.close();
-        
+
         return nbLignesAffectees > 0 ? true : false;
-      } 
+      }
     } catch (SQLException ex) {
       Logger.getLogger(CompteDAO.class.getName()).log(Level.SEVERE, null, ex);
     }
@@ -261,43 +261,36 @@ public class CompteDAO extends DAO<Compte> {
   }
 
   public Compte findByIdentifiantMotPasse(String identifiant, String motPasse) {
-    String sel = "";
-
-    // Requête pour trouver le sel de l'utilisateur correspondant
-    String reqSel = "SELECT SEL FROM compte WHERE `COURRIEL` = ? or `PSEUDONYME` = ?";
-    // Requête pour trouver le compte (avec mot de passe valide)
-    String req =
-        "SELECT * FROM compte WHERE (`COURRIEL` = ? or " + "`PSEUDONYME` = ?) and `MOT_PASSE` = ?";
-
-    ResultSet resultat;
+    ResultSet resultat = null;
     Compte compte = null;
     PreparedStatement paramStm = null;
 
+    String reqSel = "SELECT SEL FROM compte WHERE `COURRIEL` = ? or `PSEUDONYME` = ?";
+    String req =
+        "SELECT * FROM compte WHERE (`COURRIEL` = ? or " + "`PSEUDONYME` = ?) and `MOT_PASSE` = ?";
+
     try {
-      // Définition des paramètres de la requête pour le sel
       paramStm = cnx.prepareStatement(reqSel);
       paramStm.setString(1, identifiant);
       paramStm.setString(2, identifiant);
       resultat = paramStm.executeQuery();
       if (resultat.next()) {
-        sel = resultat.getString("SEL");
-        Logger.getLogger(CompteDAO.class.getName()).log(Level.SEVERE, sel);
+        String sel = resultat.getString("SEL");
 
-        // Définition des paramètres de la requête pour l'accès au compte
         paramStm = cnx.prepareStatement(req);
         paramStm.setString(1, identifiant);
         paramStm.setString(2, identifiant);
+
         String mdp = Util.hasherAvecSel(motPasse, sel);
-        Logger.getLogger(CompteDAO.class.getName()).log(Level.SEVERE, mdp);
-        // Le mot de passe est hashé avec le sel du compte (si trouvé)
         paramStm.setString(3, mdp);
         resultat = paramStm.executeQuery();
 
-        if (resultat.next()) compte = getCompteFromResultSet(resultat);
-
-        resultat.close();
-        paramStm.close();
+        if (resultat.next()) {
+          compte = getCompteFromResultSet(resultat);
+        }
       }
+      resultat.close();
+      paramStm.close();
     } catch (SQLException ex) {
       Logger.getLogger(CompteDAO.class.getName()).log(Level.SEVERE, null, ex);
     }
@@ -392,6 +385,7 @@ public class CompteDAO extends DAO<Compte> {
         resultat.getInt("ID_EQUIPE") == 0 ? -1 : resultat.getInt("ID_EQUIPE"),
         resultat.getString("PSEUDONYME"),
         resultat.getString("MOT_PASSE"),
+        resultat.getString("SEL"),
         resultat.getString("NOM"),
         resultat.getString("PRENOM"),
         resultat.getString("COURRIEL"),

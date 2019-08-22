@@ -21,6 +21,7 @@ package com.defilecture.controleur;
 
 import com.defilecture.modele.Compte;
 import com.defilecture.modele.CompteDAO;
+import com.util.Util;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -54,6 +55,7 @@ public class EffectuerModificationCompteAction extends Action
           prenom = request.getParameter("prenom"),
           nom = request.getParameter("nom"),
           programmeEtude = request.getParameter("programmeEtude"),
+          sel = Util.genererSel(),
           motPasseActuel = request.getParameter("motPasseActuel"),
           motPasseNouveau = request.getParameter("motPasseNouveau"),
           motPasseNouveauConfirmation = request.getParameter("motPasseNouveauConfirmation"),
@@ -63,10 +65,10 @@ public class EffectuerModificationCompteAction extends Action
         motPasseActuel = motPasseActuel;
       }
       if (motPasseNouveau != null) {
-        motPasseNouveau = motPasseNouveau;
+        motPasseNouveau = Util.hasherAvecSel(motPasseNouveau, sel);
       }
       if (motPasseNouveauConfirmation != null) {
-        motPasseNouveauConfirmation = motPasseNouveauConfirmation;
+        motPasseNouveauConfirmation = Util.hasherAvecSel(motPasseNouveauConfirmation, sel);
       }
 
       int idEquipe, minutesRestantes, pointage, role;
@@ -125,6 +127,7 @@ public class EffectuerModificationCompteAction extends Action
           if (motPasseActuel != null && motPasseActuel.equals(compte.getMotPasse())) {
             if (motPasseNouveau.equals(motPasseNouveauConfirmation)) {
               compte.setMotPasse(motPasseNouveau);
+              compte.setSel(sel);
             } else {
               erreurSurvenue = true;
               data.put(

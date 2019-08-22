@@ -58,8 +58,7 @@ public class EffectuerSuppressionBDAction extends Action implements RequirePRGAc
         Compte compteAdmin = daoCompte.read((int) session.getAttribute("currentId"));
         Compte verif =
             daoCompte.findByIdentifiantMotPasse(
-                compteAdmin.getPseudonyme(),
-                request.getParameter("passwordConf"));
+                compteAdmin.getPseudonyme(), request.getParameter("passwordConf"));
         if (verif != null) {
           dDao.deleteTable();
           dEDao.deleteTable();
