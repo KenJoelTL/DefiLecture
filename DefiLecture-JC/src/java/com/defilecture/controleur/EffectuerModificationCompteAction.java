@@ -124,7 +124,8 @@ public class EffectuerModificationCompteAction extends Action
         }
 
         if (motPasseNouveau != null && !"".equals(motPasseNouveau.trim())) {
-          if (motPasseActuel != null && motPasseActuel.equals(compte.getMotPasse())) {
+          if (motPasseActuel != null
+              && Util.hasherAvecSel(motPasseActuel, compte.getSel()).equals(compte.getMotPasse())) {
             if (motPasseNouveau.equals(motPasseNouveauConfirmation)) {
               compte.setMotPasse(motPasseNouveau);
               compte.setSel(sel);

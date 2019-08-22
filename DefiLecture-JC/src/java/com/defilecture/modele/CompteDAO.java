@@ -106,53 +106,40 @@ public class CompteDAO extends DAO<Compte> {
 
   @Override
   public boolean update(Compte compte) {
-    String reqSel = "SELECT SEL FROM compte WHERE ID_COMPTE = ?";
-
     String req =
         "UPDATE compte SET COURRIEL = ?, MOT_PASSE = ?, "
             + "NOM = ?, PRENOM = ?, PSEUDONYME = ?, AVATAR = ?, "
             + "PROGRAMME_ETUDE = ?, ID_EQUIPE = ?, MINUTES_RESTANTES = ?, "
-            + "POINT = ?, ROLE = ? WHERE ID_COMPTE = ?";
+            + "POINT = ?, ROLE = ?, SEL = ? WHERE ID_COMPTE = ?";
 
     PreparedStatement paramStm = null;
 
     try {
-      // Requête pour le sel du compte à modifier
-      paramStm = cnx.prepareStatement(reqSel);
-      paramStm.setInt(1, compte.getIdCompte());
-      ResultSet resultat = paramStm.executeQuery();
+      paramStm = cnx.prepareStatement(req);
+      paramStm.setString(1, compte.getCourriel());
+      paramStm.setString(2, compte.getMotPasse());
+      paramStm.setString(3, compte.getNom());
+      paramStm.setString(4, compte.getPrenom());
+      paramStm.setString(5, compte.getPseudonyme());
+      paramStm.setString(6, compte.getAvatar());
+      paramStm.setString(7, compte.getProgrammeEtude());
 
-      if (resultat.next()) {
-        String sel = resultat.getString("SEL");
-        String mdp = Util.hasherAvecSel(compte.getMotPasse(), sel);
-
-        paramStm = cnx.prepareStatement(req);
-        paramStm.setString(1, compte.getCourriel());
-        paramStm.setString(2, mdp);
-        paramStm.setString(3, compte.getNom());
-        paramStm.setString(4, compte.getPrenom());
-        paramStm.setString(5, compte.getPseudonyme());
-        paramStm.setString(6, compte.getAvatar());
-        paramStm.setString(7, compte.getProgrammeEtude());
-
-        if (compte.getIdEquipe() == -1) {
-          paramStm.setNull(8, java.sql.Types.INTEGER);
-        } else {
-          paramStm.setInt(8, compte.getIdEquipe());
-        }
-
-        paramStm.setInt(9, compte.getMinutesRestantes());
-        paramStm.setInt(10, compte.getPoint());
-        paramStm.setInt(11, compte.getRole());
-        paramStm.setInt(12, compte.getIdCompte());
-
-        int nbLignesAffectees = paramStm.executeUpdate();
-
-        resultat.close();
-        paramStm.close();
-
-        return nbLignesAffectees > 0 ? true : false;
+      if (compte.getIdEquipe() == -1) {
+        paramStm.setNull(8, java.sql.Types.INTEGER);
+      } else {
+        paramStm.setInt(8, compte.getIdEquipe());
       }
+
+      paramStm.setInt(9, compte.getMinutesRestantes());
+      paramStm.setInt(10, compte.getPoint());
+      paramStm.setInt(11, compte.getRole());
+      paramStm.setString(12, compte.getSel());
+      paramStm.setInt(13, compte.getIdCompte());
+
+      int nbLignesAffectees = paramStm.executeUpdate();
+
+      paramStm.close();
+      return nbLignesAffectees > 0 ? true : false;
     } catch (SQLException ex) {
       Logger.getLogger(CompteDAO.class.getName()).log(Level.SEVERE, null, ex);
     }
