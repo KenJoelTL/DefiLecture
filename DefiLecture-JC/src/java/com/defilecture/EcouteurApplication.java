@@ -12,20 +12,13 @@
  * <p>You should have received a copy of the GNU General Public License along with DefiLecture. If
  * not, see <http://www.gnu.org/licenses/>.
  */
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.defilecture;
-
 import com.defilecture.modele.Equipe;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import jdbc.Config;
 
-/** @author usager */
 public class EcouteurApplication implements ServletContextListener {
 
   @Override
