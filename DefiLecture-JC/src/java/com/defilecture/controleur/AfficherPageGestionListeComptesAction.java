@@ -28,21 +28,17 @@ public class AfficherPageGestionListeComptesAction extends Action {
     if (userIsConnected()) {
       try {
         if (userIsAdmin() || userIsModerateur()) {
-          int idCompte = (int) session.getAttribute("currentId");
           CompteDAO dao =
               new CompteDAO(
                   Connexion.startConnection(
                       Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
 
-          if (dao.read(idCompte) != null) {
+          if (dao.read(((Integer) session.getAttribute("currentId")).intValue()) != null) {
             request.setAttribute("vue", "pageGestionListeCompte.jsp");
           }
 
           return "/index.jsp";
         }
-      } catch (NullPointerException ex) {
-        System.out.println("L'utilisateur n'existe pas");
-        return "/index.jsp";
       } catch (SQLException ex) {
         Logger.getLogger(AfficherPageGestionListeComptesAction.class.getName())
             .log(Level.SEVERE, null, ex);

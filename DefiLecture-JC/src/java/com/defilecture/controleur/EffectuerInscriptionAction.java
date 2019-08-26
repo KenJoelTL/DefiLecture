@@ -116,8 +116,6 @@ public class EffectuerInscriptionAction extends Action implements RequirePRGActi
         }
       } catch (SQLException ex) {
         Logger.getLogger(EffectuerInscriptionAction.class.getName()).log(Level.SEVERE, null, ex);
-      } catch (NullPointerException ex) {
-        Logger.getLogger(EffectuerInscriptionAction.class.getName()).log(Level.SEVERE, null, ex);
       }
     }
     return action;
