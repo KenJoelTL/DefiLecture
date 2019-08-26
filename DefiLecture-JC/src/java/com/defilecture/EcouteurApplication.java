@@ -13,6 +13,7 @@
  * not, see <http://www.gnu.org/licenses/>.
  */
 package com.defilecture;
+
 import com.defilecture.modele.Equipe;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;

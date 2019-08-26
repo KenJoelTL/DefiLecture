@@ -42,19 +42,19 @@ public abstract class Action implements Executable, RequestAware, SessionAware {
   }
 
   protected boolean userIsAdmin() {
-    return (int) session.getAttribute("role") == Compte.ADMINISTRATEUR;
+    return ((Integer) session.getAttribute("role")).intValue() == Compte.ADMINISTRATEUR;
   }
 
   protected boolean userIsModerateur() {
-    return (int) session.getAttribute("role") == Compte.MODERATEUR;
+    return ((Integer) session.getAttribute("role")).intValue() == Compte.MODERATEUR;
   }
 
   protected boolean userIsCapitaine() {
-    return (int) session.getAttribute("role") == Compte.CAPITAINE;
+    return ((Integer) session.getAttribute("role")).intValue() == Compte.CAPITAINE;
   }
 
   protected boolean userIsParticipant() {
-    return (int) session.getAttribute("role") == Compte.PARTICIPANT;
+    return ((Integer) session.getAttribute("role")).intValue() == Compte.PARTICIPANT;
   }
 
   protected boolean userIsConnected() {
