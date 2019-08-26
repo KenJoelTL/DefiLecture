@@ -26,10 +26,6 @@ import java.util.logging.Logger;
 import jdbc.Config;
 import jdbc.Connexion;
 
-/**
- * @author Joel
- * @author Mikaël Nadeau
- */
 public class EffectuerInscriptionAction extends Action implements RequirePRGAction, DataSender {
   private HashMap data;
 

@@ -21,10 +21,6 @@ import java.util.logging.Logger;
 import jdbc.Config;
 import jdbc.Connexion;
 
-/**
- * @author Charles
- * @author Mikaël Nadeau
- */
 public class AfficherPageAdresseCourrielAction extends Action {
   @Override
   public String execute() {

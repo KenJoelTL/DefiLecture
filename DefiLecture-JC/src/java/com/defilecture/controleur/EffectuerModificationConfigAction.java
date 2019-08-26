@@ -25,10 +25,6 @@ import java.util.logging.Logger;
 import jdbc.Config;
 import jdbc.Connexion;
 
-/**
- * @author usager
- * @author Mikaël Nadeau
- */
 public class EffectuerModificationConfigAction extends Action implements RequirePRGAction {
   private ConfigSite configUpdate, configCreate, verification;
   private ConfigSiteDAO configDAO;

@@ -14,10 +14,6 @@
  */
 package com.defilecture.controleur;
 
-/**
- * @author Charles
- * @author Mikaël Nadeau
- */
 public class AfficherPageContributeursAction extends Action {
   @Override
   public String execute() {

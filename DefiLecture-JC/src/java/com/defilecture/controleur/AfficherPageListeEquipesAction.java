@@ -14,10 +14,6 @@
  */
 package com.defilecture.controleur;
 
-/**
- * @author Joel
- * @author Mikaël Nadeau
- */
 public class AfficherPageListeEquipesAction extends Action {
   @Override
   public String execute() {

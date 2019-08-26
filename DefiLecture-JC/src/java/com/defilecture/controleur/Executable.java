@@ -13,17 +13,8 @@
  * not, see <http://www.gnu.org/licenses/>.
  */
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.defilecture.controleur;
 
-/**
- * @author Charles
- * @author Mikaël Nadeau
- */
 public interface Executable {
   public String execute();
 }

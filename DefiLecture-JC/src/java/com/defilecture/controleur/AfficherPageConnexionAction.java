@@ -14,10 +14,6 @@
  */
 package com.defilecture.controleur;
 
-/**
- * @author Charles
- * @author Mikaël Nadeau
- */
 public class AfficherPageConnexionAction extends Action {
   @Override
   public String execute() {

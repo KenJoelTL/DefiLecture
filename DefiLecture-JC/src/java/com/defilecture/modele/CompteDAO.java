@@ -25,10 +25,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * @author Joel
- * @author Alexandre Dupré
- */
 public class CompteDAO extends DAO<Compte> {
 
   public CompteDAO() {}

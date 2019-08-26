@@ -21,10 +21,6 @@ import java.util.logging.Logger;
 import jdbc.Config;
 import jdbc.Connexion;
 
-/**
- * @author Joel
- * @author Mikaël Nadeau
- */
 public class AfficherPageModificationCompteAction extends Action {
   @Override
   public String execute() {
