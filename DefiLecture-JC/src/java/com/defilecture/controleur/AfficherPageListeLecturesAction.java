@@ -27,7 +27,7 @@ public class AfficherPageListeLecturesAction extends Action {
     if (userIsConnected()) {
       try {
         if (userIsAdmin() || userIsModerateur()) {
-          int idCompte = (int) session.getAttribute("currentId");
+          int idCompte = ((Integer) session.getAttribute("currentId")).intValue();
           CompteDAO dao =
               new CompteDAO(
                   Connexion.startConnection(

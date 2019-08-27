@@ -32,7 +32,7 @@ public class AfficherPageAdresseCourrielAction extends Action {
                   Connexion.startConnection(
                       Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
 
-          if (dao.read((int) session.getAttribute("currentId")) != null) {
+          if (dao.read(((Integer) session.getAttribute("currentId")).intValue()) != null) {
             request.setAttribute("vue", "pageAdresseCourriel.jsp");
           }
         }

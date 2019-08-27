@@ -51,7 +51,7 @@ public class EffectuerCreationDefiAction extends Action implements RequirePRGAct
           choixReponse = request.getParameter("choixReponseJSON"),
           reponse = request.getParameter("reponse");
 
-      int idCompte = (int) session.getAttribute("currentId"),
+      int idCompte = ((Integer) session.getAttribute("currentId")).intValue(),
           valeurMinute = Integer.parseInt(request.getParameter("valeurMinute"));
 
       try {

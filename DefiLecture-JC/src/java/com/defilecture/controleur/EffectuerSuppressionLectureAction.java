@@ -33,7 +33,7 @@ public class EffectuerSuppressionLectureAction extends Action implements Require
   public String execute() {
     if (userIsConnected() && (userIsCapitaine() || userIsParticipant())) {
       String idLecture = request.getParameter("idLecture");
-      int idCompte = (int) session.getAttribute("currentId");
+      int idCompte = ((Integer) session.getAttribute("currentId")).intValue();
 
       try {
 

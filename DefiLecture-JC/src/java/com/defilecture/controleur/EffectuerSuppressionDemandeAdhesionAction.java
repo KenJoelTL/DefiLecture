@@ -56,7 +56,7 @@ public class EffectuerSuppressionDemandeAdhesionAction extends Action
           CompteDAO compteDao = new CompteDAO(cnx);
           Compte compte = compteDao.read(demandeEq.getIdCompte());
 
-          if ((demandeEq.getIdCompte() == (int) session.getAttribute("currentId"))
+          if ((demandeEq.getIdCompte() == ((Integer) session.getAttribute("currentId")).intValue())
               || userIsCapitaine()
               || userIsAdmin()) {
             if (!deDao.delete(demandeEq)) {

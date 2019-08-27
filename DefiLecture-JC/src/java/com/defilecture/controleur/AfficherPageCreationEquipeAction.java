@@ -26,7 +26,7 @@ public class AfficherPageCreationEquipeAction extends Action {
   @Override
   public String execute() {
     if (userIsConnected() && userIsCapitaine()) {
-      int idCompte = (int) session.getAttribute("currentID");
+      int idCompte = ((Integer) session.getAttribute("currentID")).intValue();
 
       try {
         CompteDAO dao =

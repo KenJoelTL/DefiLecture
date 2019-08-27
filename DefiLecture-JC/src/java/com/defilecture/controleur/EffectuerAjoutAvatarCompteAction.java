@@ -46,7 +46,7 @@ public class EffectuerAjoutAvatarCompteAction extends Action
 
     // Seul le membre connecté peut modifier son propre avatar
     if (userIsConnected()) {
-      int idCompte = (int) session.getAttribute("currentId");
+      int idCompte = ((Integer) session.getAttribute("currentId")).intValue();
       action = "*.do?tache=afficherPageModificationCompte&id=" + idCompte;
       OutputStream out = null;
       InputStream filecontent = null;

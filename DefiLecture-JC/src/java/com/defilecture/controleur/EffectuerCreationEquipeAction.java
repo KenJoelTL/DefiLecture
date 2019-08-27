@@ -36,7 +36,7 @@ public class EffectuerCreationEquipeAction extends Action implements RequirePRGA
   public String execute() {
     if (userIsConnected()) {
       if (userIsCapitaine()) {
-        int idCompte = (int) session.getAttribute("currentId");
+        int idCompte = ((Integer) session.getAttribute("currentId")).intValue();
         String nom = request.getParameter("nom");
         if (nom != null && !"".equals(nom.trim())) {
           Equipe equipe = new Equipe();

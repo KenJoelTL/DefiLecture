@@ -39,7 +39,7 @@ public class EffectuerModificationCompteAction extends Action
                 .getParameter("idCompte")
                 .equals(session.getAttribute("currentId").toString()))
         || (!request.getParameter("idCompte").equals(session.getAttribute("currentId").toString())
-            && (int) session.getAttribute("role") > Compte.CAPITAINE)) {
+            && ((Integer) session.getAttribute("role")).intValue() > Compte.CAPITAINE)) {
 
       String idCompte = request.getParameter("idCompte"),
           courriel = request.getParameter("courriel"),
@@ -72,7 +72,7 @@ public class EffectuerModificationCompteAction extends Action
         Compte compte = dao.read(idCompte);
         if (compte == null) {
           data.put("compteIntrouvable", "Le compte que vous tentez de modifier est introuvable");
-          return (int) session.getAttribute("role") > Compte.CAPITAINE
+          return ((Integer) session.getAttribute("role")).intValue() > Compte.CAPITAINE
               ? "*.do?tache=afficherPageGestionListeCompte"
               : "*.do?tache=afficherMarcheASuivre";
         }

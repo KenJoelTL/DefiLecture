@@ -42,7 +42,7 @@ public class EffectuerInscriptionDefiAction extends Action implements RequirePRG
         && (userIsParticipant() || userIsCapitaine())
         && request.getParameter("valider") != null) {
       String reponseParticipant = request.getParameter("reponseParticipant");
-      int idCompte = (int) (session.getAttribute("currentId")),
+      int idCompte = ((Integer) (session.getAttribute("currentId"))).intValue(),
           idDefi = Integer.parseInt(request.getParameter("idDefi"));
       InscriptionDefi inscriptionDefi = new InscriptionDefi();
 

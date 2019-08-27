@@ -47,7 +47,7 @@ public class EffectuerReaffectationMembreEquipeAction extends Action
         EquipeDAO equipeDao = new EquipeDAO(cnx);
         CompteDAO compteDao = new CompteDAO(cnx);
         Compte compte = compteDao.read(idCompte);
-        Compte compteSup = compteDao.read((int) session.getAttribute("currentId"));
+        Compte compteSup = compteDao.read(((Integer) session.getAttribute("currentId")).intValue());
         Equipe equipe = equipeDao.read(idEquipe);
 
         // si le compte connecté est au niveau de Capitaine, alors il faut qu'il soit membre

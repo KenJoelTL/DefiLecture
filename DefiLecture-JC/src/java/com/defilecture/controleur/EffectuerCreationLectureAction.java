@@ -43,7 +43,7 @@ public class EffectuerCreationLectureAction extends Action implements RequirePRG
       String titre = request.getParameter("titre");
       int dureeMinutes = Integer.parseInt(request.getParameter("dureeMinutes")),
           obligatoire = Integer.parseInt(request.getParameter("obligatoire")),
-          idCompte = (int) session.getAttribute("currentId");
+          idCompte = ((Integer) session.getAttribute("currentId")).intValue();
 
       Lecture lecture;
 

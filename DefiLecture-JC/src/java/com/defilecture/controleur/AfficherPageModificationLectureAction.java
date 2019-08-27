@@ -35,7 +35,7 @@ public class AfficherPageModificationLectureAction extends Action {
               Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
           Lecture lecture = new LectureDAO(cnx).read(request.getParameter("id"));
 
-          if (lecture != null && lecture.getIdCompte() == (int) session.getAttribute("currentId")) {
+          if (lecture != null && lecture.getIdCompte() == ((Integer) session.getAttribute("currentId")).intValue()) {
             request.setAttribute("vue", "pageModificationLecture.jsp");
           }
         }
