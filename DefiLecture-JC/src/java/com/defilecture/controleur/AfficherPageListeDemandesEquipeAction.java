@@ -17,8 +17,8 @@ package com.defilecture.controleur;
 public class AfficherPageListeDemandesEquipeAction extends Action {
   @Override
   public String execute() {
-    if(userIsConnected()) {
-      request.setAttribute("vue",  "pageListeDemandesEquipe.jsp");
+    if (userIsConnected()) {
+      request.setAttribute("vue", "pageListeDemandesEquipe.jsp");
     } else {
       request.setAttribute("vue", "pageConnexion");
     }
