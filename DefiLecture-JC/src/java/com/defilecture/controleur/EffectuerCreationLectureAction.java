@@ -32,7 +32,7 @@ public class EffectuerCreationLectureAction extends Action implements RequirePRG
   @Override
   public String execute() {
 
-    System.out.println("Entrer dans l'action créer lecture");
+    Logger.getLogger(this.getClass().getName()).log(Level.INFO, ("Entrer dans l'action créer lecture");
 
     if (userIsConnected()
         && (userIsParticipant() || userIsCapitaine())
@@ -89,10 +89,10 @@ public class EffectuerCreationLectureAction extends Action implements RequirePRG
             demande.setPoint(pointDemandeEquipe);
             demandeDAO.update(demande);
 
-            System.out.println("Une lecture a été créée avec succès");
+            Logger.getLogger(this.getClass().getName()).log(Level.INFO, ("Une lecture a été créée avec succès");
 
           } else {
-            System.out.println("Problème de création de la lecture");
+            Logger.getLogger(this.getClass().getName()).log(Level.WARNING, ("Problème de création de la lecture");
           }
         }
 

@@ -35,7 +35,7 @@ public class DefiDAO extends DAO<Defi> {
   @Override
   public boolean create(Defi defi) {
 
-    System.out.println("entrer dans le DAO");
+    Logger.getLogger(this.getClass().getName()).log(Level.INFO, ("entrer dans le DAO");
     String req =
         "INSERT INTO defi (`ID_COMPTE` , `NOM` , `DESCRIPTION`, `DATE_DEBUT` , `DATE_FIN`, `QUESTION`, `CHOIX_REPONSE`, `REPONSE`, `VALEUR_MINUTE`) VALUES "
             + "(?,?,?,?,?,?,?,?,?)";
@@ -163,7 +163,7 @@ public class DefiDAO extends DAO<Defi> {
 
       return false;
     } catch (SQLException exp) {
-      System.out.println(exp.getMessage());
+      Logger.getLogger(this.getClass().getName()).log(Level.INFO, (exp.getMessage());
     } finally {
       try {
         if (paramStm != null) paramStm.close();

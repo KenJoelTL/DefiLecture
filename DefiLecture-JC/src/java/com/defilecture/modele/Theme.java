@@ -79,7 +79,7 @@ public class Theme {
     Iterator<Map.Entry<String, String>> it = _css.entrySet().iterator();
     while (it.hasNext()) {
       Map.Entry<String, String> pair = it.next();
-      System.out.println(str = str.replaceAll(pair.getKey(), pair.getValue()));
+      Logger.getLogger(this.getClass().getName()).log(Level.INFO, (str = str.replaceAll(pair.getKey(), pair.getValue()));
     }
     try (FileWriter fw = new FileWriter(this.getURL("css/defiLectureStyles.css"), false)) {
       fw.write(str);
