@@ -92,8 +92,8 @@ public class Util {
             return octetsVersHex(hash);
         } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
             Logger.getLogger(Util.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Problème d'encodage non supporté ou d'algorithme inconnu.");
         }
-        return null; // Une valeur nulle est retournée si on sort du try/catch.
     }
     
     /**
