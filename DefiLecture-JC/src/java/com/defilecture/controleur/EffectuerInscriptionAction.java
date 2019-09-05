@@ -35,7 +35,7 @@ public class EffectuerInscriptionAction extends Action implements RequirePRGActi
     String action = "echec.do?tache=afficherPageInscription";
 
     if (request.getParameter("pseudonyme") != null) {
-      data.put("pseudonyme", request.getParameter("pseudonyme"));
+      data.put("pseudonyme", Util.toUTF8(request.getParameter("pseudonyme")));
     }
 
     if (request.getParameter("programmeEtude") != null) {
@@ -53,19 +53,19 @@ public class EffectuerInscriptionAction extends Action implements RequirePRGActi
       erreur = true;
       data.put("erreurPrenom", "Veuillez entrer votre prenom");
     } else {
-      data.put("prenom", request.getParameter("prenom"));
+      data.put("prenom", Util.toUTF8(request.getParameter("prenom")));
     }
 
     if (request.getParameter("nom") == null) {
       erreur = true;
       data.put("erreurNom", "Veuillez entrer votre nom");
     } else {
-      data.put("nom", request.getParameter("nom"));
+      data.put("nom", Util.toUTF8(request.getParameter("nom")));
     }
 
     if ((request.getParameter("motPasse") != null)
         && request.getParameter("confirmationMotPasse") != null
-        && !request.getParameter("motPasse").equals(request.getParameter("confirmationMotPasse"))) {
+        && !Util.toUTF8(request.getParameter("motPasse")).equals(Util.toUTF8(request.getParameter("confirmationMotPasse")))) {
       erreur = true;
       data.put(
           "erreurMotPasseIdentique",
@@ -75,11 +75,11 @@ public class EffectuerInscriptionAction extends Action implements RequirePRGActi
     if (!erreur) {
       try {
         String courriel = request.getParameter("courriel"),
-            prenom = request.getParameter("prenom"),
-            nom = request.getParameter("nom"),
-            motPasse = request.getParameter("motPasse"),
+            prenom = Util.toUTF8(request.getParameter("prenom")),
+            nom = Util.toUTF8(request.getParameter("nom")),
+            motPasse = Util.toUTF8(request.getParameter("motPasse")),
             programmeEtude = request.getParameter("programmeEtude"),
-            pseudonyme = request.getParameter("pseudonyme"),
+            pseudonyme = Util.toUTF8(request.getParameter("pseudonyme")),
             sel = Util.genererSel();
 
         Connection cnx =

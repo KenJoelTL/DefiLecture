@@ -35,7 +35,8 @@ public class AfficherPageModificationDefiAction extends Action {
           Defi d = new DefiDAO(cnx).read(request.getParameter("id"));
 
           // seul celui qui a ajouté la lecture peut la modifier
-          if (d != null && d.getIdCompte() == ((Integer) session.getAttribute("currentId")).intValue()) {
+          if (d != null
+              && d.getIdCompte() == ((Integer) session.getAttribute("currentId")).intValue()) {
             request.setAttribute("vue", "pageModificationDefi.jsp");
           }
         }

@@ -41,7 +41,7 @@ public class EffectuerSuppressionBDAction extends Action implements RequirePRGAc
 
   @Override
   public String execute() {
-    if ((userIsConnected()) && ((Integer) session.getAttribute("role")).intValue() > Compte.MODERATEUR) {
+    if (userIsAdmin()) {
       try {
         Connexion.reinit();
         Connection cnx =
@@ -55,7 +55,8 @@ public class EffectuerSuppressionBDAction extends Action implements RequirePRGAc
         cSiteDao = new ConfigSiteDAO(cnx);
 
         // Vérification du mot de passe de l'usager administrateur
-        Compte compteAdmin = daoCompte.read(((Integer) session.getAttribute("currentId")).intValue());
+        Compte compteAdmin =
+            daoCompte.read(((Integer) session.getAttribute("currentId")).intValue());
         Compte verif =
             daoCompte.findByIdentifiantMotPasse(
                 compteAdmin.getPseudonyme(), request.getParameter("passwordConf"));

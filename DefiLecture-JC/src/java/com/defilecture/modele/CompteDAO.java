@@ -38,7 +38,7 @@ public class CompteDAO extends DAO<Compte> {
     String req =
         "INSERT INTO compte (`COURRIEL` , `MOT_PASSE` , `NOM`, "
             + "`PRENOM`, `PSEUDONYME`, `AVATAR`, `PROGRAMME_ETUDE`,`DEVENIR_CAPITAINE`, `SEL`) VALUES "
-            + "(?,?,?,?,?,?,?,?)";
+            + "(?,?,?,?,?,?,?,?,?)";
     PreparedStatement paramStm = null;
 
     try {
@@ -258,7 +258,7 @@ public class CompteDAO extends DAO<Compte> {
       paramStm.setString(2, identifiant);
       resultat = paramStm.executeQuery();
       if (resultat.next()) {
-        String sel = resultat.getString("SEL");
+        String sel = Util.toUTF8(resultat.getString("SEL"));
 
         paramStm = cnx.prepareStatement(req);
         paramStm.setString(1, identifiant);
@@ -366,14 +366,14 @@ public class CompteDAO extends DAO<Compte> {
     return new Compte(
         resultat.getInt("ID_COMPTE"),
         resultat.getInt("ID_EQUIPE") == 0 ? -1 : resultat.getInt("ID_EQUIPE"),
-        resultat.getString("PSEUDONYME"),
-        resultat.getString("MOT_PASSE"),
-        resultat.getString("SEL"),
-        resultat.getString("NOM"),
-        resultat.getString("PRENOM"),
-        resultat.getString("COURRIEL"),
-        resultat.getString("PROGRAMME_ETUDE"),
-        resultat.getString("AVATAR"),
+        Util.toUTF8(resultat.getString("PSEUDONYME")),
+        Util.toUTF8(resultat.getString("MOT_PASSE")),
+        Util.toUTF8(resultat.getString("SEL")),
+        Util.toUTF8(resultat.getString("NOM")),
+        Util.toUTF8(resultat.getString("PRENOM")),
+        Util.toUTF8(resultat.getString("COURRIEL")),
+        Util.toUTF8(resultat.getString("PROGRAMME_ETUDE")),
+        Util.toUTF8(resultat.getString("AVATAR")),
         resultat.getInt("ROLE"),
         resultat.getInt("POINT"),
         resultat.getInt("MINUTES_RESTANTES"),

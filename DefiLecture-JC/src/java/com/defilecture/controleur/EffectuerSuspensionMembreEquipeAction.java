@@ -36,8 +36,8 @@ public class EffectuerSuspensionMembreEquipeAction extends Action
   @Override
   public String execute() {
     if (userIsConnected()
-        && request.getParameter("idEquipe") == null
-        && request.getParameter("idCompte") == null
+        && request.getParameter("idEquipe") != null
+        && request.getParameter("idCompte") != null
         && !request.getParameter("idCompte").equals(session.getAttribute("currentId"))
         && (userIsCapitaine() || userIsAdmin())) {
       try {

@@ -32,7 +32,7 @@ public class EffectuerSuppressionCompteAction extends Action
 
   @Override
   public String execute() {
-    if (userIsConnected() && userIsAdmin() && request.getParameter("idCompte") != null) {
+    if (userIsConnected()) {
       if (!request.getParameter("idCompte").equals(session.getAttribute("currentId"))
           && userIsAdmin()) {
         try {

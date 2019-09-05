@@ -53,7 +53,7 @@ public class EffectuerConnexionAction extends Action implements RequirePRGAction
           action = "*.do?tache=afficherTableauScores";
         } else {
           data.put("echecConnexion", "L'identifiant et/ou le mot de passe entré est invalide");
-          data.put("identifiant", identifiant);
+          data.put("identifiant", Util.toUTF8(identifiant));
         }
       } catch (SQLException ex) {
         Logger.getLogger(EffectuerConnexionAction.class.getName()).log(Level.SEVERE, null, ex);

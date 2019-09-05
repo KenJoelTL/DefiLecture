@@ -24,17 +24,16 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/** @author Charles */
 public class DefiDAO extends DAO<Defi> {
 
   public DefiDAO() {}
 
-  public DefiDAO(Connection c) {
-    super(c);
+  public DefiDAO(Connection cnx) {
+    super(cnx);
   }
 
   @Override
-  public boolean create(Defi x) {
+  public boolean create(Defi defi) {
 
     System.out.println("entrer dans le DAO");
     String req =
@@ -46,15 +45,15 @@ public class DefiDAO extends DAO<Defi> {
 
       paramStm = cnx.prepareStatement(req);
 
-      paramStm.setInt(1, x.getIdCompte());
-      paramStm.setString(2, x.getNom());
-      paramStm.setString(3, x.getDescription());
-      paramStm.setString(4, x.getDateDebut());
-      paramStm.setString(5, x.getDateFin());
-      paramStm.setString(6, x.getQuestion());
-      paramStm.setString(7, x.getChoixReponse());
-      paramStm.setString(8, x.getReponse());
-      paramStm.setInt(9, x.getValeurMinute());
+      paramStm.setInt(1, defi.getIdCompte());
+      paramStm.setString(2, defi.getNom());
+      paramStm.setString(3, defi.getDescription());
+      paramStm.setString(4, defi.getDateDebut());
+      paramStm.setString(5, defi.getDateFin());
+      paramStm.setString(6, defi.getQuestion());
+      paramStm.setString(7, defi.getChoixReponse());
+      paramStm.setString(8, defi.getReponse());
+      paramStm.setInt(9, defi.getValeurMinute());
 
       int n = paramStm.executeUpdate();
 
@@ -145,15 +144,15 @@ public class DefiDAO extends DAO<Defi> {
     try {
       paramStm = cnx.prepareStatement(req);
 
-      paramStm.setString(1, x.getNom());
-      paramStm.setString(2, x.getDescription());
-      paramStm.setString(3, x.getDateDebut());
-      paramStm.setString(4, x.getDateFin());
-      paramStm.setString(5, x.getChoixReponse());
-      paramStm.setString(6, x.getReponse());
-      paramStm.setInt(7, x.getValeurMinute());
-      paramStm.setString(8, x.getQuestion());
-      paramStm.setInt(9, x.getIdDefi());
+      paramStm.setString(1, defi.getNom());
+      paramStm.setString(2, defi.getDescription());
+      paramStm.setString(3, defi.getDateDebut());
+      paramStm.setString(4, defi.getDateFin());
+      paramStm.setString(5, defi.getChoixReponse());
+      paramStm.setString(6, defi.getReponse());
+      paramStm.setInt(7, defi.getValeurMinute());
+      paramStm.setString(8, defi.getQuestion());
+      paramStm.setInt(9, defi.getIdDefi());
 
       int nbLignesAffectees = paramStm.executeUpdate();
 
@@ -183,7 +182,7 @@ public class DefiDAO extends DAO<Defi> {
 
     try {
       paramStm = cnx.prepareStatement(req);
-      paramStm.setInt(1, x.getIdDefi());
+      paramStm.setInt(1, defi.getIdDefi());
 
       int nbLignesAffectees = paramStm.executeUpdate();
 

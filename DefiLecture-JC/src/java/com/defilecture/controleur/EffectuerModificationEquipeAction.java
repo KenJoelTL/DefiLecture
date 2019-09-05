@@ -42,7 +42,8 @@ public class EffectuerModificationEquipeAction extends Action
           try {
             Connection cnx =
                 Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
-            Compte compte = new CompteDAO(cnx).read(((Integer) session.getAttribute("currentId")).intValue());
+            Compte compte =
+                new CompteDAO(cnx).read(((Integer) session.getAttribute("currentId")).intValue());
             EquipeDAO equipeDao = new EquipeDAO(cnx);
             Equipe equipe = equipeDao.findByNom(request.getParameter("nom"));
 
