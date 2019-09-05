@@ -20,8 +20,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Theme {
   private String ReadFile(String nomFile) throws FileNotFoundException, IOException {
@@ -80,8 +78,7 @@ public class Theme {
     Iterator<Map.Entry<String, String>> it = _css.entrySet().iterator();
     while (it.hasNext()) {
       Map.Entry<String, String> pair = it.next();
-      Logger.getLogger(this.getClass().getName())
-          .log(Level.INFO, (str = str.replaceAll(pair.getKey(), pair.getValue())));
+      str = str.replaceAll(pair.getKey(), pair.getValue());
     }
     try (FileWriter fw = new FileWriter(this.getURL("css/defiLectureStyles.css"), false)) {
       fw.write(str);
