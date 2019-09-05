@@ -14,8 +14,6 @@
  */
 package com.defilecture.modele;
 
-/** @author Joel */
-/** @author Mikaël Nadeau */
 public class Compte {
   public static int PARTICIPANT = 1;
   public static int CAPITAINE = 2;

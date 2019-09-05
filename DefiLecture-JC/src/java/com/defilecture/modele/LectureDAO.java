@@ -24,7 +24,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/** @author Charles */
 public class LectureDAO extends DAO<Lecture> {
 
   public LectureDAO() {}

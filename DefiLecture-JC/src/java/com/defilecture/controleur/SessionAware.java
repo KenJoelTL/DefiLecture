@@ -16,7 +16,6 @@ package com.defilecture.controleur;
 
 import javax.servlet.http.HttpSession;
 
-/** @author Charles */
 public interface SessionAware {
   public void setSession(HttpSession session);
 }

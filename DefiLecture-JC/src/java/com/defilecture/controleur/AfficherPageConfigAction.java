@@ -14,7 +14,6 @@
  */
 package com.defilecture.controleur;
 
-/** @author Mikaël Nadeau */
 public class AfficherPageConfigAction extends Action {
   @Override
   public String execute() {

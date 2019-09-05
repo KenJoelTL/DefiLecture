@@ -21,7 +21,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
-/** @author AC */
 public class Theme {
   private String ReadFile(String nomFile) throws FileNotFoundException, IOException {
     File f = new File(this.getURL(nomFile));

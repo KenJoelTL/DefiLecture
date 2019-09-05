@@ -17,7 +17,6 @@ package com.defilecture.controleur;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/** @author Charles */
 public interface RequestAware {
   public void setRequest(HttpServletRequest request);
 

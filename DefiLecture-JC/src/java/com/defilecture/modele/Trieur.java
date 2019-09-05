@@ -14,7 +14,6 @@
  */
 package com.defilecture.modele;
 
-/** @author Joel */
 public class Trieur {
 
   /**
