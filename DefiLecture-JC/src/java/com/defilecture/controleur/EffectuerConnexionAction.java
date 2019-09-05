@@ -16,6 +16,7 @@ package com.defilecture.controleur;
 
 import com.defilecture.modele.Compte;
 import com.defilecture.modele.CompteDAO;
+import com.util.Util;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;

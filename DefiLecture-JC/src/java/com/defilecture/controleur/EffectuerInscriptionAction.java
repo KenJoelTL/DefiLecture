@@ -65,7 +65,8 @@ public class EffectuerInscriptionAction extends Action implements RequirePRGActi
 
     if ((request.getParameter("motPasse") != null)
         && request.getParameter("confirmationMotPasse") != null
-        && !Util.toUTF8(request.getParameter("motPasse")).equals(Util.toUTF8(request.getParameter("confirmationMotPasse")))) {
+        && !Util.toUTF8(request.getParameter("motPasse"))
+            .equals(Util.toUTF8(request.getParameter("confirmationMotPasse")))) {
       erreur = true;
       data.put(
           "erreurMotPasseIdentique",

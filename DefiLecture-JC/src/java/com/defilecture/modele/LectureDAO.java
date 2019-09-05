@@ -143,7 +143,7 @@ public class LectureDAO extends DAO<Lecture> {
 
       return false;
     } catch (SQLException exp) {
-      Logger.getLogger(this.getClass().getName()).log(Level.INFO, (exp.getMessage());
+      Logger.getLogger(this.getClass().getName()).log(Level.INFO, (exp.getMessage()));
     } finally {
       try {
         if (paramStm != null) paramStm.close();
@@ -156,7 +156,7 @@ public class LectureDAO extends DAO<Lecture> {
 
   @Override
   public boolean delete(Lecture x) {
-    Logger.getLogger(this.getClass().getName()).log(Level.INFO, ("entrer dans DAOLecture");
+    Logger.getLogger(this.getClass().getName()).log(Level.INFO, ("entrer dans DAOLecture"));
     String req = "DELETE FROM lecture WHERE `ID_LECTURE` = ?";
 
     PreparedStatement paramStm = null;

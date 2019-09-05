@@ -35,7 +35,7 @@ public class DefiDAO extends DAO<Defi> {
   @Override
   public boolean create(Defi defi) {
 
-    Logger.getLogger(this.getClass().getName()).log(Level.INFO, ("entrer dans le DAO");
+    Logger.getLogger(this.getClass().getName()).log(Level.INFO, ("entrer dans le DAO"));
     String req =
         "INSERT INTO defi (`ID_COMPTE` , `NOM` , `DESCRIPTION`, `DATE_DEBUT` , `DATE_FIN`, `QUESTION`, `CHOIX_REPONSE`, `REPONSE`, `VALEUR_MINUTE`) VALUES "
             + "(?,?,?,?,?,?,?,?,?)";
@@ -134,7 +134,7 @@ public class DefiDAO extends DAO<Defi> {
   }
 
   @Override
-  public boolean update(Defi x) {
+  public boolean update(Defi defi) {
     String req =
         "UPDATE defi SET NOM = ? , DESCRIPTION = ?,"
             + "DATE_DEBUT = ?, DATE_FIN = ?, CHOIX_REPONSE = ?,"
@@ -163,7 +163,7 @@ public class DefiDAO extends DAO<Defi> {
 
       return false;
     } catch (SQLException exp) {
-      Logger.getLogger(this.getClass().getName()).log(Level.INFO, (exp.getMessage());
+      Logger.getLogger(this.getClass().getName()).log(Level.INFO, (exp.getMessage()));
     } finally {
       try {
         if (paramStm != null) paramStm.close();
@@ -175,7 +175,7 @@ public class DefiDAO extends DAO<Defi> {
   }
 
   @Override
-  public boolean delete(Defi x) {
+  public boolean delete(Defi defi) {
     String req = "DELETE FROM defi WHERE `ID_DEFI` = ?";
 
     PreparedStatement paramStm = null;

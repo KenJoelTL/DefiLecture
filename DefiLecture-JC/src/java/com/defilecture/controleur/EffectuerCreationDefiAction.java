@@ -72,9 +72,11 @@ public class EffectuerCreationDefiAction extends Action implements RequirePRGAct
         defi.setValeurMinute(valeurMinute);
 
         if (dao.create(defi)) {
-          Logger.getLogger(this.getClass().getName()).log(Level.INFO, ("Un defi a été créé avec succès");
+          Logger.getLogger(this.getClass().getName())
+              .log(Level.INFO, ("Un defi a été créé avec succès"));
         } else {
-          Logger.getLogger(this.getClass().getName()).log(Level.WARNING, ("Problème de création du défi");
+          Logger.getLogger(this.getClass().getName())
+              .log(Level.WARNING, ("Problème de création du défi"));
         }
 
         return "*.do?tache=afficherPageParticipationDefi";

@@ -16,6 +16,7 @@ package com.defilecture.controleur;
 
 import com.defilecture.modele.Compte;
 import com.defilecture.modele.CompteDAO;
+import com.util.Util;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
