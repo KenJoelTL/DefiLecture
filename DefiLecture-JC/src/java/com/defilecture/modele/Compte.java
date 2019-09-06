@@ -14,7 +14,6 @@
  */
 package com.defilecture.modele;
 
-/** @author Joel */
 public class Compte {
   public static int PARTICIPANT = 1;
   public static int CAPITAINE = 2;
@@ -22,37 +21,49 @@ public class Compte {
   public static int ADMINISTRATEUR = 4;
   public static String AVATAR_DEFAUT = "/images/avatars/avatarCompte_defaut.png";
 
-  private int idCompte, // clé primaire
-      idEquipe =
-          -1; // équipe dont le participant fait partie -1:le compte en question ne fait pas partie
-              // d'une équipe
-  private int
-      role =
-          Compte
-              .PARTICIPANT, // Utilisateur==0 | Participant==1 | Capitaine==2 | Animateur==3 |
-                            // Administrateur==4
-      point, // Sommes des points gagnées par les lectures.
-      minutesRestantes,
-      devenirCapitaine; // Utilisateur veut devenir capitaine = 1 sinon, 0.
-
-  public int getDevenirCapitaine() {
-    return devenirCapitaine;
-  }
-
-  public void setDevenirCapitaine(int devenirCapitaine) {
-    this.devenirCapitaine = devenirCapitaine;
-  }
-
-  //    String nomUtilisateur;                    //ancienne clé primaire
-  private String pseudonyme, // l'utilisateur peut aussi s'inscrire avec un pseudo unique
+  private int idCompte, idEquipe = -1;
+  private int role = Compte.PARTICIPANT, point, minutesRestantes, devenirCapitaine;
+  private String pseudonyme,
       nom,
       prenom,
       courriel,
       motPasse,
-      programmeEtude, // programme scolaire
-      avatar = AVATAR_DEFAUT; // Pour l'instant l'avatar sera représenté par le chemin vers l'image
+      sel,
+      programmeEtude,
+      avatar = AVATAR_DEFAUT;
 
   public Compte() {}
+
+  public Compte(
+      int idCompte,
+      int idEquipe,
+      String pseudonyme,
+      String motPasse,
+      String sel,
+      String nom,
+      String prenom,
+      String courriel,
+      String programme,
+      String avatar,
+      int role,
+      int pointage,
+      int minutesRestantes,
+      int devenirCapitaine) {
+    this.idCompte = idCompte;
+    this.idEquipe = idEquipe;
+    this.pseudonyme = pseudonyme;
+    this.motPasse = motPasse;
+    this.sel = sel;
+    this.nom = nom;
+    this.prenom = prenom;
+    this.courriel = courriel;
+    this.programmeEtude = programme;
+    this.avatar = avatar;
+    this.role = role;
+    this.point = pointage;
+    this.minutesRestantes = minutesRestantes;
+    this.devenirCapitaine = devenirCapitaine;
+  }
 
   public Compte(
       int idCompte,
@@ -66,17 +77,21 @@ public class Compte {
       int role,
       int pointage,
       int minutesRestantes) {
-    this.idCompte = idCompte;
-    this.idEquipe = idEquipe;
-    this.pseudonyme = pseudonyme;
-    this.nom = nom;
-    this.prenom = prenom;
-    this.courriel = courriel;
-    this.programmeEtude = programme;
-    this.avatar = avatar;
-    this.role = role;
-    this.point = pointage;
-    this.minutesRestantes = minutesRestantes;
+    this(
+        idCompte,
+        idEquipe,
+        pseudonyme,
+        null,
+        null,
+        nom,
+        prenom,
+        courriel,
+        programme,
+        avatar,
+        role,
+        pointage,
+        minutesRestantes,
+        0);
   }
 
   public Compte(
@@ -90,16 +105,18 @@ public class Compte {
       int role,
       int pointage,
       int minutesRestantes) {
-    this.idEquipe = idEquipe;
-    this.pseudonyme = pseudonyme;
-    this.nom = nom;
-    this.prenom = prenom;
-    this.courriel = courriel;
-    this.programmeEtude = programme;
-    this.avatar = avatar;
-    this.role = role;
-    this.point = pointage;
-    this.minutesRestantes = minutesRestantes;
+    this(
+        -1,
+        idEquipe,
+        pseudonyme,
+        nom,
+        prenom,
+        courriel,
+        programme,
+        avatar,
+        role,
+        pointage,
+        minutesRestantes);
   }
 
   public int getIdCompte() {
@@ -190,11 +207,27 @@ public class Compte {
     this.point = point;
   }
 
+  public String getSel() {
+    return sel;
+  }
+
+  public void setSel(String nouveauSel) {
+    this.sel = nouveauSel;
+  }
+
   public String getMotPasse() {
     return motPasse;
   }
 
   public void setMotPasse(String motPasse) {
     this.motPasse = motPasse;
+  }
+
+  public int getDevenirCapitaine() {
+    return devenirCapitaine;
+  }
+
+  public void setDevenirCapitaine(int devenirCapitaine) {
+    this.devenirCapitaine = devenirCapitaine;
   }
 }

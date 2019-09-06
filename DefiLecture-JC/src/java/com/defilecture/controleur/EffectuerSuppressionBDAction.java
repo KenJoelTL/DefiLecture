@@ -26,18 +26,11 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import jdbc.Config;
 import jdbc.Connexion;
 
-public class EffectuerSuppressionBDAction
-    implements Action, RequestAware, SessionAware, RequirePRGAction {
+public class EffectuerSuppressionBDAction extends Action implements RequirePRGAction {
 
-  private HttpServletResponse response;
-  private HttpServletRequest request;
-  private HttpSession session;
   private DefiDAO dDao;
   private CompteDAO daoCompte;
   private DemandeEquipeDAO dEDao;
@@ -48,8 +41,7 @@ public class EffectuerSuppressionBDAction
 
   @Override
   public String execute() {
-    if ((session.getAttribute("connecte") != null && session.getAttribute("role") != null)
-        && (int) session.getAttribute("role") > 3) {
+    if (userIsAdmin()) {
       try {
         Connexion.reinit();
         Connection cnx =
@@ -63,12 +55,11 @@ public class EffectuerSuppressionBDAction
         cSiteDao = new ConfigSiteDAO(cnx);
 
         // Vérification du mot de passe de l'usager administrateur
-        Compte compteAdmin = daoCompte.read((int) session.getAttribute("connecte"));
+        Compte compteAdmin =
+            daoCompte.read(((Integer) session.getAttribute("currentId")).intValue());
         Compte verif =
             daoCompte.findByIdentifiantMotPasse(
-                compteAdmin.getPseudonyme(),
-                org.apache.commons.codec.digest.DigestUtils.sha1Hex(
-                    request.getParameter("passwordConf")));
+                compteAdmin.getPseudonyme(), request.getParameter("passwordConf"));
         if (verif != null) {
           dDao.deleteTable();
           dEDao.deleteTable();
@@ -79,29 +70,11 @@ public class EffectuerSuppressionBDAction
           daoCompte.deleteTable();
           return "*.do?tache=effectuerDeconnexion";
         }
-      } catch (ClassNotFoundException e) {
-        System.out.println("Erreur dans le chargement du pilote :" + e);
-        return "*.do?tache=afficherPageConfiguration";
       } catch (SQLException ex) {
         Logger.getLogger(EffectuerSuppressionBDAction.class.getName()).log(Level.SEVERE, null, ex);
         return "*.do?tache=afficherPageConfiguration";
       }
     }
     return "*.do?tache=afficherPageConfiguration";
-  }
-
-  @Override
-  public void setRequest(HttpServletRequest request) {
-    this.request = request;
-  }
-
-  @Override
-  public void setResponse(HttpServletResponse response) {
-    this.response = response;
-  }
-
-  @Override
-  public void setSession(HttpSession session) {
-    this.session = session;
   }
 }

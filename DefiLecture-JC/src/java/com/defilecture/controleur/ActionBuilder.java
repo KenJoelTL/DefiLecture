@@ -14,11 +14,9 @@
  */
 package com.defilecture.controleur;
 
-/** @author Charles et Joel */
 public class ActionBuilder {
   public static Action getAction(String actionName) {
-    // System.out.print("entrer dans l'action builder");
-    if (actionName != null)
+    if (actionName != null) {
       switch (actionName) {
         case "afficherPageAccueil":
           return new AfficherPageMarcheASuivreAction();
@@ -38,6 +36,7 @@ public class ActionBuilder {
           return new AfficherPageInscriptionAction();
         case "effectuerInscription":
           return new EffectuerInscriptionAction();
+
           // Connexion
         case "afficherPageConnexion":
           return new AfficherPageConnexionAction();
@@ -63,6 +62,7 @@ public class ActionBuilder {
           return new EffectuerModificationLectureAction();
         case "effectuerSuppressionLecture":
           return new EffectuerSuppressionLectureAction();
+
           // Defi
         case "afficherPageCreationDefi":
           return new AfficherPageCreationDefiAction();
@@ -82,6 +82,7 @@ public class ActionBuilder {
           return new EffectuerModificationDefiAction();
         case "supprimerDefi":
           return new SupprimerDefiAction();
+
           // Compte
         case "afficherPageGestionListeCompte":
           return new AfficherPageGestionListeComptesAction();
@@ -95,6 +96,7 @@ public class ActionBuilder {
           return new EffectuerAjoutAvatarCompteAction();
         case "effectuerSuppressionCompte":
           return new EffectuerSuppressionCompteAction();
+
           // Equipe
         case "afficherPageEquipe":
           return new AfficherPageEquipeAction();
@@ -134,14 +136,12 @@ public class ActionBuilder {
           return new EffectuerModificationConfigAction();
         case "effectuerSupressionBD":
           return new EffectuerSuppressionBDAction();
-          // Test Ajax
-        case "testAjax":
-          return new ExempleClasseActionAjax();
 
+          // Default Action
         default:
           return new DefaultAction();
       }
-
+    }
     return new AfficherPageMarcheASuivreAction();
   }
 }

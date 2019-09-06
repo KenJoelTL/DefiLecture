@@ -21,7 +21,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
-/** @author AC */
 public class Theme {
   private String ReadFile(String nomFile) throws FileNotFoundException, IOException {
     File f = new File(this.getURL(nomFile));
@@ -79,7 +78,7 @@ public class Theme {
     Iterator<Map.Entry<String, String>> it = _css.entrySet().iterator();
     while (it.hasNext()) {
       Map.Entry<String, String> pair = it.next();
-      System.out.println(str = str.replaceAll(pair.getKey(), pair.getValue()));
+      str = str.replaceAll(pair.getKey(), pair.getValue());
     }
     try (FileWriter fw = new FileWriter(this.getURL("css/defiLectureStyles.css"), false)) {
       fw.write(str);

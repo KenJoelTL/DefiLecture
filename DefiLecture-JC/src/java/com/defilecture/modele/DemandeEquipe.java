@@ -14,7 +14,6 @@
  */
 package com.defilecture.modele;
 
-/** @author Joel */
 public class DemandeEquipe {
 
   public static final int EN_ATTENTE = -1, // -1 : Le demande est visible, elle vient d'être créée

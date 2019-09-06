@@ -29,16 +29,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import jdbc.Config;
 import jdbc.Connexion;
 
-public class SupprimerDefiAction implements Action, SessionAware, RequestAware, RequirePRGAction {
-  private HttpServletResponse response;
-  private HttpServletRequest request;
-  private HttpSession session;
+public class SupprimerDefiAction extends Action implements RequirePRGAction {
   private HashMap data;
 
   @Override
@@ -54,7 +48,8 @@ public class SupprimerDefiAction implements Action, SessionAware, RequestAware, 
       Defi defi;
       defi = Ddao.read(Integer.valueOf(request.getParameter("idDefiSup")));
 
-      // Permets de passer au travers de toutes les inscriptions du défi qui doit être supprimé
+      // Permets de passer au travers de toutes les inscriptions du défi qui doit être
+      // supprimé
       List<InscriptionDefi> listID =
           IDdao.findByIdDefi(Integer.valueOf(request.getParameter("idDefiSup")));
       listID.forEach(
@@ -70,12 +65,12 @@ public class SupprimerDefiAction implements Action, SessionAware, RequestAware, 
                   Dedao.update(demandeE);
                 });
 
-            // Permets d'enlever les points gagnés par le défi aux comptes qui s'y sont inscrits
+            // Permets d'enlever les points gagnés par le défi aux comptes qui s'y sont
+            // inscrits
             profil.setPoint(profil.getPoint() - insDe.getValeurMinute());
             Cdao.update(profil);
           });
-      boolean delete = Ddao.delete(defi);
-      System.out.println(delete);
+      Ddao.delete(defi);
     } catch (SQLException ex) {
       Logger.getLogger(SupprimerDefiAction.class.getName()).log(Level.SEVERE, null, ex);
     } catch (Exception ex) {
@@ -84,21 +79,6 @@ public class SupprimerDefiAction implements Action, SessionAware, RequestAware, 
       Connexion.close();
     }
     return action;
-  }
-
-  @Override
-  public void setSession(HttpSession session) {
-    this.session = session;
-  }
-
-  @Override
-  public void setRequest(HttpServletRequest request) {
-    this.request = request;
-  }
-
-  @Override
-  public void setResponse(HttpServletResponse response) {
-    this.response = response;
   }
 
   public void setData(Map<String, Object> data) {

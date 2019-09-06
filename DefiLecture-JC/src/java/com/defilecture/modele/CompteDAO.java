@@ -25,8 +25,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-// import com.google.common.hash.Hashing;
-/** @author Joel */
 public class CompteDAO extends DAO<Compte> {
 
   public CompteDAO() {}
@@ -36,111 +34,61 @@ public class CompteDAO extends DAO<Compte> {
   }
 
   @Override
-  public boolean create(Compte x) {
+  public boolean create(Compte compte) {
     String req =
         "INSERT INTO compte (`COURRIEL` , `MOT_PASSE` , `NOM`, "
-            + "`PRENOM`, `PSEUDONYME`, `AVATAR`, `PROGRAMME_ETUDE`,`DEVENIR_CAPITAINE` ) VALUES "
-            + "(?,?,?,?,?,?,?,?)";
-
+            + "`PRENOM`, `PSEUDONYME`, `AVATAR`, `PROGRAMME_ETUDE`,`DEVENIR_CAPITAINE`, `SEL`) VALUES "
+            + "(?,?,?,?,?,?,?,?,?)";
     PreparedStatement paramStm = null;
-    try {
 
+    try {
       paramStm = cnx.prepareStatement(req);
 
-      if (x.getCourriel() != null
-          && !"".equals(x.getCourriel().trim())
-          && x.getMotPasse() != null
-          && !"".equals(x.getMotPasse().trim())
-          && x.getNom() != null
-          && !"".equals(x.getNom().trim())
-          && x.getPrenom() != null
-          && !"".equals(x.getPrenom().trim())) {
-        paramStm.setString(1, Util.toUTF8(x.getCourriel()));
-        paramStm.setString(2, Util.toUTF8(x.getMotPasse()));
-        paramStm.setString(3, Util.toUTF8(x.getNom()));
-        paramStm.setString(4, Util.toUTF8(x.getPrenom()));
-        if (x.getPseudonyme() != null && !"".equals(x.getPseudonyme().trim()))
-          paramStm.setString(5, Util.toUTF8(x.getPseudonyme()));
-        else paramStm.setString(5, null);
-        if (x.getAvatar() != null && !"".equals(x.getAvatar().trim()))
-          paramStm.setString(6, Util.toUTF8(x.getAvatar()));
-        else paramStm.setString(6, null);
-        if (x.getProgrammeEtude() != null && !"".equals(x.getProgrammeEtude().trim()))
-          paramStm.setString(7, Util.toUTF8(x.getProgrammeEtude()));
-        else paramStm.setString(7, null);
+      if (compte != null) {
+        // Un sel aléatoire est généré pour ajouter au calcul du hash
+        String sel = Util.genererSel();
+        String mdpHashe = Util.hasherAvecSel(compte.getMotPasse(), sel);
 
-        paramStm.setInt(8, x.getDevenirCapitaine());
-
-        int nbLignesAffectees = paramStm.executeUpdate();
-
-        if (nbLignesAffectees > 0) {
-          paramStm.close();
-          return true;
-        }
+        paramStm.setString(1, compte.getCourriel());
+        paramStm.setString(2, mdpHashe);
+        paramStm.setString(3, compte.getNom());
+        paramStm.setString(4, compte.getPrenom());
+        paramStm.setString(5, compte.getPseudonyme());
+        paramStm.setString(6, compte.getAvatar());
+        paramStm.setString(7, compte.getProgrammeEtude());
+        paramStm.setInt(8, compte.getDevenirCapitaine());
+        paramStm.setString(9, sel);
       }
-      return false;
-    } catch (SQLException exp) {
-    } finally {
-      try {
-        if (paramStm != null) paramStm.close();
-      } catch (SQLException ex) {
-        Logger.getLogger(CompteDAO.class.getName()).log(Level.SEVERE, null, ex);
-      }
+      int nbLignesAffectees = paramStm.executeUpdate();
+
+      paramStm.close();
+      return nbLignesAffectees > 0 ? true : false;
+    } catch (SQLException ex) {
+      Logger.getLogger(CompteDAO.class.getName()).log(Level.SEVERE, null, ex);
     }
+
     return false;
   }
 
   @Override
   public Compte read(int id) {
     String req = "SELECT * FROM compte WHERE `ID_COMPTE` = ?";
-
     PreparedStatement paramStm = null;
+    Compte compte = null;
     try {
-
       paramStm = cnx.prepareStatement(req);
-
       paramStm.setInt(1, id);
-
       ResultSet resultat = paramStm.executeQuery();
 
-      // On vérifie s'il y a un résultat
-      if (resultat.next()) {
-
-        Compte c = new Compte();
-        c.setIdCompte(resultat.getInt("ID_COMPTE"));
-        if (resultat.getInt("ID_EQUIPE") == 0) c.setIdEquipe(-1);
-        else c.setIdEquipe(resultat.getInt("ID_EQUIPE"));
-        c.setCourriel(resultat.getString("COURRIEL"));
-        c.setPrenom(resultat.getString("PRENOM"));
-        c.setNom(resultat.getString("NOM"));
-        c.setMotPasse(resultat.getString("MOT_PASSE"));
-        c.setPseudonyme(resultat.getString("PSEUDONYME"));
-        c.setAvatar(resultat.getString("AVATAR"));
-        c.setProgrammeEtude(resultat.getString("PROGRAMME_ETUDE"));
-        c.setMinutesRestantes(resultat.getInt("MINUTES_RESTANTES"));
-        c.setPoint(resultat.getInt("POINT"));
-        c.setRole(resultat.getInt("ROLE"));
-        c.setDevenirCapitaine(resultat.getInt("DEVENIR_CAPITAINE"));
-
-        resultat.close();
-        paramStm.close();
-        return c;
-      }
+      if (resultat.next()) compte = getCompteFromResultSet(resultat);
 
       resultat.close();
       paramStm.close();
-      return null;
-
-    } catch (SQLException exp) {
-    } finally {
-      try {
-        if (paramStm != null) paramStm.close();
-      } catch (SQLException exp) {
-      } catch (Exception e) {
-      }
+    } catch (SQLException ex) {
+      Logger.getLogger(CompteDAO.class.getName()).log(Level.SEVERE, null, ex);
     }
 
-    return null;
+    return compte;
   }
 
   @Override
@@ -153,97 +101,66 @@ public class CompteDAO extends DAO<Compte> {
   }
 
   @Override
-  public boolean update(Compte x) {
+  public boolean update(Compte compte) {
     String req =
-        "UPDATE compte SET COURRIEL = ?, MOT_PASSE = ?,"
-            + "NOM = ?, PRENOM = ?, PSEUDONYME = ?, AVATAR = ?,"
-            + "PROGRAMME_ETUDE = ?, ID_EQUIPE = ?, MINUTES_RESTANTES = ?,"
-            + "POINT = ?, ROLE = ? WHERE ID_COMPTE = ?";
+        "UPDATE compte SET COURRIEL = ?, MOT_PASSE = ?, "
+            + "NOM = ?, PRENOM = ?, PSEUDONYME = ?, AVATAR = ?, "
+            + "PROGRAMME_ETUDE = ?, ID_EQUIPE = ?, MINUTES_RESTANTES = ?, "
+            + "POINT = ?, ROLE = ?, SEL = ? WHERE ID_COMPTE = ?";
 
     PreparedStatement paramStm = null;
+
     try {
       paramStm = cnx.prepareStatement(req);
+      paramStm.setString(1, compte.getCourriel());
+      paramStm.setString(2, compte.getMotPasse());
+      paramStm.setString(3, compte.getNom());
+      paramStm.setString(4, compte.getPrenom());
+      paramStm.setString(5, compte.getPseudonyme());
+      paramStm.setString(6, compte.getAvatar());
+      paramStm.setString(7, compte.getProgrammeEtude());
 
-      if (x.getCourriel() != null
-          && !"".equals(x.getCourriel().trim())
-          && x.getMotPasse() != null
-          && !"".equals(x.getMotPasse().trim())
-          && x.getNom() != null
-          && !"".equals(x.getNom().trim())
-          && x.getPrenom() != null
-          && !"".equals(x.getPrenom().trim())) {
-        paramStm.setString(1, x.getCourriel());
-        paramStm.setString(2, x.getMotPasse());
-        paramStm.setString(3, x.getNom());
-        paramStm.setString(4, x.getPrenom());
-
-        if (x.getPseudonyme() == null || "".equals(x.getPseudonyme().trim()))
-          paramStm.setString(5, null);
-        else paramStm.setString(5, x.getPseudonyme());
-
-        if (x.getAvatar() == null || "".equals(x.getAvatar().trim())) paramStm.setString(6, null);
-        else paramStm.setString(6, x.getAvatar());
-
-        if (x.getProgrammeEtude() == null || "".equals(x.getProgrammeEtude().trim()))
-          paramStm.setString(7, null);
-        else paramStm.setString(7, x.getProgrammeEtude());
-
-        if (x.getIdEquipe() == -1) {
-          paramStm.setNull(8, java.sql.Types.INTEGER);
-        } else paramStm.setInt(8, x.getIdEquipe());
-        paramStm.setInt(9, x.getMinutesRestantes());
-        paramStm.setInt(10, x.getPoint());
-        paramStm.setInt(11, x.getRole());
-
-        paramStm.setInt(12, x.getIdCompte());
-
-        int nbLignesAffectees = paramStm.executeUpdate();
-
-        if (nbLignesAffectees > 0) {
-          paramStm.close();
-          return true;
-        }
+      if (compte.getIdEquipe() == -1) {
+        paramStm.setNull(8, java.sql.Types.INTEGER);
+      } else {
+        paramStm.setInt(8, compte.getIdEquipe());
       }
-      return false;
-    } catch (SQLException exp) {
-      System.out.println(exp.getMessage());
-    } finally {
-      try {
-        if (paramStm != null) paramStm.close();
-      } catch (SQLException ex) {
-        Logger.getLogger(CompteDAO.class.getName()).log(Level.SEVERE, null, ex);
-      }
+
+      paramStm.setInt(9, compte.getMinutesRestantes());
+      paramStm.setInt(10, compte.getPoint());
+      paramStm.setInt(11, compte.getRole());
+      paramStm.setString(12, compte.getSel());
+      paramStm.setInt(13, compte.getIdCompte());
+
+      int nbLignesAffectees = paramStm.executeUpdate();
+
+      paramStm.close();
+      return nbLignesAffectees > 0 ? true : false;
+    } catch (SQLException ex) {
+      Logger.getLogger(CompteDAO.class.getName()).log(Level.SEVERE, null, ex);
     }
+
     return false;
   }
 
   @Override
-  public boolean delete(Compte x) {
+  public boolean delete(Compte compte) {
     String req = "DELETE FROM compte WHERE `ID_COMPTE` = ?";
 
     PreparedStatement paramStm = null;
 
     try {
       paramStm = cnx.prepareStatement(req);
-      paramStm.setInt(1, x.getIdCompte());
+      paramStm.setInt(1, compte.getIdCompte());
 
       int nbLignesAffectees = paramStm.executeUpdate();
 
-      if (nbLignesAffectees > 0) {
-        paramStm.close();
-        return true;
-      }
-
-      return false;
-    } catch (SQLException exp) {
-    } catch (Exception exp) {
-    } finally {
-      try {
-        if (paramStm != null) paramStm.close();
-      } catch (SQLException ex) {
-        Logger.getLogger(CompteDAO.class.getName()).log(Level.SEVERE, null, ex);
-      }
+      paramStm.close();
+      return nbLignesAffectees > 0 ? true : false;
+    } catch (SQLException ex) {
+      Logger.getLogger(CompteDAO.class.getName()).log(Level.SEVERE, null, ex);
     }
+
     return false;
   }
 
@@ -253,29 +170,14 @@ public class CompteDAO extends DAO<Compte> {
     List<Compte> liste = new ArrayList<Compte>();
     try {
       Statement stm = cnx.createStatement();
-      ResultSet r = stm.executeQuery("SELECT * FROM compte ORDER BY NOM");
-      while (r.next()) {
-        Compte c = new Compte();
-        c.setIdCompte(r.getInt("ID_COMPTE"));
-        if (r.getInt("ID_EQUIPE") == 0) c.setIdEquipe(-1);
-        else c.setIdEquipe(r.getInt("ID_EQUIPE"));
-        c.setCourriel(r.getString("COURRIEL"));
-        c.setMotPasse(r.getString("MOT_PASSE"));
-        c.setNom(r.getString("NOM"));
-        c.setPrenom(r.getString("PRENOM"));
-        c.setPoint(r.getInt("POINT"));
-        c.setMinutesRestantes(r.getInt("MINUTES_RESTANTES"));
-        c.setProgrammeEtude(r.getString("PROGRAMME_ETUDE"));
-        c.setAvatar(r.getString("AVATAR"));
-        c.setPseudonyme(r.getString("PSEUDONYME"));
-        c.setRole(r.getInt("ROLE"));
-        c.setDevenirCapitaine(r.getInt("DEVENIR_CAPITAINE"));
+      ResultSet resultat = stm.executeQuery("SELECT * FROM compte ORDER BY NOM");
 
-        liste.add(c);
-      }
-      r.close();
+      while (resultat.next()) liste.add(getCompteFromResultSet(resultat));
+
+      resultat.close();
       stm.close();
-    } catch (SQLException exp) {
+    } catch (SQLException ex) {
+      Logger.getLogger(CompteDAO.class.getName()).log(Level.SEVERE, null, ex);
     }
     return liste;
   }
@@ -285,29 +187,14 @@ public class CompteDAO extends DAO<Compte> {
     List<Compte> liste = new ArrayList<>();
     try {
       Statement stm = cnx.createStatement();
-      ResultSet r = stm.executeQuery("SELECT * FROM compte LIMIT ?, ?");
-      while (r.next()) {
-        Compte c = new Compte();
-        c.setIdCompte(r.getInt("ID_COMPTE"));
-        if (r.getInt("ID_EQUIPE") == 0) c.setIdEquipe(-1);
-        else c.setIdEquipe(r.getInt("ID_EQUIPE"));
-        c.setCourriel(r.getString("COURRIEL"));
-        c.setMotPasse(r.getString("MOT_PASSE"));
-        c.setNom(r.getString("NOM"));
-        c.setPrenom(r.getString("PRENOM"));
-        c.setPoint(r.getInt("POINT"));
-        c.setMinutesRestantes(r.getInt("MINUTES_RESTANTES"));
-        c.setProgrammeEtude(r.getString("PROGRAMME_ETUDE"));
-        c.setAvatar(r.getString("AVATAR"));
-        c.setPseudonyme(r.getString("PSEUDONYME"));
-        c.setRole(r.getInt("ROLE"));
-        c.setDevenirCapitaine(r.getInt("DEVENIR_CAPITAINE"));
+      ResultSet resultat = stm.executeQuery("SELECT * FROM compte LIMIT ?, ?");
 
-        liste.add(c);
-      }
-      r.close();
+      while (resultat.next()) liste.add(getCompteFromResultSet(resultat));
+
+      resultat.close();
       stm.close();
-    } catch (SQLException exp) {
+    } catch (SQLException ex) {
+      Logger.getLogger(CompteDAO.class.getName()).log(Level.SEVERE, null, ex);
     }
     return liste;
   }
@@ -319,43 +206,18 @@ public class CompteDAO extends DAO<Compte> {
 
     PreparedStatement paramStm = null;
     try {
-
       paramStm = cnx.prepareStatement(req);
-      paramStm.setString(1, "%" + Util.toUTF8(nom) + "%");
-      paramStm.setString(2, "%" + Util.toUTF8(nom) + "%");
-      paramStm.setString(3, "%" + Util.toUTF8(nom) + "%");
+      paramStm.setString(1, "%" + nom + "%");
+      paramStm.setString(2, "%" + nom + "%");
+      paramStm.setString(3, "%" + nom + "%");
 
       ResultSet resultat = paramStm.executeQuery();
-      while (resultat.next()) {
-        Compte c = new Compte();
-        c.setIdCompte(resultat.getInt("ID_COMPTE"));
-        if (resultat.getInt("ID_EQUIPE") == 0) c.setIdEquipe(-1);
-        else c.setIdEquipe(resultat.getInt("ID_EQUIPE"));
-        c.setCourriel(resultat.getString("COURRIEL"));
-        c.setPrenom(resultat.getString("PRENOM"));
-        c.setNom(resultat.getString("NOM"));
-        c.setMotPasse(resultat.getString("MOT_PASSE"));
-        c.setPseudonyme(resultat.getString("PSEUDONYME"));
-        c.setAvatar(resultat.getString("AVATAR"));
-        c.setProgrammeEtude(resultat.getString("PROGRAMME_ETUDE"));
-        c.setMinutesRestantes(resultat.getInt("MINUTES_RESTANTES"));
-        c.setPoint(resultat.getInt("POINT"));
-        c.setRole(resultat.getInt("ROLE"));
-        c.setDevenirCapitaine(resultat.getInt("DEVENIR_CAPITAINE"));
+      while (resultat.next()) liste.add(getCompteFromResultSet(resultat));
 
-        liste.add(c);
-      }
       resultat.close();
       paramStm.close();
-    } catch (SQLException exp) {
-      Logger.getLogger(CompteDAO.class.getName()).log(Level.SEVERE, null, exp);
-      throw exp;
-    } finally {
-      try {
-        if (paramStm != null) paramStm.close();
-      } catch (SQLException ex) {
-        Logger.getLogger(CompteDAO.class.getName()).log(Level.SEVERE, null, ex);
-      }
+    } catch (SQLException ex) {
+      Logger.getLogger(CompteDAO.class.getName()).log(Level.SEVERE, null, ex);
     }
     return liste;
   }
@@ -363,221 +225,123 @@ public class CompteDAO extends DAO<Compte> {
   public ArrayList<Compte> findByIdEquipe(int idEquipe) {
     ArrayList<Compte> liste = new ArrayList<>();
     String req = "SELECT * FROM compte WHERE `ID_EQUIPE` = ?";
-
     PreparedStatement paramStm = null;
+
     try {
-
       paramStm = cnx.prepareStatement(req);
-
       paramStm.setInt(1, idEquipe);
 
       ResultSet resultat = paramStm.executeQuery();
-      while (resultat.next()) {
-        Compte c = new Compte();
-        c.setIdCompte(resultat.getInt("ID_COMPTE"));
-        if (resultat.getInt("ID_EQUIPE") == 0) c.setIdEquipe(-1);
-        else c.setIdEquipe(resultat.getInt("ID_EQUIPE"));
-        c.setCourriel(resultat.getString("COURRIEL"));
-        c.setPrenom(resultat.getString("PRENOM"));
-        c.setNom(resultat.getString("NOM"));
-        c.setMotPasse(resultat.getString("MOT_PASSE"));
-        c.setPseudonyme(resultat.getString("PSEUDONYME"));
-        c.setAvatar(resultat.getString("AVATAR"));
-        c.setProgrammeEtude(resultat.getString("PROGRAMME_ETUDE"));
-        c.setMinutesRestantes(resultat.getInt("MINUTES_RESTANTES"));
-        c.setPoint(resultat.getInt("POINT"));
-        c.setRole(resultat.getInt("ROLE"));
-        c.setDevenirCapitaine(resultat.getInt("DEVENIR_CAPITAINE"));
-        liste.add(c);
-      }
+
+      while (resultat.next()) liste.add(getCompteFromResultSet(resultat));
+
       resultat.close();
       paramStm.close();
-    } catch (SQLException exp) {
+    } catch (SQLException ex) {
+      Logger.getLogger(CompteDAO.class.getName()).log(Level.SEVERE, null, ex);
     }
     return liste;
   }
 
   public Compte findByIdentifiantMotPasse(String identifiant, String motPasse) {
+    ResultSet resultat = null;
+    Compte compte = null;
+    PreparedStatement paramStm = null;
 
+    String reqSel = "SELECT SEL FROM compte WHERE `COURRIEL` = ? or `PSEUDONYME` = ?";
     String req =
         "SELECT * FROM compte WHERE (`COURRIEL` = ? or " + "`PSEUDONYME` = ?) and `MOT_PASSE` = ?";
-    ResultSet resultat;
 
-    PreparedStatement paramStm = null;
     try {
-
-      paramStm = cnx.prepareStatement(req);
-
-      paramStm.setString(1, Util.toUTF8(identifiant));
-      paramStm.setString(2, Util.toUTF8(identifiant));
-      paramStm.setString(3, Util.toUTF8(motPasse));
-
+      paramStm = cnx.prepareStatement(reqSel);
+      paramStm.setString(1, identifiant);
+      paramStm.setString(2, identifiant);
       resultat = paramStm.executeQuery();
-
-      // On vérifie s'il y a un résultat
       if (resultat.next()) {
+        String sel = Util.toUTF8(resultat.getString("SEL"));
 
-        Compte c = new Compte();
-        c.setIdCompte(resultat.getInt("ID_COMPTE"));
-        if (resultat.getInt("ID_EQUIPE") == 0) c.setIdEquipe(-1);
-        else c.setIdEquipe(resultat.getInt("ID_EQUIPE"));
-        c.setCourriel(resultat.getString("COURRIEL"));
-        c.setPrenom(resultat.getString("PRENOM"));
-        c.setNom(resultat.getString("NOM"));
-        c.setMotPasse(resultat.getString("MOT_PASSE"));
-        c.setPseudonyme(resultat.getString("PSEUDONYME"));
-        c.setAvatar(resultat.getString("AVATAR"));
-        c.setProgrammeEtude(resultat.getString("PROGRAMME_ETUDE"));
-        c.setMinutesRestantes(resultat.getInt("MINUTES_RESTANTES"));
-        c.setPoint(resultat.getInt("POINT"));
-        c.setRole(resultat.getInt("ROLE"));
-        c.setDevenirCapitaine(resultat.getInt("DEVENIR_CAPITAINE"));
+        paramStm = cnx.prepareStatement(req);
+        paramStm.setString(1, identifiant);
+        paramStm.setString(2, identifiant);
 
-        resultat.close();
-        paramStm.close();
-        return c;
+        String mdp = Util.hasherAvecSel(motPasse, sel);
+        paramStm.setString(3, mdp);
+        resultat = paramStm.executeQuery();
+
+        if (resultat.next()) {
+          compte = getCompteFromResultSet(resultat);
+        }
       }
       resultat.close();
       paramStm.close();
-      return null;
-
-    } catch (SQLException exp) {
-    } finally {
-      try {
-        if (paramStm != null) paramStm.close();
-      } catch (SQLException exp) {
-      } catch (Exception e) {
-      }
+    } catch (SQLException ex) {
+      Logger.getLogger(CompteDAO.class.getName()).log(Level.SEVERE, null, ex);
     }
 
-    return null;
+    return compte;
   }
 
   public Compte findByPseudonyme(String pseudo) {
     String req = "SELECT * FROM compte WHERE `PSEUDONYME` = ?";
-
     PreparedStatement paramStm = null;
+    Compte compte = null;
+
     try {
-
       paramStm = cnx.prepareStatement(req);
-
-      paramStm.setString(1, Util.toUTF8(pseudo));
-
+      paramStm.setString(1, pseudo);
       ResultSet resultat = paramStm.executeQuery();
 
-      // On vérifie s'il y a un résultat
-      if (resultat.next()) {
-
-        Compte c = new Compte();
-        c.setIdCompte(resultat.getInt("ID_COMPTE"));
-        c.setIdEquipe(resultat.getInt("ID_EQUIPE"));
-        c.setCourriel(resultat.getString("COURRIEL"));
-        c.setPrenom(resultat.getString("PRENOM"));
-        c.setNom(resultat.getString("NOM"));
-        c.setPseudonyme(resultat.getString("PSEUDONYME"));
-        c.setAvatar(resultat.getString("AVATAR"));
-        c.setProgrammeEtude(resultat.getString("PROGRAMME_ETUDE"));
-        c.setMinutesRestantes(resultat.getInt("MINUTES_RESTANTES"));
-        c.setPoint(resultat.getInt("POINT"));
-        c.setRole(resultat.getInt("ROLE"));
-        c.setDevenirCapitaine(resultat.getInt("DEVENIR_CAPITAINE"));
-        resultat.close();
-        paramStm.close();
-        return c;
-      }
+      if (resultat.next()) compte = getCompteFromResultSet(resultat);
 
       resultat.close();
       paramStm.close();
-      return null;
-    } catch (SQLException exp) {
-    } finally {
-      try {
-        if (paramStm != null) paramStm.close();
-      } catch (SQLException exp) {
-      }
+    } catch (SQLException ex) {
+      Logger.getLogger(CompteDAO.class.getName()).log(Level.SEVERE, null, ex);
     }
 
-    return null;
+    return compte;
   }
 
   public int countCompteByIdEquipe(int idEquipe) {
-
-    //        String req = "SELECT COUNT(ID_COMPTE), idEquipe FROM `compte` WHERE ID_EQUIPE = ?
-    // GROUP BY COUNT(ID_COMPTE)";
     String req =
         "SELECT COUNT(ID_DEMANDE_EQUIPE) FROM `demande_equipe` WHERE ID_EQUIPE = ? and STATUT_DEMANDE = 1";
     int nbMembre = 0;
     PreparedStatement paramStm = null;
-    try {
 
+    try {
       paramStm = cnx.prepareStatement(req);
       paramStm.setInt(1, idEquipe);
       ResultSet resultat = paramStm.executeQuery();
 
-      // On vérifie s'il y a un résultat
-      if (resultat.next()) {
-        // nbMembre = resultat.getInt("COUNT(ID_COMPTE)");
-        nbMembre = resultat.getInt("COUNT(ID_DEMANDE_EQUIPE)");
-      }
+      if (resultat.next()) nbMembre = resultat.getInt("COUNT(ID_DEMANDE_EQUIPE)");
 
       resultat.close();
       paramStm.close();
-      return nbMembre;
-    } catch (SQLException exp) {
-    } finally {
-      try {
-        if (paramStm != null) paramStm.close();
-      } catch (SQLException exp) {
-      }
+    } catch (SQLException ex) {
+      Logger.getLogger(CompteDAO.class.getName()).log(Level.SEVERE, null, ex);
     }
     return nbMembre;
   }
 
   public Compte findByCourriel(String courriel) {
     String req = "SELECT * FROM compte WHERE `COURRIEL` = ?";
-
     PreparedStatement paramStm = null;
+    Compte compte = null;
+
     try {
-
       paramStm = cnx.prepareStatement(req);
-
-      paramStm.setString(1, Util.toUTF8(courriel));
-
+      paramStm.setString(1, courriel);
       ResultSet resultat = paramStm.executeQuery();
 
-      // On vérifie s'il y a un résultat
-      if (resultat.next()) {
-
-        Compte c = new Compte();
-        c.setIdCompte(resultat.getInt("ID_COMPTE"));
-        c.setIdEquipe(resultat.getInt("ID_EQUIPE"));
-        c.setCourriel(resultat.getString("COURRIEL"));
-        c.setPrenom(resultat.getString("PRENOM"));
-        c.setNom(resultat.getString("NOM"));
-        c.setPseudonyme(resultat.getString("PSEUDONYME"));
-        c.setAvatar(resultat.getString("AVATAR"));
-        c.setProgrammeEtude(resultat.getString("PROGRAMME_ETUDE"));
-        c.setMinutesRestantes(resultat.getInt("MINUTES_RESTANTES"));
-        c.setPoint(resultat.getInt("POINT"));
-        c.setRole(resultat.getInt("ROLE"));
-
-        resultat.close();
-        paramStm.close();
-        return c;
-      }
+      if (resultat.next()) compte = getCompteFromResultSet(resultat);
 
       resultat.close();
       paramStm.close();
-      return null;
-    } catch (SQLException exp) {
-    } finally {
-      try {
-        if (paramStm != null) paramStm.close();
-      } catch (SQLException exp) {
-      }
+    } catch (SQLException ex) {
+      Logger.getLogger(CompteDAO.class.getName()).log(Level.SEVERE, null, ex);
     }
 
-    return null;
+    return compte;
   }
 
   public boolean deleteTable() {
@@ -587,26 +351,32 @@ public class CompteDAO extends DAO<Compte> {
 
     try {
       paramStm = cnx.prepareStatement(req);
-
       int nbLignesAffectees = paramStm.executeUpdate();
 
-      if (nbLignesAffectees > 0) {
-        paramStm.close();
-        return true;
-      }
-
-      return false;
-    } catch (SQLException exp) {
-      Logger.getLogger(CompteDAO.class.getName()).log(Level.SEVERE, null, exp);
-    } catch (Exception e) {
-      Logger.getLogger(CompteDAO.class.getName()).log(Level.SEVERE, null, e);
-    } finally {
-      try {
-        if (paramStm != null) paramStm.close();
-      } catch (SQLException ex) {
-        Logger.getLogger(CompteDAO.class.getName()).log(Level.SEVERE, null, ex);
-      }
+      paramStm.close();
+      return nbLignesAffectees > 0 ? true : false;
+    } catch (SQLException ex) {
+      Logger.getLogger(CompteDAO.class.getName()).log(Level.SEVERE, null, ex);
     }
+
     return false;
+  }
+
+  protected Compte getCompteFromResultSet(ResultSet resultat) throws SQLException {
+    return new Compte(
+        resultat.getInt("ID_COMPTE"),
+        resultat.getInt("ID_EQUIPE") == 0 ? -1 : resultat.getInt("ID_EQUIPE"),
+        Util.toUTF8(resultat.getString("PSEUDONYME")),
+        Util.toUTF8(resultat.getString("MOT_PASSE")),
+        Util.toUTF8(resultat.getString("SEL")),
+        Util.toUTF8(resultat.getString("NOM")),
+        Util.toUTF8(resultat.getString("PRENOM")),
+        Util.toUTF8(resultat.getString("COURRIEL")),
+        Util.toUTF8(resultat.getString("PROGRAMME_ETUDE")),
+        Util.toUTF8(resultat.getString("AVATAR")),
+        resultat.getInt("ROLE"),
+        resultat.getInt("POINT"),
+        resultat.getInt("MINUTES_RESTANTES"),
+        resultat.getInt("DEVENIR_CAPITAINE"));
   }
 }

@@ -24,28 +24,19 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import jdbc.Config;
 import jdbc.Connexion;
 
-/** @author Charles */
-public class EffectuerCreationLectureAction
-    implements Action, RequestAware, SessionAware, RequirePRGAction {
-  private HttpSession session;
-  private HttpServletRequest request;
-  private HttpServletResponse response;
+public class EffectuerCreationLectureAction extends Action implements RequirePRGAction {
 
   @Override
   public String execute() {
 
-    System.out.println("Entrer dans l'action créer lecture");
+    Logger.getLogger(this.getClass().getName())
+        .log(Level.INFO, ("Entrer dans l'action créer lecture"));
 
-    if (session.getAttribute("connecte") != null
-        && session.getAttribute("role") != null
-        && (((int) session.getAttribute("role") == Compte.PARTICIPANT)
-            || ((int) session.getAttribute("role") == Compte.CAPITAINE))
+    if (userIsConnected()
+        && (userIsParticipant() || userIsCapitaine())
         && request.getParameter("titre") != null
         && request.getParameter("dureeMinutes") != null
         && request.getParameter("obligatoire") != null) {
@@ -53,7 +44,7 @@ public class EffectuerCreationLectureAction
       String titre = request.getParameter("titre");
       int dureeMinutes = Integer.parseInt(request.getParameter("dureeMinutes")),
           obligatoire = Integer.parseInt(request.getParameter("obligatoire")),
-          idCompte = (int) session.getAttribute("connecte");
+          idCompte = ((Integer) session.getAttribute("currentId")).intValue();
 
       Lecture lecture;
 
@@ -72,12 +63,15 @@ public class EffectuerCreationLectureAction
         if (dao.create(lecture)) {
 
           // Mise à jour des points du participant
-          // Conversion du nombre de minutes de la lecture en points pour le Participant : 15mins =
+          // Conversion du nombre de minutes de la lecture en points pour le Participant :
+          // 15mins =
           // 1 point
           CompteDAO daoCompte = new CompteDAO(cnx);
           Compte compte = new Compte();
           compte = daoCompte.read(idCompte);
-          if (lecture.getEstObligatoire() == Lecture.NON_OBLIGATOIRE) dureeMinutes *= 2;
+          if (lecture.getEstObligatoire() == Lecture.NON_OBLIGATOIRE) {
+            dureeMinutes *= 2;
+          }
           int pointLecture = (dureeMinutes + compte.getMinutesRestantes()) / 15;
           int pointCompte = compte.getPoint() + pointLecture;
           // Les minutes restantes sont gardées en mémoire ici
@@ -85,7 +79,8 @@ public class EffectuerCreationLectureAction
           compte.setPoint(pointCompte);
           compte.setMinutesRestantes(minutesRestantes);
           daoCompte.update(compte);
-          // Mise à jour des points dans demande_equipe (pour calculer le total des points de
+          // Mise à jour des points dans demande_equipe (pour calculer le total des points
+          // de
           // l'équipe)
           if (compte.getIdEquipe() > 0) {
             DemandeEquipeDAO demandeDAO = new DemandeEquipeDAO(cnx);
@@ -95,35 +90,20 @@ public class EffectuerCreationLectureAction
             demande.setPoint(pointDemandeEquipe);
             demandeDAO.update(demande);
 
-            System.out.println("Une lecture a été créée avec succès");
+            Logger.getLogger(this.getClass().getName())
+                .log(Level.INFO, ("Une lecture a été créée avec succès"));
 
-          } else System.out.println("Problème de création de la lecture");
+          } else {
+            Logger.getLogger(this.getClass().getName())
+                .log(Level.WARNING, ("Problème de création de la lecture"));
+          }
         }
 
-      } catch (ClassNotFoundException e) {
-        System.out.println("Erreur dans le chargement du pilote :" + e);
-        // request.setAttribute("vue", "lecture.jsp");
-        return "*.do?tache=afficherPageGestionLecture";
       } catch (SQLException ex) {
         Logger.getLogger(EffectuerCreationLectureAction.class.getName())
             .log(Level.SEVERE, null, ex);
       }
     }
     return "*.do?tache=afficherPageGestionLecture";
-  }
-
-  @Override
-  public void setRequest(HttpServletRequest request) {
-    this.request = request;
-  }
-
-  @Override
-  public void setResponse(HttpServletResponse response) {
-    this.response = response;
-  }
-
-  @Override
-  public void setSession(HttpSession session) {
-    this.session = session;
   }
 }

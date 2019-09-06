@@ -23,17 +23,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import jdbc.Config;
 import jdbc.Connexion;
 
-/** @author Joel */
-public class EffectuerInscriptionAction
-    implements Action, RequestAware, RequirePRGAction, DataSender {
-  // private HttpSession session;
-  private HttpServletRequest request;
-  private HttpServletResponse response;
+public class EffectuerInscriptionAction extends Action implements RequirePRGAction, DataSender {
   private HashMap data;
 
   @Override
@@ -46,14 +39,14 @@ public class EffectuerInscriptionAction
     }
 
     if (request.getParameter("programmeEtude") != null) {
-      data.put("programmeEtude", Util.toUTF8(request.getParameter("programmeEtude")));
+      data.put("programmeEtude", request.getParameter("programmeEtude"));
     }
 
     if (request.getParameter("courriel") == null) {
       erreur = true;
       data.put("erreurCourriel", "Veuillez entrer votre courriel");
     } else {
-      data.put("courriel", Util.toUTF8(request.getParameter("courriel")));
+      data.put("courriel", request.getParameter("courriel"));
     }
 
     if (request.getParameter("prenom") == null) {
@@ -72,31 +65,24 @@ public class EffectuerInscriptionAction
 
     if ((request.getParameter("motPasse") != null)
         && request.getParameter("confirmationMotPasse") != null
-        && !request.getParameter("motPasse").equals(request.getParameter("confirmationMotPasse"))) {
+        && !Util.toUTF8(request.getParameter("motPasse"))
+            .equals(Util.toUTF8(request.getParameter("confirmationMotPasse")))) {
       erreur = true;
       data.put(
           "erreurMotPasseIdentique",
           "Les deux champs concernant les mots de passe ne sont pas identiques");
     }
+
     if (!erreur) {
       try {
         String courriel = request.getParameter("courriel"),
-            prenom = request.getParameter("prenom"),
-            nom = request.getParameter("nom"),
-            motPasse =
-                org.apache.commons.codec.digest.DigestUtils.sha1Hex(
-                    request.getParameter("motPasse")),
+            prenom = Util.toUTF8(request.getParameter("prenom")),
+            nom = Util.toUTF8(request.getParameter("nom")),
+            motPasse = Util.toUTF8(request.getParameter("motPasse")),
             programmeEtude = request.getParameter("programmeEtude"),
-            pseudonyme = request.getParameter("pseudonyme");
-        /*
-        //Étape 1 : chargement du pilote JDBC
-        Class.forName(Config.DRIVER);
-        //Étape 2 : configurer les paramètres de la connexion vers la base de données
-        Connexion.setUrl(Config.URL);
-        Connexion.setUser(Config.DB_USER);
-        Connexion.setPassword(Config.DB_PWD);
-        //Étape 3 : ouverture de la connexion vers la base de données
-        Connection cnx = Connexion.getInstance();*/
+            pseudonyme = Util.toUTF8(request.getParameter("pseudonyme")),
+            sel = Util.genererSel();
+
         Connection cnx =
             Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
         CompteDAO dao = new CompteDAO(cnx);
@@ -104,7 +90,8 @@ public class EffectuerInscriptionAction
         compte.setCourriel(courriel);
         compte.setPrenom(prenom);
         compte.setNom(nom);
-        compte.setMotPasse(motPasse);
+        compte.setMotPasse(Util.hasherAvecSel(motPasse, sel));
+        compte.setSel(sel);
         compte.setPseudonyme(pseudonyme);
         compte.setProgrammeEtude(programmeEtude);
 
@@ -128,29 +115,12 @@ public class EffectuerInscriptionAction
                 "Problème de création du compte. Veuillez réessayer. Si le problème survient à répétition, contactez un administrateur.");
           }
         }
-      } catch (ClassNotFoundException e) {
-        System.out.println("Erreur dans le chargement du pilote :" + e);
       } catch (SQLException ex) {
         Logger.getLogger(EffectuerInscriptionAction.class.getName()).log(Level.SEVERE, null, ex);
       }
     }
     return action;
   }
-
-  @Override
-  public void setRequest(HttpServletRequest request) {
-    this.request = request;
-  }
-
-  @Override
-  public void setResponse(HttpServletResponse response) {
-    this.response = response;
-  }
-  /*
-  @Override
-  public void setSession(HttpSession session) {
-      this.session = session;
-  }*/
 
   @Override
   public void setData(Map<String, Object> data) {

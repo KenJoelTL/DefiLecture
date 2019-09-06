@@ -14,5 +14,4 @@
  */
 package com.defilecture.controleur;
 
-/** @author Joel */
 public interface DataReceiver {}

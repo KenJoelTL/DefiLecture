@@ -14,30 +14,11 @@
  */
 package com.defilecture.controleur;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-/** @author Charles */
-public class AfficherPageInscriptionDefiAction implements Action, RequestAware, DataReceiver {
-
-  private HttpServletRequest request;
-  private HttpServletResponse response;
-
+public class AfficherPageInscriptionDefiAction extends Action {
   @Override
   public String execute() {
-
     request.setAttribute("vue", "pageInscriptionDefi.jsp");
 
     return "/index.jsp";
-  }
-
-  @Override
-  public void setRequest(HttpServletRequest request) {
-    this.request = request;
-  }
-
-  @Override
-  public void setResponse(HttpServletResponse response) {
-    this.response = response;
   }
 }

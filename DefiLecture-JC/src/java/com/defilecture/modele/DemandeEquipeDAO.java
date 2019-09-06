@@ -12,7 +12,6 @@
  * <p>You should have received a copy of the GNU General Public License along with DefiLecture. If
  * not, see <http://www.gnu.org/licenses/>.
  */
-
 package com.defilecture.modele;
 
 import java.sql.Connection;
@@ -25,7 +24,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/** @author Joel */
 public class DemandeEquipeDAO extends DAO<DemandeEquipe> {
 
   public DemandeEquipeDAO() {}

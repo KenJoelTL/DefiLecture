@@ -14,30 +14,10 @@
  */
 package com.defilecture.controleur;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-/** @author Charles */
-public class AfficherPageGlossaireAction implements Action, RequestAware {
-
-  private HttpServletRequest request;
-  private HttpServletResponse response;
-
+public class AfficherPageGlossaireAction extends Action {
   @Override
   public String execute() {
-
     request.setAttribute("vue", "pageGlossaire.jsp");
-
     return "/index.jsp";
-  }
-
-  @Override
-  public void setRequest(HttpServletRequest request) {
-    this.request = request;
-  }
-
-  @Override
-  public void setResponse(HttpServletResponse response) {
-    this.response = response;
   }
 }

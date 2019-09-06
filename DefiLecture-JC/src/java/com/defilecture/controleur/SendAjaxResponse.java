@@ -14,6 +14,5 @@
  */
 package com.defilecture.controleur;
 
-/** @author Joel */
 interface SendAjaxResponse { // interface de marquage
 }

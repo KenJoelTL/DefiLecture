@@ -14,8 +14,6 @@
  */
 package com.defilecture.controleur;
 
-import static org.apache.commons.codec.digest.DigestUtils.sha1Hex;
-
 import com.defilecture.modele.Compte;
 import com.defilecture.modele.CompteDAO;
 import java.sql.Connection;
@@ -24,27 +22,19 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import jdbc.Config;
 import jdbc.Connexion;
 
-/** @author Joel */
-public class EffectuerGenerationMotPasseAction
-    implements Action, RequestAware, SessionAware, DataSender, RequirePRGAction {
+public class EffectuerGenerationMotPasseAction extends Action
+    implements DataSender, RequirePRGAction {
 
-  private HttpServletResponse response;
-  private HttpServletRequest request;
-  private HttpSession session;
   private HashMap data;
 
   @Override
   public String execute() {
 
     String action = "";
-    if ((int) session.getAttribute("role") == Compte.ADMINISTRATEUR
-        && request.getParameter("idCompte") != null) {
+    if (userIsAdmin() && request.getParameter("idCompte") != null) {
       try {
         Connection cnx =
             Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
@@ -63,9 +53,10 @@ public class EffectuerGenerationMotPasseAction
             builder.append(ALPHA_NUMERIC_STRING.charAt(character));
             longueur--;
           }
+
           String motPasse = builder.toString();
-          String motPasseHash = sha1Hex(motPasse);
-          compte.setMotPasse(motPasseHash);
+          compte.setMotPasse(motPasse);
+
           if (dao.update(compte)) {
             data.put("succesGenerationMotPasse", "Nouveau mot de passe : " + motPasse);
           } else {
@@ -73,34 +64,18 @@ public class EffectuerGenerationMotPasseAction
                 "erreurGenerationMotPasse",
                 "Une erreur est survenue lors de la modification du compte");
           }
-
         } else {
           data.put(
               "erreurGenerationMotPasse", "Le compte que vous tentez de modifier est introuvable");
         }
 
-      } catch (ClassNotFoundException | SQLException ex) {
+      } catch (SQLException ex) {
         Logger.getLogger(EffectuerGenerationMotPasseAction.class.getName())
             .log(Level.SEVERE, null, ex);
       }
     }
 
     return action;
-  }
-
-  @Override
-  public void setRequest(HttpServletRequest request) {
-    this.request = request;
-  }
-
-  @Override
-  public void setResponse(HttpServletResponse response) {
-    this.response = response;
-  }
-
-  @Override
-  public void setSession(HttpSession session) {
-    this.session = session;
   }
 
   @Override
