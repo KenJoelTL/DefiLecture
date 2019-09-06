@@ -23,7 +23,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/** @author Charles */
 @MultipartConfig
 public class ControleurFrontal extends HttpServlet {
 
@@ -79,7 +78,6 @@ public class ControleurFrontal extends HttpServlet {
           this.getServletContext().getRequestDispatcher(vue).forward(request, response);
         }
       }
-
     } else {
       Action action = ActionBuilder.getAction("");
       ((RequestAware) action).setRequest(request);

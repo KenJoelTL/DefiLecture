@@ -14,10 +14,6 @@
  */
 package com.defilecture.controleur;
 
-public class AfficherPageCodeConduiteAction extends Action {
-  @Override
-  public String execute() {
-    request.setAttribute("vue", "pageCodeConduite.jsp");
-    return "/index.jsp";
-  }
+public interface Executable {
+  public String execute();
 }

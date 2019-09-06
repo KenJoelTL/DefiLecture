@@ -19,27 +19,14 @@ import com.defilecture.modele.CompteDAO;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import jdbc.Config;
 import jdbc.Connexion;
 
-/** @author Joel */
-public class AfficherPageCreationEquipeAction
-    implements Action, RequestAware, SessionAware, DataReceiver {
-  private HttpServletResponse response;
-  private HttpServletRequest request;
-  private HttpSession session;
-
+public class AfficherPageCreationEquipeAction extends Action {
   @Override
   public String execute() {
-
-    if (session.getAttribute("connecte") != null
-        && session.getAttribute("role") != null
-        && (int) session.getAttribute("role") == Compte.CAPITAINE) {
-
-      int idCompte = (int) session.getAttribute("connecte");
+    if (userIsConnected() && userIsCapitaine()) {
+      int idCompte = ((Integer) session.getAttribute("currentID")).intValue();
 
       try {
         CompteDAO dao =
@@ -48,12 +35,10 @@ public class AfficherPageCreationEquipeAction
                     Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
         Compte compte = dao.read(idCompte);
 
-        if (compte.getIdEquipe() == -1) request.setAttribute("vue", "pageCreationEquipe.jsp");
+        if (compte.getIdEquipe() == -1) {
+          request.setAttribute("vue", "pageCreationEquipe.jsp");
+        }
 
-      } catch (ClassNotFoundException ex) {
-        Logger.getLogger(AfficherPageCreationEquipeAction.class.getName())
-            .log(Level.SEVERE, null, ex);
-        request.setAttribute("vue", "accueil.jsp");
       } catch (SQLException ex) {
         Logger.getLogger(AfficherPageCreationEquipeAction.class.getName())
             .log(Level.SEVERE, null, ex);
@@ -63,20 +48,5 @@ public class AfficherPageCreationEquipeAction
     }
 
     return "/index.jsp";
-  }
-
-  @Override
-  public void setRequest(HttpServletRequest request) {
-    this.request = request;
-  }
-
-  @Override
-  public void setResponse(HttpServletResponse response) {
-    this.response = response;
-  }
-
-  @Override
-  public void setSession(HttpSession session) {
-    this.session = session;
   }
 }

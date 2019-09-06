@@ -24,28 +24,16 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import jdbc.Config;
 import jdbc.Connexion;
 
-/** @author Charles */
-public class EffectuerSuppressionLectureAction
-    implements Action, SessionAware, RequestAware, RequirePRGAction {
-  HttpServletRequest request;
-  HttpServletResponse response;
-  HttpSession session;
+public class EffectuerSuppressionLectureAction extends Action implements RequirePRGAction {
 
   @Override
   public String execute() {
-    if (session.getAttribute("connecte") != null
-        && session.getAttribute("role") != null
-        && (((int) session.getAttribute("role") == Compte.PARTICIPANT)
-            || ((int) session.getAttribute("role") == Compte.CAPITAINE))) {
-
+    if (userIsConnected() && (userIsCapitaine() || userIsParticipant())) {
       String idLecture = request.getParameter("idLecture");
-      int idCompte = (int) session.getAttribute("connecte");
+      int idCompte = ((Integer) session.getAttribute("currentId")).intValue();
 
       try {
 
@@ -54,11 +42,7 @@ public class EffectuerSuppressionLectureAction
 
         LectureDAO daoLecture = new LectureDAO(cnx);
         Lecture lecture = daoLecture.read(idLecture);
-        if (lecture == null) {
-
-          return "*.do?tache=afficherPageGestionLecture";
-        } else {
-
+        if (lecture != null) {
           cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
 
           CompteDAO daoCompte = new CompteDAO(cnx);
@@ -85,38 +69,13 @@ public class EffectuerSuppressionLectureAction
 
           daoLecture.setCnx(cnx);
 
-          if (!daoLecture.delete(lecture)) {
-
-            return "*.do?tache=afficherPageGestionLecture";
-          } else {
-
-            return "*.do?tache=afficherPageGestionLecture";
-          }
+          daoLecture.delete(lecture);
         }
-      } catch (ClassNotFoundException ex) {
-        Logger.getLogger(EffectuerModificationLectureAction.class.getName())
-            .log(Level.SEVERE, null, ex);
-        return "*.do?tache=afficherPageGestionLecture";
       } catch (SQLException ex) {
         Logger.getLogger(EffectuerModificationLectureAction.class.getName())
             .log(Level.SEVERE, null, ex);
       }
-    } else return "*.do?tache=afficherPageGestionLecture";
-    return null;
-  }
-
-  @Override
-  public void setSession(HttpSession session) {
-    this.session = session;
-  }
-
-  @Override
-  public void setRequest(HttpServletRequest request) {
-    this.request = request;
-  }
-
-  @Override
-  public void setResponse(HttpServletResponse response) {
-    this.response = response;
+    }
+    return "*.do?tache=afficherPageGestionLecture";
   }
 }

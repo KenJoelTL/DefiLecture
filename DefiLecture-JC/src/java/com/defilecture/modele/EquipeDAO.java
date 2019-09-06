@@ -14,7 +14,6 @@
  */
 package com.defilecture.modele;
 
-import com.util.Util;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,7 +25,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/** @author Joel */
 public class EquipeDAO extends DAO<Equipe> {
 
   public EquipeDAO() {}
@@ -43,7 +41,7 @@ public class EquipeDAO extends DAO<Equipe> {
     try {
 
       paramStm = cnx.prepareStatement(req);
-      paramStm.setString(1, Util.toUTF8(x.getNom()));
+      paramStm.setString(1, x.getNom());
 
       int nbLignesAffectees = paramStm.executeUpdate();
 
@@ -210,7 +208,7 @@ public class EquipeDAO extends DAO<Equipe> {
     PreparedStatement paramStm = null;
     try {
       paramStm = cnx.prepareStatement(req);
-      paramStm.setString(1, "%" + Util.toUTF8(nom) + "%");
+      paramStm.setString(1, "%" + nom + "%");
 
       ResultSet r = paramStm.executeQuery();
       while (r.next()) {
@@ -248,7 +246,7 @@ public class EquipeDAO extends DAO<Equipe> {
     try {
 
       paramStm = cnx.prepareStatement(req);
-      paramStm.setString(1, Util.toUTF8(nom));
+      paramStm.setString(1, nom);
 
       ResultSet resultat = paramStm.executeQuery();
 

@@ -14,7 +14,6 @@
  */
 package com.defilecture.modele;
 
-/** @author Joel */
 public class InscriptionDefi {
   private int idInscriptionDefi, idCompte, idDefi, valeurMinute, estReussi;
   private String dateInscription;

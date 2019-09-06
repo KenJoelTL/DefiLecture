@@ -14,38 +14,13 @@
  */
 package com.defilecture.controleur;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-/** @author Charles */
-public class AfficherPageInscriptionAction
-    implements Action, RequestAware, SessionAware, DataReceiver {
-
-  private HttpServletRequest request;
-  private HttpServletResponse response;
-  private HttpSession session;
-
+public class AfficherPageInscriptionAction extends Action {
   @Override
   public String execute() {
-    if (session.getAttribute("connecte") == null)
+    if (!userIsConnected()) {
       request.setAttribute("vue", "pageInscription.jsp");
+    }
 
     return "/index.jsp";
-  }
-
-  @Override
-  public void setRequest(HttpServletRequest request) {
-    this.request = request;
-  }
-
-  @Override
-  public void setResponse(HttpServletResponse response) {
-    this.response = response;
-  }
-
-  @Override
-  public void setSession(HttpSession session) {
-    this.session = session;
   }
 }

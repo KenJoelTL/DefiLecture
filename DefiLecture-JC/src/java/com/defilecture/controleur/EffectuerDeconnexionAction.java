@@ -14,39 +14,15 @@
  */
 package com.defilecture.controleur;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-/** @author Joel */
-public class EffectuerDeconnexionAction
-    implements Action, RequestAware, SessionAware, RequirePRGAction {
-  private HttpSession session;
-  private HttpServletRequest request;
-  private HttpServletResponse response;
+public class EffectuerDeconnexionAction extends Action implements RequirePRGAction {
 
   @Override
   public String execute() {
-    String action = "accueil.do?tache=afficherPageAccueil";
-
-    if (session != null) session.invalidate();
+    if (session != null) {
+      session.invalidate();
+    }
     session = request.getSession(false);
 
-    return action;
-  }
-
-  @Override
-  public void setSession(HttpSession session) {
-    this.session = session;
-  }
-
-  @Override
-  public void setRequest(HttpServletRequest request) {
-    this.request = request;
-  }
-
-  @Override
-  public void setResponse(HttpServletResponse response) {
-    this.response = response;
+    return "accueil.do?tache=afficherPageAccueil";
   }
 }

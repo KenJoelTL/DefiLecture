@@ -14,5 +14,4 @@
  */
 package com.defilecture.modele;
 
-/** @author Joel */
 class Paginateur {}

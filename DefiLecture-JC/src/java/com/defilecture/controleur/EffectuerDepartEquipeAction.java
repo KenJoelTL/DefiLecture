@@ -26,31 +26,22 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import jdbc.Config;
 import jdbc.Connexion;
 
-/** @author Joel */
-public class EffectuerDepartEquipeAction
-    implements Action, RequestAware, RequirePRGAction, SessionAware, DataSender {
-  private HttpServletRequest request;
-  private HttpServletResponse response;
-  private HttpSession session;
+public class EffectuerDepartEquipeAction extends Action implements RequirePRGAction, DataSender {
   private HashMap data;
 
   @Override
   public String execute() {
     String action = "echec.do?tache=afficherPageAccueil";
-    if (session.getAttribute("connecte") == null
-        || session.getAttribute("role") == null
-        || request.getParameter("idEquipe") == null
-        || request.getParameter("idCompte") == null) {
-    } else if (!request.getParameter("idCompte").equals(session.getAttribute("connecte") + "")
-        && ((int) session.getAttribute("role") != Compte.CAPITAINE)
-        && ((int) session.getAttribute("role") != Compte.ADMINISTRATEUR)) {
-    } else {
+    if (userIsConnected()
+        && session.getAttribute("role") != null
+        && request.getParameter("idEquipe") != null
+        && request.getParameter("idCompte") != null
+        && (userIsAdmin()
+            || userIsCapitaine()
+            || request.getParameter("idCompte").equals(session.getAttribute("currentId")))) {
       try {
         String idCompte = request.getParameter("idCompte");
         String idEquipe = request.getParameter("idEquipe");
@@ -60,8 +51,8 @@ public class EffectuerDepartEquipeAction
         CompteDAO compteDao = new CompteDAO(cnx);
         Compte compte = compteDao.read(idCompte);
         Equipe equipe = equipeDao.read(idEquipe);
-        if (compte != null && equipe != null && equipe.getIdEquipe() == compte.getIdEquipe()) {
 
+        if (compte != null && equipe != null && equipe.getIdEquipe() == compte.getIdEquipe()) {
           DemandeEquipeDAO demandeEqpDao = new DemandeEquipeDAO(cnx);
           DemandeEquipe demandeEquipe =
               demandeEqpDao.findByIdCompteEquipe(compte.getIdCompte(), equipe.getIdEquipe());
@@ -87,20 +78,10 @@ public class EffectuerDepartEquipeAction
                       + " "
                       + compte.getNom()
                       + " n'a pas été envoyé par-dessus bord");
-
-              // demandeEquipe.setStatutDemande(0); //met à 0 si l'utilisateur est suspendu
-              // si l'un des enregistrements échouent alors on revient à l'état initial
-              /*   if(!demandeEqpDao.update(demandeEquipe) || !compteDao.update(compte)){
-              demandeEquipe.setStatutDemande(1);
-              compte.setIdEquipe(equipe.getIdEquipe());
-              demandeEqpDao.update(demandeEquipe);
-              compteDao.update(compte);
-              action = "echec.do?tache=afficherPageEquipe&idEquipe="+idEquipe; */
             }
           }
         }
-
-      } catch (ClassNotFoundException | SQLException ex) {
+      } catch (SQLException ex) {
         Logger.getLogger(EffectuerDepartEquipeAction.class.getName()).log(Level.SEVERE, null, ex);
       } finally {
         Connexion.close();
@@ -108,21 +89,6 @@ public class EffectuerDepartEquipeAction
     }
 
     return action;
-  }
-
-  @Override
-  public void setRequest(HttpServletRequest request) {
-    this.request = request;
-  }
-
-  @Override
-  public void setResponse(HttpServletResponse response) {
-    this.response = response;
-  }
-
-  @Override
-  public void setSession(HttpSession session) {
-    this.session = session;
   }
 
   @Override

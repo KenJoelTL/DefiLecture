@@ -18,25 +18,17 @@ import com.defilecture.modele.Compte;
 import com.defilecture.modele.CompteDAO;
 import com.defilecture.modele.Equipe;
 import com.defilecture.modele.EquipeDAO;
-import com.util.Util;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import jdbc.Config;
 import jdbc.Connexion;
 
-/** @author Joel */
-public class EffectuerModificationEquipeAction
-    implements Action, RequestAware, SessionAware, RequirePRGAction, DataSender {
-  HttpServletResponse response;
-  HttpServletRequest request;
-  HttpSession session;
+public class EffectuerModificationEquipeAction extends Action
+    implements RequirePRGAction, DataSender {
   HashMap data;
 
   @Override
@@ -44,25 +36,22 @@ public class EffectuerModificationEquipeAction
     String action = "*.do?tache=afficherPageAccueil";
     if (request.getParameter("idEquipe") != null) {
       action = "*.do?tache=afficherPageEquipe&idEquipe=" + request.getParameter("idEquipe");
+
       if (request.getParameter("modifier") != null) {
-        if (session.getAttribute("connecte") != null
-            && session.getAttribute("role") != null
-            && (int) session.getAttribute("role") == Compte.CAPITAINE
-            && request.getParameter("nom") != null) {
+        if (userIsConnected() && userIsCapitaine() && request.getParameter("nom") != null) {
           try {
             Connection cnx =
                 Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
-            Compte compte = new CompteDAO(cnx).read((int) session.getAttribute("connecte"));
+            Compte compte =
+                new CompteDAO(cnx).read(((Integer) session.getAttribute("currentId")).intValue());
             EquipeDAO equipeDao = new EquipeDAO(cnx);
             Equipe equipe = equipeDao.findByNom(request.getParameter("nom"));
+
             if (compte != null && equipe == null && compte.getIdEquipe() != -1) {
               equipe = equipeDao.read(compte.getIdEquipe());
-              equipe.setNom(Util.toUTF8(request.getParameter("nom")));
+              equipe.setNom(request.getParameter("nom"));
 
               if (equipeDao.update(equipe)) {
-                action =
-                    "*.do?tache=afficherPageModificationEquipe&idEquipe="
-                        + request.getParameter("idEquipe");
                 data.put("succesNom", "L'enregistrement du nouveau nom s'est fait avec succès");
               } else {
                 data.put(
@@ -73,18 +62,9 @@ public class EffectuerModificationEquipeAction
               data.put(
                   "erreurNom",
                   "Le nom "
-                      + Util.toUTF8(request.getParameter("nom"))
+                      + request.getParameter("nom")
                       + " est déjà utilisé par un autre équipage");
-              action =
-                  "*.do?tache=afficherPageModificationEquipe&idEquipe="
-                      + request.getParameter("idEquipe");
             }
-          } catch (ClassNotFoundException ex) {
-            Logger.getLogger(EffectuerModificationEquipeAction.class.getName())
-                .log(Level.SEVERE, null, ex);
-            action =
-                "*.do?tache=afficherPageModificationEquipe&idEquipe="
-                    + request.getParameter("idEquipe");
           } catch (SQLException ex) {
             Logger.getLogger(EffectuerModificationEquipeAction.class.getName())
                 .log(Level.SEVERE, null, ex);
@@ -93,21 +73,6 @@ public class EffectuerModificationEquipeAction
       }
     }
     return action;
-  }
-
-  @Override
-  public void setRequest(HttpServletRequest request) {
-    this.request = request;
-  }
-
-  @Override
-  public void setResponse(HttpServletResponse response) {
-    this.response = response;
-  }
-
-  @Override
-  public void setSession(HttpSession session) {
-    this.session = session;
   }
 
   @Override

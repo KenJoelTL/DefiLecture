@@ -27,29 +27,20 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import jdbc.Config;
 import jdbc.Connexion;
 
-/** @author Joel */
-public class EffectuerDemandeAdhesionEquipeAction
-    implements Action, SessionAware, RequestAware, RequirePRGAction, DataSender, SendAjaxResponse {
-  HttpServletRequest request;
-  HttpServletResponse response;
-  HttpSession session;
+public class EffectuerDemandeAdhesionEquipeAction extends Action
+    implements RequestAware, RequirePRGAction, DataSender, SendAjaxResponse {
   HashMap data;
 
   @Override
   public String execute() {
     // action envoyée au controleur frontal
     String action = "connexion.do?tache=afficherPageConnexion";
-    if (session.getAttribute("connecte") == null
-        || request.getParameter("idEquipe") == null
-        || request.getParameter("idCompte") == null)
-      action = "connexion.do?tache=afficherPageConnexion";
-    else {
+    if (userIsConnected()
+        && request.getParameter("idEquipe") != null
+        && request.getParameter("idCompte") != null) {
       try {
         String idEquipe = request.getParameter("idEquipe");
         String idCompte = request.getParameter("idCompte");
@@ -61,9 +52,7 @@ public class EffectuerDemandeAdhesionEquipeAction
         Compte compte = new CompteDAO(cnx).read(idCompte);
 
         // Cherche si le compte existe
-        if (compte == null || equipe == null) {
-          action = "connexion.do?tache=afficherPageConnexion";
-        } else {
+        if (compte != null && equipe != null) {
           DemandeEquipe demandeEq;
           DemandeEquipeDAO demandeDao = new DemandeEquipeDAO(cnx);
           demandeEq = demandeDao.findByIdCompteEquipe(compte.getIdCompte(), equipe.getIdEquipe());
@@ -76,9 +65,7 @@ public class EffectuerDemandeAdhesionEquipeAction
             demandeEq.setIdEquipe(equipe.getIdEquipe());
 
             // Insertion dans la base de données
-            if (!demandeDao.create(demandeEq))
-              action = "demandeEchouee.do?tache=afficherPageListeEquipes";
-            else {
+            if (demandeDao.create(demandeEq)) {
               response.setContentType("text/plain");
               try {
                 String msg = "Une demande d'adhésion a été envoyée à l'équipage " + equipe.getNom();
@@ -92,14 +79,15 @@ public class EffectuerDemandeAdhesionEquipeAction
                 Logger.getLogger(EffectuerDemandeAdhesionEquipeAction.class.getName())
                     .log(Level.SEVERE, null, ex);
               }
-              action = "demandeEnvoyee.do?tache=afficherPageListeEquipes";
             }
-          } else { // si la demande existe déjà alors on la rend visible
+
+            action = "demandeEchouee.do?tache=afficherPageListeEquipes";
+          } else {
+            // si la demande existe déjà alors on la rend visible
             demandeEq.setStatutDemande(-1);
           }
         }
-
-      } catch (ClassNotFoundException | SQLException ex) {
+      } catch (SQLException ex) {
         Logger.getLogger(EffectuerDemandeAdhesionEquipeAction.class.getName())
             .log(Level.SEVERE, null, ex);
       } finally {
@@ -107,21 +95,6 @@ public class EffectuerDemandeAdhesionEquipeAction
       }
     }
     return action;
-  }
-
-  @Override
-  public void setRequest(HttpServletRequest request) {
-    this.request = request;
-  }
-
-  @Override
-  public void setResponse(HttpServletResponse response) {
-    this.response = response;
-  }
-
-  @Override
-  public void setSession(HttpSession session) {
-    this.session = session;
   }
 
   @Override

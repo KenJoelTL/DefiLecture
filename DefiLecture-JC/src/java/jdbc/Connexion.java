@@ -92,23 +92,13 @@ public class Connexion {
    * @param url
    * @param driver
    * @return Connection
-   * @throws java.lang.ClassNotFoundException
+   * @throws java.lang.SQLException
    */
   public static Connection startConnection(String user, String password, String url, String driver)
-      throws ClassNotFoundException, SQLException {
-    Class.forName(driver);
+      throws SQLException {
     Connexion.user = user;
     Connexion.password = password;
     Connexion.url = url;
     return getInstance();
   }
-  /*
-  public static Connection startConnection(String driver) throws ClassNotFoundException{
-         // Class.forName(driver);
-         // Connexion.user = user;
-         // Connexion.password = password;
-         // Connexion.url = url;
-      return getInstance();
-  }*/
-
 }

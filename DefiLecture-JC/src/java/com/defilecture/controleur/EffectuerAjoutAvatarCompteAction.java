@@ -31,29 +31,23 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import jdbc.Config;
 import jdbc.Connexion;
 
-/** @author Joel */
 @MultipartConfig
-public class EffectuerAjoutAvatarCompteAction
-    implements Action, RequestAware, SessionAware, RequirePRGAction, DataSender {
+public class EffectuerAjoutAvatarCompteAction extends Action
+    implements RequirePRGAction, DataSender {
 
-  private HttpServletRequest request;
-  private HttpServletResponse response;
-  private HttpSession session;
   private HashMap data;
 
   @Override
   public String execute() {
     String action = "redirection.do?tache=afficherTableauScores";
-    //      Seul le membre connecté peut modifier son propre avatar
-    if (session.getAttribute("connecte") != null) {
-      int idCompte = (int) session.getAttribute("connecte");
+
+    // Seul le membre connecté peut modifier son propre avatar
+    if (userIsConnected()) {
+      int idCompte = ((Integer) session.getAttribute("currentId")).intValue();
       action = "*.do?tache=afficherPageModificationCompte&id=" + idCompte;
       OutputStream out = null;
       InputStream filecontent = null;
@@ -65,7 +59,7 @@ public class EffectuerAjoutAvatarCompteAction
         final String fileName = "avatarCompte_" + idCompte;
 
         String relativePath = path + "/" + fileName;
-        absolutePath = session.getServletContext().getRealPath(relativePath);
+        absolutePath = session.getServletContext().getRealPath(Util.toUTF8(relativePath));
 
         out = new FileOutputStream(new File(absolutePath));
         filecontent = filePart.getInputStream();
@@ -76,6 +70,7 @@ public class EffectuerAjoutAvatarCompteAction
         while ((nbOctetsLus = filecontent.read(bytes)) != -1) {
           out.write(bytes, 0, nbOctetsLus);
         }
+
         Connection cnx =
             Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
         CompteDAO dao = new CompteDAO(cnx);
@@ -93,45 +88,25 @@ public class EffectuerAjoutAvatarCompteAction
         }
 
       } catch (FileNotFoundException fne) {
-        System.out.println("\nImpossible d'atteindre la destination : " + absolutePath);
-      } catch (IOException | ServletException | ClassNotFoundException | SQLException ex) {
+        Logger.getLogger(EffectuerAjoutAvatarCompteAction.class.getName())
+            .log(Level.SEVERE, "\nImpossible d'atteindre la destination : " + absolutePath, fne);
+      } catch (IOException | ServletException | SQLException ex) {
         Logger.getLogger(EffectuerAjoutAvatarCompteAction.class.getName())
             .log(Level.SEVERE, null, ex);
       } finally {
-        if (out != null) {
-          try {
+        try {
+          if (out != null) {
             out.close();
-          } catch (IOException ex) {
-            Logger.getLogger(EffectuerAjoutAvatarCompteAction.class.getName())
-                .log(Level.SEVERE, null, ex);
-          }
-        }
-        if (filecontent != null) {
-          try {
+          } else if (filecontent != null) {
             filecontent.close();
-          } catch (IOException ex) {
-            Logger.getLogger(EffectuerAjoutAvatarCompteAction.class.getName())
-                .log(Level.SEVERE, null, ex);
           }
+        } catch (IOException ex) {
+          Logger.getLogger(EffectuerAjoutAvatarCompteAction.class.getName())
+              .log(Level.SEVERE, null, ex);
         }
       }
     }
     return action;
-  }
-
-  @Override
-  public void setRequest(HttpServletRequest request) {
-    this.request = request;
-  }
-
-  @Override
-  public void setResponse(HttpServletResponse response) {
-    this.response = response;
-  }
-
-  @Override
-  public void setSession(HttpSession session) {
-    this.session = session;
   }
 
   @Override

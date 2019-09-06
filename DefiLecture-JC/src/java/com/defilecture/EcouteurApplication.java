@@ -15,17 +15,18 @@
 package com.defilecture;
 
 import com.defilecture.modele.Equipe;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import jdbc.Config;
 
-/** @author usager */
 public class EcouteurApplication implements ServletContextListener {
 
   @Override
   public void contextInitialized(ServletContextEvent sce) {
-    System.out.println("Application démarrée");
+    Logger.getLogger(this.getClass().getName()).log(Level.INFO, ("Application démarrée"));
     ServletContext application = sce.getServletContext();
 
     Config.DB_USER = application.getInitParameter("userDB");
@@ -38,6 +39,6 @@ public class EcouteurApplication implements ServletContextListener {
 
   @Override
   public void contextDestroyed(ServletContextEvent sce) {
-    System.out.println("Application terminée");
+    Logger.getLogger(this.getClass().getName()).log(Level.INFO, ("Application terminée"));
   }
 }

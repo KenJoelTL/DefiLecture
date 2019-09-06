@@ -16,7 +16,6 @@ package com.defilecture.controleur;
 
 import java.util.Map;
 
-/** @author Joel */
 public interface DataSender {
   public void setData(Map<String, Object> data);
 }

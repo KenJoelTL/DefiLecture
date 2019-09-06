@@ -14,7 +14,6 @@
  */
 package com.defilecture.modele;
 
-/** @author Joel */
 public class Equipe implements Comparable<Equipe> {
   public static int NB_MAX_MEMBRES = 3;
   private int idEquipe, // clé primaire

@@ -17,7 +17,6 @@ package com.defilecture.modele;
 import java.sql.Connection;
 import java.util.List;
 
-/** @author Charles */
 public abstract class DAO<T> {
   protected Connection cnx;
   protected Trieur trieur;

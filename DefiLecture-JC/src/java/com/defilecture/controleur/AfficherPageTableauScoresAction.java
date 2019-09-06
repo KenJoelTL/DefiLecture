@@ -14,27 +14,11 @@
  */
 package com.defilecture.controleur;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-/** @author Joel */
-public class AfficherPageTableauScoresAction implements Action, RequestAware {
-  private HttpServletResponse response;
-  private HttpServletRequest request;
+public class AfficherPageTableauScoresAction extends Action {
 
   @Override
   public String execute() {
     request.setAttribute("vue", "pageTableauScores.jsp");
     return "/index.jsp";
-  }
-
-  @Override
-  public void setRequest(HttpServletRequest request) {
-    this.request = request;
-  }
-
-  @Override
-  public void setResponse(HttpServletResponse response) {
-    this.response = response;
   }
 }

@@ -14,7 +14,6 @@
  */
 package com.defilecture.modele;
 
-import com.util.Util;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,7 +24,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/** @author Charles */
 public class LectureDAO extends DAO<Lecture> {
 
   public LectureDAO() {}
@@ -47,7 +45,7 @@ public class LectureDAO extends DAO<Lecture> {
       paramStm = cnx.prepareStatement(req);
 
       paramStm.setInt(1, x.getIdCompte());
-      paramStm.setString(2, Util.toUTF8(x.getTitre()));
+      paramStm.setString(2, x.getTitre());
       paramStm.setInt(3, x.getDureeMinutes());
       paramStm.setInt(4, x.getEstObligatoire());
       int n = paramStm.executeUpdate();
@@ -145,7 +143,7 @@ public class LectureDAO extends DAO<Lecture> {
 
       return false;
     } catch (SQLException exp) {
-      System.out.println(exp.getMessage());
+      Logger.getLogger(this.getClass().getName()).log(Level.INFO, (exp.getMessage()));
     } finally {
       try {
         if (paramStm != null) paramStm.close();
@@ -158,7 +156,7 @@ public class LectureDAO extends DAO<Lecture> {
 
   @Override
   public boolean delete(Lecture x) {
-    System.out.println("entrer dans DAOLecture");
+    Logger.getLogger(this.getClass().getName()).log(Level.INFO, ("entrer dans DAOLecture"));
     String req = "DELETE FROM lecture WHERE `ID_LECTURE` = ?";
 
     PreparedStatement paramStm = null;

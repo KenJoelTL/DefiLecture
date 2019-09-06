@@ -26,30 +26,19 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import jdbc.Config;
 import jdbc.Connexion;
 
-/** @author Joel */
-public class EffectuerReaffectationMembreEquipeAction
-    implements Action, RequestAware, SessionAware, RequirePRGAction, DataSender {
-  HttpServletResponse response;
-  HttpServletRequest request;
-  HttpSession session;
+public class EffectuerReaffectationMembreEquipeAction extends Action
+    implements RequirePRGAction, DataSender {
   HashMap data;
 
   @Override
   public String execute() {
-    String action = "Acceuil.do?tache=afficherPageAccueil";
-    if (session.getAttribute("connecte") == null
-        || session.getAttribute("role") == null
-        || request.getParameter("idEquipe") == null
-        || request.getParameter("idCompte") == null) {
-    } else if (!request.getParameter("idCompte").equals(session.getAttribute("connecte") + "")
-        && (((int) session.getAttribute("role") == Compte.CAPITAINE)
-            || ((int) session.getAttribute("role") == Compte.ADMINISTRATEUR))) {
+    String action = "Accueil.do?tache=afficherPageAccueil";
+    if (userIsConnected()
+        && !request.getParameter("idCompte").equals(session.getAttribute("currentId"))
+        && (userIsCapitaine() || userIsAdmin())) {
       try {
         String idCompte = request.getParameter("idCompte");
         String idEquipe = request.getParameter("idEquipe");
@@ -58,10 +47,11 @@ public class EffectuerReaffectationMembreEquipeAction
         EquipeDAO equipeDao = new EquipeDAO(cnx);
         CompteDAO compteDao = new CompteDAO(cnx);
         Compte compte = compteDao.read(idCompte);
-        Compte compteSup = compteDao.read((int) session.getAttribute("connecte"));
+        Compte compteSup = compteDao.read(((Integer) session.getAttribute("currentId")).intValue());
         Equipe equipe = equipeDao.read(idEquipe);
 
-        // si le compte connecté est au niveau de Capitaine, alors il faut qu'il soit membre de la
+        // si le compte connecté est au niveau de Capitaine, alors il faut qu'il soit membre
+        // de la
         // même équipe pour réaffecter un membre.
         // si le compte connecté est un Administrateur alors il peut réaffecter un membre de
         // n'importe quelle équipe
@@ -69,9 +59,8 @@ public class EffectuerReaffectationMembreEquipeAction
             && equipe != null
             && compteSup != null
             && equipe.getIdEquipe() == compte.getIdEquipe()
-            && ((compte.getIdEquipe() == compteSup.getIdEquipe()
-                    && compteSup.getRole() == Compte.CAPITAINE)
-                || compteSup.getRole() == Compte.ADMINISTRATEUR)) {
+            && ((compte.getIdEquipe() == compteSup.getIdEquipe() && userIsCapitaine())
+                || userIsAdmin())) {
 
           DemandeEquipeDAO demandeEqpDao = new DemandeEquipeDAO(cnx);
           DemandeEquipe demandeEquipe =
@@ -102,8 +91,6 @@ public class EffectuerReaffectationMembreEquipeAction
           }
         }
 
-      } catch (ClassNotFoundException ex) {
-        Logger.getLogger(EffectuerDepartEquipeAction.class.getName()).log(Level.SEVERE, null, ex);
       } catch (SQLException ex) {
         Logger.getLogger(EffectuerReaffectationMembreEquipeAction.class.getName())
             .log(Level.SEVERE, null, ex);
@@ -113,21 +100,6 @@ public class EffectuerReaffectationMembreEquipeAction
     }
 
     return action;
-  }
-
-  @Override
-  public void setRequest(HttpServletRequest request) {
-    this.request = request;
-  }
-
-  @Override
-  public void setResponse(HttpServletResponse response) {
-    this.response = response;
-  }
-
-  @Override
-  public void setSession(HttpSession session) {
-    this.session = session;
   }
 
   @Override

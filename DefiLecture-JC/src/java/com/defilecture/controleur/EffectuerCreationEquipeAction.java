@@ -26,42 +26,41 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import jdbc.Config;
 import jdbc.Connexion;
 
-/** @author Joel */
-public class EffectuerCreationEquipeAction
-    implements Action, RequestAware, SessionAware, RequirePRGAction, DataSender {
-  private HttpSession session;
-  private HttpServletResponse response;
-  private HttpServletRequest request;
+public class EffectuerCreationEquipeAction extends Action implements RequirePRGAction, DataSender {
   private HashMap data;
 
   @Override
   public String execute() {
-    if (session.getAttribute("connecte") != null) {
-      if ((int) session.getAttribute("role") == Compte.CAPITAINE) {
+    if (userIsConnected()) {
+      if (userIsCapitaine()) {
+        int idCompte = ((Integer) session.getAttribute("currentId")).intValue();
         String nom = request.getParameter("nom");
-        if (nom != null) {
+        if (nom != null && !"".equals(nom.trim())) {
           Equipe equipe = new Equipe();
           equipe.setNom(nom);
-          // equipe.setIdCapitaine((int)session.getAttribute("id"));
+
           try {
             Connection cnx =
                 Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
             EquipeDAO daoEquipe = new EquipeDAO(cnx);
-            // idéalement créer le tout seulement si et seulement si toutes les conditions sont
-            // vraies
+
             if (daoEquipe.create(equipe)) {
+              Logger.getLogger(EffectuerCreationEquipeAction.class.getName())
+                  .log(Level.SEVERE, "Équipe créée.");
               equipe = daoEquipe.findByNom(equipe.getNom());
               if (equipe != null) {
+                Logger.getLogger(EffectuerCreationEquipeAction.class.getName())
+                    .log(Level.SEVERE, "Équipe trouvée. " + equipe.getIdEquipe());
                 CompteDAO daoCompte = new CompteDAO(cnx);
-                Compte compte = daoCompte.read((int) session.getAttribute("connecte"));
-
+                Compte compte = daoCompte.read(idCompte);
                 compte.setIdEquipe(equipe.getIdEquipe());
+                Logger.getLogger(EffectuerCreationEquipeAction.class.getName())
+                    .log(
+                        Level.SEVERE,
+                        "Ajout du compte " + idCompte + " à l'équipe " + equipe.getIdEquipe());
 
                 if (daoCompte.update(compte)) {
                   DemandeEquipeDAO daoDemandeEquipe = new DemandeEquipeDAO(cnx);
@@ -70,21 +69,18 @@ public class EffectuerCreationEquipeAction
                   demande.setIdEquipe(compte.getIdEquipe());
 
                   demande.setStatutDemande(1);
-                  if (daoDemandeEquipe.create(demande))
+                  if (daoDemandeEquipe.create(demande)) {
+                    Logger.getLogger(EffectuerCreationEquipeAction.class.getName())
+                        .log(Level.SEVERE, "Demande complétée");
                     return "creationEquipeCompletee.do?tache=afficherPageEquipe&idEquipe="
-                        + equipe
-                            .getIdEquipe(); // soit afficher le page avec utilisateur pour pouvoir
-                                            // enoyer une demande
+                        + equipe.getIdEquipe();
+                  }
                 }
               } else {
                 data.put("erreurNom", "Ce nom est déjà utilisé par un équipage");
                 return "creation.do?tache=afficherPageCreationEquipe";
               }
             }
-          } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AfficherPageCreationEquipeAction.class.getName())
-                .log(Level.SEVERE, null, ex);
-            return "creation.do?tache=afficherPageCreationEquipe";
           } catch (SQLException ex) {
             Logger.getLogger(EffectuerCreationEquipeAction.class.getName())
                 .log(Level.SEVERE, null, ex);
@@ -99,21 +95,6 @@ public class EffectuerCreationEquipeAction
       return "creation.do?tache=afficherPageAccueil";
     }
     return "connexion.do?tache=afficherPageConnexion";
-  }
-
-  @Override
-  public void setRequest(HttpServletRequest request) {
-    this.request = request;
-  }
-
-  @Override
-  public void setResponse(HttpServletResponse response) {
-    this.response = response;
-  }
-
-  @Override
-  public void setSession(HttpSession session) {
-    this.session = session;
   }
 
   @Override

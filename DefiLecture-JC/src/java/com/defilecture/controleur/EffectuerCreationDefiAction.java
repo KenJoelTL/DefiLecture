@@ -14,34 +14,23 @@
  */
 package com.defilecture.controleur;
 
-import com.defilecture.modele.Compte;
 import com.defilecture.modele.Defi;
 import com.defilecture.modele.DefiDAO;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import jdbc.Config;
 import jdbc.Connexion;
 
-/** @author Charles */
-public class EffectuerCreationDefiAction
-    implements Action, RequestAware, SessionAware, RequirePRGAction {
+public class EffectuerCreationDefiAction extends Action implements RequirePRGAction {
 
-  private HttpSession session;
-  private HttpServletRequest request;
-  private HttpServletResponse response;
   private DefiDAO dao;
 
   @Override
   public String execute() {
-    if (session.getAttribute("connecte") != null
-        && session.getAttribute("role") != null
-        && (((int) session.getAttribute("role") == Compte.MODERATEUR)
-            || ((int) session.getAttribute("role") == Compte.ADMINISTRATEUR))
+    if (userIsConnected()
+        && (userIsAdmin() || userIsModerateur())
         && request.getParameter("nom") != null
         && request.getParameter("description") != null
         && request.getParameter("dateFin") != null
@@ -62,10 +51,8 @@ public class EffectuerCreationDefiAction
           choixReponse = request.getParameter("choixReponseJSON"),
           reponse = request.getParameter("reponse");
 
-      int idCompte = (int) session.getAttribute("connecte"),
+      int idCompte = ((Integer) session.getAttribute("currentId")).intValue(),
           valeurMinute = Integer.parseInt(request.getParameter("valeurMinute"));
-
-      Defi defi;
 
       try {
 
@@ -73,7 +60,7 @@ public class EffectuerCreationDefiAction
         Connection cnx =
             Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
         dao = new DefiDAO(cnx);
-        defi = new Defi();
+        Defi defi = new Defi();
         defi.setIdCompte(idCompte);
         defi.setNom(nom);
         defi.setDescription(description);
@@ -83,38 +70,22 @@ public class EffectuerCreationDefiAction
         defi.setChoixReponse(choixReponse);
         defi.setReponse(reponse);
         defi.setValeurMinute(valeurMinute);
-        if (dao.create(defi)) {
 
-          System.out.println("Un defi a été créé avec succès");
-        } else System.out.println("Problème de création du défi");
+        if (dao.create(defi)) {
+          Logger.getLogger(this.getClass().getName())
+              .log(Level.INFO, ("Un defi a été créé avec succès"));
+        } else {
+          Logger.getLogger(this.getClass().getName())
+              .log(Level.WARNING, ("Problème de création du défi"));
+        }
 
         return "*.do?tache=afficherPageParticipationDefi";
-      } catch (ClassNotFoundException e) {
-        System.out.println("Erreur dans le chargement du pilote :" + e);
-
-        return "*.do?tache=afficherPageCreationDefi";
       } catch (SQLException ex) {
         Logger.getLogger(EffectuerCreationDefiAction.class.getName()).log(Level.SEVERE, null, ex);
         return "*.do?tache=afficherPageCreationDefi";
-
       } finally {
         Connexion.close();
       }
     } else return "*.do?tache=afficherPageCreationDefi";
-  }
-
-  @Override
-  public void setRequest(HttpServletRequest request) {
-    this.request = request;
-  }
-
-  @Override
-  public void setResponse(HttpServletResponse response) {
-    this.response = response;
-  }
-
-  @Override
-  public void setSession(HttpSession session) {
-    this.session = session;
   }
 }

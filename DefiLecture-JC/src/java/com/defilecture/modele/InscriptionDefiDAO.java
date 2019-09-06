@@ -24,7 +24,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/** @author Charles */
 public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
 
   public InscriptionDefiDAO() {}

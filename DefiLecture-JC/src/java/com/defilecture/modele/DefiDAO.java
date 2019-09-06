@@ -14,7 +14,6 @@
  */
 package com.defilecture.modele;
 
-import com.util.Util;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,19 +24,18 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/** @author Charles */
 public class DefiDAO extends DAO<Defi> {
 
   public DefiDAO() {}
 
-  public DefiDAO(Connection c) {
-    super(c);
+  public DefiDAO(Connection cnx) {
+    super(cnx);
   }
 
   @Override
-  public boolean create(Defi x) {
+  public boolean create(Defi defi) {
 
-    System.out.println("entrer dans le DAO");
+    Logger.getLogger(this.getClass().getName()).log(Level.INFO, ("entrer dans le DAO"));
     String req =
         "INSERT INTO defi (`ID_COMPTE` , `NOM` , `DESCRIPTION`, `DATE_DEBUT` , `DATE_FIN`, `QUESTION`, `CHOIX_REPONSE`, `REPONSE`, `VALEUR_MINUTE`) VALUES "
             + "(?,?,?,?,?,?,?,?,?)";
@@ -47,15 +45,15 @@ public class DefiDAO extends DAO<Defi> {
 
       paramStm = cnx.prepareStatement(req);
 
-      paramStm.setInt(1, x.getIdCompte());
-      paramStm.setString(2, Util.toUTF8(x.getNom()));
-      paramStm.setString(3, Util.toUTF8(x.getDescription()));
-      paramStm.setString(4, x.getDateDebut());
-      paramStm.setString(5, x.getDateFin());
-      paramStm.setString(6, Util.toUTF8(x.getQuestion()));
-      paramStm.setString(7, Util.toUTF8(x.getChoixReponse()));
-      paramStm.setString(8, Util.toUTF8(x.getReponse()));
-      paramStm.setInt(9, x.getValeurMinute());
+      paramStm.setInt(1, defi.getIdCompte());
+      paramStm.setString(2, defi.getNom());
+      paramStm.setString(3, defi.getDescription());
+      paramStm.setString(4, defi.getDateDebut());
+      paramStm.setString(5, defi.getDateFin());
+      paramStm.setString(6, defi.getQuestion());
+      paramStm.setString(7, defi.getChoixReponse());
+      paramStm.setString(8, defi.getReponse());
+      paramStm.setInt(9, defi.getValeurMinute());
 
       int n = paramStm.executeUpdate();
 
@@ -136,7 +134,7 @@ public class DefiDAO extends DAO<Defi> {
   }
 
   @Override
-  public boolean update(Defi x) {
+  public boolean update(Defi defi) {
     String req =
         "UPDATE defi SET NOM = ? , DESCRIPTION = ?,"
             + "DATE_DEBUT = ?, DATE_FIN = ?, CHOIX_REPONSE = ?,"
@@ -146,15 +144,15 @@ public class DefiDAO extends DAO<Defi> {
     try {
       paramStm = cnx.prepareStatement(req);
 
-      paramStm.setString(1, x.getNom());
-      paramStm.setString(2, x.getDescription());
-      paramStm.setString(3, x.getDateDebut());
-      paramStm.setString(4, x.getDateFin());
-      paramStm.setString(5, x.getChoixReponse());
-      paramStm.setString(6, x.getReponse());
-      paramStm.setInt(7, x.getValeurMinute());
-      paramStm.setString(8, x.getQuestion());
-      paramStm.setInt(9, x.getIdDefi());
+      paramStm.setString(1, defi.getNom());
+      paramStm.setString(2, defi.getDescription());
+      paramStm.setString(3, defi.getDateDebut());
+      paramStm.setString(4, defi.getDateFin());
+      paramStm.setString(5, defi.getChoixReponse());
+      paramStm.setString(6, defi.getReponse());
+      paramStm.setInt(7, defi.getValeurMinute());
+      paramStm.setString(8, defi.getQuestion());
+      paramStm.setInt(9, defi.getIdDefi());
 
       int nbLignesAffectees = paramStm.executeUpdate();
 
@@ -165,7 +163,7 @@ public class DefiDAO extends DAO<Defi> {
 
       return false;
     } catch (SQLException exp) {
-      System.out.println(exp.getMessage());
+      Logger.getLogger(this.getClass().getName()).log(Level.INFO, (exp.getMessage()));
     } finally {
       try {
         if (paramStm != null) paramStm.close();
@@ -177,14 +175,14 @@ public class DefiDAO extends DAO<Defi> {
   }
 
   @Override
-  public boolean delete(Defi x) {
+  public boolean delete(Defi defi) {
     String req = "DELETE FROM defi WHERE `ID_DEFI` = ?";
 
     PreparedStatement paramStm = null;
 
     try {
       paramStm = cnx.prepareStatement(req);
-      paramStm.setInt(1, x.getIdDefi());
+      paramStm.setInt(1, defi.getIdDefi());
 
       int nbLignesAffectees = paramStm.executeUpdate();
 

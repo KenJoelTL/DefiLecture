@@ -16,7 +16,6 @@ package com.defilecture.modele;
 
 import java.sql.Date;
 
-/** @author Charles */
 public class Lecture {
 
   public static final int NON_OBLIGATOIRE = 0;
