@@ -39,8 +39,8 @@ public class EffectuerDemandeAdhesionEquipeAction extends Action
     // action envoyée au controleur frontal
     String action = "connexion.do?tache=afficherPageConnexion";
     if (userIsConnected()
-        || request.getParameter("idEquipe") != null
-        || request.getParameter("idCompte") != null) {
+        && request.getParameter("idEquipe") != null
+        && request.getParameter("idCompte") != null) {
       try {
         String idEquipe = request.getParameter("idEquipe");
         String idCompte = request.getParameter("idCompte");
@@ -52,7 +52,7 @@ public class EffectuerDemandeAdhesionEquipeAction extends Action
         Compte compte = new CompteDAO(cnx).read(idCompte);
 
         // Cherche si le compte existe
-        if (compte != null || equipe != null) {
+        if (compte != null && equipe != null) {
           DemandeEquipe demandeEq;
           DemandeEquipeDAO demandeDao = new DemandeEquipeDAO(cnx);
           demandeEq = demandeDao.findByIdCompteEquipe(compte.getIdCompte(), equipe.getIdEquipe());
