@@ -43,7 +43,8 @@ public class EffectuerConnexionAction extends Action implements RequirePRGAction
             new CompteDAO(
                 Connexion.startConnection(
                     Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
-        Compte compte = dao.findByIdentifiantMotPasse(identifiant, motPasse);
+        Compte compte =
+            dao.findByIdentifiantMotPasse(Util.toUTF8(identifiant), Util.toUTF8(motPasse));
 
         // On vérifie s'il y a un résultat
         if (compte != null) {

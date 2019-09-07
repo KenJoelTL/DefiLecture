@@ -53,16 +53,6 @@ public class EffectuerModificationCompteAction extends Action
           motPasseNouveauConfirmation = request.getParameter("motPasseNouveauConfirmation"),
           pseudonyme = request.getParameter("pseudonyme");
 
-      if (motPasseActuel != null) {
-        motPasseActuel = motPasseActuel;
-      }
-      if (motPasseNouveau != null) {
-        motPasseNouveau = Util.hasherAvecSel(motPasseNouveau, sel);
-      }
-      if (motPasseNouveauConfirmation != null) {
-        motPasseNouveauConfirmation = Util.hasherAvecSel(motPasseNouveauConfirmation, sel);
-      }
-
       int idEquipe, minutesRestantes, pointage, role;
       boolean erreurSurvenue = false;
       try {
@@ -100,11 +90,9 @@ public class EffectuerModificationCompteAction extends Action
         }
 
         if (motPasseNouveau != null && !"".equals(motPasseNouveau.trim())) {
-          if (motPasseActuel != null
-              && Util.hasherAvecSel(motPasseActuel, compte.getSel()).equals(compte.getMotPasse())) {
+          if (motPasseActuel != null && compte.verifierMotPasse(motPasseActuel)) {
             if (motPasseNouveau.equals(motPasseNouveauConfirmation)) {
               compte.setMotPasse(motPasseNouveau);
-              compte.setSel(sel);
             } else {
               erreurSurvenue = true;
               data.put(
