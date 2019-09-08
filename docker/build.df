@@ -1,4 +1,4 @@
-FROM ubuntu:bionic
+FROM ubuntu:latest
 
 RUN apt update
 RUN apt install -y vim tomcat8 default-jdk ant libcommons-codec-java libnb-java5-java libmysql-java libtaglibs-standard-impl-java  libtaglibs-standard-spec-java

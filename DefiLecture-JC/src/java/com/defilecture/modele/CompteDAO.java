@@ -14,7 +14,7 @@
  */
 package com.defilecture.modele;
 
-import com.util.Util;
+import com.defilecture.Util;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
