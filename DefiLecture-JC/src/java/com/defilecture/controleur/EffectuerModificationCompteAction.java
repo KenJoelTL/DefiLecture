@@ -29,155 +29,143 @@ import jdbc.Connexion;
 public class EffectuerModificationCompteAction extends Action
     implements RequirePRGAction, DataSender {
 
-    private HashMap data;
+  private HashMap data;
 
-    @Override
-    public String execute() {
-      
-	if ((userIsConnected()
-	     && request.getParameter("modifie") != null
-	     && request
-	     .getParameter("idCompte")
-	     .equals(session.getAttribute("currentId").toString()))
-	    || (!request.getParameter("idCompte").equals(session.getAttribute("currentId").toString())
-		&& ((Integer) session.getAttribute("role")).intValue() == Compte.ADMINISTRATEUR)) {
+  @Override
+  public String execute() {
 
-	    String idCompte = request.getParameter("idCompte"),
-		courriel = request.getParameter("courriel"),
-		prenom = request.getParameter("prenom"),
-		nom = request.getParameter("nom"),
-		programmeEtude = request.getParameter("programmeEtude"),
-		sel = Util.genererSel(),
-		motPasseActuel = request.getParameter("motPasseActuel"),
-		motPasseNouveau = request.getParameter("motPasseNouveau"),
-		motPasseNouveauConfirmation = request.getParameter("motPasseNouveauConfirmation"),
-		pseudonyme = request.getParameter("pseudonyme");
+    if ((userIsConnected()
+            && request.getParameter("modifie") != null
+            && request
+                .getParameter("idCompte")
+                .equals(session.getAttribute("currentId").toString()))
+        || (!request.getParameter("idCompte").equals(session.getAttribute("currentId").toString())
+            && ((Integer) session.getAttribute("role")).intValue() == Compte.ADMINISTRATEUR)) {
 
-	    if (motPasseActuel != null) {
-		motPasseActuel = motPasseActuel;
-	    }
-	    if (motPasseNouveau != null) {
-		motPasseNouveau = Util.hasherAvecSel(motPasseNouveau, sel);
-	    }
-	    if (motPasseNouveauConfirmation != null) {
-		motPasseNouveauConfirmation = Util.hasherAvecSel(motPasseNouveauConfirmation, sel);
-	    }
+      String idCompte = request.getParameter("idCompte"),
+          courriel = request.getParameter("courriel"),
+          prenom = request.getParameter("prenom"),
+          nom = request.getParameter("nom"),
+          programmeEtude = request.getParameter("programmeEtude"),
+          sel = Util.genererSel(),
+          motPasseActuel = request.getParameter("motPasseActuel"),
+          motPasseNouveau = request.getParameter("motPasseNouveau"),
+          motPasseNouveauConfirmation = request.getParameter("motPasseNouveauConfirmation"),
+          pseudonyme = request.getParameter("pseudonyme");
 
-	    int idEquipe, minutesRestantes, pointage, role;
-	    boolean erreurSurvenue = false;
-	    try {
-		Connection cnx =
-		    Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
+      int idEquipe, minutesRestantes, pointage, role;
+      boolean erreurSurvenue = false;
+      try {
+        Connection cnx =
+            Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
 
-		CompteDAO dao = new CompteDAO(cnx);
-		Compte compte = dao.read(idCompte);
-		if (compte == null) {
-		    data.put("compteIntrouvable", "Le compte que vous tentez de modifier est introuvable");
-		    return ((Integer) session.getAttribute("role")).intValue() > Compte.CAPITAINE
-			? "*.do?tache=afficherPageGestionListeCompte"
-			: "*.do?tache=afficherMarcheASuivre";
-		}
-		cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
-		dao.setCnx(cnx);
+        CompteDAO dao = new CompteDAO(cnx);
+        Compte compte = dao.read(idCompte);
+        if (compte == null) {
+          data.put("compteIntrouvable", "Le compte que vous tentez de modifier est introuvable");
+          return ((Integer) session.getAttribute("role")).intValue() > Compte.CAPITAINE
+              ? "*.do?tache=afficherPageGestionListeCompte"
+              : "*.do?tache=afficherMarcheASuivre";
+        }
+        cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
+        dao.setCnx(cnx);
 
-		if (courriel != null
-		    && !"".equals(courriel.trim())
-		    && !courriel.equals(compte.getCourriel())) {
-		    if (dao.findByCourriel(courriel) == null) {
-			compte.setCourriel(courriel);
-		    } else {
-			erreurSurvenue = true;
-			data.put("erreurCourriel", "Ce courriel est déjà utilisé par un autre matelot");
-		    }
-		}
+        if (courriel != null
+            && !"".equals(courriel.trim())
+            && !courriel.equals(compte.getCourriel())) {
+          if (dao.findByCourriel(courriel) == null) {
+            compte.setCourriel(courriel);
+          } else {
+            erreurSurvenue = true;
+            data.put("erreurCourriel", "Ce courriel est déjà utilisé par un autre matelot");
+          }
+        }
 
-		if (prenom != null && !"".equals(prenom.trim()) && !prenom.equals(compte.getPrenom())) {
-		    compte.setPrenom(prenom);
-		}
+        if (prenom != null && !"".equals(prenom.trim()) && !prenom.equals(compte.getPrenom())) {
+          compte.setPrenom(prenom);
+        }
 
-		if (nom != null && !"".equals(nom.trim()) && !nom.equals(compte.getNom())) {
-		    compte.setNom(nom);
-		}
+        if (nom != null && !"".equals(nom.trim()) && !nom.equals(compte.getNom())) {
+          compte.setNom(nom);
+        }
 
-		if (motPasseNouveau != null && !"".equals(motPasseNouveau.trim())) {
-		    if (motPasseActuel != null
-			&& Util.hasherAvecSel(motPasseActuel, compte.getSel()).equals(compte.getMotPasse())) {
-			if (motPasseNouveau.equals(motPasseNouveauConfirmation)) {
-			    compte.setMotPasse(motPasseNouveau);
-			    compte.setSel(sel);
-			} else {
-			    erreurSurvenue = true;
-			    data.put(
-				     "erreurMotPasse",
-				     "Les champs concernant le nouveau mot de passe doivent être identiques");
-			}
-		    } else {
-			erreurSurvenue = true;
-			data.put("erreurMotPasse", "Le mot de passe entré n'est pas le bon");
-		    }
-		}
-		if (pseudonyme != null && !pseudonyme.equals(compte.getPseudonyme())) {
-		    Compte compteTemp = dao.findByPseudonyme(pseudonyme);
-		    if (compteTemp != null && (compteTemp.getIdCompte() != compte.getIdCompte())) {
-			erreurSurvenue = true;
-			data.put("erreurPseudonyme", "Ce pseudonyme est déjà utilisé par un autre matelot");
-		    } else {
-			compte.setPseudonyme(pseudonyme);
-		    }
-		}
-		if (programmeEtude != null && !programmeEtude.equals(compte.getProgrammeEtude())) {
-		    compte.setProgrammeEtude(programmeEtude);
-		}
+        if (motPasseNouveau != null && !"".equals(motPasseNouveau.trim())) {
+          if (motPasseActuel != null && compte.verifierMotPasse(motPasseActuel)) {
+            if (motPasseNouveau.equals(motPasseNouveauConfirmation)) {
+              compte.setMotPasse(motPasseNouveau);
+            } else {
+              erreurSurvenue = true;
+              data.put(
+                  "erreurMotPasse",
+                  "Les champs concernant le nouveau mot de passe doivent être identiques");
+            }
+          } else {
+            erreurSurvenue = true;
+            data.put("erreurMotPasse", "Le mot de passe entré n'est pas le bon");
+          }
+        }
+        if (pseudonyme != null && !pseudonyme.equals(compte.getPseudonyme())) {
+          Compte compteTemp = dao.findByPseudonyme(pseudonyme);
+          if (compteTemp != null && (compteTemp.getIdCompte() != compte.getIdCompte())) {
+            erreurSurvenue = true;
+            data.put("erreurPseudonyme", "Ce pseudonyme est déjà utilisé par un autre matelot");
+          } else {
+            compte.setPseudonyme(pseudonyme);
+          }
+        }
+        if (programmeEtude != null && !programmeEtude.equals(compte.getProgrammeEtude())) {
+          compte.setProgrammeEtude(programmeEtude);
+        }
 
-		if  (((Integer) session.getAttribute("role")).intValue() == Compte.ADMINISTRATEUR){
-		    if (request.getParameter("role") != null) {
-			compte.setRole(Integer.parseInt(request.getParameter("role")));
-		    }
+        if (((Integer) session.getAttribute("role")).intValue() == Compte.ADMINISTRATEUR) {
+          if (request.getParameter("role") != null) {
+            compte.setRole(Integer.parseInt(request.getParameter("role")));
+          }
 
-		    if (request.getParameter("minutesRestantes") != null) {
-			compte.setMinutesRestantes(Integer.parseInt(request.getParameter("minutesRestantes")));
-		    }
+          if (request.getParameter("minutesRestantes") != null) {
+            compte.setMinutesRestantes(Integer.parseInt(request.getParameter("minutesRestantes")));
+          }
 
-		    if (request.getParameter("pointage") != null) {
-			compte.setPoint(Integer.parseInt(request.getParameter("pointage")));
-		    }
+          if (request.getParameter("pointage") != null) {
+            compte.setPoint(Integer.parseInt(request.getParameter("pointage")));
+          }
 
-		    if (request.getParameter("idEquipe") != null) {
-			compte.setIdEquipe(Integer.parseInt(request.getParameter("idEquipe")));
-		    }
-		}
+          if (request.getParameter("idEquipe") != null) {
+            compte.setIdEquipe(Integer.parseInt(request.getParameter("idEquipe")));
+          }
+        }
 
-		if (erreurSurvenue) {
-		    return "*.do?tache=afficherPageModificationCompte&id=" + compte.getIdCompte();
-		} else if (!dao.update(compte)) {
-		    data.put(
-			     "erreurModification",
-			     "Un problème est survenu lors de l'enregistrement des informations");
-		    return "*.do?tache=afficherPageModificationCompte&id=" + compte.getIdCompte();
-		} else {
-		    // il faut avertir que les changements ont étés faits
-		    data.put(
-			     "succesModification",
-			     "Le compte du moussaillon " + compte.getCourriel() + " a été correctement modifié");
-		    return "*.do?tache=afficherPageModificationCompte&id=" + compte.getIdCompte();
-		}
-	    } catch (SQLException ex) {
-		Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-		data.put(
-			 "erreurModification",
-			 "Un problème est survenu lors de l'enregistrement des informations");
-		return "*.do?tache=afficherPageModificationCompte&id=" + request.getParameter("idCompte");
-	    } catch (NumberFormatException ex) {
-		Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-	    }
-	} else {
-	    return "*.do?tache=afficherPageGestionListeCompte";
-	}
-	return "*..do?tache=afficherPageConnexion";
+        if (erreurSurvenue) {
+          return "*.do?tache=afficherPageModificationCompte&id=" + compte.getIdCompte();
+        } else if (!dao.update(compte)) {
+          data.put(
+              "erreurModification",
+              "Un problème est survenu lors de l'enregistrement des informations");
+          return "*.do?tache=afficherPageModificationCompte&id=" + compte.getIdCompte();
+        } else {
+          // il faut avertir que les changements ont étés faits
+          data.put(
+              "succesModification",
+              "Le compte du moussaillon " + compte.getCourriel() + " a été correctement modifié");
+          return "*.do?tache=afficherPageModificationCompte&id=" + compte.getIdCompte();
+        }
+      } catch (SQLException ex) {
+        Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+        data.put(
+            "erreurModification",
+            "Un problème est survenu lors de l'enregistrement des informations");
+        return "*.do?tache=afficherPageModificationCompte&id=" + request.getParameter("idCompte");
+      } catch (NumberFormatException ex) {
+        Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+      }
+    } else {
+      return "*.do?tache=afficherPageGestionListeCompte";
     }
+    return "*..do?tache=afficherPageConnexion";
+  }
 
-    @Override
-    public void setData(Map<String, Object> data) {
-	this.data = (HashMap) data;
-    }
+  @Override
+  public void setData(Map<String, Object> data) {
+    this.data = (HashMap) data;
+  }
 }

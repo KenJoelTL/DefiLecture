@@ -14,6 +14,8 @@
  */
 package com.defilecture.modele;
 
+import com.util.Util;
+
 public class Compte {
   public static int PARTICIPANT = 1;
   public static int CAPITAINE = 2;
@@ -28,9 +30,10 @@ public class Compte {
       prenom,
       courriel,
       motPasse,
-      sel,
       programmeEtude,
       avatar = AVATAR_DEFAUT;
+
+  String sel;
 
   public Compte() {}
 
@@ -211,16 +214,13 @@ public class Compte {
     return sel;
   }
 
-  public void setSel(String nouveauSel) {
-    this.sel = nouveauSel;
-  }
-
   public String getMotPasse() {
     return motPasse;
   }
 
-  public void setMotPasse(String motPasse) {
-    this.motPasse = motPasse;
+  public void setMotPasse(String motPasseClair) {
+    this.sel = Util.genererSel();
+    this.motPasse = Util.hasherAvecSel(motPasseClair, this.sel);
   }
 
   public int getDevenirCapitaine() {
@@ -229,5 +229,9 @@ public class Compte {
 
   public void setDevenirCapitaine(int devenirCapitaine) {
     this.devenirCapitaine = devenirCapitaine;
+  }
+
+  public boolean verifierMotPasse(String motPasseClair) {
+    return Util.hasherAvecSel(motPasseClair, this.sel).equals(this.motPasse);
   }
 }

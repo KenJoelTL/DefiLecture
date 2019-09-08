@@ -32,7 +32,7 @@ public class EffectuerInscriptionAction extends Action implements RequirePRGActi
   @Override
   public String execute() {
     boolean erreur = false;
-    String action = "echec.do?tache=afficherPageInscription";
+    String action = "*.do?tache=afficherPageInscription";
 
     if (request.getParameter("pseudonyme") != null) {
       data.put("pseudonyme", Util.toUTF8(request.getParameter("pseudonyme")));
@@ -43,30 +43,37 @@ public class EffectuerInscriptionAction extends Action implements RequirePRGActi
     }
 
     if (request.getParameter("courriel") == null) {
+      Logger.getLogger(EffectuerInscriptionAction.class.getName())
+          .log(Level.INFO, "Le courriel ne peut pas être null.");
       erreur = true;
-      data.put("erreurCourriel", "Veuillez entrer votre courriel");
+      data.put("erreurCourriel", "Veuillez saisir un courriel");
     } else {
       data.put("courriel", request.getParameter("courriel"));
     }
 
     if (request.getParameter("prenom") == null) {
+      Logger.getLogger(EffectuerInscriptionAction.class.getName())
+          .log(Level.INFO, "Le prénom ne peut pas être null.");
       erreur = true;
-      data.put("erreurPrenom", "Veuillez entrer votre prenom");
+      data.put("erreurPrenom", "Veuillez saisir votre prénom");
     } else {
       data.put("prenom", Util.toUTF8(request.getParameter("prenom")));
     }
 
     if (request.getParameter("nom") == null) {
+      Logger.getLogger(EffectuerInscriptionAction.class.getName())
+          .log(Level.INFO, "Le nom ne peut pas être null.");
       erreur = true;
-      data.put("erreurNom", "Veuillez entrer votre nom");
+      data.put("erreurNom", "Veuillez saisir votre nom");
     } else {
       data.put("nom", Util.toUTF8(request.getParameter("nom")));
     }
 
     if ((request.getParameter("motPasse") != null)
         && request.getParameter("confirmationMotPasse") != null
-        && !Util.toUTF8(request.getParameter("motPasse"))
-            .equals(Util.toUTF8(request.getParameter("confirmationMotPasse")))) {
+        && !request.getParameter("motPasse").equals(request.getParameter("confirmationMotPasse"))) {
+      Logger.getLogger(EffectuerInscriptionAction.class.getName())
+          .log(Level.INFO, "Le mot de passe n'est pas pareil ou il est null.");
       erreur = true;
       data.put(
           "erreurMotPasseIdentique",
@@ -80,8 +87,7 @@ public class EffectuerInscriptionAction extends Action implements RequirePRGActi
             nom = Util.toUTF8(request.getParameter("nom")),
             motPasse = Util.toUTF8(request.getParameter("motPasse")),
             programmeEtude = request.getParameter("programmeEtude"),
-            pseudonyme = Util.toUTF8(request.getParameter("pseudonyme")),
-            sel = Util.genererSel();
+            pseudonyme = Util.toUTF8(request.getParameter("pseudonyme"));
 
         Connection cnx =
             Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
@@ -90,8 +96,7 @@ public class EffectuerInscriptionAction extends Action implements RequirePRGActi
         compte.setCourriel(courriel);
         compte.setPrenom(prenom);
         compte.setNom(nom);
-        compte.setMotPasse(Util.hasherAvecSel(motPasse, sel));
-        compte.setSel(sel);
+        compte.setMotPasse(motPasse);
         compte.setPseudonyme(pseudonyme);
         compte.setProgrammeEtude(programmeEtude);
 
@@ -102,9 +107,13 @@ public class EffectuerInscriptionAction extends Action implements RequirePRGActi
         // faire vérification avec des findBy
         if (dao.findByCourriel(courriel) != null) {
           data.put("erreurCourriel", "Ce courriel est déjà utilisé par un moussaillon");
+          Logger.getLogger(EffectuerInscriptionAction.class.getName())
+              .log(Level.INFO, "Ce courriel est déjà utilisé par un moussaillon.");
 
         } else if (dao.findByPseudonyme(pseudonyme) != null) {
           data.put("erreurPseudonyme", "Ce pseudonyme est déjà utilisé par un moussaillon");
+          Logger.getLogger(EffectuerInscriptionAction.class.getName())
+              .log(Level.INFO, "Ce pseudonyme est déjà utilisé par un moussaillon.");
         } else {
           if (dao.create(compte)) {
             data.put("succesInscription", "Un compte a été créé avec succès");
@@ -113,12 +122,19 @@ public class EffectuerInscriptionAction extends Action implements RequirePRGActi
             data.put(
                 "erreurInscription",
                 "Problème de création du compte. Veuillez réessayer. Si le problème survient à répétition, contactez un administrateur.");
+            Logger.getLogger(EffectuerInscriptionAction.class.getName())
+                .log(Level.INFO, "La création du compte a échoué.");
           }
         }
       } catch (SQLException ex) {
         Logger.getLogger(EffectuerInscriptionAction.class.getName()).log(Level.SEVERE, null, ex);
       }
+    } else {
+      action = "echec.do?tache=afficherPageInscription";
+      ;
     }
+
+    Logger.getLogger(EffectuerInscriptionAction.class.getName()).log(Level.INFO, data.toString());
     return action;
   }
 

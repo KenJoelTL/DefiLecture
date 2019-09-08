@@ -46,18 +46,15 @@ public class CompteDAO extends DAO<Compte> {
 
       if (compte != null) {
         // Un sel aléatoire est généré pour ajouter au calcul du hash
-        String sel = Util.genererSel();
-        String mdpHashe = Util.hasherAvecSel(compte.getMotPasse(), sel);
-
         paramStm.setString(1, compte.getCourriel());
-        paramStm.setString(2, mdpHashe);
+        paramStm.setString(2, compte.getMotPasse());
         paramStm.setString(3, compte.getNom());
         paramStm.setString(4, compte.getPrenom());
         paramStm.setString(5, compte.getPseudonyme());
         paramStm.setString(6, compte.getAvatar());
         paramStm.setString(7, compte.getProgrammeEtude());
         paramStm.setInt(8, compte.getDevenirCapitaine());
-        paramStm.setString(9, sel);
+        paramStm.setString(9, compte.getSel());
       }
       int nbLignesAffectees = paramStm.executeUpdate();
 
@@ -245,32 +242,20 @@ public class CompteDAO extends DAO<Compte> {
 
   public Compte findByIdentifiantMotPasse(String identifiant, String motPasse) {
     ResultSet resultat = null;
-    Compte compte = null;
     PreparedStatement paramStm = null;
+    Compte compte = null;
 
-    String reqSel = "SELECT SEL FROM compte WHERE `COURRIEL` = ? or `PSEUDONYME` = ?";
-    String req =
-        "SELECT * FROM compte WHERE (`COURRIEL` = ? or " + "`PSEUDONYME` = ?) and `MOT_PASSE` = ?";
+    String req = "SELECT * FROM compte WHERE (`COURRIEL` = ? or " + "`PSEUDONYME` = ?)";
 
     try {
-      paramStm = cnx.prepareStatement(reqSel);
+      paramStm = cnx.prepareStatement(req);
       paramStm.setString(1, identifiant);
       paramStm.setString(2, identifiant);
       resultat = paramStm.executeQuery();
+
       if (resultat.next()) {
-        String sel = Util.toUTF8(resultat.getString("SEL"));
-
-        paramStm = cnx.prepareStatement(req);
-        paramStm.setString(1, identifiant);
-        paramStm.setString(2, identifiant);
-
-        String mdp = Util.hasherAvecSel(motPasse, sel);
-        paramStm.setString(3, mdp);
-        resultat = paramStm.executeQuery();
-
-        if (resultat.next()) {
-          compte = getCompteFromResultSet(resultat);
-        }
+        compte = getCompteFromResultSet(resultat);
+        compte.verifierMotPasse(motPasse);
       }
       resultat.close();
       paramStm.close();
