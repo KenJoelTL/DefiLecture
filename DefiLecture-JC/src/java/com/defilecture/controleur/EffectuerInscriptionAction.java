@@ -46,7 +46,7 @@ public class EffectuerInscriptionAction extends Action implements RequirePRGActi
       Logger.getLogger(EffectuerInscriptionAction.class.getName())
           .log(Level.INFO, "Le courriel ne peut pas être null.");
       erreur = true;
-      data.put("erreurCourriel", "Veuillez entrer votre courriel");
+      data.put("erreurCourriel", "Veuillez saisir un courriel");
     } else {
       data.put("courriel", request.getParameter("courriel"));
     }
@@ -55,7 +55,7 @@ public class EffectuerInscriptionAction extends Action implements RequirePRGActi
       Logger.getLogger(EffectuerInscriptionAction.class.getName())
           .log(Level.INFO, "Le prénom ne peut pas être null.");
       erreur = true;
-      data.put("erreurPrenom", "Veuillez entrer votre prenom");
+      data.put("erreurPrenom", "Veuillez saisir votre prénom");
     } else {
       data.put("prenom", Util.toUTF8(request.getParameter("prenom")));
     }
@@ -64,7 +64,7 @@ public class EffectuerInscriptionAction extends Action implements RequirePRGActi
       Logger.getLogger(EffectuerInscriptionAction.class.getName())
           .log(Level.INFO, "Le nom ne peut pas être null.");
       erreur = true;
-      data.put("erreurNom", "Veuillez entrer votre nom");
+      data.put("erreurNom", "Veuillez saisir votre nom");
     } else {
       data.put("nom", Util.toUTF8(request.getParameter("nom")));
     }
@@ -123,7 +123,7 @@ public class EffectuerInscriptionAction extends Action implements RequirePRGActi
                 "erreurInscription",
                 "Problème de création du compte. Veuillez réessayer. Si le problème survient à répétition, contactez un administrateur.");
             Logger.getLogger(EffectuerInscriptionAction.class.getName())
-                .log(Level.INFO, "La création du compte a échouée.");
+                .log(Level.INFO, "La création du compte a échoué.");
           }
         }
       } catch (SQLException ex) {
