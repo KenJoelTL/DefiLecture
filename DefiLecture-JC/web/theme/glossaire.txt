@@ -6,7 +6,7 @@
                     </p>
 
                     <p>
-                        <strong>Matelot</strong> : étudiant, membre du personnel ou professeur, les matelots doivent demander à joindre un équipage et obtenir l’approbation du capitaine au moment de l’inscription. Ils sont au nombre de trois dans chaque équipe.
+                        <strong>Matelot</strong> : étudiant, membre du personnel ou professeur, les matelots doivent demander à joindre un équipage et obtenir l’approbation du <b>capitaine</b> au moment de l’inscription. Ils sont au nombre de <b>deux</b> dans chaque équipe.
 
                     </p>
 
@@ -19,7 +19,7 @@
 
                     <p>
 
-                        <strong>Lecture</strong> : une lecture obligatoire est imposée dans le cadre d’un cours; une lecture libre renvoie à toute autre lecture littéraire, incluant les essais, mais excluant les journaux et les médias sociaux. Ainsi, le temps de lecture d’un article scientifique ou d’un texte philosophique pourra être consigné, alors qu’on s’abstiendra de noter celui d’une chronique culinaire.
+                        <strong>Lecture</strong> : une lecture obligatoire est imposée dans le cadre d’un cours; une lecture libre renvoie à toute autre lecture littéraire, incluant les essais, mais excluant les journaux et les médias sociaux. Ainsi, le temps de lecture d’un article scientifique ou d’un texte philosophique pourra être consigné, alors qu’on s’abstiendra de noter celui d’une chronique culinaire. De plus, il va de soi que seuls les ouvrages en français seront acceptés dans cette activité de Valorisation de la langue française.
 
                     </p>
 
@@ -32,11 +32,11 @@
                     </p>
 
                     <p>
-                        <strong>Défis</strong> : épreuves auxquelles se soumettent les membres de l’équipage afin d’obtenir des doublons supplémentaires. Il pourra s’agir de lectures complémentaires ou de jeu-concours auxquels les pirates devront participer. Des trésors sous la forme de livres seront distribués parmi les braves qui auront relevé ces défis.
+                        <strong>Épreuves hebdomadaires</strong> : épreuves auxquelles se soumettent les membres de l’équipage afin d’obtenir des doublons supplémentaires. Il pourra s’agir de lectures complémentaires ou de jeu-concours auxquels les pirates devront participer. Des trésors sous la forme de livres seront distribués parmi les braves qui auront relevé ces défis.
 
                     </p>
 
                     <p>
-                        <strong>Coffre aux trésors</strong> : les joyaux contenus dans le coffre aux trésors (livres ou bons d’achat à la COOP) seront partagés entre les pirates de l’équipage ayant cumulé le plus de doublons au cours de l’aventure.
+                        <strong>Coffre aux trésors</strong> : les joyaux contenus dans le coffre aux trésors (livres, billets pour le Salon du livre de Montréal et bons d’achat à la COOP) seront partagés entre les pirates de l’équipage ayant cumulé le plus de doublons au cours de l’aventure.
 
                     </p>

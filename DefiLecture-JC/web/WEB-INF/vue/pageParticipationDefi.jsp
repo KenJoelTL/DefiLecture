@@ -82,7 +82,7 @@
 <!-- Trouver la liste des defis que le compte cetait inscrit -->
 <c:set var="listeInscriptionDefi" scope="page" value="${daoInscriptionDefi.findAllByIdCompte(sessionScope.connecte)}"/>
 
-<!-- Création des liste réussi et echoue, déterminer si le partcipant a déjà participé au défis -->
+<!-- Création des liste réussi et echoue, déterminer si le partcipant a déjà participé aux épreuves -->
 <jsp:useBean id="listeReussi" class="java.util.ArrayList" />
 <jsp:useBean id="listeEchoue" class="java.util.ArrayList" />
 <c:forEach items="${pageScope.listeInscriptionDefi}" var="defi">
@@ -98,7 +98,7 @@
 
 <div class="row participationDefi-row"> 
     <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 participationDefi-col">
-        <h1>Liste des défis</h1>
+        <h1>Liste des épreuves</h1>
         <table class="table cacherSurMobile">
             <thead>
                 <tr>
@@ -118,7 +118,7 @@
                 <jsp:useBean id="now" class="java.util.Date" />
                 <fmt:formatDate var="dateMaintenant" value="${now}" pattern="yyyy-MM-dd' 'HH:mm:ss.S" />
                 <c:forEach items="${listeDefi}" var="d">
-                    <%-- Condition qui permet au participant de voir tous les défis qu'il a réussi ou échoué, et de voir les nouveaux défis à relever--%>
+                    <%-- Condition qui permet au participant de voir toutes les épreuves qu'il a réussi ou échoué, et de voir les nouvelles épreuves à relever--%>
                     <c:if test="${(pageScope.role lt 3)}">
                         <tr>
                             <td>${d.nom}</td>
@@ -152,7 +152,7 @@
                                            <td> PROCHAINEMENT </td>
                                        </c:when>
                                        <c:otherwise>
-                                           <td> <a class="btn btn-info" role="button" href="*.do?tache=afficherPageInscriptionDefi&id=${d.idDefi}">Relever le défi</a></td>
+                                           <td> <a class="btn btn-info" role="button" href="*.do?tache=afficherPageInscriptionDefi&id=${d.idDefi}">Participer à l'épreuve</a></td>
                                        </c:otherwise>
                                     </c:choose>
                                 </c:otherwise>                                   
@@ -160,7 +160,7 @@
                         </tr>
                     </c:if>
 
-                    <%-- Condition qui permet au modérateur ou à l'administrateur de voir tous les défis qu'il a créé--%>                              
+                    <%-- Condition qui permet au modérateur ou à l'administrateur de voir toutes les épreuves qu'il a créé--%>                              
                     <c:if test="${pageScope.role ge 3}">
                         <tr>
                             <td>${d.nom}</td>
@@ -176,10 +176,10 @@
                             <fmt:formatDate var="dateFin" value="${dateFinPARSE}" pattern="d MMMM yyyy 'à' HH'h'mm" />
                             <td>${dateFin} </td>
 
-                            <%-- Si le compte est un compte admin ou moderateur, il ne peut pas relever de défi, mais il peut les modifier--%>
+                            <%-- Si le compte est un compte admin ou moderateur, il ne peut pas relever d'épreuve, mais il peut les modifier--%>
                             <td><a href="*.do?tache=afficherPageModificationDefi&id=${d.idDefi}">modifier</a></td>
 
-                             <%-- Sert à identifier si les défi sont en cours, en attente, ou terminé--%>
+                             <%-- Sert à identifier si les épreuve sont en cours, en attente, ou terminé--%>
                             <c:choose>
                                 <c:when test="${d.dateFin lt dateMaintenant}">
                                     <td class="bg-danger"> TERMINÉ </td>
