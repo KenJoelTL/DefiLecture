@@ -16,7 +16,6 @@ package com.defilecture.controleur;
 
 import com.defilecture.modele.Compte;
 import com.defilecture.modele.CompteDAO;
-import com.defilecture.Util;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -59,7 +58,7 @@ public class EffectuerAjoutAvatarCompteAction extends Action
         final String fileName = "avatarCompte_" + idCompte;
 
         String relativePath = path + "/" + fileName;
-        absolutePath = session.getServletContext().getRealPath(Util.toUTF8(relativePath));
+        absolutePath = session.getServletContext().getRealPath(relativePath);
 
         out = new FileOutputStream(new File(absolutePath));
         filecontent = filePart.getInputStream();
@@ -76,7 +75,7 @@ public class EffectuerAjoutAvatarCompteAction extends Action
         CompteDAO dao = new CompteDAO(cnx);
         Compte compte = dao.read(idCompte);
         if (compte != null) {
-          compte.setAvatar(Util.toUTF8(relativePath));
+          compte.setAvatar(relativePath);
           if (dao.update(compte)) {
             data.put("succesAvatar", "L'enregistrement de l'avatar s'est effectué avec succès");
           } else {
