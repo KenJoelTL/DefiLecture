@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public abstract class Action implements Executable, RequestAware, SessionAware {
+public abstract class Action implements Executable, RequestAware, SessionAware, DataReceiver {
   protected HttpServletRequest request;
   protected HttpServletResponse response;
   protected HttpSession session;
