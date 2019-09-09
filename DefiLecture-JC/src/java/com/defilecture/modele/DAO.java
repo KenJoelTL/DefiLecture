@@ -40,7 +40,14 @@ public abstract class DAO<T> {
 
   public abstract T read(int id); // SELECT
 
-  public abstract T read(String id); // SELECT
+  public T read(String id){
+    if(id == null){ return null; }
+    try {
+      return this.read(Integer.parseInt(id));
+    } catch (NumberFormatException e) {
+      return null;
+    }
+  }      
 
   public abstract boolean update(T x); // UPDATE
 

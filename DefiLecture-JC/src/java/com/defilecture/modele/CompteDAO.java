@@ -88,15 +88,6 @@ public class CompteDAO extends DAO<Compte> {
   }
 
   @Override
-  public Compte read(String id) {
-    try {
-      return this.read(Integer.parseInt(id));
-    } catch (NumberFormatException e) {
-      return null;
-    }
-  }
-
-  @Override
   public boolean update(Compte compte) {
     String req =
         "UPDATE compte SET COURRIEL = ?, MOT_PASSE = ?, "

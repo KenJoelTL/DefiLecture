@@ -125,15 +125,6 @@ public class DefiDAO extends DAO<Defi> {
   }
 
   @Override
-  public Defi read(String id) {
-    try {
-      return this.read(Integer.parseInt(id));
-    } catch (NumberFormatException e) {
-      return null;
-    }
-  }
-
-  @Override
   public boolean update(Defi defi) {
     String req =
         "UPDATE defi SET NOM = ? , DESCRIPTION = ?,"

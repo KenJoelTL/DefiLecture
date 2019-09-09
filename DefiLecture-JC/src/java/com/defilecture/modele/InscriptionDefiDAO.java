@@ -68,11 +68,6 @@ public class InscriptionDefiDAO extends DAO<InscriptionDefi> {
   }
 
   @Override
-  public InscriptionDefi read(String id) {
-    return (this.read(Integer.parseInt(id)));
-  }
-
-  @Override
   public InscriptionDefi read(int id) {
     String req = "SELECT * FROM inscription_defi WHERE `ID_INSCRIPTION_DEFI` = ?";
 
