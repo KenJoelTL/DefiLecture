@@ -74,7 +74,7 @@ public class EffectuerModificationCompteAction extends Action
             && !"".equals(courriel.trim())
             && !courriel.equals(compte.getCourriel())) {
           if (dao.findByCourriel(courriel) == null) {
-            compte.setCourriel(courriel);
+            compte.setCourriel(Util.toUTF8(courriel));
           } else {
             erreurSurvenue = true;
             data.put("erreurCourriel", "Ce courriel est déjà utilisé par un autre matelot");
@@ -82,17 +82,17 @@ public class EffectuerModificationCompteAction extends Action
         }
 
         if (prenom != null && !"".equals(prenom.trim()) && !prenom.equals(compte.getPrenom())) {
-          compte.setPrenom(prenom);
+          compte.setPrenom(Util.toUTF8(prenom));
         }
 
         if (nom != null && !"".equals(nom.trim()) && !nom.equals(compte.getNom())) {
-          compte.setNom(nom);
+          compte.setNom(Util.toUTF8(nom));
         }
 
         if (motPasseNouveau != null && !"".equals(motPasseNouveau.trim())) {
           if (motPasseActuel != null && compte.verifierMotPasse(motPasseActuel)) {
             if (motPasseNouveau.equals(motPasseNouveauConfirmation)) {
-              compte.setMotPasse(motPasseNouveau);
+              compte.setMotPasse(Util.toUTF8(motPasseNouveau));
             } else {
               erreurSurvenue = true;
               data.put(
@@ -110,11 +110,11 @@ public class EffectuerModificationCompteAction extends Action
             erreurSurvenue = true;
             data.put("erreurPseudonyme", "Ce pseudonyme est déjà utilisé par un autre matelot");
           } else {
-            compte.setPseudonyme(pseudonyme);
+            compte.setPseudonyme(Util.toUTF8(pseudonyme));
           }
         }
         if (programmeEtude != null && !programmeEtude.equals(compte.getProgrammeEtude())) {
-          compte.setProgrammeEtude(programmeEtude);
+          compte.setProgrammeEtude(Util.toUTF8(programmeEtude));
         }
 
         if (((Integer) session.getAttribute("role")).intValue() == Compte.ADMINISTRATEUR) {

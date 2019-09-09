@@ -35,16 +35,15 @@ public class EffectuerConnexionAction extends Action implements RequirePRGAction
     data.put("echecConnexion", "L'identifiant et/ou le mot de passe entré est invalide");
 
     if (request.getParameter("identifiant") != null && request.getParameter("motPasse") != null) {
-      String identifiant = request.getParameter("identifiant"),
-          motPasse = request.getParameter("motPasse");
+      String identifiant = Util.toUTF8(request.getParameter("identifiant")),
+          motPasse = Util.toUTF8(request.getParameter("motPasse"));
 
       try {
         CompteDAO dao =
             new CompteDAO(
                 Connexion.startConnection(
                     Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
-        Compte compte =
-            dao.findByIdentifiantMotPasse(Util.toUTF8(identifiant), Util.toUTF8(motPasse));
+        Compte compte = dao.findByIdentifiantMotPasse(identifiant, motPasse);
 
         // On vérifie s'il y a un résultat
         if (compte != null) {
@@ -55,7 +54,7 @@ public class EffectuerConnexionAction extends Action implements RequirePRGAction
           action = "*.do?tache=afficherTableauScores";
         } else {
           data.put("echecConnexion", "L'identifiant et/ou le mot de passe entré est invalide");
-          data.put("identifiant", Util.toUTF8(identifiant));
+          data.put("identifiant", identifiant);
         }
       } catch (SQLException ex) {
         Logger.getLogger(EffectuerConnexionAction.class.getName()).log(Level.SEVERE, null, ex);
