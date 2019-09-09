@@ -28,7 +28,7 @@ public class AfficherPageModificationCompteAction extends Action {
 
     if (userIsConnected() && request.getParameter("id") != null) {
       if ((userIsAdmin() || userIsModerateur())
-          || request.getParameter("id") == session.getAttribute("currentId")) {
+          || request.getParameter("id").equals(session.getAttribute("currentId").toString())) {
 
         String idCompte = request.getParameter("id");
         try {

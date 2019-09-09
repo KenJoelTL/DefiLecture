@@ -14,7 +14,6 @@
  */
 package com.defilecture.modele;
 
-import com.util.Util;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -351,14 +350,14 @@ public class CompteDAO extends DAO<Compte> {
     return new Compte(
         resultat.getInt("ID_COMPTE"),
         resultat.getInt("ID_EQUIPE") == 0 ? -1 : resultat.getInt("ID_EQUIPE"),
-        Util.toUTF8(resultat.getString("PSEUDONYME")),
-        Util.toUTF8(resultat.getString("MOT_PASSE")),
-        Util.toUTF8(resultat.getString("SEL")),
-        Util.toUTF8(resultat.getString("NOM")),
-        Util.toUTF8(resultat.getString("PRENOM")),
-        Util.toUTF8(resultat.getString("COURRIEL")),
-        Util.toUTF8(resultat.getString("PROGRAMME_ETUDE")),
-        Util.toUTF8(resultat.getString("AVATAR")),
+        resultat.getString("PSEUDONYME"),
+        resultat.getString("MOT_PASSE"),
+        resultat.getString("SEL"),
+        resultat.getString("NOM"),
+        resultat.getString("PRENOM"),
+        resultat.getString("COURRIEL"),
+        resultat.getString("PROGRAMME_ETUDE"),
+        resultat.getString("AVATAR"),
         resultat.getInt("ROLE"),
         resultat.getInt("POINT"),
         resultat.getInt("MINUTES_RESTANTES"),
