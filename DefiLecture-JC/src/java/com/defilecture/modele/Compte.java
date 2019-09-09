@@ -14,7 +14,7 @@
  */
 package com.defilecture.modele;
 
-import com.util.Util;
+import com.defilecture.Util;
 
 public class Compte {
   public static int PARTICIPANT = 1;
