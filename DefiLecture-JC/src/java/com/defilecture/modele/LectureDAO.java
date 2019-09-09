@@ -111,15 +111,6 @@ public class LectureDAO extends DAO<Lecture> {
   }
 
   @Override
-  public Lecture read(String id) {
-    try {
-      return this.read(Integer.parseInt(id));
-    } catch (NumberFormatException e) {
-      return null;
-    }
-  }
-
-  @Override
   public boolean update(Lecture x) {
     String req =
         "UPDATE lecture SET TITRE = ?, DUREE_MINUTES = ?,"

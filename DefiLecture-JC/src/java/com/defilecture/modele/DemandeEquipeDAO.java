@@ -111,15 +111,6 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe> {
   }
 
   @Override
-  public DemandeEquipe read(String id) {
-    try {
-      return this.read(Integer.parseInt(id));
-    } catch (NumberFormatException de) {
-      return null;
-    }
-  }
-
-  @Override
   public boolean update(DemandeEquipe x) {
 
     String req =

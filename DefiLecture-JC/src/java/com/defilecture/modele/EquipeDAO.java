@@ -106,16 +106,6 @@ public class EquipeDAO extends DAO<Equipe> {
   }
 
   @Override
-  public Equipe read(String id) {
-
-    try {
-      return this.read(Integer.parseInt(id));
-    } catch (NumberFormatException e) {
-      return null;
-    }
-  }
-
-  @Override
   public boolean update(Equipe x) {
     String req = "UPDATE equipe SET `NOM` = ? WHERE `ID_EQUIPE` = ?";
 
