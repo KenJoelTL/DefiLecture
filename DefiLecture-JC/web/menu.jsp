@@ -65,7 +65,7 @@
 						    </li>                        
 						</c:when>
 						<c:otherwise>
-						    <li><a href="joindreEquipe.do?tache=afficherPageListeEquipes">Joindre<% out.println(application.getAttribute("vocEquipe3"));%></a></li>                                              
+						    <li><a href="joindreEquipe.do?tache=afficherPageListeEquipes">Joindre <% out.println(application.getAttribute("vocEquipe3"));%></a></li>                                              
 						</c:otherwise>
 					    </c:choose>
 					</c:when>
@@ -99,14 +99,14 @@
 			    
 			    
 			    <li class="dropdown">
-				<a class="dropdown-toggle" data-toggle="dropdown" href="#">D&eacute;fis
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Épreuves
 				    <span class="caret"></span></a>
 				<ul class="dropdown-menu">
 				    <c:if test="${ sessionScope.role ge 3 }">
-					<li><a href="*.do?tache=afficherPageCreationDefi">Cr&eacute;er un d&eacute;fi</a></li>
-					<li><a href="*.do?tache=afficherPageDefisReussis">Liste défis réussis</a></li>
+					<li><a href="*.do?tache=afficherPageCreationDefi">Cr&eacute;er une épreuve</a></li>
+					<li><a href="*.do?tache=afficherPageDefisReussis">Liste des épreuves réussies</a></li>
 				    </c:if>
-				    <li><a href="*.do?tache=afficherPageParticipationDefi">Voir les d&eacute;fis</a></li>
+				    <li><a href="*.do?tache=afficherPageParticipationDefi">Voir les épreuves</a></li>
 				</ul>
 			    </li>
 			    
