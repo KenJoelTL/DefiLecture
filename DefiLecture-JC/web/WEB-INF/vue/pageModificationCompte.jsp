@@ -94,23 +94,23 @@
                 <form action="modification.do" method="post" >
                     <div class="form-group col-lg-6 col-md-6">
                         <label for="prenom">Pr&eacute;nom*</label>
-                        <input type="text" class="form-control" id=prenom name="prenom" value="${compte.prenom}" required ${ compte.idCompte eq sessionScope.connecte ? '':'readonly' }/>
+                        <input type="text" class="form-control" id=prenom name="prenom" value="${compte.prenom}" required  }/>
                     </div>
                     <div class="form-group col-lg-6 col-md-6">
                         <label for="nom">Nom*</label>
-                        <input type="text" class="form-control" name="nom" value="${compte.nom}" required ${ compte.idCompte eq sessionScope.connecte ? '':'readonly' }/>
+                        <input type="text" class="form-control" name="nom" value="${compte.nom}" required  }/>
                     </div>
                     <div class="form-group col-lg-12">
                         <label for="programmeEtude">Programme d'&eacute;tude ou poste occup&eacute; au coll&egrave;ge</label>
-                         <input type="text" class="form-control" name="programmeEtude" value="${compte.programmeEtude}" ${ compte.idCompte eq sessionScope.connecte ? '':'readonly' }/>
+                         <input type="text" class="form-control" name="programmeEtude" value="${compte.programmeEtude}"  }/>
                     </div>
                     <div class="form-group col-lg-6 col-md-6">
                          <label for="courriel">Courriel*</label>
-                        <input type="email" class="form-control" name="courriel" value="${compte.courriel}" required ${ compte.idCompte eq sessionScope.connecte ? '':'readonly' }/>
+                        <input type="email" class="form-control" name="courriel" value="${compte.courriel}" required  }/>
                     </div>
                     <div class="form-group col-lg-6 col-md-6">
                         <label for="pseudonyme">Pseudonyme</label>
-                        <input type="text" class="form-control"  name="pseudonyme" value="${compte.pseudonyme}" ${ compte.idCompte eq sessionScope.connecte ? '':'readonly' }/>
+                        <input type="text" class="form-control"  name="pseudonyme" value="${compte.pseudonyme}"  }/>
                     </div>
                     
                     
