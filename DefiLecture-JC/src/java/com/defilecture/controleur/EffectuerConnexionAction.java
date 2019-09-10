@@ -64,7 +64,7 @@ public class EffectuerConnexionAction extends Action implements RequirePRGAction
         }
 
         if(erreur) {
-          data.put("echecConnexion", "L'identifiant et/ou le mot de passe entré est invalide");
+          data.put("echecConnexion", "L'identifiant ou le mot de passe entrés sont invalides");
           data.put("identifiant", identifiant);
           action = "echec.do?tache=afficherPageConnexion";
         }
