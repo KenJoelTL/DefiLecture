@@ -32,7 +32,7 @@ public class EffectuerConnexionAction extends Action implements RequirePRGAction
   @Override
   public String execute() {
     String action = "*.do?tache=afficherPageConnexion";
-    data.put("echecConnexion", "L'identifiant et/ou le mot de passe entré est invalide");
+    boolean erreur = false;
 
     if (request.getParameter("identifiant") != null && request.getParameter("motPasse") != null) {
       String identifiant = Util.toUTF8(request.getParameter("identifiant")),
@@ -43,18 +43,30 @@ public class EffectuerConnexionAction extends Action implements RequirePRGAction
             new CompteDAO(
                 Connexion.startConnection(
                     Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
-        Compte compte = dao.findByIdentifiantMotPasse(identifiant, motPasse);
+        Compte compte = dao.findByPseudonyme(identifiant);
+        
+        if(compte == null) {
+          compte = dao.findByCourriel(identifiant);
+        }
 
-        // On vérifie s'il y a un résultat
-        if (compte != null) {
-          session = request.getSession(true);
-          session.setAttribute("connecte", compte.getIdCompte());
-          session.setAttribute("role", compte.getRole());
-          session.setAttribute("currentId", compte.getIdCompte());
-          action = "*.do?tache=afficherTableauScores";
+        if(compte != null) {
+          if (compte.verifierMotPasse(motPasse)) {
+            session = request.getSession(true);
+            session.setAttribute("connecte", compte.getIdCompte());
+            session.setAttribute("role", compte.getRole());
+            session.setAttribute("currentId", compte.getIdCompte());
+            action = "*.do?tache=afficherTableauScores";
+          } else {
+            erreur = true;
+          }
         } else {
-          data.put("echecConnexion", "L'identifiant et/ou le mot de passe entré est invalide");
+            erreur = true;
+        }
+
+        if(erreur) {
+          data.put("echecConnexion", "L'identifiant ou le mot de passe entrés sont invalides");
           data.put("identifiant", identifiant);
+          action = "echec.do?tache=afficherPageConnexion";
         }
       } catch (SQLException ex) {
         Logger.getLogger(EffectuerConnexionAction.class.getName()).log(Level.SEVERE, null, ex);

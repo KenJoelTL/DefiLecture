@@ -28,6 +28,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import jdbc.Config;
 import jdbc.Connexion;
+import com.defilecture.Util;
 
 public class EffectuerSuppressionBDAction extends Action implements RequirePRGAction {
 
@@ -41,7 +42,7 @@ public class EffectuerSuppressionBDAction extends Action implements RequirePRGAc
 
   @Override
   public String execute() {
-    if (userIsAdmin()) {
+    if (userIsAdmin() && (request.getParameter("passwordConf") != null && !"".equals(request.getParameter("passwordConf")))) {
       try {
         Connexion.reinit();
         Connection cnx =
@@ -55,12 +56,10 @@ public class EffectuerSuppressionBDAction extends Action implements RequirePRGAc
         cSiteDao = new ConfigSiteDAO(cnx);
 
         // Vérification du mot de passe de l'usager administrateur
-        Compte compteAdmin =
+        Compte compteActuel =
             daoCompte.read(((Integer) session.getAttribute("currentId")).intValue());
-        Compte verif =
-            daoCompte.findByIdentifiantMotPasse(
-                compteAdmin.getPseudonyme(), request.getParameter("passwordConf"));
-        if (verif != null) {
+
+        if (compteActuel.verifierMotPasse(Util.toUTF8(request.getParameter("passwordConf")))) {
           dDao.deleteTable();
           dEDao.deleteTable();
           eDao.deleteTable();
