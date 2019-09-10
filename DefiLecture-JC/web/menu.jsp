@@ -95,6 +95,16 @@
 				</ul>
 			    </li>
 			</c:if>
+			<c:if test="${ sessionScope.role eq 4 }">
+			    
+			    <li class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#">&Eacute;quipes
+				    <span class="caret"></span></a>
+				<ul class="dropdown-menu">
+				    <li ><a href="*.do?tache=afficherPageGestionEquipes">G&eacute;rer les &eacute;quipes</a></li>
+				</ul>
+			    </li>
+			</c:if>
 			<c:if test="${ sessionScope.role ge 1 }">
 			    
 			    
