@@ -62,16 +62,17 @@ public class EffectuerConnexionAction extends Action implements RequirePRGAction
         } else {
             erreur = true;
         }
+
+        if(erreur) {
+          data.put("echecConnexion", "L'identifiant et/ou le mot de passe entré est invalide");
+          data.put("identifiant", identifiant);
+          action = "echec.do?tache=afficherPageConnexion";
+        }
       } catch (SQLException ex) {
         Logger.getLogger(EffectuerConnexionAction.class.getName()).log(Level.SEVERE, null, ex);
       } finally {
         Connexion.close();
       }
-    }
-    if(erreur) {
-      data.put("echecConnexion", "L'identifiant et/ou le mot de passe entré est invalide");
-      data.put("identifiant", identifiant);
-      action = "echec.do?tache=afficherPageConnexion";
     }
     return action;
   }
