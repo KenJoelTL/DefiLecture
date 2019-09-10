@@ -42,7 +42,7 @@ public class EffectuerSuppressionBDAction extends Action implements RequirePRGAc
 
   @Override
   public String execute() {
-    if (userIsAdmin() && (request.getParameter("passwordConf") != null && "".equals(request.getParameter("passwordConf")))) {
+    if (userIsAdmin() && (request.getParameter("passwordConf") != null && !"".equals(request.getParameter("passwordConf")))) {
       try {
         Connexion.reinit();
         Connection cnx =
