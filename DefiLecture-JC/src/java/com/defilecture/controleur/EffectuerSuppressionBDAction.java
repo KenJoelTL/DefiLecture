@@ -28,6 +28,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import jdbc.Config;
 import jdbc.Connexion;
+import com.defilecture.Util;
 
 public class EffectuerSuppressionBDAction extends Action implements RequirePRGAction {
 
