@@ -43,10 +43,10 @@ public class EffectuerConnexionAction extends Action implements RequirePRGAction
             new CompteDAO(
                 Connexion.startConnection(
                     Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
-        Compte compte = dao.findByIdentifiantMotPasse(identifiant, motPasse);
+        Compte compte = dao.findByPseudonyme(identifiant);
 
         // On vérifie s'il y a un résultat
-        if (compte != null) {
+        if (compte.verifierMotPasse(motPasse)) {
           session = request.getSession(true);
           session.setAttribute("connecte", compte.getIdCompte());
           session.setAttribute("role", compte.getRole());
