@@ -18,6 +18,7 @@ import com.defilecture.modele.Compte;
 import com.defilecture.modele.CompteDAO;
 import com.defilecture.modele.Equipe;
 import com.defilecture.modele.EquipeDAO;
+import com.defilecture.Util;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -49,7 +50,7 @@ public class EffectuerModificationEquipeAction extends Action
 
             if (compte != null && equipe == null && compte.getIdEquipe() != -1) {
               equipe = equipeDao.read(compte.getIdEquipe());
-              equipe.setNom(request.getParameter("nom"));
+              equipe.setNom(Util.toUTF8(request.getParameter("nom")));
 
               if (equipeDao.update(equipe)) {
                 data.put("succesNom", "L'enregistrement du nouveau nom s'est fait avec succès");
