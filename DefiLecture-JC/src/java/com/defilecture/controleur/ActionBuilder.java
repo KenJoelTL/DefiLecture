@@ -136,6 +136,8 @@ public class ActionBuilder {
           return new EffectuerModificationConfigAction();
         case "effectuerSupressionBD":
           return new EffectuerSuppressionBDAction();
+        case "afficherPageGestionEquipes":
+          return new AfficherPageGestionEquipesAction();
 
           // Default Action
         default:
