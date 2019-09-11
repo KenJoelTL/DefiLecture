@@ -39,7 +39,18 @@
     </jsp:useBean>    
     <c:set var="equipe" scope="page" value="${daoEquipe.read(compte.idEquipe)}"/>
 
-        
+    <script>
+     function genererMotDePasse(){
+	 mdp=Math.random().toString(36).substring(2, 15);
+	 c_mdp=document.getElementById('motPasseNouveau')
+	 c_mdp.type='text';
+	 c_mdp.value=mdp;
+	 c_mdpconf=document.getElementById('motPasseNouveauConfirmation')
+	 c_mdpconf.type='text';
+	 c_mdpconf.value=mdp;
+     }
+    </script>
+
 <body>
     <div class='row connexion-row'> 
         <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 connexion-col modification-compte-col">
@@ -56,12 +67,6 @@
                 </c:if>
                 <c:if test="${!empty requestScope.data['erreurMotPasse']}">
                     <div class="alert alert-danger"><strong>${requestScope.data['erreurMotPasse']}</strong></div>
-                </c:if>
-                <c:if test="${!empty requestScope.data['erreurGenerationMotPasse']}">
-                    <div class="alert alert-danger"><strong>${requestScope.data['erreurGenerationMotPasse']}</strong></div>
-                </c:if>
-                <c:if test="${!empty requestScope.data['succesGenerationMotPasse']}">
-                    <div class="alert alert-success"><strong>${requestScope.data['succesGenerationMotPasse']}</strong></div>
                 </c:if>
                 <c:if test="${!empty requestScope.data['erreurModification']}">
                     <div class="alert alert-danger"><strong>${requestScope.data['erreurModification']}</strong></div>
@@ -135,37 +140,32 @@
                     </div>
                 </form>
 
-
-                <c:if test="${compte.idCompte eq sessionScope.connecte}">
-                    <form action="modification.do" method="post" >                     
-                        <div class="form-group col-lg-12">
+                <form action="modification.do" method="post" >                     
+                    <div class="form-group col-lg-12">
+			<c:if test="${sessionScope.role ne Compte.ADMINISTRATEUR}">
                             <label for="motPasseActuel">Mot de passe actuel*</label>
                             <input type="password" class="form-control" name="motPasseActuel" required/>
-                        </div>
-                        <div class="form-group col-lg-12">
-                            <label for="motPasseNouveau">Nouveau mot de passe*</label>
-                            <input type="password" class="form-control" name="motPasseNouveau"/>
-                        </div>
-                        <div class="form-group col-lg-12">
-                            <label for="motPasseNouveauConfirmation">Confirmation du nouveau mot de passe*</label>
-                            <input type="password" class="form-control" name="motPasseNouveauConfirmation"/>
-                        </div>                        
-                        <div class="form-group col-lg-12">
-                            <input type="hidden" name="idCompte" value="${sessionScope.connecte}"/>
-                            <input type="hidden" name="tache" value="effectuerModificationCompte"/>
-                            <button class="btn btn-primary" type="submit" name="modifie">Modifier le mot de passe</button>
-                        </div>
-                    </form>
-                </c:if>
+			</c:if>
+                    </div>
+                    <div class="form-group col-lg-12">
+                        <label for="motPasseNouveau">Nouveau mot de passe*</label>
+			<input type="password" class="form-control" name="motPasseNouveau" id="motPasseNouveau"/>
+                    </div>
+                    <div class="form-group col-lg-12">
+                        <label for="motPasseNouveauConfirmation">Confirmation du nouveau mot de passe*</label>
+			<input type="password" class="form-control" name="motPasseNouveauConfirmation" id="motPasseNouveauConfirmation"/>
+                    </div>                        
+                    <div class="form-group col-lg-12">
+                        <input type="hidden" name="idCompte" value="${compte.idCompte}"/>
+                        <input type="hidden" name="tache" value="effectuerModificationCompte"/>
+                        <button class="btn btn-primary" type="submit" name="modifie">Modifier le mot de passe</button>
+                    </div>
+                </form>
                         
                 <c:if test="${compte.idCompte ne sessionScope.connecte and sessionScope.role eq Compte.ADMINISTRATEUR}">
-                    <form action="modification.do" method="post" >                     
                         <div class="form-group col-lg-12">
-                            <input type="hidden" name="idCompte" value="${compte.idCompte}"/>
-                            <input type="hidden" name="tache" value="effectuerGenerationMotPasse"/>
-                            <button class="btn btn-info" type="submit" name="genere">Générer un mot de passe</button>
+                            <button class="btn btn-info" type="button" name="genere" onclick="genererMotDePasse();">Générer un mot de passe</button>
                         </div>
-                    </form>
                 </c:if>
                                 
 
