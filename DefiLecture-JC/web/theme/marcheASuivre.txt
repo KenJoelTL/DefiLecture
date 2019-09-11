@@ -2,7 +2,7 @@
 
 <p>Bienvenue à cette nouvelle édition du Défi lecture! Organisé par le Centre d’aide en français dans le cadre de la Politique de valorisation de la langue française, le Défi lecture s’adresse tant aux élèves qu’au personnel du Collège de Rosemont.</p>
 
-<p>Empreinte de l’imaginaire des mondes de pirates, cette activité vise à promouvoir la lecture en encourageant les membres de la communauté collégiale à former des équipes de corsaires, composées d’un capitaine et de deux matelots, qui consigneront leurs lectures sur ce site. Tous les flibustiers, à bord de leur fier vaisseau, se livreront un combat féroce pour obtenir le plus de doublons et ainsi damer le pion à leurs adversaires.</p>
+<p>Empreinte de l’imaginaire du monde des pirates, cette activité vise à promouvoir la lecture en encourageant les membres de la communauté collégiale à former des équipes de corsaires, composées d’un capitaine et de deux matelots, qui consigneront leurs lectures sur ce site. Tous les flibustiers, à bord de leur fier vaisseau, se livreront un combat féroce pour obtenir le plus de doublons et ainsi damer le pion à leurs adversaires.</p>
 
 <p>Les employés et les tuteurs du CAF peuvent être Capitaines et former leur Équipage en recrutant deux élèves. Des prix de participation (dictionnaires, livres, logiciels Antidote, etc.) seront remis aux braves qui sauront relever l’une des épreuves hebdomadaires tout au long du périple.</p>
 
@@ -29,7 +29,7 @@
 <h2>
 
 <p><h2><b>Du 24 au 30 septembre 2019 </b>: inscrivez-vous.</h2></p>
-<p><h2><b>Du 1er au 22 octobre </b>: consignez vos lectures et relevez les épreuves hebdomadaires proposées.</h2></p>
+<p><h2><b>Du 1<sup>er</sup> au 22 octobre </b>: consignez vos lectures et relevez les épreuves hebdomadaires proposées.</h2></p>
 
 
 
