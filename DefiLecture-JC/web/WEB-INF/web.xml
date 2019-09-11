@@ -6,7 +6,7 @@
     </context-param>
     <context-param>
         <param-name>urlDb</param-name>
-        <param-value>jdbc:mysql://172.21.0.2/defilecture?useUnicode=true&amp;characterEncoding=UTF-8</param-value>
+        <param-value>jdbc:mysql://172.21.0.2/defilecture?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=UTF-8</param-value>
     </context-param>
     <context-param>
         <param-name>adminName</param-name>

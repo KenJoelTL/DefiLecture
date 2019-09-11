@@ -86,7 +86,7 @@ span.glyphicon.glyphicon-log-in {
 
 ul.nav.navbar-nav{
   height: 93px;
-  display :flex;
+  display :block;
 }
 
 div#optionsNavigation {

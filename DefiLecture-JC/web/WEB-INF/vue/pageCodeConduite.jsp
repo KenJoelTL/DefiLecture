@@ -40,7 +40,7 @@
                         <br>
                         <li><label class='pirateIcone'></label><span> Le capitaine est responsable de stimuler l’ardeur de son équipage pour amasser le plus de <strong>doublons</strong> possible.</span></li> 
                         <br>
-                        <li><label class='pirateIcone'></label><span> Chaque pirate s’engage sur l’honneur à consigner scrupuleusement ses <strong>lectures</strong> en précisant le temps consacré à cette activité et le type de lecture effectuée.</span></li>
+                        <li><label class='pirateIcone'></label><span> Chaque pirate s’engage sur l’honneur à consigner quotidiennement ses <strong>lectures</strong> en précisant le temps consacré à cette activité et le type de lecture effectuée.</span></li>
                         <br>
                         <li><label class='pirateIcone'></label><span> Tout matelot faisant preuve de paresse pourra être rabroué par le capitaine, à raison d’un coup de fouet par journée sans lecture. </span></li>
                         <br>
