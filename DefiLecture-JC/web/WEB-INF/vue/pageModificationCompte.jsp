@@ -20,26 +20,37 @@
     Author     : Joel
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="com.defiLecture.modele.Compte"%>
-<%@page import="com.defiLecture.modele.CompteDAO"%>
-<%@page import="com.defiLecture.modele.Equipe"%>
-<%@page import="com.defiLecture.modele.EquipeDAO"%>
+<%@page import="com.defilecture.modele.Compte"%>
+<%@page import="com.defilecture.modele.CompteDAO"%>
+<%@page import="com.defilecture.modele.Equipe"%>
+<%@page import="com.defilecture.modele.EquipeDAO"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="jdbc.Config"%>
 <%@page import="jdbc.Connexion"%>
 
 
  <jsp:useBean id="connexion" class="jdbc.Connexion"></jsp:useBean>
-    <jsp:useBean id="dao" class="com.defiLecture.modele.CompteDAO">
+    <jsp:useBean id="dao" class="com.defilecture.modele.CompteDAO">
         <jsp:setProperty name="dao" property="cnx" value="${connexion.connection}"></jsp:setProperty>
     </jsp:useBean>
     <c:set var="compte" scope="page" value="${dao.read(param.id)}"/>
-    <jsp:useBean id="daoEquipe" class="com.defiLecture.modele.EquipeDAO">
+    <jsp:useBean id="daoEquipe" class="com.defilecture.modele.EquipeDAO">
         <jsp:setProperty name="daoEquipe" property="cnx" value="${connexion.connection}"></jsp:setProperty>
     </jsp:useBean>    
     <c:set var="equipe" scope="page" value="${daoEquipe.read(compte.idEquipe)}"/>
 
-        
+    <script>
+     function genererMotDePasse(){
+	 mdp=Math.random().toString(36).substring(2, 15);
+	 c_mdp=document.getElementById('motPasseNouveau')
+	 c_mdp.type='text';
+	 c_mdp.value=mdp;
+	 c_mdpconf=document.getElementById('motPasseNouveauConfirmation')
+	 c_mdpconf.type='text';
+	 c_mdpconf.value=mdp;
+     }
+    </script>
+
 <body>
     <div class='row connexion-row'> 
         <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 connexion-col modification-compte-col">
@@ -57,12 +68,6 @@
                 <c:if test="${!empty requestScope.data['erreurMotPasse']}">
                     <div class="alert alert-danger"><strong>${requestScope.data['erreurMotPasse']}</strong></div>
                 </c:if>
-                <c:if test="${!empty requestScope.data['erreurGenerationMotPasse']}">
-                    <div class="alert alert-danger"><strong>${requestScope.data['erreurGenerationMotPasse']}</strong></div>
-                </c:if>
-                <c:if test="${!empty requestScope.data['succesGenerationMotPasse']}">
-                    <div class="alert alert-success"><strong>${requestScope.data['succesGenerationMotPasse']}</strong></div>
-                </c:if>
                 <c:if test="${!empty requestScope.data['erreurModification']}">
                     <div class="alert alert-danger"><strong>${requestScope.data['erreurModification']}</strong></div>
                 </c:if>
@@ -79,7 +84,7 @@
                 <img class="img-responsive avatar" src="<c:url value='${compte.avatar}'/>" alt="Avatar">
                 <h2 style="text-align:center">${compte.prenom} ${compte.nom}</h2>
                 <c:if test="${ !empty equipe }">
-                    <h2 style="text-align:center">De l'équipage <a href="pageEquipe.do?tache=afficherPageEquipe&idEquipe=${equipe.idEquipe}">${equipe.nom}</a></h2>                
+                    <h2 style="text-align:center">De  <% out.println(application.getAttribute("vocEquipe4"));%> <a href="pageEquipe.do?tache=afficherPageEquipe&idEquipe=${equipe.idEquipe}">${equipe.nom}</a></h2>                
                 </c:if>
 
                 <form method="POST" action=".do" enctype="multipart/form-data">
@@ -94,33 +99,33 @@
                 <form action="modification.do" method="post" >
                     <div class="form-group col-lg-6 col-md-6">
                         <label for="prenom">Pr&eacute;nom*</label>
-                        <input type="text" class="form-control" id=prenom name="prenom" value="${compte.prenom}" required ${ compte.idCompte eq sessionScope.connecte ? '':'readonly' }/>
+                        <input type="text" class="form-control" id=prenom name="prenom" value="${compte.prenom}" required  }/>
                     </div>
                     <div class="form-group col-lg-6 col-md-6">
                         <label for="nom">Nom*</label>
-                        <input type="text" class="form-control" name="nom" value="${compte.nom}" required ${ compte.idCompte eq sessionScope.connecte ? '':'readonly' }/>
+                        <input type="text" class="form-control" name="nom" value="${compte.nom}" required  }/>
                     </div>
                     <div class="form-group col-lg-12">
                         <label for="programmeEtude">Programme d'&eacute;tude ou poste occup&eacute; au coll&egrave;ge</label>
-                         <input type="text" class="form-control" name="programmeEtude" value="${compte.programmeEtude}" ${ compte.idCompte eq sessionScope.connecte ? '':'readonly' }/>
+                         <input type="text" class="form-control" name="programmeEtude" value="${compte.programmeEtude}"  }/>
                     </div>
                     <div class="form-group col-lg-6 col-md-6">
                          <label for="courriel">Courriel*</label>
-                        <input type="email" class="form-control" name="courriel" value="${compte.courriel}" required ${ compte.idCompte eq sessionScope.connecte ? '':'readonly' }/>
+                        <input type="email" class="form-control" name="courriel" value="${compte.courriel}" required  }/>
                     </div>
                     <div class="form-group col-lg-6 col-md-6">
                         <label for="pseudonyme">Pseudonyme</label>
-                        <input type="text" class="form-control"  name="pseudonyme" value="${compte.pseudonyme}" ${ compte.idCompte eq sessionScope.connecte ? '':'readonly' }/>
+                        <input type="text" class="form-control"  name="pseudonyme" value="${compte.pseudonyme}"  }/>
                     </div>
                     
                     
                     <c:if test="${sessionScope.role gt 3}">
-                    <div class="form-group col-lg-12">
+                    <div class="form-group col-lg-12"> 
                         <label for="role">R&ocirc;le du compte : </label>
                         <c:set var="selected" value=" selected=\"selected\"" />
                         <select name="role" class="form-control">
                             <option value="1" ${ compte.role eq 1 ? selected:'' }>Participant</option>
-                            <option value="2" ${ compte.role eq 2 ? selected:'' }>Capitaine</option>
+                            <option value="2" ${ compte.role eq 2 ? selected:'' }><% out.println(application.getAttribute("vocChef"));%></option>
                             <c:if test="${sessionScope.role eq 4}">
                             <option value="3" ${ compte.role eq 3 ? selected:'' }>Mod&eacute;rateur</option>
                             <option value="4" ${ compte.role eq 4 ? selected:'' }>Administrateur</option>
@@ -135,37 +140,32 @@
                     </div>
                 </form>
 
-
-                <c:if test="${compte.idCompte eq sessionScope.connecte}">
-                    <form action="modification.do" method="post" >                     
-                        <div class="form-group col-lg-12">
+                <form action="modification.do" method="post" >                     
+                    <div class="form-group col-lg-12">
+			<c:if test="${sessionScope.role ne Compte.ADMINISTRATEUR}">
                             <label for="motPasseActuel">Mot de passe actuel*</label>
                             <input type="password" class="form-control" name="motPasseActuel" required/>
-                        </div>
-                        <div class="form-group col-lg-12">
-                            <label for="motPasseNouveau">Nouveau mot de passe*</label>
-                            <input type="password" class="form-control" name="motPasseNouveau"/>
-                        </div>
-                        <div class="form-group col-lg-12">
-                            <label for="motPasseNouveauConfirmation">Confirmation du nouveau mot de passe*</label>
-                            <input type="password" class="form-control" name="motPasseNouveauConfirmation"/>
-                        </div>                        
-                        <div class="form-group col-lg-12">
-                            <input type="hidden" name="idCompte" value="${sessionScope.connecte}"/>
-                            <input type="hidden" name="tache" value="effectuerModificationCompte"/>
-                            <button class="btn btn-primary" type="submit" name="modifie">Modifier le mot de passe</button>
-                        </div>
-                    </form>
-                </c:if>
+			</c:if>
+                    </div>
+                    <div class="form-group col-lg-12">
+                        <label for="motPasseNouveau">Nouveau mot de passe*</label>
+			<input type="password" class="form-control" name="motPasseNouveau" id="motPasseNouveau"/>
+                    </div>
+                    <div class="form-group col-lg-12">
+                        <label for="motPasseNouveauConfirmation">Confirmation du nouveau mot de passe*</label>
+			<input type="password" class="form-control" name="motPasseNouveauConfirmation" id="motPasseNouveauConfirmation"/>
+                    </div>                        
+                    <div class="form-group col-lg-12">
+                        <input type="hidden" name="idCompte" value="${compte.idCompte}"/>
+                        <input type="hidden" name="tache" value="effectuerModificationCompte"/>
+                        <button class="btn btn-primary" type="submit" name="modifie">Modifier le mot de passe</button>
+                    </div>
+                </form>
                         
                 <c:if test="${compte.idCompte ne sessionScope.connecte and sessionScope.role eq Compte.ADMINISTRATEUR}">
-                    <form action="modification.do" method="post" >                     
                         <div class="form-group col-lg-12">
-                            <input type="hidden" name="idCompte" value="${compte.idCompte}"/>
-                            <input type="hidden" name="tache" value="effectuerGenerationMotPasse"/>
-                            <button class="btn btn-info" type="submit" name="genere">Générer un mot de passe</button>
+                            <button class="btn btn-info" type="button" name="genere" onclick="genererMotDePasse();">Générer un mot de passe</button>
                         </div>
-                    </form>
                 </c:if>
                                 
 

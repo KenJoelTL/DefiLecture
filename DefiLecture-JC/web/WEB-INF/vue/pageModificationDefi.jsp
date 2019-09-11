@@ -22,29 +22,35 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<%@page import="com.defiLecture.modele.Defi"%>
+<%@page import="com.defilecture.modele.Defi"%>
 <%@page import="jdbc.Config"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="jdbc.Connexion"%>
-<%@page import="com.defiLecture.modele.DefiDAO"%>
+<%@page import="com.defilecture.modele.DefiDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <script language="javascript" src="./script/jquery-1.4.2.min.js"></script>
 
-<% 
-    Connection cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
-    DefiDAO daoDefi = new DefiDAO(cnx);
-    Defi defi = daoDefi.read(request.getParameter("id"));
-    String choixReponse = defi.getChoixReponse();
-    String bonneReponse = defi.getReponse();
-    pageContext.setAttribute("defi", defi);
+<!-- Faire la connexion -->
+<jsp:useBean id="connexion" class="jdbc.Connexion"/>
 
-%>
+<!-- Cree les DAOs -->
+<jsp:useBean id="daoDefi" class="com.defilecture.modele.DefiDAO" scope="page">
+    <jsp:setProperty name="daoDefi" property="cnx" value="${connexion.connection}"/>
+</jsp:useBean>
+
+<!-- Declarer les classes-->
+<jsp:useBean id="defi" class="com.defilecture.modele.Defi" scope="page"/>
+
+<!-- Assigner les variables-->
+<c:set var="defi" value="${daoDefi.read(param.id)}" scope="page"/>
+<c:set var="choixReponse" value="${defi.getChoixReponse()}" scope="page"/>
+<c:set var="bonneReponse" value="${defi.getReponse()}" scope="page"/>
 
 
 <script>
     $(document).ready(function(){
-          var value = <%=choixReponse%>; //chaine string venant de la BD qui contient les choix de réponse
-          var reponse = <%=bonneReponse%>; //valeur de la bonne réponse
+          var value = ${choixReponse}; //chaine string venant de la BD qui contient les choix de réponse
+          var reponse = ${bonneReponse}; //valeur de la bonne réponse
           var sBonneReponse=""; //chaine string qui contiendra le code HTML pour recréer les radio boutons de la bonne réponse
           var sChoixReponse=""; //chaine string qui contiendra le code HTML pour recréer les inputs text pour les choix de réponse
  
@@ -196,17 +202,50 @@
 
 
                 <div class="form-group">
-                    <label for="point">Quantité de doublons pour ce défi* : </label>
+                    <label for="point">Quantité de <% out.println(application.getAttribute("vocPoints"));%> pour ce défi* : </label>
                     <input class="form-control" type="text" name="valeurMinute" value="${defi.valeurMinute}" required />
                 </div>
 
                 <input id="choixReponseJSON" type="hidden" name="choixReponseJSON" value="">
                 <input type="hidden" name="idDefi" value="${defi.idDefi}">
                 <input type="hidden" name="tache" value="effectuerModificationDefi">
-                <button type="submit" class="btn btn-success" name="modifie" >Enregistrer </button>
-                <a href="*.do?tache=afficherPageParticipationDefi" class="retour"><span class="glyphicon glyphicon-circle-arrow-left"></span>retour à la liste des défis</a>
+                <button type="submit" class="btn btn-success" name="modifie" >Enregistrer </button> 
             </form>
-                <br>
+            <br />
+            
+            <form>
+              <input type="hidden" name="idDefiSup" value="${defi.idDefi}">
+              <input type="hidden" name="tache" value="supprimerDefi">
+              
+              <!-- Bouton de suppression -->
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#supprimerModal">
+                Supprimer
+              </button>
+
+              <!-- Boîte de dialogue de confirmation -->
+              <div class="modal fade" id="supprimerModal" tabindex="-1" role="dialog" aria-labelledby="supprimerModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="supprimerModalLabel">Confirmer la suppression</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      Voulez-vous vraiment supprimer le défi?
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-primary" data-dismiss="modal">Non</button>
+                      <button type="submit" class="btn btn-secondary">Oui</button>
+                    </div>
+                  </div>
+                </div>
+              </div>              
+            </form>
+            
+            <a href="*.do?tache=afficherPageParticipationDefi" class="retour"><span class="glyphicon glyphicon-circle-arrow-left"></span>retour à la liste des défis</a>
+            <br />
         </div>
     </div>
 </div>

@@ -21,11 +21,11 @@
 --%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="com.defiLecture.modele.DemandeEquipeDAO"%>
+<%@page import="com.defilecture.modele.DemandeEquipeDAO"%>
 <%@page import="java.sql.Connection"%>
-<%@page import="com.defiLecture.modele.EquipeDAO"%>
-<%@page import="com.defiLecture.modele.CompteDAO"%>
-<%@page import="com.defiLecture.modele.Equipe"%>
+<%@page import="com.defilecture.modele.EquipeDAO"%>
+<%@page import="com.defilecture.modele.CompteDAO"%>
+<%@page import="com.defilecture.modele.Equipe"%>
 <%@page import="jdbc.Config"%>
 <%@page import="jdbc.Connexion"%>
 
@@ -39,15 +39,15 @@
         <c:redirect url="redirection.do?tache=afficherPageAccueil"></c:redirect>
     </c:if>
     
-    <jsp:useBean id="daoEquipe" scope="page"  class="com.defiLecture.modele.EquipeDAO">
+    <jsp:useBean id="daoEquipe" scope="page"  class="com.defilecture.modele.EquipeDAO">
         <jsp:setProperty name="daoEquipe" property="cnx" value="${cnx}"></jsp:setProperty>
     </jsp:useBean>
 
-    <jsp:useBean id="daoDemEqp" scope="page"  class="com.defiLecture.modele.DemandeEquipeDAO">
+    <jsp:useBean id="daoDemEqp" scope="page"  class="com.defilecture.modele.DemandeEquipeDAO">
         <jsp:setProperty name="daoDemEqp" property="cnx" value="${cnx}"></jsp:setProperty>
     </jsp:useBean>
     
-    <jsp:useBean id="daoCompte" scope="page"  class="com.defiLecture.modele.CompteDAO">
+    <jsp:useBean id="daoCompte" scope="page"  class="com.defilecture.modele.CompteDAO">
         <jsp:setProperty name="daoCompte" property="cnx" value="${cnx}"></jsp:setProperty>
     </jsp:useBean>
     
@@ -68,10 +68,10 @@
                     
                     <h1>${equipe.nom}</h1>
                     <c:if test="${equipe.point eq 0}">
-                        <p>${equipe.point} doublon</p>
+                        <p>${equipe.point} <% out.println(application.getAttribute("vocPoint"));%></p>
                     </c:if>
                     <c:if test="${equipe.point ge 1}">
-                        <p>${equipe.point} doublons</p>
+                        <p>${equipe.point} <% out.println(application.getAttribute("vocPoints"));%></p>
                     </c:if> 
                     <p>Rang ${rang}</p>
              
@@ -83,19 +83,19 @@
                     </a>
                 </c:if>
                     
-                    <h2>Membres de l'équipage</h2>
+                    <h2>Membres de  <% out.println(application.getAttribute("vocEquipe1"));%> </h2>
 
                     <table class='table table-hover'>
                   <thead>
                     <tr>
-                      <th width=50%>Pirate</th>
+                      <th width=50%><% out.println(application.getAttribute("vocParticipant"));%></th>
                       <th>Contribution</th>
                     </tr>
                   </thead>
                   <tbody>
                     <c:forEach items="${listeMembres}" var="membre">      
                     <tr>
-                      <td>${membre.prenom} «${membre.pseudonyme}» ${membre.nom}</td>
+                    <td><a href="?tache=afficherPageProfil&id=${membre.idCompte}">${membre.prenom} «${membre.pseudonyme}» ${membre.nom}</a></td>
                       <td>
                           <c:set var="contribution" value="${daoDemEqp.findByIdCompteEquipe(membre.idCompte,equipe.idEquipe)}"></c:set>
                         <div class="progress">
