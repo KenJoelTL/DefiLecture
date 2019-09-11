@@ -90,7 +90,7 @@ public class EffectuerModificationCompteAction extends Action
         }
 
         if (motPasseNouveau != null && !"".equals(motPasseNouveau.trim())) {
-          if (motPasseActuel != null && compte.verifierMotPasse(motPasseActuel)) {
+	    if (motPasseActuel != null && compte.verifierMotPasse(motPasseActuel) || userIsAdmin()) {
             if (motPasseNouveau.equals(motPasseNouveauConfirmation)) {
               compte.setMotPasse(Util.toUTF8(motPasseNouveau));
             } else {
@@ -101,7 +101,7 @@ public class EffectuerModificationCompteAction extends Action
             }
           } else {
             erreurSurvenue = true;
-            data.put("erreurMotPasse", "Le mot de passe entré n'est pas le bon");
+            data.put("erreurMotPasse", "Mot de passe incorrect");
           }
         }
         if (pseudonyme != null && !pseudonyme.equals(compte.getPseudonyme())) {
