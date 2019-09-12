@@ -17,7 +17,7 @@ package com.defilecture.controleur;
 public class AfficherPageGestionEquipesAction extends Action {
   @Override
   public String execute() {
-    if(userIsConnected) {
+    if(userIsConnected()) {
         if(userIsAdmin()) {
             request.setAttribute("vue", "pageGestionEquipes.jsp");
         }
