@@ -230,32 +230,6 @@ public class CompteDAO extends DAO<Compte> {
     return liste;
   }
 
-  public Compte findByIdentifiantMotPasse(String identifiant, String motPasse) {
-    ResultSet resultat = null;
-    PreparedStatement paramStm = null;
-    Compte compte = null;
-
-    String req = "SELECT * FROM compte WHERE (`COURRIEL` = ? or " + "`PSEUDONYME` = ?)";
-
-    try {
-      paramStm = cnx.prepareStatement(req);
-      paramStm.setString(1, identifiant);
-      paramStm.setString(2, identifiant);
-      resultat = paramStm.executeQuery();
-
-      if (resultat.next()) {
-        compte = getCompteFromResultSet(resultat);
-        compte.verifierMotPasse(motPasse);
-      }
-      resultat.close();
-      paramStm.close();
-    } catch (SQLException ex) {
-      Logger.getLogger(CompteDAO.class.getName()).log(Level.SEVERE, null, ex);
-    }
-
-    return compte;
-  }
-
   public Compte findByPseudonyme(String pseudo) {
     String req = "SELECT * FROM compte WHERE `PSEUDONYME` = ?";
     PreparedStatement paramStm = null;

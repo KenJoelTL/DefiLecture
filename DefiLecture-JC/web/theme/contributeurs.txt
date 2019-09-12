@@ -1,4 +1,13 @@
 <h1>Contributeurs</h1>
+
+<h2>Mécènes</h2>
+<strong><p>Éditions Interforum</strong> (pour Les Éditions Le Robert)</p>
+<strong><p>Salon du livre de Montréal</p></strong>
+<strong><p>Druide informatique</p></strong>
+<strong><p>Librairie COOPSCO Rosemont et Éditions Gallimard</p></strong>
+<strong><p>Association des parents d’élèves du Collège de Rosemont</p></strong>
+<strong><p>Syndicat des professeur-e-s du Collège de Rosemont</p></strong>
+
 <h2>Complices</h2>
 <p>
   <strong>Idéateurs et concepteurs</strong> : 
@@ -51,10 +60,3 @@
 </strong>
 
 <br>
-<h2>Mécènes</h2>
-<strong><p>Éditions Interforum</strong> (pour Les Éditions Le Robert)</p>
-<strong><p>Salon du livre de Montréal</p></strong>
-<strong><p>Druide informatique</p></strong>
-<strong><p>Librairie COOPSCO Rosemont et Éditions Gallimard</p></strong>
-<strong><p>Association des parents d’élèves du Collège de Rosemont</p></strong>
-<strong><p>Syndicat des professeur-e-s du Collège de Rosemont</p></strong>

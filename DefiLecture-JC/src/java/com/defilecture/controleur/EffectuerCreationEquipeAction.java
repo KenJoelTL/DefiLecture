@@ -20,6 +20,7 @@ import com.defilecture.modele.DemandeEquipe;
 import com.defilecture.modele.DemandeEquipeDAO;
 import com.defilecture.modele.Equipe;
 import com.defilecture.modele.EquipeDAO;
+import com.defilecture.Util;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -37,7 +38,7 @@ public class EffectuerCreationEquipeAction extends Action implements RequirePRGA
     if (userIsConnected()) {
       if (userIsCapitaine()) {
         int idCompte = ((Integer) session.getAttribute("currentId")).intValue();
-        String nom = request.getParameter("nom");
+        String nom = Util.toUTF8(request.getParameter("nom"));
         if (nom != null && !"".equals(nom.trim())) {
           Equipe equipe = new Equipe();
           equipe.setNom(nom);
