@@ -177,7 +177,7 @@ public class EquipeDAO extends DAO<Equipe> {
         e.setPoint(new DemandeEquipeDAO(cnx).sumPointByidEquipe(r.getInt("ID_EQUIPE")));
         e.setNbMembres(new CompteDAO(cnx).countCompteByIdEquipe(r.getInt("ID_EQUIPE")));
 
-        liste.add(ex);
+        liste.add(e);
       }
       Collections.sort(liste);
       Collections.reverse(liste);
