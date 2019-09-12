@@ -14,13 +14,13 @@
  */
 package com.defilecture.controleur;
 
+import com.defilecture.Util;
 import com.defilecture.modele.Compte;
 import com.defilecture.modele.CompteDAO;
 import com.defilecture.modele.DemandeEquipe;
 import com.defilecture.modele.DemandeEquipeDAO;
 import com.defilecture.modele.Equipe;
 import com.defilecture.modele.EquipeDAO;
-import com.defilecture.Util;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;

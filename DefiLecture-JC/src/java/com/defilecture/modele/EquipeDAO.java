@@ -37,22 +37,18 @@ public class EquipeDAO extends DAO<Equipe> {
   public boolean create(Equipe x) {
     String req = "INSERT INTO equipe (`NOM`) VALUES (?)";
     boolean isCreer = false;
-    PreparedStatement paramStm = null;
-    try {
 
-      paramStm = cnx.prepareStatement(req);
+    try {
+      PreparedStatement paramStm = cnx.prepareStatement(req);
       paramStm.setString(1, x.getNom());
 
-      int nbLignesAffectees = paramStm.executeUpdate();
-
-      if (nbLignesAffectees > 0) {
+      if (paramStm.executeUpdate() > 0) {
         isCreer = true;
       }
 
-    } catch (SQLException ex) {
-       Logger.getLogger(EquipeDAO.class.getName()).log(Level.SEVERE, null, ex);
-    } finally {
       paramStm.close();
+    } catch (SQLException ex) {
+      Logger.getLogger(EquipeDAO.class.getName()).log(Level.SEVERE, null, ex);
     }
     return isCreer;
   }
@@ -60,72 +56,66 @@ public class EquipeDAO extends DAO<Equipe> {
   @Override
   public Equipe read(int id) {
     String req = "SELECT * FROM equipe WHERE `ID_EQUIPE` = ?";
-    PreparedStatement paramStm = null;
     Equipe equipe = null;
+
     try {
-      paramStm = cnx.prepareStatement(req);
+      PreparedStatement paramStm = cnx.prepareStatement(req);
       paramStm.setInt(1, id);
       ResultSet resultat = paramStm.executeQuery();
 
-      // On vérifie s'il y a un résultat
       if (resultat.next()) {
-        equipe  = new Equipe();
-        equipe .setIdEquipe(resultat.getInt("ID_EQUIPE"));
-        equipe .setNom(resultat.getString("NOM"));
-        equipe .setPoint((new DemandeEquipeDAO(cnx).sumPointByidEquipe(id)));
-        equipe .setNbMembres((new CompteDAO(cnx)).countCompteByIdEquipe(id));
+        equipe = new Equipe();
+        equipe.setIdEquipe(resultat.getInt("ID_EQUIPE"));
+        equipe.setNom(resultat.getString("NOM"));
+        equipe.setPoint((new DemandeEquipeDAO(cnx).sumPointByidEquipe(id)));
+        equipe.setNbMembres((new CompteDAO(cnx)).countCompteByIdEquipe(id));
       }
 
       resultat.close();
-    } catch (SQLException ex) {
-       Logger.getLogger(EquipeDAO.class.getName()).log(Level.SEVERE, null, ex);
-    } finally {
       paramStm.close();
+    } catch (SQLException ex) {
+      Logger.getLogger(EquipeDAO.class.getName()).log(Level.SEVERE, null, ex);
     }
 
-    return equipe ;
+    return equipe;
   }
 
   @Override
   public boolean update(Equipe x) {
     String req = "UPDATE equipe SET `NOM` = ? WHERE `ID_EQUIPE` = ?";
-    PreparedStatement paramStm = null;
     boolean isUpdated = false;
 
     try {
-
-      paramStm = cnx.prepareStatement(req);
+      PreparedStatement paramStm = cnx.prepareStatement(req);
       paramStm.setString(1, x.getNom() == null || "".equals(x.getNom().trim()) ? null : x.getNom());
       paramStm.setInt(2, x.getIdEquipe());
 
       if (paramStm.executeUpdate() > 0) {
         isUpdated = true;
       }
+      paramStm.close();
     } catch (SQLException ex) {
-       Logger.getLogger(EquipeDAO.class.getName()).log(Level.SEVERE, null, ex);
-    } finally {
-        paramStm.close();
+      Logger.getLogger(EquipeDAO.class.getName()).log(Level.SEVERE, null, ex);
     }
+
     return false;
   }
 
   @Override
   public boolean delete(Equipe x) {
     String req = "DELETE FROM equipe WHERE `ID_EQUIPE` = ?";
-    PreparedStatement paramStm = null;
     boolean isDeleted = false;
 
     try {
-      paramStm = cnx.prepareStatement(req);
+      PreparedStatement paramStm = cnx.prepareStatement(req);
       paramStm.setInt(1, x.getIdEquipe());
 
       if (paramStm.executeUpdate() > 0) {
         isDeleted = true;
       }
+      paramStm.close();
     } catch (SQLException ex) {
-        Logger.getLogger(EquipeDAO.class.getName()).log(Level.SEVERE, null, ex);
-    } finally {
-        paramStm.close();
+      Logger.getLogger(EquipeDAO.class.getName()).log(Level.SEVERE, null, ex);
     }
 
     return isDeleted;
@@ -133,11 +123,13 @@ public class EquipeDAO extends DAO<Equipe> {
 
   @Override
   public List<Equipe> findAll() {
+    String req = "SELECT * FROM equipe";
     List<Equipe> liste = new ArrayList<>();
-    Statement stm = null;
+
     try {
-      stm = cnx.createStatement();
-      ResultSet r = stm.executeQuery("SELECT * FROM equipe");
+      Statement stm = cnx.createStatement();
+      ResultSet r = stm.executeQuery(req);
+
       while (r.next()) {
         Equipe equipe = new Equipe();
         equipe.setIdEquipe(r.getInt("ID_EQUIPE"));
@@ -148,27 +140,28 @@ public class EquipeDAO extends DAO<Equipe> {
 
         liste.add(equipe);
       }
+
       Collections.sort(liste);
       Collections.reverse(liste);
       r.close();
+      stm.close();
     } catch (SQLException ex) {
       Logger.getLogger(EquipeDAO.class.getName()).log(Level.SEVERE, null, ex);
-    } finally {
-      stm.close();
     }
 
     return liste;
   }
 
   public List<Equipe> findAllByNom(String nom) throws SQLException {
-    List<Equipe> liste = new ArrayList<>();
     String req = "SELECT * FROM equipe WHERE `NOM` LIKE ?";
-    PreparedStatement paramStm = null;
+    List<Equipe> liste = new ArrayList<>();
+
     try {
-      paramStm = cnx.prepareStatement(req);
+      PreparedStatement paramStm = cnx.prepareStatement(req);
       paramStm.setString(1, "%" + nom + "%");
 
       ResultSet r = paramStm.executeQuery();
+
       while (r.next()) {
         Equipe e = new Equipe();
         e.setIdEquipe(r.getInt("ID_EQUIPE"));
@@ -179,14 +172,14 @@ public class EquipeDAO extends DAO<Equipe> {
 
         liste.add(e);
       }
+
       Collections.sort(liste);
       Collections.reverse(liste);
       r.close();
+      paramStm.close();
     } catch (SQLException ex) {
       Logger.getLogger(EquipeDAO.class.getName()).log(Level.SEVERE, null, ex);
       throw ex;
-    } finally {
-      paramStm.close();
     }
 
     return liste;
@@ -194,10 +187,10 @@ public class EquipeDAO extends DAO<Equipe> {
 
   public Equipe findByNom(String nom) {
     String req = "SELECT * FROM equipe WHERE `NOM` = ?";
-    PreparedStatement paramStm = null;
     Equipe equipe = null;
+
     try {
-      paramStm = cnx.prepareStatement(req);
+      PreparedStatement paramStm = cnx.prepareStatement(req);
       paramStm.setString(1, nom);
       ResultSet resultat = paramStm.executeQuery();
 
@@ -210,10 +203,9 @@ public class EquipeDAO extends DAO<Equipe> {
       }
 
       resultat.close();
+      paramStm.close();
     } catch (SQLException ex) {
-        Logger.getLogger(EquipeDAO.class.getName()).log(Level.SEVERE, null, ex);
-    } finally {
-        paramStm.close();
+      Logger.getLogger(EquipeDAO.class.getName()).log(Level.SEVERE, null, ex);
     }
 
     return equipe;
@@ -221,21 +213,20 @@ public class EquipeDAO extends DAO<Equipe> {
 
   public boolean deleteTable() {
     String req = "DELETE FROM equipe";
-    PreparedStatement paramStm = null;
     boolean isDeleted = false;
+
     try {
-      paramStm = cnx.prepareStatement(req);
+      PreparedStatement paramStm = cnx.prepareStatement(req);
 
       if (paramStm.executeUpdate() > 0) {
         isDeleted = true;
       }
 
+      paramStm.close();
     } catch (SQLException ex) {
       Logger.getLogger(EquipeDAO.class.getName()).log(Level.SEVERE, null, ex);
     } catch (Exception ex) {
       Logger.getLogger(EquipeDAO.class.getName()).log(Level.SEVERE, null, ex);
-    } finally {
-        paramStm.close();
     }
 
     return isDeleted;

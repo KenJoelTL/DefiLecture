@@ -90,7 +90,7 @@ public class EffectuerModificationCompteAction extends Action
         }
 
         if (motPasseNouveau != null && !"".equals(motPasseNouveau.trim())) {
-	    if (motPasseActuel != null && compte.verifierMotPasse(motPasseActuel) || userIsAdmin()) {
+          if (motPasseActuel != null && compte.verifierMotPasse(motPasseActuel) || userIsAdmin()) {
             if (motPasseNouveau.equals(motPasseNouveauConfirmation)) {
               compte.setMotPasse(Util.toUTF8(motPasseNouveau));
             } else {

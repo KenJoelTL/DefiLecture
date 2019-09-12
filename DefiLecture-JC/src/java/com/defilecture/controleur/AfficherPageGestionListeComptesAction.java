@@ -14,20 +14,13 @@
  */
 package com.defilecture.controleur;
 
-import com.defilecture.modele.CompteDAO;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import jdbc.Config;
-import jdbc.Connexion;
-
 public class AfficherPageGestionListeComptesAction extends Action {
   @Override
   public String execute() {
     if (userIsConnected()) {
-        if (userIsAdmin() || userIsModerateur()) {
-            request.setAttribute("vue", "pageGestionListeCompte.jsp");
-        }
+      if (userIsAdmin() || userIsModerateur()) {
+        request.setAttribute("vue", "pageGestionListeCompte.jsp");
+      }
     }
     return "/index.jsp";
   }
