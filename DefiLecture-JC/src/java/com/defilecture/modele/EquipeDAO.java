@@ -69,7 +69,7 @@ public class EquipeDAO extends DAO<Equipe> {
 
       // On vérifie s'il y a un résultat
       if (resultat.next()) {
-        Equipe equipe  = new Equipe();
+        equipe  = new Equipe();
         equipe .setIdEquipe(resultat.getInt("ID_EQUIPE"));
         equipe .setNom(resultat.getString("NOM"));
         equipe .setPoint((new DemandeEquipeDAO(cnx).sumPointByidEquipe(id)));
@@ -139,17 +139,17 @@ public class EquipeDAO extends DAO<Equipe> {
       stm = cnx.createStatement();
       ResultSet r = stm.executeQuery("SELECT * FROM equipe");
       while (r.next()) {
-        Equipe e = new Equipe();
-        e.setIdEquipe(r.getInt("ID_EQUIPE"));
-        e.setNom(r.getString("NOM"));
+        Equipe equipe = new Equipe();
+        equipe.setIdEquipe(r.getInt("ID_EQUIPE"));
+        equipe.setNom(r.getString("NOM"));
 
-        e.setPoint(new DemandeEquipeDAO(cnx).sumPointByidEquipe(r.getInt("ID_EQUIPE")));
-        e.setNbMembres(new CompteDAO(cnx).countCompteByIdEquipe(r.getInt("ID_EQUIPE")));
+        equipe.setPoint(new DemandeEquipeDAO(cnx).sumPointByidEquipe(r.getInt("ID_EQUIPE")));
+        equipe.setNbMembres(new CompteDAO(cnx).countCompteByIdEquipe(r.getInt("ID_EQUIPE")));
 
-        liste.add(ex);
+        liste.add(equipe);
       }
-      Collections.sort(listex);
-      Collections.reverse(listex);
+      Collections.sort(liste);
+      Collections.reverse(liste);
       r.close();
     } catch (SQLException ex) {
       Logger.getLogger(EquipeDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -179,8 +179,8 @@ public class EquipeDAO extends DAO<Equipe> {
 
         liste.add(ex);
       }
-      Collections.sort(listex);
-      Collections.reverse(listex);
+      Collections.sort(liste);
+      Collections.reverse(liste);
       r.close();
     } catch (SQLException ex) {
       Logger.getLogger(EquipeDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -222,7 +222,7 @@ public class EquipeDAO extends DAO<Equipe> {
   public boolean deleteTable() {
     String req = "DELETE FROM equipe";
     PreparedStatement paramStm = null;
-    isDeleted = false;
+    boolean isDeleted = false;
     try {
       paramStm = cnx.prepareStatement(req);
 
