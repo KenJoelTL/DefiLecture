@@ -15,12 +15,13 @@
     along with DefiLecture.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-function supprimerCompteDeEquipe(idCompte){
+function supprimerEquipe(idEquipe){
   $.ajax({
-        url: '*.do?tache=effectuerSuppressionCompteDeEquipe&idCompte='+idCompte, 
+        url: '*.do?tache=effectuerSuppressionEquipe&idEquipe='+idEquipe, 
         cache    : false,
         complete: function () {
-          $("tr#lecture-"+ idLecture).remove();
+          $("tr#equipe-"+ idEquipe).remove();
         }
     });
 }
+
