@@ -50,9 +50,9 @@ public class EffectuerCreationEquipeAction extends Action implements RequirePRGA
 
             if (daoEquipe.findByNom(equipe.getNom()) == null) {
               if (daoEquipe.create(equipe)) {
-                Logger.getLogger(EffectuerCreationEquipeAction.class.getName())
-                    .log(Level.INFO, "Équipe " + equipe.getNom() + "créée.");
                 equipe = daoEquipe.findByNom(equipe.getNom());
+                Logger.getLogger(EffectuerCreationEquipeAction.class.getName())
+                    .log(Level.INFO, "Équipe {ID: " + equipe.getIdEquipe().toString() + ", Nom: " + equipe.getNom() + "} créée.");
               } else {
                 data.put("erreurNom", "Équipe non créée.");
                 Logger.getLogger(EffectuerCreationEquipeAction.class.getName())
