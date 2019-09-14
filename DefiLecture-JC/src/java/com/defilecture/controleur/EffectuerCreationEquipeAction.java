@@ -52,6 +52,12 @@ public class EffectuerCreationEquipeAction extends Action implements RequirePRGA
               if (daoEquipe.create(equipe)) {
                 Logger.getLogger(EffectuerCreationEquipeAction.class.getName())
                     .log(Level.INFO, "Équipe " + equipe.getNom() + "créée.");
+                equipe = daoEquipe.findByNom(equipe.getNom());
+              } else {
+                data.put("erreurNom", "Équipe non créée.");
+                Logger.getLogger(EffectuerCreationEquipeAction.class.getName())
+                    .log(Level.INFO, "Erreur lors de la création de l'équipe " + equipe.getNom() + ".");
+                return "creation.do?tache=afficherPageCreationEquipe";
               }
 
               CompteDAO daoCompte = new CompteDAO(cnx);
