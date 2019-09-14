@@ -39,7 +39,7 @@ public class EffectuerModificationEquipeAction extends Action
       action = "*.do?tache=afficherPageEquipe&idEquipe=" + request.getParameter("idEquipe");
 
       if (request.getParameter("modifier") != null) {
-        if (userIsConnected() && userIsCapitaine() && request.getParameter("nom") != null) {
+        if (userIsConnected() && (userIsCapitaine() || userIsAdmin()) && request.getParameter("nom") != null) {
           try {
             Connection cnx =
                 Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
