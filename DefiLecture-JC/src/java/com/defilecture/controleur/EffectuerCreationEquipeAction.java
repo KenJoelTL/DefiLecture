@@ -48,20 +48,18 @@ public class EffectuerCreationEquipeAction extends Action implements RequirePRGA
                 Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
             EquipeDAO daoEquipe = new EquipeDAO(cnx);
 
-            
             if (daoEquipe.findByNom(equipe.getNom()) == null) {
               if (daoEquipe.create(equipe)) {
                 Logger.getLogger(EffectuerCreationEquipeAction.class.getName())
-                    .log(Level.SEVERE, "Équipe créée.");
+                    .log(Level.INFO, "Équipe " + equipe.getNom() + "créée.");
               }
-              Logger.getLogger(EffectuerCreationEquipeAction.class.getName())
-                  .log(Level.SEVERE, "Équipe trouvée. " + equipe.getIdEquipe());
+
               CompteDAO daoCompte = new CompteDAO(cnx);
               Compte compte = daoCompte.read(idCompte);
               compte.setIdEquipe(equipe.getIdEquipe());
               Logger.getLogger(EffectuerCreationEquipeAction.class.getName())
                   .log(
-                      Level.SEVERE,
+                      Level.INFO,
                       "Ajout du compte " + idCompte + " à l'équipe " + equipe.getIdEquipe());
 
               if (daoCompte.update(compte)) {
@@ -73,7 +71,7 @@ public class EffectuerCreationEquipeAction extends Action implements RequirePRGA
                 demande.setStatutDemande(1);
                 if (daoDemandeEquipe.create(demande)) {
                   Logger.getLogger(EffectuerCreationEquipeAction.class.getName())
-                      .log(Level.SEVERE, "Demande complétée");
+                      .log(Level.INFO, "Demande complétée");
                   return "creationEquipeCompletee.do?tache=afficherPageEquipe&idEquipe="
                       + equipe.getIdEquipe();
                 }
