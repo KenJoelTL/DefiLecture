@@ -15,12 +15,13 @@
     along with DefiLecture.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="jdbc.Config"%>
-<%@page import="com.defilecture.modele.Equipe"%>
-<%@page import="java.sql.Connection"%>
-<%@page import="com.defilecture.modele.EquipeDAO"%>
-<%@page import="jdbc.Connexion"%>
 <%@ page pageEncoding="UTF-8" %>
+<%@page import="jdbc.Config"%>
+<%@page import="jdbc.Connexion"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="com.defilecture.modele.Equipe"%>
+<%@page import="com.defilecture.modele.EquipeDAO"%>
+<script language="javascript" src="./script/jsPageGestionEquipe.js"></script>
 
 <jsp:useBean id="connexion" scope="page" class="jdbc.Connexion"></jsp:useBean>  
 <jsp:useBean id="daoEquipe" scope="page" class="com.defilecture.modele.EquipeDAO">
