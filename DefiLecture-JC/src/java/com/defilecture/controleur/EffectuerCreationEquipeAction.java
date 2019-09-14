@@ -48,8 +48,8 @@ public class EffectuerCreationEquipeAction extends Action implements RequirePRGA
                 Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
             EquipeDAO daoEquipe = new EquipeDAO(cnx);
 
-            equipe = daoEquipe.findByNom(equipe.getNom());
-            if (equipe == null) {
+            
+            if (daoEquipe.findByNom(equipe.getNom()) == null) {
               if (daoEquipe.create(equipe)) {
                 Logger.getLogger(EffectuerCreationEquipeAction.class.getName())
                     .log(Level.SEVERE, "Équipe créée.");
