@@ -54,7 +54,7 @@
                         <td>${equipe.getNom()}</td>
                         <td>${equipe.getNbMembres()}</td>
                         <td>${equipe.getPoint()}</td>
-                        <td><a href="*.do?tache=afficherPageModificationEquipe&id=${equipe.getIdEquipe()}">Modifier</a></td>
+                        <td><a href="*.do?tache=afficherPageModificationEquipe&idEquipe=${equipe.getIdEquipe()}">Modifier</a></td>
                         <td><a onclick="supprimerEquipe(${equipe.getIdEquipe()})">Supprimer</a></td>
                     </tr>
                 </c:forEach>   
