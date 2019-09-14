@@ -19,7 +19,7 @@ public class AfficherPageGestionEquipesAction extends Action {
   public String execute() {
     if (userIsConnected()) {
       if (userIsAdmin()) {
-        request.setAttribute("vue", request.getParameter("idEquipe") == null ? "pageGestionListeEquipe.jsp" : "pageGestionEquipe.jsp");
+        request.setAttribute("vue", request.getParameter("idEquipe") == null ? "pageGestionListeEquipe.jsp" : "pageModificationEquipe.jsp");
       }
     }
     return "/index.jsp";
