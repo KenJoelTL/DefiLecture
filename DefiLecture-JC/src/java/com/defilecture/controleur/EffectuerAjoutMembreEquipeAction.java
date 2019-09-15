@@ -90,7 +90,7 @@ public class EffectuerAjoutMembreEquipeAction extends Action
             }
           }
 
-          if(demandeEq.getStatusDemande() == DemandeEquipe.EN_ATTENTE){
+          if(demandeEq.getStatutDemande() == DemandeEquipe.EN_ATTENTE){
             demandeEq.setStatutDemande(DemandeEquipe.ACCEPTEE);
             if(daoDE.update(demandeEq)) {
                 daoCompte.update(compte);
