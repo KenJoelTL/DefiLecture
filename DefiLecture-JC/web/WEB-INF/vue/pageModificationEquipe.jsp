@@ -62,7 +62,7 @@
     </c:otherwise>
 </c:choose>
 
-<!-- Ajouter l'equipe dans les variables -->
+<!-- Ajouter equipe dans les variables -->
 <c:set var="listeMembres" value="${compteDao.findByIdEquipe(equipe.getIdEquipe())}"/>
 <c:set var="nbMembres" value="${listeMembres.size()}"/>
 
@@ -90,7 +90,7 @@
                 </c:if>
                 <c:if test="${!empty requestScope.data['succesReafectation']}">
                     <div class="alert alert-success"><strong>${requestScope.data['succesReafectation']}</strong></div>
-                </c:if>a
+                </c:if>
                 <c:if test="${!empty requestScope.data['erreurSuspension']}">
                     <div class="alert alert-danger"><strong>${requestScope.data['erreurSuspension']}</strong></div>
                 </c:if>
