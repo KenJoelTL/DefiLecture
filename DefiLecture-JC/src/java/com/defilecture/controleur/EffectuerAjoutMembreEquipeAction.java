@@ -73,7 +73,7 @@ public class EffectuerAjoutMembreEquipeAction extends Action
           data.put(
               "erreurMembreDejaDansEquipe",
               "Le participant est déjà membre d'une équipe");
-          return "echec.do?tache=afficherPageModificationEquipe?idEquipe="+idEquipe;
+          return "echec.do?tache=afficherPageModificationEquipe&idEquipe="+idEquipe;
         }
 
         if(equipe.getNbMembres() < Equipe.NB_MAX_MEMBRES) {
@@ -98,13 +98,13 @@ public class EffectuerAjoutMembreEquipeAction extends Action
               data.put(
                   "erreurDemandeNonAcceptee",
                   "La demande n'a pas pu être acceptée.");
-              return "echec.do?tache=afficherPageModificationEquipe?idEquipe="+idEquipe;
+              return "echec.do?tache=afficherPageModificationEquipe&idEquipe="+idEquipe;
             }
           } else {
             data.put(
                 "erreurParticipantDejaAccepter",
                 "Le participant a déjà été accepté ou a été suspendu.");
-            return "echec.do?tache=afficherPageModificationEquipe?idEquipe="+idEquipe;
+            return "echec.do?tache=afficherPageModificationEquipe&idEquipe="+idEquipe;
           }
 
           Logger.getLogger(this.getClass().getName())
@@ -115,12 +115,12 @@ public class EffectuerAjoutMembreEquipeAction extends Action
           data.put(
               "succesAjoutMembre",
               "Le membre a été ajouté.");
-          return "succes.do?tache=afficherPageModificationEquipe?idEquipe="+idEquipe;
+          return "succes.do?tache=afficherPageModificationEquipe&idEquipe="+idEquipe;
         } else {
           data.put(
               "erreurEquipePleine",
               "L'équipe est complète.");
-          return "echec.do?tache=afficherPageModificationEquipe?idEquipe="+idEquipe;
+          return "echec.do?tache=afficherPageModificationEquipe&idEquipe="+idEquipe;
         }
       } catch (NumberFormatException ex) {
         Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
