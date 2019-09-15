@@ -43,7 +43,7 @@ public class EffectuerAjoutMembreEquipeAction extends Action
 
       try {
         int idEquipe = Integer.parseInt(request.getParameter("idEquipe")),
-              idCompte = (Integer.parseInt(request.getParameter("idCompte"));
+              idCompte = Integer.parseInt(request.getParameter("idCompte"));
         boolean promouvoirCapitaine = request.getParameter("promouvoirCapitaine") != null;
 
         Connection cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
