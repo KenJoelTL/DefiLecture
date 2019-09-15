@@ -90,7 +90,7 @@
                 </c:if>
                 <c:if test="${!empty requestScope.data['succesReafectation']}">
                     <div class="alert alert-success"><strong>${requestScope.data['succesReafectation']}</strong></div>
-                </c:if>
+                </c:if>a
                 <c:if test="${!empty requestScope.data['erreurSuspension']}">
                     <div class="alert alert-danger"><strong>${requestScope.data['erreurSuspension']}</strong></div>
                 </c:if>
@@ -99,6 +99,27 @@
                 </c:if>
                 <c:if test="${!empty requestScope.data['erreurRetrait']}">
                     <div class="alert alert-danger"><strong>${requestScope.data['erreurRetrait']}</strong></div>
+                </c:if>
+                <c:if test="${!empty requestScope.data['attentionPromouvoirCapitaine']}">
+                    <div class="alert alert-warning"><strong>${requestScope.data['attentionPromouvoirCapitaine']}</strong></div>
+                </c:if>
+                <c:if test="${!empty requestScope.data['erreurMembreDejaDansEquipe']}">
+                    <div class="alert alert-danger"><strong>${requestScope.data['erreurMembreDejaDansEquipe']}</strong></div>
+                </c:if>
+                <c:if test="${!empty requestScope.data['erreurDemandeNonAcceptee']}">
+                    <div class="alert alert-danger"><strong>${requestScope.data['erreurDemandeNonAcceptee']}</strong></div>
+                </c:if>
+                <c:if test="${!empty requestScope.data['erreurParticipantDejaAccepter']}">
+                    <div class="alert alert-danger"><strong>${requestScope.data['erreurParticipantDejaAccepter']}</strong></div>
+                </c:if>
+                <c:if test="${!empty requestScope.data['succesAjoutMembre']}">
+                    <div class="alert alert-sucess"><strong>${requestScope.data['succesAjoutMembre']}</strong></div>
+                </c:if>
+                <c:if test="${!empty requestScope.data['erreurEquipePleine']}">
+                    <div class="alert alert-danger"><strong>${requestScope.data['erreurEquipePleine']}</strong></div>
+                </c:if>
+                <c:if test="${!empty requestScope.data['erreurServeur']}">
+                    <div class="alert alert-danger"><strong>${requestScope.data['erreurServeur']}</strong></div>
                 </c:if>
                 <form action="modificationEquipe.do" method="post">
                     <div class="form-group">
