@@ -20,13 +20,14 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jdbc.Config;
 import jdbc.Connexion;
 
 public class EffectuerModificationConfigAction extends Action implements RequirePRGAction {
-  private ConfigSite configUpdate, configCreate, verification;
+  private ConfigSite configUpdate;
   private ConfigSiteDAO configDAO;
 
   @Override
@@ -39,26 +40,22 @@ public class EffectuerModificationConfigAction extends Action implements Require
         List<String> parameterNames = new ArrayList<>(request.getParameterMap().keySet());
         configDAO = new ConfigSiteDAO(cnx);
         configUpdate = new ConfigSite();
-        configCreate = new ConfigSite();
-        verification = new ConfigSite();
 
         // Modification et création des paramètres dans la même action
         for (String id : parameterNames) {
-          verification = configDAO.read(id);
-          // Vérification que l'input n'est pas vide
-          String verif = request.getParameter(id).trim();
 
-          if (verification != null && !"tache".equals(id) && !verif.isEmpty()) {
+          if (!"tache".equals(id)) {
             configUpdate.getConfig().put(id, request.getParameter(id));
-          }
-
-          if (verification == null && !"tache".equals(id) && !verif.isEmpty()) {
-            configCreate.getConfig().put(id, request.getParameter(id));
           }
         }
 
         configDAO.update(configUpdate);
-        configDAO.create(configCreate);
+        for (Map.Entry<String, String> entry : configUpdate.getConfig().entrySet()) {
+          session
+              .getServletContext()
+              .setAttribute("com.defilecture." + entry.getKey(), entry.getValue());
+        }
+
       } catch (SQLException ex) {
         Logger.getLogger(EffectuerModificationConfigAction.class.getName())
             .log(Level.SEVERE, null, ex);

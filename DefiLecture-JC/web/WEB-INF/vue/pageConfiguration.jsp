@@ -62,9 +62,15 @@
                                     <input type="datetime-local" id="fLecture" name="fLecture" class="input-sm form-control" value="<c:out value="${daoConfig.getString('fLecture')}" />"/>
                                 </div>
                                 <h4>Nombre de matelots :</h4>
-                                <input id="nbMatelot" name="nbMatelot" class="form-control" type="text" value="<c:out value="${daoConfig.getString('nbmatelot')}" />" pattern="[-+]?[0-9]*[.,]?[0-9]+"/>
+                                <input id="nbMatelots" name="nbMatelots" class="form-control" type="text" value="<c:out value="${daoConfig.getString('nbmatelots')}" />" pattern="[0-9]+"/>
+                                <h4>Nombre d'heures limite de lecture quotidienne :</h4>
+				<div class="input-group">
+                                    <span class="input-group-addon">Avertissement</span><input id="limiteSoft" name="limiteSoft" class="form-control" type="text" value="<c:out value="${daoConfig.getString('limiteSoft')}" />" pattern="[0-9]+"/>
+                                    <span class="input-group-addon">Limite absolue</span><input id="limiteHard" name="limiteHard" class="form-control" type="text" value="<c:out value="${daoConfig.getString('limiteHard')}" />" pattern="[0-9]+"/>
+				</div>
                                 <input type="hidden" name="tache" value="effectuerModificationConfig"/>
                                 <input type="submit" id="enregistrerConfig" class="btn btn-primary" value="Enregistrer"/>
+				
                             </form>
                         </div>
                     </div>
