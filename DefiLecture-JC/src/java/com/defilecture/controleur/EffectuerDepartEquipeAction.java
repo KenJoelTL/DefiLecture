@@ -63,7 +63,7 @@ public class EffectuerDepartEquipeAction extends Action implements RequirePRGAct
             if (demandeEqpDao.delete(demandeEquipe)) {
               compte.setIdEquipe(-1);
               compteDao.update(compte);
-              action = "auRevoir.do?tache=afficherPageEquipe&idEquipe=" + idEquipe;
+              action = "auRevoir.do?tache=afficherModificationEquipe&idEquipe=" + idEquipe;
               data.put(
                   "succesRetrait",
                   "Le matelot "
