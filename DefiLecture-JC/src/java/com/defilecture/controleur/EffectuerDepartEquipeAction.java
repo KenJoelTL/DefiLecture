@@ -34,7 +34,7 @@ public class EffectuerDepartEquipeAction extends Action implements RequirePRGAct
 
   @Override
   public String execute() {
-    String action = "echec.do?tache=afficherPageAccueil";
+    String action = "*.do?tache=afficherPageConnexion";
     if (userIsConnected()
         && session.getAttribute("role") != null
         && request.getParameter("idEquipe") != null
@@ -42,6 +42,9 @@ public class EffectuerDepartEquipeAction extends Action implements RequirePRGAct
         && (userIsAdmin()
             || userIsCapitaine()
             || request.getParameter("idCompte").equals(session.getAttribute("currentId")))) {
+
+      action = "echec.do?tache=afficherPageModificationEquipe&idEquipe="+request.getParameter("idEquipe"); 
+
       try {
         String idCompte = request.getParameter("idCompte");
         String idEquipe = request.getParameter("idEquipe");
@@ -51,7 +54,6 @@ public class EffectuerDepartEquipeAction extends Action implements RequirePRGAct
         CompteDAO compteDao = new CompteDAO(cnx);
         Compte compte = compteDao.read(idCompte);
         Equipe equipe = equipeDao.read(idEquipe);
-
         if (compte != null && equipe != null && equipe.getIdEquipe() == compte.getIdEquipe()) {
           DemandeEquipeDAO demandeEqpDao = new DemandeEquipeDAO(cnx);
           DemandeEquipe demandeEquipe =
