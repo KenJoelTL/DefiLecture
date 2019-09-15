@@ -64,6 +64,7 @@
 
 <!-- Ajouter equipe dans les variables -->
 <c:set var="listeMembres" value="${compteDao.findByIdEquipe(equipe.getIdEquipe())}"/>
+<c:set var="listeComptes" value="${compteDao.findAll()}"/>
 <c:set var="nbMembres" value="${listeMembres.size()}"/>
 
 <!-- Reste du code -->
@@ -182,6 +183,17 @@
                             </c:if>
                         </tr>
                         </c:forEach>
+                        <tr>
+                          <td colspan=5>
+                            <select class="selectpicker" data-show-subtext="true" data-live-search="true">
+                              <c:forEach items="${listeComptes}" var="compte">
+                                <c:if test="${compte.getIdEquipe() eq -1}">
+                                  <option value="${compte.getIdCompte()}">${compte.getPrenom()} ${compte.getNom()}</option>
+                                </c:if>
+                              </c:forEach>
+                            </select>
+                          <td>
+                        </tr>
                     </tbody>
                 </table>
         
