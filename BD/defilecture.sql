@@ -196,7 +196,7 @@ CREATE TABLE `lecture` (
 
 CREATE TABLE `config_site` (
   `ID_CONFIG` varchar(50) NOT NULL,
-  `VALUE_CONFIG` varchar(50) DEFAULT NULL
+  `VALUE_CONFIG` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
