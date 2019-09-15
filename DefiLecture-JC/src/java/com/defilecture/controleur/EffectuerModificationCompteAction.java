@@ -161,7 +161,7 @@ public class EffectuerModificationCompteAction extends Action
     } else {
       return "*.do?tache=afficherPageGestionListeCompte";
     }
-    return "*..do?tache=afficherPageConnexion";
+    return "*.do?tache=afficherPageConnexion";
   }
 
   @Override

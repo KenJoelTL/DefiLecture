@@ -41,11 +41,11 @@ public class EffectuerAjoutMembreEquipeAction extends Action
         && request.getParameter("idCompte") != null
         && userIsAdmin()) {
 
-      int idEquipe = ((Integer) request.getParameter("idEquipe")).intValue(),
-            idCompte = ((Integer) request.getParameter("idCompte")).intValue();
-      boolean promouvoirCapitaine = request.getParameter("promouvoirCapitaine") != null;
-
       try {
+        int idEquipe = Integer.parseInt(request.getParameter("idEquipe")),
+              idCompte = (Integer.parseInt(request.getParameter("idCompte"));
+        boolean promouvoirCapitaine = request.getParameter("promouvoirCapitaine") != null;
+
         Connection cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
         EquipeDAO daoEquipe = new EquipeDAO(cnx);
         CompteDAO daoCompte = new CompteDAO(cnx);
@@ -55,7 +55,7 @@ public class EffectuerAjoutMembreEquipeAction extends Action
 
         if(promouvoirCapitaine) {
           List<Compte> membres = daoCompte.findByIdEquipe(idEquipe);
-          if(!list.stream().filter(m -> m.getRole() == Compte.CAPITAINE).findFirst().isPresent()) {
+          if(!membres.stream().filter(m -> m.getRole() == Compte.CAPITAINE).findFirst().isPresent()) {
             compte.setRole(Compte.CAPITAINE);
           } else {
             data.put(
@@ -70,7 +70,6 @@ public class EffectuerAjoutMembreEquipeAction extends Action
           data.put(
               "erreurMembreDejaDansEquipe",
               "Le participant est déjà membre d'une équipe");
-          return "erreur.do?tache=afficherPageModificationEquipe&idEquipe=" + idEquipe;
         }
 
         if(equipe.getNbMembres() < Equipe.NB_MAX_MEMBRES) {
@@ -88,19 +87,23 @@ public class EffectuerAjoutMembreEquipeAction extends Action
           data.put(
               "erreurEquipePleine",
               "L'équipe est complète.");
-          return "erreur.do?tache=afficherPageModificationEquipe&idEquipe=" + idEquipe;
         }
+      } catch (NumberFormatException ex) {
+        Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+        data.put(
+          "erreurServeur",
+          "Equipe ou compte introuvable.");
       } catch (SQLException ex){
         Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         data.put(
           "erreurServeur",
           "Erreur du serveur. Veuillez contacter l'administrateur.");
-        return "erreur.do?tache=afficherPageModificationEquipe&idEquipe=" + idEquipe;
       } finally {
         Connexion.close();
       }
+      return "erreur.do?tache=afficherPageModificationEquipe&idEquipe=" + idEquipe;
     }
-    return "/";
+    return "*.do?tache=afficherPageConnexion";
   }
 
   @Override
