@@ -50,6 +50,7 @@ while (it.hasNext()) {
         <title>Défi Lecture</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css" />
         <link rel="stylesheet" href="./css/styles.css">
         <link rel="stylesheet" href="./css/defiLectureStyles.css" type="text/css"> </head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
