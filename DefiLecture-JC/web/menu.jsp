@@ -101,7 +101,7 @@
 				<a class="dropdown-toggle" data-toggle="dropdown" href="#">&Eacute;quipes
 				    <span class="caret"></span></a>
 				<ul class="dropdown-menu">
-				    <li ><a href="*.do?tache=afficherPageGestionEquipes">G&eacute;rer les &eacute;quipes</a></li>
+				    <li ><a href="*.do?tache=afficherPageGestionListeEquipes">G&eacute;rer les &eacute;quipes</a></li>
 				</ul>
 			    </li>
 			</c:if>
