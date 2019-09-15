@@ -113,7 +113,7 @@
                     <div class="alert alert-danger"><strong>${requestScope.data['erreurParticipantDejaAccepter']}</strong></div>
                 </c:if>
                 <c:if test="${!empty requestScope.data['succesAjoutMembre']}">
-                    <div class="alert alert-sucess"><strong>${requestScope.data['succesAjoutMembre']}</strong></div>
+                    <div class="alert alert-success"><strong>${requestScope.data['succesAjoutMembre']}</strong></div>
                 </c:if>
                 <c:if test="${!empty requestScope.data['erreurEquipePleine']}">
                     <div class="alert alert-danger"><strong>${requestScope.data['erreurEquipePleine']}</strong></div>
