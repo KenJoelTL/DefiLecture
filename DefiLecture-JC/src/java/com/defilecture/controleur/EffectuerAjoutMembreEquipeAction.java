@@ -137,7 +137,6 @@ public class EffectuerAjoutMembreEquipeAction extends Action
       } finally {
         Connexion.close();
       }
-      return "erreur.do?tache=afficherPageModificationEquipe&idEquipe=" + request.getParameter("idEquipe");
     }
     return "*.do?tache=afficherPageConnexion";
   }
