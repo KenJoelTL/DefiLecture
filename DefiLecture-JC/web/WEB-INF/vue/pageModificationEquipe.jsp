@@ -150,8 +150,8 @@
                         <c:forEach items="${listeMembres}" var="membre">      
                         <c:set var="estCapitaine" value="${membre.getRole eq Compte.CAPITAINE}"></c:set>
                         <tr>
-                          <td><c:if test="estCapitaine"><b></c:if>${membre.prenom}<c:if test="estCapitaine"></b></c:if></td>
-                            <td><c:if test="estCapitaine"><b></c:if>${membre.nom}<c:if test="estCapitaine"></b></c:if></td>
+                          <td><c:if test="${estCapitaine}"><b></c:if>${membre.prenom}<c:if test="${estCapitaine}"></b></c:if></td>
+                            <td><c:if test="${estCapitaine}"><b></c:if>${membre.nom}<c:if test="${estCapitaine}"></b></c:if></td>
                             <td>
                                 <c:set var="contribution" value="${demEquipeDao.findByIdCompteEquipe(membre.idCompte,equipe.idEquipe)}"></c:set>
                                 <div class="progress">
