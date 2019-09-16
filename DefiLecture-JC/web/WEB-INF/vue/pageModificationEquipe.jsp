@@ -185,7 +185,7 @@
                         </c:forEach>
                     </tbody>
                 </table>
-                <c:if test="${compte.getRole() eq Compte.ADMINISTRATEUR}">
+                <c:if test="${compteConnecte.getRole() eq Compte.ADMINISTRATEUR}">
                 <form method="get" action="*.do">
                   <div class="form-group">
                       <label for="nom">Ajouter un <% out.println(application.getAttribute("vocParticipant"));%> :</label>
