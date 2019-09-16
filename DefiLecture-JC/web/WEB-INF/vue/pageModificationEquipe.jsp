@@ -183,24 +183,24 @@
                             </c:if>
                         </tr>
                         </c:forEach>
-                        <tr>
-                          <td colspan=5>
-                            <form method="get" action="*.do">
-                            <input hidden name="tache" value="effectuerAjoutMembreEquipe" type="text" />
-                            <input hidden name="idEquipe" value="${equipe.idEquipe}" type="text" />
-                            <select class="selectpicker" data-show-subtext="true" data-live-search="true" name="idCompte">
-                              <c:forEach items="${listeComptes}" var="compte">
-                                <c:if test="${compte.getIdEquipe() eq -1}">
-                                  <option value="${compte.getIdCompte()}">${compte.getPrenom()} ${compte.getNom()}</option>
-                                </c:if>
-                              </c:forEach>
-                            </select>
-                            <button type="submit" class="btn btn-success" name="modifie" >Ajouter</button>
-                          <td>
-                        </tr>
                     </tbody>
                 </table>
-        
+
+                <form method="get" action="*.do">
+                  <div class="form-group">
+                      <label for="nom">Ajouter un <% out.println(application.getAttribute("vocParticipant"));%> :</label>
+                      <input hidden name="tache" value="effectuerAjoutMembreEquipe" type="text" />
+                      <input hidden name="idEquipe" value="${equipe.idEquipe}" type="text" />
+                  </div>
+                  <select class="selectpicker" data-show-subtext="true" data-live-search="true" name="idCompte">
+                    <c:forEach items="${listeComptes}" var="compte">
+                      <c:if test="${compte.getIdEquipe() eq -1}">
+                        <option value="${compte.getIdCompte()}">${compte.getPrenom()} ${compte.getNom()}</option>
+                      </c:if>
+                    </c:forEach>
+                  </select>
+                  <button type="submit" class="btn btn-success" name="modifie" >Ajouter</button>
+                </form>
         <a href="*.do?tache=afficherPageEquipe&idEquipe=${equipe.idEquipe}" class="retour"><span class="glyphicon glyphicon-circle-arrow-left"></span>retour à la page <% out.println(application.getAttribute("vocEquipe1"));%></a>
         
             </div>
