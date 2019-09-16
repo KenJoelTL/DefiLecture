@@ -21,7 +21,7 @@
 <%@page import="java.sql.Connection"%>
 <%@page import="com.defilecture.modele.Equipe"%>
 <%@page import="com.defilecture.modele.EquipeDAO"%>
-<script language="javascript" src="./script/jsPageGestionEquipe.js"></script>
+<script language="javascript" src="./script/jsPageGestionListeEquipe.js"></script>
 
 <jsp:useBean id="connexion" scope="page" class="jdbc.Connexion"></jsp:useBean>  
 <jsp:useBean id="daoEquipe" scope="page" class="com.defilecture.modele.EquipeDAO">

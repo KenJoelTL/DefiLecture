@@ -15,13 +15,12 @@
     along with DefiLecture.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-function supprimerParticipant(idCompte, idEquipe){
+function supprimerEquipe(idEquipe){
   jQuery.alerts.okButton = 'Oui';
   jQuery.alerts.cancelButton = 'Non';                  
-  jConfirm('Souhaitez-vous vraiment supprimer le participant?',  '', function(r) {
+  jConfirm('Souhaitez-vous vraiment supprimer l\'équipage?',  '', function(r) {
     if (r == true) {                    
-      location.href = 'depart.do?tache=effectuerDepartEquipe&idCompte='+idCompte+'&idEquipe='+idEquipe;
-    }  
+      location.href = '*.do?tache=effectuerSuppressionEquipe&idEquipe='+idEquipe;
+    }
   }
 }
-

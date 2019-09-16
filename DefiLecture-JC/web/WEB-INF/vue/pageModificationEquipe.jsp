@@ -30,6 +30,7 @@
 <%@page import="jdbc.Config"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<script language="javascript" src="./script/jsPageGestionEquipe.js"></script>
 
 <!-- Faire la connexion -->
 <jsp:useBean id="connexion" class="jdbc.Connexion"/>
@@ -176,7 +177,7 @@
                                 </c:if>
                                 <c:if test="${permissionAccordee and (sessionScope.connecte ne membre.idCompte)}">
                                 <td>
-                                    <a href="depart.do?tache=effectuerDepartEquipe&idCompte=${membre.idCompte}&idEquipe=${equipe.idEquipe}">
+                                    <a onclick="supprimerParticipant(${membre.idCompte}, ${equipe.idEquipe})">
                                         Retirer <% out.println(application.getAttribute("vocEquipe1"));%>
                                     </a>
                                 </td>
