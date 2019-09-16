@@ -52,11 +52,19 @@ public class EffectuerCreationEquipeAction extends Action implements RequirePRGA
               if (daoEquipe.create(equipe)) {
                 equipe = daoEquipe.findByNom(equipe.getNom());
                 Logger.getLogger(EffectuerCreationEquipeAction.class.getName())
-                    .log(Level.INFO, "Équipe {ID: " + Integer.toString(equipe.getIdEquipe()) + ", Nom: " + equipe.getNom() + "} créée.");
+                    .log(
+                        Level.INFO,
+                        "Équipe {ID: "
+                            + Integer.toString(equipe.getIdEquipe())
+                            + ", Nom: "
+                            + equipe.getNom()
+                            + "} créée.");
               } else {
                 data.put("erreurNom", "Équipe non créée.");
                 Logger.getLogger(EffectuerCreationEquipeAction.class.getName())
-                    .log(Level.INFO, "Erreur lors de la création de l'équipe " + equipe.getNom() + ".");
+                    .log(
+                        Level.INFO,
+                        "Erreur lors de la création de l'équipe " + equipe.getNom() + ".");
                 return "creation.do?tache=afficherPageCreationEquipe";
               }
 

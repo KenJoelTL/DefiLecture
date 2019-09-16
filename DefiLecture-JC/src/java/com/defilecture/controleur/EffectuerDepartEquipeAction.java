@@ -43,7 +43,9 @@ public class EffectuerDepartEquipeAction extends Action implements RequirePRGAct
             || userIsCapitaine()
             || request.getParameter("idCompte").equals(session.getAttribute("currentId")))) {
 
-      action = "echec.do?tache=afficherPageModificationEquipe&idEquipe="+request.getParameter("idEquipe"); 
+      action =
+          "echec.do?tache=afficherPageModificationEquipe&idEquipe="
+              + request.getParameter("idEquipe");
 
       try {
         String idCompte = request.getParameter("idCompte");

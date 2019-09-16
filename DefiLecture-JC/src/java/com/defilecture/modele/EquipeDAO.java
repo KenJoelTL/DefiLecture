@@ -195,11 +195,13 @@ public class EquipeDAO extends DAO<Equipe> {
       ResultSet resultat = paramStm.executeQuery();
 
       if (resultat.next()) {
-        equipe  = new Equipe();
-        equipe .setIdEquipe(resultat.getInt("ID_EQUIPE"));
-        equipe .setNom(resultat.getString("NOM"));
-        equipe .setPoint((new DemandeEquipeDAO(cnx).sumPointByidEquipe(resultat.getInt("ID_EQUIPE"))));
-        equipe .setNbMembres((new CompteDAO(cnx)).countCompteByIdEquipe(resultat.getInt("ID_EQUIPE")));
+        equipe = new Equipe();
+        equipe.setIdEquipe(resultat.getInt("ID_EQUIPE"));
+        equipe.setNom(resultat.getString("NOM"));
+        equipe.setPoint(
+            (new DemandeEquipeDAO(cnx).sumPointByidEquipe(resultat.getInt("ID_EQUIPE"))));
+        equipe.setNbMembres(
+            (new CompteDAO(cnx)).countCompteByIdEquipe(resultat.getInt("ID_EQUIPE")));
       }
 
       resultat.close();

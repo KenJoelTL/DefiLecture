@@ -252,8 +252,7 @@ public class CompteDAO extends DAO<Compte> {
   }
 
   public int countCompteByIdEquipe(int idEquipe) {
-    String req =
-        "SELECT COUNT(ID_COMPTE) AS NB_MEMBRES FROM `compte` WHERE ID_EQUIPE = ?";
+    String req = "SELECT COUNT(ID_COMPTE) AS NB_MEMBRES FROM `compte` WHERE ID_EQUIPE = ?";
     int nbMembre = 0;
     PreparedStatement paramStm = null;
 

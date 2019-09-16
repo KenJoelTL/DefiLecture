@@ -1,4 +1,3 @@
-
 /**
  * This file is part of DefiLecture.
  *
@@ -17,16 +16,15 @@ package com.defilecture.controleur;
 
 import com.defilecture.modele.Compte;
 import com.defilecture.modele.CompteDAO;
-import com.defilecture.modele.Equipe;
-import com.defilecture.modele.EquipeDAO;
 import com.defilecture.modele.DemandeEquipe;
 import com.defilecture.modele.DemandeEquipeDAO;
+import com.defilecture.modele.Equipe;
+import com.defilecture.modele.EquipeDAO;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jdbc.Config;
@@ -45,95 +43,91 @@ public class EffectuerAjoutMembreEquipeAction extends Action
         && userIsAdmin()) {
       try {
         int idEquipe = Integer.parseInt(request.getParameter("idEquipe")),
-              idCompte = Integer.parseInt(request.getParameter("idCompte"));
+            idCompte = Integer.parseInt(request.getParameter("idCompte"));
         boolean promouvoirCapitaine = request.getParameter("promouvoirCapitaine") != null;
 
-        Connection cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
+        Connection cnx =
+            Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
         EquipeDAO daoEquipe = new EquipeDAO(cnx);
         CompteDAO daoCompte = new CompteDAO(cnx);
-        DemandeEquipeDAO daoDE= new DemandeEquipeDAO(cnx);
+        DemandeEquipeDAO daoDE = new DemandeEquipeDAO(cnx);
 
         Compte compte = daoCompte.read(idCompte);
         Equipe equipe = daoEquipe.read(idEquipe);
 
-        if(promouvoirCapitaine) {
+        if (promouvoirCapitaine) {
           List<Compte> membres = daoCompte.findByIdEquipe(idEquipe);
-          if(!membres.stream().filter(m -> m.getRole() == Compte.CAPITAINE).findFirst().isPresent()) {
+          if (!membres.stream()
+              .filter(m -> m.getRole() == Compte.CAPITAINE)
+              .findFirst()
+              .isPresent()) {
             compte.setRole(Compte.CAPITAINE);
           } else {
-            data.put(
-                "attentionPromouvoirCapitaine",
-                "L'équipe a déjà un capitaine.");
+            data.put("attentionPromouvoirCapitaine", "L'équipe a déjà un capitaine.");
           }
         }
 
-        if(compte.getIdEquipe() == -1) {
+        if (compte.getIdEquipe() == -1) {
           compte.setIdEquipe(idEquipe);
         } else {
-          data.put(
-              "erreurMembreDejaDansEquipe",
-              "Le participant est déjà membre d'une équipe");
-          return "echec.do?tache=afficherPageModificationEquipe&idEquipe="+idEquipe;
+          data.put("erreurMembreDejaDansEquipe", "Le participant est déjà membre d'une équipe");
+          return "echec.do?tache=afficherPageModificationEquipe&idEquipe=" + idEquipe;
         }
 
-        if(equipe.getNbMembres() < Equipe.NB_MAX_MEMBRES) {
+        if (equipe.getNbMembres() < Equipe.NB_MAX_MEMBRES) {
 
-          DemandeEquipe demandeEq = daoDE.findByIdCompteEquipe(compte.getIdCompte(), equipe.getIdEquipe());
+          DemandeEquipe demandeEq =
+              daoDE.findByIdCompteEquipe(compte.getIdCompte(), equipe.getIdEquipe());
 
           if (demandeEq == null) {
             demandeEq = new DemandeEquipe();
             demandeEq.setIdCompte(compte.getIdCompte());
             demandeEq.setIdEquipe(equipe.getIdEquipe());
 
-            if(daoDE.create(demandeEq)) {
+            if (daoDE.create(demandeEq)) {
               demandeEq = daoDE.findByIdCompteEquipe(compte.getIdCompte(), equipe.getIdEquipe());
             }
           }
 
-          if(demandeEq.getStatutDemande() == DemandeEquipe.EN_ATTENTE){
+          if (demandeEq.getStatutDemande() == DemandeEquipe.EN_ATTENTE) {
             demandeEq.setStatutDemande(DemandeEquipe.ACCEPTEE);
-            if(daoDE.update(demandeEq)) {
-                daoCompte.update(compte);
+            if (daoDE.update(demandeEq)) {
+              daoCompte.update(compte);
             } else {
-              data.put(
-                  "erreurDemandeNonAcceptee",
-                  "La demande n'a pas pu être acceptée.");
-              return "echec.do?tache=afficherPageModificationEquipe&idEquipe="+idEquipe;
+              data.put("erreurDemandeNonAcceptee", "La demande n'a pas pu être acceptée.");
+              return "echec.do?tache=afficherPageModificationEquipe&idEquipe=" + idEquipe;
             }
           } else {
             data.put(
                 "erreurParticipantDejaAccepter",
                 "Le participant a déjà été accepté ou a été suspendu.");
-            return "echec.do?tache=afficherPageModificationEquipe&idEquipe="+idEquipe;
+            return "echec.do?tache=afficherPageModificationEquipe&idEquipe=" + idEquipe;
           }
 
           Logger.getLogger(this.getClass().getName())
-            .log(Level.INFO, 
-                "Compte " + Integer.toString(compte.getIdCompte())
-                + " ajouté à l'équipe " + Integer.toString(compte.getIdEquipe())
-                + (promouvoirCapitaine ? "et a été promu capitaine !" : ""));
-          data.put(
-              "succesAjoutMembre",
-              "Le membre a été ajouté.");
-          return "succes.do?tache=afficherPageModificationEquipe&idEquipe="+idEquipe;
+              .log(
+                  Level.INFO,
+                  "Compte "
+                      + Integer.toString(compte.getIdCompte())
+                      + " ajouté à l'équipe "
+                      + Integer.toString(compte.getIdEquipe())
+                      + (promouvoirCapitaine ? "et a été promu capitaine !" : ""));
+          data.put("succesAjoutMembre", "Le membre a été ajouté.");
+          return "succes.do?tache=afficherPageModificationEquipe&idEquipe=" + idEquipe;
         } else {
-          data.put(
-              "erreurEquipePleine",
-              "L'équipe est complète.");
-          return "echec.do?tache=afficherPageModificationEquipe&idEquipe="+idEquipe;
+          data.put("erreurEquipePleine", "L'équipe est complète.");
+          return "echec.do?tache=afficherPageModificationEquipe&idEquipe=" + idEquipe;
         }
       } catch (NumberFormatException ex) {
         Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-        data.put(
-          "erreurServeur",
-          "Equipe ou compte introuvable.");
-        return "erreur.do?tache=afficherPageModificationEquipe&idEquipe=" + request.getParameter("idEquipe");
-      } catch (SQLException ex){
+        data.put("erreurServeur", "Equipe ou compte introuvable.");
+        return "erreur.do?tache=afficherPageModificationEquipe&idEquipe="
+            + request.getParameter("idEquipe");
+      } catch (SQLException ex) {
         Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-        data.put(
-          "erreurServeur",
-          "Erreur du serveur. Veuillez contacter l'administrateur.");
-        return "erreur.do?tache=afficherPageModificationEquipe&idEquipe=" + request.getParameter("idEquipe");
+        data.put("erreurServeur", "Erreur du serveur. Veuillez contacter l'administrateur.");
+        return "erreur.do?tache=afficherPageModificationEquipe&idEquipe="
+            + request.getParameter("idEquipe");
       } finally {
         Connexion.close();
       }

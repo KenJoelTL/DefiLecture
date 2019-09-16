@@ -75,6 +75,6 @@ public class Equipe implements Comparable<Equipe> {
 
   @Override
   public boolean equals(Object obj) {
-      return (obj instanceof Equipe) ? (this.idEquipe == ((Equipe) obj).idEquipe) : false;
+    return (obj instanceof Equipe) ? (this.idEquipe == ((Equipe) obj).idEquipe) : false;
   }
 }
