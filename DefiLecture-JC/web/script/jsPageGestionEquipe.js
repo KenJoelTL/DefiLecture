@@ -16,7 +16,7 @@
 */
 
 function supprimerParticipant(idCompte, idEquipe){
-  var confirmation = confirm('Souhaitez-vous vraiment supprimer le participant?';
+  var confirmation = confirm('Souhaitez-vous vraiment supprimer le participant?');
   if (confirmation == true) {                    
     location.href = 'depart.do?tache=effectuerDepartEquipe&idCompte='+idCompte+'&idEquipe='+idEquipe;
   }
