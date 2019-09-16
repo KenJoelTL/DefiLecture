@@ -62,7 +62,7 @@
     </c:otherwise>
 </c:choose>
 
-<!-- Ajouter equipe dans les variables -->
+<!-- Ajouter l'equipe dans les variables -->
 <c:set var="listeMembres" value="${compteDao.findByIdEquipe(equipe.getIdEquipe())}"/>
 <c:set var="listeComptes" value="${compteDao.findAll()}"/>
 <c:set var="nbMembres" value="${listeMembres.size()}"/>
