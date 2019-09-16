@@ -64,6 +64,11 @@ public class EffectuerCreationLectureAction extends Action implements RequirePRG
       int obligatoire = Integer.parseInt(request.getParameter("obligatoire"));
       int idCompte = ((Integer) session.getAttribute("currentId")).intValue();
 
+      //Vérifie la limite de lectures
+      if (dureeMinutes > Integer.parseInt(session.getServletContext().getAttribute("com.defilecture.limiteHard").toString())){
+	  return "*.do?tache=afficherPageGestionLecture";
+      }
+      
       Lecture lecture;
 
       try {

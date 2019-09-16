@@ -63,7 +63,7 @@
                                 </div>
                                 <h4>Nombre de matelots :</h4>
                                 <input id="nbMatelots" name="nbMatelots" class="form-control" type="text" value="<c:out value="${daoConfig.getString('nbmatelots')}" />" pattern="[0-9]+"/>
-                                <h4>Nombre d'heures limite de lecture quotidienne :</h4>
+                                <h4>Maximum de minutes de lecture quotidienne :</h4>
 				<div class="input-group">
                                     <span class="input-group-addon">Avertissement</span><input id="limiteSoft" name="limiteSoft" class="form-control" type="text" value="<c:out value="${daoConfig.getString('limiteSoft')}" />" pattern="[0-9]+"/>
                                     <span class="input-group-addon">Limite absolue</span><input id="limiteHard" name="limiteHard" class="form-control" type="text" value="<c:out value="${daoConfig.getString('limiteHard')}" />" pattern="[0-9]+"/>
