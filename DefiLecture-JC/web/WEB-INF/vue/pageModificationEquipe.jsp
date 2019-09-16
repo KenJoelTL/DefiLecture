@@ -185,7 +185,7 @@
                         </c:forEach>
                     </tbody>
                 </table>
-
+                <c:if test="${compte.getRole() eq Compte.ADMINISTRATEUR}">
                 <form method="get" action="*.do">
                   <div class="form-group">
                       <label for="nom">Ajouter un <% out.println(application.getAttribute("vocParticipant"));%> :</label>
@@ -201,6 +201,7 @@
                   </select>
                   <button type="submit" class="btn btn-success" name="modifie" >Ajouter</button>
                 </form>
+                </c:if>
         <a href="*.do?tache=afficherPageEquipe&idEquipe=${equipe.idEquipe}" class="retour"><span class="glyphicon glyphicon-circle-arrow-left"></span>retour à la page <% out.println(application.getAttribute("vocEquipe1"));%></a>
         
             </div>
