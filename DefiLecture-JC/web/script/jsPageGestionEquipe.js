@@ -16,12 +16,9 @@
 */
 
 function supprimerParticipant(idCompte, idEquipe){
-  jQuery.alerts.okButton = 'Oui';
-  jQuery.alerts.cancelButton = 'Non';                  
-  jConfirm('Souhaitez-vous vraiment supprimer le participant?',  '', function(r) {
-    if (r == true) {                    
-      location.href = 'depart.do?tache=effectuerDepartEquipe&idCompte='+idCompte+'&idEquipe='+idEquipe;
-    }  
-  });
+  var confirmation = confirm('Souhaitez-vous vraiment supprimer le participant?';
+  if (confirmation == true) {                    
+    location.href = 'depart.do?tache=effectuerDepartEquipe&idCompte='+idCompte+'&idEquipe='+idEquipe;
+  }
 }
 

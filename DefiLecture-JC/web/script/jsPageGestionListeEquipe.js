@@ -16,11 +16,8 @@
 */
 
 function supprimerEquipe(idEquipe){
-  jQuery.alerts.okButton = 'Oui';
-  jQuery.alerts.cancelButton = 'Non';                  
-  jConfirm('Souhaitez-vous vraiment supprimer l\'équipage?',  '', function(r) {
-    if (r == true) {                    
-      location.href = '*.do?tache=effectuerSuppressionEquipe&idEquipe='+idEquipe;
-    }
-  });
+  var confirmation = confirm('Souhaitez-vous vraiment supprimer l\'équipage?';
+  if (confirmation == true) {                    
+    location.href = '*.do?tache=effectuerSuppressionEquipe&idEquipe='+idEquipe;
+  }
 }
