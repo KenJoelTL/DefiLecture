@@ -22,6 +22,6 @@ function supprimerParticipant(idCompte, idEquipe){
     if (r == true) {                    
       location.href = 'depart.do?tache=effectuerDepartEquipe&idCompte='+idCompte+'&idEquipe='+idEquipe;
     }  
-  }
+  });
 }
 

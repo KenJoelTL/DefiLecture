@@ -22,5 +22,5 @@ function supprimerEquipe(idEquipe){
     if (r == true) {                    
       location.href = '*.do?tache=effectuerSuppressionEquipe&idEquipe='+idEquipe;
     }
-  }
+  });
 }
