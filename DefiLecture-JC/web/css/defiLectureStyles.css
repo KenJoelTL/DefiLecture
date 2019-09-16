@@ -93,9 +93,8 @@ div#optionsNavigation {
   max-height: 100%!important;
 }
 
-ul.dropdown-menu {
+#optionsNavigation ul.dropdown-menu {
   background-color: black;
-
 }
 
   .navbar-nav .open .dropdown-menu li a:hover {
