@@ -18,6 +18,8 @@ import com.defilecture.modele.Lecture;
 import com.defilecture.modele.LectureDAO;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jdbc.Config;
@@ -30,9 +32,28 @@ public class EffectuerModificationLectureAction extends Action implements Requir
     if (userIsConnected()
         && (userIsCapitaine() || userIsParticipant())
         && request.getParameter("modifie") != null) {
-      String idLecture = request.getParameter("idLecture"), titre = request.getParameter("titre");
 
-      int dureeMinutes, estObligatoire = Integer.parseInt(request.getParameter("obligatoire"));
+      // Vérification des dates
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+      LocalDateTime débutInscription =
+          LocalDateTime.parse(
+              (String) session.getServletContext().getAttribute("com.defilecture.dLecture"),
+              formatter);
+      LocalDateTime finInscription =
+          LocalDateTime.parse(
+              (String) session.getServletContext().getAttribute("com.defilecture.fLecture"),
+              formatter);
+
+      if (LocalDateTime.now().isBefore(débutInscription)
+          || LocalDateTime.now().isAfter(finInscription)) {
+        return "*.do?tache=afficherPageGestionLecture";
+      }
+
+      String idLecture = request.getParameter("idLecture");
+      String titre = request.getParameter("titre");
+
+      int dureeMinutes;
+      int estObligatoire = Integer.parseInt(request.getParameter("obligatoire"));
 
       try {
         Connection cnx =

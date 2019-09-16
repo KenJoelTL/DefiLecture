@@ -42,24 +42,24 @@
                         <div class="panel-heading"><h2>Configuration :</h2></div>
                         <div class="panel-body">
                             <form action="configSite.do" method="post">
-                                <h4>Dates Accès (jj-mm-aaaa hh:mm) :</h4>
+                                <h4>Dates Accès (aaaa-mm-jj hh:mm) :</h4>
                                 <div class="input-daterange input-group dateConfig">
                                     <span class="input-group-addon">De:</span>
-                                     <input type="datetime-local" id="accesDe" name="accesDe" class="input-sm form-control" value="<c:out value="${daoConfig.getString('accesDe')}" />"  pattern='(31|30|[12][0-9]|0[1-9])-(1[012]|0[1-9])-20[0-9]{2} (2[0-3]|[01][0-9]):[0-5][0-9]'/>
+                                     <input type="datetime-local" id="accesDe" name="accesDe" class="input-sm form-control" value="<c:out value="${daoConfig.getString('accesDe')}" />"  pattern='20[0-9]{2}-(1[012]|0[1-9])-(31|30|[12][0-9]|0[1-9]) (2[0-3]|[01][0-9]):[0-5][0-9]'/>
                                     <span class="input-group-addon">à</span>
                                     <input type="datetime-local" id="accesA" name="accesA" class="input-sm form-control" value="<c:out value="${daoConfig.getString('accesA')}" />"/>
                                 </div>
-                                <h4>Dates d'inscription (jj-mm-aaaa hh:mm):</h4>
+                                <h4>Dates d'inscription (aaaa-mm-jj hh:mm):</h4>
                                 <div class="input-daterange input-group dateConfig">
                                     <span class="input-group-addon">De :</span>
-                                    <input type="datetime-local" id="dInscription" name="dInscription" class="input-sm form-control" value="<c:out value="${daoConfig.getString('dInscription')}" />" pattern='(31|30|[12][0-9]|0[1-9])-(1[012]|0[1-9])-20[0-9]{2} (2[0-3]|[01][0-9]):[0-5][0-9]' />
+                                    <input type="datetime-local" id="dInscription" name="dInscription" class="input-sm form-control" value="<c:out value="${daoConfig.getString('dInscription')}" />" pattern='20[0-9]{2}-(1[012]|0[1-9])-(31|30|[12][0-9]|0[1-9]) (2[0-3]|[01][0-9]):[0-5][0-9]' />
                                 </div>
-                                <h4>Dates de lectures (jj-mm-aaaa hh:mm):</h4>
+                                <h4>Dates de lectures (aaaa-mm-jj hh:mm):</h4>
                                 <div class="input-daterange input-group dateConfig">
                                     <span class="input-group-addon">De :</span>
-                                    <input type="datetime-local" id="dLecture" name="dLecture" class="input-sm form-control" value="<c:out value="${daoConfig.getString('dLecture')}" />" pattern='(31|30|[12][0-9]|0[1-9])-(1[012]|0[1-9])-20[0-9]{2} (2[0-3]|[01][0-9]):[0-5][0-9]' />
+                                    <input type="datetime-local" id="dLecture" name="dLecture" class="input-sm form-control" value="<c:out value="${daoConfig.getString('dLecture')}" />" pattern='20[0-9]{2}-(1[012]|0[1-9])-(31|30|[12][0-9]|0[1-9]) (2[0-3]|[01][0-9]):[0-5][0-9]' />
                                     <span class="input-group-addon">à</span>
-                                    <input type="datetime-local" id="fLecture" name="fLecture" class="input-sm form-control" value="<c:out value="${daoConfig.getString('fLecture')}" />" pattern='(31|30|[12][0-9]|0[1-9])-(1[012]|0[1-9])-20[0-9]{2} (2[0-3]|[01][0-9]):[0-5][0-9]' />
+                                    <input type="datetime-local" id="fLecture" name="fLecture" class="input-sm form-control" value="<c:out value="${daoConfig.getString('fLecture')}" />" pattern='20[0-9]{2}-(1[012]|0[1-9])-(31|30|[12][0-9]|0[1-9]) (2[0-3]|[01][0-9]):[0-5][0-9]' />
                                 </div>
                                 <h4>Nombre de matelots :</h4>
                                 <input id="nbMatelots" name="nbMatelots" class="form-control" type="text" value="<c:out value="${daoConfig.getString('nbmatelots')}" />" pattern="[0-9]+"/>

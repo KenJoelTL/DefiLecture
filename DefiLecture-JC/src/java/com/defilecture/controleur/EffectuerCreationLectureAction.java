@@ -22,6 +22,8 @@ import com.defilecture.modele.Lecture;
 import com.defilecture.modele.LectureDAO;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jdbc.Config;
@@ -41,10 +43,26 @@ public class EffectuerCreationLectureAction extends Action implements RequirePRG
         && request.getParameter("dureeMinutes") != null
         && request.getParameter("obligatoire") != null) {
 
+      // Vérification des dates
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+      LocalDateTime débutInscription =
+          LocalDateTime.parse(
+              (String) session.getServletContext().getAttribute("com.defilecture.dLecture"),
+              formatter);
+      LocalDateTime finInscription =
+          LocalDateTime.parse(
+              (String) session.getServletContext().getAttribute("com.defilecture.fLecture"),
+              formatter);
+
+      if (LocalDateTime.now().isBefore(débutInscription)
+          || LocalDateTime.now().isAfter(finInscription)) {
+        return "*.do?tache=afficherPageGestionLecture";
+      }
+
       String titre = request.getParameter("titre");
-      int dureeMinutes = Integer.parseInt(request.getParameter("dureeMinutes")),
-          obligatoire = Integer.parseInt(request.getParameter("obligatoire")),
-          idCompte = ((Integer) session.getAttribute("currentId")).intValue();
+      int dureeMinutes = Integer.parseInt(request.getParameter("dureeMinutes"));
+      int obligatoire = Integer.parseInt(request.getParameter("obligatoire"));
+      int idCompte = ((Integer) session.getAttribute("currentId")).intValue();
 
       Lecture lecture;
 

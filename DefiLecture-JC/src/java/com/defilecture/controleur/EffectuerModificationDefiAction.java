@@ -18,6 +18,8 @@ import com.defilecture.modele.Defi;
 import com.defilecture.modele.DefiDAO;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -37,16 +39,32 @@ public class EffectuerModificationDefiAction extends Action
         && (userIsAdmin() || userIsModerateur())
         && request.getParameter("modifie") != null) {
 
-      String nom = request.getParameter("nom"),
-          description = request.getParameter("description"),
-          heureDebut = request.getParameter("heureDebut"),
-          dateDebut = request.getParameter("dateDebut") + " " + heureDebut,
-          heureFin = request.getParameter("heureFin"),
-          dateFin = request.getParameter("dateFin") + " " + heureFin,
-          question = request.getParameter("question"),
-          reponse = request.getParameter("reponse"),
-          choixReponse = request.getParameter("choixReponseJSON"),
-          idDefi = request.getParameter("idDefi");
+      // Vérification des dates
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+      LocalDateTime débutInscription =
+          LocalDateTime.parse(
+              (String) session.getServletContext().getAttribute("com.defilecture.dLecture"),
+              formatter);
+      LocalDateTime finInscription =
+          LocalDateTime.parse(
+              (String) session.getServletContext().getAttribute("com.defilecture.fLecture"),
+              formatter);
+
+      if (LocalDateTime.now().isBefore(débutInscription)
+          || LocalDateTime.now().isAfter(finInscription)) {
+        return "*.do?tache=afficherPageParticipationDefi";
+      }
+
+      String nom = request.getParameter("nom");
+      String description = request.getParameter("description");
+      String heureDebut = request.getParameter("heureDebut");
+      String dateDebut = request.getParameter("dateDebut") + " " + heureDebut;
+      String heureFin = request.getParameter("heureFin");
+      String dateFin = request.getParameter("dateFin") + " " + heureFin;
+      String question = request.getParameter("question");
+      String reponse = request.getParameter("reponse");
+      String choixReponse = request.getParameter("choixReponseJSON");
+      String idDefi = request.getParameter("idDefi");
 
       int valeurMinute;
 

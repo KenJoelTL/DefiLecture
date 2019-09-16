@@ -15,11 +15,6 @@
     You should have received a copy of the GNU General Public License
     along with DefiLecture.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<%-- 
-    Document   : jsPageListeEquipe
-    Created on : 2018-12-16, 20:58:32
-    Author     : Roodney Aladin
---%>
  */
 
 

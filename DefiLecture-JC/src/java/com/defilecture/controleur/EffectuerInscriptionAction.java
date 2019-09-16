@@ -14,11 +14,13 @@
  */
 package com.defilecture.controleur;
 
+import com.defilecture.Util;
 import com.defilecture.modele.Compte;
 import com.defilecture.modele.CompteDAO;
-import com.defilecture.Util;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -33,6 +35,26 @@ public class EffectuerInscriptionAction extends Action implements RequirePRGActi
   public String execute() {
     boolean erreur = false;
     String action = "*.do?tache=afficherPageInscription";
+
+    // Vérifie les dates d'inscription
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    LocalDateTime débutInscription =
+        LocalDateTime.parse(
+            (String) session.getServletContext().getAttribute("com.defilecture.dInscription"),
+            formatter);
+    LocalDateTime finInscription =
+        LocalDateTime.parse(
+            (String) session.getServletContext().getAttribute("com.defilecture.fLecture"),
+            formatter);
+
+    if (LocalDateTime.now().isBefore(débutInscription)
+        || LocalDateTime.now().isAfter(finInscription)) {
+      erreur = true;
+      data.put(
+          "erreurDates",
+          "Les inscriptions sont désactivées pour le moment. Revenez après le "
+              + débutInscription.format(formatter));
+    }
 
     if (request.getParameter("pseudonyme") != null) {
       data.put("pseudonyme", Util.toUTF8(request.getParameter("pseudonyme")));
@@ -82,17 +104,18 @@ public class EffectuerInscriptionAction extends Action implements RequirePRGActi
 
     if (!erreur) {
       try {
-        String courriel = request.getParameter("courriel"),
-            prenom = Util.toUTF8(request.getParameter("prenom")),
-            nom = Util.toUTF8(request.getParameter("nom")),
-            motPasse = Util.toUTF8(request.getParameter("motPasse")),
-            programmeEtude = request.getParameter("programmeEtude"),
-            pseudonyme = Util.toUTF8(request.getParameter("pseudonyme"));
+        String courriel = request.getParameter("courriel");
+        String prenom = Util.toUTF8(request.getParameter("prenom"));
+        String nom = Util.toUTF8(request.getParameter("nom"));
+        String motPasse = Util.toUTF8(request.getParameter("motPasse"));
+        String programmeEtude = request.getParameter("programmeEtude");
+        String pseudonyme = Util.toUTF8(request.getParameter("pseudonyme"));
 
         Connection cnx =
             Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
         CompteDAO dao = new CompteDAO(cnx);
         Compte compte = new Compte();
+
         compte.setCourriel(courriel);
         compte.setPrenom(prenom);
         compte.setNom(nom);
@@ -131,7 +154,6 @@ public class EffectuerInscriptionAction extends Action implements RequirePRGActi
       }
     } else {
       action = "echec.do?tache=afficherPageInscription";
-      ;
     }
 
     Logger.getLogger(EffectuerInscriptionAction.class.getName()).log(Level.INFO, data.toString());
