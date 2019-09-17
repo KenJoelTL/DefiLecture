@@ -55,7 +55,7 @@
             <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 connexion-col modification-compte-col" style="margin-top:5em;">
                 <div class="row contenuEnteteProfil">
                     <div class="col-lg-12">
-                        <img class="imgProfil" src="<c:url value='${compte.avatar}'/>">
+                        <img class="imgProfil center-block" src="<c:url value='${compte.avatar}'/>">
                         <h1><c:out value="${compte.pseudonyme}"/> </h1>
                     </div>
                     <div class="col-lg-12">
