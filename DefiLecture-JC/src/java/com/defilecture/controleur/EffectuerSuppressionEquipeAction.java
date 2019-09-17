@@ -43,14 +43,14 @@ public class EffectuerSuppressionEquipeAction extends Action
     if (userIsConnected()) {
       if (userIsAdmin()) {
         try {
-          int idCompte = Integer.parseInt(request.getParameter("idCompte")),
-              idEquipe = Integer.parseInt(request.getParameter("idEquipe"));
+          int idCompte = request.getParameter("idCompte"),
+              idEquipe = request.getParameter("idEquipe");
 
           Connection cnx =
               Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
           CompteDAO compteDao = new CompteDAO(cnx);
           List<Compte> comptes = compteDao.findByIdEquipe(idEquipe);
-          
+          a
           EquipeDAO equipeDao = new EquipeDAO(cnx);
           Equipe equipe = equipeDao.read(idEquipe);
 
@@ -73,11 +73,6 @@ public class EffectuerSuppressionEquipeAction extends Action
             }
           }
           return "succes.do?tache=afficherPageGestionListeEquipe";
-        }  catch (NumberFormatException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-            data.put("suppressionEchec", "Nombre d'équipe ou de compte invalide.");
-            return "erreur.do?tache=afficherPageModificationEquipe&idEquipe="
-                    + request.getParameter("idEquipe");
         } catch (SQLException ex) {
           Logger.getLogger(EffectuerSuppressionCompteAction.class.getName())
               .log(Level.SEVERE, null, ex);
