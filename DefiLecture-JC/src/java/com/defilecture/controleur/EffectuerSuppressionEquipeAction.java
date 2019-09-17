@@ -43,7 +43,7 @@ public class EffectuerSuppressionEquipeAction extends Action
     if (userIsConnected()) {
       if (userIsAdmin()) {
         try {
-          int idCompte = request.getParameter("idCompte"),
+          String idCompte = request.getParameter("idCompte"),
               idEquipe = request.getParameter("idEquipe");
 
           Connection cnx =
