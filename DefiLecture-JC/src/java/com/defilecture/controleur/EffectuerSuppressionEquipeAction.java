@@ -73,7 +73,7 @@ public class EffectuerSuppressionEquipeAction extends Action
                       + request.getParameter("idEquipe");
             }
           }
-          return "succes.do?tache=afficherPageGestionListeEquipe";
+          return "succes.do?tache=afficherPageGestionListeEquipes";
         } catch (NumberFormatException ex) {
           data.put("suppressionEchec", "Erreur lors de la suppression de l'équipe.");
           return "erreur.do?tache=afficherPageGestionListeEquipes&idEquipe="
