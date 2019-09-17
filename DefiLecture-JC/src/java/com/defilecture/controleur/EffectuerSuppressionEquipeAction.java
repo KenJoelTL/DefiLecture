@@ -49,7 +49,7 @@ public class EffectuerSuppressionEquipeAction extends Action
           Connection cnx =
               Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
           CompteDAO compteDao = new CompteDAO(cnx);
-          List<Compte> comptes = compteDao.findByIdEquipe(idEquipe);
+          List<Compte> comptes = compteDao.findByIdEquipe(Integer.parseInt(idEquipe));
           
           EquipeDAO equipeDao = new EquipeDAO(cnx);
           Equipe equipe = equipeDao.read(idEquipe);
@@ -73,6 +73,10 @@ public class EffectuerSuppressionEquipeAction extends Action
             }
           }
           return "succes.do?tache=afficherPageGestionListeEquipe";
+        } catch (NumberFormatException ex) {
+          data.put("suppressionEchec", "Erreur lors de la suppression de l'équipe.");
+          return "erreur.do?tache=afficherPageGestionListeEquipe&idEquipe="
+                  + request.getParameter("idEquipe");
         } catch (SQLException ex) {
           Logger.getLogger(EffectuerSuppressionCompteAction.class.getName())
               .log(Level.SEVERE, null, ex);
