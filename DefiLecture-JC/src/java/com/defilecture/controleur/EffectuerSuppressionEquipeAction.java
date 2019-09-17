@@ -62,11 +62,11 @@ public class EffectuerSuppressionEquipeAction extends Action
 
             if(compteDao.update(compte) && demandeequipeDao.delete(demande)) {
                 Logger.getLogger(this.getClass().getName())
-                  .log(Level.INFO, "Le compte #" + Integer.toString(idCompte) + " a été retiré de l'équipe #" + Integer.toString(idEquipe));
+                  .log(Level.INFO, "Le compte #" + idCompte + " a été retiré de l'équipe #" + idEquipe);
               data.put("suppressionSucces", "L'équipe a été supprimée avec succès.");
             } else {
               Logger.getLogger(this.getClass().getName())
-                .log(Level.INFO, "Le compte #" + Integer.toString(compte.getIdCompte()) + " n'a pas été retiré de l'équipe #" + Integer.toString(idEquipe));
+                .log(Level.INFO, "Le compte #" + compte.getIdCompte() + " n'a pas été retiré de l'équipe #" + idEquipe);
               data.put("suppressionEchec", "Erreur lors de la suppression de l'équipe.");
               return "erreur.do?tache=afficherPageModificationEquipe&idEquipe="
                       + request.getParameter("idEquipe");
