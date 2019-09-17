@@ -50,7 +50,7 @@ public class EffectuerSuppressionEquipeAction extends Action
               Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
           CompteDAO compteDao = new CompteDAO(cnx);
           List<Compte> comptes = compteDao.findByIdEquipe(idEquipe);
-          a
+          
           EquipeDAO equipeDao = new EquipeDAO(cnx);
           Equipe equipe = equipeDao.read(idEquipe);
 
