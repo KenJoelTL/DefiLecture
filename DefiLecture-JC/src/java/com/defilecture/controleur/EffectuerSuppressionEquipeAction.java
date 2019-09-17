@@ -69,20 +69,20 @@ public class EffectuerSuppressionEquipeAction extends Action
               Logger.getLogger(this.getClass().getName())
                 .log(Level.INFO, "Le compte #" + compte.getIdCompte() + " n'a pas été retiré de l'équipe #" + idEquipe);
               data.put("suppressionEchec", "Erreur lors de la suppression de l'équipe.");
-              return "erreur.do?tache=afficherPageGestionListeEquipe&idEquipe="
+              return "erreur.do?tache=afficherPageGestionListeEquipes&idEquipe="
                       + request.getParameter("idEquipe");
             }
           }
           return "succes.do?tache=afficherPageGestionListeEquipe";
         } catch (NumberFormatException ex) {
           data.put("suppressionEchec", "Erreur lors de la suppression de l'équipe.");
-          return "erreur.do?tache=afficherPageGestionListeEquipe&idEquipe="
+          return "erreur.do?tache=afficherPageGestionListeEquipes&idEquipe="
                   + request.getParameter("idEquipe");
         } catch (SQLException ex) {
           Logger.getLogger(EffectuerSuppressionCompteAction.class.getName())
               .log(Level.SEVERE, null, ex);
             data.put("suppressionEchec", "Erreur avec le serveur de base de donnée.");
-            return "erreur.do?tache=afficherPageGestionListeEquipe&idEquipe="
+            return "erreur.do?tache=afficherPageGestionListeEquipes&idEquipe="
                     + request.getParameter("idEquipe");
         } finally {
           Connexion.close();
