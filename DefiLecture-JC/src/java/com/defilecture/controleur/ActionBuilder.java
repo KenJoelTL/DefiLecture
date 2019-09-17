@@ -138,6 +138,8 @@ public class ActionBuilder {
           return new AfficherPageGestionListeEquipesAction();
         case "effectuerAjoutMembreEquipe":
           return new EffectuerAjoutMembreEquipeAction();
+        case "effectuerSuppressionEquipe":
+          return new EffectuerSuppressionEquipeAction();
 
           // Default Action
         default:
