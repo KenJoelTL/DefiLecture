@@ -692,7 +692,7 @@ background-image: url(cssImageBackPrincipal);
 }
 
 .lecture-submit {
-   background-image: url();
+   background-image: url(cssImageConfirmer);
    background-size: cover;
         width: 161px!important;
     height: 167px!important;

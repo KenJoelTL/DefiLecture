@@ -90,7 +90,7 @@ cssImageDuree30="../images/30.png"
 
 cssImageDuree45="../images/45.png"
 
-cssImageduree60="../images/60.png"
+cssImageDuree60="../images/60.png"
 
 
 cssCouleurNavBack=black
