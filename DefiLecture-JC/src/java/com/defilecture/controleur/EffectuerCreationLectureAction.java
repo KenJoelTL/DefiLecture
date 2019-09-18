@@ -22,6 +22,7 @@ import com.defilecture.modele.Lecture;
 import com.defilecture.modele.LectureDAO;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jdbc.Config;
@@ -41,11 +42,21 @@ public class EffectuerCreationLectureAction extends Action implements RequirePRG
         && request.getParameter("dureeMinutes") != null
         && request.getParameter("obligatoire") != null) {
 
-      String titre = request.getParameter("titre");
-      int dureeMinutes = Integer.parseInt(request.getParameter("dureeMinutes")),
-          obligatoire = Integer.parseInt(request.getParameter("obligatoire")),
-          idCompte = ((Integer) session.getAttribute("currentId")).intValue();
+	if (LocalDateTime.now().isBefore(getDébutInscriptions())
+	    || LocalDateTime.now().isAfter(getFinInscriptions())) {
+        return "*.do?tache=afficherPageGestionLecture";
+      }
 
+      String titre = request.getParameter("titre");
+      int dureeMinutes = Integer.parseInt(request.getParameter("dureeMinutes"));
+      int obligatoire = Integer.parseInt(request.getParameter("obligatoire"));
+      int idCompte = ((Integer) session.getAttribute("currentId")).intValue();
+
+      //Vérifie la limite de lectures
+      if (dureeMinutes > getLimiteLectureHard()){
+	  return "*.do?tache=afficherPageGestionLecture";
+      }
+      
       Lecture lecture;
 
       try {

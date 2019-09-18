@@ -20,7 +20,9 @@
 <%@ page pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:useBean id="connexion" class="jdbc.Connexion"></jsp:useBean>
+<jsp:useBean id="now" class="java.util.Date" />
 
 <!--Objet du compte-->
 <jsp:useBean id="dao" class="com.defilecture.modele.CompteDAO">
@@ -122,9 +124,13 @@
                                         <a href="?tache=afficherPageGestionLecture"> <!--Lien pour edit ses lectures-->
                                             <span class="glyphicon glyphicon-edit glyphProfil"></span>
                                         </a>
-                                        <a href="?tache=afficherPageCreationLecture"><!--Lien pour ajouter des lectures-->
+
+					<fmt:parseDate pattern="yyyy-MM-dd HH:mm" value="${applicationScope['com.defilecture.dLecture']}" var="datedebut" type="both"/>
+					<fmt:parseDate pattern="yyyy-MM-dd HH:mm" value="${applicationScope['com.defilecture.fLecture']}" var="datefin" type="both"/>			
+                                        <a href="?tache=afficherPageCreationLecture" id="ajoutLectures" style="display: ${now ge datedebut && now lt datefin ? 'block' : 'none'}">
                                             <span style="margin-right: 1em;" class="glyphicon glyphicon-plus glyphProfil"></span>
                                         </a>
+					
                                     </c:if>
                                 </p>
                             </div>

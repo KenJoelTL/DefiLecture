@@ -18,6 +18,7 @@ import com.defilecture.modele.Lecture;
 import com.defilecture.modele.LectureDAO;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jdbc.Config;
@@ -30,9 +31,17 @@ public class EffectuerModificationLectureAction extends Action implements Requir
     if (userIsConnected()
         && (userIsCapitaine() || userIsParticipant())
         && request.getParameter("modifie") != null) {
-      String idLecture = request.getParameter("idLecture"), titre = request.getParameter("titre");
 
-      int dureeMinutes, estObligatoire = Integer.parseInt(request.getParameter("obligatoire"));
+	if (LocalDateTime.now().isBefore(getDébutInscriptions())
+	    || LocalDateTime.now().isAfter(getFinInscriptions())) {
+        return "*.do?tache=afficherPageGestionLecture";
+      }
+
+      String idLecture = request.getParameter("idLecture");
+      String titre = request.getParameter("titre");
+
+      int dureeMinutes;
+      int estObligatoire = Integer.parseInt(request.getParameter("obligatoire"));
 
       try {
         Connection cnx =

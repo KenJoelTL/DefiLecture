@@ -241,6 +241,42 @@ public class LectureDAO extends DAO<Lecture> {
     return listeLecture;
   }
 
+  public int getMinutesAjd(int idCompte) {
+
+    String req = "SELECT SUM(DUREE_MINUTES) AS MINAJD FROM lecture WHERE `ID_COMPTE` = ? AND DATE(DATE_INSCRIPTION)=CURDATE()";
+    List<Lecture> listeLecture = new ArrayList<Lecture>();
+
+    PreparedStatement paramStm = null;
+    int minAjd=0;
+    
+    try {
+
+      paramStm = cnx.prepareStatement(req);
+
+      paramStm.setInt(1, idCompte);
+
+      ResultSet resultat = paramStm.executeQuery();
+
+      // On vérifie s'il y a un résultat
+      while (resultat.next()) {
+	  minAjd=resultat.getInt("MINAJD");
+      }
+      resultat.close();
+      paramStm.close();
+
+    } catch (SQLException exp) {
+    } finally {
+      try {
+        if (paramStm != null) paramStm.close();
+      } catch (SQLException exp) {
+      } catch (Exception e) {
+      }
+    }
+
+    return minAjd;
+  }
+    
+    
   public List<Lecture> findByIdCompteOrderByDate(int idCompte) {
 
     String req =
