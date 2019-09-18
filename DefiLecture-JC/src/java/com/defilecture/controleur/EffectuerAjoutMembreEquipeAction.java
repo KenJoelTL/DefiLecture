@@ -57,13 +57,13 @@ public class EffectuerAjoutMembreEquipeAction extends Action
 
         if (promouvoirCapitaine) {
           List<Compte> membres = daoCompte.findByIdEquipe(idEquipe);
-          if (!membres.stream()
+          if (membres.stream()
               .filter(m -> m.getRole() == Compte.CAPITAINE)
               .findFirst()
               .isPresent()) {
-            compte.setRole(Compte.CAPITAINE);
-          } else {
             data.put("attentionPromouvoirCapitaine", "L'équipe a déjà un capitaine.");
+          } else {
+            compte.setRole(Compte.CAPITAINE);
           }
         }
 
