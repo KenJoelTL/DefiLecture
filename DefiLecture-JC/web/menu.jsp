@@ -159,7 +159,7 @@
 
 		    <fmt:parseDate pattern="yyyy-MM-dd HH:mm" value="${applicationScope['com.defilecture.dInscription']}" var="datedebut" type="both"/>
 		    <fmt:parseDate pattern="yyyy-MM-dd HH:mm" value="${applicationScope['com.defilecture.fLecture']}" var="datefin" type="both"/>
-		    <div id="menuConnexion" style="display: ${now ge datedebut && now lt datefin ? 'block' : 'none'}">
+		    <div id="menuConnexion" style="display: ${sessionScope.role ge 3 || now ge datedebut && now lt datefin ? 'block' : 'none'}">
 		    <c:choose>
 			<c:when test="${ empty sessionScope.connecte }">
 			    <li><a href='*.do?tache=afficherPageConnexion'><span class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>
