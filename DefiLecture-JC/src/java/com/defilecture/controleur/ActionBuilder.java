@@ -134,6 +134,12 @@ public class ActionBuilder {
           return new EffectuerModificationConfigAction();
         case "effectuerSupressionBD":
           return new EffectuerSuppressionBDAction();
+        case "afficherPageGestionListeEquipes":
+          return new AfficherPageGestionListeEquipesAction();
+        case "effectuerAjoutMembreEquipe":
+          return new EffectuerAjoutMembreEquipeAction();
+        case "effectuerSuppressionEquipe":
+          return new EffectuerSuppressionEquipeAction();
 
           // Default Action
         default:

@@ -14,6 +14,7 @@
  */
 package com.defilecture.controleur;
 
+import com.defilecture.Util;
 import com.defilecture.modele.Compte;
 import com.defilecture.modele.CompteDAO;
 import com.defilecture.modele.ConfigSiteDAO;
@@ -28,7 +29,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import jdbc.Config;
 import jdbc.Connexion;
-import com.defilecture.Util;
 
 public class EffectuerSuppressionBDAction extends Action implements RequirePRGAction {
 
@@ -42,7 +42,9 @@ public class EffectuerSuppressionBDAction extends Action implements RequirePRGAc
 
   @Override
   public String execute() {
-    if (userIsAdmin() && (request.getParameter("passwordConf") != null && !"".equals(request.getParameter("passwordConf")))) {
+    if (userIsAdmin()
+        && (request.getParameter("passwordConf") != null
+            && !"".equals(request.getParameter("passwordConf")))) {
       try {
         Connexion.reinit();
         Connection cnx =

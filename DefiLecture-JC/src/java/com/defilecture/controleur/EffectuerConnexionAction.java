@@ -14,9 +14,9 @@
  */
 package com.defilecture.controleur;
 
+import com.defilecture.Util;
 import com.defilecture.modele.Compte;
 import com.defilecture.modele.CompteDAO;
-import com.defilecture.Util;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -44,12 +44,12 @@ public class EffectuerConnexionAction extends Action implements RequirePRGAction
                 Connexion.startConnection(
                     Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
         Compte compte = dao.findByPseudonyme(identifiant);
-        
-        if(compte == null) {
+
+        if (compte == null) {
           compte = dao.findByCourriel(identifiant);
         }
 
-        if(compte != null) {
+        if (compte != null) {
           if (compte.verifierMotPasse(motPasse)) {
             session = request.getSession(true);
             session.setAttribute("connecte", compte.getIdCompte());
@@ -60,10 +60,10 @@ public class EffectuerConnexionAction extends Action implements RequirePRGAction
             erreur = true;
           }
         } else {
-            erreur = true;
+          erreur = true;
         }
 
-        if(erreur) {
+        if (erreur) {
           data.put("echecConnexion", "L'identifiant ou le mot de passe entrés sont invalides");
           data.put("identifiant", identifiant);
           action = "echec.do?tache=afficherPageConnexion";
