@@ -14,11 +14,11 @@
  */
 package com.defilecture.controleur;
 
+import com.defilecture.Util;
 import com.defilecture.modele.Compte;
 import com.defilecture.modele.CompteDAO;
 import com.defilecture.modele.Equipe;
 import com.defilecture.modele.EquipeDAO;
-import com.defilecture.Util;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -39,7 +39,9 @@ public class EffectuerModificationEquipeAction extends Action
       action = "*.do?tache=afficherPageEquipe&idEquipe=" + request.getParameter("idEquipe");
 
       if (request.getParameter("modifier") != null) {
-        if (userIsConnected() && userIsCapitaine() && request.getParameter("nom") != null) {
+        if (userIsConnected()
+            && (userIsCapitaine() || userIsAdmin())
+            && request.getParameter("nom") != null) {
           try {
             Connection cnx =
                 Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);

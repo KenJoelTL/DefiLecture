@@ -30,6 +30,7 @@
 <%@page import="jdbc.Config"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<script language="javascript" src="./script/jsPageGestionEquipe.js"></script>
 
 <!-- Faire la connexion -->
 <jsp:useBean id="connexion" class="jdbc.Connexion"/>
@@ -64,6 +65,7 @@
 
 <!-- Ajouter l'equipe dans les variables -->
 <c:set var="listeMembres" value="${compteDao.findByIdEquipe(equipe.getIdEquipe())}"/>
+<c:set var="listeComptes" value="${compteDao.findAll()}"/>
 <c:set var="nbMembres" value="${listeMembres.size()}"/>
 
 <!-- Reste du code -->
@@ -100,6 +102,27 @@
                 <c:if test="${!empty requestScope.data['erreurRetrait']}">
                     <div class="alert alert-danger"><strong>${requestScope.data['erreurRetrait']}</strong></div>
                 </c:if>
+                <c:if test="${!empty requestScope.data['attentionPromouvoirCapitaine']}">
+                    <div class="alert alert-warning"><strong>${requestScope.data['attentionPromouvoirCapitaine']}</strong></div>
+                </c:if>
+                <c:if test="${!empty requestScope.data['erreurMembreDejaDansEquipe']}">
+                    <div class="alert alert-danger"><strong>${requestScope.data['erreurMembreDejaDansEquipe']}</strong></div>
+                </c:if>
+                <c:if test="${!empty requestScope.data['erreurDemandeNonAcceptee']}">
+                    <div class="alert alert-danger"><strong>${requestScope.data['erreurDemandeNonAcceptee']}</strong></div>
+                </c:if>
+                <c:if test="${!empty requestScope.data['erreurParticipantDejaAccepter']}">
+                    <div class="alert alert-danger"><strong>${requestScope.data['erreurParticipantDejaAccepter']}</strong></div>
+                </c:if>
+                <c:if test="${!empty requestScope.data['succesAjoutMembre']}">
+                    <div class="alert alert-success"><strong>${requestScope.data['succesAjoutMembre']}</strong></div>
+                </c:if>
+                <c:if test="${!empty requestScope.data['erreurEquipePleine']}">
+                    <div class="alert alert-danger"><strong>${requestScope.data['erreurEquipePleine']}</strong></div>
+                </c:if>
+                <c:if test="${!empty requestScope.data['erreurServeur']}">
+                    <div class="alert alert-danger"><strong>${requestScope.data['erreurServeur']}</strong></div>
+                </c:if>
                 <form action="modificationEquipe.do" method="post">
                     <div class="form-group">
                         <label for="nom">Nom  <% out.println(application.getAttribute("vocEquipe1"));%> :</label>
@@ -126,9 +149,10 @@
                     </thead>
                     <tbody>
                         <c:forEach items="${listeMembres}" var="membre">      
+                        <c:set var="estCapitaine" value="${membre.getRole() eq Compte.CAPITAINE}"></c:set>
                         <tr>
-                            <td>${membre.prenom}</td>
-                            <td>${membre.nom}</td>
+                          <td><c:if test="${estCapitaine}"><b></c:if>${membre.prenom}<c:if test="${estCapitaine}"></b></c:if></td>
+                            <td><c:if test="${estCapitaine}"><b></c:if>${membre.nom}<c:if test="${estCapitaine}"></b></c:if></td>
                             <td>
                                 <c:set var="contribution" value="${demEquipeDao.findByIdCompteEquipe(membre.idCompte,equipe.idEquipe)}"></c:set>
                                 <div class="progress">
@@ -153,7 +177,7 @@
                                 </c:if>
                                 <c:if test="${permissionAccordee and (sessionScope.connecte ne membre.idCompte)}">
                                 <td>
-                                    <a href="depart.do?tache=effectuerDepartEquipe&idCompte=${membre.idCompte}&idEquipe=${equipe.idEquipe}">
+                                    <a onclick="supprimerParticipant(${membre.idCompte}, ${equipe.idEquipe})">
                                         Retirer <% out.println(application.getAttribute("vocEquipe1"));%>
                                     </a>
                                 </td>
@@ -163,7 +187,23 @@
                         </c:forEach>
                     </tbody>
                 </table>
-        
+                <c:if test="${compteConnecte.getRole() eq Compte.ADMINISTRATEUR}">
+                <form method="get" action="*.do">
+                  <div class="form-group">
+                      <label for="nom">Ajouter un <% out.println(application.getAttribute("vocParticipant"));%> :</label>
+                      <input hidden name="tache" value="effectuerAjoutMembreEquipe" type="text" />
+                      <input hidden name="idEquipe" value="${equipe.idEquipe}" type="text" />
+                  </div>
+                  <select class="selectpicker" data-show-subtext="true" data-live-search="true" name="idCompte">
+                    <c:forEach items="${listeComptes}" var="compte">
+                      <c:if test="${compte.getIdEquipe() eq -1}">
+                        <option value="${compte.getIdCompte()}">${compte.getPrenom()} ${compte.getNom()}</option>
+                      </c:if>
+                    </c:forEach>
+                  </select>
+                  <button type="submit" class="btn btn-success" name="modifie" >Ajouter</button>
+                </form>
+                </c:if>
         <a href="*.do?tache=afficherPageEquipe&idEquipe=${equipe.idEquipe}" class="retour"><span class="glyphicon glyphicon-circle-arrow-left"></span>retour à la page <% out.println(application.getAttribute("vocEquipe1"));%></a>
         
             </div>

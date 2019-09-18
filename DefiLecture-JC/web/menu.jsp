@@ -104,34 +104,42 @@
 				<li ><a href="*.do?tache=afficherPageListeLectures">Liste des lectures</a></li>
 			    </ul>
 			</li>
-		    </c:if>
-
-		    <c:if test="${!empty sessionScope.connecte}">
-			<fmt:parseDate pattern="yyyy-MM-dd HH:mm" value="${applicationScope['com.defilecture.dLecture']}" var="datedebut" type="both"/>
-			<fmt:parseDate pattern="yyyy-MM-dd HH:mm" value="${applicationScope['com.defilecture.fLecture']}" var="datefin" type="both"/>			
-			<div id="menuDefis" style="display: ${now ge datedebut && now lt datefin ? 'block' : 'none'}">
-			    <li class="dropdown">
-				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Épreuves
-				    <span class="caret"></span></a>
-				<ul class="dropdown-menu">
-				    <c:if test="${ sessionScope.role ge 3 }">
-					<li><a href="*.do?tache=afficherPageCreationDefi">Cr&eacute;er une épreuve</a></li>
-					<li><a href="*.do?tache=afficherPageDefisReussis">Liste des épreuves réussies</a></li>
-				    </c:if>
-				    <li><a href="*.do?tache=afficherPageParticipationDefi">Voir les épreuves</a></li>
-				</ul>
-			    </li>
-			</div>
-		    </c:if>
-		    
-		    <c:if test="${ sessionScope.role ge 3 }">
-			<li>
-			    <a href="*.do?tache=afficherPageConfiguration">
-				Configuration du site
-			    </a>
+			<li class="dropdown">
+			    <a class="dropdown-toggle" data-toggle="dropdown" href="#">&Eacute;quipes
+				<span class="caret"></span></a>
+			    <ul class="dropdown-menu">
+				<li ><a href="*.do?tache=afficherPageGestionListeEquipes">G&eacute;rer les &eacute;quipes</a></li>
+			    </ul>
 			</li>
 		    </c:if>
-		    
+		    <c:if test="${ sessionScope.role ge 1 }">
+
+			<c:if test="${!empty sessionScope.connecte}">
+			    <fmt:parseDate pattern="yyyy-MM-dd HH:mm" value="${applicationScope['com.defilecture.dLecture']}" var="datedebut" type="both"/>
+			    <fmt:parseDate pattern="yyyy-MM-dd HH:mm" value="${applicationScope['com.defilecture.fLecture']}" var="datefin" type="both"/>			
+			    <div id="menuDefis" style="display: ${now ge datedebut && now lt datefin ? 'block' : 'none'}">
+				<li class="dropdown">
+				    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Épreuves
+					<span class="caret"></span></a>
+				    <ul class="dropdown-menu">
+					<c:if test="${ sessionScope.role ge 3 }">
+					    <li><a href="*.do?tache=afficherPageCreationDefi">Cr&eacute;er une épreuve</a></li>
+					    <li><a href="*.do?tache=afficherPageDefisReussis">Liste des épreuves réussies</a></li>
+					</c:if>
+					<li><a href="*.do?tache=afficherPageParticipationDefi">Voir les épreuves</a></li>
+				    </ul>
+				</li>
+			    </div>
+			</c:if>
+			
+			<c:if test="${ sessionScope.role ge 3 }">
+			    <li>
+				<a href="*.do?tache=afficherPageConfiguration">
+				    Configuration du site
+				</a>
+			    </li>
+			</c:if>
+		    </c:if>
                     
 		</ul>
 		<ul class="nav navbar-nav navbar-right">

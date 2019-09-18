@@ -1,0 +1,7 @@
+compilation:
+    image: git.dept-info.crosemont.quebec:5678/plafrance/defilecture
+    script:
+        - apt update
+        - apt install -y vim tomcat8 default-jdk ant libcommons-codec-java libnb-java5-java libmysql-java libtaglibs-standard-impl-java  libtaglibs-standard-spec-java
+        - cd DefiLecture-JC
+        - ant -Dj2ee.server.home='/usr/share/glassfish5' -Dlibs.CopyLibs.classpath=/usr/share/netbeans/java5/ant/extra/org-netbeans-modules-java-j2seproject-copylibstask.jar
