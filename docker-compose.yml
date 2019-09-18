@@ -18,6 +18,7 @@ services:
       - "./data:/var/lib/mysql"
     environment:
       MYSQL_ROOT_PASSWORD: password
+      TZ: America/New_York
     restart: on-failure
 
   defilecture:
@@ -31,6 +32,8 @@ services:
     volumes:
       - "./DefiLecture-JC/build/web/:/usr/local/tomcat/webapps/ROOT/"
     restart: on-failure
+    environment:
+      TZ: America/New_York
     depends_on:
       - defilecture_db
 
