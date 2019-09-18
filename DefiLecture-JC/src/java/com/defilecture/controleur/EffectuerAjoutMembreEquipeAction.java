@@ -74,9 +74,7 @@ public class EffectuerAjoutMembreEquipeAction extends Action
           return "echec.do?tache=afficherPageModificationEquipe&idEquipe=" + idEquipe;
         }
 
-        if (equipe.getNbMembres() - 1
-            < Integer.parseInt(
-                (String) session.getServletContext().getAttribute("com.defilecture.nbMatelots"))) {
+        if (equipe.getNbMembres() - 1 < getNbMatelotsMax()) {
 
           DemandeEquipe demandeEq =
               daoDE.findByIdCompteEquipe(compte.getIdCompte(), equipe.getIdEquipe());

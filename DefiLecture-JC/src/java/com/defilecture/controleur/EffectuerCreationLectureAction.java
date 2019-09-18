@@ -23,7 +23,6 @@ import com.defilecture.modele.LectureDAO;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jdbc.Config;
@@ -43,19 +42,8 @@ public class EffectuerCreationLectureAction extends Action implements RequirePRG
         && request.getParameter("dureeMinutes") != null
         && request.getParameter("obligatoire") != null) {
 
-      // Vérification des dates
-      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-      LocalDateTime débutInscription =
-          LocalDateTime.parse(
-              (String) session.getServletContext().getAttribute("com.defilecture.dLecture"),
-              formatter);
-      LocalDateTime finInscription =
-          LocalDateTime.parse(
-              (String) session.getServletContext().getAttribute("com.defilecture.fLecture"),
-              formatter);
-
-      if (LocalDateTime.now().isBefore(débutInscription)
-          || LocalDateTime.now().isAfter(finInscription)) {
+	if (LocalDateTime.now().isBefore(getDébutInscriptions())
+	    || LocalDateTime.now().isAfter(getFinInscriptions())) {
         return "*.do?tache=afficherPageGestionLecture";
       }
 
@@ -65,7 +53,7 @@ public class EffectuerCreationLectureAction extends Action implements RequirePRG
       int idCompte = ((Integer) session.getAttribute("currentId")).intValue();
 
       //Vérifie la limite de lectures
-      if (dureeMinutes > Integer.parseInt(session.getServletContext().getAttribute("com.defilecture.limiteHard").toString())){
+      if (dureeMinutes > getLimiteLectureHard()){
 	  return "*.do?tache=afficherPageGestionLecture";
       }
       

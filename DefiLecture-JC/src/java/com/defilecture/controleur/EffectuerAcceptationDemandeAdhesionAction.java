@@ -78,12 +78,7 @@ public class EffectuerAcceptationDemandeAdhesionAction extends Action
                 int idEquipe = demandeEq.getIdEquipe();
                 int nbMembre = compteDao.countCompteByIdEquipe(idEquipe);
 
-                if (nbMembre - 1
-                    < Integer.parseInt(
-                        (String)
-                            session
-                                .getServletContext()
-                                .getAttribute("com.defilecture.nbMatelots"))) {
+                if (nbMembre - 1 < getNbMatelotsMax()) {
                   cpt.setIdEquipe(idEquipe);
                   demandeEq.setStatutDemande(DemandeEquipe.ACCEPTEE);
 

@@ -19,7 +19,6 @@ import com.defilecture.modele.DefiDAO;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -39,19 +38,8 @@ public class EffectuerModificationDefiAction extends Action
         && (userIsAdmin() || userIsModerateur())
         && request.getParameter("modifie") != null) {
 
-      // Vérification des dates
-      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-      LocalDateTime débutInscription =
-          LocalDateTime.parse(
-              (String) session.getServletContext().getAttribute("com.defilecture.dLecture"),
-              formatter);
-      LocalDateTime finInscription =
-          LocalDateTime.parse(
-              (String) session.getServletContext().getAttribute("com.defilecture.fLecture"),
-              formatter);
-
-      if (LocalDateTime.now().isBefore(débutInscription)
-          || LocalDateTime.now().isAfter(finInscription)) {
+	if (LocalDateTime.now().isBefore(getDébutInscriptions())
+	    || LocalDateTime.now().isAfter(getFinInscriptions())) {
         return "*.do?tache=afficherPageParticipationDefi";
       }
 

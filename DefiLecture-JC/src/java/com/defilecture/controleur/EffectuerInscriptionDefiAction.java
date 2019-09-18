@@ -25,7 +25,6 @@ import com.defilecture.modele.InscriptionDefiDAO;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,19 +43,8 @@ public class EffectuerInscriptionDefiAction extends Action implements RequirePRG
         && (userIsParticipant() || userIsCapitaine())
         && request.getParameter("valider") != null) {
 
-      // Vérification des dates
-      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-      LocalDateTime débutInscription =
-          LocalDateTime.parse(
-              (String) session.getServletContext().getAttribute("com.defilecture.dLecture"),
-              formatter);
-      LocalDateTime finInscription =
-          LocalDateTime.parse(
-              (String) session.getServletContext().getAttribute("com.defilecture.fLecture"),
-              formatter);
-
-      if (LocalDateTime.now().isBefore(débutInscription)
-          || LocalDateTime.now().isAfter(finInscription)) {
+	if (LocalDateTime.now().isBefore(getDébutInscriptions())
+	    || LocalDateTime.now().isAfter(getFinInscriptions())) {
         return "*.do?tache=afficherPageParticipationDefi";
       }
 

@@ -20,7 +20,6 @@ import com.defilecture.modele.CompteDAO;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -36,24 +35,12 @@ public class EffectuerInscriptionAction extends Action implements RequirePRGActi
     boolean erreur = false;
     String action = "*.do?tache=afficherPageInscription";
 
-    // Vérifie les dates d'inscription
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    LocalDateTime débutInscription =
-        LocalDateTime.parse(
-            (String) session.getServletContext().getAttribute("com.defilecture.dInscription"),
-            formatter);
-    LocalDateTime finInscription =
-        LocalDateTime.parse(
-            (String) session.getServletContext().getAttribute("com.defilecture.fLecture"),
-            formatter);
-
-    if (LocalDateTime.now().isBefore(débutInscription)
-        || LocalDateTime.now().isAfter(finInscription)) {
+    if (LocalDateTime.now().isBefore(getDébutInscriptions())
+        || LocalDateTime.now().isAfter(getFinInscriptions())) {
       erreur = true;
       data.put(
           "erreurDates",
-          "Les inscriptions sont désactivées pour le moment. Revenez après le "
-              + débutInscription.format(formatter));
+          "Les inscriptions sont désactivées pour le moment. Revenez plus tard ");
     }
 
     if (request.getParameter("pseudonyme") != null) {

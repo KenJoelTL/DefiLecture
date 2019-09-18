@@ -35,19 +35,8 @@ public class EffectuerSuppressionLectureAction extends Action implements Require
   public String execute() {
     if (userIsConnected() && (userIsCapitaine() || userIsParticipant())) {
 
-      // Vérification des dates
-      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-      LocalDateTime débutInscription =
-          LocalDateTime.parse(
-              (String) session.getServletContext().getAttribute("com.defilecture.dLecture"),
-              formatter);
-      LocalDateTime finInscription =
-          LocalDateTime.parse(
-              (String) session.getServletContext().getAttribute("com.defilecture.fLecture"),
-              formatter);
-
-      if (LocalDateTime.now().isBefore(débutInscription)
-          || LocalDateTime.now().isAfter(finInscription)) {
+	if (LocalDateTime.now().isBefore(getDébutInscriptions())
+	    || LocalDateTime.now().isAfter(getFinInscriptions())) {
         return "*.do?tache=afficherPageGestionLecture";
       }
 
