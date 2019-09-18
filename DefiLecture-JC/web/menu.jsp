@@ -2,29 +2,27 @@
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:useBean id="now" class="java.util.Date" />
 
-<script language="javascript" src="./script/jsMenu.js"></script>
-
 <div class='container-fluid'  style="margin-bottom: 90px" >
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
-            
+
             <div class="navbar-header">
 		<a class="navbar-brand logo-navigation" href='*.do?tache=afficherPageMarcheASuivre'></a>
 		<!-- Apparait lorsque la fenêtre devient de la taille d'un téléphone mobile -->
 		<button id="btn-burger" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#optionsNavigation">
 		    <span class="icon-bar"></span>
-		    <span class="icon-bar"></span>                       
+		    <span class="icon-bar"></span>
 		</button>
-            </div>          
-            
-            <!-- Options contenues dans le bouton à son activation -->   
+            </div>
+
+            <!-- Options contenues dans le bouton à son activation -->
             <div class="collapse navbar-collapse" id="optionsNavigation">
 		<ul class="nav navbar-nav">
-		    
+
 		    <c:if test="${ !empty sessionScope.connecte && sessionScope.role le 2 }">
 
 			<fmt:parseDate pattern="yyyy-MM-dd HH:mm" value="${applicationScope['com.defilecture.dLecture']}" var="datedebut" type="both"/>
-			<fmt:parseDate pattern="yyyy-MM-dd HH:mm" value="${applicationScope['com.defilecture.fLecture']}" var="datefin" type="both"/>			
+			<fmt:parseDate pattern="yyyy-MM-dd HH:mm" value="${applicationScope['com.defilecture.fLecture']}" var="datefin" type="both"/>
 			<div id="menuLectures" style="display: ${now ge datedebut && now lt datefin ? 'block' : 'none'}">
 			<li class="dropdown">
 			    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Lectures
@@ -35,14 +33,14 @@
 			    </ul>
 			</li>
 			</div>
-			
+
 		    </c:if>
-		    
+
                     <li><a href="scoreboard.do?tache=afficherPageTableauScores">
 			<% out.println(application.getAttribute("vocBanque"));%>
                     </a>
                     </li>
-		    
+
 		    <c:choose>
 			<c:when test="${ !empty sessionScope.connecte }">
 			    <!-- <li><a href="*.do?tache=afficherPageProfil">Page de profil</a></li> -->
@@ -52,13 +50,13 @@
 					<c:when test="${compteConnecte.idEquipe gt -1}">
 					    <li><a href="affichagePageEquipe.do?tache=afficherPageEquipe&idEquipe=${compteConnecte.idEquipe}">
 						Page <% out.println(application.getAttribute("vocEquipe1"));%></a>
-					    </li>                        
+					    </li>
 					    <li><a href="joindreEquipe.do?tache=afficherPageListeDemandesEquipe&ordre=recu">
 						Acc&eacute;der aux demandes</a>
-					    </li>                                              
+					    </li>
 					</c:when>
 					<c:otherwise>
-					    <li><a href="creationEquipe.do?tache=afficherPageCreationEquipe">Cr&eacute;er <% out.println(application.getAttribute("vocEquipe3"));%></a></li>                                            
+					    <li><a href="creationEquipe.do?tache=afficherPageCreationEquipe">Cr&eacute;er <% out.println(application.getAttribute("vocEquipe3"));%></a></li>
 					</c:otherwise>
 				    </c:choose>
 				</c:when>
@@ -69,21 +67,21 @@
 						<c:when test="${compteConnecte.idEquipe > -1}">
 						    <li><a href="affichagePageEquipe.do?tache=afficherPageEquipe&idEquipe=${compteConnecte.idEquipe}">
 							Page <% out.println(application.getAttribute("vocEquipe1"));%></a>
-						    </li>                        
+						    </li>
 						</c:when>
 						<c:otherwise>
-						    <li><a href="joindreEquipe.do?tache=afficherPageListeEquipes">Joindre <% out.println(application.getAttribute("vocEquipe3"));%></a></li>                                              
+						    <li><a href="joindreEquipe.do?tache=afficherPageListeEquipes">Joindre <% out.println(application.getAttribute("vocEquipe3"));%></a></li>
 						</c:otherwise>
 					    </c:choose>
 					</c:when>
 				    </c:choose>
 				</c:otherwise>
-				
+
 			    </c:choose>
 			</c:when>
 			<c:otherwise>
 			    <fmt:parseDate pattern="yyyy-MM-dd HH:mm" value="${applicationScope['com.defilecture.dInscription']}" var="datedebut" type="both"/>
-			    <fmt:parseDate pattern="yyyy-MM-dd HH:mm" value="${applicationScope['com.defilecture.fLecture']}" var="datefin" type="both"/>		
+			    <fmt:parseDate pattern="yyyy-MM-dd HH:mm" value="${applicationScope['com.defilecture.fLecture']}" var="datefin" type="both"/>
 			    <div id="menuInscription" style="display: ${now ge datedebut && now lt datefin ? 'block' : 'none'}">
 				<li>
 				    <a href='*.do?tache=afficherPageInscription'>
@@ -92,9 +90,9 @@
 			    </div>
 			</c:otherwise>
 		    </c:choose>
-                    
+
 		    <c:if test="${ sessionScope.role eq 4 }">
-			
+
 			<li class="dropdown">
 			    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Comptes
 				<span class="caret"></span></a>
@@ -116,7 +114,7 @@
 
 			<c:if test="${!empty sessionScope.connecte}">
 			    <fmt:parseDate pattern="yyyy-MM-dd HH:mm" value="${applicationScope['com.defilecture.dLecture']}" var="datedebut" type="both"/>
-			    <fmt:parseDate pattern="yyyy-MM-dd HH:mm" value="${applicationScope['com.defilecture.fLecture']}" var="datefin" type="both"/>			
+			    <fmt:parseDate pattern="yyyy-MM-dd HH:mm" value="${applicationScope['com.defilecture.fLecture']}" var="datefin" type="both"/>
 			    <div id="menuDefis" style="display: ${now ge datedebut && now lt datefin ? 'block' : 'none'}">
 				<li class="dropdown">
 				    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Épreuves
@@ -131,7 +129,7 @@
 				</li>
 			    </div>
 			</c:if>
-			
+
 			<c:if test="${ sessionScope.role ge 3 }">
 			    <li>
 				<a href="*.do?tache=afficherPageConfiguration">
@@ -140,16 +138,16 @@
 			    </li>
 			</c:if>
 		    </c:if>
-                    
+
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
-                    
+
                     <li id='li-facebook'>
 			<a id='facebook'  target="_blank" href='https://www.facebook.com/DefiLectureCollegeRosemont/'></a>
                     </li>
-                    
+
                     <li class="dropdown">
-			<a class="dropdown-toggle" data-toggle="dropdown" href="#"><% out.println(application.getAttribute("vocCode"));%>   
+			<a class="dropdown-toggle" data-toggle="dropdown" href="#"><% out.println(application.getAttribute("vocCode"));%>
 			    <span class="caret"></span></a>
 			<ul class="dropdown-menu">
 			    <li><a href='*.do?tache=afficherPageMarcheASuivre'>Marche à suivre</a></li>
@@ -158,17 +156,17 @@
 			    <li><a href='*.do?tache=afficherPageContributeurs'>Contributeurs</a></li>
 			</ul>
                     </li>
-                    
+
 		    <fmt:parseDate pattern="yyyy-MM-dd HH:mm" value="${applicationScope['com.defilecture.dInscription']}" var="datedebut" type="both"/>
-		    <fmt:parseDate pattern="yyyy-MM-dd HH:mm" value="${applicationScope['com.defilecture.fLecture']}" var="datefin" type="both"/>			
+		    <fmt:parseDate pattern="yyyy-MM-dd HH:mm" value="${applicationScope['com.defilecture.fLecture']}" var="datefin" type="both"/>
 		    <div id="menuConnexion" style="display: ${now ge datedebut && now lt datefin ? 'block' : 'none'}">
 		    <c:choose>
 			<c:when test="${ empty sessionScope.connecte }">
-			    <li><a href='*.do?tache=afficherPageConnexion'><span class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>        
+			    <li><a href='*.do?tache=afficherPageConnexion'><span class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>
 			</c:when>
 			<c:otherwise>
 			    <li class="dropdown">
-				<a class="dropdown-toggle" data-toggle="dropdown" href="#">  
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 				    <span class="glyphicon glyphicon-cog"></span>
 				    <span class="caret"></span></a>
 				<ul class="dropdown-menu">
@@ -183,7 +181,7 @@
 			</c:otherwise>
 		    </c:choose>
 		    </div>
-		</ul>   
+		</ul>
             </div>
         </div>
     </nav>
