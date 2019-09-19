@@ -30,88 +30,94 @@ import jdbc.Connexion;
 
 public class EffectuerCreationLectureAction extends Action implements RequirePRGAction {
 
-    @Override
-    public String execute() {
+  @Override
+  public String execute() {
 
-	if (userIsConnected()
-	    && (userIsParticipant() || userIsCapitaine())
-	    && request.getParameter("titre") != null
-	    && request.getParameter("dureeMinutes") != null
-	    && request.getParameter("obligatoire") != null) {
+    if (userIsConnected()
+        && (userIsParticipant() || userIsCapitaine())
+        && request.getParameter("titre") != null
+        && request.getParameter("dureeMinutes") != null
+        && request.getParameter("obligatoire") != null) {
 
-	    if (LocalDateTime.now().isBefore(getDébutLectures())
-		|| LocalDateTime.now().isAfter(getFinLectures())) {
-		return "*.do?tache=afficherPageGestionLecture";
-	    }
+      if (LocalDateTime.now().isBefore(getDébutLectures())
+          || LocalDateTime.now().isAfter(getFinLectures())) {
+        return "*.do?tache=afficherPageGestionLecture";
+      }
 
-	    String titre = request.getParameter("titre");
-	    int dureeMinutes = Integer.parseInt(request.getParameter("dureeMinutes"));
-	    int obligatoire = Integer.parseInt(request.getParameter("obligatoire"));
-	    int idCompte = ((Integer) session.getAttribute("currentId")).intValue();
+      String titre = request.getParameter("titre");
+      int dureeMinutes = Integer.parseInt(request.getParameter("dureeMinutes"));
+      int obligatoire = Integer.parseInt(request.getParameter("obligatoire"));
+      int idCompte = ((Integer) session.getAttribute("currentId")).intValue();
 
-	    //Vérifie la limite de lectures
-	    if (dureeMinutes > getLimiteLectureHard()){
-		return "*.do?tache=afficherPageGestionLecture";
-	    }
-      
-	    Lecture lecture;
+      // Vérifie la limite de lectures
+      if (dureeMinutes <= 0) {
+        return "*.do?tache=afficherPageGestionLecture";
+      }
 
-	    try {
+      Lecture lecture;
 
-		Connexion.reinit();
-		Connection cnx =
-		    Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
-		LectureDAO dao;
-		dao = new LectureDAO(cnx);
-		lecture = new Lecture();
-		lecture.setIdCompte(idCompte);
-		lecture.setDureeMinutes(dureeMinutes);
-		lecture.setTitre(titre);
-		lecture.setEstObligatoire(obligatoire);
-		if (dao.create(lecture)) {
+      try {
 
-		    // Mise à jour des points du participant
-		    // Conversion du nombre de minutes de la lecture en points pour le Participant :
-		    // 15mins =
-		    // 1 point
-		    CompteDAO daoCompte = new CompteDAO(cnx);
-		    Compte compte = new Compte();
-		    compte = daoCompte.read(idCompte);
-		    if (lecture.getEstObligatoire() == Lecture.NON_OBLIGATOIRE) {
-			dureeMinutes *= 2;
-		    }
-		    int pointLecture = (dureeMinutes + compte.getMinutesRestantes()) / 15;
-		    int pointCompte = compte.getPoint() + pointLecture;
-		    // Les minutes restantes sont gardées en mémoire ici
-		    int minutesRestantes = (dureeMinutes + compte.getMinutesRestantes()) % 15;
-		    compte.setPoint(pointCompte);
-		    compte.setMinutesRestantes(minutesRestantes);
-		    daoCompte.update(compte);
-		    // Mise à jour des points dans demande_equipe (pour calculer le total des points
-		    // de
-		    // l'équipe)
-		    if (compte.getIdEquipe() > 0) {
-			DemandeEquipeDAO demandeDAO = new DemandeEquipeDAO(cnx);
-			DemandeEquipe demande = new DemandeEquipe();
-			demande = demandeDAO.findByIdCompteEquipe(idCompte, compte.getIdEquipe());
-			int pointDemandeEquipe = demande.getPoint() + pointLecture;
-			demande.setPoint(pointDemandeEquipe);
-			demandeDAO.update(demande);
+        Connexion.reinit();
+        Connection cnx =
+            Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
+        LectureDAO dao;
+        dao = new LectureDAO(cnx);
 
-			Logger.getLogger(this.getClass().getName())
-			    .log(Level.INFO, ("Une lecture a été créée avec succès"));
+        // Vérifie la limite absolue de temps de lecture quotidien
+        if (dao.getMinutesAjd(idCompte) + dureeMinutes > getLimiteLectureHard()) {
+          return "*.do?tache=afficherPageGestionLecture";
+        }
 
-		    } else {
-			Logger.getLogger(this.getClass().getName())
-			    .log(Level.WARNING, ("Problème de création de la lecture"));
-		    }
-		}
+        lecture = new Lecture();
+        lecture.setIdCompte(idCompte);
+        lecture.setDureeMinutes(dureeMinutes);
+        lecture.setTitre(titre);
+        lecture.setEstObligatoire(obligatoire);
+        if (dao.create(lecture)) {
 
-	    } catch (SQLException ex) {
-		Logger.getLogger(EffectuerCreationLectureAction.class.getName())
-		    .log(Level.SEVERE, null, ex);
-	    }
-	}
-	return "*.do?tache=afficherPageGestionLecture";
+          // Mise à jour des points du participant
+          // Conversion du nombre de minutes de la lecture en points pour le Participant :
+          // 15mins =
+          // 1 point
+          CompteDAO daoCompte = new CompteDAO(cnx);
+          Compte compte = new Compte();
+          compte = daoCompte.read(idCompte);
+          if (lecture.getEstObligatoire() == Lecture.NON_OBLIGATOIRE) {
+            dureeMinutes *= 2;
+          }
+          int pointLecture = (dureeMinutes + compte.getMinutesRestantes()) / 15;
+          int pointCompte = compte.getPoint() + pointLecture;
+          // Les minutes restantes sont gardées en mémoire ici
+          int minutesRestantes = (dureeMinutes + compte.getMinutesRestantes()) % 15;
+          compte.setPoint(pointCompte);
+          compte.setMinutesRestantes(minutesRestantes);
+          daoCompte.update(compte);
+          // Mise à jour des points dans demande_equipe (pour calculer le total des points
+          // de
+          // l'équipe)
+          if (compte.getIdEquipe() > 0) {
+            DemandeEquipeDAO demandeDAO = new DemandeEquipeDAO(cnx);
+            DemandeEquipe demande = new DemandeEquipe();
+            demande = demandeDAO.findByIdCompteEquipe(idCompte, compte.getIdEquipe());
+            int pointDemandeEquipe = demande.getPoint() + pointLecture;
+            demande.setPoint(pointDemandeEquipe);
+            demandeDAO.update(demande);
+
+            Logger.getLogger(this.getClass().getName())
+                .log(Level.INFO, ("Une lecture a été créée avec succès"));
+
+          } else {
+            Logger.getLogger(this.getClass().getName())
+                .log(Level.WARNING, ("Problème de création de la lecture"));
+          }
+        }
+
+      } catch (SQLException ex) {
+        Logger.getLogger(EffectuerCreationLectureAction.class.getName())
+            .log(Level.SEVERE, null, ex);
+      }
     }
+    return "*.do?tache=afficherPageGestionLecture";
+  }
 }
