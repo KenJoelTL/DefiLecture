@@ -46,9 +46,26 @@ Author     : Charles
 	     bouton.css('border-radius', '37px');
 
 	     //limite le nombre de minutes quotidiennes
-	     minutesTotal = Math.min(parseInt($('.dureeMinutes').text())+min,${applicationScope['com.defilecture.limiteHard']}-minAjd);
-	     $('#dureeMinutes').val(minutesTotal);
-	     $('.dureeMinutes').html(minutesTotal + " minutes");
+	     minutes = Math.min(parseInt($('.dureeMinutes').text())+min,${applicationScope['com.defilecture.limiteHard']}-minAjd);
+	     var txt = " Vous allez cumuler " + (minutes+minAjd) + " minutes de lecture pour aujourd'hui. Confirmez qu'il s'agit bien de lectures effectuées aujourd'hui seulement en entrant «Je confirme» ci-dessous :";
+	     $('#texteConfirmation').html(txt);
+	     $('#dureeMinutes').val(minutes);
+	     $('.dureeMinutes').html(minutes + " minutes");
+
+	     if(minutes==0){
+		 $('#confirmer').hide();
+		 $('#confirmerAvertissement').hide();
+	     }
+	     else{
+		 if(minutes+minAjd>${applicationScope['com.defilecture.limiteSoft']}){
+		     $('#confirmer').hide();
+		     $('#confirmerAvertissement').show();
+		 }
+		 else{
+		     $('#confirmer').show();
+		     $('#confirmerAvertissement').hide();
+		 }
+	     }
 	 }
 	 
          $(document).ready(function(){
@@ -94,6 +111,7 @@ Author     : Charles
                  minutesTotal = 0;
                  $('#dureeMinutes').val(minutesTotal);
                  $('.dureeMinutes').html(minutesTotal+ " minute");
+		 ajouterMin($(this),0);
 
              });
              
@@ -127,7 +145,7 @@ Author     : Charles
             <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 creation-lecture-col">
                 <div class="creation-lecture-form">
                     <h1>Ajoutez une lecture!</h1>
-                    <form action="*.do" method="post">
+                    <form action="*.do" method="post" id="formCreationLecture">
                         
                         <div class="form-group">
                             <input list="browsers" name="titre" required/>
@@ -177,7 +195,15 @@ Author     : Charles
                         </div>
 
                         <input type="hidden" name="tache" value="effectuerCreationLecture">
-                        <label class="lecture-submit"><input type="submit" class="btn btn-success" value="Ajouter" ></input></label>
+			<div id="confirmer" class="form-group" style="display: none">
+                            <label class="lecture-submit"><input type="submit" class="btn btn-success" value="Ajouter" id="btnSubmit"></input></label>
+			</div>
+			<div id="confirmerAvertissement" class="form-group" style="display: none">
+			    <div class="alert alert-danger" role="alert" id="texteConfirmation">
+			    </div>
+			    <input type="text" id="confirmation">
+                            <label class="lecture-submit"><input class="btn btn-success" value="Ajouter" id="btnSubmit" onclick="if($('#confirmation').val().toLowerCase()=='je confirme'){$('#btnSubmit').click();}"></input></label>
+			</div>
                         <a href="*.do?tache=afficherPageGestionLecture" class="retour"><span class="glyphicon glyphicon-circle-arrow-left"></span>retour à la liste des lectures</a>
                         
                     </form>
