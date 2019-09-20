@@ -1,12 +1,35 @@
 <h1>Contributeurs</h1>
 
 <h2>Mécènes</h2>
-<strong><p>Éditions Interforum</strong> (pour Les Éditions Le Robert)</p>
-<strong><p>Salon du livre de Montréal</p></strong>
-<strong><p>Druide informatique</p></strong>
-<strong><p>Librairie COOPSCO Rosemont et Éditions Gallimard</p></strong>
-<strong><p>Association des parents d’élèves du Collège de Rosemont</p></strong>
-<strong><p>Syndicat des professeur-e-s du Collège de Rosemont</p></strong>
+
+<style>
+  .flex-container{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-between;
+  }
+  .flex-container > div{
+  margin: 10px;
+  height: 100px;
+  }
+ 
+</style>
+<div class="flex-container">
+
+    <div><img height=100 src="images/logos/Le_Robert_rectangle.jpg"></div>
+
+    <div><img height=100 src="images/logos/Logotype-SLM-noir.png"></div>
+    <div><img height=100 src="images/logos/Logo_Druide.png"></div>
+    <div><img height=100 src="images/logos/Logo_COOPSCO_vertical_encadre.png"></div>
+    <div><img height=100 src="images/logos/logo_nouveau_CR.png"></div>    
+    <div><strong><p>Association des parents d’élèves du Collège de Rosemont</p></strong></div>
+    <div><img height=100 src="images/logos/SPCR.png"></div>
+    <div><img height=100 src="images/logos/Logo_Fides.jpg"></div>
+    <div><img height=100 src="images/logos/Logo folio HD noir.png"></div>
+    <div><img height=100 src="images/logos/logo_memoire.png"></div>
+  
+</div>
 
 <h2>Complices</h2>
 <p>
@@ -28,7 +51,7 @@
   <strong>Concepteurs graphiques</strong> :
   Maxime Blanchet, enseignant au département de Bureautique,
   Charlotte Ganivet, Eléazar Désiré,
-  Samony Chea et Alexandre Paillé, étudiants (concepts visuels retenus). Merci aux autres étudiants du cours Conception de sites web interactifs en Techniques de bureautique, Microédition et hypermédia pour les maquettes présentées à la session d’hiver 2017.
+  Samony Chea et Alexandre Paillé, étudiants (concepts visuels retenus). Merci aux autres étudiants du cours Conception de sites web interactifs en Techniques de bureautique, Microédition et hypermédia, pour les maquettes présentées à la session d’hiver 2017
 
 
 
@@ -45,9 +68,8 @@
 <p>
 
   <strong>Collaboratrices aux communications</strong> :
-  Geneviève Gaudreault, conseillère en communications,
-  Denise Courtine, technicienne en art graphique,
-  Marie-Ève Robitaille et Andie Giroux
+  Marie-Ève Robitaille, conseillère en communication, Denise Courtine, technicienne en art graphique, et Andie Giroux,
+technicienne en art graphique 
 
 
 
