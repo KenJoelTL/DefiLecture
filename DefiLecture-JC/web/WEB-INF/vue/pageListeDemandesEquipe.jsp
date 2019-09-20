@@ -42,7 +42,6 @@
     <jsp:setProperty name="demandeEqDao" property="cnx" value="${connexion.connection}"/>
 </jsp:useBean>
 
-<!-- Si l'ordre est recu -->
 <c:choose>
     <c:when test="${param.ordre eq 'recu'}">
         <!-- Cree les DAOs -->
@@ -79,7 +78,7 @@
         
         <c:if test="${(param.ordre eq 'recu') and (sessionScope.role eq Compte.CAPITAINE) }">
             <c:choose>
-                <c:when test="${ equipe.nbMembres-1 lt applicationScope['com.defilecture.nbMatelos'] }">
+                <c:when test="${ equipe.nbMembres-1 lt applicationScope['com.defilecture.nbMatelots'] }">
 		    <table class="table">
 
 			<thead>
