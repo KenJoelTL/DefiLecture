@@ -53,7 +53,7 @@ public class EffectuerModificationEquipeAction extends Action
             EquipeDAO equipeDao = new EquipeDAO(cnx);
             Equipe equipe = equipeDao.findByNom(request.getParameter("nom"));
 
-            if (userIsAdmin() || compte != null && equipe == null) {
+            if ((userIsAdmin() || compte != null) && equipe == null) {
               equipe = equipeDao.read(userIsAdmin() ? idEquipe : compte.getIdEquipe());
               equipe.setNom(Util.toUTF8(request.getParameter("nom")));
 
