@@ -15,10 +15,9 @@
 package com.defilecture.modele;
 
 public class Equipe implements Comparable<Equipe> {
-  public static int NB_MAX_MEMBRES = 3;
-  private int idEquipe, // clé primaire
-      point,
-      nbMembres;
+  private int idEquipe; // clé primaire
+  private int point;
+  private int nbMembres;
 
   private String nom;
 
@@ -68,18 +67,18 @@ public class Equipe implements Comparable<Equipe> {
   @Override
   public int compareTo(Equipe equipe) {
     int valeur = 0;
-    if (this.point > equipe.point) valeur = 1;
-    else if (this.point < equipe.point) valeur = -1;
+    if (this.point > equipe.point) {
+      valeur = 1;
+    } else {
+      if (this.point < equipe.point) {
+        valeur = -1;
+      }
+    }
     return valeur;
   }
 
   @Override
   public boolean equals(Object obj) {
-    if (this != null && obj != null)
-      if (obj instanceof Equipe)
-        return (this.idEquipe == ((Equipe) obj).idEquipe)
-        /*|| (this.nom.equals(equipe.nom))*/ ;
-
-    return false;
+    return obj instanceof Equipe && this.idEquipe == ((Equipe) obj).idEquipe;
   }
 }

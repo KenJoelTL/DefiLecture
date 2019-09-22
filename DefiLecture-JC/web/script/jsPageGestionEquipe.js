@@ -1,5 +1,4 @@
 /* 
- <!--
     This file is part of DefiLecture.
 
     DefiLecture is free software: you can redistribute it and/or modify
@@ -14,28 +13,12 @@
 
     You should have received a copy of the GNU General Public License
     along with DefiLecture.  If not, see <http://www.gnu.org/licenses/>.
--->
-<%-- 
-    Document   : jsPageGestionLectures
-    Created on : 2018-12-16, 20:52:35
-    Author     : Roodney Aladin
---%>
- */
+*/
 
-
-
-function supprimer(idLecture){
-
-  $.ajax({
-        url: '*.do?tache=effectuerSuppressionLecture&idLecture='+idLecture, 
-        cache    : false,
-        complete: function () {
-          $("tr#lecture-"+ idLecture).remove();
-        
-        }
-    });
-    
-    
-
+function supprimerParticipant(idCompte, idEquipe){
+  var confirmation = confirm('Souhaitez-vous vraiment supprimer le participant?');
+  if (confirmation == true) {                    
+    location.href = 'depart.do?tache=effectuerDepartEquipe&idCompte='+idCompte+'&idEquipe='+idEquipe;
   }
+}
 

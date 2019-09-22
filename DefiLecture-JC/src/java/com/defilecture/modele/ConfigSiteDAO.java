@@ -34,34 +34,7 @@ public class ConfigSiteDAO extends DAO<ConfigSite> {
 
   @Override
   public boolean create(ConfigSite x) {
-
-    String req = "INSERT INTO config_site (`ID_CONFIG` , `VALUE_CONFIG`) VALUES " + "(?,?)";
-
-    PreparedStatement paramStm = null;
-    try {
-      paramStm = cnx.prepareStatement(req);
-      for (String cle : x.getConfig().keySet()) {
-        paramStm.setString(1, cle.toUpperCase());
-        paramStm.setString(2, x.getConfig().get(cle));
-        paramStm.executeUpdate();
-      }
-      int n = paramStm.executeUpdate();
-      if (n > 0) {
-        paramStm.close();
-        // stm.close();
-        return true;
-      }
-      return false;
-    } catch (SQLException exp) {
-      Logger.getLogger(ConfigSiteDAO.class.getName()).log(Level.SEVERE, null, exp);
-    } finally {
-      try {
-        if (paramStm != null) paramStm.close();
-      } catch (SQLException ex) {
-        Logger.getLogger(ConfigSiteDAO.class.getName()).log(Level.SEVERE, null, ex);
-      }
-    }
-    return false;
+    return update(x);
   }
 
   @Override
@@ -73,7 +46,7 @@ public class ConfigSiteDAO extends DAO<ConfigSite> {
     try {
       paramStm = cnx.prepareStatement(req);
 
-      paramStm.setString(1, id.toUpperCase());
+      paramStm.setString(1, id);
 
       ResultSet resultat = paramStm.executeQuery();
 
@@ -82,7 +55,7 @@ public class ConfigSiteDAO extends DAO<ConfigSite> {
 
         ConfigSite config = new ConfigSite();
 
-        config.getConfig().put(id.toUpperCase(), resultat.getString("VALUE_CONFIG"));
+        config.getConfig().put(id, resultat.getString("VALUE_CONFIG"));
 
         resultat.close();
         paramStm.close();
@@ -96,7 +69,9 @@ public class ConfigSiteDAO extends DAO<ConfigSite> {
       Logger.getLogger(ConfigSiteDAO.class.getName()).log(Level.SEVERE, null, exp);
     } finally {
       try {
-        if (paramStm != null) paramStm.close();
+        if (paramStm != null) {
+          paramStm.close();
+        }
       } catch (SQLException exp) {
         Logger.getLogger(ConfigSiteDAO.class.getName()).log(Level.SEVERE, null, exp);
       } catch (Exception e) {
@@ -114,15 +89,15 @@ public class ConfigSiteDAO extends DAO<ConfigSite> {
 
   @Override
   public boolean update(ConfigSite x) {
-    String req = "UPDATE config_site SET VALUE_CONFIG = ? WHERE ID_Config = ?";
+    String req = "REPLACE INTO config_site(ID_Config, VALUE_CONFIG) VALUES (?, ?)";
 
     PreparedStatement paramStm = null;
     try {
       paramStm = cnx.prepareStatement(req);
 
       for (String cle : x.getConfig().keySet()) {
-        paramStm.setString(1, x.getConfig().get(cle));
-        paramStm.setString(2, cle.toUpperCase());
+        paramStm.setString(1, cle);
+        paramStm.setString(2, x.getConfig().get(cle));
         paramStm.executeUpdate();
       }
       int n = paramStm.executeUpdate();
@@ -136,7 +111,9 @@ public class ConfigSiteDAO extends DAO<ConfigSite> {
       Logger.getLogger(ConfigSiteDAO.class.getName()).log(Level.SEVERE, null, exp);
     } finally {
       try {
-        if (paramStm != null) paramStm.close();
+        if (paramStm != null) {
+          paramStm.close();
+        }
       } catch (SQLException ex) {
         Logger.getLogger(ConfigSiteDAO.class.getName()).log(Level.SEVERE, null, ex);
       }
@@ -166,7 +143,9 @@ public class ConfigSiteDAO extends DAO<ConfigSite> {
       Logger.getLogger(ConfigSiteDAO.class.getName()).log(Level.SEVERE, null, exp);
     } finally {
       try {
-        if (paramStm != null) paramStm.close();
+        if (paramStm != null) {
+          paramStm.close();
+        }
       } catch (SQLException ex) {
         Logger.getLogger(ConfigSiteDAO.class.getName()).log(Level.SEVERE, null, ex);
       }
@@ -182,7 +161,7 @@ public class ConfigSiteDAO extends DAO<ConfigSite> {
 
     try {
       for (String cle : x.getConfig().keySet()) {
-        paramStm.setString(1, cle.toUpperCase());
+        paramStm.setString(1, cle);
         paramStm = cnx.prepareStatement(req);
 
         int nbLignesAffectees = paramStm.executeUpdate();
@@ -199,7 +178,9 @@ public class ConfigSiteDAO extends DAO<ConfigSite> {
       Logger.getLogger(ConfigSiteDAO.class.getName()).log(Level.SEVERE, null, exp);
     } finally {
       try {
-        if (paramStm != null) paramStm.close();
+        if (paramStm != null) {
+          paramStm.close();
+        }
       } catch (SQLException ex) {
         Logger.getLogger(ConfigSiteDAO.class.getName()).log(Level.SEVERE, null, ex);
       }
@@ -237,7 +218,9 @@ public class ConfigSiteDAO extends DAO<ConfigSite> {
       Logger.getLogger(ConfigSiteDAO.class.getName()).log(Level.SEVERE, null, exp);
     } finally {
       try {
-        if (stm != null) stm.close();
+        if (stm != null) {
+          stm.close();
+        }
       } catch (SQLException exp) {
         Logger.getLogger(ConfigSiteDAO.class.getName()).log(Level.SEVERE, null, exp);
       } catch (Exception e) {
@@ -258,7 +241,7 @@ public class ConfigSiteDAO extends DAO<ConfigSite> {
     try {
       paramStm = cnx.prepareStatement(req);
 
-      paramStm.setString(1, id.toUpperCase());
+      paramStm.setString(1, id);
 
       ResultSet resultat = paramStm.executeQuery();
 
@@ -279,7 +262,9 @@ public class ConfigSiteDAO extends DAO<ConfigSite> {
       Logger.getLogger(ConfigSiteDAO.class.getName()).log(Level.SEVERE, null, exp);
     } finally {
       try {
-        if (paramStm != null) paramStm.close();
+        if (paramStm != null) {
+          paramStm.close();
+        }
       } catch (SQLException exp) {
         Logger.getLogger(ConfigSiteDAO.class.getName()).log(Level.SEVERE, null, exp);
       } catch (Exception e) {

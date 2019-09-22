@@ -55,7 +55,7 @@ public class Util {
   public static String toUTF16(String someString) {
     //        byte[] ptext = someString.getBytes(ISO_8859_1); //forme un tableau de bytes selon le
     // format latin [format intermédiaire ± arbitraire]
-    String value=null;
+    String value = null;
     try {
       // forme un String selon le format UTF-16 à partir du tableau de bytes récupérés.
 
@@ -66,7 +66,7 @@ public class Util {
 
     return value;
   }
-    
+
   /**
    * Retourne un String hashé en SHA256 et salé du mot de passe donné en paramètre.
    *

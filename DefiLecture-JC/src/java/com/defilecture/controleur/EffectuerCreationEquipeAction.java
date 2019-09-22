@@ -14,13 +14,13 @@
  */
 package com.defilecture.controleur;
 
+import com.defilecture.Util;
 import com.defilecture.modele.Compte;
 import com.defilecture.modele.CompteDAO;
 import com.defilecture.modele.DemandeEquipe;
 import com.defilecture.modele.DemandeEquipeDAO;
 import com.defilecture.modele.Equipe;
 import com.defilecture.modele.EquipeDAO;
-import com.defilecture.Util;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -48,39 +48,51 @@ public class EffectuerCreationEquipeAction extends Action implements RequirePRGA
                 Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
             EquipeDAO daoEquipe = new EquipeDAO(cnx);
 
-            if (daoEquipe.create(equipe)) {
-              Logger.getLogger(EffectuerCreationEquipeAction.class.getName())
-                  .log(Level.SEVERE, "Équipe créée.");
-              equipe = daoEquipe.findByNom(equipe.getNom());
-              if (equipe != null) {
-                Logger.getLogger(EffectuerCreationEquipeAction.class.getName())
-                    .log(Level.SEVERE, "Équipe trouvée. " + equipe.getIdEquipe());
-                CompteDAO daoCompte = new CompteDAO(cnx);
-                Compte compte = daoCompte.read(idCompte);
-                compte.setIdEquipe(equipe.getIdEquipe());
+            if (daoEquipe.findByNom(equipe.getNom()) == null) {
+              if (daoEquipe.create(equipe)) {
+                equipe = daoEquipe.findByNom(equipe.getNom());
                 Logger.getLogger(EffectuerCreationEquipeAction.class.getName())
                     .log(
-                        Level.SEVERE,
-                        "Ajout du compte " + idCompte + " à l'équipe " + equipe.getIdEquipe());
-
-                if (daoCompte.update(compte)) {
-                  DemandeEquipeDAO daoDemandeEquipe = new DemandeEquipeDAO(cnx);
-                  DemandeEquipe demande = new DemandeEquipe();
-                  demande.setIdCompte(compte.getIdCompte());
-                  demande.setIdEquipe(compte.getIdEquipe());
-
-                  demande.setStatutDemande(1);
-                  if (daoDemandeEquipe.create(demande)) {
-                    Logger.getLogger(EffectuerCreationEquipeAction.class.getName())
-                        .log(Level.SEVERE, "Demande complétée");
-                    return "creationEquipeCompletee.do?tache=afficherPageEquipe&idEquipe="
-                        + equipe.getIdEquipe();
-                  }
-                }
+                        Level.INFO,
+                        "Équipe {ID: "
+                            + Integer.toString(equipe.getIdEquipe())
+                            + ", Nom: "
+                            + equipe.getNom()
+                            + "} créée.");
               } else {
-                data.put("erreurNom", "Ce nom est déjà utilisé par un équipage");
+                data.put("erreurNom", "Équipe non créée.");
+                Logger.getLogger(EffectuerCreationEquipeAction.class.getName())
+                    .log(
+                        Level.INFO,
+                        "Erreur lors de la création de l'équipe " + equipe.getNom() + ".");
                 return "creation.do?tache=afficherPageCreationEquipe";
               }
+
+              CompteDAO daoCompte = new CompteDAO(cnx);
+              Compte compte = daoCompte.read(idCompte);
+              compte.setIdEquipe(equipe.getIdEquipe());
+              Logger.getLogger(EffectuerCreationEquipeAction.class.getName())
+                  .log(
+                      Level.INFO,
+                      "Ajout du compte " + idCompte + " à l'équipe " + equipe.getIdEquipe());
+
+              if (daoCompte.update(compte)) {
+                DemandeEquipeDAO daoDemandeEquipe = new DemandeEquipeDAO(cnx);
+                DemandeEquipe demande = new DemandeEquipe();
+                demande.setIdCompte(compte.getIdCompte());
+                demande.setIdEquipe(compte.getIdEquipe());
+
+                demande.setStatutDemande(1);
+                if (daoDemandeEquipe.create(demande)) {
+                  Logger.getLogger(EffectuerCreationEquipeAction.class.getName())
+                      .log(Level.INFO, "Demande complétée");
+                  return "creationEquipeCompletee.do?tache=afficherPageEquipe&idEquipe="
+                      + equipe.getIdEquipe();
+                }
+              }
+            } else {
+              data.put("erreurNom", "Ce nom est déjà utilisé par un équipage");
+              return "creation.do?tache=afficherPageCreationEquipe";
             }
           } catch (SQLException ex) {
             Logger.getLogger(EffectuerCreationEquipeAction.class.getName())

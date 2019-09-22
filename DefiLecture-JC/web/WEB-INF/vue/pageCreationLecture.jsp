@@ -37,64 +37,51 @@ Author     : Charles
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Création d'une lecture</title>
         <script type="text/javascript">
+
+	 var ajoutMin=0;
+	 
+	 function ajouterMin(bouton, min){
+	     minAjd=${dao.getMinutesAjd(sessionScope.connecte)};
+	     bouton.css('border', '3px dotted goldenrod');
+	     bouton.css('border-radius', '37px');
+
+	     //limite le nombre de minutes quotidiennes
+	     minutesTotal = Math.min(parseInt($('.dureeMinutes').text())+min,${applicationScope['com.defilecture.limiteHard']}-minAjd);
+	     $('#dureeMinutes').val(minutesTotal);
+	     $('.dureeMinutes').html(minutesTotal + " minutes");
+	 }
+	 
          $(document).ready(function(){
-             
+	     
              var mobile   = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent); 
              var start = mobile ? "touchstart" : "mousedown";
              var end =  mobile ? "touchend" : "mouseup";
 
-             
-             $('.duree15').bind(start,function() {
-                 $(this).css('border', '3px dotted goldenrod');
-                 $(this).css('border-radius', '37px');
-                 minutesTotal = parseInt($('.dureeMinutes').text())+15;
-                 $('#dureeMinutes').val(minutesTotal);
-                 $('.dureeMinutes').html(minutesTotal + " minutes");
-                 
-             });
-             
-             $('.duree15').on(end+" mouseleave mouseout",function() {
+
+             $('.duree15').bind(start, function(){
+		 ajouterMin($(this),15);
+	     });
+             $('.duree15').on(end+" mouseleave mouseout", function() {
                  $(this).css('border', 'transparent');
-
              });
              
-             
-             $('.duree30').bind(start, function() {
-                 $(this).css('border', '3px dotted goldenrod');
-                 $(this).css('border-radius', '37px');
-                 minutesTotal = parseInt($('.dureeMinutes').text())+30;
-                 $('#dureeMinutes').val(minutesTotal);
-                 $('.dureeMinutes').html(minutesTotal+ " minutes");
-
-             });
-             
-             $('.duree30').on(end+" mouseleave mouseout",function() {
+             $('.duree30').bind(start, function(){
+		 ajouterMin($(this),30);
+	     });
+             $('.duree30').on(end+" mouseleave mouseout", function() {
                  $(this).css('border', 'transparent');
-
-                 
              });
-             $('.duree45').bind(start, function() {
-                 $(this).css('border', '3px dotted goldenrod');
-                 $(this).css('border-radius', '37px');
-                 minutesTotal = parseInt($('.dureeMinutes').text())+45;
-                 $('#dureeMinutes').val(minutesTotal);
-                 $('.dureeMinutes').html(minutesTotal+ " minutes");
 
-             });
-             
-             $('.duree45').on(end+" mouseleave mouseout",function() {
+             $('.duree45').bind(start, function(){
+		 ajouterMin($(this),45);
+	     });
+             $('.duree45').on(end+" mouseleave mouseout", function() {
                  $(this).css('border', 'transparent');
-
-                 
              });
-             $('.duree60').bind(start,function() {
-                 $(this).css('border', '3px dotted goldenrod');
-                 $(this).css('border-radius', '37px');
-                 minutesTotal = parseInt($('.dureeMinutes').text())+60;
-                 $('#dureeMinutes').val(minutesTotal);
-                 $('.dureeMinutes').html(minutesTotal+ " minutes");
 
-             });
+             $('.duree60').bind(start, function(){
+		 ajouterMin($(this),60);
+	     });
              $('.duree60').on(end+" mouseleave mouseout", function() {
                  $(this).css('border', 'transparent');
 

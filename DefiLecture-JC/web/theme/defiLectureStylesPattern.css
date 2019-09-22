@@ -97,7 +97,7 @@ div#optionsNavigation {
   max-height: 100%!important;
 }
 
-ul.dropdown-menu {
+#optionsNavigation ul.dropdown-menu {
   background-color: cssCouleurNavBack !important;
 }
 
@@ -692,7 +692,7 @@ p#msgMDPoublie {
 }
 
 .lecture-submit {
-  background-image: url();
+  background-image: url(cssImageConfirmer);
   background-size: cover;
   width: 161px!important;
   height: 167px!important;
@@ -1143,4 +1143,5 @@ p#msgMDPoublie {
 .pErreur {
   text-align: center;
   font-weight: bold;
+
 }

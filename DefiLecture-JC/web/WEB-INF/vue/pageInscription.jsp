@@ -36,6 +36,9 @@
                     </c:if>
                     <h1>S'inscrire</h1>
                    
+                    <c:if test="${!empty requestScope.data['erreurDates']}">
+                        <div class="alert alert-danger"><strong>${requestScope.data['erreurDates']}</strong></div>
+                    </c:if>
                     <c:if test="${!empty requestScope.data['erreurPrenom']}">
                         <div class="alert alert-danger"><strong>${requestScope.data['erreurPrenom']}</strong></div>
                     </c:if>
