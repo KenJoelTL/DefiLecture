@@ -87,7 +87,7 @@ span.glyphicon.glyphicon-log-in {
 
 ul.nav.navbar-nav{
   height: 93px;
-  display :flex;
+  display :block;
 }
 
 a.dropdown-toggle{
@@ -1089,6 +1089,11 @@ p#msgMDPoublie {
   border-style:solid;
   border-color:#212529;
   float: left;
+}
+
+.imgProfil.Petite {
+  height: 2em;
+  width: 2em;
 }
 
 .contenuEnteteProfil{
