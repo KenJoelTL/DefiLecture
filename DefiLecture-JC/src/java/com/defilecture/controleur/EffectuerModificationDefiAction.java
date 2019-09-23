@@ -16,6 +16,7 @@ package com.defilecture.controleur;
 
 import com.defilecture.modele.Defi;
 import com.defilecture.modele.DefiDAO;
+import com.defilecture.Util;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -58,7 +59,7 @@ public class EffectuerModificationDefiAction extends Action
 	if (defi != null) {
 
 	  if (nom != null && !"".equals(nom.trim()) && !nom.equals(defi.getNom())) {
-	    defi.setNom(nom);
+	    defi.setNom(Util.toUTF8(nom));
 	  }
 
 	  if (request.getParameter("valeurMinute") != null) {
@@ -78,17 +79,17 @@ public class EffectuerModificationDefiAction extends Action
 	  if (description != null
 	      && !"".equals(description.trim())
 	      && !description.equals(defi.getDescription())) {
-	    defi.setDescription(description);
+	    defi.setDescription(Util.toUTF8(description));
 	  }
 
 	  if (question != null
 	      && !"".equals(question.trim())
 	      && !question.equals(defi.getQuestion())) {
-	    defi.setQuestion(question);
+	    defi.setQuestion(Util.toUTF8(question));
 	  }
 
 	  if (choixReponse != defi.getChoixReponse()) {
-	    defi.setChoixReponse(choixReponse);
+	    defi.setChoixReponse(Util.toUTF8(choixReponse));
 	  }
 
 	  if (reponse != defi.getReponse()) {

@@ -148,7 +148,7 @@ Author     : Charles
                     <form action="*.do" method="post" id="formCreationLecture">
                         
                         <div class="form-group">
-                            <input list="browsers" name="titre" required/>
+				<label for="titre">Titre : </label><input list="browsers" name="titre" id="titre" class="form-control" required/>
                             <datalist id="browsers">
                                 <c:set var="listeLectures" value="${dao.findByIdCompteOrderByTitre(sessionScope.connecte)}"/>
                                 <c:forEach items="${listeLectures}" var="l">

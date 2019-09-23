@@ -92,6 +92,7 @@
                         <label for="nomFichier">Avatar : </label>
                         <input type="file" name="nomFichier" id="file"  accept="image/*"/> <br/>
                         <input type="hidden" name="tache" value="effectuerAjoutAvatarCompte" />
+			<input type="hidden" name="idCompte" value="${compte.idCompte}" />
                         <button id="upload" name="upload" class="btn btn-primary">T&eacute;l&eacute;verser</button>
                     </div>
                 </form>

@@ -46,13 +46,19 @@ public class EffectuerAjoutAvatarCompteAction extends Action
 
     // Seul le membre connecté peut modifier son propre avatar
     if (userIsConnected()) {
-      int idCompte = ((Integer) session.getAttribute("currentId")).intValue();
-      action = "*.do?tache=afficherPageModificationCompte&id=" + idCompte;
       OutputStream out = null;
       InputStream filecontent = null;
       String absolutePath = "";
-
       try {
+	    int idCompte;	
+	if(userIsAdmin() || userIsModerateur()){
+      idCompte = Integer.parseInt(request.getParameter("idCompte"));
+	}
+	else{
+      idCompte = ((Integer) session.getAttribute("currentId")).intValue();
+	}
+      action = "*.do?tache=afficherPageModificationCompte&id=" + idCompte;
+
         final Part filePart = request.getPart("nomFichier");
         final String path = "/images/avatars";
         final String fileName = "avatarCompte_" + idCompte;
@@ -89,6 +95,9 @@ public class EffectuerAjoutAvatarCompteAction extends Action
       } catch (FileNotFoundException fne) {
         Logger.getLogger(EffectuerAjoutAvatarCompteAction.class.getName())
             .log(Level.SEVERE, "\nImpossible d'atteindre la destination : " + absolutePath, fne);
+      } catch (NumberFormatException ex){
+        Logger.getLogger(EffectuerAjoutAvatarCompteAction.class.getName())
+            .log(Level.SEVERE, null, ex);
       } catch (IOException | ServletException | SQLException ex) {
         Logger.getLogger(EffectuerAjoutAvatarCompteAction.class.getName())
             .log(Level.SEVERE, null, ex);
