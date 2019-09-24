@@ -66,7 +66,7 @@
             <tbody>
                 <c:forEach items="${listeEquipes}" var="equipe">          
                     <tr>
-                        <c:if test="${(compteConnecte.idEquipe eq -1) and (equipe.nbMembres lt 3)}">
+                        <c:if test="${(compteConnecte.idEquipe eq -1) and (equipe.nbMembres lt 4)}">
                             <td><a href="pageEquipe.do?tache=afficherPageEquipe&idEquipe=${equipe.idEquipe}">${equipe.nom}</a></td>
 
                             <td id="Lien-${i}">

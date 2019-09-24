@@ -53,6 +53,7 @@
                     <th>Pseudonyme</th>
                     <th>Courriel</th>
                     <th>Rôle</th>
+                    <th>Points</th>
                 </tr>
             </thead>
             <tbody>
@@ -92,6 +93,7 @@
                         <td>${ empty compte.pseudonyme ? "---" : compte.pseudonyme}</td>
                         <td>${compte.courriel}</td>
                         <td>${role}</td>
+                        <td>${compte.point}</td>
                         <td><c:if test="${ (sessionScope.connecte eq compte.idCompte ) or (permissionAccordee) }">
                                 <a href="details.do?tache=afficherPageModificationCompte&id=${compte.idCompte}">Modifier</a>
                             </c:if>
