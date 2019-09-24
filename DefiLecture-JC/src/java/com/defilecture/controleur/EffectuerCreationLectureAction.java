@@ -20,6 +20,7 @@ import com.defilecture.modele.DemandeEquipe;
 import com.defilecture.modele.DemandeEquipeDAO;
 import com.defilecture.modele.Lecture;
 import com.defilecture.modele.LectureDAO;
+import com.defilecture.Util;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -44,7 +45,7 @@ public class EffectuerCreationLectureAction extends Action implements RequirePRG
         return "*.do?tache=afficherPageGestionLecture";
       }
 
-      String titre = request.getParameter("titre");
+      String titre = Util.toUTF8(request.getParameter("titre"));
       int dureeMinutes = Integer.parseInt(request.getParameter("dureeMinutes"));
       int obligatoire = Integer.parseInt(request.getParameter("obligatoire"));
       int idCompte = ((Integer) session.getAttribute("currentId")).intValue();
