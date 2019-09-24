@@ -22,6 +22,7 @@ import com.defilecture.modele.DemandeEquipe;
 import com.defilecture.modele.DemandeEquipeDAO;
 import com.defilecture.modele.InscriptionDefi;
 import com.defilecture.modele.InscriptionDefiDAO;
+import com.defilecture.Util;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -48,7 +49,7 @@ public class EffectuerInscriptionDefiAction extends Action implements RequirePRG
         return "*.do?tache=afficherPageParticipationDefi";
       }
 
-      String reponseParticipant = request.getParameter("reponseParticipant");
+      String reponseParticipant = Util.toUTF8(request.getParameter("reponseParticipant"));
       int idCompte = ((Integer) (session.getAttribute("currentId"))).intValue();
       int idDefi = Integer.parseInt(request.getParameter("idDefi"));
       InscriptionDefi inscriptionDefi = new InscriptionDefi();

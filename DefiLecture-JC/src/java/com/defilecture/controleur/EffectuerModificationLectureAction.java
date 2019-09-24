@@ -16,6 +16,7 @@ package com.defilecture.controleur;
 
 import com.defilecture.modele.Lecture;
 import com.defilecture.modele.LectureDAO;
+import com.defilecture.Util;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -38,7 +39,7 @@ public class EffectuerModificationLectureAction extends Action implements Requir
       }
 
       String idLecture = request.getParameter("idLecture");
-      String titre = request.getParameter("titre");
+      String titre = Util.toUTF8(request.getParameter("titre"));
 
       int dureeMinutes;
       int estObligatoire = Integer.parseInt(request.getParameter("obligatoire"));
