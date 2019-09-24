@@ -6,7 +6,7 @@
     </context-param>
     <context-param>
         <param-name>urlDb</param-name>
-        <param-value>jdbc:mysql://172.21.0.2/defilecture?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=UTF-8</param-value>
+        <param-value>jdbc:mysql://172.21.0.2/defilecture?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=EST5EDT</param-value>
     </context-param>
     <context-param>
         <param-name>adminName</param-name>
@@ -24,19 +24,13 @@
         <param-name>passwordDB</param-name>
         <param-value>password</param-value>
     </context-param>
-    <context-param>
-        <description>Nombre maximum de participants par équipe</description>
-        <param-name>nbParticipantMax</param-name>
-        <param-value>4</param-value>
-    </context-param>
-    
     <listener>
-        <listener-class>com.defiLecture.EcouteurApplication</listener-class>
+        <listener-class>com.defilecture.EcouteurApplication</listener-class>
     </listener>
     
     <servlet>
         <servlet-name>CF</servlet-name>
-        <servlet-class>com.defiLecture.controleur.ControleurFrontal</servlet-class>
+        <servlet-class>com.defilecture.controleur.ControleurFrontal</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>CF</servlet-name>

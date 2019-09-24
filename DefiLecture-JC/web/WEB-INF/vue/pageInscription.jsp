@@ -32,25 +32,28 @@
         <div class='row inscription-row'> 
                 <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 inscription-col"> 
                     <c:if test="${!empty requestScope.data['erreurInscription']}">
-                    <div class="alert alert-danger"><strong>${requestScope.data['erreurInscription']}</strong></div>
+                        <div class="alert alert-danger"><strong>${requestScope.data['erreurInscription']}</strong></div>
                     </c:if>
                     <h1>S'inscrire</h1>
                    
-                     <c:if test="${!empty requestScope.data['erreurPrenom']}">
-                              <div class="alert alert-danger"><strong>${requestScope.data['erreurPrenom']}</strong></div>
-                            </c:if>
-                     <c:if test="${!empty requestScope.data['erreurNom']}">
-                            <div class="alert alert-danger"><strong>${requestScope.data['erreurNom']}</strong></div>
-                            </c:if>
+                    <c:if test="${!empty requestScope.data['erreurDates']}">
+                        <div class="alert alert-danger"><strong>${requestScope.data['erreurDates']}</strong></div>
+                    </c:if>
+                    <c:if test="${!empty requestScope.data['erreurPrenom']}">
+                        <div class="alert alert-danger"><strong>${requestScope.data['erreurPrenom']}</strong></div>
+                    </c:if>
+                    <c:if test="${!empty requestScope.data['erreurNom']}">
+                        <div class="alert alert-danger"><strong>${requestScope.data['erreurNom']}</strong></div>
+                    </c:if>
                     <c:if test="${!empty requestScope.data['erreurCourriel']}">
-                            <div class="alert alert-danger"><strong>${requestScope.data['erreurCourriel']}</strong></div>
-                            </c:if>
+                        <div class="alert alert-danger"><strong>${requestScope.data['erreurCourriel']}</strong></div>
+                    </c:if>
                     <c:if test="${!empty requestScope.data['erreurPseudonyme']}">
-                            <div class="alert alert-danger"><strong>${requestScope.data['erreurPseudonyme']}</strong></div>
-                            </c:if>
+                        <div class="alert alert-danger"><strong>${requestScope.data['erreurPseudonyme']}</strong></div>
+                    </c:if>
                     <c:if test="${!empty requestScope.data['erreurMotPasseIdentique']}">
-                            <div class="alert alert-danger"><strong>${requestScope.data['erreurMotPasseIdentique']}</strong></div>
-                            </c:if>
+                        <div class="alert alert-danger"><strong>${requestScope.data['erreurMotPasseIdentique']}</strong></div>
+                    </c:if>
                     <form class="inscription-form" action="inscription.do" method="post">
                         <strong><p>* champs obligatoires</p></strong>
                         <div class="form-group">
@@ -90,7 +93,7 @@
                         </div>
                             
                         <div class="form-group">
-                            <label for="motPasse">Mot de passe (jusqu'à 12 caratères)* :</label>
+                            <label for="motPasse">Mot de passe* :</label>
                             <div class="input-group">
                                 <input id="motPasse" type="password" class="form-control" name="motPasse" required>
                             </div>
@@ -103,7 +106,7 @@
                         </div> 
                         
                         <div class="form-group">
-                             <label for="devenirCapitaine"><input id="chkDevenirCapitaine" type="checkbox" name="devenirCapitaine" value="1">Je désire être capitaine d'un équipage (employé ou tuteur)</label>
+                             <label for="devenirCapitaine"><input id="chkDevenirCapitaine" type="checkbox" name="devenirCapitaine" value="1">Je désire être <% out.println(application.getAttribute("vocChef"));%> <% out.println(application.getAttribute("vocEquipe2"));%> (employé ou tuteur)</label>
                         </div> 
                         
                         <input type="hidden" name="tache" value="effectuerInscription">

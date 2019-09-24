@@ -56,7 +56,7 @@ CREATE TABLE `compte` (
   `ID_COMPTE` int(10) NOT NULL,
   `ID_EQUIPE` int(10) DEFAULT NULL,
   `COURRIEL` varchar(255) NOT NULL,
-  `MOT_PASSE` varchar(50) NOT NULL,
+  `MOT_PASSE` varchar(64) NOT NULL,
   `NOM` varchar(255) NOT NULL,
   `PRENOM` varchar(255) NOT NULL,
   `POINT` int(10) DEFAULT '0',
@@ -65,7 +65,8 @@ CREATE TABLE `compte` (
   `AVATAR` varchar(255) DEFAULT '/images/avatars/avatarCompte_defaut.png',
   `PSEUDONYME` varchar(255) DEFAULT NULL,
   `ROLE` int(10) NOT NULL DEFAULT '1',
-  `DEVENIR_CAPITAINE` int(3) NOT NULL DEFAULT '0'
+  `DEVENIR_CAPITAINE` int(3) NOT NULL DEFAULT '0',
+  `SEL` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -77,8 +78,34 @@ TRUNCATE TABLE `compte`;
 -- Contenu de la table `compte`
 --
 
-INSERT INTO `compte` (`ID_COMPTE`, `ID_EQUIPE`, `COURRIEL`, `MOT_PASSE`, `NOM`, `PRENOM`, `POINT`, `MINUTES_RESTANTES`, `PROGRAMME_ETUDE`, `PSEUDONYME`, `ROLE`, `DEVENIR_CAPITAINE`) VALUES
-(1, NULL, 'admin@mail.com', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'admin', 'Admin', 0, 0, '', 'admin', 4, 0);
+INSERT INTO `compte` 
+(`ID_COMPTE`, 
+`ID_EQUIPE`, 
+`COURRIEL`, 
+`MOT_PASSE`, 
+`NOM`, 
+`PRENOM`, 
+`POINT`, 
+`MINUTES_RESTANTES`, 
+`PROGRAMME_ETUDE`, 
+`PSEUDONYME`, 
+`ROLE`, 
+`DEVENIR_CAPITAINE`,
+`SEL`) 
+VALUES
+(1, 
+NULL, 
+'admin@mail.com', 
+'d7306b69d6144db293e52c0bbf1f3fa3210b42ed8e122aaaf2dad7db0aa4ac93',
+'admin', 
+'Admin', 
+0, 
+0, 
+'', 
+'admin', 
+4, 
+0,
+'ungraindeselpourtest');
 
 -- --------------------------------------------------------
 
@@ -91,7 +118,7 @@ CREATE TABLE `defi` (
   `ID_DEFI` int(10) NOT NULL,
   `ID_COMPTE` int(10) DEFAULT NULL,
   `NOM` varchar(255) NOT NULL,
-  `DESCRIPTION` varchar(1024) DEFAULT NULL,
+  `DESCRIPTION` text DEFAULT NULL,
   `DATE_DEBUT` datetime(2) NOT NULL,
   `DATE_FIN` datetime(2) NOT NULL,
   `QUESTION` varchar(1024) DEFAULT NULL,
@@ -161,7 +188,18 @@ CREATE TABLE `lecture` (
   `EST_OBLIGATOIRE` int(2) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
 
+--
+-- Structure de la table `config_site`
+--
+
+CREATE TABLE `config_site` (
+  `ID_CONFIG` varchar(50) NOT NULL,
+  `VALUE_CONFIG` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
 --
 -- Index pour les tables exportées
 --
@@ -213,6 +251,12 @@ ALTER TABLE `lecture`
   ADD KEY `ID_COMPTE` (`ID_COMPTE`);
 
 --
+-- Index pour la table `config_site`
+--
+ALTER TABLE `config_site`
+  ADD PRIMARY KEY (`ID_CONFIG`);
+
+--
 -- AUTO_INCREMENT pour les tables exportées
 --
 
@@ -246,6 +290,7 @@ ALTER TABLE `inscription_defi`
 --
 ALTER TABLE `lecture`
   MODIFY `ID_LECTURE` int(10) NOT NULL AUTO_INCREMENT;
+
 --
 -- Contraintes pour les tables exportées
 --
