@@ -180,8 +180,8 @@
               <div class="form-group">
                 <label for="obligatoire">La lecture était-elle obligatoire? <br>  (Lecture imposée dans le cadre d’un cours.) </label>
 
-                <div class="radio obligatoire-oui">
-                  <label ><input type="radio" name="obligatoire" value="1" required >oui</label>
+                <div class="radio obligatoire-oui" style="background-color: rgba(255,255,255,0.8);">
+                  <label ><input type="radio" name="obligatoire" value="1" required checked>oui</label>
                 </div>
                 <div class="radio obligatoire-non">
                   <label ><input type="radio" name="obligatoire" value="0" required >non</label>
@@ -190,10 +190,10 @@
             </div>
 
             <input type="hidden" name="tache" value="effectuerCreationLecture">
-	    <div id="confirmer" class="form-group" style="display: none">
+	    <div id="confirmer" class="form-group" style="display: none; text-align: center;">
               <label class="lecture-submit"><input type="submit" class="btn btn-success" value="Ajouter" id="btnSubmit"></input></label>
 	    </div>
-	    <div id="confirmerAvertissement" class="form-group" style="display: none">
+	    <div id="confirmerAvertissement" class="form-group" style="display: none; text-align: center;">
 	      <div class="alert alert-danger" role="alert" id="texteConfirmation">
 	      </div>
 	      <input type="text" id="confirmation">
