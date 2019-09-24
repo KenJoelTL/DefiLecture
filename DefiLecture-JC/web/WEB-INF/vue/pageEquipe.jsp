@@ -88,6 +88,7 @@
                     <table class='table table-hover'>
                   <thead>
                     <tr>
+	              <th/>
                       <th width=50%><% out.println(application.getAttribute("vocParticipant"));%></th>
                       <th>Contribution</th>
                     </tr>
@@ -95,6 +96,7 @@
                   <tbody>
                     <c:forEach items="${listeMembres}" var="membre">      
                     <tr>
+			    <td><img class="imgProfil" src="<c:url value='${membre.avatar}'/>"></td>
                     <td><a href="?tache=afficherPageProfil&id=${membre.idCompte}">${membre.prenom} «${membre.pseudonyme}» ${membre.nom}</a></td>
                       <td>
                           <c:set var="contribution" value="${daoDemEqp.findByIdCompteEquipe(membre.idCompte,equipe.idEquipe)}"></c:set>

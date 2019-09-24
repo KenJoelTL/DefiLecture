@@ -36,7 +36,7 @@ import jdbc.Connexion;
 
 @MultipartConfig
 public class EffectuerAjoutAvatarCompteAction extends Action
-    implements RequirePRGAction, DataSender {
+  implements RequirePRGAction, DataSender {
 
   private HashMap data;
 
@@ -46,13 +46,20 @@ public class EffectuerAjoutAvatarCompteAction extends Action
 
     // Seul le membre connecté peut modifier son propre avatar
     if (userIsConnected()) {
-      int idCompte = ((Integer) session.getAttribute("currentId")).intValue();
-      action = "*.do?tache=afficherPageModificationCompte&id=" + idCompte;
       OutputStream out = null;
       InputStream filecontent = null;
       String absolutePath = "";
-
+      
       try {
+	int idCompte;	
+	if(userIsAdmin() || userIsModerateur()){
+	  idCompte = Integer.parseInt(request.getParameter("idCompte"));
+	}
+	else{
+	  idCompte = ((Integer) session.getAttribute("currentId")).intValue();
+	}
+	action = "*.do?tache=afficherPageModificationCompte&id=" + idCompte;
+
         final Part filePart = request.getPart("nomFichier");
         final String path = "/images/avatars";
         final String fileName = "avatarCompte_" + idCompte;
@@ -71,7 +78,7 @@ public class EffectuerAjoutAvatarCompteAction extends Action
         }
 
         Connection cnx =
-            Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
+	  Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
         CompteDAO dao = new CompteDAO(cnx);
         Compte compte = dao.read(idCompte);
         if (compte != null) {
@@ -83,15 +90,18 @@ public class EffectuerAjoutAvatarCompteAction extends Action
           }
         } else {
           data.put(
-              "erreurAvatar", "Le compte que vous tentez de modifier l'Avatar est introuvable");
+		   "erreurAvatar", "Le compte que vous tentez de modifier l'Avatar est introuvable");
         }
 
       } catch (FileNotFoundException fne) {
         Logger.getLogger(EffectuerAjoutAvatarCompteAction.class.getName())
-            .log(Level.SEVERE, "\nImpossible d'atteindre la destination : " + absolutePath, fne);
+	  .log(Level.SEVERE, "\nImpossible d'atteindre la destination : " + absolutePath, fne);
+      } catch (NumberFormatException ex){
+        Logger.getLogger(EffectuerAjoutAvatarCompteAction.class.getName())
+	  .log(Level.SEVERE, null, ex);
       } catch (IOException | ServletException | SQLException ex) {
         Logger.getLogger(EffectuerAjoutAvatarCompteAction.class.getName())
-            .log(Level.SEVERE, null, ex);
+	  .log(Level.SEVERE, null, ex);
       } finally {
         try {
           if (out != null) {
@@ -101,7 +111,7 @@ public class EffectuerAjoutAvatarCompteAction extends Action
           }
         } catch (IOException ex) {
           Logger.getLogger(EffectuerAjoutAvatarCompteAction.class.getName())
-              .log(Level.SEVERE, null, ex);
+	    .log(Level.SEVERE, null, ex);
         }
       }
     }

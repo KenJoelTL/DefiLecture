@@ -16,6 +16,7 @@ package com.defilecture.controleur;
 
 import com.defilecture.modele.Defi;
 import com.defilecture.modele.DefiDAO;
+import com.defilecture.Util;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -62,12 +63,12 @@ public class EffectuerCreationDefiAction extends Action implements RequirePRGAct
         dao = new DefiDAO(cnx);
         Defi defi = new Defi();
         defi.setIdCompte(idCompte);
-        defi.setNom(nom);
-        defi.setDescription(description);
+        defi.setNom(Util.toUTF8(nom));
+        defi.setDescription(Util.toUTF8(description));
         defi.setDateDebut(dateDebut + " " + heureDebut);
         defi.setDateFin(dateFin + " " + heureFin);
-        defi.setQuestion(question);
-        defi.setChoixReponse(choixReponse);
+        defi.setQuestion(Util.toUTF8(question));
+        defi.setChoixReponse(Util.toUTF8(choixReponse));
         defi.setReponse(reponse);
         defi.setValeurMinute(valeurMinute);
 

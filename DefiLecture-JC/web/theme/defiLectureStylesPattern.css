@@ -123,6 +123,19 @@ div#optionsNavigation {
   align-items: center;
 }
 
+#instagram {
+  background-image: url("../images/instagram_inv.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 34px;
+}
+
+#li-instagram {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 
 @media (max-width: 1400px) {
 
@@ -140,13 +153,17 @@ div#optionsNavigation {
     justify-content: flex-start;
     margin-left: 12px!important;
   }
+  #li-instagram {
+    justify-content: flex-start;
+    margin-left: 12px!important;
+  }
 
 
 
   ul.nav.navbar-nav {
     height: auto;
     flex-direction: column;
-
+    display: block;
   }
 
   .navbar-right li {
@@ -1019,7 +1036,6 @@ p#msgMDPoublie {
   margin-top: 60px;
 }
 
-
 .fa.fa-facebook {
   background-color: #4267b2;
   color: white;
@@ -1089,6 +1105,11 @@ p#msgMDPoublie {
   border-style:solid;
   border-color:#212529;
   float: left;
+}
+
+.imgProfil.Petite {
+  height: 2em;
+  width: 2em;
 }
 
 .contenuEnteteProfil{

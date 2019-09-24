@@ -144,6 +144,9 @@
 
                     <li id='li-facebook'>
 			<a id='facebook'  target="_blank" href='https://www.facebook.com/DefiLectureCollegeRosemont/'></a>
+		    </li>
+		    <li id='li-facebook'>
+			<a id='instagram'  target="_blank" href='https://www.instagram.com/defilecture/'></a>
                     </li>
 
                     <li class="dropdown">
