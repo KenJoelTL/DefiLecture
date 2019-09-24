@@ -15,12 +15,12 @@ td, td a, p, li {
 }
 
 body {
-      background-color: cssCouleurBack;
+  background-color: cssCouleurBack;
 }
 
 h1 {
-      font-size: 45px!important;
-    text-align: center!important;
+  font-size: 45px!important;
+  text-align: center!important;
 }
 
 
@@ -36,7 +36,7 @@ h1 {
 }
 
 .retour.modifCompte {
-	display: block!important;
+  display: block!important;
 }
 
 .retour:hover {
@@ -55,17 +55,17 @@ span.glyphicon.glyphicon-log-in {
 }
 
 .logo-navigation {
-	width: 168px;
-    height: 73px;
-    background-image: url(cssImageLogo);
-    background-repeat: no-repeat;
-    background-size: cover;
-    margin: 10px 10px;
+  width: 168px;
+  height: 73px;
+  background-image: url(cssImageLogo);
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 10px 10px;
 }
 
 .navbar {
-	background-color: cssCouleurNavBack !important;
-        
+  background-color: cssCouleurNavBack !important;
+  
 }
 
 .navbar li {
@@ -74,15 +74,15 @@ span.glyphicon.glyphicon-log-in {
 }
 
 .navbar li a {
-      height: 100%;
-    display: flex;
-    align-items: center;
-    color: cssCouleurNavText !important;
-    font-size: 20px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  color: cssCouleurNavText !important;
+  font-size: 20px;
 }
 
 .navbar li:hover {
-    background: rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.2);
 }
 
 ul.nav.navbar-nav{
@@ -91,37 +91,37 @@ ul.nav.navbar-nav{
 }
 
 a.dropdown-toggle{
-    background-color: cssCouleurNavBack !important;
+  background-color: cssCouleurNavBack !important;
 }
 div#optionsNavigation {
   max-height: 100%!important;
 }
 
-ul.dropdown-menu {
+#optionsNavigation ul.dropdown-menu {
   background-color: cssCouleurNavBack !important;
 }
 
 
 .dropdown{
-    background-color: inherit; 
+  background-color: inherit; 
 }
 
-  .navbar-nav .open .dropdown-menu li a:hover {
-      background : none!important;
-  }
+.navbar-nav .open .dropdown-menu li a:hover {
+  background : none!important;
+}
 
-  #facebook {
-  	background-image: url("../images/facebook.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    height: 34px;
-  }
+#facebook {
+  background-image: url("../images/facebook.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 34px;
+}
 
-  #li-facebook {
-  	display: flex;
-  	justify-content: center;
-  	align-items: center;
-  }
+#li-facebook {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 
 @media (max-width: 1400px) {
@@ -137,56 +137,56 @@ ul.dropdown-menu {
   }
 
   #li-facebook {
-  	justify-content: flex-start;
-  	margin-left: 12px!important;
+    justify-content: flex-start;
+    margin-left: 12px!important;
   }
 
 
 
   ul.nav.navbar-nav {
-  height: auto;
-  flex-direction: column;
+    height: auto;
+    flex-direction: column;
 
   }
 
   .navbar-right li {
-  width: 100%!important;
-}
+    width: 100%!important;
+  }
   .navbar-header {
-      float: none;
+    float: none;
   }
   .navbar-left,.navbar-right {
-      float: none !important;
+    float: none !important;
   }
   .navbar-toggle {
-      display: block;
+    display: block;
 
 
   }
   .navbar-collapse {
-      border-top: 1px solid transparent;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    border-top: 1px solid transparent;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
   }
   .navbar-fixed-top {
-      top: 0;
-      border-width: 0 0 1px;
+    top: 0;
+    border-width: 0 0 1px;
   }
   .navbar-collapse.collapse {
-      display: none!important;
+    display: none!important;
   }
   .navbar-nav {
-      float: none!important;
-      margin-top: 7.5px;
+    float: none!important;
+    margin-top: 7.5px;
   }
   .navbar-nav>li {
-      float: none;
+    float: none;
   }
   .navbar-nav>li>a {
-      padding-top: 10px;
-      padding-bottom: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
   .collapse.in{
-      display:block !important;
+    display:block !important;
   }
 }
 
@@ -195,30 +195,30 @@ ul.dropdown-menu {
 /*Page connexion*/
 
 .connexion-form {
-	 display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    text-align: center;
-    min-height: 700px;
-    padding-top: 35px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  min-height: 700px;
+  padding-top: 35px;
 }
 
 .connexion-form .form-group, .connexion-form .input-group {
-	width : 100%;
+  width : 100%;
 }
 
 .connexion-row {
-background-image: url(cssImageBackConnection);
+  background-image: url(cssImageBackConnection);
   padding: 5%;
-      display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
 }
 
 .connexion-row h1, .inscription-row h1 {
-      border-bottom: 8px double;
+  border-bottom: 8px double;
 }
 
 
@@ -231,59 +231,59 @@ background-image: url(cssImageBackConnection);
   width: 251px!important;
 }
 .connexion-col h1 {
-    font-size: 45px!important;
-    text-align: center;
-  }
+  font-size: 45px!important;
+  text-align: center;
+}
 .connexion-col {
   background-color: rgba(255, 255, 255, 0.5);
-      padding: 1% 4%;
+  padding: 1% 4%;
   border-radius: 20px;
 }
 .connexion-form button {
-	font-size: 20px;
+  font-size: 20px;
 }
 
 .connexion-form input {
-	border-radius: 10px!important;
-	height: 45px;
+  border-radius: 10px!important;
+  height: 45px;
 }
 
 .connexion-form a{
-    font-size: 16px;
-    color: black;
-    text-decoration: none;
-    margin-bottom: 20px;
+  font-size: 16px;
+  color: black;
+  text-decoration: none;
+  margin-bottom: 20px;
 
 }
 
 p#msgMDPoublie {
-	       background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 10px;
-        padding: 15px 9px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  padding: 15px 9px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #lienMDPoublie {
-	font-weight: 600;
+  font-weight: 600;
 }
 
 p#msgMDPoublie {
-	font-size: 16px;
+  font-size: 16px;
 }
 
 /*Inscription*/
 
 .inscription-form {
   display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    text-align: center;
-    min-height: 1080px;
-    padding-top: 35px;
-    padding-bottom: 35px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  min-height: 1080px;
+  padding-top: 35px;
+  padding-bottom: 35px;
 }
 
 .inscription-form .form-group, .inscription-form .input-group {
@@ -298,13 +298,13 @@ p#msgMDPoublie {
   width: auto;
 }
 .inscription-col h1 {
-    font-size: 45px!important;
-    text-align: center;
-  }
+  font-size: 45px!important;
+  text-align: center;
+}
 
 .inscription-col{
   background-color: rgba(255, 255, 255, 0.5);
-      padding: 1% 4%;
+  padding: 1% 4%;
   border-radius: 20px;
 }
 
@@ -318,46 +318,46 @@ p#msgMDPoublie {
 }
 
 .inscription-row {
-background-image: url(cssImageBackConnection);
-     min-height: 1080px;
+  background-image: url(cssImageBackConnection);
+  min-height: 1080px;
   padding: 5%;
-      display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
 }
 
 .inscription-col h1 {
-    font-size: 45px!important;
-    text-align: center;
-  }
+  font-size: 45px!important;
+  text-align: center;
+}
 
 #chkDevenirCapitaine {
-	    height: 10px;
-    zoom: 175%;
-    position: relative;
-    top: 3px;
+  height: 10px;
+  zoom: 175%;
+  position: relative;
+  top: 3px;
 }
 
 /*Tableau des scores*/
 
 .scores-row {
-background-image: url(cssImageBackPrincipal);
+  background-image: url(cssImageBackPrincipal);
 
   padding: 5%;
-      display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-size: cover;
 
 }
 
 .scores-col {
-    background-color: rgba(255,255,255,0.5);
-    border-radius: 20px;
-    min-height: 700px;
-    padding: 5%;
-  }
+  background-color: rgba(255,255,255,0.5);
+  border-radius: 20px;
+  min-height: 700px;
+  padding: 5%;
+}
 
 .scores-col h1 {
   text-align: center;
@@ -398,15 +398,15 @@ background-image: url(cssImageBackPrincipal);
 }
 
 .creation-defi-col label {
-/*  background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 10px;*/
+  /*  background-color: rgba(255, 255, 255, 0.5);
+     border-radius: 10px;*/
   padding: 9px 25px 9px 4px;
   font-size: 18px;
   width: auto;
 }
 
 .creation-defi-col div#bonneReponse .radio label {
-    padding-left: 30px!important;
+  padding-left: 30px!important;
 }
 
 .creation-defi-col #btnMOINS {
@@ -418,14 +418,14 @@ background-image: url(cssImageBackPrincipal);
   width: 35px;
 }
 /*
-.creation-defi-col label#ajouterChoix {
-      padding: 6px 25px 6px 15px;
-}*/
+   .creation-defi-col label#ajouterChoix {
+   padding: 6px 25px 6px 15px;
+   }*/
 
 .creation-defi-col .ajouterChoix, .creation-defi-col .bonneReponse {
-      border: 2px solid white;
-    border-radius: 20px;
-    padding: 1%;
+  border: 2px solid white;
+  border-radius: 20px;
+  padding: 1%;
 }
 
 .creation-defi-col .bonneReponse {
@@ -444,8 +444,8 @@ background-image: url(cssImageBackPrincipal);
 
 .creation-defi-form {
   background-color: rgba(255, 255, 255, 0.5);
-      padding: 1% 2%;
-    margin-top: 5%;
+  padding: 1% 2%;
+  margin-top: 5%;
   border-radius: 20px;
 }
 
@@ -458,11 +458,11 @@ background-image: url(cssImageBackPrincipal);
 }
 
 .demandes-col {
-    background-color: rgba(255,255,255,0.5);
-    border-radius: 20px;
-    min-height: 700px;
-    padding: 5%;
-  }
+  background-color: rgba(255,255,255,0.5);
+  border-radius: 20px;
+  min-height: 700px;
+  padding: 5%;
+}
 
 .demandes-col h2 {
   text-align: center;
@@ -477,11 +477,11 @@ background-image: url(cssImageBackPrincipal);
 }
 
 .participationDefi-col {
-    background-color: rgba(255,255,255,0.5);
-    border-radius: 20px;
-    min-height: 700px;
-    padding: 5%;
-  }
+  background-color: rgba(255,255,255,0.5);
+  border-radius: 20px;
+  min-height: 700px;
+  padding: 5%;
+}
 
 .participationDefi-col h2 {
   text-align: center;
@@ -489,9 +489,9 @@ background-image: url(cssImageBackPrincipal);
 
 
 @media (max-width: 530px) {
-.participationDefi-row .cacherSurMobile tr td:nth-child(3), .participationDefi-row .cacherSurMobile tr td:nth-child(4), .participationDefi-row .cacherSurMobile tr th:nth-child(3), .participationDefi-row .cacherSurMobile tr th:nth-child(4) {
-  display: none;
-}
+  .participationDefi-row .cacherSurMobile tr td:nth-child(3), .participationDefi-row .cacherSurMobile tr td:nth-child(4), .participationDefi-row .cacherSurMobile tr th:nth-child(3), .participationDefi-row .cacherSurMobile tr th:nth-child(4) {
+    display: none;
+  }
 }
 
 /*Gestion liste comptes*/
@@ -503,11 +503,11 @@ background-image: url(cssImageBackPrincipal);
 }
 
 .listeCompte-col {
-    background-color: rgba(255,255,255,0.5);
-    border-radius: 20px;
-    min-height: 700px;
-    padding: 5%!important;
-  }
+  background-color: rgba(255,255,255,0.5);
+  border-radius: 20px;
+  min-height: 700px;
+  padding: 5%!important;
+}
 
 .listeCompte-col h2 {
   text-align: center;
@@ -528,8 +528,8 @@ background-image: url(cssImageBackPrincipal);
 /*Modification comptes*/
 
 .modification-compte-col {
-background-color: rgba(255, 255, 255, 0.5);
-      padding: 1% 4%;
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 1% 4%;
   border-radius: 20px;
 
 }
@@ -556,12 +556,12 @@ background-color: rgba(255, 255, 255, 0.5);
 }
 
 .modification-compte-col .btn-danger {
-      margin-left: 15px;
+  margin-left: 15px;
 }
 
 .modification-compte-col .avatar {
   margin-left: auto;
-    margin-right: auto;
+  margin-right: auto;
 }
 
 /*Modification défi*/
@@ -576,15 +576,15 @@ background-color: rgba(255, 255, 255, 0.5);
 }
 
 .modification-defi-col label {
-/*  background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 10px;*/
+  /*  background-color: rgba(255, 255, 255, 0.5);
+     border-radius: 10px;*/
   padding: 9px 25px 9px 4px;
   font-size: 18px;
   width: auto;
 }
 
 .modification-defi-col div#bonneReponse .radio label {
-    padding-left: 30px!important;
+  padding-left: 30px!important;
 }
 
 .modification-defi-col #btnMOINS {
@@ -598,9 +598,9 @@ background-color: rgba(255, 255, 255, 0.5);
 
 
 .modification-defi-col .ajouterChoix, .modification-defi-col .bonneReponse {
-      border: 2px solid white;
-    border-radius: 20px;
-    padding: 1%;
+  border: 2px solid white;
+  border-radius: 20px;
+  padding: 1%;
 }
 
 .modification-defi-col .bonneReponse {
@@ -619,8 +619,8 @@ background-color: rgba(255, 255, 255, 0.5);
 
 .modification-defi-form {
   background-color: rgba(255, 255, 255, 0.5);
-      padding: 1% 2%;
-    margin-top: 5%;
+  padding: 1% 2%;
+  margin-top: 5%;
   border-radius: 20px;
 }
 
@@ -631,21 +631,21 @@ background-color: rgba(255, 255, 255, 0.5);
 }
 
 .creation-lecture-row {
-background-image: url(cssImageBackPrincipal);
+  background-image: url(cssImageBackPrincipal);
   padding: 5%;
-      display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-size: cover;
 
 }
 
 .creation-lecture-col {
 
-    background-color: rgba(255,255,255,0.5);
-    border-radius: 20px;
-    min-height: 700px;
-    padding: 5%;
+  background-color: rgba(255,255,255,0.5);
+  border-radius: 20px;
+  min-height: 700px;
+  padding: 5%;
 
 }
 
@@ -663,15 +663,15 @@ background-image: url(cssImageBackPrincipal);
 
 .creation-lecture-col button {
   font-size: 20px!important;
-      margin: 2% auto;
-    display: flex;
+  margin: 2% auto;
+  display: flex;
 
 }
 .dureeLecture .duree15 {
   background-image: url(cssImageDuree15);
 }
 
- .dureeLecture .duree30 {
+.dureeLecture .duree30 {
   background-image: url(cssImageDuree30);
 }
 
@@ -684,29 +684,29 @@ background-image: url(cssImageBackPrincipal);
 }
 
 .dureeLecture .duree15, .dureeLecture .duree30, .dureeLecture .duree45, .dureeLecture .duree60{
-      background-size: cover;
-    width: 110px;
-    height: 110px;
-    cursor: pointer;
-   
+  background-size: cover;
+  width: 110px;
+  height: 110px;
+  cursor: pointer;
+  
 }
 
 .lecture-submit {
-   background-image: url();
-   background-size: cover;
-        width: 161px!important;
-    height: 167px!important;
-    cursor: pointer;
+  background-image: url(cssImageConfirmer);
+  background-size: cover;
+  width: 161px!important;
+  height: 167px!important;
+  cursor: pointer;
 }
 
 .dureeLecture {
-      display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin-left: auto;
-    margin-right: auto;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+  justify-content: center;
 }
 
 #lblDureeLecture{
@@ -716,36 +716,33 @@ background-image: url(cssImageBackPrincipal);
 
 
 .dureeMinutes {
-      font-size: 33px!important;
-    padding-top: 0!important;
+  font-size: 33px!important;
+  padding-top: 0!important;
 }
 
 .lecture-submit input {
   display: none;
 }
 
-
-
-
 .creation-lecture-form .form-group {
   width: 280px;
 }
 
 .creation-lecture-form form {
-      display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .creation-lecture-col .lectureObligatoire {
-      border: 2px solid white;
-    border-radius: 20px;
-    padding: 1%;
-    margin-top: 20px;
+  border: 2px solid white;
+  border-radius: 20px;
+  padding: 1%;
+  margin-top: 20px;
 }
 
 .lectureObligatoire .form-group .radio {
-      background-color: rgba(255,255,255,0.5);
+  background-color: rgba(255,255,255,0.5);
 }
 
 .lectureObligatoire .form-group input {
@@ -779,35 +776,35 @@ background-image: url(cssImageBackPrincipal);
 
 .inscription-defi-col button {
   font-size: 20px!important;
-      margin: 2% auto;
-    display: flex;
+  margin: 2% auto;
+  display: flex;
 
 }
 
 
 .inscription-defi-form {
   background-color: rgba(255, 255, 255, 0.5);
-      padding: 1% 2%;
-    margin-top: 5%;
+  padding: 1% 2%;
+  margin-top: 5%;
   border-radius: 20px;
 }
 
 .inscription-defi-col .choixReponse {
-      border: 2px solid white;
-    border-radius: 20px;
-    padding: 1%;
+  border: 2px solid white;
+  border-radius: 20px;
+  padding: 1%;
 }
 
 .inscription-defi-col div.choixReponse .radio label {
-    padding-left: 30px!important;
+  padding-left: 30px!important;
 }
 
 .inscription-defi-col textarea {
   max-width: 100%!important;
 }
- /*Page gestion lecture*/
+/*Page gestion lecture*/
 
- .gestion-lecture-row {
+.gestion-lecture-row {
   background-image: url(cssImageBackPrincipal);
 
   padding: 5%;
@@ -815,11 +812,11 @@ background-image: url(cssImageBackPrincipal);
 }
 
 .gestion-lecture-col {
-    background-color: rgba(255,255,255,0.5);
-    border-radius: 20px;
-    min-height: 700px;
-    padding: 5%;
-  }
+  background-color: rgba(255,255,255,0.5);
+  border-radius: 20px;
+  min-height: 700px;
+  padding: 5%;
+}
 
 .gestion-lecture-col h2 {
   text-align: center;
@@ -827,27 +824,27 @@ background-image: url(cssImageBackPrincipal);
 
 /*Page gestion liste équipe*/
 
- .liste-equipes-row {
+.liste-equipes-row {
   background-image: url(cssImageBackPrincipal);
   padding: 5%;
 
 }
 
 .liste-equipes-col {
-    background-color: rgba(255,255,255,0.5);
-    border-radius: 20px;
-    min-height: 700px;
-    padding: 5%;
-  }
+  background-color: rgba(255,255,255,0.5);
+  border-radius: 20px;
+  min-height: 700px;
+  padding: 5%;
+}
 
 .liste-equipes-col h2 {
   text-align: center;
 }
 
 @media (max-width: 530px) {
-.gestion-lecture-col .cacherSurMobile tr td:nth-child(4), .gestion-lecture-col .cacherSurMobile tr th:nth-child(4), .gestion-lecture-col .cacherSurMobile tr td:nth-child(3), .gestion-lecture-col .cacherSurMobile tr th:nth-child(3), .gestion-lecture-col .cacherSurMobile tr td:nth-child(6), .gestion-lecture-col .cacherSurMobile tr th:nth-child(6){
-  display: none;
-}
+  .gestion-lecture-col .cacherSurMobile tr td:nth-child(4), .gestion-lecture-col .cacherSurMobile tr th:nth-child(4), .gestion-lecture-col .cacherSurMobile tr td:nth-child(3), .gestion-lecture-col .cacherSurMobile tr th:nth-child(3), .gestion-lecture-col .cacherSurMobile tr td:nth-child(6), .gestion-lecture-col .cacherSurMobile tr th:nth-child(6){
+    display: none;
+  }
 }
 
 
@@ -858,8 +855,8 @@ background-image: url(cssImageBackPrincipal);
   background-image: url(cssImageBackConnection);
   padding-bottom: 20px;
   min-height: 700px;
-      display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .page-equipe-col h1 {
@@ -868,8 +865,8 @@ background-image: url(cssImageBackPrincipal);
 
 .page-equipe-col h2 {
   padding-left: 5px;
-    color: black;
-    font-weight: 600;
+  color: black;
+  font-weight: 600;
 }
 
 
@@ -881,8 +878,8 @@ background-image: url(cssImageBackPrincipal);
 
 
 .page-equipe-col button {
-    font-size: 20px!important;
-    margin: 1% auto;
+  font-size: 20px!important;
+  margin: 1% auto;
 
 }
 
@@ -912,12 +909,12 @@ background-image: url(cssImageBackPrincipal);
 
 
 .page-equipe-col #parametreEquipe{
-      background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 10px;
-    padding: 9px 25px;
-    color: black;
-    text-align: center;
-    font-size: 20px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  padding: 9px 25px;
+  color: black;
+  text-align: center;
+  font-size: 20px;
 }
 
 .page-equipe-col #parametreEquipe:hover {
@@ -928,15 +925,15 @@ background-image: url(cssImageBackPrincipal);
 /*Configuration équipe*/
 
 .page-equipe-col.configuration-equipe label {
-      background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 10px;
-    padding: 9px 25px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  padding: 9px 25px;
 }
 
 @media (max-width: 530px) {
-.configuration-equipe .cacherSurMobile tr td:nth-child(3), .configuration-equipe .cacherSurMobile tr th:nth-child(3){
-  display: none;
-}
+  .configuration-equipe .cacherSurMobile tr td:nth-child(3), .configuration-equipe .cacherSurMobile tr th:nth-child(3){
+    display: none;
+  }
 }
 
 
@@ -947,135 +944,204 @@ background-image: url(cssImageBackPrincipal);
 
 .petiteIcone {
 
- background-image: url(cssImageIcone);
-     height: 50px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 78px!important;
-    margin-right: 15px;
+  background-image: url(cssImageIcone);
+  height: 50px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 78px!important;
+  margin-right: 15px;
 
 }
 
 .code-conduite div {
-	    display: flex;
-    align-items: center;
-    margin: 10px 0;
-    margin-right: 20px;
-    text-align: justify;
-    font-size: 20px!important;
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  margin-right: 20px;
+  text-align: justify;
+  font-size: 20px!important;
 }
 
 .code-conduite label {
-	    padding: 9px 55px 9px 4px!important;
+  padding: 9px 55px 9px 4px!important;
 }
 
 .code-conduite ul li {
-	    list-style: none;
-    display: flex;
-    align-items: center;
+  list-style: none;
+  display: flex;
+  align-items: center;
 }
 .code-conduite ul {
-	  padding: 0;
+  padding: 0;
 }
 
 
 /*Glossaire*/
 
 .glossaire p {
-	 text-align: justify;
-    font-size: 20px!important;
-    margin: 40px 10px;
+  text-align: justify;
+  font-size: 20px!important;
+  margin: 40px 10px;
 }
 
 /*Contributeurs*/
 
 .contributeurs p {
-	font-size: 20px!important;
-	margin: 10px;
+  font-size: 20px!important;
+  margin: 10px;
 }
 
 .contributeurs h2 {
-	margin: 10px;
-	border-bottom: 1px solid;
+  margin: 10px;
+  border-bottom: 1px solid;
 }
 
 /*Marche a suivre*/
 
 .marcheASuivre h1 {
-	text-align: center;
+  text-align: center;
 }
 
 .petiteIconeMarcheASuivre {
 
- background-image: url(cssImageIcone);
-        height: 180px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 170px!important;
+  background-image: url(cssImageIcone);
+  height: 180px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 170px!important;
 
 }
 
 .divPetiteIcone {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin-top: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 60px;
 }
 
 
 .fa.fa-facebook {
-    background-color: #4267b2;
-    color: white;
-    width: 17px;
-    padding-left: 5px;
-    border-radius: 4px;
-    padding-top: 2px;
+  background-color: #4267b2;
+  color: white;
+  width: 17px;
+  padding-left: 5px;
+  border-radius: 4px;
+  padding-top: 2px;
 }
 
 /*Page de configuration*/
 #configSite input{
-    font-size: 18px;
+  font-size: 18px;
 }
 #configSite #panelConfig, #panelReset{
-    margin: 5% 5% 0 15%;
-    min-width: 486px;
+  margin: 5% 5% 0 15%;
+  min-width: 486px;
 }
 #configSite #reset{
-    margin-left: 42%;
+  margin-left: 42%;
 }
 #configSite #resetConfirm{
-    margin-left: 37%;
-    text-align: center;
+  margin-left: 37%;
+  text-align: center;
 }
 #configSite #enregistrerConfig{
-    margin: 2% 0 0 42%;
+  margin: 2% 0 0 42%;
 }
 #configSite .dateConfig{
-    margin-bottom: 2%;
+  margin-bottom: 2%;
 } 
 
 
 
 /*Background*/
 
- .creation-lecture-row, .scores-row, .accueil-row, .connexion-row, .inscription-row, .creation-defi-col, .modification-defi-col, .inscription-defi-col, .page-equipe-col, .demandes-row, .participationDefi-row, .listeCompte-row,  .gestion-lecture-row,  .liste-equipes-row {
-    min-height: 968px; 
- }
+.creation-lecture-row, .scores-row, .accueil-row, .connexion-row, .inscription-row, .creation-defi-col, .modification-defi-col, .inscription-defi-col, .page-equipe-col, .demandes-row, .participationDefi-row, .listeCompte-row,  .gestion-lecture-row,  .liste-equipes-row {
+  min-height: 968px; 
+}
 
-  .creation-lecture-row, .scores-row, .accueil-row,  .demandes-row, .participationDefi-row, .listeCompte-row,  .gestion-lecture-row,  .liste-equipes-row {
-        background-position: center;
-  }
+.creation-lecture-row, .scores-row, .accueil-row,  .demandes-row, .participationDefi-row, .listeCompte-row,  .gestion-lecture-row,  .liste-equipes-row {
+  background-position: center;
+}
 
-  .connexion-row, .inscription-row, .creation-defi-col, .modification-defi-col, .inscription-defi-col, .page-equipe-col {
-    background-position: bottom;
-  }
+.connexion-row, .inscription-row, .creation-defi-col, .modification-defi-col, .inscription-defi-col, .page-equipe-col {
+  background-position: bottom;
+}
 
 @media (max-width: 668px) {
   .creation-lecture-row, .scores-row, .accueil-row, .connexion-row, .inscription-row, .creation-defi-col, .modification-defi-col, .inscription-defi-col, .page-equipe-col, .demandes-row, .participationDefi-row, .listeCompte-row,  .gestion-lecture-row,  .liste-equipes-row {
     background-size: contain;
     background-position: top;
   }
+}
 
- 
+/* Page profil */
+
+.bold {
+  font-weight: bold;
+}
+
+.imgProfil {
+  padding: 3px;
+  height: 8em;
+  width: 8em;
+  background-color:white;
+  border-width:3px;
+  border-style:solid;
+  border-color:#212529;
+  float: left;
+}
+
+.contenuEnteteProfil{
+  padding: 2em;
+}
+
+.contenuEnteteProfil h1{
+  position: relative;
+  float:left;
+  margin: 0.7em 0em 0em 1em;
+}
+
+@media screen and (max-width: 557px) {
+  .contenuEnteteProfil h1{
+    position: static;
+    text-align: center;
+    margin: 0;
+  }
+  .imgProfil{
+    margin-right: 4em;
+  }
+}
+
+.panInfo{
+  margin-top: 0.8em;
+}
+
+.panInfo p{
+  margin-left: 1em;
+}
+
+.glyphProfil{
+  margin-top:5px;
+  position: relative;
+  float:right;
+  transition:0.5s;
+}
+
+.glyphProfil:hover {
+  transform: scale(1.3);
+}
+
+.btnModif {
+  width: 5.6em;
+  transition: 0.5s;
+}
+
+.btnModif:hover {
+  transform: scale(1.1);
+}
+
+.pErreur {
+  text-align: center;
+  font-weight: bold;
 
 }

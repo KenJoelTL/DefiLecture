@@ -22,6 +22,8 @@ import com.defilecture.modele.Lecture;
 import com.defilecture.modele.LectureDAO;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jdbc.Config;
@@ -32,6 +34,12 @@ public class EffectuerSuppressionLectureAction extends Action implements Require
   @Override
   public String execute() {
     if (userIsConnected() && (userIsCapitaine() || userIsParticipant())) {
+
+	if (LocalDateTime.now().isBefore(getDébutLectures())
+	    || LocalDateTime.now().isAfter(getFinLectures())) {
+        return "*.do?tache=afficherPageGestionLecture";
+      }
+
       String idLecture = request.getParameter("idLecture");
       int idCompte = ((Integer) session.getAttribute("currentId")).intValue();
 

@@ -14,36 +14,12 @@
  */
 package com.defilecture.controleur;
 
-import com.defilecture.modele.CompteDAO;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import jdbc.Config;
-import jdbc.Connexion;
-
 public class AfficherPageGestionListeComptesAction extends Action {
   @Override
   public String execute() {
-    // Exclusivement pour l'Admin et le Modérateur.
     if (userIsConnected()) {
-      try {
-        if (userIsAdmin() || userIsModerateur()) {
-          CompteDAO dao =
-              new CompteDAO(
-                  Connexion.startConnection(
-                      Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
-
-          if (dao.read(((Integer) session.getAttribute("currentId")).intValue()) != null) {
-            request.setAttribute("vue", "pageGestionListeCompte.jsp");
-          }
-
-          return "/index.jsp";
-        }
-      } catch (SQLException ex) {
-        Logger.getLogger(AfficherPageGestionListeComptesAction.class.getName())
-            .log(Level.SEVERE, null, ex);
-      } finally {
-        Connexion.close();
+      if (userIsAdmin() || userIsModerateur()) {
+        request.setAttribute("vue", "pageGestionListeCompte.jsp");
       }
     }
     return "/index.jsp";

@@ -18,7 +18,6 @@ import com.defilecture.modele.Compte;
 import com.defilecture.modele.CompteDAO;
 import com.defilecture.modele.DemandeEquipe;
 import com.defilecture.modele.DemandeEquipeDAO;
-import com.defilecture.modele.Equipe;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -78,7 +77,8 @@ public class EffectuerAcceptationDemandeAdhesionAction extends Action
               } else {
                 int idEquipe = demandeEq.getIdEquipe();
                 int nbMembre = compteDao.countCompteByIdEquipe(idEquipe);
-                if (nbMembre < Equipe.NB_MAX_MEMBRES) {
+
+                if (nbMembre - 1 < getNbMatelotsMax()) {
                   cpt.setIdEquipe(idEquipe);
                   demandeEq.setStatutDemande(DemandeEquipe.ACCEPTEE);
 
@@ -112,8 +112,8 @@ public class EffectuerAcceptationDemandeAdhesionAction extends Action
             }
           }
 
-          String msg_json = "{\"msg\":\"" + msg + "\",\"typeAlert\" :\"" + typeAlert + "\"}";
-          response.getWriter().write(msg_json);
+          String msgJson = "{\"msg\":\"" + msg + "\",\"typeAlert\" :\"" + typeAlert + "\"}";
+          response.getWriter().write(msgJson);
 
         } catch (IOException ex) {
           Logger.getLogger(EffectuerDemandeAdhesionEquipeAction.class.getName())

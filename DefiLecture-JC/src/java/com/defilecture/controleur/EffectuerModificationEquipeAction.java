@@ -14,11 +14,11 @@
  */
 package com.defilecture.controleur;
 
+import com.defilecture.Util;
 import com.defilecture.modele.Compte;
 import com.defilecture.modele.CompteDAO;
 import com.defilecture.modele.Equipe;
 import com.defilecture.modele.EquipeDAO;
-import com.defilecture.Util;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -39,8 +39,13 @@ public class EffectuerModificationEquipeAction extends Action
       action = "*.do?tache=afficherPageEquipe&idEquipe=" + request.getParameter("idEquipe");
 
       if (request.getParameter("modifier") != null) {
-        if (userIsConnected() && userIsCapitaine() && request.getParameter("nom") != null) {
+        if (userIsConnected()
+            && (userIsCapitaine() || userIsAdmin())
+            && request.getParameter("nom") != null) {
           try {
+
+            int idEquipe = Integer.parseInt(request.getParameter("idEquipe"));
+
             Connection cnx =
                 Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
             Compte compte =
@@ -48,8 +53,8 @@ public class EffectuerModificationEquipeAction extends Action
             EquipeDAO equipeDao = new EquipeDAO(cnx);
             Equipe equipe = equipeDao.findByNom(request.getParameter("nom"));
 
-            if (compte != null && equipe == null && compte.getIdEquipe() != -1) {
-              equipe = equipeDao.read(compte.getIdEquipe());
+            if ((userIsAdmin() || compte != null) && equipe == null) {
+              equipe = equipeDao.read(idEquipe);
               equipe.setNom(Util.toUTF8(request.getParameter("nom")));
 
               if (equipeDao.update(equipe)) {
@@ -66,6 +71,10 @@ public class EffectuerModificationEquipeAction extends Action
                       + request.getParameter("nom")
                       + " est déjà utilisé par un autre équipage");
             }
+          } catch (NumberFormatException ex) {
+            data.put("erreurNom", "Équipe inexistante.");
+            Logger.getLogger(EffectuerModificationEquipeAction.class.getName())
+                .log(Level.SEVERE, null, ex);
           } catch (SQLException ex) {
             Logger.getLogger(EffectuerModificationEquipeAction.class.getName())
                 .log(Level.SEVERE, null, ex);

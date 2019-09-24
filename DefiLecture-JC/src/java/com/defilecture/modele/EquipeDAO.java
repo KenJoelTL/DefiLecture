@@ -36,267 +36,201 @@ public class EquipeDAO extends DAO<Equipe> {
   @Override
   public boolean create(Equipe x) {
     String req = "INSERT INTO equipe (`NOM`) VALUES (?)";
+    boolean isCreer = false;
 
-    PreparedStatement paramStm = null;
     try {
-
-      paramStm = cnx.prepareStatement(req);
+      PreparedStatement paramStm = cnx.prepareStatement(req);
       paramStm.setString(1, x.getNom());
 
-      int nbLignesAffectees = paramStm.executeUpdate();
-
-      if (nbLignesAffectees > 0) {
-        paramStm.close();
-        return true;
+      if (paramStm.executeUpdate() > 0) {
+        isCreer = true;
       }
 
-      return false;
-    } catch (SQLException exp) {
-    } finally {
-      try {
-        if (paramStm != null) paramStm.close();
-      } catch (SQLException ex) {
-        Logger.getLogger(EquipeDAO.class.getName()).log(Level.SEVERE, null, ex);
-      }
+      paramStm.close();
+    } catch (SQLException ex) {
+      Logger.getLogger(EquipeDAO.class.getName()).log(Level.SEVERE, null, ex);
     }
-    return false;
+    return isCreer;
   }
 
   @Override
   public Equipe read(int id) {
     String req = "SELECT * FROM equipe WHERE `ID_EQUIPE` = ?";
+    Equipe equipe = null;
 
-    PreparedStatement paramStm = null;
     try {
-
-      paramStm = cnx.prepareStatement(req);
-
+      PreparedStatement paramStm = cnx.prepareStatement(req);
       paramStm.setInt(1, id);
-
       ResultSet resultat = paramStm.executeQuery();
 
-      // On vérifie s'il y a un résultat
       if (resultat.next()) {
-
-        Equipe e = new Equipe();
-        e.setIdEquipe(resultat.getInt("ID_EQUIPE"));
-        e.setNom(resultat.getString("NOM"));
-        e.setPoint((new DemandeEquipeDAO(cnx).sumPointByidEquipe(id)));
-        e.setNbMembres((new CompteDAO(cnx)).countCompteByIdEquipe(id));
-
-        resultat.close();
-        paramStm.close();
-        return e;
+        equipe = new Equipe();
+        equipe.setIdEquipe(resultat.getInt("ID_EQUIPE"));
+        equipe.setNom(resultat.getString("NOM"));
+        equipe.setPoint((new DemandeEquipeDAO(cnx).sumPointByidEquipe(id)));
+        equipe.setNbMembres((new CompteDAO(cnx)).countCompteByIdEquipe(id));
       }
 
       resultat.close();
       paramStm.close();
-      return null;
-
-    } catch (SQLException exp) {
-    } finally {
-      try {
-        if (paramStm != null) paramStm.close();
-      } catch (SQLException exp) {
-      } catch (Exception e) {
-      }
+    } catch (SQLException ex) {
+      Logger.getLogger(EquipeDAO.class.getName()).log(Level.SEVERE, null, ex);
     }
 
-    return null;
+    return equipe;
   }
 
   @Override
   public boolean update(Equipe x) {
     String req = "UPDATE equipe SET `NOM` = ? WHERE `ID_EQUIPE` = ?";
+    boolean isUpdated = false;
 
-    PreparedStatement paramStm = null;
     try {
-
-      paramStm = cnx.prepareStatement(req);
-
-      if (x.getNom() == null || "".equals(x.getNom().trim())) paramStm.setString(1, null);
-      else paramStm.setString(1, x.getNom());
+      PreparedStatement paramStm = cnx.prepareStatement(req);
+      paramStm.setString(1, x.getNom() == null || "".equals(x.getNom().trim()) ? null : x.getNom());
       paramStm.setInt(2, x.getIdEquipe());
 
-      int nbLignesAffectees = paramStm.executeUpdate();
-
-      if (nbLignesAffectees > 0) {
-        paramStm.close();
-        return true;
+      if (paramStm.executeUpdate() > 0) {
+        isUpdated = true;
       }
-
-      return false;
-    } catch (SQLException exp) {
-    } finally {
-      try {
-        if (paramStm != null) paramStm.close();
-      } catch (SQLException ex) {
-        Logger.getLogger(EquipeDAO.class.getName()).log(Level.SEVERE, null, ex);
-      }
+      paramStm.close();
+    } catch (SQLException ex) {
+      Logger.getLogger(EquipeDAO.class.getName()).log(Level.SEVERE, null, ex);
     }
+
     return false;
   }
 
   @Override
   public boolean delete(Equipe x) {
     String req = "DELETE FROM equipe WHERE `ID_EQUIPE` = ?";
+    boolean isDeleted = false;
 
-    PreparedStatement paramStm = null;
     try {
-
-      paramStm = cnx.prepareStatement(req);
+      PreparedStatement paramStm = cnx.prepareStatement(req);
       paramStm.setInt(1, x.getIdEquipe());
 
-      int nbLignesAffectees = paramStm.executeUpdate();
-
-      if (nbLignesAffectees > 0) {
-        paramStm.close();
-        return true;
+      if (paramStm.executeUpdate() > 0) {
+        isDeleted = true;
       }
-
-      return false;
-    } catch (SQLException exp) {
-    } finally {
-      try {
-        if (paramStm != null) paramStm.close();
-      } catch (SQLException ex) {
-        Logger.getLogger(EquipeDAO.class.getName()).log(Level.SEVERE, null, ex);
-      }
+      paramStm.close();
+    } catch (SQLException ex) {
+      Logger.getLogger(EquipeDAO.class.getName()).log(Level.SEVERE, null, ex);
     }
-    return false;
+
+    return isDeleted;
   }
 
   @Override
   public List<Equipe> findAll() {
+    String req = "SELECT * FROM equipe";
     List<Equipe> liste = new ArrayList<>();
+
     try {
       Statement stm = cnx.createStatement();
-      ResultSet r = stm.executeQuery("SELECT * FROM equipe");
+      ResultSet r = stm.executeQuery(req);
+
       while (r.next()) {
-        Equipe e = new Equipe();
-        e.setIdEquipe(r.getInt("ID_EQUIPE"));
-        e.setNom(r.getString("NOM"));
+        Equipe equipe = new Equipe();
+        equipe.setIdEquipe(r.getInt("ID_EQUIPE"));
+        equipe.setNom(r.getString("NOM"));
 
-        // appelle les DAO DEMANDE Compte et DemandeEquipe
-        e.setPoint(new DemandeEquipeDAO(cnx).sumPointByidEquipe(r.getInt("ID_EQUIPE")));
-        e.setNbMembres(new CompteDAO(cnx).countCompteByIdEquipe(r.getInt("ID_EQUIPE")));
+        equipe.setPoint(new DemandeEquipeDAO(cnx).sumPointByidEquipe(r.getInt("ID_EQUIPE")));
+        equipe.setNbMembres(new CompteDAO(cnx).countCompteByIdEquipe(r.getInt("ID_EQUIPE")));
 
-        liste.add(e);
+        liste.add(equipe);
       }
+
       Collections.sort(liste);
       Collections.reverse(liste);
       r.close();
       stm.close();
-    } catch (SQLException exp) {
+    } catch (SQLException ex) {
+      Logger.getLogger(EquipeDAO.class.getName()).log(Level.SEVERE, null, ex);
     }
+
     return liste;
   }
 
   public List<Equipe> findAllByNom(String nom) throws SQLException {
-    List<Equipe> liste = new ArrayList<>();
     String req = "SELECT * FROM equipe WHERE `NOM` LIKE ?";
-    PreparedStatement paramStm = null;
+    List<Equipe> liste = new ArrayList<>();
+
     try {
-      paramStm = cnx.prepareStatement(req);
+      PreparedStatement paramStm = cnx.prepareStatement(req);
       paramStm.setString(1, "%" + nom + "%");
 
       ResultSet r = paramStm.executeQuery();
+
       while (r.next()) {
         Equipe e = new Equipe();
         e.setIdEquipe(r.getInt("ID_EQUIPE"));
         e.setNom(r.getString("NOM"));
 
-        // appelle les DAO DEMANDE Compte et DemandeEquipe
         e.setPoint(new DemandeEquipeDAO(cnx).sumPointByidEquipe(r.getInt("ID_EQUIPE")));
         e.setNbMembres(new CompteDAO(cnx).countCompteByIdEquipe(r.getInt("ID_EQUIPE")));
 
         liste.add(e);
       }
+
       Collections.sort(liste);
       Collections.reverse(liste);
       r.close();
       paramStm.close();
-    } catch (SQLException exp) {
-      Logger.getLogger(EquipeDAO.class.getName()).log(Level.SEVERE, null, exp);
-      throw exp;
-    } finally {
-      try {
-        if (paramStm != null) paramStm.close();
-      } catch (SQLException ex) {
-        Logger.getLogger(EquipeDAO.class.getName()).log(Level.SEVERE, null, ex);
-      }
+    } catch (SQLException ex) {
+      Logger.getLogger(EquipeDAO.class.getName()).log(Level.SEVERE, null, ex);
+      throw ex;
     }
+
     return liste;
   }
 
   public Equipe findByNom(String nom) {
     String req = "SELECT * FROM equipe WHERE `NOM` = ?";
+    Equipe equipe = null;
 
-    PreparedStatement paramStm = null;
     try {
-
-      paramStm = cnx.prepareStatement(req);
+      PreparedStatement paramStm = cnx.prepareStatement(req);
       paramStm.setString(1, nom);
-
       ResultSet resultat = paramStm.executeQuery();
 
-      // On vérifie s'il y a un résultat
       if (resultat.next()) {
-
-        Equipe e = new Equipe();
-        e.setIdEquipe(resultat.getInt("ID_EQUIPE"));
-        e.setNom(resultat.getString("NOM"));
-        e.setPoint((new DemandeEquipeDAO(cnx).sumPointByidEquipe(resultat.getInt("ID_EQUIPE"))));
-        e.setNbMembres((new CompteDAO(cnx)).countCompteByIdEquipe(resultat.getInt("ID_EQUIPE")));
-
-        resultat.close();
-        paramStm.close();
-        return e;
+        equipe = new Equipe();
+        equipe.setIdEquipe(resultat.getInt("ID_EQUIPE"));
+        equipe.setNom(resultat.getString("NOM"));
+        equipe.setPoint(
+            (new DemandeEquipeDAO(cnx).sumPointByidEquipe(resultat.getInt("ID_EQUIPE"))));
+        equipe.setNbMembres(
+            (new CompteDAO(cnx)).countCompteByIdEquipe(resultat.getInt("ID_EQUIPE")));
       }
 
       resultat.close();
       paramStm.close();
-      return null;
-
-    } catch (SQLException exp) {
-    } finally {
-      try {
-        if (paramStm != null) paramStm.close();
-      } catch (SQLException exp) {
-      } catch (Exception e) {
-      }
+    } catch (SQLException ex) {
+      Logger.getLogger(EquipeDAO.class.getName()).log(Level.SEVERE, null, ex);
     }
 
-    return null;
+    return equipe;
   }
 
   public boolean deleteTable() {
     String req = "DELETE FROM equipe";
-
-    PreparedStatement paramStm = null;
+    boolean isDeleted = false;
 
     try {
-      paramStm = cnx.prepareStatement(req);
+      PreparedStatement paramStm = cnx.prepareStatement(req);
 
-      int nbLignesAffectees = paramStm.executeUpdate();
-
-      if (nbLignesAffectees > 0) {
-        paramStm.close();
-        return true;
+      if (paramStm.executeUpdate() > 0) {
+        isDeleted = true;
       }
 
-      return false;
-    } catch (SQLException exp) {
-      Logger.getLogger(EquipeDAO.class.getName()).log(Level.SEVERE, null, exp);
-    } catch (Exception e) {
-      Logger.getLogger(EquipeDAO.class.getName()).log(Level.SEVERE, null, e);
-    } finally {
-      try {
-        if (paramStm != null) paramStm.close();
-      } catch (SQLException ex) {
-        Logger.getLogger(EquipeDAO.class.getName()).log(Level.SEVERE, null, ex);
-      }
+      paramStm.close();
+    } catch (SQLException ex) {
+      Logger.getLogger(EquipeDAO.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (Exception ex) {
+      Logger.getLogger(EquipeDAO.class.getName()).log(Level.SEVERE, null, ex);
     }
-    return false;
+
+    return isDeleted;
   }
 }

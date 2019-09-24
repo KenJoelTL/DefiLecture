@@ -14,13 +14,16 @@
  */
 package com.defilecture;
 
-import com.defilecture.modele.Equipe;
+import com.defilecture.modele.ConfigSiteDAO;
+import java.sql.SQLException;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import jdbc.Config;
+import jdbc.Connexion;
 
 public class EcouteurApplication implements ServletContextListener {
 
@@ -34,7 +37,32 @@ public class EcouteurApplication implements ServletContextListener {
     Config.DRIVER = application.getInitParameter("piloteJDBC");
     Config.URL = application.getInitParameter("urlDb");
 
-    Equipe.NB_MAX_MEMBRES = Integer.parseInt(application.getInitParameter("nbParticipantMax"));
+    
+    try
+      {
+	Class.forName("com.mysql.jdbc.Driver");
+      }
+    catch(ClassNotFoundException e)
+      {
+	Logger.getLogger(EcouteurApplication.class.getName()).log(Level.SEVERE, null, e);
+      }
+
+
+    try {
+      ConfigSiteDAO configDao =
+          new ConfigSiteDAO(
+              Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
+      Map<String, String> config = configDao.findAllByMap();
+
+      for (Map.Entry<String, String> entry : config.entrySet()) {
+        application.setAttribute("com.defilecture." + entry.getKey(), entry.getValue());
+      }
+
+    } catch (SQLException ex) {
+      Logger.getLogger(EcouteurApplication.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+      Connexion.close();
+    }
   }
 
   @Override
