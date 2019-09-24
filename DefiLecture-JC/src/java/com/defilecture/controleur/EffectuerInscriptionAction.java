@@ -48,7 +48,7 @@ public class EffectuerInscriptionAction extends Action implements RequirePRGActi
     }
 
     if (request.getParameter("programmeEtude") != null) {
-      data.put("programmeEtude", request.getParameter("programmeEtude"));
+      data.put("programmeEtude", Util.toUTF8(request.getParameter("programmeEtude")));
     }
 
     if (request.getParameter("courriel") == null) {
@@ -95,7 +95,7 @@ public class EffectuerInscriptionAction extends Action implements RequirePRGActi
         String prenom = Util.toUTF8(request.getParameter("prenom"));
         String nom = Util.toUTF8(request.getParameter("nom"));
         String motPasse = Util.toUTF8(request.getParameter("motPasse"));
-        String programmeEtude = request.getParameter("programmeEtude");
+        String programmeEtude = Util.toUTF8(request.getParameter("programmeEtude"));
         String pseudonyme = Util.toUTF8(request.getParameter("pseudonyme"));
 
         Connection cnx =
