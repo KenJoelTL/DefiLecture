@@ -87,7 +87,7 @@ span.glyphicon.glyphicon-log-in {
 
 ul.nav.navbar-nav{
   height: 93px;
-  display :block;
+  display :flex;
 }
 
 a.dropdown-toggle{
@@ -123,6 +123,19 @@ div#optionsNavigation {
   align-items: center;
 }
 
+#instagram {
+  background-image: url("../images/instagram_inv.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 34px;
+}
+
+#li-instagram {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 
 @media (max-width: 1400px) {
 
@@ -140,13 +153,17 @@ div#optionsNavigation {
     justify-content: flex-start;
     margin-left: 12px!important;
   }
+  #li-instagram {
+    justify-content: flex-start;
+    margin-left: 12px!important;
+  }
 
 
 
   ul.nav.navbar-nav {
     height: auto;
     flex-direction: column;
-
+    display: block;
   }
 
   .navbar-right li {
@@ -1018,7 +1035,6 @@ p#msgMDPoublie {
   justify-content: center;
   margin-top: 60px;
 }
-
 
 .fa.fa-facebook {
   background-color: #4267b2;
