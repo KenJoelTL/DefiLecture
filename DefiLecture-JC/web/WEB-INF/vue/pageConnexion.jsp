@@ -44,7 +44,7 @@
 	    <label for="identifiant">Courriel ou pseudonyme :</label>
 	    <div class="input-group">
 	      <input id="identifiant" type="text" class="form-control"
-		     name="identifiant" value="${requestScope.data['identifiant']}">
+		     name="identifiant" value="${requestScope.data['identifiant']}" autofocus>
 	    </div>
 	  </div>
 

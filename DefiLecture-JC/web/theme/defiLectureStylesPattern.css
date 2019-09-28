@@ -79,6 +79,7 @@ span.glyphicon.glyphicon-log-in {
   align-items: center;
   color: cssCouleurNavText !important;
   font-size: 20px;
+  text-decoration: none;
 }
 
 .navbar li:hover {
