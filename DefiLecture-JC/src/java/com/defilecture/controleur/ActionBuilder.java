@@ -49,7 +49,7 @@ public class ActionBuilder {
         case "afficherPageCreationLecture":
           return new AfficherPageCreationLectureAction();
         case "afficherPageGestionLectures":
-          return new AfficherPageGestionLectureAction();
+          return new AfficherPageGestionLecturesAction();
         case "effectuerCreationLecture":
           return new EffectuerCreationLectureAction();
         case "afficherPageModificationLecture":
