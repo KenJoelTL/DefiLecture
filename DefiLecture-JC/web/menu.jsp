@@ -26,7 +26,7 @@
                 <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><a href="*.do?tache=afficherPageCreationLecture">Ajouter une lecture</a></li>
-                  <li><a href="*.do?tache=afficherPageGestionLecture">Voir mes lectures</a></li>
+                  <li><a href="*.do?tache=afficherPageGestionLectures">Voir mes lectures</a></li>
                 </ul>
               </li>
             </div>
@@ -101,12 +101,19 @@
           <c:if test="${ sessionScope.role eq 4 }">
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                Lectures<span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li ><a href="*.do?tache=afficherPageGestionLectures">G&eacute;rer les lectures</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 Comptes<span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
-                <li ><a href="*.do?tache=afficherPageGestionListeCompte">G&eacute;rer les comptes</a></li>
+                <li ><a href="*.do?tache=afficherPageGestionComptes">G&eacute;rer les comptes</a></li>
                 <li ><a href="*.do?tache=afficherPageAdresseCourriel">Liste d'adresses</a></li>
-                <li ><a href="*.do?tache=afficherPageListeLectures">Liste des lectures</a></li>
               </ul>
             </li>
             <li class="dropdown">
@@ -115,7 +122,7 @@
               </a>
               <ul class="dropdown-menu">
                 <li >
-                  <a href="*.do?tache=afficherPageGestionListeEquipes">
+                  <a href="*.do?tache=afficherPageGestionEquipes">
                     G&eacute;rer les &eacute;quipes</a>
                 </li>
               </ul>

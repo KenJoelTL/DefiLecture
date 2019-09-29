@@ -15,7 +15,7 @@
     along with DefiLecture.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <%-- 
-    Document   : pageListeLectures
+    Document   : pageGestionLectures
     Created on : 2018-04-15, 09:35:38
     Author     : Charles
 --%>
@@ -31,43 +31,44 @@
 <jsp:useBean id="connexion" scope="page" class="jdbc.Connexion"></jsp:useBean>  
 
 <jsp:useBean id="daoLecture" scope="page" class="com.defilecture.modele.LectureDAO">
-    <jsp:setProperty name="daoLecture" property="cnx" value="${connexion.connection}"></jsp:setProperty>
+  <jsp:setProperty name="daoLecture" property="cnx" value="${connexion.connection}"></jsp:setProperty>
 </jsp:useBean>
 <jsp:useBean id="daoCompte" scope="page" class="com.defilecture.modele.CompteDAO">
-    <jsp:setProperty name="daoCompte" property="cnx" value="${connexion.connection}"></jsp:setProperty>
+  <jsp:setProperty name="daoCompte" property="cnx" value="${connexion.connection}"></jsp:setProperty>
 </jsp:useBean>
+
+<c:set var="listeLectures" value="${ sessionScope.role ge Compte.MODERATEUR ? daoLecture.findAll() : dao.findByIdCompteOrderByDate(sessionScope.connecte)}"/>
+
 <div class="row listeCompte-row"> 
     <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 listeCompte-col">
-       
-        <h2>Liste des lectures</h2>  
-        
-   
-                         
+      <h1>Liste de<c:if test="${ sessionScope.role ge Compte.MODERATEUR }"> me</c:if>s lectures</h1>
         <table class="table">       
-                         
-               <thead>
+          <thead>
+            <tr>
+              <th>Titre</th>
+              <c:if test="${ sessionScope.role ge Compte.MODERATEUR }"> <th>Courriel</th></c:if>
+              <th>Durée</th>
+              <th>Date d'inscription</th>
+              <th>Obligatoire</th>
+            </tr>
+          </thead>
+          <tbody>
+            <c:forEach items="${listeLectures}" var="lecture">
                 <tr>
-                  <th>Titre</th>
-                  <th>Courriel</th>
-                  <th>Date d'inscription</th>
-                  <th>Obligatoire</th>
-                </tr>
-              </thead>
-              <tbody>
-                <c:set var="listeLectures" value="${daoLecture.findAll()}"/>
-                <c:forEach items="${listeLectures}" var="lecture">
+                  <td>${lecture.titre}</td>
+                  <c:if test="${ sessionScope.role ge Compte.MODERATEUR }">
                     <c:set var="compte" value="${daoCompte.read(lecture.idCompte)}"/>
-                   <tr>
-                      <td>${lecture.titre}</td>
-                      <td>${compte.courriel}</td>
-                      <td>${lecture.dateInscription} </td>
-                      <td>${lecture.estObligatoire eq 0 ? "NON" : "OUI"}</td>
-                    </tr>
-          
-                </c:forEach>
-
-              </tbody>
-              </table> 
-             
+                    <td>${compte.courriel}</td>
+                   </c:if>
+                  <td>${lecture.dureeMinutes} minutes</td>
+                  <td>${lecture.dateInscription} </td>
+                  <td>${lecture.estObligatoire eq 0 ? "NON" : "OUI"}</td>
+                  <c:if test="${ sessionScope.connecte eq lecture.idCompte || sessionScope.role ge Compte.MODERATEUR }">
+                    <td><a id="supp" onclick="supprimer(${lecture.idLecture})">Supprimer</a></td>
+                  </c:if>
+                </tr>
+            </c:forEach>
+          </tbody>
+        </table> 
     </div>
 </div>

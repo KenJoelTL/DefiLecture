@@ -47,15 +47,15 @@ public class EffectuerSuppressionCompteAction extends Action
               data.put(
                   "suppressionSucces",
                   "Le compte " + compte.getCourriel() + " a bien été supprimé");
-              return "succes.do?tache=afficherPageGestionListeCompte";
+              return "succes.do?tache=afficherPageGestionComptes";
             } else {
               data.put("suppressionEchec", "Une erreur est survenue lors de la suppression");
-              return "echec.do?tache=afficherPageGestionListCompte";
+              return "echec.do?tache=afficherPageGestionComptes";
             }
 
           } else {
             data.put("suppressionEchec", "Le compte que vous tentez de supprimer n'existe pas");
-            return "echec.do?tache=afficherPageGestionListCompte";
+            return "echec.do?tache=afficherPageGestionComptes";
           }
 
         } catch (SQLException ex) {

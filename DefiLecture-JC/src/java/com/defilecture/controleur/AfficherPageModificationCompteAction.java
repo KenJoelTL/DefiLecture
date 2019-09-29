@@ -43,7 +43,7 @@ public class AfficherPageModificationCompteAction extends Action {
             request.setAttribute(
                 "vue",
                 userIsAdmin() || userIsModerateur()
-                    ? "pageGestionListeCompte.jsp"
+                    ? "pageGestionComptes.jsp"
                     : "pageMarcheASuivre.jsp");
           }
         } catch (SQLException ex) {

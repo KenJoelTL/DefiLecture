@@ -37,7 +37,7 @@ public class AfficherPageAdresseCourrielAction extends Action {
           }
         }
       } catch (SQLException ex) {
-        Logger.getLogger(AfficherPageGestionListeComptesAction.class.getName())
+        Logger.getLogger(AfficherPageGestionComptesAction.class.getName())
             .log(Level.SEVERE, null, ex);
       } finally {
         Connexion.close();

@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 import jdbc.Config;
 import jdbc.Connexion;
 
-public class AfficherPageListeLecturesAction extends Action {
+public class AfficherPageGestionLecturesAction extends Action {
   @Override
   public String execute() {
     if (userIsConnected()) {
@@ -34,11 +34,11 @@ public class AfficherPageListeLecturesAction extends Action {
                       Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
 
           if (dao.read(idCompte) != null) {
-            request.setAttribute("vue", "pageListeLectures.jsp");
+            request.setAttribute("vue", "pageGestionLectures.jsp");
           }
         }
       } catch (SQLException ex) {
-        Logger.getLogger(AfficherPageGestionListeComptesAction.class.getName())
+        Logger.getLogger(AfficherPageGestionLecturesAction.class.getName())
             .log(Level.SEVERE, null, ex);
       } finally {
         Connexion.close();

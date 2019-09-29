@@ -64,7 +64,7 @@ public class EffectuerModificationCompteAction extends Action
         if (compte == null) {
           data.put("compteIntrouvable", "Le compte que vous tentez de modifier est introuvable");
           return ((Integer) session.getAttribute("role")).intValue() > Compte.CAPITAINE
-              ? "*.do?tache=afficherPageGestionListeCompte"
+              ? "*.do?tache=afficherPageGestionComptes"
               : "*.do?tache=afficherMarcheASuivre";
         }
         cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
@@ -159,7 +159,7 @@ public class EffectuerModificationCompteAction extends Action
         Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
       }
     } else {
-      return "*.do?tache=afficherPageGestionListeCompte";
+      return "*.do?tache=afficherPageGestionComptes";
     }
     return "*.do?tache=afficherPageConnexion";
   }
