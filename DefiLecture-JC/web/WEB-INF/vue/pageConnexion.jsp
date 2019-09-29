@@ -20,7 +20,7 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <script src="./script/jquery-1.4.2.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="./script/connexion.js"></script>
     <title>Page de connexion</title>
   </head>
@@ -44,7 +44,7 @@
 	    <label for="identifiant">Courriel ou pseudonyme :</label>
 	    <div class="input-group">
 	      <input id="identifiant" type="text" class="form-control"
-		     name="identifiant" value="${requestScope.data['identifiant']}">
+		     name="identifiant" value="${requestScope.data['identifiant']}" autofocus>
 	    </div>
 	  </div>
 
