@@ -37,16 +37,16 @@
   <jsp:setProperty name="daoCompte" property="cnx" value="${connexion.connection}"></jsp:setProperty>
 </jsp:useBean>
 
-<c:set var="listeLectures" value="${ sessionScope.role ge Compte.MODERATEUR ? daoLecture.findAll() : dao.findByIdCompteOrderByDate(sessionScope.connecte)}"/>
+<c:set var="listeLectures" value="${ sessionScope.role >= 3 ? daoLecture.findAll() : dao.findByIdCompteOrderByDate(sessionScope.connecte)}"/>
 
 <div class="row listeCompte-row"> 
     <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 listeCompte-col">
-      <h1>Liste de<c:if test="${ sessionScope.role ge Compte.MODERATEUR }"> me</c:if>s lectures</h1>
+      <h1>Liste de<c:if test="${ sessionScope.role < 3 }"> me</c:if>s lectures</h1>
         <table class="table">       
           <thead>
             <tr>
               <th>Titre</th>
-              <c:if test="${ sessionScope.role ge Compte.MODERATEUR }"> <th>Courriel</th></c:if>
+              <c:if test="${ sessionScope.role >= 3 }"> <th>Courriel</th></c:if>
               <th>Durée</th>
               <th>Date d'inscription</th>
               <th>Obligatoire</th>
@@ -56,14 +56,14 @@
             <c:forEach items="${listeLectures}" var="lecture">
                 <tr>
                   <td>${lecture.titre}</td>
-                  <c:if test="${ sessionScope.role ge Compte.MODERATEUR }">
+                  <c:if test="${ sessionScope.role >= 3 }">
                     <c:set var="compte" value="${daoCompte.read(lecture.idCompte)}"/>
                     <td>${compte.courriel}</td>
                    </c:if>
                   <td>${lecture.dureeMinutes} minutes</td>
                   <td>${lecture.dateInscription} </td>
                   <td>${lecture.estObligatoire eq 0 ? "NON" : "OUI"}</td>
-                  <c:if test="${ sessionScope.connecte eq lecture.idCompte || sessionScope.role ge Compte.MODERATEUR }">
+                  <c:if test="${ sessionScope.connecte eq lecture.idCompte || sessionScope.role >= 3 }">
                     <td><a id="supp" onclick="supprimer(${lecture.idLecture})">Supprimer</a></td>
                   </c:if>
                 </tr>
