@@ -42,7 +42,7 @@ public class EffectuerCreationLectureAction extends Action implements RequirePRG
 
       if (LocalDateTime.now().isBefore(getDébutLectures())
           || LocalDateTime.now().isAfter(getFinLectures())) {
-        return "*.do?tache=afficherPageGestionLecture";
+        return "*.do?tache=afficherPageGestionLectures";
       }
 
       String titre = Util.toUTF8(request.getParameter("titre"));
@@ -52,7 +52,7 @@ public class EffectuerCreationLectureAction extends Action implements RequirePRG
 
       // Vérifie la limite de lectures
       if (dureeMinutes <= 0) {
-        return "*.do?tache=afficherPageGestionLecture";
+        return "*.do?tache=afficherPageGestionLectures";
       }
 
       Lecture lecture;
@@ -67,7 +67,7 @@ public class EffectuerCreationLectureAction extends Action implements RequirePRG
 
         // Vérifie la limite absolue de temps de lecture quotidien
         if (dao.getMinutesAjd(idCompte) + dureeMinutes > getLimiteLectureHard()) {
-          return "*.do?tache=afficherPageGestionLecture";
+          return "*.do?tache=afficherPageGestionLectures";
         }
 
         lecture = new Lecture();
@@ -119,6 +119,6 @@ public class EffectuerCreationLectureAction extends Action implements RequirePRG
             .log(Level.SEVERE, null, ex);
       }
     }
-    return "*.do?tache=afficherPageGestionLecture";
+    return "*.do?tache=afficherPageGestionLectures";
   }
 }
