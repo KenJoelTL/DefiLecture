@@ -25,26 +25,8 @@ public class AfficherPageGestionLecturesAction extends Action {
   @Override
   public String execute() {
     if (userIsConnected()) {
-      try {
-        if (userIsAdmin() || userIsModerateur()) {
-          int idCompte = ((Integer) session.getAttribute("currentId")).intValue();
-          CompteDAO dao =
-              new CompteDAO(
-                  Connexion.startConnection(
-                      Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER));
-
-          if (dao.read(idCompte) != null) {
-            request.setAttribute("vue", "pageGestionLectures.jsp");
-          }
-        }
-      } catch (SQLException ex) {
-        Logger.getLogger(AfficherPageGestionLecturesAction.class.getName())
-            .log(Level.SEVERE, null, ex);
-      } finally {
-        Connexion.close();
-      }
+      request.setAttribute("vue", "pageGestionLectures.jsp");
     }
-
     return "/index.jsp";
   }
 }
