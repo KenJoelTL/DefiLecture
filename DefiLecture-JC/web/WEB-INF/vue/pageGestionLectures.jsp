@@ -38,7 +38,7 @@
   <jsp:setProperty name="daoCompte" property="cnx" value="${connexion.connection}"></jsp:setProperty>
 </jsp:useBean>
 
-<c:set var="listeLectures" value="${ sessionScope.role >= 3 ? daoLecture.findAll() : dao.findByIdCompteOrderByDate(sessionScope.connecte)}"/>
+<c:set var="listeLectures" value="${ sessionScope.role >= 3 ? daoLecture.findAll() : daoLecture.findByIdCompteOrderByDate(sessionScope.connecte)}"/>
 
 <div class="row listeCompte-row"> 
     <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 listeCompte-col">
