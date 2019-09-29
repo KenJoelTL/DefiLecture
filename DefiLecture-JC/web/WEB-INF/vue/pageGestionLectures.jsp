@@ -55,7 +55,7 @@
           </thead>
           <tbody>
             <c:forEach items="${listeLectures}" var="lecture">
-                <tr>
+                <tr id="lecture-${lecture.idLecture}">
                   <td>${lecture.titre}</td>
                   <c:if test="${ sessionScope.role >= 3 }">
                     <c:set var="compte" value="${daoCompte.read(lecture.idCompte)}"/>
