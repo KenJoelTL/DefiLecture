@@ -21,7 +21,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<script language="javascript" src="./script/jquery-1.4.2.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script language="javascript" src="./script/jsPageCreationDefi.js"></script>
 
 
