@@ -26,6 +26,7 @@
 <%@page import="java.sql.Connection"%>
 <%@page import="com.defilecture.modele.CompteDAO"%>
 <%@page import="jdbc.Connexion"%>
+<script language="javascript" src="./script/jsPageGestionLectures.js"></script>
 <%@ page pageEncoding="UTF-8" %>
 
 <jsp:useBean id="connexion" scope="page" class="jdbc.Connexion"></jsp:useBean>  
