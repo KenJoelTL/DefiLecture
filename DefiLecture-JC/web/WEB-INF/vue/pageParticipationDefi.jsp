@@ -123,18 +123,14 @@
                         <tr>
                             <td>${d.nom}</td>
                             <td>+ ${d.valeurMinute} doublons</td>
-                            <c:catch>
-                                <fmt:parseDate pattern="yyyy-MM-dd' 'HH:mm:ss.SS" value="${d.dateDebut}" var="dateDebutPARSE" />
-                            </c:catch>
+                                <fmt:parseDate pattern="yyyy-MM-dd' 'HH:mm:ss" value="${d.dateDebut}" var="dateDebutPARSE" />
 
                             <fmt:formatDate var="dateDebut" value="${dateDebutPARSE}" pattern="d MMMM yyyy 'à' HH'h'mm" />
-                            <td>${dateDebut} </td>
-                            <c:catch>
-                                <fmt:parseDate pattern="yyyy-MM-dd' 'HH:mm:ss.SS" value="${d.dateFin}" var="dateFinPARSE" />
-                            </c:catch>
+                            <td style="white-space: nowrap;">${dateDebut} </td>
+                                <fmt:parseDate pattern="yyyy-MM-dd' 'HH:mm:ss" value="${d.dateFin}" var="dateFinPARSE" />
 
                             <fmt:formatDate var="dateFin" value="${dateFinPARSE}" pattern="d MMMM yyyy 'à' HH'h'mm" />
-                            <td >${dateFin} </td>
+                            <td style="white-space: nowrap;">${dateFin} </td>
 
                             <c:choose>
                                 <c:when test="${listeReussi.contains(d.idDefi)}">
@@ -152,7 +148,7 @@
                                            <td> PROCHAINEMENT </td>
                                        </c:when>
                                        <c:otherwise>
-                                           <td> <a class="btn btn-info" role="button" href="*.do?tache=afficherPageInscriptionDefi&id=${d.idDefi}">Participer à l'épreuve</a></td>
+                                           <td> <a class="btn btn-info" role="button" href="*.do?tache=afficherPageInscriptionDefi&id=${d.idDefi}">Participer</a></td>
                                        </c:otherwise>
                                     </c:choose>
                                 </c:otherwise>                                   
@@ -165,16 +161,12 @@
                         <tr>
                             <td>${d.nom}</td>
                             <td>+ ${d.valeurMinute} doublons</td>
-                            <c:catch>
-                                <fmt:parseDate pattern="yyyy-MM-dd' 'HH:mm:ss.SS" value="${d.dateDebut}" var="dateDebutPARSE" />
-                            </c:catch>
+                                <fmt:parseDate pattern="yyyy-MM-dd' 'HH:mm:ss" value="${d.dateDebut}" var="dateDebutPARSE" />
                             <fmt:formatDate var="dateDebut" value="${dateDebutPARSE}" pattern="d MMMM yyyy 'à' HH'h'mm" />
-                            <td>${dateDebut} </td>
-                            <c:catch>
-                                <fmt:parseDate pattern="yyyy-MM-dd' 'HH:mm:ss.SS" value="${d.dateFin}" var="dateFinPARSE" />
-                            </c:catch>
+                            <td style="white-space: nowrap;">${dateDebut} </td>
+                                <fmt:parseDate pattern="yyyy-MM-dd' 'HH:mm:ss" value="${d.dateFin}" var="dateFinPARSE" />
                             <fmt:formatDate var="dateFin" value="${dateFinPARSE}" pattern="d MMMM yyyy 'à' HH'h'mm" />
-                            <td>${dateFin} </td>
+                            <td style="white-space: nowrap;">${dateFin} </td>
 
                             <%-- Si le compte est un compte admin ou moderateur, il ne peut pas relever d'épreuve, mais il peut les modifier--%>
                             <td><a href="*.do?tache=afficherPageModificationDefi&id=${d.idDefi}">modifier</a></td>
