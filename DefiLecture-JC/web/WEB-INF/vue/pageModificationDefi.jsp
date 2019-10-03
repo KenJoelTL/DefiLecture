@@ -156,18 +156,14 @@
                 </div>
 
                 <div class="form-group">
-                    <c:catch>
-                        <fmt:parseDate pattern="yyyy-MM-dd' 'HH:mm:ss.SS" value="${defi.dateDebut}" var="dateDebutPARSE" />
-                    </c:catch>
+	            <fmt:parseDate pattern="yyyy-MM-dd' 'HH:mm:ss" value="${defi.dateDebut}" var="dateDebutPARSE" />
                     <fmt:formatDate var="dateDebut" value="${dateDebutPARSE}" pattern="yyyy-MM-dd" />
                     <label for="dateDebut">Date de début* : </label>
                     <input class="form-control" type="date" name="dateDebut" value="${dateDebut}" required />
                     <fmt:formatDate var="heureDebut" value="${dateDebutPARSE}" pattern="HH:mm:ss" />
                     <label for="heureDebut">Heure de début* : </label>
                     <input class="form-control" type="time" name="heureDebut" value="${heureDebut}" required />
-                    <c:catch>
-                        <fmt:parseDate pattern="yyyy-MM-dd' 'HH:mm:ss.SS" value="${defi.dateFin}" var="dateFinPARSE" />
-                    </c:catch>
+                    <fmt:parseDate pattern="yyyy-MM-dd' 'HH:mm:ss" value="${defi.dateFin}" var="dateFinPARSE" />
                     <fmt:formatDate var="dateFin" value="${dateFinPARSE}" pattern="yyyy-MM-dd" />
                     <label for="dateDebut">Date de fin* : </label>
                     <input class="form-control" type="date" name="dateFin" value="${dateFin}" required />

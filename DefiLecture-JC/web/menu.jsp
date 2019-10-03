@@ -70,7 +70,7 @@
 						    </li>
 						</c:when>
 						<c:otherwise>
-						    <li><a href="joindreEquipe.do?tache=afficherPageListeEquipes">Joindre <% out.println(application.getAttribute("vocEquipe3"));%></a></li>
+						    <li><a href="joindreEquipe.do?tache=afficherPageListeEquipes">Se joindre à <% out.println(application.getAttribute("vocEquipe3"));%></a></li>
 						</c:otherwise>
 					    </c:choose>
 					</c:when>
@@ -115,7 +115,7 @@
 			<c:if test="${!empty sessionScope.connecte}">
 			    <fmt:parseDate pattern="yyyy-MM-dd HH:mm" value="${applicationScope['com.defilecture.dLecture']}" var="datedebut" type="both"/>
 			    <fmt:parseDate pattern="yyyy-MM-dd HH:mm" value="${applicationScope['com.defilecture.fLecture']}" var="datefin" type="both"/>
-			    <div id="menuDefis" style="display: ${now ge datedebut && now lt datefin ? 'block' : 'none'}">
+			    <div id="menuDefis" style="display: ${sessionScope.role ge 3 || now ge datedebut && now lt datefin ? 'block' : 'none'}">
 				<li class="dropdown">
 				    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Épreuves
 					<span class="caret"></span></a>
