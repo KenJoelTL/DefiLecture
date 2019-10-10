@@ -42,34 +42,41 @@
 
 <div class="row listeCompte-row"> 
     <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 listeCompte-col">
-      <h1>Liste de<c:if test="${ sessionScope.role < 3 }"> me</c:if>s lectures</h1>
-        <table class="table">       
-          <thead>
-            <tr>
-              <th>Titre</th>
-              <c:if test="${ sessionScope.role >= 3 }"> <th>Courriel</th></c:if>
-              <th>Durée</th>
-              <th>Date d'inscription</th>
-              <th>Obligatoire</th>
-            </tr>
-          </thead>
-          <tbody>
-            <c:forEach items="${listeLectures}" var="lecture">
-                <tr id="lecture-${lecture.idLecture}">
-                  <td>${lecture.titre}</td>
-                  <c:if test="${ sessionScope.role >= 3 }">
-                    <c:set var="compte" value="${daoCompte.read(lecture.idCompte)}"/>
-                    <td>${compte.courriel}</td>
-                   </c:if>
-                  <td>${lecture.dureeMinutes} minutes</td>
-                  <td>${lecture.dateInscription} </td>
-                  <td>${lecture.estObligatoire eq 0 ? "NON" : "OUI"}</td>
-                  <c:if test="${ sessionScope.connecte eq lecture.idCompte || sessionScope.role >= 3 }">
-                    <td><a id="supp" onclick="supprimer(${lecture.idLecture})">Supprimer</a></td>
-                  </c:if>
-                </tr>
-            </c:forEach>
-          </tbody>
-        </table> 
+      <c:choose>
+        <c:when test="${ sessionScope.role < 3 }">
+          <h1>Liste de mes lectures</h1>
+        </c:when>    
+        <c:otherwise>
+          <h1>Liste des lectures</h1>
+        </c:otherwise>
+      </c:choose>
+      <table class="table">       
+        <thead>
+          <tr>
+            <th>Titre</th>
+            <c:if test="${ sessionScope.role >= 3 }"> <th>Courriel</th></c:if>
+            <th>Durée</th>
+            <th>Date d'inscription</th>
+            <th>Obligatoire</th>
+          </tr>
+        </thead>
+        <tbody>
+          <c:forEach items="${listeLectures}" var="lecture">
+              <tr id="lecture-${lecture.idLecture}">
+                <td>${lecture.titre}</td>
+                <c:if test="${ sessionScope.role >= 3 }">
+                  <c:set var="compte" value="${daoCompte.read(lecture.idCompte)}"/>
+                  <td>${compte.courriel}</td>
+                 </c:if>
+                <td>${lecture.dureeMinutes} minutes</td>
+                <td>${lecture.dateInscription} </td>
+                <td>${lecture.estObligatoire eq 0 ? "NON" : "OUI"}</td>
+                <c:if test="${ sessionScope.connecte eq lecture.idCompte || sessionScope.role >= 3 }">
+                  <td><a id="supp" onclick="supprimer(${lecture.idLecture})">Supprimer</a></td>
+                </c:if>
+              </tr>
+          </c:forEach>
+        </tbody>
+      </table> 
     </div>
 </div>
