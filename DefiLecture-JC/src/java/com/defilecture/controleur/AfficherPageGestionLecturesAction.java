@@ -14,13 +14,6 @@
  */
 package com.defilecture.controleur;
 
-import com.defilecture.modele.CompteDAO;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import jdbc.Config;
-import jdbc.Connexion;
-
 public class AfficherPageGestionLecturesAction extends Action {
   @Override
   public String execute() {
