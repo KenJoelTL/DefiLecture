@@ -16,6 +16,8 @@ package com.defilecture.controleur;
 
 import com.defilecture.modele.Compte;
 import com.defilecture.modele.CompteDAO;
+import com.defilecture.modele.DemandeEquipe;
+import com.defilecture.modele.DemandeEquipeDAO;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -43,10 +45,15 @@ public class EffectuerSuppressionCompteAction extends Action
           Compte compte = compteDao.read(idCompte);
 
           if (compte != null) {
+	    DemandeEquipeDAO demandeEqpDao = new DemandeEquipeDAO(cnx);
+	    DemandeEquipe demandeEquipe =
+              demandeEqpDao.findByIdCompte(compte.getIdCompte());
+
+	    equipe.ajouterPoint(demandeEquipe.getPoint());
             if (compteDao.delete(compte)) {
               data.put(
-                  "suppressionSucces",
-                  "Le compte " + compte.getCourriel() + " a bien été supprimé");
+		       "suppressionSucces",
+		       "Le compte " + compte.getCourriel() + " a bien été supprimé");
               return "succes.do?tache=afficherPageGestionListeCompte";
             } else {
               data.put("suppressionEchec", "Une erreur est survenue lors de la suppression");

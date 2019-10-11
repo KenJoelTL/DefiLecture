@@ -153,7 +153,8 @@ CREATE TABLE `demande_equipe` (
 DROP TABLE IF EXISTS `equipe`;
 CREATE TABLE `equipe` (
   `ID_EQUIPE` int(10) NOT NULL,
-  `NOM` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+  `NOM` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `POINT`INT NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------

@@ -82,13 +82,14 @@ public class EquipeDAO extends DAO<Equipe> {
 
   @Override
   public boolean update(Equipe x) {
-    String req = "UPDATE equipe SET `NOM` = ? WHERE `ID_EQUIPE` = ?";
+    String req = "UPDATE equipe SET `NOM` = ?, `POINT` = ? WHERE `ID_EQUIPE` = ?";
     boolean isUpdated = false;
 
     try {
       PreparedStatement paramStm = cnx.prepareStatement(req);
       paramStm.setString(1, x.getNom() == null || "".equals(x.getNom().trim()) ? null : x.getNom());
       paramStm.setInt(2, x.getIdEquipe());
+      paramStm.setInt(3, x.getPoint());
 
       if (paramStm.executeUpdate() > 0) {
         isUpdated = true;
@@ -98,7 +99,7 @@ public class EquipeDAO extends DAO<Equipe> {
       Logger.getLogger(EquipeDAO.class.getName()).log(Level.SEVERE, null, ex);
     }
 
-    return false;
+    return isUpdated;
   }
 
   @Override

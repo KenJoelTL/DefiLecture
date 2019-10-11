@@ -55,7 +55,11 @@ public class Equipe implements Comparable<Equipe> {
   public void setPoint(int point) {
     this.point = point;
   }
-
+  
+  public void ajouterPoint(int point) {
+    this.point += point;
+  }
+  
   public int getNbMembres() {
     return nbMembres;
   }
