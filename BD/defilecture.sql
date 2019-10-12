@@ -153,7 +153,8 @@ CREATE TABLE `demande_equipe` (
 DROP TABLE IF EXISTS `equipe`;
 CREATE TABLE `equipe` (
   `ID_EQUIPE` int(10) NOT NULL,
-  `NOM` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+  `NOM` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `POINT`INT NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -198,6 +199,10 @@ CREATE TABLE `config_site` (
   `ID_CONFIG` varchar(50) NOT NULL,
   `VALUE_CONFIG` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+-- Valeurs de config par défaut
+INSERT INTO `config_site` VALUES ('accesA','2099-12-31 00:00'),('accesDe','2000-01-01 00:00'),('dInscription','2000-01-01 00:00'),('dLecture','2000-01-01 00:00'),('fLecture','2099-12-31 00:00'),('limiteHard','900'),('limiteSoft','600'),('nbMatelots','2');
 
 -- --------------------------------------------------------
 --

@@ -16,6 +16,10 @@ package com.defilecture.controleur;
 
 import com.defilecture.modele.Compte;
 import com.defilecture.modele.CompteDAO;
+import com.defilecture.modele.DemandeEquipe;
+import com.defilecture.modele.DemandeEquipeDAO;
+import com.defilecture.modele.Equipe;
+import com.defilecture.modele.EquipeDAO;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -43,6 +47,26 @@ public class EffectuerSuppressionCompteAction extends Action
           Compte compte = compteDao.read(idCompte);
 
           if (compte != null) {
+            EquipeDAO eqpDao = new EquipeDAO(cnx);
+            Equipe equipe = eqpDao.findById(compte.getIdEquipe());
+
+            if (equipe != null) {
+              DemandeEquipeDAO demandeEqpDao = new DemandeEquipeDAO(cnx);
+              DemandeEquipe demandeEquipe =
+                  demandeEqpDao.findByIdCompteEquipe(compte.getIdCompte(), equipe.getIdEquipe());
+
+              equipe.ajouterPoint(demandeEquipe.getPoint());
+              if (!eqpDao.update(equipe)) {
+                data.put(
+                    "échecTransfertDePoints",
+                    "Impossible de transférer les "
+                        + demandeEquipe.getPoint()
+                        + " points à l'équipe "
+                        + equipe.getIdEquipe());
+                return "succes.do?tache=afficherPageGestionListeCompte";
+              }
+            }
+
             if (compteDao.delete(compte)) {
               data.put(
                   "suppressionSucces",

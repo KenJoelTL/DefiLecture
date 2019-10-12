@@ -114,8 +114,7 @@ public class DemandeEquipeDAO extends DAO<DemandeEquipe> {
   public boolean update(DemandeEquipe x) {
 
     String req =
-        "UPDATE demande_equipe SET `ID_EQUIPE` = ? , `ID_COMPTE` = ? , "
-            + "`POINT` = ? , `STATUT_DEMANDE`= ? WHERE `ID_DEMANDE_EQUIPE` = ?";
+        "UPDATE demande_equipe SET `ID_EQUIPE` = ? , `ID_COMPTE` = ? , `POINT` = ? , `STATUT_DEMANDE`= ? WHERE `ID_DEMANDE_EQUIPE` = ?";
 
     PreparedStatement paramStm = null;
     try {

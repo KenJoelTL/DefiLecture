@@ -68,7 +68,7 @@
                         <tr>
                           <td>${daoEquipe.findAll().indexOf(equipe)+1}</td>
                           <td><a href="pageEquipe.do?tache=afficherPageEquipe&idEquipe=${equipe.idEquipe}">${equipe.nom}</a></td>
-                          <td style="text-align:center">${equipe.point}</td>
+                          <td style="text-align:center">${equipe.score}</td>
                         </tr>
                       </c:forEach>
                       </tbody>
@@ -98,7 +98,7 @@
                                         <c:set var="contribution" value="${daoDemEqp.findByIdCompteEquipe(compte.idCompte,equipe.idEquipe)}"></c:set>
                                         <div class="progress">
                                             <div class="progress-bar" role="progressbar" aria-valuenow="${contribution.point}"
-                                                aria-valuemin="0" aria-valuemax="100" style="width:${(contribution.point/equipe.point)*100}%">
+                                                aria-valuemin="0" aria-valuemax="100" style="width:${(contribution.point/equipe.score)*100}%">
                                                 ${contribution.point}
                                             </div>
                                         </div>

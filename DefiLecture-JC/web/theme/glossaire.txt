@@ -6,7 +6,7 @@
                     </p>
 
                     <p>
-                        <strong>Matelot</strong> : étudiant, membre du personnel ou professeur, les matelots doivent demander à joindre un équipage et obtenir l’approbation du <b>capitaine</b> au moment de l’inscription. Ils sont au nombre de <b>deux</b> dans chaque équipe.
+                        <strong>Matelot</strong> : étudiant, membre du personnel ou professeur, les matelots doivent demander à se joindre à un équipage et obtenir l’approbation du <b>capitaine</b> au moment de l’inscription. Ils sont au nombre de <b>deux</b> dans chaque équipe.
 
                     </p>
 

@@ -103,7 +103,7 @@
                                         <p class='bold'>Nom de l'équipe :</p>
                                         <p><c:out value="${equipe.nom}" /></p>
                                         <p class='bold'>Points de l'équpe :</p>
-                                        <p><c:out value="${equipe.point}" /></p>
+                                        <p><c:out value="${equipe.score}" /></p>
                                     </div>
                                 </c:when>
                                 <c:otherwise> <!--Sinon, affiche un message pour avertir-->
