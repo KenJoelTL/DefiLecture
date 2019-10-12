@@ -64,7 +64,6 @@ public class EffectuerSuppressionEquipeAction extends Action
                 Logger.getLogger(this.getClass().getName())
                   .log(Level.INFO, "Le compte #" + compte.getIdCompte() + " a été retiré de l'équipe #" + idEquipe);
               data.put("suppressionSucces", "L'équipe a été supprimée avec succès.");
-              equipeDao.delete(equipe);
             } else {
               Logger.getLogger(this.getClass().getName())
                 .log(Level.INFO, "Le compte #" + compte.getIdCompte() + " n'a pas été retiré de l'équipe #" + idEquipe);
@@ -73,6 +72,8 @@ public class EffectuerSuppressionEquipeAction extends Action
                       + request.getParameter("idEquipe");
             }
           }
+	  equipeDao.delete(equipe);
+			
           return "succes.do?tache=afficherPageGestionListeEquipes";
         } catch (NumberFormatException ex) {
           data.put("suppressionEchec", "Erreur lors de la suppression de l'équipe.");

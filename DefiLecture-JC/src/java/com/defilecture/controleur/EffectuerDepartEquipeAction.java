@@ -64,6 +64,7 @@ public class EffectuerDepartEquipeAction extends Action implements RequirePRGAct
           if (demandeEquipe != null) {
 	    equipe.ajouterPoint(demandeEquipe.getPoint());
             if (demandeEqpDao.delete(demandeEquipe) && equipeDao.update(equipe)) {
+	      compte.setPoint(0);
               compte.setIdEquipe(-1);
               compteDao.update(compte);
               action = "auRevoir.do?tache=afficherPageModificationEquipe&idEquipe=" + idEquipe;

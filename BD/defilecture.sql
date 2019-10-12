@@ -200,6 +200,10 @@ CREATE TABLE `config_site` (
   `VALUE_CONFIG` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+
+-- Valeurs de config par défaut
+INSERT INTO `config_site` VALUES ('accesA','2099-12-31 00:00'),('accesDe','2000-01-01 00:00'),('dInscription','2000-01-01 00:00'),('dLecture','2000-01-01 00:00'),('fLecture','2099-12-31 00:00'),('limiteHard','900'),('limiteSoft','600'),('nbMatelots','2');
+
 -- --------------------------------------------------------
 --
 -- Index pour les tables exportées
