@@ -30,7 +30,7 @@ public class Equipe implements Comparable<Equipe> {
     this.nom = nom;
     this.nbMembres = 0;
     this.point = 0;
-    this.score=0;
+    this.score = 0;
   }
 
   // Getters et Setters
@@ -65,11 +65,11 @@ public class Equipe implements Comparable<Equipe> {
   public void setScore(int score) {
     this.score = score;
   }
-  
+
   public void ajouterPoint(int point) {
     this.point += point;
   }
-  
+
   public int getNbMembres() {
     return nbMembres;
   }

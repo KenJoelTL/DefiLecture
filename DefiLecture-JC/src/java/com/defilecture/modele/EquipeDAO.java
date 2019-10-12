@@ -64,7 +64,7 @@ public class EquipeDAO extends DAO<Equipe> {
       ResultSet resultat = paramStm.executeQuery();
 
       if (resultat.next()) {
-	equipe=créerEquipeParResultSet(resultat);
+        equipe = créerEquipeParResultSet(resultat);
       }
 
       resultat.close();
@@ -153,7 +153,7 @@ public class EquipeDAO extends DAO<Equipe> {
       ResultSet r = paramStm.executeQuery();
 
       while (r.next()) {
-	liste.add(créerEquipeParResultSet(r));
+        liste.add(créerEquipeParResultSet(r));
       }
 
       Collections.sort(liste);
@@ -178,7 +178,7 @@ public class EquipeDAO extends DAO<Equipe> {
       ResultSet resultat = paramStm.executeQuery();
 
       if (resultat.next()) {
-	equipe=créerEquipeParResultSet(resultat);
+        equipe = créerEquipeParResultSet(resultat);
       }
 
       resultat.close();
@@ -190,7 +190,7 @@ public class EquipeDAO extends DAO<Equipe> {
     return equipe;
   }
 
-    public Equipe findById(int id) {
+  public Equipe findById(int id) {
     String req = "SELECT * FROM equipe WHERE `ID_EQUIPE` = ?";
     Equipe equipe = null;
 
@@ -200,7 +200,7 @@ public class EquipeDAO extends DAO<Equipe> {
       ResultSet resultat = paramStm.executeQuery();
 
       if (resultat.next()) {
-	equipe=créerEquipeParResultSet(resultat);
+        equipe = créerEquipeParResultSet(resultat);
       }
 
       resultat.close();
@@ -233,15 +233,15 @@ public class EquipeDAO extends DAO<Equipe> {
     return isDeleted;
   }
 
-  private Equipe créerEquipeParResultSet(ResultSet rs) throws SQLException{
+  private Equipe créerEquipeParResultSet(ResultSet rs) throws SQLException {
     Equipe équipe = new Equipe();
     équipe.setIdEquipe(rs.getInt("ID_EQUIPE"));
     équipe.setNom(rs.getString("NOM"));
     équipe.setPoint(rs.getInt("POINT"));
-    équipe.setScore(équipe.getPoint()+new DemandeEquipeDAO(cnx).sumPointByidEquipe(rs.getInt("ID_EQUIPE")));
+    équipe.setScore(
+        équipe.getPoint() + new DemandeEquipeDAO(cnx).sumPointByidEquipe(rs.getInt("ID_EQUIPE")));
     équipe.setNbMembres(new CompteDAO(cnx).countCompteByIdEquipe(rs.getInt("ID_EQUIPE")));
 
     return équipe;
   }
 }
-

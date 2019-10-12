@@ -30,7 +30,7 @@ import jdbc.Config;
 import jdbc.Connexion;
 
 public class EffectuerSuppressionCompteAction extends Action
-  implements RequirePRGAction, DataSender {
+    implements RequirePRGAction, DataSender {
 
   private HashMap data;
 
@@ -42,49 +42,52 @@ public class EffectuerSuppressionCompteAction extends Action
         try {
           String idCompte = request.getParameter("idCompte");
           Connection cnx =
-	    Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
+              Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
           CompteDAO compteDao = new CompteDAO(cnx);
           Compte compte = compteDao.read(idCompte);
 
           if (compte != null) {
-	    EquipeDAO eqpDao = new EquipeDAO(cnx);
-	    Equipe equipe = eqpDao.findById(compte.getIdEquipe());
-	    
-	    if(equipe != null){
-	      DemandeEquipeDAO demandeEqpDao = new DemandeEquipeDAO(cnx);
-	      DemandeEquipe demandeEquipe =
-		demandeEqpDao.findByIdCompteEquipe(compte.getIdCompte(), equipe.getIdEquipe());
+            EquipeDAO eqpDao = new EquipeDAO(cnx);
+            Equipe equipe = eqpDao.findById(compte.getIdEquipe());
 
-	      equipe.ajouterPoint(demandeEquipe.getPoint());
-	      if(!eqpDao.update(equipe)){
-		data.put(
-			 "échecTransfertDePoints",
-			 "Impossible de transférer les "+demandeEquipe.getPoint() + " points à l'équipe " + equipe.getIdEquipe());
-		return "succes.do?tache=afficherPageGestionListeCompte";
-	      }
-	    }
-	    
-	    if (compteDao.delete(compte)) {
-	      data.put(
-		       "suppressionSucces",
-		       "Le compte " + compte.getCourriel() + " a bien été supprimé");
-	      return "succes.do?tache=afficherPageGestionListeCompte";
-	    } else {
-	      data.put("suppressionEchec", "Une erreur est survenue lors de la suppression");
-	      return "echec.do?tache=afficherPageGestionListCompte";
-	    }
+            if (equipe != null) {
+              DemandeEquipeDAO demandeEqpDao = new DemandeEquipeDAO(cnx);
+              DemandeEquipe demandeEquipe =
+                  demandeEqpDao.findByIdCompteEquipe(compte.getIdCompte(), equipe.getIdEquipe());
 
-	  } else {
-	    data.put("suppressionEchec", "Le compte que vous tentez de supprimer n'existe pas");
-	    return "echec.do?tache=afficherPageGestionListCompte";
-	  }
+              equipe.ajouterPoint(demandeEquipe.getPoint());
+              if (!eqpDao.update(equipe)) {
+                data.put(
+                    "échecTransfertDePoints",
+                    "Impossible de transférer les "
+                        + demandeEquipe.getPoint()
+                        + " points à l'équipe "
+                        + equipe.getIdEquipe());
+                return "succes.do?tache=afficherPageGestionListeCompte";
+              }
+            }
 
-	} catch (SQLException ex) {
-	  Logger.getLogger(EffectuerSuppressionCompteAction.class.getName())
-	    .log(Level.SEVERE, null, ex);
-	} finally {
-	  Connexion.close();
-	}
+            if (compteDao.delete(compte)) {
+              data.put(
+                  "suppressionSucces",
+                  "Le compte " + compte.getCourriel() + " a bien été supprimé");
+              return "succes.do?tache=afficherPageGestionListeCompte";
+            } else {
+              data.put("suppressionEchec", "Une erreur est survenue lors de la suppression");
+              return "echec.do?tache=afficherPageGestionListCompte";
+            }
+
+          } else {
+            data.put("suppressionEchec", "Le compte que vous tentez de supprimer n'existe pas");
+            return "echec.do?tache=afficherPageGestionListCompte";
+          }
+
+        } catch (SQLException ex) {
+          Logger.getLogger(EffectuerSuppressionCompteAction.class.getName())
+              .log(Level.SEVERE, null, ex);
+        } finally {
+          Connexion.close();
+        }
       }
     }
 

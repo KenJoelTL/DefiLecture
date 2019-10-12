@@ -14,9 +14,9 @@
  */
 package com.defilecture.controleur;
 
+import com.defilecture.Util;
 import com.defilecture.modele.Defi;
 import com.defilecture.modele.DefiDAO;
-import com.defilecture.Util;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -27,7 +27,7 @@ import jdbc.Config;
 import jdbc.Connexion;
 
 public class EffectuerModificationDefiAction extends Action
-  implements RequirePRGAction, DataSender {
+    implements RequirePRGAction, DataSender {
 
   private HashMap data;
 
@@ -35,8 +35,8 @@ public class EffectuerModificationDefiAction extends Action
   public String execute() {
 
     if (userIsConnected()
-	&& (userIsAdmin() || userIsModerateur())
-	&& request.getParameter("modifie") != null) {
+        && (userIsAdmin() || userIsModerateur())
+        && request.getParameter("modifie") != null) {
 
       String nom = request.getParameter("nom");
       String description = request.getParameter("description");
@@ -52,69 +52,69 @@ public class EffectuerModificationDefiAction extends Action
       int valeurMinute;
 
       try {
-	Connection cnx =
-	  Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
+        Connection cnx =
+            Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
 
-	Defi defi = new DefiDAO(cnx).read(idDefi);
-	if (defi != null) {
+        Defi defi = new DefiDAO(cnx).read(idDefi);
+        if (defi != null) {
 
-	  if (nom != null && !"".equals(nom.trim()) && !nom.equals(defi.getNom())) {
-	    defi.setNom(Util.toUTF8(nom));
-	  }
+          if (nom != null && !"".equals(nom.trim()) && !nom.equals(defi.getNom())) {
+            defi.setNom(Util.toUTF8(nom));
+          }
 
-	  if (request.getParameter("valeurMinute") != null) {
-	    valeurMinute = Integer.parseInt(request.getParameter("valeurMinute"));
-	    if (valeurMinute != defi.getValeurMinute()) {
-	      defi.setValeurMinute(valeurMinute);
-	    }
-	  }
+          if (request.getParameter("valeurMinute") != null) {
+            valeurMinute = Integer.parseInt(request.getParameter("valeurMinute"));
+            if (valeurMinute != defi.getValeurMinute()) {
+              defi.setValeurMinute(valeurMinute);
+            }
+          }
 
-	  if (dateDebut != defi.getDateDebut()) {
-	    defi.setDateDebut(dateDebut);
-	  }
-	  if (dateFin != defi.getDateFin()) {
-	    defi.setDateFin(dateFin);
-	  }
+          if (dateDebut != defi.getDateDebut()) {
+            defi.setDateDebut(dateDebut);
+          }
+          if (dateFin != defi.getDateFin()) {
+            defi.setDateFin(dateFin);
+          }
 
-	  if (description != null
-	      && !"".equals(description.trim())
-	      && !description.equals(defi.getDescription())) {
-	    defi.setDescription(Util.toUTF8(description));
-	  }
+          if (description != null
+              && !"".equals(description.trim())
+              && !description.equals(defi.getDescription())) {
+            defi.setDescription(Util.toUTF8(description));
+          }
 
-	  if (question != null
-	      && !"".equals(question.trim())
-	      && !question.equals(defi.getQuestion())) {
-	    defi.setQuestion(Util.toUTF8(question));
-	  }
+          if (question != null
+              && !"".equals(question.trim())
+              && !question.equals(defi.getQuestion())) {
+            defi.setQuestion(Util.toUTF8(question));
+          }
 
-	  if (choixReponse != defi.getChoixReponse()) {
-	    defi.setChoixReponse(Util.toUTF8(choixReponse));
-	  }
+          if (choixReponse != defi.getChoixReponse()) {
+            defi.setChoixReponse(Util.toUTF8(choixReponse));
+          }
 
-	  if (reponse != defi.getReponse()) {
-	    defi.setReponse(reponse);
-	  }
+          if (reponse != defi.getReponse()) {
+            defi.setReponse(reponse);
+          }
 
-	  cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
+          cnx = Connexion.startConnection(Config.DB_USER, Config.DB_PWD, Config.URL, Config.DRIVER);
 
-	  DefiDAO dao = new DefiDAO(cnx);
-	  if (dao.update(defi)) {
-	    return "*.do?tache=afficherPageParticipationDefi";
-	  } else {
-	    Logger.getLogger(EffectuerModificationDefiAction.class.getName())
-	      .log(Level.WARNING, "Mise à jour défi échouée.");
-	    return "*.do?tache=afficherPageParticipationDefi";
-	  }
-	}
+          DefiDAO dao = new DefiDAO(cnx);
+          if (dao.update(defi)) {
+            return "*.do?tache=afficherPageParticipationDefi";
+          } else {
+            Logger.getLogger(EffectuerModificationDefiAction.class.getName())
+                .log(Level.WARNING, "Mise à jour défi échouée.");
+            return "*.do?tache=afficherPageParticipationDefi";
+          }
+        }
       } catch (SQLException ex) {
-	Logger.getLogger(EffectuerModificationDefiAction.class.getName())
-	  .log(Level.SEVERE, null, ex);
-	return "*.do?tache=afficherPageParticipationDefi";
+        Logger.getLogger(EffectuerModificationDefiAction.class.getName())
+            .log(Level.SEVERE, null, ex);
+        return "*.do?tache=afficherPageParticipationDefi";
       } catch (NumberFormatException ex) {
-	Logger.getLogger(EffectuerModificationDefiAction.class.getName())
-	  .log(Level.SEVERE, null, ex);
-	return "*.do?tache=afficherPageParticipationDefi";
+        Logger.getLogger(EffectuerModificationDefiAction.class.getName())
+            .log(Level.SEVERE, null, ex);
+        return "*.do?tache=afficherPageParticipationDefi";
       }
     }
     return "*.do?tache=afficherPageParticipationDefi";

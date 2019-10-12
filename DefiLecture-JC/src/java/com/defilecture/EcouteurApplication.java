@@ -37,16 +37,11 @@ public class EcouteurApplication implements ServletContextListener {
     Config.DRIVER = application.getInitParameter("piloteJDBC");
     Config.URL = application.getInitParameter("urlDb");
 
-    
-    try
-      {
-	Class.forName("com.mysql.jdbc.Driver");
-      }
-    catch(ClassNotFoundException e)
-      {
-	Logger.getLogger(EcouteurApplication.class.getName()).log(Level.SEVERE, null, e);
-      }
-
+    try {
+      Class.forName("com.mysql.jdbc.Driver");
+    } catch (ClassNotFoundException e) {
+      Logger.getLogger(EcouteurApplication.class.getName()).log(Level.SEVERE, null, e);
+    }
 
     try {
       ConfigSiteDAO configDao =

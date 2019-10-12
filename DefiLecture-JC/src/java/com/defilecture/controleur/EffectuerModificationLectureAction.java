@@ -14,9 +14,9 @@
  */
 package com.defilecture.controleur;
 
+import com.defilecture.Util;
 import com.defilecture.modele.Lecture;
 import com.defilecture.modele.LectureDAO;
-import com.defilecture.Util;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -33,8 +33,8 @@ public class EffectuerModificationLectureAction extends Action implements Requir
         && (userIsCapitaine() || userIsParticipant())
         && request.getParameter("modifie") != null) {
 
-	if (LocalDateTime.now().isBefore(getDébutLectures())
-	    || LocalDateTime.now().isAfter(getFinLectures())) {
+      if (LocalDateTime.now().isBefore(getDébutLectures())
+          || LocalDateTime.now().isAfter(getFinLectures())) {
         return "*.do?tache=afficherPageGestionLecture";
       }
 
