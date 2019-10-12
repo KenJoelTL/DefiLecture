@@ -196,7 +196,7 @@
                   </div>
                   <select class="selectpicker" data-show-subtext="true" data-live-search="true" name="idCompte">
                     <c:forEach items="${listeComptes}" var="compte">
-                      <c:if test="${compte.getIdEquipe() eq -1}">
+		    <c:if test="${compte.getIdEquipe()==-1 && compte.role<compte.MODERATEUR}">
                         <option value="${compte.getIdCompte()}">${compte.getPrenom()} ${compte.getNom()}</option>
                       </c:if>
                     </c:forEach>
