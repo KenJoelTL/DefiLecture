@@ -14,7 +14,7 @@
     <li>Cochez Je désire être capitaine d’un équipage (employé ou tuteur)</li>
     <li>Attendez que nous approuvions votre inscription en tant que capitaine </li>
     <li>Créez votre équipage en donnant un nom au navire</li>
-    <li>Invitez des élèves à joindre votre équipage</li>
+    <li>Invitez des élèves à se joindre à votre équipage</li>
   </ol>
 
 </div>
@@ -22,7 +22,7 @@
   <h3>  <strong>Pour vous joindre à un équipage
       <ol>
         <li>Inscrivez-vous </li>
-        <li>Sélectionnez l’onglet Joindre un équipage, choisissez l’équipe de votre choix et cliquez sur Envoyer une demande d’adhésion </li>
+        <li>Sélectionnez l’onglet «Se joindre à un équipage», choisissez l’équipe de votre choix et cliquez sur Envoyer une demande d’adhésion </li>
         <li>Attendez que le capitaine approuve votre demande</li>
       </ol>
 </div>

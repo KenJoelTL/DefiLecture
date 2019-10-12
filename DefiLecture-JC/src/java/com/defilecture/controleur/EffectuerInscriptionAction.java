@@ -39,8 +39,7 @@ public class EffectuerInscriptionAction extends Action implements RequirePRGActi
         || LocalDateTime.now().isAfter(getFinInscriptions())) {
       erreur = true;
       data.put(
-          "erreurDates",
-          "Les inscriptions sont désactivées pour le moment. Revenez plus tard ");
+          "erreurDates", "Les inscriptions sont désactivées pour le moment. Revenez plus tard ");
     }
 
     if (request.getParameter("pseudonyme") != null) {

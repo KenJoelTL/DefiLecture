@@ -83,6 +83,8 @@ public class EffectuerCreationEquipeAction extends Action implements RequirePRGA
                 demande.setIdEquipe(compte.getIdEquipe());
 
                 demande.setStatutDemande(1);
+                demande.setPoint(compte.getPoint());
+
                 if (daoDemandeEquipe.create(demande)) {
                   Logger.getLogger(EffectuerCreationEquipeAction.class.getName())
                       .log(Level.INFO, "Demande complétée");

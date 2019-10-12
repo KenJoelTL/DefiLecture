@@ -243,12 +243,13 @@ public class LectureDAO extends DAO<Lecture> {
 
   public int getMinutesAjd(int idCompte) {
 
-    String req = "SELECT SUM(DUREE_MINUTES) AS MINAJD FROM lecture WHERE `ID_COMPTE` = ? AND DATE(DATE_INSCRIPTION)=CURDATE()";
+    String req =
+        "SELECT SUM(DUREE_MINUTES) AS MINAJD FROM lecture WHERE `ID_COMPTE` = ? AND DATE(DATE_INSCRIPTION)=CURDATE()";
     List<Lecture> listeLecture = new ArrayList<Lecture>();
 
     PreparedStatement paramStm = null;
-    int minAjd=0;
-    
+    int minAjd = 0;
+
     try {
 
       paramStm = cnx.prepareStatement(req);
@@ -259,7 +260,7 @@ public class LectureDAO extends DAO<Lecture> {
 
       // On vérifie s'il y a un résultat
       while (resultat.next()) {
-	  minAjd=resultat.getInt("MINAJD");
+        minAjd = resultat.getInt("MINAJD");
       }
       resultat.close();
       paramStm.close();
@@ -275,8 +276,7 @@ public class LectureDAO extends DAO<Lecture> {
 
     return minAjd;
   }
-    
-    
+
   public List<Lecture> findByIdCompteOrderByDate(int idCompte) {
 
     String req =

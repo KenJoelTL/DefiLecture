@@ -37,12 +37,10 @@ public class EffectuerModificationEquipeAction extends Action
     String action = "*.do?tache=afficherPageAccueil";
     if (request.getParameter("idEquipe") != null) {
       action = "*.do?tache=afficherPageEquipe&idEquipe=" + request.getParameter("idEquipe");
-	
+
       String nomEquipe = Util.toUTF8(request.getParameter("nom"));
       if (request.getParameter("modifier") != null) {
-        if (userIsConnected()
-            && (userIsCapitaine() || userIsAdmin())
-            && nomEquipe != null) {
+        if (userIsConnected() && (userIsCapitaine() || userIsAdmin()) && nomEquipe != null) {
           try {
 
             int idEquipe = Integer.parseInt(request.getParameter("idEquipe"));
@@ -67,10 +65,7 @@ public class EffectuerModificationEquipeAction extends Action
               }
             } else {
               data.put(
-                  "erreurNom",
-                  "Le nom "
-                      + nomEquipe
-                      + " est déjà utilisé par un autre équipage");
+                  "erreurNom", "Le nom " + nomEquipe + " est déjà utilisé par un autre équipage");
             }
           } catch (NumberFormatException ex) {
             data.put("erreurNom", "Équipe inexistante.");

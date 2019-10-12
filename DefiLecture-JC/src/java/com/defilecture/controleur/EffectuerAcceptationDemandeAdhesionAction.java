@@ -81,7 +81,7 @@ public class EffectuerAcceptationDemandeAdhesionAction extends Action
                 if (nbMembre - 1 < getNbMatelotsMax()) {
                   cpt.setIdEquipe(idEquipe);
                   demandeEq.setStatutDemande(DemandeEquipe.ACCEPTEE);
-
+                  demandeEq.setPoint(cpt.getPoint());
                   if (deDao.update(demandeEq) && compteDao.update(cpt)) {
                     action = "ajoutReussi.do?tache=afficherPageListeDemandesEquipe&ordre=recu";
 

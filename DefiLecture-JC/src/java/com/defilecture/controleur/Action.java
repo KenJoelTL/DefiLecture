@@ -29,7 +29,7 @@ public abstract class Action implements Executable, RequestAware, SessionAware, 
   public abstract String execute();
 
   protected static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    
+
   @Override
   public void setRequest(HttpServletRequest request) {
     this.request = request;
@@ -65,35 +65,39 @@ public abstract class Action implements Executable, RequestAware, SessionAware, 
     return session.getAttribute("connecte") != null;
   }
 
-    protected LocalDateTime getDébutLectures(){
-	return LocalDateTime.parse((String) session.getServletContext().getAttribute("com.defilecture.dLecture"),
-				   formatter);
-    }
+  protected LocalDateTime getDébutLectures() {
+    return LocalDateTime.parse(
+        (String) session.getServletContext().getAttribute("com.defilecture.dLecture"), formatter);
+  }
 
-    protected LocalDateTime getFinLectures(){
-	return LocalDateTime.parse((String) session.getServletContext().getAttribute("com.defilecture.fLecture"),
-				   formatter);
-    }
+  protected LocalDateTime getFinLectures() {
+    return LocalDateTime.parse(
+        (String) session.getServletContext().getAttribute("com.defilecture.fLecture"), formatter);
+  }
 
-    protected LocalDateTime getDébutInscriptions(){
-	return LocalDateTime.parse((String) session.getServletContext().getAttribute("com.defilecture.dInscription"),
-				   formatter);
-    }
+  protected LocalDateTime getDébutInscriptions() {
+    return LocalDateTime.parse(
+        (String) session.getServletContext().getAttribute("com.defilecture.dInscription"),
+        formatter);
+  }
 
-    protected LocalDateTime getFinInscriptions(){
-	return LocalDateTime.parse((String) session.getServletContext().getAttribute("com.defilecture.fLecture"),
-				   formatter);
-    }
+  protected LocalDateTime getFinInscriptions() {
+    return LocalDateTime.parse(
+        (String) session.getServletContext().getAttribute("com.defilecture.fLecture"), formatter);
+  }
 
-    protected int getLimiteLectureHard(){
-	return Integer.parseInt(session.getServletContext().getAttribute("com.defilecture.limiteHard").toString());
-    }
+  protected int getLimiteLectureHard() {
+    return Integer.parseInt(
+        session.getServletContext().getAttribute("com.defilecture.limiteHard").toString());
+  }
 
-    protected int getLimiteLectureSoft(){
-	return Integer.parseInt(session.getServletContext().getAttribute("com.defilecture.limiteSoft").toString());
-    }
+  protected int getLimiteLectureSoft() {
+    return Integer.parseInt(
+        session.getServletContext().getAttribute("com.defilecture.limiteSoft").toString());
+  }
 
-    protected int getNbMatelotsMax(){
-	return Integer.parseInt((String) session.getServletContext().getAttribute("com.defilecture.nbMatelots"));
-    }
+  protected int getNbMatelotsMax() {
+    return Integer.parseInt(
+        (String) session.getServletContext().getAttribute("com.defilecture.nbMatelots"));
+  }
 }

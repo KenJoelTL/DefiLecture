@@ -67,11 +67,11 @@
                 <div class='jumbotron'> 
                     
                     <h1>${equipe.nom}</h1>
-                    <c:if test="${equipe.point eq 0}">
-                        <p>${equipe.point} <% out.println(application.getAttribute("vocPoint"));%></p>
+                    <c:if test="${equipe.score eq 0}">
+                        <p>${equipe.score} <% out.println(application.getAttribute("vocPoint"));%></p>
                     </c:if>
-                    <c:if test="${equipe.point ge 1}">
-                        <p>${equipe.point} <% out.println(application.getAttribute("vocPoints"));%></p>
+                    <c:if test="${equipe.score ge 1}">
+                        <p>${equipe.score} <% out.println(application.getAttribute("vocPoints"));%></p>
                     </c:if> 
                     <p>Rang ${rang}</p>
              
@@ -102,7 +102,7 @@
                           <c:set var="contribution" value="${daoDemEqp.findByIdCompteEquipe(membre.idCompte,equipe.idEquipe)}"></c:set>
                         <div class="progress">
                           <div class="progress-bar" role="progressbar" aria-valuenow="${contribution.point}"
-                               aria-valuemin="0" aria-valuemax="100" style="width:${(contribution.point/equipe.point)*100}%">
+                               aria-valuemin="0" aria-valuemax="100" style="width:${(contribution.point/equipe.score)*100}%">
 			    ${contribution.point}
                           </div>
                         </div>

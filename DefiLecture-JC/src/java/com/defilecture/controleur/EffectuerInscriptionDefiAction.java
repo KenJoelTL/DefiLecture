@@ -14,6 +14,7 @@
  */
 package com.defilecture.controleur;
 
+import com.defilecture.Util;
 import com.defilecture.modele.Compte;
 import com.defilecture.modele.CompteDAO;
 import com.defilecture.modele.Defi;
@@ -22,7 +23,6 @@ import com.defilecture.modele.DemandeEquipe;
 import com.defilecture.modele.DemandeEquipeDAO;
 import com.defilecture.modele.InscriptionDefi;
 import com.defilecture.modele.InscriptionDefiDAO;
-import com.defilecture.Util;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -44,8 +44,8 @@ public class EffectuerInscriptionDefiAction extends Action implements RequirePRG
         && (userIsParticipant() || userIsCapitaine())
         && request.getParameter("valider") != null) {
 
-	if (LocalDateTime.now().isBefore(getDébutInscriptions())
-	    || LocalDateTime.now().isAfter(getFinInscriptions())) {
+      if (LocalDateTime.now().isBefore(getDébutInscriptions())
+          || LocalDateTime.now().isAfter(getFinInscriptions())) {
         return "*.do?tache=afficherPageParticipationDefi";
       }
 

@@ -64,11 +64,7 @@ public class EquipeDAO extends DAO<Equipe> {
       ResultSet resultat = paramStm.executeQuery();
 
       if (resultat.next()) {
-        equipe = new Equipe();
-        equipe.setIdEquipe(resultat.getInt("ID_EQUIPE"));
-        equipe.setNom(resultat.getString("NOM"));
-        equipe.setPoint((new DemandeEquipeDAO(cnx).sumPointByidEquipe(id)));
-        equipe.setNbMembres((new CompteDAO(cnx)).countCompteByIdEquipe(id));
+        equipe = créerEquipeParResultSet(resultat);
       }
 
       resultat.close();
@@ -82,13 +78,14 @@ public class EquipeDAO extends DAO<Equipe> {
 
   @Override
   public boolean update(Equipe x) {
-    String req = "UPDATE equipe SET `NOM` = ? WHERE `ID_EQUIPE` = ?";
+    String req = "UPDATE equipe SET `NOM` = ?, `POINT` = ? WHERE `ID_EQUIPE` = ?";
     boolean isUpdated = false;
 
     try {
       PreparedStatement paramStm = cnx.prepareStatement(req);
       paramStm.setString(1, x.getNom() == null || "".equals(x.getNom().trim()) ? null : x.getNom());
-      paramStm.setInt(2, x.getIdEquipe());
+      paramStm.setInt(2, x.getPoint());
+      paramStm.setInt(3, x.getIdEquipe());
 
       if (paramStm.executeUpdate() > 0) {
         isUpdated = true;
@@ -98,7 +95,7 @@ public class EquipeDAO extends DAO<Equipe> {
       Logger.getLogger(EquipeDAO.class.getName()).log(Level.SEVERE, null, ex);
     }
 
-    return false;
+    return isUpdated;
   }
 
   @Override
@@ -131,14 +128,7 @@ public class EquipeDAO extends DAO<Equipe> {
       ResultSet r = stm.executeQuery(req);
 
       while (r.next()) {
-        Equipe equipe = new Equipe();
-        equipe.setIdEquipe(r.getInt("ID_EQUIPE"));
-        equipe.setNom(r.getString("NOM"));
-
-        equipe.setPoint(new DemandeEquipeDAO(cnx).sumPointByidEquipe(r.getInt("ID_EQUIPE")));
-        equipe.setNbMembres(new CompteDAO(cnx).countCompteByIdEquipe(r.getInt("ID_EQUIPE")));
-
-        liste.add(equipe);
+        liste.add(créerEquipeParResultSet(r));
       }
 
       Collections.sort(liste);
@@ -163,14 +153,7 @@ public class EquipeDAO extends DAO<Equipe> {
       ResultSet r = paramStm.executeQuery();
 
       while (r.next()) {
-        Equipe e = new Equipe();
-        e.setIdEquipe(r.getInt("ID_EQUIPE"));
-        e.setNom(r.getString("NOM"));
-
-        e.setPoint(new DemandeEquipeDAO(cnx).sumPointByidEquipe(r.getInt("ID_EQUIPE")));
-        e.setNbMembres(new CompteDAO(cnx).countCompteByIdEquipe(r.getInt("ID_EQUIPE")));
-
-        liste.add(e);
+        liste.add(créerEquipeParResultSet(r));
       }
 
       Collections.sort(liste);
@@ -195,13 +178,29 @@ public class EquipeDAO extends DAO<Equipe> {
       ResultSet resultat = paramStm.executeQuery();
 
       if (resultat.next()) {
-        equipe = new Equipe();
-        equipe.setIdEquipe(resultat.getInt("ID_EQUIPE"));
-        equipe.setNom(resultat.getString("NOM"));
-        equipe.setPoint(
-            (new DemandeEquipeDAO(cnx).sumPointByidEquipe(resultat.getInt("ID_EQUIPE"))));
-        equipe.setNbMembres(
-            (new CompteDAO(cnx)).countCompteByIdEquipe(resultat.getInt("ID_EQUIPE")));
+        equipe = créerEquipeParResultSet(resultat);
+      }
+
+      resultat.close();
+      paramStm.close();
+    } catch (SQLException ex) {
+      Logger.getLogger(EquipeDAO.class.getName()).log(Level.SEVERE, null, ex);
+    }
+
+    return equipe;
+  }
+
+  public Equipe findById(int id) {
+    String req = "SELECT * FROM equipe WHERE `ID_EQUIPE` = ?";
+    Equipe equipe = null;
+
+    try {
+      PreparedStatement paramStm = cnx.prepareStatement(req);
+      paramStm.setInt(1, id);
+      ResultSet resultat = paramStm.executeQuery();
+
+      if (resultat.next()) {
+        equipe = créerEquipeParResultSet(resultat);
       }
 
       resultat.close();
@@ -232,5 +231,17 @@ public class EquipeDAO extends DAO<Equipe> {
     }
 
     return isDeleted;
+  }
+
+  private Equipe créerEquipeParResultSet(ResultSet rs) throws SQLException {
+    Equipe équipe = new Equipe();
+    équipe.setIdEquipe(rs.getInt("ID_EQUIPE"));
+    équipe.setNom(rs.getString("NOM"));
+    équipe.setPoint(rs.getInt("POINT"));
+    équipe.setScore(
+        équipe.getPoint() + new DemandeEquipeDAO(cnx).sumPointByidEquipe(rs.getInt("ID_EQUIPE")));
+    équipe.setNbMembres(new CompteDAO(cnx).countCompteByIdEquipe(rs.getInt("ID_EQUIPE")));
+
+    return équipe;
   }
 }
