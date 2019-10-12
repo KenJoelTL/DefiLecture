@@ -199,7 +199,7 @@
 	      <input type="text" id="confirmation">
               <label class="lecture-submit"><input class="btn btn-success" value="Ajouter" id="btnSubmit" onclick="if($('#confirmation').val().toLowerCase()=='je confirme'){$('#btnSubmit').click();}"></input></label>
 	    </div>
-            <a href="*.do?tache=afficherPageGestionLecture" class="retour"><span class="glyphicon glyphicon-circle-arrow-left"></span>retour à la liste des lectures</a>
+            <a href="*.do?tache=afficherPageGestionLectures" class="retour"><span class="glyphicon glyphicon-circle-arrow-left"></span>retour à la liste des lectures</a>
             
           </form>
         </div>

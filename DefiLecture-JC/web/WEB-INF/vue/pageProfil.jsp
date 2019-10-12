@@ -121,7 +121,7 @@
                                 <p>
                                     Lectures
                                     <c:if test="${memeUser == true}"> <!--Si c'est le profil du user-->
-                                        <a href="?tache=afficherPageGestionLecture"> <!--Lien pour edit ses lectures-->
+                                        <a href="?tache=afficherPageGestionLectures"> <!--Lien pour edit ses lectures-->
                                             <span class="glyphicon glyphicon-edit glyphProfil"></span>
                                         </a>
 

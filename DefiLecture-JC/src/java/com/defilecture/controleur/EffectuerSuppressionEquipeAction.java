@@ -85,13 +85,13 @@ public class EffectuerSuppressionEquipeAction extends Action
           return "succes.do?tache=afficherPageGestionListeEquipes";
         } catch (NumberFormatException ex) {
           data.put("suppressionEchec", "Erreur lors de la suppression de l'équipe.");
-          return "erreur.do?tache=afficherPageGestionListeEquipes&idEquipe="
+          return "erreur.do?tache=afficherPageGestionEquipes&idEquipe="
               + request.getParameter("idEquipe");
         } catch (SQLException ex) {
           Logger.getLogger(EffectuerSuppressionCompteAction.class.getName())
               .log(Level.SEVERE, null, ex);
           data.put("suppressionEchec", "Erreur avec le serveur de base de donnée.");
-          return "erreur.do?tache=afficherPageGestionListeEquipes&idEquipe="
+          return "erreur.do?tache=afficherPageGestionEquipes&idEquipe="
               + request.getParameter("idEquipe");
         } finally {
           Connexion.close();

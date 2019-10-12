@@ -33,9 +33,9 @@ public class EffectuerModificationLectureAction extends Action implements Requir
         && (userIsCapitaine() || userIsParticipant())
         && request.getParameter("modifie") != null) {
 
-      if (LocalDateTime.now().isBefore(getDébutLectures())
-          || LocalDateTime.now().isAfter(getFinLectures())) {
-        return "*.do?tache=afficherPageGestionLecture";
+	if (LocalDateTime.now().isBefore(getDébutLectures())
+	    || LocalDateTime.now().isAfter(getFinLectures())) {
+        return "*.do?tache=afficherPageGestionLectures";
       }
 
       String idLecture = request.getParameter("idLecture");
@@ -76,13 +76,13 @@ public class EffectuerModificationLectureAction extends Action implements Requir
       } catch (SQLException ex) {
         Logger.getLogger(EffectuerModificationLectureAction.class.getName())
             .log(Level.SEVERE, null, ex);
-        return "*.do?tache=afficherPageGestionLecture";
+        return "*.do?tache=afficherPageGestionLectures";
       } catch (NumberFormatException ex) {
         Logger.getLogger(EffectuerModificationLectureAction.class.getName())
             .log(Level.SEVERE, null, ex);
-        return "*.do?tache=afficherPageGestionLecture";
+        return "*.do?tache=afficherPageGestionLectures";
       }
     }
-    return "*.do?tache=afficherPageGestionLecture";
+    return "*.do?tache=afficherPageGestionLectures";
   }
 }

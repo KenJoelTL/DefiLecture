@@ -48,14 +48,12 @@ public class ActionBuilder {
           // Lecture
         case "afficherPageCreationLecture":
           return new AfficherPageCreationLectureAction();
-        case "afficherPageGestionLecture":
-          return new AfficherPageGestionLectureAction();
+        case "afficherPageGestionLectures":
+          return new AfficherPageGestionLecturesAction();
         case "effectuerCreationLecture":
           return new EffectuerCreationLectureAction();
         case "afficherPageModificationLecture":
           return new AfficherPageModificationLectureAction();
-        case "afficherPageListeLectures":
-          return new AfficherPageListeLecturesAction();
         case "effectuerModificationLecture":
           return new EffectuerModificationLectureAction();
         case "effectuerSuppressionLecture":
@@ -82,8 +80,8 @@ public class ActionBuilder {
           return new SupprimerDefiAction();
 
           // Compte
-        case "afficherPageGestionListeCompte":
-          return new AfficherPageGestionListeComptesAction();
+        case "afficherPageGestionComptes":
+          return new AfficherPageGestionComptesAction();
         case "afficherPageAdresseCourriel":
           return new AfficherPageAdresseCourrielAction();
         case "afficherPageModificationCompte":
@@ -134,8 +132,8 @@ public class ActionBuilder {
           return new EffectuerModificationConfigAction();
         case "effectuerSupressionBD":
           return new EffectuerSuppressionBDAction();
-        case "afficherPageGestionListeEquipes":
-          return new AfficherPageGestionListeEquipesAction();
+        case "afficherPageGestionEquipes":
+          return new AfficherPageGestionEquipesAction();
         case "effectuerAjoutMembreEquipe":
           return new EffectuerAjoutMembreEquipeAction();
         case "effectuerSuppressionEquipe":

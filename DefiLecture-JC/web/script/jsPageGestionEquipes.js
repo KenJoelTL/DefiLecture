@@ -22,3 +22,9 @@ function supprimerParticipant(idCompte, idEquipe){
   }
 }
 
+function supprimerEquipe(idEquipe){
+  var confirmation = confirm('Souhaitez-vous vraiment supprimer l\'équipage?');
+  if (confirmation == true) {                    
+    location.href = '*.do?tache=effectuerSuppressionEquipe&idEquipe='+idEquipe;
+  }
+}

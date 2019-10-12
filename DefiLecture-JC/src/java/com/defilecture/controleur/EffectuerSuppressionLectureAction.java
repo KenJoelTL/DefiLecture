@@ -34,9 +34,9 @@ public class EffectuerSuppressionLectureAction extends Action implements Require
   public String execute() {
     if (userIsConnected() && (userIsCapitaine() || userIsParticipant())) {
 
-      if (LocalDateTime.now().isBefore(getDébutLectures())
-          || LocalDateTime.now().isAfter(getFinLectures())) {
-        return "*.do?tache=afficherPageGestionLecture";
+	if (LocalDateTime.now().isBefore(getDébutLectures())
+	    || LocalDateTime.now().isAfter(getFinLectures())) {
+        return "*.do?tache=afficherPageGestionLectures";
       }
 
       String idLecture = request.getParameter("idLecture");
@@ -83,6 +83,6 @@ public class EffectuerSuppressionLectureAction extends Action implements Require
             .log(Level.SEVERE, null, ex);
       }
     }
-    return "*.do?tache=afficherPageGestionLecture";
+    return "*.do?tache=afficherPageGestionLectures";
   }
 }

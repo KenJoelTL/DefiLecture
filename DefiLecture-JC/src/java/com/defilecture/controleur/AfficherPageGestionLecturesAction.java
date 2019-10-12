@@ -14,14 +14,12 @@
  */
 package com.defilecture.controleur;
 
-public class AfficherPageGestionListeEquipesAction extends Action {
+public class AfficherPageGestionLecturesAction extends Action {
   @Override
   public String execute() {
     if (userIsConnected()) {
-      if (userIsAdmin()) {
-        request.setAttribute("vue", "pageGestionListeEquipe.jsp");
-      }
+      request.setAttribute("vue", "pageGestionLectures.jsp");
     }
-    return "/";
+    return "/index.jsp";
   }
 }
