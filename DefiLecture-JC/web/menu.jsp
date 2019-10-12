@@ -4,41 +4,37 @@
 
 <div class='container-fluid'  style="margin-bottom: 90px" >
     <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container-fluid">
-
-            <div class="navbar-header">
+	<div class="container-fluid">
+	    <div class="navbar-header">
 		<a class="navbar-brand logo-navigation" href='*.do?tache=afficherPageMarcheASuivre'></a>
 		<!-- Apparait lorsque la fenêtre devient de la taille d'un téléphone mobile -->
 		<button id="btn-burger" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#optionsNavigation">
 		    <span class="icon-bar"></span>
 		    <span class="icon-bar"></span>
 		</button>
-            </div>
+	    </div>
 
-            <!-- Options contenues dans le bouton à son activation -->
-            <div class="collapse navbar-collapse" id="optionsNavigation">
+	    <!-- Options contenues dans le bouton à son activation -->
+	    <div class="collapse navbar-collapse" id="optionsNavigation">
 		<ul class="nav navbar-nav">
-
 		    <c:if test="${ !empty sessionScope.connecte && sessionScope.role le 2 }">
-
 			<fmt:parseDate pattern="yyyy-MM-dd HH:mm" value="${applicationScope['com.defilecture.dLecture']}" var="datedebut" type="both"/>
 			<fmt:parseDate pattern="yyyy-MM-dd HH:mm" value="${applicationScope['com.defilecture.fLecture']}" var="datefin" type="both"/>
 			<div id="menuLectures" style="display: ${now ge datedebut && now lt datefin ? 'block' : 'none'}">
-			<li class="dropdown">
-			    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Lectures
-				<span class="caret"></span></a>
-			    <ul class="dropdown-menu">
-				<li><a href="*.do?tache=afficherPageCreationLecture">Ajouter une lecture</a></li>
-				<li><a href="*.do?tache=afficherPageGestionLecture">Voir mes lectures</a></li>
-			    </ul>
-			</li>
+			    <li class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Lectures
+				    <span class="caret"></span></a>
+				<ul class="dropdown-menu">
+				    <li><a href="*.do?tache=afficherPageCreationLecture">Ajouter une lecture</a></li>
+				    <li><a href="*.do?tache=afficherPageGestionLecture">Voir mes lectures</a></li>
+				</ul>
+			    </li>
 			</div>
-
 		    </c:if>
-
-                    <li><a href="scoreboard.do?tache=afficherPageTableauScores">
-			<% out.println(application.getAttribute("vocBanque"));%>
-                    </a>
+		    <li>
+			<a href="scoreboard.do?tache=afficherPageTableauScores">
+			    <% out.println(application.getAttribute("vocBanque"));%>
+			</a>
                     </li>
 
 		    <c:choose>
@@ -177,18 +173,17 @@
 				    <li><a href='details.do?tache=afficherPageProfil&id=${sessionScope.connecte}'>
 					<span class="glyphicon glyphicon-user"></span> Mon Compte</a>
 				    </li>
-				    <li><a href='*.do?tache=effectuerDeconnexion'>
-					<span class="glyphicon glyphicon-log-in"></span> Se d&eacute;connecter</a>
+				    <li>
+					<a href='*.do?tache=effectuerDeconnexion'>
+					    <span class="glyphicon glyphicon-log-in"></span> Se d&eacute;connecter
+					</a>
 				    </li>
 				</ul>
 			    </li>
 			</c:otherwise>
 		    </c:choose>
 		</ul>
-            </div>
-        </div>
+	    </div>
+	</div>
     </nav>
 </div>
-
-
-

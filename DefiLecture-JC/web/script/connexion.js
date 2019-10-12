@@ -6,11 +6,9 @@
 
 
 $(document).ready(function(){
-    $("#identifiant").focus();
-    $("#msgMDPoublie").hide();
     $("#lienMDPoublie").click(function(){
-	$("#spanMDP").toggleClass("glyphicon-menu-up")
-	$("#msgMDPoublie").slideToggle();
+      $("#spanMDP").toggleClass("glyphicon-menu-up")
+      $("#msgMDPoublie").slideToggle();
     });
 });
 
