@@ -1,5 +1,5 @@
 compilation:
-    image: git.dept-info.crosemont.quebec:5678/plafrance/defilecture
+    image: git.dti.crosemont.quebec:5678/plafrance/defilecture
     script:
         - apt update
         - apt install -y vim tomcat8 default-jdk ant libcommons-codec-java libnb-java5-java libmysql-java libtaglibs-standard-impl-java  libtaglibs-standard-spec-java
