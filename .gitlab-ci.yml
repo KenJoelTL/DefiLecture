@@ -2,4 +2,5 @@ compilation:
     image: git.dti.crosemont.quebec:5678/plafrance/defilecture
     script:
         - apt update
-        - gradlew build
+        - chmod +x gradlew
+        - ./gradlew build
