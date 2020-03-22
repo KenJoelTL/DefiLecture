@@ -1,0 +1,49 @@
+/* 
+  Nom : gradle.build
+  Description : script de build gradle qui clean, lint et déploie le code dans un dossier utilisé par docker
+*/
+
+buildscript {
+    tasks.withType(JavaCompile) {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+}
+
+plugins {
+    id 'war'
+    id 'com.github.sherter.google-java-format' version '0.8'
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    providedCompile 'javax.servlet:javax.servlet-api:3.1.0' 
+    testCompile 'junit:junit:4.12'
+}
+
+// Ajout du support d'UTF-8 lors de la compilation
+compileJava.options.encoding = 'UTF-8'
+
+// Ajout du support d'UTF-8 lors de la compilation
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+// Force le format Google Java
+tasks.verifyGoogleJavaFormat.ignoreFailures = true
+
+// Dependencies
+compileJava.dependsOn = ["clean", "verifyGoogleJavaFormat"]
+
+// Finalizers
+build.finalizedBy = ["deploy"]
+
+// Tasks
+
+task deploy(type: Sync) {
+    into "${buildDir}/defilecture"
+    with war
+} 

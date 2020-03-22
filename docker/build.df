@@ -1,8 +1,0 @@
-FROM ubuntu:latest
-
-RUN apt update
-RUN apt install -y vim tomcat8 default-jdk ant libcommons-codec-java libnb-java5-java libmysql-java libtaglibs-standard-impl-java  libtaglibs-standard-spec-java
-
-WORKDIR /tmp/src
-CMD ["ant", "-Dj2ee.server.home='/usr/share/glassfish5'", "-Dlibs.CopyLibs.classpath=/usr/share/netbeans/java5/ant/extra/org-netbeans-modules-java-j2seproject-copylibstask.jar"]
-

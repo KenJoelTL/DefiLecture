@@ -57,7 +57,8 @@ public class EffectuerAjoutMembreEquipeAction extends Action
 
         if (promouvoirCapitaine) {
           List<Compte> membres = daoCompte.findByIdEquipe(idEquipe);
-          if (membres.stream()
+          if (membres
+              .stream()
               .filter(m -> m.getRole() == Compte.CAPITAINE)
               .findFirst()
               .isPresent()) {
