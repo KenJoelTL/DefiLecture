@@ -1,6 +1,6 @@
 version: "3"
 services:
-  
+
   defilecture_db:
     image: mariadb:latest
     container_name: defilecture_db
@@ -15,7 +15,9 @@ services:
     restart: on-failure
 
   defilecture:
-    image: tomcat:latest
+    build:
+      context: docker/
+      dockerfile: defilecture.df
     container_name: defilecture
     networks:
       defilecturenet:
