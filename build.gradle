@@ -1,6 +1,6 @@
 /* 
   Nom : gradle.build
-  Description : script de build gradle qui clean, lint et déploie le code dans un dossier utilisé par docker
+  Description : script de build gradle qui clean, inspect et déploie le code dans un dossier utilisé par docker
 */
 
 buildscript {
