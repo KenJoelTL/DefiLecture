@@ -48,7 +48,6 @@ dependencies {
     
 }
 
-
 compileJava.dependsOn = ['clean']
 
 // Settings des tasks
