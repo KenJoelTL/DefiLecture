@@ -1,3 +1,5 @@
+TEST
+
 # Installation de l'environnement de développement : 
 
 Requis : 
