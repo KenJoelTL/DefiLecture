@@ -2,14 +2,17 @@
 
 Requis : 
  * docker
- * docker-compose v1.13+
+ * docker-compose
 
-# Compilation (ou recompilation) de l'application :
+# Compilation de l'application :
 
- * docker-compose up defilecture_build
+##### Linux
+ * ./gradlew build
+##### Windows
+ * .\gradlew.bat build
 
 # Démarrage du serveur :
- 
+
  * docker-compose up -d defilecture
  * l'application sera accessible à http://172.21.0.3:8080
 
