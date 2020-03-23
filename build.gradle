@@ -46,6 +46,7 @@ dependencies {
 }
 
 compileJava.dependsOn = ['clean']
+war.finalizedBy = ['deploy']
 
 // Settings des tasks
 tasks.withType(JavaCompile) {
