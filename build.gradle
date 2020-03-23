@@ -20,7 +20,6 @@ plugins {
 
 // Code Inspection
 checkstyle {
-
     project.ext.checkstyleVersion = '8.30'
     project.ext.sevntuChecksVersion = '1.37.1'
 
