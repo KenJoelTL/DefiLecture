@@ -1,3 +1,5 @@
+import java.beans.Customizer
+
 /* 
   Nom : gradle.build
   Description : script de build gradle qui clean, inspect et déploie le code dans un dossier utilisé par docker
@@ -11,8 +13,27 @@ buildscript {
 }
 
 plugins {
+    id 'java'
     id 'war'
-    id 'com.github.sherter.google-java-format' version '0.8'
+    id 'checkstyle'
+}
+
+// Code Inspection
+checkstyle {
+
+    project.ext.checkstyleVersion = '8.30'
+    project.ext.sevntuChecksVersion = '1.37.1'
+
+    configFile = file("${project.rootDir}/checkstyle.xml")
+    ignoreFailures = true
+    showViolations = true
+
+    dependencies{
+        assert project.hasProperty("checkstyleVersion")
+
+        checkstyle "com.puppycrawl.tools:checkstyle:${checkstyleVersion}"
+        checkstyle "com.github.sevntu-checkstyle:sevntu-checks:${sevntuChecksVersion}"
+    }
 }
 
 repositories {
@@ -20,31 +41,22 @@ repositories {
 }
 
 dependencies {
-    providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
-    compile group: 'org.apache.tomcat', name: 'tomcat-catalina', version: '10.0.0-M3'
-    compile group: 'javax.servlet', name: 'jstl', version: '1.2'
-    testCompile 'junit:junit:4.12'
+    compileOnly 'javax.servlet:javax.servlet-api:3.1.0'
+    runtimeOnly group: 'org.apache.tomcat', name: 'tomcat-catalina', version: '10.0.0-M3'
+    runtimeOnly group: 'javax.servlet', name: 'jstl', version: '1.2'
+    testImplementation 'junit:junit:4.12'
+    
 }
 
-// Ajout du support d'UTF-8 lors de la compilation
-compileJava.options.encoding = 'UTF-8'
 
-// Ajout du support d'UTF-8 lors de la compilation
+compileJava.dependsOn = ['clean']
+
+// Settings des tasks
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 
-// Force le format Google Java
-tasks.verifyGoogleJavaFormat.ignoreFailures = true
-
-// Dependencies
-compileJava.dependsOn = ["clean", "verifyGoogleJavaFormat"]
-
-// Finalizers
-build.finalizedBy = ["deploy"]
-
 // Tasks
-
 task deploy(type: Sync) {
     into "${buildDir}/defilecture"
     with war

@@ -1,20 +1,15 @@
-TEST
-
 # Installation de l'environnement de développement : 
 
 Requis : 
  * docker
- * docker-compose
+ * docker-compose v1.13+
 
-# Compilation de l'application :
+# Compilation (ou recompilation) de l'application :
 
-##### Linux
- * ./gradlew build
-##### Windows
- * .\gradlew.bat build
+ * docker-compose up defilecture_build
 
 # Démarrage du serveur :
-
+ 
  * docker-compose up -d defilecture
  * l'application sera accessible à http://172.21.0.3:8080
 
