@@ -93,16 +93,16 @@
 			    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Comptes
 				<span class="caret"></span></a>
 			    <ul class="dropdown-menu">
-				<li ><a href="*.do?tache=afficherPageGestionListeCompte">G&eacute;rer les comptes</a></li>
+				<li ><a href="*.do?tache=afficherPageGestionComptes">G&eacute;rer les comptes</a></li>
 				<li ><a href="*.do?tache=afficherPageAdresseCourriel">Liste d'adresses</a></li>
-				<li ><a href="*.do?tache=afficherPageListeLectures">Liste des lectures</a></li>
+				<li ><a href="*.do?tache=afficherPageGestionLectures">Liste des lectures</a></li>
 			    </ul>
 			</li>
 			<li class="dropdown">
 			    <a class="dropdown-toggle" data-toggle="dropdown" href="#">&Eacute;quipes
 				<span class="caret"></span></a>
 			    <ul class="dropdown-menu">
-				<li ><a href="*.do?tache=afficherPageGestionListeEquipes">G&eacute;rer les &eacute;quipes</a></li>
+				<li ><a href="*.do?tache=afficherPageGestionEquipes">G&eacute;rer les &eacute;quipes</a></li>
 			    </ul>
 			</li>
 		    </c:if>
