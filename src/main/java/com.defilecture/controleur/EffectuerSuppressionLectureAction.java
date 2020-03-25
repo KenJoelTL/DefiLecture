@@ -34,8 +34,8 @@ public class EffectuerSuppressionLectureAction extends Action implements Require
   public String execute() {
     if (userIsConnected() && (userIsCapitaine() || userIsParticipant())) {
 
-	if (LocalDateTime.now().isBefore(getDébutLectures())
-	    || LocalDateTime.now().isAfter(getFinLectures())) {
+      if (LocalDateTime.now().isBefore(getDébutLectures())
+          || LocalDateTime.now().isAfter(getFinLectures())) {
         return "*.do?tache=afficherPageGestionLectures";
       }
 

@@ -9,7 +9,7 @@ Le projet DéfiLecture est placé sous [licence GPLv3](https://www.gnu.org/licen
 
 Le projet duquel est tiré l'application mise en production lors de l'événement Défi Lecture au Collège de Rosemont est hébergé sur le serveur Gitlab du département des techniques de l'informatique : https://git.dept-info.crosemont.quebec/plafrance/DefiLecture
 
-## Branches Le projet possède deux branches principales : master et live.
+## Branches
 
 - La branche live est celle présentement mise en production.
 
@@ -48,22 +48,26 @@ Afin d'uniformiser toutes les contributions au code source, veuillez respecter l
 
 Les exemples suivants supposent l'utilisation de NetBeans mais tous les IDEs qui se respectent devraient permettre les mêmes configurations.
 
+Les fichiers de cette solution sont soumis à une vérification selon les standards définis par Google pour le langage de programmation *Java*. Pour de plus amples informations, visitez la [documentation officielle](https://google.github.io/styleguide/javaguide.html).
+
+Voici les points récapitulatifs de ce standard :
+
 1. Toujours sauvegarder les fichiers au format UTF-8
    Dans Netbeans, clic-droit sur le projet puis Properties. Dans l'onglet «Général», en bas, assurez-vous que l'encodage indique UTF-8. 
    Si vos commits incluent des différences pour tous les caractères accentués, c'est que vous avez enregistré votre fichier dans un mauvais format (probablement ISO-8859).
    Exemple de mauvais format. Lorsqu'on fait la commande «git diff test.h»:
 
     ```
-	diff --git a/test.h b/test.h
+	diff --git a/test.java b/test.java
     index 44d771b..8b0c19c 100644
-    --- a/test.h
-    +++ b/test.h
+    --- a/test.java
+    +++ b/test.java
     @@ -1,4 +1,4 @@
     -//ceci est un test de fusion accentué
     +//ceci est un test de fusion accentu<E9>
     ```
 	
-2. Le code doit être correctement indenté à l'aide de 4 espaces par niveau d'indentation. Les caractères TAB (0x09) sont à proscrire. Par défaut, Netbeans insère automatiquement 4 espaces lorsqu'on indente une ligne. Si ce n'est pas le cas (s'il insère un seul caractère TAB), allez dans le menu Tool/Options et dans l'onglet Editor, sélectionnez le style «Netbeans». Si ce n'est pas déjà fait, cochez «Expand Tab to spaces» et entrez 4 dans «Indent Size».
+2. Le code doit être correctement indenté à l'aide de 2 espaces par niveau d'indentation. Les caractères TAB (0x09) sont à proscrire. Assurez-vous que votre éditeur utilise bien 2 espaces et non le caractère TAB (0x09) et qu'il indente par incrément de 2 espaces.
 
 3. Si vous travaillez sous Windows, assurez-vous que git traduit bien vos fins de ligne de CRLF en LF (c'est le comportement par défaut). Si `git diff` montre des différences à chaque fin de ligne, c'est qu'il y a un problème.
 
@@ -85,8 +89,8 @@ Les exemples suivants supposent l'utilisation de NetBeans mais tous les IDEs qui
     //Fusionnez la destination pour incorporer les derniers changements que vous n'aviez pas encore.
     git pull origin master
     //S'il y a un conflit, réglez-le : 
-    git mergetool fichierEnConflit.cpp
-    git commit -m "Réglé les conflit dans fichierEnConflit.cpp"
+    git mergetool fichierEnConflit.java
+    git commit -m "Réglé les conflit dans fichierEnConflit.java"
     //Publiez votre branche
     git push origin branche_travail
     //Maintenant créez votre merge request

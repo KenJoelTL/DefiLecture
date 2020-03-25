@@ -1,0 +1,60 @@
+/* 
+  Nom : gradle.build
+  Description : script de build gradle qui clean, inspect et déploie le code dans un dossier utilisé par docker
+*/
+
+buildscript {
+    tasks.withType(JavaCompile) {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+}
+
+plugins {
+    id 'java'
+    id 'war'
+    id 'checkstyle'
+}
+
+// Code Inspection
+checkstyle {
+    project.ext.checkstyleVersion = '8.30'
+    project.ext.sevntuChecksVersion = '1.37.1'
+
+    configFile = file("${project.rootDir}/checkstyle.xml")
+    ignoreFailures = true
+    showViolations = true
+
+    dependencies{
+        assert project.hasProperty("checkstyleVersion")
+
+        checkstyle "com.puppycrawl.tools:checkstyle:${checkstyleVersion}"
+        checkstyle "com.github.sevntu-checkstyle:sevntu-checks:${sevntuChecksVersion}"
+    }
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compileOnly 'javax.servlet:javax.servlet-api:3.1.0'
+    runtimeOnly group: 'org.apache.tomcat', name: 'tomcat-catalina', version: '10.0.0-M3'
+    runtimeOnly group: 'javax.servlet', name: 'jstl', version: '1.2'
+    testImplementation 'junit:junit:4.12'
+    
+}
+
+compileJava.dependsOn = ['clean']
+war.finalizedBy = ['deploy']
+
+// Settings des tasks
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+// Tasks
+task deploy(type: Sync) {
+    into "${buildDir}/defilecture"
+    with war
+} 

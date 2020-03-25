@@ -27,7 +27,6 @@
     <listener>
         <listener-class>com.defilecture.EcouteurApplication</listener-class>
     </listener>
-    
     <servlet>
         <servlet-name>CF</servlet-name>
         <servlet-class>com.defilecture.controleur.ControleurFrontal</servlet-class>

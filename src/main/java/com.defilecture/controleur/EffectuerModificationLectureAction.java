@@ -33,8 +33,8 @@ public class EffectuerModificationLectureAction extends Action implements Requir
         && (userIsCapitaine() || userIsParticipant())
         && request.getParameter("modifie") != null) {
 
-	if (LocalDateTime.now().isBefore(getDébutLectures())
-	    || LocalDateTime.now().isAfter(getFinLectures())) {
+      if (LocalDateTime.now().isBefore(getDébutLectures())
+          || LocalDateTime.now().isAfter(getFinLectures())) {
         return "*.do?tache=afficherPageGestionLectures";
       }
 

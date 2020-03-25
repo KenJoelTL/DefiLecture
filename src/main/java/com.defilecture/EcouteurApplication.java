@@ -38,7 +38,7 @@ public class EcouteurApplication implements ServletContextListener {
     Config.URL = application.getInitParameter("urlDb");
 
     try {
-      Class.forName("com.mysql.jdbc.Driver");
+      Class.forName("com.mysql.cj.jdbc.Driver");
     } catch (ClassNotFoundException e) {
       Logger.getLogger(EcouteurApplication.class.getName()).log(Level.SEVERE, null, e);
     }

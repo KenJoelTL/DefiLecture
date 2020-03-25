@@ -1,13 +1,6 @@
 version: "3"
 services:
 
-  defilecture_build:
-    build:
-      context: docker/
-      dockerfile: build.df
-    volumes:
-      - "./DefiLecture-JC:/tmp/src/"
-
   defilecture_db:
     image: mariadb:latest
     container_name: defilecture_db
@@ -30,7 +23,7 @@ services:
       defilecturenet:
         ipv4_address: 172.21.0.3
     volumes:
-      - "./DefiLecture-JC/build/web/:/usr/local/tomcat/webapps/ROOT/"
+      - "./build/defilecture/:/usr/local/tomcat/webapps/ROOT/"
     restart: on-failure
     environment:
       TZ: America/New_York
