@@ -9,7 +9,7 @@ Le projet DéfiLecture est placé sous [licence GPLv3](https://www.gnu.org/licen
 
 Le projet duquel est tiré l'application mise en production lors de l'événement Défi Lecture au Collège de Rosemont est hébergé sur le serveur Gitlab du département des techniques de l'informatique : https://git.dept-info.crosemont.quebec/plafrance/DefiLecture
 
-## Modèle de branches
+## Branches
 
 - La branche live est celle présentement mise en production.
 
